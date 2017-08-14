@@ -6,7 +6,7 @@ Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-tab
 * Fully compatiable with bootstrap 3 and 4(`react-bootstrap-table@4.0.0` already done) 
 * Clean Code and Testing
 * Decrease the size of bundled file
-* Split module/functionality from core module
+* **Split module/functionality from core module, make core module more lightweight**
 * Use [`storybook`](https://github.com/storybooks/storybook) to build examples
 * Support the aggregation(summary) view
 * Support the table footer
