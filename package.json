@@ -1,0 +1,19 @@
+{
+  "name": "react-bootstrap-table2",
+  "version": "0.0.1",
+  "description": "Rebuilt for react-bootstrap-table",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/react-bootstrap-table/react-bootstrap-table2/issues"
+  },
+  "homepage": "https://github.com/react-bootstrap-table/react-bootstrap-table2#readme"
+}
