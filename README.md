@@ -3,14 +3,14 @@ Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-tab
 
 ## The problems/features I want to solve
 * Performance
-* Fully compatiable with bootstrap 3 adn 4(`react-bootstrap-table@4.0.0` already done) 
+* Fully compatiable with bootstrap 3 and 4(`react-bootstrap-table@4.0.0` already done) 
 * Clean Code and Testing
 * Decrease the size of bundled file
 * Split module/functionality from core module
 * Use [`storybook`](https://github.com/storybooks/storybook) to build examples
-* Support the aggregation view
+* Support the aggregation(summary) view
 * Support the table footer
-* Support column group
+* Support column/row span on header and body
 * Support sticky header
 * Support table section([react-bootstrap-table#721](https://github.com/AllenFang/react-bootstrap-table/pull/721))
 * Handle events well
