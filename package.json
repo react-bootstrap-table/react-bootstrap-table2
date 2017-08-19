@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r babel-register ./node_modules/.bin/webpack-dev-server --config webpack.config.babel.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint ./packages --ext .js --ext .jsx --ignore-path .gitignore",
+    "pretest": "yarn lint --cache",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -25,6 +29,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
+    "enzyme": "^2.9.1",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "^14.1.0",
     "eslint-loader": "^1.9.0",
@@ -32,7 +37,10 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^7.2.1",
     "html-webpack-plugin": "^2.30.1",
+    "jest": "^20.0.4",
+    "jest-babel": "^1.0.1",
     "lerna": "^2.0.0",
+    "react-test-renderer": "^15.6.1",
     "webpack": "^3.5.4",
     "webpack-dev-server": "^2.7.1"
   },
@@ -42,8 +50,20 @@
     "react-dom": "^15.6.1"
   },
   "peerDependencies": {
+    "prop-types": "^15.0.0",
     "react": "^15.0.0",
-    "react-dom": "^15.0.0",
-    "prop-types": "^15.0.0"
+    "react-dom": "^15.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "packages/**/*.js"
+    ],
+    "roots": [
+      "<rootDir>/packages"
+    ],
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/test/*.js"
+    ]
   }
 }
