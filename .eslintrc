@@ -1,0 +1,23 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "jasmine": true,
+    "node": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "comma-dangle": ["error", "never"],
+    "react/jsx-curly-spacing": 0,
+    "react/forbid-prop-types": 0,
+    "react/jsx-filename-extension": 0,
+    "import/prefer-default-export": 0,
+    "import/no-extraneous-dependencies": 0
+  },
+  "globals": {
+    "jest": false
+  }
+}

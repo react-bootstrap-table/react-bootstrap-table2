@@ -1,0 +1,11 @@
+{
+  "name": "react-bootstrap-table2",
+  "version": "0.0.1",
+  "description": "Rebuilt for react-bootstrap-table",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "react-bootstrap-table2-example",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react-bootstrap-table2": "0.0.1"
+  }
+}
