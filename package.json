@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node -r babel-register ./node_modules/.bin/webpack-dev-server --config webpack.config.babel.js",
+    "lint": "eslint ./packages --ext .js --ext .jsx --ignore-path .gitignore",
+    "pretest": "yarn lint --cache",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch"
