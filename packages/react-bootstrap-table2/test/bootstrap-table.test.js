@@ -30,10 +30,54 @@ describe('BootstrapTable', () => {
 
     it('should render successfully', () => {
       expect(wrapper.length).toBe(1);
-      expect(wrapper.find('table').length).toBe(1);
+      expect(wrapper.find('table.table').length).toBe(1);
       expect(wrapper.find(Header).length).toBe(1);
       expect(wrapper.find(Body).length).toBe(1);
       expect(wrapper.find('.react-bootstrap-table-container').length).toBe(1);
+    });
+
+    it('should have table-bordered class as default', () => {
+      expect(wrapper.find('table.table-bordered').length).toBe(1);
+    });
+  });
+
+  describe('when hover is true', () => {
+    beforeEach(() => {
+      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } hover />);
+    });
+
+    it('should have table-hover class on table', () => {
+      expect(wrapper.find('table.table-hover').length).toBe(1);
+    });
+  });
+
+  describe('when striped is true', () => {
+    beforeEach(() => {
+      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } striped />);
+    });
+
+    it('should have table-striped class on table', () => {
+      expect(wrapper.find('table.table-striped').length).toBe(1);
+    });
+  });
+
+  describe('when condensed is true', () => {
+    beforeEach(() => {
+      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } condensed />);
+    });
+
+    it('should have table-condensed class on table', () => {
+      expect(wrapper.find('table.table-condensed').length).toBe(1);
+    });
+  });
+
+  describe('when bordered is false', () => {
+    beforeEach(() => {
+      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } bordered={ false } />);
+    });
+
+    it('should not have table-condensed class on table', () => {
+      expect(wrapper.find('table.table-condensed').length).toBe(0);
     });
   });
 });
