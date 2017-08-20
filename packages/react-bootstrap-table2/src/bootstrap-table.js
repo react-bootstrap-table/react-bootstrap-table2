@@ -12,13 +12,13 @@ class BootstrapTable extends storeBase(Component) {
   }
 
   render() {
-    const { columns, data, keyField } = this.props;
+    const { columns, keyField } = this.props;
     return (
       <div className="react-bootstrap-table-container">
         <table className="table">
           <Header columns={ columns } />
           <Body
-            data={ data }
+            data={ this.data }
             keyField={ keyField }
             columns={ columns }
           />
