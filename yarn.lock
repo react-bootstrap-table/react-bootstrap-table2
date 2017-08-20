@@ -3377,10 +3377,6 @@ jest:
   dependencies:
     jest-cli "^20.0.4"
 
-jest-babel:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/jest-babel/-/jest-babel-1.0.1.tgz#ef659df0e9397b083c0f6aebd4cb8cfaa77df8bf"
-
 jest-changed-files@^20.0.3:
   version "20.0.3"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-20.0.3.tgz#9394d5cc65c438406149bef1bf4d52b68e03e3f8"
