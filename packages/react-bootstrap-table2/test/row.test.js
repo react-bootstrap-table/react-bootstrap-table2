@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
+import Cell from '../src/cell';
 import Row from '../src/row';
-import Body from '../src/body';
 
-describe('Body', () => {
+describe('Row', () => {
   let wrapper;
   const columns = [{
     dataField: 'id',
@@ -14,23 +14,20 @@ describe('Body', () => {
     text: 'Name'
   }];
 
-  const data = [{
+  const row = {
     id: 1,
     name: 'A'
-  }, {
-    id: 2,
-    name: 'B'
-  }];
+  };
 
-  describe('simplest body', () => {
+  describe('simplest row', () => {
     beforeEach(() => {
-      wrapper = shallow(<Body keyField="id" columns={ columns } data={ data } />);
+      wrapper = shallow(<Row columns={ columns } row={ row } />);
     });
 
     it('should render successfully', () => {
       expect(wrapper.length).toBe(1);
-      expect(wrapper.find('tbody').length).toBe(1);
-      expect(wrapper.find(Row).length).toBe(data.length);
+      expect(wrapper.find('tr').length).toBe(1);
+      expect(wrapper.find(Cell).length).toBe(Object.keys(row).length);
     });
   });
 });
