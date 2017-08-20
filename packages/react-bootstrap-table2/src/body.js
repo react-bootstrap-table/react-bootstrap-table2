@@ -6,8 +6,13 @@ import Row from './row';
 const Body = ({ columns, data, keyField }) => (
   <tbody>
     {
-      data.map(row => (
-        <Row key={ row[keyField] } row={ row } columns={ columns } />
+      data.map((row, index) => (
+        <Row
+          key={ row[keyField] }
+          row={ row }
+          rowIndex={ index }
+          columns={ columns }
+        />
       ))
     }
   </tbody>

@@ -41,6 +41,7 @@
     "jest-babel": "^1.0.1",
     "lerna": "^2.0.0",
     "react-test-renderer": "^15.6.1",
+    "sinon": "^3.2.1",
     "webpack": "^3.5.4",
     "webpack-dev-server": "^2.7.1"
   },
