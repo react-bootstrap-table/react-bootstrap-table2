@@ -21,7 +21,7 @@ describe('Row', () => {
 
   describe('simplest row', () => {
     beforeEach(() => {
-      wrapper = shallow(<Row columns={ columns } row={ row } />);
+      wrapper = shallow(<Row rowIndex={ 1 } columns={ columns } row={ row } />);
     });
 
     it('should render successfully', () => {

@@ -41,7 +41,7 @@ describe('BootstrapTable', () => {
     });
   });
 
-  describe('when hover is true', () => {
+  describe('when hover props is true', () => {
     beforeEach(() => {
       wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } hover />);
     });
@@ -51,7 +51,7 @@ describe('BootstrapTable', () => {
     });
   });
 
-  describe('when striped is true', () => {
+  describe('when striped props is true', () => {
     beforeEach(() => {
       wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } striped />);
     });
@@ -61,7 +61,7 @@ describe('BootstrapTable', () => {
     });
   });
 
-  describe('when condensed is true', () => {
+  describe('when condensed props is true', () => {
     beforeEach(() => {
       wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } condensed />);
     });
@@ -71,7 +71,7 @@ describe('BootstrapTable', () => {
     });
   });
 
-  describe('when bordered is false', () => {
+  describe('when bordered props is false', () => {
     beforeEach(() => {
       wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } bordered={ false } />);
     });
