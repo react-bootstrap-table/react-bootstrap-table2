@@ -1,19 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Row from './row';
 
 const Body = ({ columns, data, keyField }) => (
   <tbody>
     {
       data.map(row => (
-        <tr key={ row[keyField] }>
-          {
-            columns.map(column =>
-              <td key={ row[column.dataField] }>{ row[column.dataField] }</td>
-            )
-          }
-        </tr>)
-      )
+        <Row key={ row[keyField] } row={ row } columns={ columns } />
+      ))
     }
   </tbody>
 );
