@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import _ from './utils';
 import Row from './row';
 
 const Body = ({ columns, data, keyField }) => (
@@ -8,7 +9,7 @@ const Body = ({ columns, data, keyField }) => (
     {
       data.map((row, index) => (
         <Row
-          key={ row[keyField] }
+          key={ _.get(row, keyField) }
           row={ row }
           rowIndex={ index }
           columns={ columns }

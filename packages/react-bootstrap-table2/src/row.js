@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import _ from './utils';
 import Cell from './cell';
 
 const Row = ({ row, rowIndex, columns }) => (
@@ -9,7 +10,7 @@ const Row = ({ row, rowIndex, columns }) => (
       columns.map(column =>
         (
           <Cell
-            key={ row[column.dataField] }
+            key={ _.get(row, column.dataField) }
             row={ row }
             rowIndex={ rowIndex }
             column={ column }
