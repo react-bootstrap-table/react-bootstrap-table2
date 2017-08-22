@@ -13,6 +13,11 @@ function get(target, field) {
   return result;
 }
 
+function isFunction(obj) {
+  return obj && (typeof obj === 'function');
+}
+
 export default {
-  get
+  get,
+  isFunction
 };
