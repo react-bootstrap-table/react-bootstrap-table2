@@ -7,12 +7,13 @@ import Cell from './cell';
 const Row = ({ row, rowIndex, columns }) => (
   <tr>
     {
-      columns.map(column =>
+      columns.map((column, index) =>
         (
           <Cell
             key={ _.get(row, column.dataField) }
             row={ row }
             rowIndex={ rowIndex }
+            columnIndex={ index }
             column={ column }
           />
         ))
