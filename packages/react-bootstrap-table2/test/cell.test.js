@@ -161,4 +161,53 @@ describe('Cell', () => {
       });
     });
   });
+
+  describe('when column.title prop is defined', () => {
+    let column;
+    const columnIndex = 1;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID'
+      };
+    });
+
+    describe('when title is boolean', () => {
+      beforeEach(() => {
+        column.title = true;
+        wrapper = shallow(
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+      });
+
+      it('should render title as cell value as default', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('title')).toEqual(row[column.dataField]);
+      });
+    });
+
+    describe('when title is custom function', () => {
+      const customTitle = 'test_title';
+      let titleCallBack;
+
+      beforeEach(() => {
+        titleCallBack = sinon.stub()
+          .withArgs(row[column.dataField], row, columnIndex)
+          .returns(customTitle);
+        column.title = titleCallBack;
+        wrapper = shallow(
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+      });
+
+      it('should render title correctly by custom title function', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('title')).toBe(customTitle);
+      });
+
+      it('should call custom title function correctly', () => {
+        expect(titleCallBack.callCount).toBe(1);
+        expect(titleCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+      });
+    });
+  });
 });

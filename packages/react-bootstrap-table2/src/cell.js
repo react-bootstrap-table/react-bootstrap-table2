@@ -9,19 +9,28 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
     formatter,
     formatExtraData,
     style,
-    classes
+    classes,
+    title
   } = column;
   let content = _.get(row, dataField);
+  let cellTitle;
+
+  const attrs = {};
   const cellStyle = _.isFunction(style) ? style(content, row, columnIndex) : style;
   const cellClasses = _.isFunction(classes) ? classes(content, row, columnIndex) : classes;
+
+  if (title) {
+    cellTitle = _.isFunction(title) ? title(content, row, columnIndex) : content;
+    attrs.title = cellTitle;
+  }
+
   if (formatter) {
     content = column.formatter(content, row, rowIndex, formatExtraData);
   }
 
-  const attrs = {
-    style: cellStyle,
-    className: cellClasses
-  };
+  attrs.style = cellStyle;
+  attrs.className = cellClasses;
+
   return (
     <td { ...attrs }>{ content }</td>
   );
