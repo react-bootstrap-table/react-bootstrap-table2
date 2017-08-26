@@ -147,4 +147,30 @@ describe('HeaderCell', () => {
       expect(formatter.calledWith(column, index)).toBe(true);
     });
   });
+
+  describe('when column.headerEvents prop is defined', () => {
+    let column;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        headerEvents: {
+          onClick: sinon.stub()
+        }
+      };
+
+      wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+    });
+
+    it('should attachs DOM event successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('th').prop('onClick')).toBeDefined();
+    });
+
+    it('event hook should be called when triggering', () => {
+      wrapper.find('th').simulate('click');
+      expect(column.headerEvents.onClick.callCount).toBe(1);
+    });
+  });
 });

@@ -5,8 +5,16 @@ import _ from './utils';
 
 
 const HeaderCell = ({ column, index }) => {
-  const { headerTitle, text, headerAlign, headerFormatter } = column;
-  const attrs = {};
+  const {
+    text,
+    headerTitle,
+    headerAlign,
+    headerFormatter,
+    headerEvents
+  } = column;
+  const attrs = {
+    ...headerEvents
+  };
   const headerStyle = {};
   const children = headerFormatter ? headerFormatter(column, index) : text;
 
@@ -39,6 +47,7 @@ HeaderCell.propTypes = {
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     headerTitle: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     title: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    headerEvents: PropTypes.object,
     events: PropTypes.object,
     headerAlign: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     align: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
