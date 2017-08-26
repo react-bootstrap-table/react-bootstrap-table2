@@ -10,12 +10,15 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
     formatExtraData,
     style,
     classes,
-    title
+    title,
+    events
   } = column;
   let content = _.get(row, dataField);
   let cellTitle;
 
-  const attrs = {};
+  const attrs = {
+    ...events
+  };
   const cellStyle = _.isFunction(style) ? style(content, row, columnIndex) : style;
   const cellClasses = _.isFunction(classes) ? classes(content, row, columnIndex) : classes;
 
