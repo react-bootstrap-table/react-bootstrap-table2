@@ -28,7 +28,8 @@ HeaderCell.propTypes = {
     classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     headerTitle: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    title: PropTypes.oneOfType([PropTypes.bool, PropTypes.func])
+    title: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    events: PropTypes.object
   }).isRequired,
   index: PropTypes.number.isRequired
 };

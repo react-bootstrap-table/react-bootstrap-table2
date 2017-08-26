@@ -210,4 +210,32 @@ describe('Cell', () => {
       });
     });
   });
+
+  describe('when column.events prop is defined', () => {
+    let column;
+    const columnIndex = 1;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        events: {
+          onClick: sinon.stub()
+        }
+      };
+
+      wrapper = shallow(
+        <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+    });
+
+    it('should attachs DOM event successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('td').prop('onClick')).toBeDefined();
+    });
+
+    it('event hook should be called when triggering', () => {
+      wrapper.find('td').simulate('click');
+      expect(column.events.onClick.callCount).toBe(1);
+    });
+  });
 });
