@@ -11,7 +11,11 @@ const HeaderCell = ({ column }) => (
 HeaderCell.propTypes = {
   column: PropTypes.shape({
     dataField: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired
+    text: PropTypes.string.isRequired,
+    formatter: PropTypes.func,
+    formatExtraData: PropTypes.any,
+    classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    style: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
   }).isRequired
 };
 
