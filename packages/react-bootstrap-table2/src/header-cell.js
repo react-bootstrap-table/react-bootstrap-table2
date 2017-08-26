@@ -5,9 +5,10 @@ import _ from './utils';
 
 
 const HeaderCell = ({ column, index }) => {
-  const { headerTitle, text, headerAlign } = column;
+  const { headerTitle, text, headerAlign, headerFormatter } = column;
   const attrs = {};
   const headerStyle = {};
+  const children = headerFormatter ? headerFormatter(column, index) : text;
 
   if (headerTitle) {
     attrs.title = _.isFunction(headerTitle) ? headerTitle(column, index) : text;
@@ -19,9 +20,10 @@ const HeaderCell = ({ column, index }) => {
 
   attrs.style = headerStyle;
 
+
   return (
     <th { ...attrs }>
-      { column.text }
+      { children }
     </th>
   );
 };
@@ -30,6 +32,7 @@ HeaderCell.propTypes = {
   column: PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    headerFormatter: PropTypes.func,
     formatter: PropTypes.func,
     formatExtraData: PropTypes.any,
     classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),

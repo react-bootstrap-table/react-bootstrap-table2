@@ -119,4 +119,32 @@ describe('HeaderCell', () => {
       });
     });
   });
+
+  describe('when column.headerFormatter prop is defined', () => {
+    const column = {
+      dataField: 'id',
+      text: 'ID'
+    };
+    const formatterResult = (<h3>{ column.text }</h3>);
+    const formatter = sinon.stub()
+      .withArgs(column, index)
+      .returns(formatterResult);
+    column.headerFormatter = formatter;
+
+    beforeEach(() => {
+      wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+    });
+
+    afterEach(() => { formatter.reset(); });
+
+    it('should render successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.contains(formatterResult)).toBe(true);
+    });
+
+    it('should call custom headerFormatter correctly', () => {
+      expect(formatter.callCount).toBe(1);
+      expect(formatter.calledWith(column, index)).toBe(true);
+    });
+  });
 });
