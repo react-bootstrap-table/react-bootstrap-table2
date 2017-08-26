@@ -11,16 +11,21 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
     style,
     classes,
     title,
-    events
+    events,
+    align
   } = column;
-  let content = _.get(row, dataField);
   let cellTitle;
+  let cellStyle = {};
+  let content = _.get(row, dataField);
 
   const attrs = {
     ...events
   };
-  const cellStyle = _.isFunction(style) ? style(content, row, columnIndex) : style;
   const cellClasses = _.isFunction(classes) ? classes(content, row, columnIndex) : classes;
+
+  if (style) {
+    cellStyle = _.isFunction(style) ? style(content, row, columnIndex) : style;
+  }
 
   if (title) {
     cellTitle = _.isFunction(title) ? title(content, row, columnIndex) : content;
@@ -29,6 +34,10 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
 
   if (formatter) {
     content = column.formatter(content, row, rowIndex, formatExtraData);
+  }
+
+  if (align) {
+    cellStyle.textAlign = _.isFunction(align) ? align(content, row, columnIndex) : align;
   }
 
   attrs.style = cellStyle;
