@@ -62,6 +62,11 @@ describe('HeaderCell', () => {
         expect(wrapper.length).toBe(1);
         expect(wrapper.find('th').prop('title')).toBe(customTitle);
       });
+
+      it('should call custom title function correctly', () => {
+        expect(titleCallBack.callCount).toBe(1);
+        expect(titleCallBack.calledWith(column)).toBe(true);
+      });
     });
   });
 });
