@@ -238,4 +238,53 @@ describe('Cell', () => {
       expect(column.events.onClick.callCount).toBe(1);
     });
   });
+
+  describe('when column.align prop is defined', () => {
+    let column;
+    const columnIndex = 1;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID'
+      };
+    });
+
+    describe('when align is string', () => {
+      beforeEach(() => {
+        column.align = 'center';
+        wrapper = shallow(
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+      });
+
+      it('should render style.textAlign correctly', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('style').textAlign).toEqual(column.align);
+      });
+    });
+
+    describe('when align is custom function', () => {
+      const customAlign = 'center';
+      let alignCallBack;
+
+      beforeEach(() => {
+        alignCallBack = sinon.stub()
+          .withArgs(row[column.dataField], row, columnIndex)
+          .returns(customAlign);
+        column.align = alignCallBack;
+        wrapper = shallow(
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+      });
+
+      it('should render style.textAlign correctly', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('style').textAlign).toEqual(customAlign);
+      });
+
+      it('should call custom headerAlign function correctly', () => {
+        expect(alignCallBack.callCount).toBe(1);
+        expect(alignCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+      });
+    });
+  });
 });

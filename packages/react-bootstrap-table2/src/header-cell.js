@@ -5,12 +5,19 @@ import _ from './utils';
 
 
 const HeaderCell = ({ column, index }) => {
-  const { headerTitle, text } = column;
+  const { headerTitle, text, headerAlign } = column;
   const attrs = {};
+  const headerStyle = {};
 
   if (headerTitle) {
     attrs.title = _.isFunction(headerTitle) ? headerTitle(column, index) : text;
   }
+
+  if (headerAlign) {
+    headerStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
+  }
+
+  attrs.style = headerStyle;
 
   return (
     <th { ...attrs }>
@@ -29,7 +36,9 @@ HeaderCell.propTypes = {
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     headerTitle: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     title: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-    events: PropTypes.object
+    events: PropTypes.object,
+    headerAlign: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    align: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   }).isRequired,
   index: PropTypes.number.isRequired
 };
