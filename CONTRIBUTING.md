@@ -1,30 +1,21 @@
-# Contributing to react-bootstrap-table2
+# Issues
+Before open issue, please make sure your problem/request is open or not. When open issue, please give following information if you can:
 
-## Development
+* Example code or repo(Please keep it simple and minimal)
+* Reproduce steps
+* `react-bootstrap-table2` version
 
-### Setup
-```bash
-$ git clone https://github.com/react-bootstrap-table/react-bootstrap-table2.git
-$ cd react-bootstrap-table
-$ npm install
-$ lerna bootstrap  //./node_modules/.bin/lerna bootstrap
-```
-### Development
-```bash
-$ npm start
-```
+Anyway, it's welcome to open issue to ask questions or feature request.
 
-### Launch StoryBook
-We use [storybook](https://storybook.js.org/) to list our examples and it also have hot reload from source code. Sometime, it is also a good entry point to develop.
+# Pull Requests
+Check [here](./docs/development.md) for getting start development.
 
-```bash
-$ cd packages/react-bootstrap-table2-example
-$ npm run storybook
-```
+* When you want to implement a new feature, please let us know(via issues).
+* Please run test before opening PR and also remember to write test code.
+* If you PR is trying to fix bug, please describe the bug when PR open.
 
-### Testing
-```bash
-$ npm test
-$ npm run test:watch  // for watch mode
-$ npm run test:coverage  // generate coverage report
-```
+# For the member of react-bootstrap-table2 org
+
+* Please convert ticket to issue when ticket move to `Ready` from `Backlog` in project
+* Please write document if any new API/feature/props changed or added
+* Please add story example if any new feature implement
