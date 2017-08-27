@@ -8,6 +8,7 @@ import BasicTable from 'examples/basic/index.js';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'stories/stylesheet/storybook.scss';
 
 storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
 
