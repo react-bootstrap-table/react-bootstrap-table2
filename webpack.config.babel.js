@@ -23,21 +23,21 @@ module.exports = {
     filename: '[name].bundle.js'
   },
   module: {
-    rules: [ {
+    rules: [{
       enforce: 'pre',
       test: /\.js?$/,
       exclude: /node_modules/,
-      include: [ sourcePath, examplePath ],
+      include: [sourcePath],
       loader: 'eslint-loader'
     }, {
       test: /\.js?$/,
-      use: [ 'babel-loader' ],
+      use: ['babel-loader'],
       exclude: /node_modules/,
-      include: [ sourcePath, examplePath ],
+      include: [sourcePath, examplePath]
     }, {
-      test: /\.css$/, 
+      test: /\.css$/,
       use: 'style-loader!css-loader'
-    } ]
+    }]
   },
   plugins: [
     new HtmlWebpackPlugin({
