@@ -9,7 +9,8 @@
     "pretest": "yarn lint --cache",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook"
   },
   "repository": {
     "type": "git",
@@ -40,7 +41,9 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^20.0.4",
     "lerna": "^2.0.0",
+    "node-sass": "^4.5.3",
     "react-test-renderer": "^15.6.1",
+    "sass-loader": "^6.0.6",
     "sinon": "^3.2.1",
     "webpack": "^3.5.4",
     "webpack-dev-server": "^2.7.1"
