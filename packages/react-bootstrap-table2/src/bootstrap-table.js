@@ -48,7 +48,10 @@ BootstrapTable.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  striped: PropTypes.bool
+  striped: PropTypes.bool,
+  bordered: PropTypes.bool,
+  hover: PropTypes.bool,
+  condensed: PropTypes.bool
 };
 
 BootstrapTable.defaultProps = {
