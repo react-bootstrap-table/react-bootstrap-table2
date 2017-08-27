@@ -20,6 +20,7 @@
     "react-bootstrap-table2": "0.0.1"
   },
   "devDependencies": {
-    "@storybook/react": "^3.2.8"
+    "@storybook/react": "^3.2.8",
+    "typed.js": "^2.0.5"
   }
 }
