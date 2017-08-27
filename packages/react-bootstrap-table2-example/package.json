@@ -10,6 +10,11 @@
   },
   "author": "",
   "license": "ISC",
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
+  },
   "dependencies": {
     "bootstrap": "^3.3.7",
     "react-bootstrap-table2": "0.0.1"
