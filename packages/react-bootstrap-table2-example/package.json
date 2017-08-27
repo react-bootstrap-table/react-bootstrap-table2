@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^3.3.7",
     "react-bootstrap-table2": "0.0.1"
   },
   "devDependencies": {
