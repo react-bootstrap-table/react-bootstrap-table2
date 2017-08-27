@@ -9,7 +9,8 @@
     "pretest": "yarn lint --cache",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch"
+    "test:watch": "jest --watch",
+    "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook"
   },
   "repository": {
     "type": "git",
