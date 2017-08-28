@@ -1,0 +1,17 @@
+.welcome {
+  margin-top: 70px;
+  text-align: center;
+  padding: 30px 30px;
+
+  &-title {
+    color: $grey-900;
+  }
+  &-sub-title {
+    font-size: 30px;
+    color: $grey-500;
+  }
+}
+
+span.love-icon {
+  color: $pink-500;
+}

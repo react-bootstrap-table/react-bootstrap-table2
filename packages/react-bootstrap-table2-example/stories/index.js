@@ -1,16 +1,16 @@
 /* eslint import/no-unresolved: 0 */
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { linkTo } from '@storybook/addon-links';
 
-import { Welcome } from '@storybook/react/demo';
-import BasicTable from 'examples/basic/index.js';
+import Welcome from 'examples/welcome';
+import BasicTable from 'examples/basic';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/storybook.scss';
 
-storiesOf('Welcome', module).add('to Storybook', () => <Welcome showApp={linkTo('Button')} />);
+storiesOf('Welcome', module)
+  .add('react bootstrap table 2 ', () => <Welcome />);
 
 storiesOf('Basic Table', module)
   .add('default', () => <BasicTable />);
