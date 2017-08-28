@@ -29,4 +29,6 @@ const columns = [{
   text: 'Product Price'
 }];
 
-export default () => <BootstrapTable keyField="id" data={ products } columns={ columns } />;
+export default () => (
+  <BootstrapTable keyField="id" data={ products } columns={ columns } bordered={ false } />
+);
