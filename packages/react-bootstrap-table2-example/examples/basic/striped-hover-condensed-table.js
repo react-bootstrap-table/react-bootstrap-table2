@@ -30,12 +30,25 @@ const columns = [{
 }];
 
 export default () => (
-  <BootstrapTable
-    keyField="id"
-    data={ products }
-    columns={ columns }
-    striped
-    hover
-    condensed
-  />
+  <div>
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      striped
+      hover
+      condensed
+    />
+    <pre className="prettyprint lang-html"><code className="language-html">{`
+<BootstrapTable
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  striped
+  hover
+  condensed
+/>
+    `}
+    </code></pre>
+  </div>
 );

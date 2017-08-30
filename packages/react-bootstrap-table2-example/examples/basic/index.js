@@ -29,4 +29,22 @@ const columns = [{
   text: 'Product Price'
 }];
 
-export default () => <BootstrapTable keyField="id" data={ products } columns={ columns } />;
+export default () => (
+  <div>
+    <BootstrapTable keyField="id" data={ products } columns={ columns } />
+    <pre className="prettyprint lang-js"><code className="language-javascript">{`const columns = [{
+  dataField: 'id',
+  text: 'Product ID'
+}, {
+  dataField: 'name',
+  text: 'Product Name'
+}, {
+  dataField: 'price',
+  text: 'Product Price'
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } />
+    `}
+    </code></pre>
+  </div>
+);
