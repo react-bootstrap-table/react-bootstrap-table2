@@ -15,9 +15,17 @@ const columns = [{
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ [] } columns={ columns } noDataIndication="Table Empty" />
+    <BootstrapTable keyField="id" data={ [] } columns={ columns } noDataIndication="Table is Empty" />
     <pre className="prettyprint lang-js"><code className="language-javascript">{`
-<BootstrapTable keyField='id' data={ [] } columns={ columns } />
+<BootstrapTable keyField='id' data={ [] } columns={ columns } noDataIndication="Table is Empty" />
+
+// Following is more customizable example
+
+function indication() {
+  // return something here
+}
+
+<BootstrapTable keyField='id' data={ [] } columns={ columns } noDataIndication={ indication } />
     `}
     </code></pre>
   </div>
