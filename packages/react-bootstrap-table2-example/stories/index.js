@@ -19,6 +19,12 @@ import ColumnAlignTable from 'examples/columns/column-align-table';
 import ColumnTitleTable from 'examples/columns/column-title-table';
 import ColumnEventTable from 'examples/columns/column-event-table';
 
+// work on header columns
+import HeaderColumnFormatTable from 'examples/header-columns/column-format-table';
+import HeaderColumnAlignTable from 'examples/header-columns/column-align-table';
+import HeaderColumnTitleTable from 'examples/header-columns/column-title-table';
+import HeaderColumnEventTable from 'examples/header-columns/column-event-table';
+
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/storybook.scss';
@@ -43,3 +49,9 @@ storiesOf('Work on Columns', module)
   .add('Column Event', () => <ColumnEventTable />)
   .add('Customize Column Class', () => <ColumnClassTable />)
   .add('Customize Column Style', () => <ColumnStyleTable />);
+
+storiesOf('Work on Header Columns', module)
+  .add('Column Formatter', () => <HeaderColumnFormatTable />)
+  .add('Column Align', () => <HeaderColumnAlignTable />)
+  .add('Column Title', () => <HeaderColumnTitleTable />)
+  .add('Column Event', () => <HeaderColumnEventTable />);
