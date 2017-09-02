@@ -4,6 +4,7 @@ Available properties in a column object:
 
 * [dataField (**required**)](#dataField)
 * [text (**required**)](#text)
+* [hidden](#hidden)
 * [formatter](#formatter)
 * [headerFormatter](#headerFormatter)
 * [formatExtraData](#formatExtraData)
@@ -56,6 +57,9 @@ dataField: 'address.city'
 
 ## <a name='text'>column.text (**required**) - [String]</a>
 `text` will be apply as the column text in header column, if your header is not only text and you want to customize your header column, please check [`column.headerFormatter`](#headerFormatter)
+
+## <a name='hidden'>column.hidden - [Bool]</a>
+`hidden` allow you to hide column when `true` given.
 
 ## <a name='formatter'>column.formatter - [Function]</a>
 `formatter` allow you to customize the table column and only accept a callback function which take four arguments and a JSX/String are expected for return.
