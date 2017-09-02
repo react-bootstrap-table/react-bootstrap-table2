@@ -11,23 +11,32 @@ const HeaderCell = ({ column, index }) => {
     headerTitle,
     headerAlign,
     headerFormatter,
-    headerEvents
+    headerEvents,
+    headerClasses,
+    headerStyle
   } = column;
   const attrs = {
     ...headerEvents
   };
-  const headerStyle = {};
   const children = headerFormatter ? headerFormatter(column, index) : text;
+  const cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
+
+  let cellStyle = {};
+
+  if (headerStyle) {
+    cellStyle = _.isFunction(headerStyle) ? headerStyle(column, index) : headerStyle;
+  }
 
   if (headerTitle) {
     attrs.title = _.isFunction(headerTitle) ? headerTitle(column, index) : text;
   }
 
   if (headerAlign) {
-    headerStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
+    cellStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
   }
 
-  attrs.style = headerStyle;
+  attrs.style = cellStyle;
+  attrs.className = cellClasses;
 
   if (hidden) {
     attrs.style.display = 'none';

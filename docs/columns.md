@@ -16,6 +16,8 @@ Available properties in a column object:
 * [headerTitle](#headerTitle)
 * [headerEvents](#headerEvents)
 * [headerAlign](#headerAlign)
+* [headerClasses](#headerClasses)
+* [headerStyle](#headerStyle)
 
 Following is a most simplest and basic usage:
 
@@ -93,6 +95,20 @@ In addition, `classes` also accept a callback function which have more power to 
 * `row`
 * `colIndex`
 
+## <a name='headerClasses'>column.headerClasses - [String | Function]</a>
+It's availabe to have customized class on table header column:
+
+```js
+{
+  // omit...
+  headerClasses: 'id-custom-cell'
+}
+```
+In addition, similar to [`column.classes`](#classes), `headerClasses` also accept a callback function which have more power to custom the css class on header column. This callback function take two arguments and a string is expect to return: 
+
+* `column`
+* `colIndex`
+
 ## <a name='style'>column.style - [Object | Function]</a>
 It's availabe to have custom class on table column:
 
@@ -103,6 +119,17 @@ It's availabe to have custom class on table column:
 }
 ```
 `style` like [`column.classes`](#classes), it accept a callback function too and have same arguments: `cell`, `row` and `colIndex`.
+
+## <a name='headerStyle'>column.headerStyle - [Object | Function]</a>
+It's availabe to have customized inline-style on table header column:
+
+```js
+{
+  // omit...
+  headerStyle: { backgroundColor: 'green' }
+}
+```
+`headerStyle` like [`column.headerClasses`](#headerClasses), it accept a callback function as well and have same arguments: `column` and `colIndex`.
 
 ## <a name='title'>column.title - [Bool | Function]</a>
 `react-bootstrap-table2` is disable [`HTML title`](https://www.w3schools.com/tags/tag_title.asp) as default. You can assign `title` as `true` to enable the HTML title on table column. In addition, you can custom the title via a callback function:
