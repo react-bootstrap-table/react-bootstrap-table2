@@ -1,6 +1,7 @@
 const path = require('path');
 
 const sourcePath = path.join(__dirname, '../../react-bootstrap-table2/src');
+const sourceStylePath = path.join(__dirname, '../../react-bootstrap-table2/style');
 const storyPath = path.join(__dirname, '../stories');
 const examplesPath = path.join(__dirname, '../examples');
 const aliasPath = {
@@ -25,7 +26,7 @@ const loaders = [{
 }, {
   test: /\.scss$/,
   use: ['style-loader', 'css-loader', 'sass-loader'],
-  include: [storyPath, sourcePath, examplesPath],
+  include: [storyPath, sourceStylePath],
 }, {
   test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
   loader: 'url-loader?limit=100000',
