@@ -1,6 +1,6 @@
 export default ExtendBase =>
   class ColumnResolver extends ExtendBase {
-    columnSize() {
+    visibleColumnSize() {
       return this.props.columns.length;
     }
   };
