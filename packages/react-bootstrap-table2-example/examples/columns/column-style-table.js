@@ -33,11 +33,11 @@ const columns = [{
   style: (cell, row, colIndex) => {
     if (row.id % 2 === 0) {
       return {
-        backgroundColor: '#bbe'
+        backgroundColor: '#81c784'
       };
     }
     return {
-      backgroundColor: '#fea'
+      backgroundColor: '#c8e6c9'
     };
   }
 }, {
@@ -59,11 +59,11 @@ const columns = [{
   style: (cell, row, colIndex) => {
     if (row.id % 2 === 0) {
       return {
-        backgroundColor: '#bbe'
+        backgroundColor: '#81c784'
       };
     }
     return {
-      backgroundColor: '#fea'
+      backgroundColor: '#c8e6c9'
     };
   }
 }, {

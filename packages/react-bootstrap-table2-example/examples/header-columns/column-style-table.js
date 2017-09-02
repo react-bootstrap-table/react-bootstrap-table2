@@ -27,7 +27,7 @@ const columns = [{
   dataField: 'name',
   text: 'Product Name',
   headerStyle: {
-    backgroundColor: '#fea'
+    backgroundColor: '#c8e6c9'
   }
 }, {
   dataField: 'price',
@@ -35,11 +35,11 @@ const columns = [{
   headerStyle: (column, colIndex) => {
     if (colIndex % 2 === 0) {
       return {
-        backgroundColor: '#bbe'
+        backgroundColor: '#81c784'
       };
     }
     return {
-      backgroundColor: '#fea'
+      backgroundColor: '#c8e6c9'
     };
   }
 }];
@@ -52,7 +52,7 @@ const columns = [{
   dataField: 'name',
   text: 'Product Name',
   headerStyle: {
-    backgroundColor: '#fea'
+    backgroundColor: '#c8e6c9'
   }
 }, {
   dataField: 'price',
@@ -60,11 +60,11 @@ const columns = [{
   headerStyle: (column, colIndex) => {
     if (colIndex % 2 === 0) {
       return {
-        backgroundColor: '#bbe'
+        backgroundColor: '#81c784'
       };
     }
     return {
-      backgroundColor: '#fea'
+      backgroundColor: '#c8e6c9'
     };
   }
 }];
