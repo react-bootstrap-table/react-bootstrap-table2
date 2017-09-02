@@ -4,12 +4,14 @@ import cs from 'classnames';
 
 import Header from './header';
 import Body from './body';
-import storeBase from './store/base';
+import Store from './store/base';
+import PropsBaseResolver from './props-resolver';
 
-class BootstrapTable extends storeBase(Component) {
+class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
+    this.store = new Store(props);
   }
 
   render() {
@@ -34,7 +36,7 @@ class BootstrapTable extends storeBase(Component) {
         <table className={ tableClass }>
           <Header columns={ columns } />
           <Body
-            data={ this.data }
+            data={ this.store.data }
             keyField={ keyField }
             columns={ columns }
           />

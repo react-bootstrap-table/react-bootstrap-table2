@@ -1,13 +1,13 @@
-import { columnSize } from './column-resolver';
+import ColumnResolver from './column-resolver';
 
 export default ExtendBase =>
-  class TableResolver extends ExtendBase {
+  class TableResolver extends ColumnResolver(ExtendBase) {
     validateProps() {
       const { columns, keyField } = this.props;
       if (!keyField) {
         throw new Error('Please specify a field as key via keyField');
       }
-      if (columnSize(columns) <= 0) {
+      if (this.columnSize(columns) <= 0) {
         throw new Error('No any visible columns detect');
       }
     }
