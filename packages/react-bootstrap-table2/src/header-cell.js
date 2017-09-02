@@ -11,13 +11,15 @@ const HeaderCell = ({ column, index }) => {
     headerTitle,
     headerAlign,
     headerFormatter,
-    headerEvents
+    headerEvents,
+    headerClasses
   } = column;
   const attrs = {
     ...headerEvents
   };
   const headerStyle = {};
   const children = headerFormatter ? headerFormatter(column, index) : text;
+  const cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
   if (headerTitle) {
     attrs.title = _.isFunction(headerTitle) ? headerTitle(column, index) : text;
@@ -28,6 +30,7 @@ const HeaderCell = ({ column, index }) => {
   }
 
   attrs.style = headerStyle;
+  attrs.className = cellClasses;
 
   if (hidden) {
     attrs.style.display = 'none';
