@@ -21,7 +21,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       striped,
       hover,
       bordered,
-      condensed
+      condensed,
+      noDataIndication
     } = this.props;
 
     const tableClass = cs('table', {
@@ -39,6 +40,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             data={ this.store.data }
             keyField={ keyField }
             columns={ columns }
+            isEmpty={ this.store.isEmpty() }
+            visibleColumnSize={ this.visibleColumnSize() }
+            noDataIndication={ noDataIndication }
           />
         </table>
       </div>
@@ -50,6 +54,7 @@ BootstrapTable.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
@@ -60,7 +65,8 @@ BootstrapTable.defaultProps = {
   striped: false,
   bordered: true,
   hover: false,
-  condensed: false
+  condensed: false,
+  noDataIndication: null
 };
 
 export default BootstrapTable;

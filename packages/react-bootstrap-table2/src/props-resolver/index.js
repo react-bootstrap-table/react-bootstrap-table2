@@ -7,7 +7,7 @@ export default ExtendBase =>
       if (!keyField) {
         throw new Error('Please specify a field as key via keyField');
       }
-      if (this.columnSize(columns) <= 0) {
+      if (this.visibleColumnSize(columns) <= 0) {
         throw new Error('No any visible columns detect');
       }
     }

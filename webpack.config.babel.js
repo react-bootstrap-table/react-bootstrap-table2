@@ -4,6 +4,7 @@ import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const sourcePath = path.join(__dirname, 'packages/react-bootstrap-table2/src');
+const sourceStylePath = path.join(__dirname, 'packages/react-bootstrap-table2/style');
 const examplePath = path.join(__dirname, 'packages/react-bootstrap-table2-example/src');
 const exampleHTMLPath = path.join(__dirname, 'packages/react-bootstrap-table2-example/src/index.html');
 
@@ -35,8 +36,9 @@ module.exports = {
       exclude: /node_modules/,
       include: [sourcePath, examplePath]
     }, {
-      test: /\.css$/,
-      use: 'style-loader!css-loader'
+      test: /\.scss$/,
+      use: ['style-loader', 'css-loader', 'sass-loader'],
+      include: [sourceStylePath]
     }]
   },
   plugins: [

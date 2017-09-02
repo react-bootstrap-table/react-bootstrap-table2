@@ -8,6 +8,7 @@ import Welcome from 'examples/welcome';
 import BasicTable from 'examples/basic';
 import BorderlessTable from 'examples/basic/borderless-table';
 import StripHoverCondensedTable from 'examples/basic/striped-hover-condensed-table';
+import NoDataTable from 'examples/basic/no-data-table';
 
 // work on columns
 import NestedDataTable from 'examples/columns/nested-data-table';
@@ -29,6 +30,7 @@ import HeaderColumnEventTable from 'examples/header-columns/column-event-table';
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/storybook.scss';
+import 'react-bootstrap-table2/style/react-bootstrap-table.scss';
 
 // import { action } from '@storybook/addon-actions';
 
@@ -39,7 +41,8 @@ storiesOf('Welcome', module)
 storiesOf('Basic Table', module)
   .add('basic table', () => <BasicTable />)
   .add('striped, hover, condensed table', () => <StripHoverCondensedTable />)
-  .add('borderless table', () => <BorderlessTable />);
+  .add('borderless table', () => <BorderlessTable />)
+  .add('Indication For Empty Table', () => <NoDataTable />);
 
 storiesOf('Work on Columns', module)
   .add('Display Nested Data', () => <NestedDataTable />)

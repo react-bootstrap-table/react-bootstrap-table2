@@ -31,6 +31,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.24.1",
+    "css-loader": "^0.28.1",
     "enzyme": "^2.9.1",
     "eslint": "^4.5.0",
     "eslint-config-airbnb": "15.1.0",
@@ -45,6 +46,7 @@
     "react-test-renderer": "^15.6.1",
     "sass-loader": "^6.0.6",
     "sinon": "^3.2.1",
+    "style-loader": "^0.17.0",
     "webpack": "^3.5.4",
     "webpack-dev-server": "^2.7.1"
   },
