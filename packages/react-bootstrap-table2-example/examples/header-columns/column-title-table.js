@@ -1,3 +1,4 @@
+/* eslint no-unused-vars: 0 */
 import React from 'react';
 
 import { BootstrapTable } from 'react-bootstrap-table2';
@@ -20,10 +21,12 @@ addProducts(5);
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  headerTitle: true
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  headerTitle: (column, colIndex) => `this is custom title for ${column.text}`
 }, {
   dataField: 'price',
   text: 'Product Price'
@@ -32,12 +35,15 @@ const columns = [{
 export default () => (
   <div>
     <BootstrapTable keyField="id" data={ products } columns={ columns } />
-    <pre className="prettyprint lang-js"><code className="language-javascript">{`const columns = [{
+    <pre className="prettyprint lang-js"><code className="language-javascript">{`
+const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  headerTitle: true
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  headerTitle: (column, colIndex) => \`this is custom title for \${column.text}\`
 }, {
   dataField: 'price',
   text: 'Product Price'

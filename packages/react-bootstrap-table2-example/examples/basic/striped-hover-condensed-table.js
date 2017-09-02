@@ -31,19 +31,23 @@ const columns = [{
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } />
-    <pre className="prettyprint lang-js"><code className="language-javascript">{`const columns = [{
-  dataField: 'id',
-  text: 'Product ID'
-}, {
-  dataField: 'name',
-  text: 'Product Name'
-}, {
-  dataField: 'price',
-  text: 'Product Price'
-}];
-
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      striped
+      hover
+      condensed
+    />
+    <pre className="prettyprint lang-html"><code className="language-html">{`
+<BootstrapTable
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  striped
+  hover
+  condensed
+/>
     `}
     </code></pre>
   </div>

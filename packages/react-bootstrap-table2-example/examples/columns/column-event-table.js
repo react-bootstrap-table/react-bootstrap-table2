@@ -1,3 +1,5 @@
+/* eslint no-unused-vars: 0 */
+/* eslint no-alert: 0 */
 import React from 'react';
 
 import { BootstrapTable } from 'react-bootstrap-table2';
@@ -20,7 +22,10 @@ addProducts(5);
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  events: {
+    onClick: () => alert('Click on Product ID field')
+  }
 }, {
   dataField: 'name',
   text: 'Product Name'
@@ -31,10 +36,15 @@ const columns = [{
 
 export default () => (
   <div>
+    <h3>Try to Click on Product ID columns</h3>
     <BootstrapTable keyField="id" data={ products } columns={ columns } />
-    <pre className="prettyprint lang-js"><code className="language-javascript">{`const columns = [{
+    <pre className="prettyprint lang-js"><code className="language-javascript">{`
+const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  events: {
+    onClick: () => alert('Click on Product ID field')
+  }
 }, {
   dataField: 'name',
   text: 'Product Name'

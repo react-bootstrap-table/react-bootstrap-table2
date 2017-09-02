@@ -10,8 +10,12 @@ function addProducts(quantity) {
     const id = startId + i;
     products.push({
       id,
-      name: `Item name ${id}`,
-      price: 2100 + i
+      name: `User Name ${id}`,
+      phone: 21009831 + i,
+      address: {
+        city: 'New York',
+        postCode: '1111-4512'
+      }
     });
   }
 }
@@ -20,13 +24,19 @@ addProducts(5);
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'User ID'
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'User Name'
 }, {
-  dataField: 'price',
-  text: 'Product Price'
+  dataField: 'phone',
+  text: 'Phone'
+}, {
+  dataField: 'address.city',
+  text: 'City'
+}, {
+  dataField: 'address.postCode',
+  text: 'PostCode'
 }];
 
 export default () => (
@@ -34,13 +44,19 @@ export default () => (
     <BootstrapTable keyField="id" data={ products } columns={ columns } />
     <pre className="prettyprint lang-js"><code className="language-javascript">{`const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'User ID'
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'User Name'
 }, {
-  dataField: 'price',
-  text: 'Product Price'
+  dataField: 'phone',
+  text: 'Phone'
+}, {
+  dataField: 'address.city',
+  text: 'City'
+}, {
+  dataField: 'address.postCode',
+  text: 'PostCode'
 }];
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } />
