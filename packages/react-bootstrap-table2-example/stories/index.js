@@ -18,6 +18,7 @@ import ColumnStyleTable from 'examples/columns/column-style-table';
 import ColumnAlignTable from 'examples/columns/column-align-table';
 import ColumnTitleTable from 'examples/columns/column-title-table';
 import ColumnEventTable from 'examples/columns/column-event-table';
+import ColumnHiddenTable from 'examples/columns/column-hidden-table';
 
 // work on header columns
 import HeaderColumnFormatTable from 'examples/header-columns/column-format-table';
@@ -46,6 +47,7 @@ storiesOf('Work on Columns', module)
   .add('Column Formatter with Custom Data', () => <ColumnFormatExtraDataTable />)
   .add('Column Align', () => <ColumnAlignTable />)
   .add('Column Title', () => <ColumnTitleTable />)
+  .add('Column Hidden', () => <ColumnHiddenTable />)
   .add('Column Event', () => <ColumnEventTable />)
   .add('Customize Column Class', () => <ColumnClassTable />)
   .add('Customize Column Style', () => <ColumnStyleTable />);
