@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { BootstrapTable } from 'react-bootstrap-table2';
+import Code from 'common/codeBlock';
 
 const products = [];
 
@@ -41,15 +42,7 @@ const columns = [{
   }
 }];
 
-export default () => (
-  <div>
-    <BootstrapTable
-      keyField="id"
-      data={ products }
-      columns={ columns }
-      bordered={ false }
-    />
-    <pre className="prettyprint lang-js"><code className="language-javascript">{`
+const sourceCode = `\
 function rankFormatter(cell, row, rowIndex, formatExtraData) {
   return (
     <i className={ formatExtraData[cell] } />
@@ -72,7 +65,16 @@ const columns = [
   data={ products }
   columns={ columns }
 />
-    `}
-    </code></pre>
+`;
+
+export default () => (
+  <div>
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      bordered={ false }
+    />
+    <Code>{ sourceCode }</Code>
   </div>
 );

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { BootstrapTable } from 'react-bootstrap-table2';
+import Code from 'common/codeBlock';
 
 const products = [];
 
@@ -29,6 +30,15 @@ const columns = [{
   text: 'Product Price'
 }];
 
+const sourceCode = `\
+<BootstrapTable
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  bordered={ false }
+/>
+`;
+
 export default () => (
   <div>
     <BootstrapTable
@@ -37,14 +47,6 @@ export default () => (
       columns={ columns }
       bordered={ false }
     />
-    <pre className="prettyprint lang-js"><code className="language-javascript">{`
-<BootstrapTable
-  keyField="id"
-  data={ products }
-  columns={ columns }
-  bordered={ false }
-/>
-    `}
-    </code></pre>
+    <Code>{ sourceCode }</Code>
   </div>
 );

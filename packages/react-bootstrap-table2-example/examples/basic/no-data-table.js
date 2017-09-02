@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { BootstrapTable } from 'react-bootstrap-table2';
+import Code from 'common/codeBlock';
 
 const columns = [{
   dataField: 'id',
@@ -13,10 +14,7 @@ const columns = [{
   text: 'Product Price'
 }];
 
-export default () => (
-  <div>
-    <BootstrapTable keyField="id" data={ [] } columns={ columns } noDataIndication="Table is Empty" />
-    <pre className="prettyprint lang-js"><code className="language-javascript">{`
+const sourceCode = `\
 <BootstrapTable keyField='id' data={ [] } columns={ columns } noDataIndication="Table is Empty" />
 
 // Following is more customizable example
@@ -26,7 +24,11 @@ function indication() {
 }
 
 <BootstrapTable keyField='id' data={ [] } columns={ columns } noDataIndication={ indication } />
-    `}
-    </code></pre>
+`;
+
+export default () => (
+  <div>
+    <BootstrapTable keyField="id" data={ [] } columns={ columns } noDataIndication="Table is Empty" />
+    <Code>{ sourceCode }</Code>
   </div>
 );
