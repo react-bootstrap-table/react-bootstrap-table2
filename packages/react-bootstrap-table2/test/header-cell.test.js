@@ -191,4 +191,52 @@ describe('HeaderCell', () => {
       expect(column.headerEvents.onClick.callCount).toBe(1);
     });
   });
+
+  describe('when column.headerStyle prop is defined', () => {
+    let column;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID'
+      };
+    });
+
+    describe('when headerStyle is an object', () => {
+      beforeEach(() => {
+        column.headerStyle = { backgroundColor: 'red' };
+        wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+      });
+
+      it('should render successfully', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('th').prop('style')).toEqual(column.headerStyle);
+      });
+    });
+
+    describe('when headerStyle is a function', () => {
+      const returnStyle = { backgroundColor: 'red' };
+      let styleCallBack;
+
+      beforeEach(() => {
+        styleCallBack = sinon.stub()
+          .withArgs(column, index)
+          .returns(returnStyle);
+        column.headerStyle = styleCallBack;
+        wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+      });
+
+      afterEach(() => { styleCallBack.reset(); });
+
+      it('should render successfully', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('th').prop('style')).toEqual(returnStyle);
+      });
+
+      it('should call custom style function correctly', () => {
+        expect(styleCallBack.callCount).toBe(1);
+        expect(styleCallBack.calledWith(column, index)).toBe(true);
+      });
+    });
+  });
 });
