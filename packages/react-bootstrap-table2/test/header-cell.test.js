@@ -239,4 +239,52 @@ describe('HeaderCell', () => {
       });
     });
   });
+
+  describe('when column.headerClasses prop is defined', () => {
+    let column;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID'
+      };
+    });
+
+    describe('when headerClasses is an object', () => {
+      beforeEach(() => {
+        column.headerClasses = 'td-test-class';
+        wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+      });
+
+      it('should render successfully', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.hasClass(column.headerClasses)).toBe(true);
+      });
+    });
+
+    describe('when headerClasses is a function', () => {
+      const returnClasses = 'td-test-class';
+      let classesCallBack;
+
+      beforeEach(() => {
+        classesCallBack = sinon.stub()
+          .withArgs(column, index)
+          .returns(returnClasses);
+        column.headerClasses = classesCallBack;
+        wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+      });
+
+      afterEach(() => { classesCallBack.reset(); });
+
+      it('should render successfully', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.hasClass(returnClasses)).toBe(true);
+      });
+
+      it('should call custom classes function correctly', () => {
+        expect(classesCallBack.callCount).toBe(1);
+        expect(classesCallBack.calledWith(column, index)).toBe(true);
+      });
+    });
+  });
 });
