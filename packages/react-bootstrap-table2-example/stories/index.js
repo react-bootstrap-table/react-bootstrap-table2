@@ -31,6 +31,7 @@ import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'stories/stylesheet/tomorrow.min.css';
 import 'stories/stylesheet/storybook.scss';
 import 'react-bootstrap-table2/style/react-bootstrap-table.scss';
 
