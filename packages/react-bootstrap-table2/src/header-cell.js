@@ -7,6 +7,7 @@ import _ from './utils';
 const HeaderCell = ({ column, index }) => {
   const {
     text,
+    hidden,
     headerTitle,
     headerAlign,
     headerFormatter,
@@ -28,6 +29,9 @@ const HeaderCell = ({ column, index }) => {
 
   attrs.style = headerStyle;
 
+  if (hidden) {
+    attrs.style.display = 'none';
+  }
 
   return (
     <th { ...attrs }>
@@ -40,6 +44,7 @@ HeaderCell.propTypes = {
   column: PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    hidden: PropTypes.bool,
     headerFormatter: PropTypes.func,
     formatter: PropTypes.func,
     formatExtraData: PropTypes.any,

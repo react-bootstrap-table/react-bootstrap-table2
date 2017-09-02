@@ -6,6 +6,7 @@ import _ from './utils';
 const Cell = ({ row, rowIndex, column, columnIndex }) => {
   const {
     dataField,
+    hidden,
     formatter,
     formatExtraData,
     style,
@@ -42,6 +43,10 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
 
   attrs.style = cellStyle;
   attrs.className = cellClasses;
+
+  if (hidden) {
+    attrs.style.display = 'none';
+  }
 
   return (
     <td { ...attrs }>{ content }</td>
