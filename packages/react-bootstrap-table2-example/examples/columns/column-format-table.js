@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BootstrapTable } from 'react-bootstrap-table2';
+import { BootstrapTableful } from 'react-bootstrap-table2';
 import Code from 'common/codeBlock';
 
 const products = [];
@@ -67,7 +67,7 @@ const columns = [
   formatter: priceFormatter
 }];
 
-<BootstrapTable
+<BootstrapTableful
   keyField="id"
   data={ products }
   columns={ columns }
@@ -76,7 +76,7 @@ const columns = [
 
 export default () => (
   <div>
-    <BootstrapTable
+    <BootstrapTableful
       keyField="id"
       data={ products }
       columns={ columns }

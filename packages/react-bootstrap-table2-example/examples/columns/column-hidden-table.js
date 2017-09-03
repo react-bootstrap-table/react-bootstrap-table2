@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: 0 */
 import React from 'react';
 
-import { BootstrapTable } from 'react-bootstrap-table2';
+import { BootstrapTableful } from 'react-bootstrap-table2';
 import Code from 'common/codeBlock';
 
 const products = [];
@@ -41,12 +41,12 @@ const columns = [{
 // omit...
 ];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+<BootstrapTableful keyField='id' data={ products } columns={ columns } />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } />
+    <BootstrapTableful keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>
 );
