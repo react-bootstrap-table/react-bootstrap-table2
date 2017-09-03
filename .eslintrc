@@ -17,7 +17,7 @@
     "react/jsx-space-before-closing": 0,
     "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
     "import/extensions": 0, // skip import extensions
-    "import/no-unresolved": [1, { "ignore": ["^react-bootstrap-table"] }], // monorepo setup
+    "import/no-unresolved": [0, { "ignore": ["^react-bootstrap-table"] }], // monorepo setup
     "import/prefer-default-export": 0,
     "import/no-extraneous-dependencies": 0
   },

@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { BootstrapTable } from 'react-bootstrap-table2';
+import Code from 'common/codeBlock';
 
 const products = [];
 
@@ -32,11 +33,11 @@ const columns = [{
   style: (cell, row, colIndex) => {
     if (row.id % 2 === 0) {
       return {
-        backgroundColor: '#bbe'
+        backgroundColor: '#81c784'
       };
     }
     return {
-      backgroundColor: '#fea'
+      backgroundColor: '#c8e6c9'
     };
   }
 }, {
@@ -44,10 +45,7 @@ const columns = [{
   text: 'Product Price'
 }];
 
-export default () => (
-  <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } />
-    <pre className="prettyprint lang-js"><code className="language-javascript">{`
+const sourceCode = `\
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
@@ -61,11 +59,11 @@ const columns = [{
   style: (cell, row, colIndex) => {
     if (row.id % 2 === 0) {
       return {
-        backgroundColor: '#bbe'
+        backgroundColor: '#81c784'
       };
     }
     return {
-      backgroundColor: '#fea'
+      backgroundColor: '#c8e6c9'
     };
   }
 }, {
@@ -74,7 +72,11 @@ const columns = [{
 }];
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } />
-    `}
-    </code></pre>
+`;
+
+export default () => (
+  <div>
+    <BootstrapTable keyField="id" data={ products } columns={ columns } />
+    <Code>{ sourceCode }</Code>
   </div>
 );
