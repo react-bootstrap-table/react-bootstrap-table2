@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import { BootstrapTable } from 'react-bootstrap-table2';
+import { BootstrapTableful } from 'react-bootstrap-table2';
 
 const products = [];
 
@@ -62,5 +62,5 @@ const columns = [{
 
 
 ReactDom.render(
-  <BootstrapTable keyField="id" data={ products } columns={ columns } />,
+  <BootstrapTableful keyField="id" data={ products } columns={ columns } />,
   document.getElementById('example'));

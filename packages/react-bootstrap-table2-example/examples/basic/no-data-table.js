@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BootstrapTable } from 'react-bootstrap-table2';
+import { BootstrapTableful } from 'react-bootstrap-table2';
 import Code from 'common/codeBlock';
 
 const columns = [{
@@ -15,7 +15,7 @@ const columns = [{
 }];
 
 const sourceCode = `\
-<BootstrapTable keyField='id' data={ [] } columns={ columns } noDataIndication="Table is Empty" />
+<BootstrapTableful keyField='id' data={ [] } columns={ columns } noDataIndication="Table is Empty" />
 
 // Following is more customizable example
 
@@ -23,12 +23,12 @@ function indication() {
   // return something here
 }
 
-<BootstrapTable keyField='id' data={ [] } columns={ columns } noDataIndication={ indication } />
+<BootstrapTableful keyField='id' data={ [] } columns={ columns } noDataIndication={ indication } />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ [] } columns={ columns } noDataIndication="Table is Empty" />
+    <BootstrapTableful keyField="id" data={ [] } columns={ columns } noDataIndication="Table is Empty" />
     <Code>{ sourceCode }</Code>
   </div>
 );

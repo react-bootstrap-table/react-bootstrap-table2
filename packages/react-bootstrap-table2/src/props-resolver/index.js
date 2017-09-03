@@ -11,4 +11,8 @@ export default ExtendBase =>
         throw new Error('No any visible columns detect');
       }
     }
+
+    isEmpty() {
+      return this.props.data.length === 0;
+    }
   };

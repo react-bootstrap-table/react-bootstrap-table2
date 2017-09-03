@@ -2,7 +2,7 @@
 /* eslint no-alert: 0 */
 import React from 'react';
 
-import { BootstrapTable } from 'react-bootstrap-table2';
+import { BootstrapTableful } from 'react-bootstrap-table2';
 import Code from 'common/codeBlock';
 
 const products = [];
@@ -50,13 +50,13 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+<BootstrapTableful keyField='id' data={ products } columns={ columns } />
 `;
 
 export default () => (
   <div>
     <h3>Try to Click on Product ID header column</h3>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } />
+    <BootstrapTableful keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>
 );

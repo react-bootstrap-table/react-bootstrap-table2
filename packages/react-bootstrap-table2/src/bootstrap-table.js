@@ -11,11 +11,13 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
-    this.store = new Store(props);
+    const { store } = this.props;
+    this.store = !store ? new Store(props) : store;
   }
 
   render() {
     const {
+      data,
       columns,
       keyField,
       striped,
@@ -37,10 +39,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
         <table className={ tableClass }>
           <Header columns={ columns } />
           <Body
-            data={ this.store.data }
+            data={ data }
             keyField={ keyField }
             columns={ columns }
-            isEmpty={ this.store.isEmpty() }
+            isEmpty={ this.isEmpty() }
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
           />
@@ -54,6 +56,7 @@ BootstrapTable.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  store: PropTypes.object,
   noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
