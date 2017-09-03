@@ -7,9 +7,9 @@ const examplesPath = path.join(__dirname, '../examples');
 const srcPath = path.join(__dirname, '../src');
 const aliasPath = {
   examples: examplesPath,
-  common: path.join(examplesPath, 'common'),
   stories: storyPath,
   src: srcPath,
+  components: path.join(srcPath, 'components'),
   utils: path.join(srcPath, 'utils'),
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BootstrapTableful } from 'react-bootstrap-table2';
-import Code from 'common/codeBlock';
+import Code from 'components/common/code-block';
 
 const columns = [{
   dataField: 'id',

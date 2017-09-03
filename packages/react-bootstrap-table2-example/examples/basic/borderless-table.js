@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { BootstrapTableful } from 'react-bootstrap-table2';
-import Code from 'common/codeBlock';
+import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
