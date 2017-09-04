@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 
 import HeaderCell from '../src/header-cell';
 import Header from '../src/header';
+import Const from '../src/const';
 
 describe('Header', () => {
   let wrapper;
@@ -23,6 +24,23 @@ describe('Header', () => {
       expect(wrapper.length).toBe(1);
       expect(wrapper.find('tr').length).toBe(1);
       expect(wrapper.find(HeaderCell).length).toBe(columns.length);
+    });
+  });
+
+  describe('header with columns enable sort', () => {
+    const sortField = columns[1].dataField;
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <Header columns={ columns } sortField={ sortField } sortOrder={ Const.SORT_ASC } />);
+    });
+
+    it('The HeaderCell should receive correct sorting props', () => {
+      const headerCells = wrapper.find(HeaderCell);
+      expect(headerCells.length).toBe(columns.length);
+      expect(headerCells.at(0).prop('sorting')).toBe(false);
+      expect(headerCells.at(1).prop('sorting')).toBe(true);
+      expect(headerCells.at(1).prop('sortOrder')).toBe(Const.SORT_ASC);
     });
   });
 });
