@@ -1,27 +1,18 @@
 import React from 'react';
 
 import { BootstrapTableful } from 'react-bootstrap-table2';
-import Code from 'common/codeBlock';
+import Code from 'components/common/code-block';
+import { productsGenerator } from 'utils/common';
 
-const products = [];
-
-function addProducts(quantity) {
-  const startId = products.length;
-  for (let i = 0; i < quantity; i += 1) {
-    const id = startId + i;
-    products.push({
-      id,
-      name: `User Name ${id}`,
-      phone: 21009831 + i,
-      address: {
-        city: 'New York',
-        postCode: '1111-4512'
-      }
-    });
+const products = productsGenerator(5, (value, index) => ({
+  id: index,
+  name: `User Name ${index}`,
+  phone: 21009831 + index,
+  address: {
+    city: 'New York',
+    postCode: '1111-4512'
   }
-}
-
-addProducts(5);
+}));
 
 const columns = [{
   dataField: 'id',

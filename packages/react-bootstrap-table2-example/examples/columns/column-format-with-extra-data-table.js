@@ -2,23 +2,14 @@
 import React from 'react';
 
 import { BootstrapTableful } from 'react-bootstrap-table2';
-import Code from 'common/codeBlock';
+import Code from 'components/common/code-block';
+import { productsGenerator } from 'utils/common';
 
-const products = [];
-
-function addProducts(quantity) {
-  const startId = products.length;
-  for (let i = 0; i < quantity; i += 1) {
-    const id = startId + i;
-    products.push({
-      id,
-      name: `Item name ${id}`,
-      rank: Math.random() < 0.5 ? 'down' : 'up'
-    });
-  }
-}
-
-addProducts(5);
+const products = productsGenerator(5, (value, index) => ({
+  id: index,
+  name: `User Name ${index}`,
+  rank: Math.random() < 0.5 ? 'down' : 'up'
+}));
 
 function rankFormatter(cell, row, rowIndex, formatExtraData) {
   return (
