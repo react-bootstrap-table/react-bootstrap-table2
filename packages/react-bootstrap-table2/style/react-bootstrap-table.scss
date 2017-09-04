@@ -1,5 +1,24 @@
 .react-bootstrap-table-container {
+
+  th.sortable {
+    cursor: pointer;
+  }
+
+  th > .order > .dropdown > .caret {
+    margin: 10px 0 10px 5px;
+    color: #cccccc;
+  }
+
+  th > .order > .dropup > .caret {
+    margin: 10px 0;
+    color: #cccccc;
+  }
+
+  th > .react-bootstrap-table-sort-order > .caret {
+    margin: 10px 6.5px;
+  }
+
   td.react-bs-table-no-data {
-    text-align: center
-  } 
+    text-align: center;
+  }
 }

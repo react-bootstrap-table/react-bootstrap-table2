@@ -1,3 +1,4 @@
+/* eslint arrow-body-style: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
@@ -13,11 +14,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
     const { store } = this.props;
     this.store = !store ? new Store(props) : store;
+
+    this.handleSort = this.handleSort.bind(this);
+    this.state = {
+      data: this.store.get()
+    };
   }
 
   render() {
     const {
-      data,
       columns,
       keyField,
       striped,
@@ -37,9 +42,14 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     return (
       <div className="react-bootstrap-table-container">
         <table className={ tableClass }>
-          <Header columns={ columns } />
+          <Header
+            columns={ columns }
+            sortField={ this.store.sortField }
+            sortOrder={ this.store.sortOrder }
+            onSort={ this.handleSort }
+          />
           <Body
-            data={ data }
+            data={ this.state.data }
             keyField={ keyField }
             columns={ columns }
             isEmpty={ this.isEmpty() }
@@ -49,6 +59,16 @@ class BootstrapTable extends PropsBaseResolver(Component) {
         </table>
       </div>
     );
+  }
+
+  handleSort(column) {
+    this.store.sortBy(column);
+
+    this.setState(() => {
+      return {
+        data: this.store.get()
+      };
+    });
   }
 }
 

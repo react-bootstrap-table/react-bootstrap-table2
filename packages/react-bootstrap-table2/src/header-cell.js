@@ -1,12 +1,25 @@
+/* eslint react/require-default-props: 0 */
 import React from 'react';
+import cs from 'classnames';
 import PropTypes from 'prop-types';
 
+import Const from './const';
+import SortSymbol from './sort-symbol';
+import SortCaret from './sort-caret';
 import _ from './utils';
 
 
-const HeaderCell = ({ column, index }) => {
+const HeaderCell = (props) => {
+  const {
+    column,
+    index,
+    onSort,
+    sorting,
+    sortOrder
+  } = props;
   const {
     text,
+    sort,
     hidden,
     headerTitle,
     headerAlign,
@@ -25,6 +38,7 @@ const HeaderCell = ({ column, index }) => {
   const cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
   let cellStyle = {};
+  let sortSymbol;
 
   if (headerStyle) {
     cellStyle = _.isFunction(headerStyle) ? headerStyle(column, index) : headerStyle;
@@ -46,9 +60,24 @@ const HeaderCell = ({ column, index }) => {
 
   if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
+  if (sort) {
+    const customClick = cellAttrs.onClick;
+    cellAttrs.onClick = (e) => {
+      onSort(column);
+      if (_.isFunction(customClick)) customClick(e);
+    };
+    cellAttrs.className = cs(cellAttrs.className, 'sortable');
+
+    if (sorting) {
+      sortSymbol = <SortCaret order={ sortOrder } />;
+    } else {
+      sortSymbol = <SortSymbol />;
+    }
+  }
+
   return (
     <th { ...cellAttrs }>
-      { children }
+      { children }{ sortSymbol }
     </th>
   );
 };
@@ -68,9 +97,14 @@ HeaderCell.propTypes = {
     headerEvents: PropTypes.object,
     events: PropTypes.object,
     headerAlign: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    align: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    align: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    sort: PropTypes.bool,
+    sortFunc: PropTypes.func
   }).isRequired,
-  index: PropTypes.number.isRequired
+  index: PropTypes.number.isRequired,
+  onSort: PropTypes.func,
+  sorting: PropTypes.bool,
+  sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC])
 };
 
 export default HeaderCell;
