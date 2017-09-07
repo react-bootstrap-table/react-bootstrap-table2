@@ -13,15 +13,18 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
     classes,
     title,
     events,
-    align
+    align,
+    attrs
   } = column;
   let cellTitle;
   let cellStyle = {};
   let content = _.get(row, dataField);
 
-  const attrs = {
-    ...events
+  const cellAttrs = {
+    ...events,
+    ..._.isFunction(attrs) ? attrs(content, row, columnIndex) : attrs
   };
+
   const cellClasses = _.isFunction(classes) ? classes(content, row, columnIndex) : classes;
 
   if (style) {
@@ -30,7 +33,7 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
 
   if (title) {
     cellTitle = _.isFunction(title) ? title(content, row, columnIndex) : content;
-    attrs.title = cellTitle;
+    cellAttrs.title = cellTitle;
   }
 
   if (formatter) {
@@ -41,15 +44,15 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
     cellStyle.textAlign = _.isFunction(align) ? align(content, row, columnIndex) : align;
   }
 
-  attrs.style = cellStyle;
-  attrs.className = cellClasses;
+  cellAttrs.style = cellStyle;
+  cellAttrs.className = cellClasses;
 
   if (hidden) {
-    attrs.style.display = 'none';
+    cellAttrs.style.display = 'none';
   }
 
   return (
-    <td { ...attrs }>{ content }</td>
+    <td { ...cellAttrs }>{ content }</td>
   );
 };
 
