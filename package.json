@@ -4,6 +4,7 @@
   "description": "Rebuilt for react-bootstrap-table",
   "main": "index.js",
   "scripts": {
+    "postinstall": "lerna bootstrap",
     "start": "node -r babel-register ./node_modules/.bin/webpack-dev-server --config webpack.config.babel.js",
     "lint": "eslint ./packages --ext .js --ext .jsx --ignore-path .gitignore",
     "pretest": "yarn lint --cache",
