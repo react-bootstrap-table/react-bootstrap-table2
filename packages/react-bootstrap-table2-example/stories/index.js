@@ -29,6 +29,7 @@ import HeaderColumnTitleTable from 'examples/header-columns/column-title-table';
 import HeaderColumnEventTable from 'examples/header-columns/column-event-table';
 import HeaderColumnClassTable from 'examples/header-columns/column-class-table';
 import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
+import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -66,4 +67,5 @@ storiesOf('Work on Header Columns', module)
   .add('Column Title', () => <HeaderColumnTitleTable />)
   .add('Column Event', () => <HeaderColumnEventTable />)
   .add('Customize Column Class', () => <HeaderColumnClassTable />)
-  .add('Customize Column Style', () => <HeaderColumnStyleTable />);
+  .add('Customize Column Style', () => <HeaderColumnStyleTable />)
+  .add('Customize Column Attributes', () => <HeaderColumnAttrsTable />);
