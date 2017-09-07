@@ -305,4 +305,69 @@ describe('Cell', () => {
       });
     });
   });
+
+  describe('when column.attrs prop is defined', () => {
+    let column;
+    const columnIndex = 1;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        attrs: {
+          title: 'title',
+          'data-test': 'test'
+        }
+      };
+    });
+
+    describe('when attrs is an object', () => {
+      it('should render column.attrs correctly', () => {
+        wrapper = shallow(
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('data-test')).toEqual(column.attrs['data-test']);
+        expect(wrapper.find('td').prop('title')).toEqual(column.attrs.title);
+      });
+
+      describe('when column.title prop is defined', () => {
+        it('title should be overwrited', () => {
+          column.title = true;
+          wrapper = shallow(
+            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+
+          expect(wrapper.find('td').prop('title')).toEqual(row[column.dataField]);
+        });
+      });
+    });
+
+    describe('when attrs is custom function', () => {
+      let attrsCallBack;
+      const customAttrs = {
+        title: 'title',
+        'data-test': 'test'
+      };
+
+      beforeEach(() => {
+        attrsCallBack = sinon.stub()
+          .withArgs(row[column.dataField], row, columnIndex)
+          .returns(customAttrs);
+        column.attrs = attrsCallBack;
+        wrapper = shallow(
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+      });
+
+      it('should render style.attrs correctly', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('data-test')).toEqual(customAttrs['data-test']);
+        expect(wrapper.find('td').prop('title')).toEqual(customAttrs.title);
+      });
+
+      it('should call custom attrs function correctly', () => {
+        expect(attrsCallBack.callCount).toBe(1);
+        expect(attrsCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+      });
+    });
+  });
 });
