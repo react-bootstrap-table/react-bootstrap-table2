@@ -21,8 +21,8 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
   let content = _.get(row, dataField);
 
   const cellAttrs = {
-    ...events,
-    ..._.isFunction(attrs) ? attrs(content, row, columnIndex) : attrs
+    ..._.isFunction(attrs) ? attrs(content, row, columnIndex) : attrs,
+    ...events
   };
 
   const cellClasses = _.isFunction(classes) ? classes(content, row, columnIndex) : classes;
@@ -44,12 +44,13 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
     cellStyle.textAlign = _.isFunction(align) ? align(content, row, columnIndex) : align;
   }
 
-  cellAttrs.style = cellStyle;
-  cellAttrs.className = cellClasses;
-
   if (hidden) {
-    cellAttrs.style.display = 'none';
+    cellStyle.display = 'none';
   }
+
+  if (cellClasses) cellAttrs.className = cellClasses;
+
+  if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
   return (
     <td { ...cellAttrs }>{ content }</td>
