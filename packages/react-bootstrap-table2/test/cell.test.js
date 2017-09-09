@@ -313,31 +313,92 @@ describe('Cell', () => {
     beforeEach(() => {
       column = {
         dataField: 'id',
-        text: 'ID',
-        attrs: {
-          title: 'title',
-          'data-test': 'test'
-        }
+        text: 'ID'
       };
     });
 
     describe('when attrs is an object', () => {
       it('should render column.attrs correctly', () => {
+        column.attrs = {
+          'data-test': 'test',
+          title: 'title',
+          className: 'attrs-class',
+          style: {
+            backgroundColor: 'attrs-style-test',
+            display: 'none',
+            textAlign: 'right'
+          }
+        };
         wrapper = shallow(
           <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
 
         expect(wrapper.length).toBe(1);
         expect(wrapper.find('td').prop('data-test')).toEqual(column.attrs['data-test']);
         expect(wrapper.find('td').prop('title')).toEqual(column.attrs.title);
+        expect(wrapper.hasClass(column.attrs.className)).toBe(true);
+        expect(wrapper.find('td').prop('style')).toEqual(column.attrs.style);
+        expect(wrapper.find('td').prop('style').textAlign).toEqual(column.attrs.style.textAlign);
       });
 
       describe('when column.title prop is defined', () => {
-        it('title should be overwrited', () => {
+        it('attrs.title should be overwrited', () => {
           column.title = true;
+          column.attrs = { title: 'title' };
+
           wrapper = shallow(
             <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
 
           expect(wrapper.find('td').prop('title')).toEqual(row[column.dataField]);
+        });
+      });
+
+      describe('when column.classes prop is defined', () => {
+        it('attrs.class should be overwrited', () => {
+          column.classes = 'td-test-class';
+          column.attrs = { className: 'attrs-class' };
+
+          wrapper = shallow(
+            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+
+          expect(wrapper.hasClass(column.classes)).toBe(true);
+        });
+      });
+
+      describe('when column.style prop is defined', () => {
+        it('attrs.style should be overwrited', () => {
+          column.style = { backgroundColor: 'red' };
+          column.attrs = { style: { backgroundColor: 'attrs-style-test' } };
+
+          wrapper = shallow(
+            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+
+          expect(wrapper.find('td').prop('style')).toEqual(column.style);
+        });
+      });
+
+      describe('when column.hidden prop is defined', () => {
+        it('attrs.style.hidden should be overwrited', () => {
+          column.hidden = true;
+          column.attrs = { style: { hidden: true } };
+
+          wrapper = shallow(
+            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+
+          const style = wrapper.find('td').prop('style');
+          expect(style).toBeDefined();
+          expect(style.display).toEqual('none');
+        });
+      });
+
+      describe('when column.align prop is defined', () => {
+        it('attrs.style.textAlign should be overwrited', () => {
+          column.align = 'center';
+          column.attrs = { style: { textAlign: 'right' } };
+
+          wrapper = shallow(
+            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+
+          expect(wrapper.find('td').prop('style').textAlign).toEqual(column.align);
         });
       });
     });
