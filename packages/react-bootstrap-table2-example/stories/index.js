@@ -59,7 +59,7 @@ storiesOf('Work on Columns', module)
   .add('Column Event', () => <ColumnEventTable />)
   .add('Customize Column Class', () => <ColumnClassTable />)
   .add('Customize Column Style', () => <ColumnStyleTable />)
-  .add('Customize Column Attributes', () => <ColumnAttrsTable />);
+  .add('Customize Column HTML attribute', () => <ColumnAttrsTable />);
 
 storiesOf('Work on Header Columns', module)
   .add('Column Formatter', () => <HeaderColumnFormatTable />)
@@ -68,4 +68,4 @@ storiesOf('Work on Header Columns', module)
   .add('Column Event', () => <HeaderColumnEventTable />)
   .add('Customize Column Class', () => <HeaderColumnClassTable />)
   .add('Customize Column Style', () => <HeaderColumnStyleTable />)
-  .add('Customize Column Attributes', () => <HeaderColumnAttrsTable />);
+  .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);
