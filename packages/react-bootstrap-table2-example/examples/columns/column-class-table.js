@@ -14,8 +14,8 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  classes: (cell, row, colIndex) => {
-    if (row.id % 2 === 0) return 'demo-row-even';
+  classes: (cell, row, rowIndex, colIndex) => {
+    if (rowIndex % 2 === 0) return 'demo-row-even';
     return 'demo-row-odd';
   }
 }, {
@@ -31,8 +31,8 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  classes: (cell, row, colIndex) => {
-    if (row.id % 2 === 0) return 'demo-row-even';
+  classes: (cell, row, rowIndex, colIndex) => {
+    if (rowIndex % 2 === 0) return 'demo-row-even';
     return 'demo-row-odd';
   }
 }, {

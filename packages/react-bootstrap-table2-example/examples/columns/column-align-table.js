@@ -14,8 +14,8 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  align: (cell, row, colIndex) => {
-    if (row.id % 2 === 0) return 'right';
+  align: (cell, row, rowIndex, colIndex) => {
+    if (rowIndex % 2 === 0) return 'right';
     return 'left';
   }
 }, {
@@ -31,8 +31,8 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  align: (cell, row, colIndex) => {
-    if (row.id % 2 === 0) return 'right';
+  align: (cell, row, rowIndex, colIndex) => {
+    if (rowIndex % 2 === 0) return 'right';
     return 'left';
   }
 }, {
