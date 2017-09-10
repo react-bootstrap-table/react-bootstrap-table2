@@ -21,18 +21,20 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
   let content = _.get(row, dataField);
 
   const cellAttrs = {
-    ..._.isFunction(attrs) ? attrs(content, row, columnIndex) : attrs,
+    ..._.isFunction(attrs) ? attrs(content, row, rowIndex, columnIndex) : attrs,
     ...events
   };
 
-  const cellClasses = _.isFunction(classes) ? classes(content, row, columnIndex) : classes;
+  const cellClasses = _.isFunction(classes)
+    ? classes(content, row, rowIndex, columnIndex)
+    : classes;
 
   if (style) {
-    cellStyle = _.isFunction(style) ? style(content, row, columnIndex) : style;
+    cellStyle = _.isFunction(style) ? style(content, row, rowIndex, columnIndex) : style;
   }
 
   if (title) {
-    cellTitle = _.isFunction(title) ? title(content, row, columnIndex) : content;
+    cellTitle = _.isFunction(title) ? title(content, row, rowIndex, columnIndex) : content;
     cellAttrs.title = cellTitle;
   }
 
@@ -41,7 +43,7 @@ const Cell = ({ row, rowIndex, column, columnIndex }) => {
   }
 
   if (align) {
-    cellStyle.textAlign = _.isFunction(align) ? align(content, row, columnIndex) : align;
+    cellStyle.textAlign = _.isFunction(align) ? align(content, row, rowIndex, columnIndex) : align;
   }
 
   if (hidden) {
