@@ -94,11 +94,24 @@ It's availabe to have custom class on table column:
   classes: 'id-custom-cell'
 }
 ```
-In addition, `classes` also accept a callback function which have more power to custom the css class on each columns. This callback function take three arguments and a string is expect to return: 
+In addition, `classes` also accept a callback function which have more power to custom the css class on each columns. This callback function take `4` arguments and a `string` is expect to return: 
 
-* `cell`
-* `row`
-* `colIndex`
+
+```js
+{
+  classes: function callback(cell, row, rowIndex, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `cell`: The value of current cell. 
+* `row`: The value of `row` being processed in the `BootstrapTable`.
+* `rowIndex`: The index of the current `row` being processed in the `BootstrapTable`.
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+**Return value**
+
+A new `String` will be the result of element class.
 
 ## <a name='headerClasses'>column.headerClasses - [String | Function]</a>
 It's availabe to have customized class on table header column:
@@ -115,7 +128,7 @@ In addition, similar to [`column.classes`](#classes), `headerClasses` also accep
 * `colIndex`
 
 ## <a name='style'>column.style - [Object | Function]</a>
-It's availabe to have custom class on table column:
+It's availabe to have custom style on table column:
 
 ```js
 {
@@ -123,7 +136,26 @@ It's availabe to have custom class on table column:
   style: { backgroundColor: 'green' }
 }
 ```
-`style` like [`column.classes`](#classes), it accept a callback function too and have same arguments: `cell`, `row` and `colIndex`.
+
+In addition, similar to [`column.classes`](#classes), `style` also accept a callback function which have more power to customize the `inline style` on each columns. This callback function takes `4` arguments and an `Object` is expect to return: 
+
+
+```js
+{
+  style: function callback(cell, row, rowIndex, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `cell`: The value of current cell. 
+* `row`: The value of `row` being processed in the `BootstrapTable`.
+* `rowIndex`: The index of the current `row` being processed in the `BootstrapTable`.
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+**Return value**
+
+A new `Object` will be the result of element style.
+
 
 ## <a name='headerStyle'>column.headerStyle - [Object | Function]</a>
 It's availabe to have customized inline-style on table header column:
@@ -137,16 +169,26 @@ It's availabe to have customized inline-style on table header column:
 `headerStyle` like [`column.headerClasses`](#headerClasses), it accept a callback function as well and have same arguments: `column` and `colIndex`.
 
 ## <a name='title'>column.title - [Bool | Function]</a>
-`react-bootstrap-table2` is disable [`HTML title`](https://www.w3schools.com/tags/tag_title.asp) as default. You can assign `title` as `true` to enable the HTML title on table column. In addition, you can custom the title via a callback function:
+`react-bootstrap-table2` is disable [`HTML title`](https://www.w3schools.com/tags/tag_title.asp) as default. You can assign `title` as `true` to enable the HTML title on table column and take `cell content` as default value. Additionally, you could customize title via a callback. It takes `4` arguments and a `String` is expect to return: 
+
 
 ```js
 {
   // omit...
-  title: (cell, row, colIndex) => {
-    // return custom title here
-  }
+  title: function callback(cell, row, rowIndex, colIndex) { ... }
+  // return custom title here
 }
 ```
+
+**Parameters**
+* `cell`: The value of current cell. 
+* `row`: The value of `row` being processed in the `BootstrapTable`.
+* `rowIndex`: The index of the current `row` being processed in the `BootstrapTable`.
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+**Return value**
+
+A new `String` will be the result of element title.
 
 ## <a name='headerTitle'>column.headerTitle - [Bool | Function]</a>
 `headerTitle` is only for the title on header column, default is disable. The usage almost same as [`column.title`](#title), it's also availabe to custom via a callback function:
@@ -162,11 +204,26 @@ It's availabe to have customized inline-style on table header column:
 ```
 
 ## <a name='align'>column.align - [String | Function]</a>
-You can configure the [CSS text-align](https://www.w3schools.com/cssref/pr_text_text-align.asp) for table column by `align` property. However, `align` also accept a callback function for customizable reason and this function take fore arguments:
+You can configure the [CSS text-align](https://www.w3schools.com/cssref/pr_text_text-align.asp) for table column by `align` property. 
 
-* `cell`
-* `row`
-* `colIndex`
+Besides, `align` also accept a callback function for dynamically setting text align. It takes `4` arguments and a `String` is expect to return: 
+
+```js
+{
+  // omit...
+  align: function callback(cell, row, rowIndex, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `cell`: The value of current cell. 
+* `row`: The value of `row` being processed in the `BootstrapTable`.
+* `rowIndex`: The index of the current `row` being processed in the `BootstrapTable`.
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+**Return value**
+
+A new `String` will be the result of element text alignment.
 
 ## <a name='headerAlign'>column.headerAlign - [String | Function]</a>
 It's almost same as [`column.align`](#align), but it's for the [CSS text-align](https://www.w3schools.com/cssref/pr_text_text-align.asp) on header column. Also, you can custom the align by a callback function:
@@ -197,16 +254,34 @@ You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattribut
 `headerEvents` same as [`column.events`](#events) but this is for header column.
 
 ## <a name='attrs'>column.attrs - [Object | Function]</a>
-Via `attrs` property, You can costomize table column [HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) which allow user to configure the elements or adjust their behavior. It takes `Object` and `callback function` is also acceptable.
+Via `attrs` property, You can customize table column [HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) which allow user to configure the elements or adjust their behavior.
 
 ```js
 {
   // omit...
-  attrs: (cell, row, colIndex) => ({
-    // return customized HTML attribute here
-  })
+  attrs: {
+    title: 'bar',
+    'data-test': 'foo'
+  }
 }
 ```
+Not only `Object`, `callback function` is also acceptable. It takes `4` arguments and an `Object` is expect to return: 
+
+```js
+{
+  attrs: function callback(cell, row, rowIndex, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `cell`: The value of current cell. 
+* `row`: The value of `row` being processed in the `BootstrapTable`.
+* `rowIndex`: The index of the current `row` being processed in the `BootstrapTable`.
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+**Return value**
+
+A new `Object` will be the result of element HTML attributes.
 
 #### * Caution
 
