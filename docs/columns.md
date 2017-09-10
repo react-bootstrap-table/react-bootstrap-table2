@@ -2,23 +2,26 @@
 
 Available properties in a column object:
 
+#### Required
 * [dataField (**required**)](#dataField)
 * [text (**required**)](#text)
+
+#### Optional
 * [hidden](#hidden)
 * [formatter](#formatter)
-* [headerFormatter](#headerFormatter)
 * [formatExtraData](#formatExtraData)
+* [headerFormatter](#headerFormatter)
 * [classes](#classes)
 * [style](#style)
 * [title](#title)
 * [events](#events)
 * [align](#align)
 * [attrs](#attrs)
+* [headerClasses](#headerClasses)
+* [headerStyle](#headerStyle)
 * [headerTitle](#headerTitle)
 * [headerEvents](#headerEvents)
 * [headerAlign](#headerAlign)
-* [headerClasses](#headerClasses)
-* [headerStyle](#headerStyle)
 * [headerAttrs](#headerAttrs)
 
 Following is a most simplest and basic usage:
