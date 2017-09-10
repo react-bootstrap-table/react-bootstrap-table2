@@ -194,7 +194,7 @@ You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattribut
 `headerEvents` same as [`column.events`](#events) but this is for header column.
 
 ## <a name='attrs'>column.attrs - [Object | Function]</a>
-Via `attrs` property, You can costomize table column [HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) which allow user to configure the elements or adjust their behavior. It takes `Object` but `callback function` is also acceptable.
+Via `attrs` property, You can costomize table column [HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) which allow user to configure the elements or adjust their behavior. It takes `Object` and `callback function` is also acceptable.
 
 ```js
 {
@@ -207,14 +207,14 @@ Via `attrs` property, You can costomize table column [HTML attribute](https://de
 
 #### * Caution
 
-If `column.classes`, `column.style` or `column.title` was given at the same time, property `attrs` has lower priorty and it will be overwrited.
+If `column.classes`, `column.style`, `column.title`, `column.hidden` or `column.align` was given at the same time, property `attrs` has lower priorty and it will be overwrited.
 
 ```js
-
+{
   // omit...
-  title: true, // it will be choosen.
+  title: true, // it will be chosen.
   attrs: { title: 'test' }
-
+}
 ```
 
 ## <a name='headerAttrs'>column.headerAttrs - [Object | Function]</a>
