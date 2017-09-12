@@ -20,6 +20,7 @@ import ColumnAlignTable from 'examples/columns/column-align-table';
 import ColumnTitleTable from 'examples/columns/column-title-table';
 import ColumnEventTable from 'examples/columns/column-event-table';
 import ColumnHiddenTable from 'examples/columns/column-hidden-table';
+import ColumnAttrsTable from 'examples/columns/column-attrs-table';
 
 // work on header columns
 import HeaderColumnFormatTable from 'examples/header-columns/column-format-table';
@@ -28,6 +29,7 @@ import HeaderColumnTitleTable from 'examples/header-columns/column-title-table';
 import HeaderColumnEventTable from 'examples/header-columns/column-event-table';
 import HeaderColumnClassTable from 'examples/header-columns/column-class-table';
 import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
+import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -56,7 +58,8 @@ storiesOf('Work on Columns', module)
   .add('Column Hidden', () => <ColumnHiddenTable />)
   .add('Column Event', () => <ColumnEventTable />)
   .add('Customize Column Class', () => <ColumnClassTable />)
-  .add('Customize Column Style', () => <ColumnStyleTable />);
+  .add('Customize Column Style', () => <ColumnStyleTable />)
+  .add('Customize Column HTML attribute', () => <ColumnAttrsTable />);
 
 storiesOf('Work on Header Columns', module)
   .add('Column Formatter', () => <HeaderColumnFormatTable />)
@@ -64,4 +67,5 @@ storiesOf('Work on Header Columns', module)
   .add('Column Title', () => <HeaderColumnTitleTable />)
   .add('Column Event', () => <HeaderColumnEventTable />)
   .add('Customize Column Class', () => <HeaderColumnClassTable />)
-  .add('Customize Column Style', () => <HeaderColumnStyleTable />);
+  .add('Customize Column Style', () => <HeaderColumnStyleTable />)
+  .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);

@@ -13,11 +13,13 @@ Available properties in a column object:
 * [title](#title)
 * [events](#events)
 * [align](#align)
+* [attrs](#attrs)
 * [headerTitle](#headerTitle)
 * [headerEvents](#headerEvents)
 * [headerAlign](#headerAlign)
 * [headerClasses](#headerClasses)
 * [headerStyle](#headerStyle)
+* [headerAttrs](#headerAttrs)
 
 Following is a most simplest and basic usage:
 
@@ -190,3 +192,39 @@ You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattribut
 
 ## <a name='headerEvents'>column.headerEvents - [Object]</a>
 `headerEvents` same as [`column.events`](#events) but this is for header column.
+
+## <a name='attrs'>column.attrs - [Object | Function]</a>
+Via `attrs` property, You can costomize table column [HTML attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes) which allow user to configure the elements or adjust their behavior. It takes `Object` and `callback function` is also acceptable.
+
+```js
+{
+  // omit...
+  attrs: (cell, row, colIndex) => ({
+    // return customized HTML attribute here
+  })
+}
+```
+
+#### * Caution
+
+If `column.classes`, `column.style`, `column.title`, `column.hidden` or `column.align` was given at the same time, property `attrs` has lower priorty and it will be overwrited.
+
+```js
+{
+  // omit...
+  title: true, // it will be chosen.
+  attrs: { title: 'test' }
+}
+```
+
+## <a name='headerAttrs'>column.headerAttrs - [Object | Function]</a>
+`headerAttrs` is similiar to [`column.attrs`](#attrs) but it's for header column.
+
+```js
+{
+  // omit...
+  headerAttrs: (column, colIndex) => ({
+    // return customized HTML attribute here
+  })
+}
+```

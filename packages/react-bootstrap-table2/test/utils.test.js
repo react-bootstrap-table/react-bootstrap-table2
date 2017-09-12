@@ -21,4 +21,62 @@ describe('Utils', () => {
       expect(_.get(data, 'address.not.exist')).toEqual(undefined);
     });
   });
+
+  describe('isObject', () => {
+    describe('when given Object', () => {
+      it('should return true', () => {
+        expect(_.isObject({})).toBe(true);
+      });
+    });
+
+    describe('when given Function', () => {
+      it('should return false', () => {
+        expect(_.isObject(() => 'test')).toBe(false);
+      });
+    });
+
+    describe('when given Array', () => {
+      it('should return false', () => {
+        expect(_.isObject([])).toBe(false);
+      });
+    });
+
+    describe('when given null', () => {
+      it('should return false', () => {
+        expect(_.isObject(null)).toBe(false);
+      });
+    });
+  });
+
+  describe('isEmptyObject', () => {
+    describe('when given empty Object', () => {
+      it('should return true', () => {
+        expect(_.isEmptyObject({})).toBe(true);
+      });
+    });
+
+    describe('when given non-empty Object', () => {
+      it('should return false', () => {
+        expect(_.isEmptyObject({ foo: 'test' })).toBe(false);
+      });
+    });
+
+    describe('when given Function', () => {
+      it('should return false', () => {
+        expect(_.isEmptyObject(() => 'test')).toBe(false);
+      });
+    });
+
+    describe('when given Array', () => {
+      it('should return false', () => {
+        expect(_.isEmptyObject([])).toBe(false);
+      });
+    });
+
+    describe('when given null', () => {
+      it('should return false', () => {
+        expect(_.isEmptyObject(null)).toBe(false);
+      });
+    });
+  });
 });

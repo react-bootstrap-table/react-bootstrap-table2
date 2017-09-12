@@ -24,9 +24,9 @@ describe('HeaderCell', () => {
       expect(wrapper.text()).toEqual(column.text);
     });
 
-    it('should have correct default style', () => {
+    it('should not have default style', () => {
       const style = wrapper.find('th').prop('style');
-      expect(style).toBeDefined();
+      expect(style).toBeUndefined();
     });
   });
 
@@ -284,6 +284,104 @@ describe('HeaderCell', () => {
       it('should call custom classes function correctly', () => {
         expect(classesCallBack.callCount).toBe(1);
         expect(classesCallBack.calledWith(column, index)).toBe(true);
+      });
+    });
+
+    describe('when column.headerAttrs prop is defined', () => {
+      beforeEach(() => {
+        column = {
+          dataField: 'id',
+          text: 'ID'
+        };
+      });
+
+      describe('when headerAttrs is an object', () => {
+        it('should render column.headerAttrs correctly', () => {
+          column.headerAttrs = {
+            'data-test': 'test',
+            title: 'title',
+            className: 'attrs-class',
+            style: { backgroundColor: 'attrs-style-test' }
+          };
+          wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+
+          expect(wrapper.length).toBe(1);
+          expect(wrapper.find('th').prop('data-test')).toEqual(column.headerAttrs['data-test']);
+          expect(wrapper.find('th').prop('title')).toEqual(column.headerAttrs.title);
+          expect(wrapper.hasClass(column.headerAttrs.className)).toBe(true);
+          expect(wrapper.find('th').prop('style')).toEqual(column.headerAttrs.style);
+        });
+
+        describe('when column.headerTitle prop is defined', () => {
+          it('title should be overwrited', () => {
+            column.headerAttrs = { title: 'title' };
+            column.headerTitle = true;
+            wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+
+            expect(wrapper.find('th').prop('title')).toBe(column.text);
+          });
+        });
+
+        describe('when column.headerClasses prop is defined', () => {
+          it('class should be overwrited', () => {
+            column.headerClasses = 'td-test-class';
+            column.headerAttrs = { className: 'attrs-class' };
+
+            wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+
+            expect(wrapper.hasClass(column.headerClasses)).toBe(true);
+          });
+        });
+
+        describe('when column.headerStyle prop is defined', () => {
+          it('style should be overwrited', () => {
+            column.headerStyle = { backgroundColor: 'red' };
+            column.headerAttrs = { style: { backgroundColor: 'attrs-style-test' } };
+
+            wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+
+            expect(wrapper.find('th').prop('style')).toEqual(column.headerStyle);
+          });
+        });
+
+        describe('when column.headerAlign prop is defined', () => {
+          it('style.textAlign should be overwrited', () => {
+            column.headerAlign = 'center';
+            column.headerAttrs = { style: { textAlign: 'right' } };
+
+            wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+
+            expect(wrapper.find('th').prop('style').textAlign).toEqual(column.headerAlign);
+          });
+        });
+      });
+
+      describe('when headerAttrs is custom function', () => {
+        let headerAttrsCallBack;
+        const customHeaderAttrs = {
+          title: 'title',
+          'data-test': 'test'
+        };
+
+
+        beforeEach(() => {
+          headerAttrsCallBack = sinon.stub()
+            .withArgs(column, index)
+            .returns(customHeaderAttrs);
+          column.headerAttrs = headerAttrsCallBack;
+          wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+        });
+
+        it('should render style.headerAttrs correctly', () => {
+          expect(wrapper.length).toBe(1);
+          expect(wrapper.find('th').prop('data-test')).toEqual(customHeaderAttrs['data-test']);
+          expect(wrapper.find('th').prop('title')).toEqual(customHeaderAttrs.title);
+        });
+
+        it('should call custom headerAttrs function correctly', () => {
+          expect(headerAttrsCallBack.callCount).toBe(1);
+          expect(headerAttrsCallBack.calledWith(column, index)).toBe(true);
+        });
       });
     });
   });
