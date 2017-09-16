@@ -2,6 +2,9 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
+import Const from '../src/const';
+import SortCaret from '../src/sort-caret';
+import SortSymbol from '../src/sort-symbol';
 import HeaderCell from '../src/header-cell';
 
 describe('HeaderCell', () => {
@@ -382,6 +385,77 @@ describe('HeaderCell', () => {
           expect(headerAttrsCallBack.callCount).toBe(1);
           expect(headerAttrsCallBack.calledWith(column, index)).toBe(true);
         });
+      });
+    });
+  });
+
+  describe('when column.sort is enable', () => {
+    let column;
+    let onSortCallBack;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        sort: true
+      };
+      onSortCallBack = sinon.stub().withArgs(column);
+      wrapper = shallow(<HeaderCell column={ column } index={ index } onSort={ onSortCallBack } />);
+    });
+
+    it('should have sortable class on header cell', () => {
+      expect(wrapper.hasClass('sortable')).toBe(true);
+    });
+
+    it('should have onClick event on header cell', () => {
+      expect(wrapper.find('th').prop('onClick')).toBeDefined();
+    });
+
+    it('should trigger onSort callback when click on header cell', () => {
+      wrapper.find('th').simulate('click');
+      expect(onSortCallBack.callCount).toBe(1);
+    });
+
+    describe('and sorting prop is false', () => {
+      it('header should render SortSymbol as default', () => {
+        expect(wrapper.find(SortSymbol).length).toBe(1);
+      });
+    });
+
+    describe('and sorting prop is true', () => {
+      [Const.SORT_ASC, Const.SORT_DESC].forEach((order) => {
+        describe(`and sortOrder is ${order}`, () => {
+          beforeEach(() => {
+            wrapper = shallow(
+              <HeaderCell column={ column } index={ index } sortOrder={ order } sorting />);
+          });
+
+          it('should render SortCaret correctly', () => {
+            expect(wrapper.find(SortCaret).length).toBe(1);
+            expect(wrapper.find(SortCaret).prop('order')).toEqual(order);
+          });
+        });
+      });
+    });
+
+    describe('when column.headerEvents prop is defined and have custom onClick', () => {
+      beforeEach(() => {
+        column = {
+          dataField: 'id',
+          text: 'ID',
+          sort: true,
+          headerEvents: {
+            onClick: sinon.stub()
+          }
+        };
+        wrapper = shallow(
+          <HeaderCell column={ column } index={ index } onSort={ onSortCallBack } />);
+      });
+
+      it('custom event hook should still be called when triggering sorting', () => {
+        wrapper.find('th').simulate('click');
+        expect(onSortCallBack.callCount).toBe(1);
+        expect(column.headerEvents.onClick.callCount).toBe(1);
       });
     });
   });

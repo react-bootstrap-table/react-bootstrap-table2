@@ -31,6 +31,10 @@ import HeaderColumnClassTable from 'examples/header-columns/column-class-table';
 import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
 import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
+// table sort
+import EnableSortTable from 'examples/sort/enable-sort-table';
+import CustomSortTable from 'examples/sort/custom-sort-table';
+
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/tomorrow.min.css';
@@ -69,3 +73,7 @@ storiesOf('Work on Header Columns', module)
   .add('Customize Column Class', () => <HeaderColumnClassTable />)
   .add('Customize Column Style', () => <HeaderColumnStyleTable />)
   .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);
+
+storiesOf('Sort Table', module)
+  .add('Enable Sort', () => <EnableSortTable />)
+  .add('Custom Sort Fuction', () => <CustomSortTable />);

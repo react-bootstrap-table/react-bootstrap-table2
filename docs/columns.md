@@ -10,13 +10,15 @@ Available properties in a column object:
 * [hidden](#hidden)
 * [formatter](#formatter)
 * [formatExtraData](#formatExtraData)
-* [headerFormatter](#headerFormatter)
+* [sort](#sort)
+* [sortFunc](#sortFunc)
 * [classes](#classes)
 * [style](#style)
 * [title](#title)
 * [events](#events)
 * [align](#align)
 * [attrs](#attrs)
+* [headerFormatter](#headerFormatter)
 * [headerClasses](#headerClasses)
 * [headerStyle](#headerStyle)
 * [headerTitle](#headerTitle)
@@ -84,6 +86,24 @@ dataField: 'address.city'
 
 ## <a name='formatExtraData'>column.formatExtraData - [Any]</a>
 It's only used for [`column.formatter`](#formatter), you can define any value for it and will be passed as fourth argument for [`column.formatter`](#formatter) callback function.
+
+## <a name='sort'>column.sort - [Bool]</a>
+Enable the column sort via a `true` value given.
+
+## <a name='sortFunc'>column.sortFunc - [Function]</a>
+`column.sortFunc` only work when `column.sort` is enable. `sortFunc` allow you to define your sorting algorithm. This callback function accept four arguments:
+
+```js
+{
+  // omit...
+  sort: true,
+  sortFunc: (a, b, order, dataField) => {
+    if (order === 'asc') return a - b;
+    else return b - a;
+  }
+}
+```
+> The possible value of `order` argument is **`asc`** and **`desc`**.
 
 ## <a name='classes'>column.classes - [String | Function]</a>
 It's availabe to have custom class on table column:
