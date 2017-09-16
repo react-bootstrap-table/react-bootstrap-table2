@@ -14,7 +14,7 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  title: (cell, row, colIndex) => `this is custom title for ${cell}`
+  title: (cell, row, rowIndex, colIndex) => `this is custom title for ${cell}`
 }, {
   dataField: 'price',
   text: 'Product Price'
@@ -28,7 +28,7 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  title: (cell, row, colIndex) => \`this is custom title for \${cell}\`
+  title: (cell, row, rowIndex, colIndex) => \`this is custom title for \${cell}\`
 }, {
   dataField: 'price',
   text: 'Product Price'

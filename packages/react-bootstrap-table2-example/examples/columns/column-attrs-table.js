@@ -14,7 +14,7 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  attrs: (cell, row, colIndex) => ({ 'data-test': `customized data ${colIndex}` })
+  attrs: (cell, row, rowIndex, colIndex) => ({ 'data-test': `customized data ${rowIndex}` })
 }, {
   dataField: 'price',
   text: 'Product Price'
@@ -28,7 +28,7 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  attrs: (cell, row, colIndex) => ({ 'data-test': \`customized data \${colIndex}\` })
+  attrs: (cell, row, rowIndex, colIndex) => ({ 'data-test': \`customized data \${rowIndex}\` })
 }, {
   dataField: 'price',
   text: 'Product Price'

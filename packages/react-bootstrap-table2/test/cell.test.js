@@ -81,6 +81,7 @@ describe('Cell', () => {
   describe('when column.style prop is defined', () => {
     let column;
     const columnIndex = 1;
+    const rowIndex = 1;
 
     beforeEach(() => {
       column = {
@@ -93,7 +94,7 @@ describe('Cell', () => {
       beforeEach(() => {
         column.style = { backgroundColor: 'red' };
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       it('should render successfully', () => {
@@ -108,11 +109,11 @@ describe('Cell', () => {
 
       beforeEach(() => {
         styleCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, columnIndex)
+          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
           .returns(returnStyle);
         column.style = styleCallBack;
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       afterEach(() => { styleCallBack.reset(); });
@@ -124,7 +125,9 @@ describe('Cell', () => {
 
       it('should call custom style function correctly', () => {
         expect(styleCallBack.callCount).toBe(1);
-        expect(styleCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+        expect(
+          styleCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
+        ).toBe(true);
       });
     });
   });
@@ -132,6 +135,7 @@ describe('Cell', () => {
   describe('when column.classes prop is defined', () => {
     let column;
     const columnIndex = 1;
+    const rowIndex = 1;
 
     beforeEach(() => {
       column = {
@@ -144,7 +148,7 @@ describe('Cell', () => {
       beforeEach(() => {
         column.classes = 'td-test-class';
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       it('should render successfully', () => {
@@ -159,11 +163,11 @@ describe('Cell', () => {
 
       beforeEach(() => {
         classesCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, columnIndex)
+          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
           .returns(returnClasses);
         column.classes = classesCallBack;
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       afterEach(() => { classesCallBack.reset(); });
@@ -175,7 +179,9 @@ describe('Cell', () => {
 
       it('should call custom classes function correctly', () => {
         expect(classesCallBack.callCount).toBe(1);
-        expect(classesCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+        expect(
+          classesCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
+        ).toBe(true);
       });
     });
   });
@@ -183,6 +189,7 @@ describe('Cell', () => {
   describe('when column.title prop is defined', () => {
     let column;
     const columnIndex = 1;
+    const rowIndex = 1;
 
     beforeEach(() => {
       column = {
@@ -195,7 +202,7 @@ describe('Cell', () => {
       beforeEach(() => {
         column.title = true;
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       it('should render title as cell value as default', () => {
@@ -210,11 +217,11 @@ describe('Cell', () => {
 
       beforeEach(() => {
         titleCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, columnIndex)
+          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
           .returns(customTitle);
         column.title = titleCallBack;
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       it('should render title correctly by custom title function', () => {
@@ -224,7 +231,9 @@ describe('Cell', () => {
 
       it('should call custom title function correctly', () => {
         expect(titleCallBack.callCount).toBe(1);
-        expect(titleCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+        expect(
+          titleCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
+        ).toBe(true);
       });
     });
   });
@@ -232,6 +241,7 @@ describe('Cell', () => {
   describe('when column.events prop is defined', () => {
     let column;
     const columnIndex = 1;
+    const rowIndex = 1;
 
     beforeEach(() => {
       column = {
@@ -243,7 +253,7 @@ describe('Cell', () => {
       };
 
       wrapper = shallow(
-        <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+        <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
     });
 
     it('should attachs DOM event successfully', () => {
@@ -260,6 +270,7 @@ describe('Cell', () => {
   describe('when column.align prop is defined', () => {
     let column;
     const columnIndex = 1;
+    const rowIndex = 1;
 
     beforeEach(() => {
       column = {
@@ -272,7 +283,7 @@ describe('Cell', () => {
       beforeEach(() => {
         column.align = 'center';
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       it('should render style.textAlign correctly', () => {
@@ -287,11 +298,11 @@ describe('Cell', () => {
 
       beforeEach(() => {
         alignCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, columnIndex)
+          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
           .returns(customAlign);
         column.align = alignCallBack;
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       it('should render style.textAlign correctly', () => {
@@ -301,7 +312,9 @@ describe('Cell', () => {
 
       it('should call custom headerAlign function correctly', () => {
         expect(alignCallBack.callCount).toBe(1);
-        expect(alignCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+        expect(
+          alignCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
+        ).toBe(true);
       });
     });
   });
@@ -309,6 +322,7 @@ describe('Cell', () => {
   describe('when column.attrs prop is defined', () => {
     let column;
     const columnIndex = 1;
+    const rowIndex = 1;
 
     beforeEach(() => {
       column = {
@@ -412,11 +426,11 @@ describe('Cell', () => {
 
       beforeEach(() => {
         attrsCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, columnIndex)
+          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
           .returns(customAttrs);
         column.attrs = attrsCallBack;
         wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
+          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
       });
 
       it('should render style.attrs correctly', () => {
@@ -427,7 +441,9 @@ describe('Cell', () => {
 
       it('should call custom attrs function correctly', () => {
         expect(attrsCallBack.callCount).toBe(1);
-        expect(attrsCallBack.calledWith(row[column.dataField], row, columnIndex)).toBe(true);
+        expect(
+          attrsCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
+        ).toBe(true);
       });
     });
   });

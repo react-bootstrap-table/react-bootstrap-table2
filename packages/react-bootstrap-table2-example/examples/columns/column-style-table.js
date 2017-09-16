@@ -17,8 +17,8 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  style: (cell, row, colIndex) => {
-    if (row.id % 2 === 0) {
+  style: (cell, row, rowIndex, colIndex) => {
+    if (rowIndex % 2 === 0) {
       return {
         backgroundColor: '#81c784'
       };
@@ -43,8 +43,8 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  style: (cell, row, colIndex) => {
-    if (row.id % 2 === 0) {
+  style: (cell, row, rowIndex, colIndex) => {
+    if (rowIndex % 2 === 0) {
       return {
         backgroundColor: '#81c784'
       };
