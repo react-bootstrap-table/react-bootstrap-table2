@@ -66,4 +66,8 @@ Row.propTypes = {
   columns: PropTypes.array.isRequired
 };
 
+Row.defaultProps = {
+  editable: true
+};
+
 export default Row;

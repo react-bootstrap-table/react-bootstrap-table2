@@ -29,7 +29,7 @@ export default class Store {
 
   edit(rowId, dataField, newValue) {
     const row = this.getRowByRowId(rowId);
-    _.set(row, dataField, newValue);
+    if (row) _.set(row, dataField, newValue);
   }
 
   get() {

@@ -18,12 +18,13 @@ function get(target, field) {
   return result;
 }
 
-function set(target, field, value) {
+function set(target, field, value, safe = false) {
   const pathArray = splitNested(field);
   let level = 0;
   pathArray.reduce((a, b) => {
     level += 1;
-    if (typeof a[b] === 'undefined' && level !== pathArray.length) {
+    if (typeof a[b] === 'undefined') {
+      if (!safe) throw new Error(`${a}.${b} is undefined`);
       a[b] = {};
       return a[b];
     }
