@@ -22,6 +22,42 @@ describe('Utils', () => {
     });
   });
 
+  describe('set', () => {
+    const newValue = 'test';
+    const data = {
+      name: 'A',
+      address: {
+        road: 'BCD',
+        postal: '1234-12345',
+        city: {
+          name: 'B'
+        }
+      }
+    };
+
+    it('should set data successfully', () => {
+      _.set(data, 'name', newValue);
+      _.set(data, 'address.road', newValue);
+      _.set(data, 'address.city.name', newValue);
+      expect(data.name).toEqual(newValue);
+      expect(data.address.road).toEqual(newValue);
+      expect(data.address.city.name).toEqual(newValue);
+    });
+
+    it('should throw error if target not existing', () => {
+      expect(() => {
+        _.set(data, 'address.not.existing', newValue);
+      }).toThrow();
+    });
+
+    it('should not throw error if target not existing but with safe=true', () => {
+      expect(() => {
+        _.set(data, 'address.not.existing', newValue, true);
+      }).not.toThrow();
+      expect(data.address.not.existing).toEqual({});
+    });
+  });
+
   describe('isObject', () => {
     describe('when given Object', () => {
       it('should return true', () => {

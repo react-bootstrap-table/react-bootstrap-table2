@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 
 import Body from '../src/body';
 import Row from '../src/row';
+import Const from '../src/const';
 import RowSection from '../src/row-section';
 
 describe('Body', () => {
@@ -109,6 +110,37 @@ describe('Body', () => {
           expect(emptyIndicationCallBack.callCount).toBe(1);
         });
       });
+    });
+  });
+
+  describe('when cellEdit.nonEditableRows props is defined', () => {
+    const nonEditableRows = [data[1].id];
+    const keyField = 'id';
+    const cellEdit = {
+      mode: Const.CLICK_TO_CELL_EDIT,
+      nonEditableRows
+    };
+    beforeEach(() => {
+      wrapper = shallow(
+        <Body
+          data={ data }
+          columns={ columns }
+          keyField={ keyField }
+          cellEdit={ cellEdit }
+        />
+      );
+    });
+
+    it('should render Row component with correct editable prop', () => {
+      expect(wrapper.length).toBe(1);
+      const rows = wrapper.find(Row);
+      for (let i = 0; i < rows.length; i += 1) {
+        if (nonEditableRows.indexOf(rows.get(i).props.row[keyField]) > -1) {
+          expect(rows.get(i).props.editable).toBeFalsy();
+        } else {
+          expect(rows.get(i).props.editable).toBeTruthy();
+        }
+      }
     });
   });
 });

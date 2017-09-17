@@ -3,15 +3,16 @@ import Const from '../../src/const';
 
 describe('Store Base', () => {
   let store;
-  const data = [
-    { id: 3, name: 'name2' },
-    { id: 2, name: 'ABC' },
-    { id: 4, name: '123tester' },
-    { id: 1, name: '!@#' }
-  ];
+  let data;
 
   beforeEach(() => {
-    store = new Base({ data });
+    data = [
+      { id: 3, name: 'name2' },
+      { id: 2, name: 'ABC' },
+      { id: 4, name: '123tester' },
+      { id: 1, name: '!@#' }
+    ];
+    store = new Base({ data, keyField: 'id' });
   });
 
   describe('initialize', () => {
@@ -70,6 +71,42 @@ describe('Store Base', () => {
       store.get().forEach((e, i) => {
         expect(e[dataField]).toEqual(result[i]);
       });
+    });
+  });
+
+  describe('getRowByRowId', () => {
+    it('should return data if specified id existing', () => {
+      const result = store.getRowByRowId(3);
+      expect(result).toBeDefined();
+    });
+
+    it('should return undefined if specified id existing', () => {
+      const result = store.getRowByRowId(88);
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('edit', () => {
+    it('should update a specified field correctly', () => {
+      const newValue = 'newValue';
+      const dataField = 'name';
+      const rowId = 2;
+      store.edit(rowId, dataField, newValue);
+
+      const row = store.data.find(d => d[store.keyField] === rowId);
+      expect(row[dataField]).toEqual(newValue);
+    });
+
+    it('should not throw any error even if rowId is not existing', () => {
+      expect(() => {
+        store.edit('123', 'name', 'value');
+      }).not.toThrow();
+    });
+
+    it('should throwing error if dataField is not existing', () => {
+      expect(() => {
+        store.edit(2, 'non_exist_field', 'value');
+      }).toThrow();
     });
   });
 });

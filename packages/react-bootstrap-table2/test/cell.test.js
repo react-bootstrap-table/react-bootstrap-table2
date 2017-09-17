@@ -2,6 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
+import Const from '../src/const';
 import Cell from '../src/cell';
 
 describe('Cell', () => {
@@ -444,6 +445,100 @@ describe('Cell', () => {
         expect(
           attrsCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
         ).toBe(true);
+      });
+    });
+  });
+
+  describe('when editable prop is true', () => {
+    let onStartCallBack;
+    const rowIndex = 1;
+    const columnIndex = 1;
+    const column = {
+      dataField: 'id',
+      text: 'ID'
+    };
+
+    beforeEach(() => {
+      onStartCallBack = sinon.stub().withArgs(rowIndex, columnIndex);
+    });
+
+    describe(`and editMode is ${Const.CLICK_TO_CELL_EDIT}`, () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <Cell
+            row={ row }
+            rowIndex={ rowIndex }
+            column={ column }
+            columnIndex={ columnIndex }
+            editable
+            editMode={ Const.CLICK_TO_CELL_EDIT }
+            onStart={ onStartCallBack }
+          />
+        );
+      });
+
+      it('should render onClick attribute', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('onClick')).toBeDefined();
+      });
+
+      it('should call onStart correctly when clicking cell', () => {
+        wrapper.find('td').simulate('click');
+        expect(onStartCallBack.callCount).toBe(1);
+        expect(onStartCallBack.calledWith(rowIndex, columnIndex)).toBe(true);
+      });
+
+      describe('if when column.events.onClick prop is defined', () => {
+        beforeEach(() => {
+          column.events = {
+            onClick: sinon.stub()
+          };
+        });
+        it('should calling custom onClick callback also', () => {
+          wrapper.find('td').simulate('click');
+          expect(onStartCallBack.callCount).toBe(1);
+          expect(column.events.onClick.callCount).toBe(1);
+        });
+      });
+    });
+
+    describe(`and editMode is ${Const.DBCLICK_TO_CELL_EDIT}`, () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <Cell
+            row={ row }
+            rowIndex={ 1 }
+            column={ column }
+            columnIndex={ 1 }
+            editable
+            editMode={ Const.DBCLICK_TO_CELL_EDIT }
+            onStart={ onStartCallBack }
+          />
+        );
+      });
+
+      it('should render onDoubleClick attribute', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('td').prop('onDoubleClick')).toBeDefined();
+      });
+
+      it('should call onStart correctly when double clicking cell', () => {
+        wrapper.find('td').simulate('doubleclick');
+        expect(onStartCallBack.callCount).toBe(1);
+        expect(onStartCallBack.calledWith(rowIndex, columnIndex)).toBe(true);
+      });
+
+      describe('if when column.events.onDoubleClick prop is defined', () => {
+        beforeEach(() => {
+          column.events = {
+            onDoubleClick: sinon.stub()
+          };
+        });
+        it('should calling custom onDoubleClick callback also', () => {
+          wrapper.find('td').simulate('doubleclick');
+          expect(onStartCallBack.callCount).toBe(1);
+          expect(column.events.onDoubleClick.callCount).toBe(1);
+        });
       });
     });
   });
