@@ -10,6 +10,7 @@ const Row = (props) => {
   const {
     row,
     columns,
+    keyField,
     rowIndex,
     cellEdit,
     editable: editableRow
@@ -28,7 +29,7 @@ const Row = (props) => {
       {
         columns.map((column, index) => {
           let editable = _.isDefined(column.editable) ? column.editable : true;
-          if (!editableRow) editable = false;
+          if (column.dataField === keyField || !editableRow) editable = false;
           if (rowIndex === editingRowIdx && index === editingColIdx) {
             return (
               <EditingCell

@@ -30,6 +30,7 @@ const Body = (props) => {
         <Row
           key={ key }
           row={ row }
+          keyField={ keyField }
           rowIndex={ index }
           columns={ columns }
           cellEdit={ cellEdit }
