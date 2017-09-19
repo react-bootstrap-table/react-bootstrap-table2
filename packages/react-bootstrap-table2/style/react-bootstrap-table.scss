@@ -1,5 +1,9 @@
 .react-bootstrap-table-container {
 
+  table {
+    table-layout: fixed;
+  }
+
   th.sortable {
     cursor: pointer;
   }
