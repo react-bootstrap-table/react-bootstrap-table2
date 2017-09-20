@@ -7,11 +7,20 @@ const withStateful = (Base) => {
     constructor(props) {
       super(props);
       this.store = new Store(props);
+      this.edit = this.edit.bind(this);
+    }
+
+    edit(rowId, dataField, newValue) {
+      this.store.edit(rowId, dataField, newValue);
     }
 
     render() {
       const { props } = this;
-      return <Base { ...props } store={ this.store } />;
+      const newProps = { ...props };
+      if (newProps.cellEdit && !newProps.cellEdit.onEditing) {
+        newProps.cellEdit.onEditing = this.edit;
+      }
+      return <Base { ...newProps } store={ this.store } />;
     }
   }
   return StatefulComponent;

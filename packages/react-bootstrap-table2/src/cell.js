@@ -1,63 +1,103 @@
-import React from 'react';
+/* eslint react/prop-types: 0 */
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Const from './const';
 import _ from './utils';
 
-const Cell = ({ row, rowIndex, column, columnIndex }) => {
-  const {
-    dataField,
-    hidden,
-    formatter,
-    formatExtraData,
-    style,
-    classes,
-    title,
-    events,
-    align,
-    attrs
-  } = column;
-  let cellTitle;
-  let cellStyle = {};
-  let content = _.get(row, dataField);
-
-  const cellAttrs = {
-    ..._.isFunction(attrs) ? attrs(content, row, rowIndex, columnIndex) : attrs,
-    ...events
-  };
-
-  const cellClasses = _.isFunction(classes)
-    ? classes(content, row, rowIndex, columnIndex)
-    : classes;
-
-  if (style) {
-    cellStyle = _.isFunction(style) ? style(content, row, rowIndex, columnIndex) : style;
+class Cell extends Component {
+  constructor(props) {
+    super(props);
+    this.handleEditingCell = this.handleEditingCell.bind(this);
   }
 
-  if (title) {
-    cellTitle = _.isFunction(title) ? title(content, row, rowIndex, columnIndex) : content;
-    cellAttrs.title = cellTitle;
+  handleEditingCell(e) {
+    const { editMode, column, onStart, rowIndex, columnIndex } = this.props;
+    const { events } = column;
+    if (events) {
+      if (editMode === Const.CLICK_TO_CELL_EDIT) {
+        const customClick = events.onClick;
+        if (_.isFunction(customClick)) customClick(e);
+      } else {
+        const customDbClick = events.onDoubleClick;
+        if (_.isFunction(customDbClick)) customDbClick(e);
+      }
+    }
+    onStart(rowIndex, columnIndex);
   }
 
-  if (formatter) {
-    content = column.formatter(content, row, rowIndex, formatExtraData);
+  render() {
+    const {
+      row,
+      rowIndex,
+      column,
+      columnIndex,
+      editMode,
+      editable
+    } = this.props;
+    const {
+      dataField,
+      hidden,
+      formatter,
+      formatExtraData,
+      style,
+      classes,
+      title,
+      events,
+      align,
+      attrs
+    } = column;
+    let cellTitle;
+    let cellStyle = {};
+    let content = _.get(row, dataField);
+
+    const cellAttrs = {
+      ..._.isFunction(attrs) ? attrs(content, row, rowIndex, columnIndex) : attrs,
+      ...events
+    };
+
+    const cellClasses = _.isFunction(classes)
+      ? classes(content, row, rowIndex, columnIndex)
+      : classes;
+
+    if (style) {
+      cellStyle = _.isFunction(style) ? style(content, row, rowIndex, columnIndex) : style;
+    }
+
+    if (title) {
+      cellTitle = _.isFunction(title) ? title(content, row, rowIndex, columnIndex) : content;
+      cellAttrs.title = cellTitle;
+    }
+
+    if (formatter) {
+      content = column.formatter(content, row, rowIndex, formatExtraData);
+    }
+
+    if (align) {
+      cellStyle.textAlign =
+        _.isFunction(align) ? align(content, row, rowIndex, columnIndex) : align;
+    }
+
+    if (hidden) {
+      cellStyle.display = 'none';
+    }
+
+    if (cellClasses) cellAttrs.className = cellClasses;
+
+    if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
+
+    if (editable && editMode !== Const.UNABLE_TO_CELL_EDIT) {
+      if (editMode === Const.CLICK_TO_CELL_EDIT) { // click to edit
+        cellAttrs.onClick = this.handleEditingCell;
+      } else { // dbclick to edit
+        cellAttrs.onDoubleClick = this.handleEditingCell;
+      }
+    }
+    return (
+      <td { ...cellAttrs }>{ content }</td>
+    );
   }
-
-  if (align) {
-    cellStyle.textAlign = _.isFunction(align) ? align(content, row, rowIndex, columnIndex) : align;
-  }
-
-  if (hidden) {
-    cellStyle.display = 'none';
-  }
-
-  if (cellClasses) cellAttrs.className = cellClasses;
-
-  if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
-
-  return (
-    <td { ...cellAttrs }>{ content }</td>
-  );
-};
+}
 
 Cell.propTypes = {
   row: PropTypes.object.isRequired,

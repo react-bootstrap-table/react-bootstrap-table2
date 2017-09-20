@@ -1,9 +1,11 @@
 import { sort } from './sort';
 import Const from '../const';
+import _ from '../utils';
 
 export default class Store {
   constructor(props) {
-    const { data } = props;
+    const { data, keyField } = props;
+    this.keyField = keyField;
     this.data = data ? data.slice() : [];
 
     this.sortOrder = undefined;
@@ -25,7 +27,16 @@ export default class Store {
     this.sortField = dataField;
   }
 
+  edit(rowId, dataField, newValue) {
+    const row = this.getRowByRowId(rowId);
+    if (row) _.set(row, dataField, newValue);
+  }
+
   get() {
     return this.data;
+  }
+
+  getRowByRowId(rowId) {
+    return this.get().find(row => _.get(row, this.keyField) === rowId);
   }
 }

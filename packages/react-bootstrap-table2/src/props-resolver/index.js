@@ -1,4 +1,6 @@
 import ColumnResolver from './column-resolver';
+import Const from '../const';
+import _ from '../utils';
 
 export default ExtendBase =>
   class TableResolver extends ColumnResolver(ExtendBase) {
@@ -14,5 +16,28 @@ export default ExtendBase =>
 
     isEmpty() {
       return this.props.data.length === 0;
+    }
+
+    resolveCellEditProps(options) {
+      const { cellEdit } = this.props;
+      const { currEditCell } = this.state;
+      const nonEditableRows =
+        (cellEdit && _.isFunction(cellEdit.nonEditableRows)) ? cellEdit.nonEditableRows() : [];
+      const cellEditInfo = {
+        ...currEditCell,
+        nonEditableRows
+      };
+
+      if (_.isDefined(cellEdit)) {
+        return {
+          ...cellEdit,
+          ...cellEditInfo,
+          ...options
+        };
+      }
+      return {
+        mode: Const.UNABLE_TO_CELL_EDIT,
+        ...cellEditInfo
+      };
     }
   };

@@ -1,16 +1,40 @@
 /* eslint no-empty: 0 */
+/* eslint no-param-reassign: 0 */
 
-function get(target, field) {
-  const pathArray = [field]
+function splitNested(str) {
+  return [str]
     .join('.')
     .replace(/\[/g, '.')
     .replace(/\]/g, '')
     .split('.');
+}
+
+function get(target, field) {
+  const pathArray = splitNested(field);
   let result;
   try {
     result = pathArray.reduce((curr, path) => curr[path], target);
   } catch (e) {}
   return result;
+}
+
+function set(target, field, value, safe = false) {
+  const pathArray = splitNested(field);
+  let level = 0;
+  pathArray.reduce((a, b) => {
+    level += 1;
+    if (typeof a[b] === 'undefined') {
+      if (!safe) throw new Error(`${a}.${b} is undefined`);
+      a[b] = {};
+      return a[b];
+    }
+
+    if (level === pathArray.length) {
+      a[b] = value;
+      return value;
+    }
+    return a[b];
+  }, target);
 }
 
 function isFunction(obj) {
@@ -46,6 +70,7 @@ function isDefined(value) {
 
 export default {
   get,
+  set,
   isFunction,
   isObject,
   isEmptyObject,

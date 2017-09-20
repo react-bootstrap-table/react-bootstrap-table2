@@ -13,7 +13,8 @@ const Body = (props) => {
     keyField,
     isEmpty,
     noDataIndication,
-    visibleColumnSize
+    visibleColumnSize,
+    cellEdit
   } = props;
 
   let content;
@@ -22,14 +23,21 @@ const Body = (props) => {
     const indication = _.isFunction(noDataIndication) ? noDataIndication() : noDataIndication;
     content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
   } else {
-    content = data.map((row, index) => (
-      <Row
-        key={ _.get(row, keyField) }
-        row={ row }
-        rowIndex={ index }
-        columns={ columns }
-      />
-    ));
+    content = data.map((row, index) => {
+      const key = _.get(row, keyField);
+      const editable = !(cellEdit && cellEdit.nonEditableRows.indexOf(key) > -1);
+      return (
+        <Row
+          key={ key }
+          row={ row }
+          keyField={ keyField }
+          rowIndex={ index }
+          columns={ columns }
+          cellEdit={ cellEdit }
+          editable={ editable }
+        />
+      );
+    });
   }
 
   return (

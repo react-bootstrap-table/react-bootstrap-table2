@@ -7,6 +7,8 @@ import Header from './header';
 import Body from './body';
 import Store from './store/base';
 import PropsBaseResolver from './props-resolver';
+import Const from './const';
+import _ from './utils';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
@@ -16,8 +18,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.store = !store ? new Store(props) : store;
 
     this.handleSort = this.handleSort.bind(this);
+    this.startEditing = this.startEditing.bind(this);
+    this.escapeEditing = this.escapeEditing.bind(this);
+    this.completeEditing = this.completeEditing.bind(this);
     this.state = {
-      data: this.store.get()
+      data: this.store.get(),
+      currEditCell: {
+        ridx: null,
+        cidx: null
+      }
     };
   }
 
@@ -39,6 +48,12 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-condensed': condensed
     });
 
+    const cellEditInfo = this.resolveCellEditProps({
+      onStart: this.startEditing,
+      onEscape: this.escapeEditing,
+      onComplete: this.completeEditing
+    });
+
     return (
       <div className="react-bootstrap-table-container">
         <table className={ tableClass }>
@@ -55,6 +70,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             isEmpty={ this.isEmpty() }
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
+            cellEdit={ cellEditInfo }
           />
         </table>
       </div>
@@ -70,6 +86,39 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       };
     });
   }
+
+  completeEditing(row, column, newValue) {
+    const { cellEdit, keyField } = this.props;
+    const { beforeSaveCell, onEditing, afterSaveCell } = cellEdit;
+    const oldValue = _.get(row, column.dataField);
+    const rowId = _.get(row, keyField);
+    if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
+    onEditing(rowId, column.dataField, newValue);
+    if (_.isFunction(afterSaveCell)) afterSaveCell(oldValue, newValue, row, column);
+
+    this.setState(() => {
+      return {
+        data: this.store.get(),
+        currEditCell: { ridx: null, cidx: null }
+      };
+    });
+  }
+
+  startEditing(ridx, cidx) {
+    this.setState(() => {
+      return {
+        currEditCell: { ridx, cidx }
+      };
+    });
+  }
+
+  escapeEditing() {
+    this.setState(() => {
+      return {
+        currEditCell: { ridx: null, cidx: null }
+      };
+    });
+  }
 }
 
 BootstrapTable.propTypes = {
@@ -81,7 +130,15 @@ BootstrapTable.propTypes = {
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
-  condensed: PropTypes.bool
+  condensed: PropTypes.bool,
+  cellEdit: PropTypes.shape({
+    mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
+    onEditing: PropTypes.func.isRequired,
+    blurToSave: PropTypes.bool,
+    beforeSaveCell: PropTypes.func,
+    afterSaveCell: PropTypes.func,
+    nonEditableRows: PropTypes.func
+  })
 };
 
 BootstrapTable.defaultProps = {

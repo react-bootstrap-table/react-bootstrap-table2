@@ -35,6 +35,14 @@ import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 import EnableSortTable from 'examples/sort/enable-sort-table';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 
+// cell editing
+import ClickToEditTable from 'examples/cell-edit/click-to-edit-table';
+import DoubleClickToEditTable from 'examples/cell-edit/dbclick-to-edit-table';
+import BlurToSaveTable from 'examples/cell-edit/blur-to-save-table';
+import RowLevelEditableTable from 'examples/cell-edit/row-level-editable-table';
+import ColumnLevelEditableTable from 'examples/cell-edit/column-level-editable-table';
+import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
+
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/tomorrow.min.css';
@@ -77,3 +85,11 @@ storiesOf('Work on Header Columns', module)
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Custom Sort Fuction', () => <CustomSortTable />);
+
+storiesOf('Cell Editing', module)
+  .add('Click to Edit', () => <ClickToEditTable />)
+  .add('DoubleClick to Edit', () => <DoubleClickToEditTable />)
+  .add('Blur to Save Cell', () => <BlurToSaveTable />)
+  .add('Row Level Editable', () => <RowLevelEditableTable />)
+  .add('Column Level Editable', () => <ColumnLevelEditableTable />)
+  .add('Rich Hook Functions', () => <CellEditHooks />);
