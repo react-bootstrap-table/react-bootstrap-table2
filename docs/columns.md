@@ -25,6 +25,7 @@ Available properties in a column object:
 * [headerEvents](#headerEvents)
 * [headerAlign](#headerAlign)
 * [headerAttrs](#headerAttrs)
+* [editable](#editable)
 
 Following is a most simplest and basic usage:
 
@@ -411,5 +412,9 @@ Additionally, customize the header attributes by a `2-arguments` callback functi
 
 A new `Object` will be the result of element headerAttrs.
 
-#### * Caution
-Same as [column.attrs](#attrs), it has lower priority and will be overwrited when other props related to HTML attributes were given.
+> Caution:   
+> Same as [column.attrs](#attrs), it has lower priority and will be
+> overwrited when other props related to HTML attributes were given.
+
+## <a name='editable'>column.editable - [Bool]</a>
+`column.editable` default is true, means every column is editable if you configure [`cellEdit`](./README.md#cellEdit). But you can disable some columns editable via setting `false`.
