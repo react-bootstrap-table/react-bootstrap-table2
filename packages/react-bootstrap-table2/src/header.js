@@ -3,19 +3,28 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import HeaderCell from './header-cell';
-
+import HeaderCellSelectColumn from './row-selection/header-cell-select-column';
 
 const Header = (props) => {
   const {
+    data,
     columns,
     onSort,
     sortField,
-    sortOrder
+    sortOrder,
+    selectRowProps,
+    selectedRowKeys,
+    handleSelectAllRows
   } = props;
   return (
     <thead>
       <tr>
-        { <th />}
+        {<HeaderCellSelectColumn
+          data={data}
+          selectRowProps={selectRowProps}
+          selectedRowKeys={selectedRowKeys}
+          handleSelectAllRows={handleSelectAllRows}
+        />}
         {
           columns.map((column, i) => {
             const currSort = column.dataField === sortField;
@@ -36,10 +45,14 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
+  data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
   onSort: PropTypes.func,
   sortField: PropTypes.string,
-  sortOrder: PropTypes.string
+  sortOrder: PropTypes.string,
+  selectRowProps: PropTypes.object,
+  selectedRowKeys: PropTypes.array.isRequired,
+  handleSelectAllRows: PropTypes.func.isRequired
 };
 
 export default Header;

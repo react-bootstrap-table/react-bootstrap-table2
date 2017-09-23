@@ -23,6 +23,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.escapeEditing = this.escapeEditing.bind(this);
     this.completeEditing = this.completeEditing.bind(this);
     this.handleSelectRow = this.handleSelectRow.bind(this);
+    this.handleSelectAllRows = this.handleSelectAllRows.bind(this);
     this.state = {
       data: this.store.get(),
       rowKeys: this.store.getSelectedRowKeys(),
@@ -64,10 +65,14 @@ class BootstrapTable extends PropsBaseResolver(Component) {
         <table className={ tableClass }>
           <Caption>{ caption }</Caption>
           <Header
+            data={ this.state.data }
             columns={ columns }
             sortField={ this.store.sortField }
             sortOrder={ this.store.sortOrder }
             onSort={ this.handleSort }
+            selectRowProps={selectRow}
+            selectedRowKeys={this.state.rowKeys}
+            handleSelectAllRows={this.handleSelectAllRows}
           />
           <Body
             data={ this.state.data }
@@ -102,6 +107,23 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     } else {
       currSelected = currSelected.filter(value => value !== rowKey);
     }
+
+    this.store.setSelectedRowKeys(currSelected);
+
+    this.setState(() => ({
+      rowKeys: currSelected
+    }));
+  }
+
+  /**
+   * handle all rows selection on header cell
+   * @param {HTML Event} event - on click event of header cell checkbox
+   * @param {Boolean} selected - any row was selected
+   */
+  handleSelectAllRows(event, selected) {
+    const { data, keyField } = this.props;
+
+    const currSelected = selected ? [] : data.map(value => value[keyField]);
 
     this.store.setSelectedRowKeys(currSelected);
 

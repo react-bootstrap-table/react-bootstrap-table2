@@ -5,5 +5,8 @@ export default {
   CLICK_TO_CELL_EDIT: 'click',
   DBCLICK_TO_CELL_EDIT: 'dbclick',
   TIME_TO_CLOSE_MESSAGE: 3000,
-  ROW_SELECT_SINGLE: 'radio'
+  ROW_SELECT_SINGLE: 'radio',
+  CHECKBOX_STATUS_CHECK: 'checked',
+  CHECKBOX_STATUS_INDETERMINATE: 'indeterminate',
+  CHECKBOX_STATUS_UNCHECKED: 'unchecked'
 };
