@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import _ from './utils';
 import Cell from './cell';
+import CellSelectColumn from './row-selection/cell-select-column';
 import EditingCell from './editing-cell';
 
 const Row = (props) => {
@@ -13,6 +14,9 @@ const Row = (props) => {
     keyField,
     rowIndex,
     cellEdit,
+    selectRowProps,
+    selectedRowKeys,
+    handleSelectRow,
     editable: editableRow
   } = props;
   const {
@@ -24,6 +28,13 @@ const Row = (props) => {
   } = cellEdit;
   return (
     <tr>
+      {<CellSelectColumn
+        row={row}
+        keyField={keyField}
+        selectRowProps={selectRowProps}
+        selectedRowKeys={selectedRowKeys}
+        handleSelectRow={handleSelectRow}
+      />}
       {
         columns.map((column, index) => {
           const { dataField } = column;

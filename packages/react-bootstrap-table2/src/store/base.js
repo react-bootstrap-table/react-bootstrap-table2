@@ -10,6 +10,7 @@ export default class Store {
 
     this.sortOrder = undefined;
     this.sortField = undefined;
+    this.selected = [];
   }
 
   isEmpty() {
@@ -38,5 +39,13 @@ export default class Store {
 
   getRowByRowId(rowId) {
     return this.get().find(row => _.get(row, this.keyField) === rowId);
+  }
+
+  setSelectedRowKeys(selectedKeys) {
+    this.selected = selectedKeys;
+  }
+
+  getSelectedRowKeys() {
+    return this.selected;
   }
 }

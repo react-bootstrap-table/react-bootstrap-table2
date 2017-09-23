@@ -15,6 +15,7 @@ const Header = (props) => {
   return (
     <thead>
       <tr>
+        { <th />}
         {
           columns.map((column, i) => {
             const currSort = column.dataField === sortField;

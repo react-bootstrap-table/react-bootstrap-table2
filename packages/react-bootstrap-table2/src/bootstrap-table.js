@@ -22,8 +22,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.startEditing = this.startEditing.bind(this);
     this.escapeEditing = this.escapeEditing.bind(this);
     this.completeEditing = this.completeEditing.bind(this);
+    this.handleSelectRow = this.handleSelectRow.bind(this);
     this.state = {
       data: this.store.get(),
+      rowKeys: this.store.getSelectedRowKeys(),
       currEditCell: {
         ridx: null,
         cidx: null
@@ -40,7 +42,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       bordered,
       condensed,
       noDataIndication,
-      caption
+      caption,
+      selectRow
     } = this.props;
 
     const tableClass = cs('table', {
@@ -74,10 +77,37 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
             cellEdit={ cellEditInfo }
+            selectRowProps={selectRow}
+            selectedRowKeys={this.state.rowKeys}
+            handleSelectRow={this.handleSelectRow}
           />
         </table>
       </div>
     );
+  }
+
+  /**
+   * row selection handler
+   * @param {String} rowKey - row key of what was selected.
+   * @param {String} inputType - input button type.
+   * @param {Boolean} nextStatus - next status of input button.
+   */
+  handleSelectRow(rowKey, inputType, nextStatus) {
+    let currSelected = [...this.store.getSelectedRowKeys()];
+
+    if (inputType === Const.ROW_SELECT_SINGLE) { // when select mode is radio
+      currSelected = [rowKey];
+    } else if (nextStatus) { // when select mode is checkbox
+      currSelected.push(rowKey);
+    } else {
+      currSelected = currSelected.filter(value => value !== rowKey);
+    }
+
+    this.store.setSelectedRowKeys(currSelected);
+
+    this.setState(() => ({
+      rowKeys: currSelected
+    }));
   }
 
   handleSort(column) {
@@ -146,7 +176,8 @@ BootstrapTable.propTypes = {
     afterSaveCell: PropTypes.func,
     nonEditableRows: PropTypes.func,
     timeToCloseMessage: PropTypes.number
-  })
+  }),
+  selectRow: PropTypes.object
 };
 
 BootstrapTable.defaultProps = {

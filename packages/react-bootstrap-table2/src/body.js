@@ -14,7 +14,10 @@ const Body = (props) => {
     isEmpty,
     noDataIndication,
     visibleColumnSize,
-    cellEdit
+    cellEdit,
+    selectRowProps,
+    selectedRowKeys,
+    handleSelectRow
   } = props;
 
   let content;
@@ -35,6 +38,9 @@ const Body = (props) => {
           columns={ columns }
           cellEdit={ cellEdit }
           editable={ editable }
+          selectRowProps={selectRowProps}
+          selectedRowKeys={selectedRowKeys}
+          handleSelectRow={handleSelectRow}
         />
       );
     });
