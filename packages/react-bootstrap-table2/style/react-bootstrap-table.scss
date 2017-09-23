@@ -4,7 +4,9 @@
     table-layout: fixed;
   }
 
-  th.sortable {
+  th.sortable,
+  input[type="checkbox"],
+  input[type="radio"] {
     cursor: pointer;
   }
 
