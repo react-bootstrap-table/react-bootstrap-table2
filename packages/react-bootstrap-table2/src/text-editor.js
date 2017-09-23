@@ -1,5 +1,6 @@
 /* eslint no-return-assign: 0 */
 import React, { Component } from 'react';
+import cs from 'classnames';
 import PropTypes from 'prop-types';
 
 class TextEditor extends Component {
@@ -10,12 +11,13 @@ class TextEditor extends Component {
   }
 
   render() {
-    const { defaultValue, ...rest } = this.props;
+    const { defaultValue, classNames, ...rest } = this.props;
+    const editorClass = cs('form-control editor edit-text', classNames);
     return (
       <input
         ref={ node => this.text = node }
         type="text"
-        className="form-control editor edit-text"
+        className={ editorClass }
         { ...rest }
       />
     );
@@ -23,9 +25,16 @@ class TextEditor extends Component {
 }
 
 TextEditor.propTypes = {
+  classNames: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.object
+  ]),
   defaultValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
   ]).isRequired
+};
+TextEditor.defaultProps = {
+  classNames: null
 };
 export default TextEditor;
