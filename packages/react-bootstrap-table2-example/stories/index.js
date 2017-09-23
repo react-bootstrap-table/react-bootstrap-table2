@@ -43,6 +43,7 @@ import RowLevelEditableTable from 'examples/cell-edit/row-level-editable-table';
 import ColumnLevelEditableTable from 'examples/cell-edit/column-level-editable-table';
 import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
+import ColumnEditableAsCallback from 'examples/cell-edit/column-editable-as-callback';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -94,4 +95,5 @@ storiesOf('Cell Editing', module)
   .add('Row Level Editable', () => <RowLevelEditableTable />)
   .add('Column Level Editable', () => <ColumnLevelEditableTable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
-  .add('Validation', () => <CellEditValidator />);
+  .add('Validation', () => <CellEditValidator />)
+  .add('Editable as callback', () => <ColumnEditableAsCallback />);
