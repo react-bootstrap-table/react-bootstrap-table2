@@ -137,7 +137,8 @@ BootstrapTable.propTypes = {
     blurToSave: PropTypes.bool,
     beforeSaveCell: PropTypes.func,
     afterSaveCell: PropTypes.func,
-    nonEditableRows: PropTypes.func
+    nonEditableRows: PropTypes.func,
+    timeToCloseMessage: PropTypes.number
   })
 };
 

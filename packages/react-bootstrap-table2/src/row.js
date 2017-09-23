@@ -16,13 +16,11 @@ const Row = (props) => {
     editable: editableRow
   } = props;
   const {
-    ridx: editingRowIdx,
-    cidx: editingColIdx,
     mode,
     onStart,
-    onEscape,
-    onComplete,
-    blurToSave
+    ridx: editingRowIdx,
+    cidx: editingColIdx,
+    ...rest
   } = cellEdit;
   return (
     <tr>
@@ -36,9 +34,7 @@ const Row = (props) => {
                 key={ _.get(row, column.dataField) }
                 row={ row }
                 column={ column }
-                blurToSave={ blurToSave }
-                onComplete={ onComplete }
-                onEscape={ onEscape }
+                { ...rest }
               />
             );
           }
