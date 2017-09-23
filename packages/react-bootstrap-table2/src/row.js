@@ -26,12 +26,17 @@ const Row = (props) => {
     <tr>
       {
         columns.map((column, index) => {
+          const { dataField } = column;
+          const content = _.get(row, dataField);
           let editable = _.isDefined(column.editable) ? column.editable : true;
-          if (column.dataField === keyField || !editableRow) editable = false;
+          if (dataField === keyField || !editableRow) editable = false;
+          if (_.isFunction(column.editable)) {
+            editable = column.editable(content, row, rowIndex, index);
+          }
           if (rowIndex === editingRowIdx && index === editingColIdx) {
             return (
               <EditingCell
-                key={ _.get(row, column.dataField) }
+                key={ content }
                 row={ row }
                 column={ column }
                 { ...rest }
@@ -40,7 +45,7 @@ const Row = (props) => {
           }
           return (
             <Cell
-              key={ _.get(row, column.dataField) }
+              key={ content }
               row={ row }
               rowIndex={ rowIndex }
               columnIndex={ index }
