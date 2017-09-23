@@ -26,6 +26,7 @@ Available properties in a column object:
 * [headerAlign](#headerAlign)
 * [headerAttrs](#headerAttrs)
 * [editable](#editable)
+* [validator](#validator)
 
 Following is a most simplest and basic usage:
 
@@ -418,3 +419,24 @@ A new `Object` will be the result of element headerAttrs.
 
 ## <a name='editable'>column.editable - [Bool]</a>
 `column.editable` default is true, means every column is editable if you configure [`cellEdit`](./README.md#cellEdit). But you can disable some columns editable via setting `false`.
+
+## <a name='validator'>column.validator - [Function]</a>
+`column.validator` used for validate the data when cell on updating. it's should accept a callback function with following argument:
+`newValue`, `row` and `column`:
+
+```js
+{
+  // omit...
+  validator: (newValue, row, column) => {
+    return ...;
+  }
+}
+```
+
+The return value can be a bool or an object. If your valiation is pass, return `true` explicitly. If your valiation is invalid, return following object instead:
+```js
+{
+  valid: false,
+  message: 'SOME_REASON_HERE'
+}
+```
