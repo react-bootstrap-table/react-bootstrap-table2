@@ -233,9 +233,12 @@ describe('Row', () => {
         });
 
         it('should render EditingCell correctly', () => {
+          const complexComponents = wrapper.find('tr').children().findWhere(
+            n => n.type().name === 'Cell' || n.type().name === 'EditingCell');
+
           expect(wrapper.length).toBe(1);
           expect(wrapper.find(EditingCell).length).toBe(1);
-          expect(wrapper.find('tr').children().at(editingColIndex).type()).toEqual(EditingCell);
+          expect(complexComponents.at(editingColIndex).type()).toEqual(EditingCell);
         });
       });
 
