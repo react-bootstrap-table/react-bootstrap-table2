@@ -45,14 +45,14 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.array,
   columns: PropTypes.array.isRequired,
   onSort: PropTypes.func,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRowProps: PropTypes.object,
-  selectedRowKeys: PropTypes.array.isRequired,
-  handleSelectAllRows: PropTypes.func.isRequired
+  selectedRowKeys: PropTypes.array,
+  handleSelectAllRows: PropTypes.func
 };
 
 export default Header;

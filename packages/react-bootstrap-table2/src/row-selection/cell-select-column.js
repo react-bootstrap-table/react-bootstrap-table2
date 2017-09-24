@@ -1,3 +1,4 @@
+/* eslint react/require-default-props: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Constant from '../const';
@@ -5,11 +6,11 @@ import Constant from '../const';
 
 export default class CellSelectColumn extends Component {
   static propTypes = {
-    row: PropTypes.object.isRequired,
-    keyField: PropTypes.string.isRequired,
+    row: PropTypes.object,
+    keyField: PropTypes.string,
     selectRowProps: PropTypes.object,
-    selectedRowKeys: PropTypes.array.isRequired,
-    handleSelectRow: PropTypes.func.isRequired
+    selectedRowKeys: PropTypes.array,
+    handleSelectRow: PropTypes.func
   }
 
   static defaultProps = {

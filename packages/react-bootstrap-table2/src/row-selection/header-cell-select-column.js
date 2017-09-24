@@ -1,3 +1,4 @@
+/* eslint react/require-default-props: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Constant from '../const';
@@ -21,10 +22,10 @@ CheckBox.propTypes = {
 
 export default class HeaderCellSelectColumn extends Component {
   static propTypes = {
-    data: PropTypes.array.isRequired,
-    selectedRowKeys: PropTypes.array.isRequired,
+    data: PropTypes.array,
+    selectedRowKeys: PropTypes.array,
     selectRowProps: PropTypes.object,
-    handleSelectAllRows: PropTypes.func.isRequired
+    handleSelectAllRows: PropTypes.func
   }
 
   static defaultProps = {
