@@ -22,7 +22,6 @@ const Row = (props) => {
     cidx: editingColIdx,
     ...rest
   } = cellEdit;
-  console.warn('DOUBLE_RENDER?');
   return (
     <tr>
       {

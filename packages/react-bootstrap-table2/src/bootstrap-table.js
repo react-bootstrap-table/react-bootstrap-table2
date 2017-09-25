@@ -1,5 +1,5 @@
 /* eslint arrow-body-style: 0 */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
 
@@ -10,7 +10,7 @@ import PropsBaseResolver from './props-resolver';
 import Const from './const';
 import _ from './utils';
 
-class BootstrapTable extends PropsBaseResolver(Component) {
+class BootstrapTable extends PropsBaseResolver(PureComponent) {
   constructor(props) {
     super(props);
     this.validateProps();
