@@ -73,7 +73,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
         <table className={ tableClass }>
           <Caption>{ caption }</Caption>
           <Header
-            data={ this.state.data }
             columns={ columns }
             sortField={ this.store.sortField }
             sortOrder={ this.store.sortOrder }
@@ -123,14 +122,17 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   }
 
   /**
-   * handle all rows selection on header cell
-   * @param {HTML Event} event - on click event of header cell checkbox
-   * @param {Boolean} selected - any row was selected
+   * handle all rows selection on header cell by selectedRowKeys or given specific result.
+   * @param {Boolean} option - customized result for all rows selection
    */
-  handleSelectAllRows(event, selected) {
-    const { data, keyField } = this.props;
+  handleSelectAllRows(option) {
+    const { data, selectedRowKeys } = this.state;
 
-    const currSelected = selected ? [] : data.map(value => value[keyField]);
+    const { keyField } = this.props;
+
+    const allRowsSelected = option || _.getAllRowsSelected(data, selectedRowKeys);
+
+    const currSelected = allRowsSelected ? [] : data.map(row => _.get(row, keyField));
 
     this.store.setSelectedRowKeys(currSelected);
 

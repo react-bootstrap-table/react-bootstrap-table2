@@ -68,11 +68,14 @@ function isDefined(value) {
   return typeof value !== 'undefined' && value !== null;
 }
 
+const getAllRowsSelected = (data, selectedRowKeys) => data.length === selectedRowKeys.length;
+
 export default {
   get,
   set,
   isFunction,
   isObject,
   isEmptyObject,
-  isDefined
+  isDefined,
+  getAllRowsSelected
 };

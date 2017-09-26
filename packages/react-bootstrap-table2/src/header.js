@@ -1,30 +1,28 @@
 /* eslint react/require-default-props: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
+import Const from './const';
 
 import HeaderCell from './header-cell';
-import HeaderCellSelectColumn from './row-selection/header-cell-select-column';
+import SelectionHeaderCell from './row-selection/selection-header-cell';
 
 const Header = (props) => {
+  const { ROW_SELECT_DISABLED } = Const;
+
   const {
-    data,
     columns,
     onSort,
     sortField,
     sortOrder,
-    selectRowProps,
-    selectedRowKeys,
-    handleSelectAllRows
+    selectRow
   } = props;
+
   return (
     <thead>
       <tr>
-        {<HeaderCellSelectColumn
-          data={data}
-          selectRowProps={selectRowProps}
-          selectedRowKeys={selectedRowKeys}
-          handleSelectAllRows={handleSelectAllRows}
-        />}
+        {
+          selectRow.mode === ROW_SELECT_DISABLED ? null : <SelectionHeaderCell {...selectRow} />
+        }
         {
           columns.map((column, i) => {
             const currSort = column.dataField === sortField;
@@ -45,14 +43,11 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  data: PropTypes.array,
   columns: PropTypes.array.isRequired,
   onSort: PropTypes.func,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
-  selectRowProps: PropTypes.object,
-  selectedRowKeys: PropTypes.array,
-  handleSelectAllRows: PropTypes.func
+  selectRow: PropTypes.object
 };
 
 export default Header;
