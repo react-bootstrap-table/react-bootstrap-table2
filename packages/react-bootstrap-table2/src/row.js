@@ -4,21 +4,24 @@ import PropTypes from 'prop-types';
 
 import _ from './utils';
 import Cell from './cell';
-import CellSelectColumn from './row-selection/cell-select-column';
+import SelectionCell from './row-selection/selection-cell';
 import EditingCell from './editing-cell';
+import Const from './const';
 
 const Row = (props) => {
+  const { ROW_SELECT_DISABLED } = Const;
+
   const {
     row,
     columns,
     keyField,
     rowIndex,
     cellEdit,
-    selectRowProps,
-    selectedRowKeys,
-    handleSelectRow,
+    selected,
+    selectRow,
     editable: editableRow
   } = props;
+
   const {
     mode,
     onStart,
@@ -26,15 +29,20 @@ const Row = (props) => {
     cidx: editingColIdx,
     ...rest
   } = cellEdit;
+
   return (
     <tr>
-      {<CellSelectColumn
-        row={row}
-        keyField={keyField}
-        selectRowProps={selectRowProps}
-        selectedRowKeys={selectedRowKeys}
-        handleSelectRow={handleSelectRow}
-      />}
+      {
+        selectRow.mode === ROW_SELECT_DISABLED
+          ? null
+          : (
+            <SelectionCell
+              { ...selectRow }
+              rowKey={_.get(row, keyField)}
+              selected={selected}
+            />
+          )
+      }
       {
         columns.map((column, index) => {
           const { dataField } = column;

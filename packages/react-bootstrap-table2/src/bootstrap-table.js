@@ -26,7 +26,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.handleSelectAllRows = this.handleSelectAllRows.bind(this);
     this.state = {
       data: this.store.get(),
-      rowKeys: this.store.getSelectedRowKeys(),
+      selectedRowKeys: this.store.getSelectedRowKeys(),
       currEditCell: {
         ridx: null,
         cidx: null
@@ -75,7 +75,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortOrder={ this.store.sortOrder }
             onSort={ this.handleSort }
             selectRowProps={selectRow}
-            selectedRowKeys={this.state.rowKeys}
+            selectedRowKeys={this.state.selectedRowKeys}
             handleSelectAllRows={this.handleSelectAllRows}
           />
           <Body
@@ -86,9 +86,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
             cellEdit={ cellEditInfo }
-            selectRowProps={selectRow}
-            selectedRowKeys={this.state.rowKeys}
-            handleSelectRow={this.handleSelectRow}
+            selectRow={cellSelectionInfo}
+            selectedRowKeys={this.state.selectedRowKeys}
           />
         </table>
       </div>
@@ -98,15 +97,17 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   /**
    * row selection handler
    * @param {String} rowKey - row key of what was selected.
-   * @param {String} inputType - input button type.
-   * @param {Boolean} nextStatus - next status of input button.
+   * @param {Boolean} checked - next checked status of input button.
    */
-  handleSelectRow(rowKey, inputType, nextStatus) {
+  handleSelectRow(rowKey, checked) {
+    const { mode } = this.props.selectRow;
+    const { ROW_SELECT_SINGLE } = Const;
+
     let currSelected = [...this.store.getSelectedRowKeys()];
 
-    if (inputType === Const.ROW_SELECT_SINGLE) { // when select mode is radio
+    if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
       currSelected = [rowKey];
-    } else if (nextStatus) { // when select mode is checkbox
+    } else if (checked) { // when select mode is checkbox
       currSelected.push(rowKey);
     } else {
       currSelected = currSelected.filter(value => value !== rowKey);
@@ -115,7 +116,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.store.setSelectedRowKeys(currSelected);
 
     this.setState(() => ({
-      rowKeys: currSelected
+      selectedRowKeys: currSelected
     }));
   }
 
@@ -132,7 +133,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.store.setSelectedRowKeys(currSelected);
 
     this.setState(() => ({
-      rowKeys: currSelected
+      selectedRowKeys: currSelected
     }));
   }
 

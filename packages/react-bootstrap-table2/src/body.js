@@ -15,9 +15,8 @@ const Body = (props) => {
     noDataIndication,
     visibleColumnSize,
     cellEdit,
-    selectRowProps,
-    selectedRowKeys,
-    handleSelectRow
+    selectRow,
+    selectedRowKeys
   } = props;
 
   let content;
@@ -29,6 +28,8 @@ const Body = (props) => {
     content = data.map((row, index) => {
       const key = _.get(row, keyField);
       const editable = !(cellEdit && cellEdit.nonEditableRows.indexOf(key) > -1);
+      const selected = selectedRowKeys.includes(key);
+
       return (
         <Row
           key={ key }
@@ -38,9 +39,9 @@ const Body = (props) => {
           columns={ columns }
           cellEdit={ cellEdit }
           editable={ editable }
-          selectRowProps={selectRowProps}
+          selected={ selected }
+          selectRow={ selectRow }
           selectedRowKeys={selectedRowKeys}
-          handleSelectRow={handleSelectRow}
         />
       );
     });
