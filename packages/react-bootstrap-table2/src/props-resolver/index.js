@@ -46,7 +46,7 @@ export default ExtendBase =>
      * @param {Object} options - addtional options like callback for cell selection
      *
      * @returns {Object} result
-     * @returns {String} result.mode - (Required) input type of row selection.
+     * @returns {String} result.mode - input type of row selection or disabled.
      */
     resolveCellSelectionProps(options) {
       const { selectRow } = this.props;
@@ -63,6 +63,50 @@ export default ExtendBase =>
           ...selectRow,
           ...options,
           mode
+        };
+      }
+
+      return {
+        mode: ROW_SELECT_DISABLED
+      };
+    }
+
+    /**
+     * props resolver for header cell selection
+     * @param {Object} options - addtional options like callback for header cell selection
+     *
+     * @returns {Object} result
+     * @returns {String} result.mode - input type of row selection or disabled.
+     * @returns {String} result.checkedStatus - checkbox status depending on selected rows counts
+     */
+    resolveHeaderCellSelectionProps(options) {
+      const { data, selectedRowKeys } = this.state;
+      const { selectRow } = this.props;
+      const {
+        ROW_SELECT_SINGLE, ROW_SELECT_MULTIPLE, ROW_SELECT_DISABLED,
+        CHECKBOX_STATUS_CHECKED, CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_UNCHECKED
+      } = Const;
+
+      if (_.isDefined(selectRow)) {
+        let { mode } = selectRow;
+        let checkedStatus;
+
+        const allRowsSelected = _.getAllRowsSelected(data, selectedRowKeys);
+
+        if (!mode || (mode !== ROW_SELECT_SINGLE && mode !== ROW_SELECT_MULTIPLE)) {
+          mode = Const.ROW_SELECT_MULTIPLE;
+        }
+
+        // checkbox status depending on selected rows counts
+        if (allRowsSelected) checkedStatus = CHECKBOX_STATUS_CHECKED;
+        else if (selectedRowKeys.length === 0) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
+        else checkedStatus = CHECKBOX_STATUS_INDETERMINATE;
+
+        return {
+          ...selectRow,
+          ...options,
+          mode,
+          checkedStatus
         };
       }
 

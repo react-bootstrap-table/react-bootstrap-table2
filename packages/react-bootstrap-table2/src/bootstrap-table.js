@@ -64,6 +64,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       handleSelectRow: this.handleSelectRow
     });
 
+    const headerCellSelectionInfo = this.resolveHeaderCellSelectionProps({
+      handleSelectAllRows: this.handleSelectAllRows
+    });
+
     return (
       <div className="react-bootstrap-table-container">
         <table className={ tableClass }>
@@ -74,9 +78,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortField={ this.store.sortField }
             sortOrder={ this.store.sortOrder }
             onSort={ this.handleSort }
-            selectRowProps={selectRow}
-            selectedRowKeys={this.state.selectedRowKeys}
-            handleSelectAllRows={this.handleSelectAllRows}
+            selectRow={ headerCellSelectionInfo }
           />
           <Body
             data={ this.state.data }

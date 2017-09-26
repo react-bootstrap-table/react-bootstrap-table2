@@ -8,7 +8,7 @@ export default {
   ROW_SELECT_SINGLE: 'radio',
   ROW_SELECT_MULTIPLE: 'checkbox',
   ROW_SELECT_DISABLED: 'ROW_SELECT_DISABLED',
-  CHECKBOX_STATUS_CHECK: 'checked',
+  CHECKBOX_STATUS_CHECKED: 'checked',
   CHECKBOX_STATUS_INDETERMINATE: 'indeterminate',
   CHECKBOX_STATUS_UNCHECKED: 'unchecked'
 };
