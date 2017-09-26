@@ -40,4 +40,34 @@ export default ExtendBase =>
         ...cellEditInfo
       };
     }
+
+    /**
+     * props resolver for cell selection
+     * @param {Object} options - addtional options like callback for cell selection
+     *
+     * @returns {Object} result
+     * @returns {String} result.mode - (Required) input type of row selection.
+     */
+    resolveCellSelectionProps(options) {
+      const { selectRow } = this.props;
+      const { ROW_SELECT_SINGLE, ROW_SELECT_MULTIPLE, ROW_SELECT_DISABLED } = Const;
+
+      if (_.isDefined(selectRow)) {
+        let { mode } = selectRow;
+
+        if (!mode || (mode !== ROW_SELECT_SINGLE && mode !== ROW_SELECT_MULTIPLE)) {
+          mode = Const.ROW_SELECT_MULTIPLE;
+        }
+
+        return {
+          ...selectRow,
+          ...options,
+          mode
+        };
+      }
+
+      return {
+        mode: ROW_SELECT_DISABLED
+      };
+    }
   };

@@ -60,6 +60,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       onComplete: this.completeEditing
     });
 
+    const cellSelectionInfo = this.resolveCellSelectionProps({
+      handleSelectRow: this.handleSelectRow
+    });
+
     return (
       <div className="react-bootstrap-table-container">
         <table className={ tableClass }>
