@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 import Row from './row';
 import RowSection from './row-section';
+import Const from './const';
 
 const Body = (props) => {
   const {
@@ -27,8 +28,12 @@ const Body = (props) => {
   } else {
     content = data.map((row, index) => {
       const key = _.get(row, keyField);
-      const editable = !(cellEdit && cellEdit.nonEditableRows.indexOf(key) > -1);
-      const selected = selectedRowKeys.includes(key);
+      const editable = !(cellEdit.mode !== Const.UNABLE_TO_CELL_EDIT &&
+        cellEdit.nonEditableRows.indexOf(key) > -1);
+
+      const selected = selectRow.mode !== Const.ROW_SELECT_DISABLED
+        ? selectedRowKeys.includes(key)
+        : null;
 
       return (
         <Row
