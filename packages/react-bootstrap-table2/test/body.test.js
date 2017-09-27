@@ -6,6 +6,7 @@ import Body from '../src/body';
 import Row from '../src/row';
 import Const from '../src/const';
 import RowSection from '../src/row-section';
+import mockBodyResolvedProps from '../test/mock-data/body-resolved-props';
 
 describe('Body', () => {
   let wrapper;
@@ -27,7 +28,7 @@ describe('Body', () => {
 
   describe('simplest body', () => {
     beforeEach(() => {
-      wrapper = shallow(<Body keyField="id" columns={ columns } data={ data } />);
+      wrapper = shallow(<Body {...mockBodyResolvedProps} keyField="id" columns={ columns } data={ data } />);
     });
 
     it('should render successfully', () => {
@@ -41,6 +42,7 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
+          {...mockBodyResolvedProps}
           keyField="id"
           columns={ columns }
           data={ data }
@@ -65,6 +67,7 @@ describe('Body', () => {
           emptyIndication = 'Table is empty';
           wrapper = shallow(
             <Body
+              {...mockBodyResolvedProps}
               keyField="id"
               columns={ columns }
               data={ data }
@@ -90,6 +93,7 @@ describe('Body', () => {
           emptyIndicationCallBack = sinon.stub().returns(content);
           wrapper = shallow(
             <Body
+              {...mockBodyResolvedProps}
               keyField="id"
               columns={ columns }
               data={ data }
@@ -123,6 +127,7 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
+          {...mockBodyResolvedProps}
           data={ data }
           columns={ columns }
           keyField={ keyField }
