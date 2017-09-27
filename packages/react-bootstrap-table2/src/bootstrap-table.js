@@ -22,8 +22,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.startEditing = this.startEditing.bind(this);
     this.escapeEditing = this.escapeEditing.bind(this);
     this.completeEditing = this.completeEditing.bind(this);
-    this.handleSelectRow = this.handleSelectRow.bind(this);
-    this.handleSelectAllRows = this.handleSelectAllRows.bind(this);
+    this.handleRowSelect = this.handleRowSelect.bind(this);
+    this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
     this.state = {
       data: this.store.get(),
       selectedRowKeys: this.store.getSelectedRowKeys(),
@@ -61,11 +61,11 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     const cellSelectionInfo = this.resolveCellSelectionProps({
-      handleSelectRow: this.handleSelectRow
+      onRowSelect: this.handleRowSelect
     });
 
     const headerCellSelectionInfo = this.resolveHeaderCellSelectionProps({
-      handleSelectAllRows: this.handleSelectAllRows
+      onAllRowsSelect: this.handleAllRowsSelect
     });
 
     return (
@@ -100,7 +100,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
    * @param {String} rowKey - row key of what was selected.
    * @param {Boolean} checked - next checked status of input button.
    */
-  handleSelectRow(rowKey, checked) {
+  handleRowSelect(rowKey, checked) {
     const { mode } = this.props.selectRow;
     const { ROW_SELECT_SINGLE } = Const;
 
@@ -125,7 +125,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
    * handle all rows selection on header cell by selectedRowKeys or given specific result.
    * @param {Boolean} option - customized result for all rows selection
    */
-  handleSelectAllRows(option) {
+  handleAllRowsSelect(option) {
     const { data, selectedRowKeys } = this.state;
 
     const { keyField } = this.props;

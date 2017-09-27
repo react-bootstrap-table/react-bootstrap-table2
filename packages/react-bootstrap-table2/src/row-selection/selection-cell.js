@@ -11,7 +11,7 @@ export default class SelectionCell extends Component {
     rowKey: PropTypes.any,
     mode: PropTypes.string,
     selected: PropTypes.bool,
-    handleSelectRow: PropTypes.func
+    onRowSelect: PropTypes.func
   }
 
   constructor() {
@@ -31,7 +31,7 @@ export default class SelectionCell extends Component {
       rowKey,
       mode,
       selected,
-      handleSelectRow
+      onRowSelect
     } = this.props;
 
     const inputType = mode;
@@ -40,7 +40,7 @@ export default class SelectionCell extends Component {
       ? true
       : !selected;
 
-    handleSelectRow(rowKey, checked);
+    onRowSelect(rowKey, checked);
   }
 
   render() {

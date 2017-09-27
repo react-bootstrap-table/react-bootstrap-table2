@@ -22,7 +22,7 @@ export default class SelectionHeaderCell extends Component {
   static propTypes = {
     mode: PropTypes.string,
     checkedStatus: PropTypes.string,
-    handleSelectAllRows: PropTypes.func
+    onAllRowsSelect: PropTypes.func
   }
 
   constructor() {
@@ -45,9 +45,9 @@ export default class SelectionHeaderCell extends Component {
   }
 
   handleCheckBoxClick() {
-    const { handleSelectAllRows } = this.props;
+    const { onAllRowsSelect } = this.props;
 
-    handleSelectAllRows();
+    onAllRowsSelect();
   }
 
   render() {
