@@ -4,9 +4,7 @@
     table-layout: fixed;
   }
 
-  th.sortable,
-  input[type="checkbox"],
-  input[type="radio"] {
+  th.sortable {
     cursor: pointer;
   }
 
@@ -24,7 +22,7 @@
     margin: 10px 6.5px;
   }
 
-  th[data-th-row-selection] {
+  th[data-row-selection] {
     width: 30px;
   }
 

@@ -91,7 +91,7 @@ export default ExtendBase =>
         let { mode } = selectRow;
         let checkedStatus;
 
-        const allRowsSelected = _.getAllRowsSelected(data, selectedRowKeys);
+        const allRowsSelected = data.length === selectedRowKeys.length;
 
         if (!mode || (mode !== ROW_SELECT_SINGLE && mode !== ROW_SELECT_MULTIPLE)) {
           mode = Const.ROW_SELECT_MULTIPLE;

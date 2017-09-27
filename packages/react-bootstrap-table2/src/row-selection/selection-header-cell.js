@@ -61,20 +61,16 @@ export default class SelectionHeaderCell extends Component {
 
     const indeterminate = checkedStatus === CHECKBOX_STATUS_INDETERMINATE;
 
-    return (
-      <th data-th-row-selection onClick={this.handleCheckBoxClick}>
-        {
-          mode === ROW_SELECT_SINGLE
-            ? null
-            : (
-              <CheckBox
-                {...this.props}
-                checked={checked}
-                indeterminate={indeterminate}
-              />
-            )
-        }
-      </th>
-    );
+    return mode === ROW_SELECT_SINGLE
+      ? <th data-row-selection />
+      : (
+        <th data-row-selection onClick={this.handleCheckBoxClick}>
+          <CheckBox
+            {...this.props}
+            checked={checked}
+            indeterminate={indeterminate}
+          />
+        </th>
+      );
   }
 }
