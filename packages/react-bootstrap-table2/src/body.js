@@ -46,7 +46,6 @@ const Body = (props) => {
           editable={ editable }
           selected={ selected }
           selectRow={ selectRow }
-          selectedRowKeys={selectedRowKeys}
         />
       );
     });
