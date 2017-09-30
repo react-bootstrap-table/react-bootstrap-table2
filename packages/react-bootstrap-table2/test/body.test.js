@@ -148,4 +148,58 @@ describe('Body', () => {
       }
     });
   });
+
+  describe('when row was selectable', () => {
+    const keyField = 'id';
+    const selectRow = { mode: 'checkbox' };
+
+    it('props selected should be true if all rows were selected', () => {
+      wrapper = shallow(
+        <Body
+          {...mockBodyResolvedProps}
+          data={ data }
+          columns={ columns }
+          keyField={ keyField }
+          selectedRowKeys={[1, 2]}
+          selectRow={selectRow}
+        />
+      );
+
+      expect(wrapper.find(Row).get(0).props.selected).toBe(true);
+    });
+
+    it('props selected should be false if all rows were not selected', () => {
+      wrapper = shallow(
+        <Body
+          {...mockBodyResolvedProps}
+          data={ data }
+          columns={ columns }
+          keyField={ keyField }
+          selectedRowKeys={[]}
+          selectRow={selectRow}
+        />
+      );
+
+      expect(wrapper.find(Row).get(0).props.selected).toBe(false);
+    });
+  });
+
+  describe('when row was not selectable', () => {
+    beforeEach(() => {
+      const keyField = 'id';
+      wrapper = shallow(
+        <Body
+          {...mockBodyResolvedProps}
+          data={ data }
+          columns={ columns }
+          keyField={ keyField }
+          selectedRowKeys={[]}
+        />
+      );
+    });
+
+    it('prop selected should be null', () => {
+      expect(wrapper.find(Row).get(0).props.selected).toBeNull();
+    });
+  });
 });
