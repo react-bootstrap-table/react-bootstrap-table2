@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Constant from '../const';
 
-const CheckBox = ({ checked, indeterminate }) => (
+export const CheckBox = ({ checked, indeterminate }) => (
   <input
     type="checkbox"
     checked={checked}
