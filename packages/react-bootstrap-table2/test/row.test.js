@@ -6,6 +6,7 @@ import Cell from '../src/cell';
 import Row from '../src/row';
 import Const from '../src/const';
 import EditingCell from '../src/editing-cell';
+import SelectionCell from '../src//row-selection/selection-cell';
 import mockBodyResolvedProps from '../test/mock-data/body-resolved-props';
 
 const defaultColumns = [{
@@ -273,6 +274,35 @@ describe('Row', () => {
           expect(wrapper.find(Cell).length).toBe(columns.length);
         });
       });
+    });
+  });
+
+  describe('when the selectRow.mode was not selectable', () => {
+    beforeEach(() => {
+      wrapper = shallow(
+        <Row {...mockBodyResolvedProps} rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
+    });
+
+    it('should not render <SelectionCell />', () => {
+      expect(wrapper.find(SelectionCell).length).toBe(0);
+    });
+  });
+
+  describe('when the selectRow.mode was selectable', () => {
+    beforeEach(() => {
+      const selectRow = { mode: 'checkbox' };
+      wrapper = shallow(
+        <Row
+          {...mockBodyResolvedProps}
+          rowIndex={ 1 }
+          columns={ defaultColumns }
+          row={ row }
+          selectRow={selectRow}
+        />);
+    });
+
+    it('should render <SelectionCell />', () => {
+      expect(wrapper.find(SelectionCell).length).toBe(1);
     });
   });
 });
