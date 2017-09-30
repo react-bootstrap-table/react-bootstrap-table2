@@ -2,8 +2,12 @@ export const extendTo = Base =>
   class MockComponent extends Base {
     constructor(props) {
       super(props);
+
+      const { data, selectedRowKeys } = props;
+
       this.state = {
-        data: this.props.data,
+        data,
+        selectedRowKeys,
         currEditCell: {
           ridx: null,
           cidx: null
