@@ -16,7 +16,7 @@ export default class SelectionCell extends Component {
 
   constructor() {
     super();
-    this.handleRowClicked = this.handleRowClicked.bind(this);
+    this.handleRowClick = this.handleRowClick.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -25,7 +25,7 @@ export default class SelectionCell extends Component {
     return nextProps.selected !== selected;
   }
 
-  handleRowClicked() {
+  handleRowClick() {
     const { ROW_SELECT_SINGLE } = Const;
     const {
       rowKey,
@@ -52,7 +52,7 @@ export default class SelectionCell extends Component {
     const inputType = mode;
 
     return (
-      <td onClick={this.handleRowClicked}>
+      <td onClick={this.handleRowClick}>
         <input
           type={inputType}
           checked={selected}
