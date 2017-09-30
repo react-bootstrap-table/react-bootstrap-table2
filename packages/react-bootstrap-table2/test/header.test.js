@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import HeaderCell from '../src/header-cell';
+import SelectionHeaderCell from '../src//row-selection/selection-header-cell';
 import Header from '../src/header';
 import Const from '../src/const';
 import mockHeaderResolvedProps from '../test/mock-data/header-resolved-props';
@@ -47,6 +48,33 @@ describe('Header', () => {
       expect(headerCells.at(0).prop('sorting')).toBe(false);
       expect(headerCells.at(1).prop('sorting')).toBe(true);
       expect(headerCells.at(1).prop('sortOrder')).toBe(Const.SORT_ASC);
+    });
+  });
+
+  describe('when the selectRow.mode was not selectable', () => {
+    beforeEach(() => {
+      wrapper = shallow(<Header {...mockHeaderResolvedProps} columns={ columns } />);
+    });
+
+    it('should not render <SelectionHeaderCell />', () => {
+      expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+    });
+  });
+
+  describe('when the selectRow.mode was selectable', () => {
+    beforeEach(() => {
+      const selectRow = { mode: 'checkbox' };
+      wrapper = shallow(
+        <Header
+          {...mockHeaderResolvedProps}
+          columns={ columns }
+          selectRow={selectRow}
+        />
+      );
+    });
+
+    it('should render <SelectionHeaderCell />', () => {
+      expect(wrapper.find(SelectionHeaderCell).length).toBe(1);
     });
   });
 });
