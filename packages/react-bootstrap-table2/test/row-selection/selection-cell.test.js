@@ -33,29 +33,101 @@ describe('<SelectionCell />', () => {
   });
 
   describe('handleRowClick', () => {
-    let spy;
+    describe('when <input /> was been clicked', () => {
+      const rowKey = 1;
+      const mockOnRowSelect = jest.fn();
+      const spy = jest.spyOn(SelectionCell.prototype, 'handleRowClick');
 
-    const mockOnRowSelect = jest.fn();
-
-    beforeEach(() => {
-      spy = jest.spyOn(SelectionCell.prototype, 'handleRowClick');
-
-      wrapper = shallow(
-        <SelectionCell
-          selected
-          rowKey={1}
-          mode={mode}
-          onRowSelect={mockOnRowSelect}
-        />
-      );
-    });
-
-    describe('when input was been clicked', () => {
       it('should call handleRowClicked', () => {
+        mockOnRowSelect.mockClear();
+        spy.mockClear();
+
+        wrapper = shallow(
+          <SelectionCell
+            selected
+            rowKey={rowKey}
+            mode={mode}
+            onRowSelect={mockOnRowSelect}
+          />
+        );
+
         wrapper.find('td').simulate('click');
 
         expect(spy).toHaveBeenCalled();
         expect(mockOnRowSelect).toHaveBeenCalled();
+      });
+
+      describe('if selectRow.mode is radio', () => {
+        let calledCount;
+
+        beforeEach(() => {
+          calledCount = 0;
+
+          mockOnRowSelect.mockClear();
+          spy.mockClear();
+
+          wrapper = shallow(
+            <SelectionCell
+              selected
+              rowKey={rowKey}
+              mode="radio"
+              onRowSelect={mockOnRowSelect}
+            />
+          );
+        });
+
+        it('first param should get correct row key', () => {
+          wrapper.find('td').simulate('click');
+
+          expect(mockOnRowSelect.mock.calls[calledCount][0]).toBe(rowKey);
+        });
+
+        it('second param, checked, should always be true', () => {
+          wrapper.find('td').simulate('click');
+          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(true);
+
+          calledCount += 1;
+          wrapper.find('td').simulate('click');
+          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(true);
+        });
+      });
+
+      describe('if selectRow.mode is checkbox', () => {
+        let calledCount;
+
+        const selected = true;
+
+        beforeEach(() => {
+          calledCount = 0;
+
+          mockOnRowSelect.mockClear();
+          spy.mockClear();
+
+          wrapper = shallow(
+            <SelectionCell
+              selected={selected}
+              rowKey={rowKey}
+              mode="checkbox"
+              onRowSelect={mockOnRowSelect}
+            />
+          );
+        });
+
+        it('first param should get correct row key', () => {
+          wrapper.find('td').simulate('click');
+
+          expect(mockOnRowSelect.mock.calls[calledCount][0]).toBe(rowKey);
+        });
+
+        it('second param, checked, should be toggled', () => {
+          wrapper.find('td').simulate('click');
+          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(!selected);
+
+          calledCount += 1;
+          wrapper.setProps({ selected: !selected });
+          wrapper.find('td').simulate('click');
+          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(selected);
+        });
       });
     });
   });
