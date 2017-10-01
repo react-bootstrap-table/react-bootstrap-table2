@@ -25,7 +25,6 @@ class EditingCell extends Component {
 
   componentWillReceiveProps({ message }) {
     if (_.isDefined(message)) {
-      this.clearTimer();
       this.createTimer();
       this.setState(() => {
         return { invalidMessage: message };
@@ -44,16 +43,17 @@ class EditingCell extends Component {
   }
 
   createTimer() {
-    const { timeToCloseMessage } = this.props;
+    this.clearTimer();
+    const { timeToCloseMessage, onErrorMessageDisappear } = this.props;
     this.indicatorTimer = _.sleep(() => {
       this.setState(() => {
         return { invalidMessage: null };
       });
+      if (_.isFunction(onErrorMessageDisappear)) onErrorMessageDisappear();
     }, timeToCloseMessage);
   }
 
   beforeComplete(row, column, newValue) {
-    this.clearTimer();
     const { onUpdate } = this.props;
     if (_.isFunction(column.validator)) {
       const validateForm = column.validator(newValue, row, column);

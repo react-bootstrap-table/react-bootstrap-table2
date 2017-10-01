@@ -31,22 +31,27 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       currEditCell: {
         ridx: null,
         cidx: null,
-        message: null
+        message: null,
+        editing: false
       }
     };
   }
 
   componentWillReceiveProps({ cellEdit }) {
-    if (_.isDefined(cellEdit) && _.isDefined(cellEdit.errorMessage)) {
-      const { currEditCell } = this.state;
-      this.setState(() => {
-        return {
-          currEditCell: {
-            ...currEditCell,
-            message: cellEdit.errorMessage
-          }
-        };
-      });
+    if (_.isDefined(cellEdit)) {
+      if (cellEdit.editing) {
+        const { currEditCell } = this.state;
+        this.setState(() => {
+          return {
+            currEditCell: {
+              ...currEditCell,
+              message: cellEdit.errorMessage
+            }
+          };
+        });
+      } else {
+        this.escapeEditing();
+      }
     }
   }
 
@@ -182,7 +187,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.setState(() => {
       return {
         data: this.store.get(),
-        currEditCell: { ridx: null, cidx: null }
+        currEditCell: { ridx: null, cidx: null, editing: true }
       };
     });
   }
@@ -190,7 +195,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   startEditing(ridx, cidx) {
     this.setState(() => {
       return {
-        currEditCell: { ridx, cidx }
+        currEditCell: { ridx, cidx, editing: true }
       };
     });
   }
@@ -198,7 +203,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   escapeEditing() {
     this.setState(() => {
       return {
-        currEditCell: { ridx: null, cidx: null }
+        currEditCell: { ridx: null, cidx: null, editing: false }
       };
     });
   }
@@ -229,11 +234,13 @@ BootstrapTable.propTypes = {
   ]),
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
-    onEditing: PropTypes.func,
+    onUpdate: PropTypes.func,
+    onErrorMessageDisappear: PropTypes.func,
     blurToSave: PropTypes.bool,
     beforeSaveCell: PropTypes.func,
     afterSaveCell: PropTypes.func,
     nonEditableRows: PropTypes.func,
+    editing: PropTypes.bool,
     timeToCloseMessage: PropTypes.number,
     errorMessage: PropTypes.string
   }),
