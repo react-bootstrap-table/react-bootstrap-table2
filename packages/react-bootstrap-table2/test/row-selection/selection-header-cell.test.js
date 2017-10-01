@@ -10,7 +10,7 @@ describe('<SelectionHeaderCell />', () => {
   describe('shouldComponentUpdate', () => {
     describe('when props.mode is radio', () => {
       it('should not update component', () => {
-        wrapper = shallow(<SelectionHeaderCell mode={'radio'} />);
+        wrapper = shallow(<SelectionHeaderCell mode="radio" />);
 
         expect(wrapper.instance().shouldComponentUpdate({})).toBe(false);
       });
@@ -23,7 +23,7 @@ describe('<SelectionHeaderCell />', () => {
           const nextProps = { checkedStatus };
 
           wrapper = shallow(
-            <SelectionHeaderCell mode={'checkbox'} checkedStatus={checkedStatus} />);
+            <SelectionHeaderCell mode="checkbox" checkedStatus={checkedStatus} />);
 
           expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(false);
         });
@@ -36,7 +36,7 @@ describe('<SelectionHeaderCell />', () => {
           const nextProps = { checkedStatus };
 
           wrapper = shallow(
-            <SelectionHeaderCell mode={'checkbox'} checkedStatus={CHECKBOX_STATUS_INDETERMINATE} />);
+            <SelectionHeaderCell mode="checkbox" checkedStatus={CHECKBOX_STATUS_INDETERMINATE} />);
 
           expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
         });
@@ -45,7 +45,7 @@ describe('<SelectionHeaderCell />', () => {
   });
 
   describe('handleCheckBoxClick', () => {
-    describe('when th was clicked', () => {
+    describe('when <th /> was clicked', () => {
       let spy;
       const mockOnAllRowsSelect = jest.fn();
 
@@ -55,7 +55,7 @@ describe('<SelectionHeaderCell />', () => {
 
           wrapper = shallow(
             <SelectionHeaderCell
-              mode={'radio'}
+              mode="radio"
               checkedStatus={Constant.CHECKBOX_STATUS_CHECKED}
               onAllRowsSelect={mockOnAllRowsSelect}
             />);
@@ -72,7 +72,7 @@ describe('<SelectionHeaderCell />', () => {
 
           wrapper = shallow(
             <SelectionHeaderCell
-              mode={'checkbox'}
+              mode="checkbox"
               checkedStatus={Constant.CHECKBOX_STATUS_CHECKED}
               onAllRowsSelect={mockOnAllRowsSelect}
             />);
@@ -91,10 +91,10 @@ describe('<SelectionHeaderCell />', () => {
       beforeEach(() => {
         const checkedStatus = Constant.CHECKBOX_STATUS_CHECKED;
 
-        wrapper = shallow(<SelectionHeaderCell mode={'radio'} checkedStatus={checkedStatus} />);
+        wrapper = shallow(<SelectionHeaderCell mode="radio" checkedStatus={checkedStatus} />);
       });
 
-      it('should not render checkbox button', () => {
+      it('should not render checkbox', () => {
         expect(wrapper.find('th').length).toBe(1);
         expect(wrapper.find('th[data-row-selection]').length).toBe(1);
         expect(wrapper.find(CheckBox).length).toBe(0);
@@ -105,10 +105,10 @@ describe('<SelectionHeaderCell />', () => {
       const checkedStatus = Constant.CHECKBOX_STATUS_CHECKED;
 
       beforeEach(() => {
-        wrapper = shallow(<SelectionHeaderCell mode={'checkbox'} checkedStatus={checkedStatus} />);
+        wrapper = shallow(<SelectionHeaderCell mode="checkbox" checkedStatus={checkedStatus} />);
       });
 
-      it('should render button type in checkbox', () => {
+      it('should render checkbox', () => {
         const checked = checkedStatus === Constant.CHECKBOX_STATUS_CHECKED;
         const indeterminate = checkedStatus === Constant.CHECKBOX_STATUS_INDETERMINATE;
 

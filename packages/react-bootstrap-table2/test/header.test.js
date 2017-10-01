@@ -51,7 +51,7 @@ describe('Header', () => {
     });
   });
 
-  describe('when the selectRow.mode was not selectable', () => {
+  describe('when the selectRow.mode is radio(single selection)', () => {
     beforeEach(() => {
       wrapper = shallow(<Header {...mockHeaderResolvedProps} columns={ columns } />);
     });
@@ -61,7 +61,7 @@ describe('Header', () => {
     });
   });
 
-  describe('when the selectRow.mode was selectable', () => {
+  describe('when the selectRow.mode is checkbox(multiple selection)', () => {
     beforeEach(() => {
       const selectRow = { mode: 'checkbox' };
       wrapper = shallow(
