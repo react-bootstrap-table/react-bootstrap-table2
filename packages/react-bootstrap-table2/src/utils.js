@@ -68,11 +68,16 @@ function isDefined(value) {
   return typeof value !== 'undefined' && value !== null;
 }
 
+function sleep(fn, ms) {
+  return setTimeout(() => fn(), ms);
+}
+
 export default {
   get,
   set,
   isFunction,
   isObject,
   isEmptyObject,
-  isDefined
+  isDefined,
+  sleep
 };

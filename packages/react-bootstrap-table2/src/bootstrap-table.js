@@ -24,14 +24,30 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.completeEditing = this.completeEditing.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
     this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
+    this.handleCellUpdate = this.handleCellUpdate.bind(this);
     this.state = {
       data: this.store.get(),
       selectedRowKeys: this.store.getSelectedRowKeys(),
       currEditCell: {
         ridx: null,
-        cidx: null
+        cidx: null,
+        message: null
       }
     };
+  }
+
+  componentWillReceiveProps({ cellEdit }) {
+    if (_.isDefined(cellEdit) && _.isDefined(cellEdit.errorMessage)) {
+      const { currEditCell } = this.state;
+      this.setState(() => {
+        return {
+          currEditCell: {
+            ...currEditCell,
+            message: cellEdit.errorMessage
+          }
+        };
+      });
+    }
   }
 
   render() {
@@ -56,7 +72,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     const cellEditInfo = this.resolveCellEditProps({
       onStart: this.startEditing,
       onEscape: this.escapeEditing,
-      onComplete: this.completeEditing
+      onUpdate: this.handleCellUpdate
     });
 
     const cellSelectionInfo = this.resolveCellSelectionProps({
@@ -149,15 +165,20 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
   }
 
-  completeEditing(row, column, newValue) {
-    const { cellEdit, keyField } = this.props;
-    const { beforeSaveCell, onEditing, afterSaveCell } = cellEdit;
+  handleCellUpdate(row, column, newValue) {
+    const { cellEdit, keyField, onUpdateCell } = this.props;
+    const { beforeSaveCell, afterSaveCell } = cellEdit;
     const oldValue = _.get(row, column.dataField);
     const rowId = _.get(row, keyField);
     if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
-    onEditing(rowId, column.dataField, newValue);
-    if (_.isFunction(afterSaveCell)) afterSaveCell(oldValue, newValue, row, column);
 
+    if (onUpdateCell(rowId, column.dataField, newValue)) {
+      if (_.isFunction(afterSaveCell)) afterSaveCell(oldValue, newValue, row, column);
+      this.completeEditing();
+    }
+  }
+
+  completeEditing() {
     this.setState(() => {
       return {
         data: this.store.get(),
@@ -181,6 +202,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       };
     });
   }
+
+  updateEditingWithErr(message) {
+    this.setState(() => {
+      const { currEditCell } = this.state;
+      return {
+        currEditCell: { ...currEditCell, message }
+      };
+    });
+  }
 }
 
 BootstrapTable.propTypes = {
@@ -199,13 +229,15 @@ BootstrapTable.propTypes = {
   ]),
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
-    onEditing: PropTypes.func.isRequired,
+    onEditing: PropTypes.func,
     blurToSave: PropTypes.bool,
     beforeSaveCell: PropTypes.func,
     afterSaveCell: PropTypes.func,
     nonEditableRows: PropTypes.func,
-    timeToCloseMessage: PropTypes.number
+    timeToCloseMessage: PropTypes.number,
+    errorMessage: PropTypes.string
   }),
+  onUpdateCell: PropTypes.func,
   selectRow: PropTypes.shape({
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired
   })
