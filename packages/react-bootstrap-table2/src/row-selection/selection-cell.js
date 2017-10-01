@@ -8,8 +8,8 @@ import Const from '../const';
 
 export default class SelectionCell extends Component {
   static propTypes = {
+    mode: PropTypes.string.isRequired,
     rowKey: PropTypes.any,
-    mode: PropTypes.string,
     selected: PropTypes.bool,
     onRowSelect: PropTypes.func
   }
@@ -28,13 +28,11 @@ export default class SelectionCell extends Component {
   handleRowClick() {
     const { ROW_SELECT_SINGLE } = Const;
     const {
+      mode: inputType,
       rowKey,
-      mode,
       selected,
       onRowSelect
     } = this.props;
-
-    const inputType = mode;
 
     const checked = inputType === ROW_SELECT_SINGLE
       ? true
@@ -45,11 +43,9 @@ export default class SelectionCell extends Component {
 
   render() {
     const {
-      mode,
+      mode: inputType,
       selected
     } = this.props;
-
-    const inputType = mode;
 
     return (
       <td onClick={this.handleRowClick}>

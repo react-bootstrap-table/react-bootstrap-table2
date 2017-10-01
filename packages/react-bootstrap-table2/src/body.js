@@ -1,4 +1,6 @@
 /* eslint react/prop-types: 0 */
+/* eslint react/require-default-props: 0 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -59,7 +61,14 @@ const Body = (props) => {
 Body.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
-  columns: PropTypes.array.isRequired
+  columns: PropTypes.array.isRequired,
+  selectRow: PropTypes.shape({
+    mode: PropTypes.oneOf([
+      Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE, Const.ROW_SELECT_DISABLED
+    ]).isRequired,
+    onRowSelect: PropTypes.func
+  }),
+  selectedRowKeys: PropTypes.array
 };
 
 export default Body;

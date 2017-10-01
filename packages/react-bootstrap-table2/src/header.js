@@ -47,7 +47,13 @@ Header.propTypes = {
   onSort: PropTypes.func,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
-  selectRow: PropTypes.object
+  selectRow: PropTypes.shape({
+    mode: PropTypes.oneOf([
+      Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE, Const.ROW_SELECT_DISABLED
+    ]).isRequired,
+    checkedStatus: PropTypes.string,
+    onAllRowsSelect: PropTypes.func
+  })
 };
 
 export default Header;

@@ -50,19 +50,12 @@ export default ExtendBase =>
      */
     resolveCellSelectionProps(options) {
       const { selectRow } = this.props;
-      const { ROW_SELECT_SINGLE, ROW_SELECT_MULTIPLE, ROW_SELECT_DISABLED } = Const;
+      const { ROW_SELECT_DISABLED } = Const;
 
       if (_.isDefined(selectRow)) {
-        let { mode } = selectRow;
-
-        if (!mode || (mode !== ROW_SELECT_SINGLE && mode !== ROW_SELECT_MULTIPLE)) {
-          mode = Const.ROW_SELECT_MULTIPLE;
-        }
-
         return {
           ...selectRow,
-          ...options,
-          mode
+          ...options
         };
       }
 
@@ -83,19 +76,14 @@ export default ExtendBase =>
       const { data, selectedRowKeys } = this.state;
       const { selectRow } = this.props;
       const {
-        ROW_SELECT_SINGLE, ROW_SELECT_MULTIPLE, ROW_SELECT_DISABLED,
-        CHECKBOX_STATUS_CHECKED, CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_UNCHECKED
+        ROW_SELECT_DISABLED, CHECKBOX_STATUS_CHECKED,
+        CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_UNCHECKED
       } = Const;
 
       if (_.isDefined(selectRow)) {
-        let { mode } = selectRow;
         let checkedStatus;
 
         const allRowsSelected = data.length === selectedRowKeys.length;
-
-        if (!mode || (mode !== ROW_SELECT_SINGLE && mode !== ROW_SELECT_MULTIPLE)) {
-          mode = Const.ROW_SELECT_MULTIPLE;
-        }
 
         // checkbox status depending on selected rows counts
         if (allRowsSelected) checkedStatus = CHECKBOX_STATUS_CHECKED;
@@ -105,7 +93,6 @@ export default ExtendBase =>
         return {
           ...selectRow,
           ...options,
-          mode,
           checkedStatus
         };
       }
