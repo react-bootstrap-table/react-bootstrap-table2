@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Caption = (props) => {
-  if (!props.children) { return null; }
+  if (!props.children) return null;
   return (
     <caption>{ props.children }</caption>
   );

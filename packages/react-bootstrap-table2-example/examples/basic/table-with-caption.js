@@ -29,7 +29,11 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<BootstrapTableful keyField='id' data={ products } columns={ columns } />
+const CaptionElement = () => <h3 style={{ borderRadius: '0.25em', textAlign: 'center', color: 'purple', border: '1px solid purple', padding: '0.5em' }}>Component as Header</h3>;
+
+<BootstrapTableful keyField="id" data={ products } tableCaption="Plain text header" columns={ columns } />
+
+<BootstrapTableful keyField="id" data={ products } tableCaption={<CaptionElement />} columns={ columns } />
 `;
 
 const CaptionElement = () => <h3 style={{ borderRadius: '0.25em', textAlign: 'center', color: 'purple', border: '1px solid purple', padding: '0.5em' }}>Component as Header</h3>;
