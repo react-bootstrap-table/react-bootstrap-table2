@@ -1,7 +1,5 @@
-/* eslint
-  react/require-default-props: 0
-  jsx-a11y/no-noninteractive-element-interactions: 0
-*/
+/* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
