@@ -48,4 +48,16 @@ export default class Store {
   getSelectedRowKeys() {
     return this.selected;
   }
+
+  selectAllRowKeys() {
+    return this.data.map(row => _.get(row, this.keyField));
+  }
+
+  isAllRowsSelected() {
+    return this.data.length === this.selected.length;
+  }
+
+  isAnySelectedRow() {
+    return this.selected.length > 0;
+  }
 }

@@ -20,7 +20,7 @@ CheckBox.propTypes = {
 
 export default class SelectionHeaderCell extends Component {
   static propTypes = {
-    mode: PropTypes.string,
+    mode: PropTypes.string.isRequired,
     checkedStatus: PropTypes.string,
     onAllRowsSelect: PropTypes.func
   }

@@ -122,20 +122,16 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   }
 
   /**
-   * handle all rows selection on header cell by selectedRowKeys or given specific result.
+   * handle all rows selection on header cell by store.selected or given specific result.
    * @param {Boolean} option - customized result for all rows selection
    */
   handleAllRowsSelect(option) {
-    const { data, selectedRowKeys } = this.state;
+    const selected = this.store.isAnySelectedRow();
 
-    const { keyField } = this.props;
-
-    const selected = selectedRowKeys.length > 0;
-
-    // set next status of all row selected by selectedRowKeys or customizing by user.
+    // set next status of all row selected by store.selected or customizing by user.
     const result = option || !selected;
 
-    const currSelected = result ? data.map(row => _.get(row, keyField)) : [];
+    const currSelected = result ? this.store.selectAllRowKeys() : [];
 
     this.store.setSelectedRowKeys(currSelected);
 

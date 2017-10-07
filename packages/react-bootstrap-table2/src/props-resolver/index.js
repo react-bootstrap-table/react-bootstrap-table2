@@ -43,9 +43,9 @@ export default ExtendBase =>
 
     /**
      * props resolver for cell selection
-     * @param {Object} options - addtional options like callback for cell selection
+     * @param {Object} options - addtional options like callback which are about to merge into props
      *
-     * @returns {Object} result
+     * @returns {Object} result - props for cell selections
      * @returns {String} result.mode - input type of row selection or disabled.
      */
     resolveCellSelectionProps(options) {
@@ -66,14 +66,14 @@ export default ExtendBase =>
 
     /**
      * props resolver for header cell selection
-     * @param {Object} options - addtional options like callback for header cell selection
+     * @param {Object} options - addtional options like callback which are about to merge into props
      *
-     * @returns {Object} result
+     * @returns {Object} result - props for cell selections
      * @returns {String} result.mode - input type of row selection or disabled.
      * @returns {String} result.checkedStatus - checkbox status depending on selected rows counts
      */
     resolveHeaderCellSelectionProps(options) {
-      const { data, selectedRowKeys } = this.state;
+      const { selected } = this.store;
       const { selectRow } = this.props;
       const {
         ROW_SELECT_DISABLED, CHECKBOX_STATUS_CHECKED,
@@ -83,11 +83,11 @@ export default ExtendBase =>
       if (_.isDefined(selectRow)) {
         let checkedStatus;
 
-        const allRowsSelected = data.length === selectedRowKeys.length;
+        const allRowsSelected = this.store.isAllRowsSelected();
 
         // checkbox status depending on selected rows counts
         if (allRowsSelected) checkedStatus = CHECKBOX_STATUS_CHECKED;
-        else if (selectedRowKeys.length === 0) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
+        else if (selected.length === 0) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
         else checkedStatus = CHECKBOX_STATUS_INDETERMINATE;
 
         return {

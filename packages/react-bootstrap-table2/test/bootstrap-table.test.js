@@ -208,7 +208,7 @@ describe('BootstrapTable', () => {
     describe('when customized option was not given', () => {
       describe('when nothing was selected', () => {
         it('should select all rows', () => {
-          wrapper.setState({ selectedRowKeys: [] });
+          wrapper.instance().store.setSelectedRowKeys([]);
 
           wrapper.instance().handleAllRowsSelect();
 
@@ -218,7 +218,7 @@ describe('BootstrapTable', () => {
 
       describe('when one or more than one row was selected', () => {
         it('should unselect all rows', () => {
-          wrapper.setState({ selectedRowKeys: data.map(({ id }) => id) });
+          wrapper.instance().store.setSelectedRowKeys([1]);
 
           wrapper.instance().handleAllRowsSelect();
 
@@ -238,7 +238,7 @@ describe('BootstrapTable', () => {
 
       describe('when option is falsy', () => {
         it('should unselect all rows', () => {
-          wrapper.setState({ selectedRowKeys: data.map(({ id }) => id) });
+          wrapper.instance().store.setSelectedRowKeys([1]);
 
           wrapper.instance().handleAllRowsSelect(false);
 

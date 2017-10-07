@@ -169,23 +169,6 @@ describe('TableResolver', () => {
     });
 
     describe('if selectRow was defined', () => {
-      describe('when mode is not given', () => {
-        beforeEach(() => {
-          selectRow = {};
-          const mockElement = React.createElement(BootstrapTableMock, {
-            data, keyField, columns, selectRow
-          }, null);
-          wrapper = shallow(mockElement);
-          cellSelectionInfo = wrapper.instance().resolveCellSelectionProps();
-        });
-
-        it('should have default multiple mode', () => {
-          expect(cellSelectionInfo).toBeDefined();
-          expect(cellSelectionInfo.constructor).toEqual(Object);
-          expect(cellSelectionInfo.mode).toEqual(Const.ROW_SELECT_MULTIPLE);
-        });
-      });
-
       describe('when mode was defined', () => {
         it('should return object which contains ROW_SELECT_SINGLE if mode is radio', () => {
           selectRow = { mode: 'radio' };
@@ -238,7 +221,6 @@ describe('TableResolver', () => {
     });
   });
 
-
   describe('resolveHeaderCellSelectionProps', () => {
     let headerCellSelectionInfo;
     let selectRow;
@@ -263,24 +245,6 @@ describe('TableResolver', () => {
     });
 
     describe('if selectRow was defined', () => {
-      describe('when mode is not given', () => {
-        beforeEach(() => {
-          selectRow = {};
-          const selectedRowKeys = [];
-          const mockElement = React.createElement(BootstrapTableMock, {
-            data, keyField, columns, selectedRowKeys, selectRow
-          }, null);
-          wrapper = shallow(mockElement);
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
-        });
-
-        it('should have default multiple mode', () => {
-          expect(headerCellSelectionInfo).toBeDefined();
-          expect(headerCellSelectionInfo.constructor).toEqual(Object);
-          expect(headerCellSelectionInfo.mode).toEqual(Const.ROW_SELECT_MULTIPLE);
-        });
-      });
-
       describe('when mode was defined', () => {
         it('should return object which contains ROW_SELECT_SINGLE if mode is radio', () => {
           selectRow = { mode: 'radio' };
@@ -339,9 +303,12 @@ describe('TableResolver', () => {
           selectRow = {};
           const selectedRowKeys = [1, 2];
           const mockElement = React.createElement(BootstrapTableMock, {
-            data, keyField, columns, selectedRowKeys, selectRow
+            data, keyField, columns, selectRow
           }, null);
+
           wrapper = shallow(mockElement);
+          wrapper.instance().store.setSelectedRowKeys(selectedRowKeys);
+
           headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
         });
 
@@ -356,9 +323,11 @@ describe('TableResolver', () => {
           selectRow = {};
           const selectedRowKeys = [1];
           const mockElement = React.createElement(BootstrapTableMock, {
-            data, keyField, columns, selectedRowKeys, selectRow
+            data, keyField, columns, selectRow
           }, null);
+
           wrapper = shallow(mockElement);
+          wrapper.instance().store.setSelectedRowKeys(selectedRowKeys);
           headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
         });
 
@@ -374,9 +343,12 @@ describe('TableResolver', () => {
           selectRow = {};
           const selectedRowKeys = [];
           const mockElement = React.createElement(BootstrapTableMock, {
-            data, keyField, columns, selectedRowKeys, selectRow
+            data, keyField, columns, selectRow
           }, null);
+
           wrapper = shallow(mockElement);
+          wrapper.instance().store.setSelectedRowKeys(selectedRowKeys);
+
           headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
         });
 

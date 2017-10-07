@@ -149,7 +149,7 @@ describe('Body', () => {
     });
   });
 
-  describe('when row was selectable', () => {
+  describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
     const keyField = 'id';
     const selectRow = { mode: 'checkbox' };
 
@@ -184,7 +184,7 @@ describe('Body', () => {
     });
   });
 
-  describe('when row was not selectable', () => {
+  describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
     beforeEach(() => {
       const keyField = 'id';
       wrapper = shallow(
