@@ -13,7 +13,7 @@ $ npm start
 ```
 
 ### Launch StoryBook
-We use [storybook](https://storybook.js.org/) to list our examples and it also have hot reload from source code. Sometime, it is also a good entry point to develop.
+We use [storybook](https://storybook.js.org/) to list our examples and it also has hot reload from source code. Sometimes, it is also a good entry point to development.
 
 ```bash
 $ cd packages/react-bootstrap-table2-example
