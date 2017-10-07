@@ -6,7 +6,9 @@ import Body from 'src/body';
 import Row from 'src/row';
 import Const from 'src/const';
 import RowSection from 'src/row-section';
-import mockBodyResolvedProps from 'test/mock-data/body-resolved-props';
+import { bodyResolvedProps } from 'test/factory';
+
+const mockBodyResolvedProps = bodyResolvedProps();
 
 describe('Body', () => {
   let wrapper;

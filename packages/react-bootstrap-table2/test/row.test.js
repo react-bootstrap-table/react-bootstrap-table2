@@ -7,8 +7,9 @@ import Row from 'src/row';
 import Const from 'src/const';
 import EditingCell from 'src/editing-cell';
 import SelectionCell from 'src/row-selection/selection-cell';
+import { bodyResolvedProps } from 'test/factory';
 
-import mockBodyResolvedProps from 'test/mock-data/body-resolved-props';
+const mockBodyResolvedProps = bodyResolvedProps();
 
 const defaultColumns = [{
   dataField: 'id',
