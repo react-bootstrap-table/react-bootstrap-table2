@@ -1,4 +1,4 @@
-import Const from '../../src/const';
+import Const from 'src/const';
 
 const { ROW_SELECT_DISABLED } = Const;
 

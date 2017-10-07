@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import SelectionCell from '../../src/row-selection/selection-cell';
+import SelectionCell from 'src/row-selection/selection-cell';
 
 describe('<SelectionCell />', () => {
   const mode = 'checkbox';

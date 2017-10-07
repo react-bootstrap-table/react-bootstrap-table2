@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { extendTo } from '../test-helpers/mock-component';
-import baseResolver from '../../src/props-resolver/index';
-import Const from '../../src/const';
+import baseResolver from 'src/props-resolver/index';
+import Const from 'src/const';
+import { extendTo } from 'test/test-helpers/mock-component';
 
 describe('TableResolver', () => {
   const keyField = 'id';

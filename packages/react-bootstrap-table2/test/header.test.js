@@ -1,11 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import HeaderCell from '../src/header-cell';
-import SelectionHeaderCell from '../src//row-selection/selection-header-cell';
-import Header from '../src/header';
-import Const from '../src/const';
-import mockHeaderResolvedProps from '../test/mock-data/header-resolved-props';
+import HeaderCell from 'src/header-cell';
+import SelectionHeaderCell from 'src/row-selection/selection-header-cell';
+import Header from 'src/header';
+import Const from 'src/const';
+
+import mockHeaderResolvedProps from 'test/mock-data/header-resolved-props';
 
 describe('Header', () => {
   let wrapper;

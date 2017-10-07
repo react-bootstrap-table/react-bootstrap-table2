@@ -74,6 +74,11 @@
     "testEnvironment": "node",
     "testMatch": [
       "**/test/**/*.test.js"
+    ],
+    "moduleFileExtensions": ["js", "jsx"],
+    "moduleDirectories": [
+      "node_modules",
+      "packages/react-bootstrap-table2"
     ]
   }
 }

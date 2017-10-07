@@ -2,12 +2,13 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Cell from '../src/cell';
-import Row from '../src/row';
-import Const from '../src/const';
-import EditingCell from '../src/editing-cell';
-import SelectionCell from '../src//row-selection/selection-cell';
-import mockBodyResolvedProps from '../test/mock-data/body-resolved-props';
+import Cell from 'src/cell';
+import Row from 'src/row';
+import Const from 'src/const';
+import EditingCell from 'src/editing-cell';
+import SelectionCell from 'src/row-selection/selection-cell';
+
+import mockBodyResolvedProps from 'test/mock-data/body-resolved-props';
 
 const defaultColumns = [{
   dataField: 'id',

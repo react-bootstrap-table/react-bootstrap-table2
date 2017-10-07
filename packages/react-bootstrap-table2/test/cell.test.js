@@ -2,8 +2,8 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Const from '../src/const';
-import Cell from '../src/cell';
+import Const from 'src/const';
+import Cell from 'src/cell';
 
 describe('Cell', () => {
   let wrapper;

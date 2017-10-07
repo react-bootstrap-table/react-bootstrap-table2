@@ -3,10 +3,11 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
 
-import { TableRowWrapper } from './test-helpers/table-wrapper';
-import EditingCell from '../src/editing-cell';
-import TextEditor from '../src/text-editor';
-import EditorIndicator from '../src/editor-indicator';
+import EditingCell from 'src/editing-cell';
+import TextEditor from 'src/text-editor';
+import EditorIndicator from 'src/editor-indicator';
+
+import { TableRowWrapper } from 'test/test-helpers/table-wrapper';
 
 describe('EditingCell', () => {
   let wrapper;
