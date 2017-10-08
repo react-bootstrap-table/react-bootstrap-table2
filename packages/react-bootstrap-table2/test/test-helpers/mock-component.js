@@ -8,13 +8,7 @@ export const extendTo = Base =>
       const { data } = props;
 
       this.store = new Store(props);
-      this.state = {
-        data,
-        currEditCell: {
-          ridx: null,
-          cidx: null
-        }
-      };
+      this.state = { data };
     }
 
     render() { return null; }

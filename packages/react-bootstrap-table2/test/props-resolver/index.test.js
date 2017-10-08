@@ -86,18 +86,6 @@ describe('TableResolver', () => {
         expect(cellEdit).toBeDefined();
         expect(cellEdit.mode).toEqual(Const.UNABLE_TO_CELL_EDIT);
         expect(cellEdit.nonEditableRows.length).toEqual(0);
-        expect(cellEdit.ridx).toBeNull();
-        expect(cellEdit.cidx).toBeNull();
-      });
-
-      it('should resolve a default cellEdit instance even if state.currEditCell changed', () => {
-        const ridx = 1;
-        const cidx = 1;
-        wrapper.setState({ currEditCell: { ridx, cidx } });
-        const cellEdit = wrapper.instance().resolveCellEditProps();
-        expect(cellEdit).toBeDefined();
-        expect(cellEdit.ridx).toEqual(ridx);
-        expect(cellEdit.cidx).toEqual(cidx);
       });
     });
 
