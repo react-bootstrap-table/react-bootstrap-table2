@@ -19,3 +19,5 @@ export const productsGenerator = (quantity = 5, callback) => {
     }))
   );
 };
+
+export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));

@@ -45,6 +45,8 @@ import ColumnLevelEditableTable from 'examples/cell-edit/column-level-editable-t
 import CellLevelEditable from 'examples/cell-edit/cell-level-editable-table';
 import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
+import CellEditWithPromise from 'examples/cell-edit/cell-edit-with-promise-table';
+import CellEditWithRedux from 'examples/cell-edit/cell-edit-with-redux-table';
 
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
@@ -102,8 +104,11 @@ storiesOf('Cell Editing', module)
   .add('Column Level Editable', () => <ColumnLevelEditableTable />)
   .add('Cell Level Editable', () => <CellLevelEditable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
-  .add('Validation', () => <CellEditValidator />);
+  .add('Validation', () => <CellEditValidator />)
+  .add('Async Cell Editing(Promise)', () => <CellEditWithPromise />)
+  .add('Async Cell Editing(Redux)', () => <CellEditWithRedux />);
 
 storiesOf('Row Selection', module)
   .add('Single selection', () => <SingleSelectionTable />)
   .add('Multiple selection', () => <MultipleSelectionTable />);
+
