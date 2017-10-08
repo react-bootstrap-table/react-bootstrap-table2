@@ -91,10 +91,10 @@ describe('BootstrapTable', () => {
 
   describe('when table should have a caption', () => {
     beforeEach(() => {
-      wrapper = shallow(<BootstrapTable tableCaption={<span className="table-caption">test</span>} keyField="id" columns={ columns } data={ data } bordered={ false } />);
+      wrapper = shallow(<BootstrapTable caption={<span className="table-caption">test</span>} keyField="id" columns={ columns } data={ data } bordered={ false } />);
     });
 
-    it('should render tableCaption', () => {
+    it('should render caption', () => {
       expect(wrapper.find('.table-caption').length).toBe(1);
     });
   });
