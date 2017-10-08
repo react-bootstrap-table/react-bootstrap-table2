@@ -18,13 +18,12 @@ export default ExtendBase =>
       return this.props.data.length === 0;
     }
 
-    resolveCellEditProps(options) {
+    resolveCellEditProps(options = { currEditCell: null }) {
       const { cellEdit } = this.props;
-      const { currEditCell } = this.state;
       const nonEditableRows =
         (cellEdit && _.isFunction(cellEdit.nonEditableRows)) ? cellEdit.nonEditableRows() : [];
       const cellEditInfo = {
-        ...currEditCell,
+        ...options.currEditCell,
         nonEditableRows
       };
 

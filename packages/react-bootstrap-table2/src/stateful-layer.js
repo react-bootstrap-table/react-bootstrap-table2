@@ -4,6 +4,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import Store from './store/base';
+import CellEditWrapper from './cell-edit-wrapper';
 import _ from './utils';
 
 const withStateful = (Base) => {
@@ -12,6 +13,10 @@ const withStateful = (Base) => {
       super(props);
       this.store = new Store(props);
       this.handleUpdateCell = this.handleUpdateCell.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+      this.store.set(nextProps.data);
     }
 
     handleUpdateCell(rowId, dataField, newValue) {
@@ -25,7 +30,7 @@ const withStateful = (Base) => {
       // handle cell editing external
       const aPromise = cellEdit.onUpdate(rowId, dataField, newValue);
       if (_.isDefined(aPromise) && aPromise !== false) { // TODO: should be a promise here
-        aPromise.then((result) => {
+        aPromise.then((result = true) => {
           const response = result === true ? {} : result;
           if (_.isObject(response)) {
             const { value } = response;
@@ -39,15 +44,29 @@ const withStateful = (Base) => {
       return false;
     }
 
-    render() {
+    renderCellEdit(elem) {
       return (
-        <Base
-          { ...this.props }
+        <CellEditWrapper
+          keyField={ this.props.keyField }
+          cellEdit={ this.props.cellEdit }
           ref={ node => this.table = node }
-          store={ this.store }
+          elem={ elem }
           onUpdateCell={ this.handleUpdateCell }
         />
       );
+    }
+
+    render() {
+      const baseProps = {
+        ...this.props,
+        store: this.store
+      };
+
+      let element = React.createElement(Base, baseProps);
+      if (this.props.cellEdit) {
+        element = this.renderCellEdit(element);
+      }
+      return element;
     }
   }
   return StatefulComponent;

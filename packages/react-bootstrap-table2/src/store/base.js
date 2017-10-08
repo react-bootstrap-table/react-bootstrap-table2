@@ -1,3 +1,4 @@
+/* eslint class-methods-use-this: 0 */
 import { sort } from './sort';
 import Const from '../const';
 import _ from '../utils';
@@ -6,7 +7,7 @@ export default class Store {
   constructor(props) {
     const { data, keyField } = props;
     this.keyField = keyField;
-    this.data = data ? data.slice() : [];
+    this.set(data);
 
     this.sortOrder = undefined;
     this.sortField = undefined;
@@ -35,6 +36,10 @@ export default class Store {
 
   get() {
     return this.data;
+  }
+
+  set(data) {
+    this.data = data ? JSON.parse(JSON.stringify(data)) : [];
   }
 
   getRowByRowId(rowId) {

@@ -6,17 +6,13 @@ import cs from 'classnames';
 import Header from './header';
 import Caption from './caption';
 import Body from './body';
-import Store from './store/base';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
-import _ from './utils';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
-    const { store } = this.props;
-    this.store = !store ? new Store(props) : store;
 
     this.handleSort = this.handleSort.bind(this);
     this.startEditing = this.startEditing.bind(this);
@@ -27,36 +23,19 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.handleCellUpdate = this.handleCellUpdate.bind(this);
     this.state = {
       data: this.store.get(),
-      selectedRowKeys: this.store.getSelectedRowKeys(),
-      currEditCell: {
-        ridx: null,
-        cidx: null,
-        message: null,
-        editing: false
-      }
+      selectedRowKeys: this.store.getSelectedRowKeys()
     };
   }
 
-  componentWillReceiveProps({ cellEdit }) {
-    if (_.isDefined(cellEdit)) {
-      if (cellEdit.editing) {
-        const { currEditCell } = this.state;
-        this.setState(() => {
-          return {
-            currEditCell: {
-              ...currEditCell,
-              message: cellEdit.errorMessage
-            }
-          };
-        });
-      } else {
-        this.escapeEditing();
-      }
-    }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      data: nextProps.store.get()
+    });
   }
 
   render() {
     const {
+      store,
       columns,
       keyField,
       striped,
@@ -75,9 +54,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     const cellEditInfo = this.resolveCellEditProps({
-      onStart: this.startEditing,
-      onEscape: this.escapeEditing,
-      onUpdate: this.handleCellUpdate
+      onStart: this.props.onStartEditing,
+      onEscape: this.props.onEscapeEditing,
+      onUpdate: this.props.onCellUpdate,
+      currEditCell: this.props.currEditCell
     });
 
     const cellSelectionInfo = this.resolveCellSelectionProps({
@@ -94,8 +74,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Caption>{ caption }</Caption>
           <Header
             columns={ columns }
-            sortField={ this.store.sortField }
-            sortOrder={ this.store.sortOrder }
+            sortField={ store.sortField }
+            sortOrder={ store.sortOrder }
             onSort={ this.handleSort }
             selectRow={ headerCellSelectionInfo }
           />
@@ -161,58 +141,12 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   }
 
   handleSort(column) {
-    this.store.sortBy(column);
+    const { store } = this.props;
+    store.sortBy(column);
 
     this.setState(() => {
       return {
-        data: this.store.get()
-      };
-    });
-  }
-
-  handleCellUpdate(row, column, newValue) {
-    const { cellEdit, keyField, onUpdateCell } = this.props;
-    const { beforeSaveCell, afterSaveCell } = cellEdit;
-    const oldValue = _.get(row, column.dataField);
-    const rowId = _.get(row, keyField);
-    if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
-
-    if (onUpdateCell(rowId, column.dataField, newValue)) {
-      if (_.isFunction(afterSaveCell)) afterSaveCell(oldValue, newValue, row, column);
-      this.completeEditing();
-    }
-  }
-
-  completeEditing() {
-    this.setState(() => {
-      return {
-        data: this.store.get(),
-        currEditCell: { ridx: null, cidx: null, editing: true }
-      };
-    });
-  }
-
-  startEditing(ridx, cidx) {
-    this.setState(() => {
-      return {
-        currEditCell: { ridx, cidx, editing: true }
-      };
-    });
-  }
-
-  escapeEditing() {
-    this.setState(() => {
-      return {
-        currEditCell: { ridx: null, cidx: null, editing: false }
-      };
-    });
-  }
-
-  updateEditingWithErr(message) {
-    this.setState(() => {
-      const { currEditCell } = this.state;
-      return {
-        currEditCell: { ...currEditCell, message }
+        data: store.get()
       };
     });
   }
@@ -244,9 +178,17 @@ BootstrapTable.propTypes = {
     timeToCloseMessage: PropTypes.number,
     errorMessage: PropTypes.string
   }),
-  onUpdateCell: PropTypes.func,
   selectRow: PropTypes.shape({
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired
+  }),
+  onCellUpdate: PropTypes.func,
+  onStartEditing: PropTypes.func,
+  onEscapeEditing: PropTypes.func,
+  currEditCell: PropTypes.shape({
+    ridx: PropTypes.number,
+    cidx: PropTypes.number,
+    message: PropTypes.string,
+    editing: PropTypes.bool
   })
 };
 
