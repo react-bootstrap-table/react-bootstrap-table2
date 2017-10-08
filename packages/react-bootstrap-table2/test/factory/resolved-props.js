@@ -1,28 +1,5 @@
 import BootstrapTable from 'src/bootstrap-table';
-
-const columns = [{
-  dataField: 'id',
-  text: 'ID'
-}, {
-  dataField: 'name',
-  text: 'Name'
-}];
-
-const data = [{
-  id: 1,
-  name: 'A'
-}, {
-  id: 2,
-  name: 'B'
-}];
-
-const keyField = 'id';
-
-const props = {
-  columns,
-  data,
-  keyField
-};
+import { baseProps as props } from './base-props';
 
 const bootstrapTable = new BootstrapTable(props);
 

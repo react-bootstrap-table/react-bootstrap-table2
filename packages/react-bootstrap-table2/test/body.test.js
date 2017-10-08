@@ -6,31 +6,18 @@ import Body from 'src/body';
 import Row from 'src/row';
 import Const from 'src/const';
 import RowSection from 'src/row-section';
-import { bodyResolvedProps } from 'test/factory';
+import { baseColumns, baseData, baseProps, bodyResolvedProps } from 'test/factory';
 
+const columns = baseColumns();
+const data = baseData();
 const mockBodyResolvedProps = bodyResolvedProps();
 
 describe('Body', () => {
   let wrapper;
-  const columns = [{
-    dataField: 'id',
-    text: 'ID'
-  }, {
-    dataField: 'name',
-    text: 'Name'
-  }];
-
-  const data = [{
-    id: 1,
-    name: 'A'
-  }, {
-    id: 2,
-    name: 'B'
-  }];
 
   describe('simplest body', () => {
     beforeEach(() => {
-      wrapper = shallow(<Body {...mockBodyResolvedProps} keyField="id" columns={ columns } data={ data } />);
+      wrapper = shallow(<Body {...baseProps} {...mockBodyResolvedProps} />);
     });
 
     it('should render successfully', () => {
@@ -44,10 +31,8 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
+          {...baseProps}
           {...mockBodyResolvedProps}
-          keyField="id"
-          columns={ columns }
-          data={ data }
           visibleColumnSize={ columns.length }
           isEmpty
         />);
@@ -69,10 +54,8 @@ describe('Body', () => {
           emptyIndication = 'Table is empty';
           wrapper = shallow(
             <Body
+              {...baseProps}
               {...mockBodyResolvedProps}
-              keyField="id"
-              columns={ columns }
-              data={ data }
               visibleColumnSize={ columns.length }
               noDataIndication={ emptyIndication }
               isEmpty
@@ -95,10 +78,8 @@ describe('Body', () => {
           emptyIndicationCallBack = sinon.stub().returns(content);
           wrapper = shallow(
             <Body
+              {...baseProps}
               {...mockBodyResolvedProps}
-              keyField="id"
-              columns={ columns }
-              data={ data }
               visibleColumnSize={ columns.length }
               noDataIndication={ emptyIndicationCallBack }
               isEmpty
@@ -129,10 +110,8 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
+          {...baseProps}
           {...mockBodyResolvedProps}
-          data={ data }
-          columns={ columns }
-          keyField={ keyField }
           cellEdit={ cellEdit }
         />
       );
@@ -152,16 +131,13 @@ describe('Body', () => {
   });
 
   describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
-    const keyField = 'id';
     const selectRow = { mode: 'checkbox' };
 
     it('props selected should be true if all rows were selected', () => {
       wrapper = shallow(
         <Body
+          {...baseProps}
           {...mockBodyResolvedProps}
-          data={ data }
-          columns={ columns }
-          keyField={ keyField }
           selectedRowKeys={[1, 2]}
           selectRow={selectRow}
         />
@@ -173,10 +149,8 @@ describe('Body', () => {
     it('props selected should be false if all rows were not selected', () => {
       wrapper = shallow(
         <Body
+          {...baseProps}
           {...mockBodyResolvedProps}
-          data={ data }
-          columns={ columns }
-          keyField={ keyField }
           selectedRowKeys={[]}
           selectRow={selectRow}
         />
@@ -188,13 +162,10 @@ describe('Body', () => {
 
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
     beforeEach(() => {
-      const keyField = 'id';
       wrapper = shallow(
         <Body
+          {...baseProps}
           {...mockBodyResolvedProps}
-          data={ data }
-          columns={ columns }
-          keyField={ keyField }
           selectedRowKeys={[]}
         />
       );

@@ -5,24 +5,13 @@ import { shallow } from 'enzyme';
 import baseResolver from 'src/props-resolver/index';
 import Const from 'src/const';
 import { extendTo } from 'test/test-helpers/mock-component';
+import { baseColumns, baseData, baseKeyField } from 'test/factory';
+
+const columns = baseColumns();
+const data = baseData();
+const keyField = baseKeyField();
 
 describe('TableResolver', () => {
-  const keyField = 'id';
-  const columns = [{
-    dataField: keyField,
-    text: 'ID'
-  }, {
-    dataField: 'name',
-    text: 'Name'
-  }];
-  const data = [{
-    id: 1,
-    name: 'A'
-  }, {
-    id: 2,
-    name: 'B'
-  }];
-
   const ExtendBase = baseResolver(Component);
   const BootstrapTableMock = extendTo(ExtendBase);
   let wrapper;

@@ -7,29 +7,16 @@ import Row from 'src/row';
 import Const from 'src/const';
 import EditingCell from 'src/editing-cell';
 import SelectionCell from 'src/row-selection/selection-cell';
-import { bodyResolvedProps } from 'test/factory';
+import { bodyResolvedProps, baseColumns, baseRow } from 'test/factory';
 
 const mockBodyResolvedProps = bodyResolvedProps();
 
-const defaultColumns = [{
-  dataField: 'id',
-  text: 'ID'
-}, {
-  dataField: 'name',
-  text: 'Name'
-}, {
-  dataField: 'price',
-  text: 'Price'
-}];
+const defaultColumns = baseColumns();
 
 describe('Row', () => {
   let wrapper;
 
-  const row = {
-    id: 1,
-    name: 'A',
-    price: 1000
-  };
+  const row = baseRow();
 
   describe('simplest row', () => {
     beforeEach(() => {
