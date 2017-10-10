@@ -132,6 +132,7 @@ describe('Row', () => {
           columns[nonEditableColIndex].editable = editableCallBack;
           wrapper = shallow(
             <Row
+              {...mockBodyResolvedProps}
               row={ row }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -164,6 +165,7 @@ describe('Row', () => {
           columns[nonEditableColIndex].editable = editableCallBack;
           wrapper = shallow(
             <Row
+              {...mockBodyResolvedProps}
               row={ row }
               rowIndex={ rowIndex }
               columns={ columns }

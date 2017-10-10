@@ -43,8 +43,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       bordered,
       condensed,
       noDataIndication,
-      caption,
-      selectRow
+      caption
     } = this.props;
 
     const tableClass = cs('table', {
