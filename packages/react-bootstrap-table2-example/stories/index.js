@@ -94,6 +94,6 @@ storiesOf('Cell Editing', module)
   .add('Blur to Save Cell', () => <BlurToSaveTable />)
   .add('Row Level Editable', () => <RowLevelEditableTable />)
   .add('Column Level Editable', () => <ColumnLevelEditableTable />)
+  .add('Cell Level Editable', () => <CellLevelEditable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
-  .add('Validation', () => <CellEditValidator />)
-  .add('Cell Level Editable', () => <CellLevelEditable />);
+  .add('Validation', () => <CellEditValidator />);

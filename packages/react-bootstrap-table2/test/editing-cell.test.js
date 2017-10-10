@@ -4,13 +4,9 @@ import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
 
 import { TableRowWrapper } from './test-helpers/table-wrapper';
-import BootstrapTable from '../src/bootstrap-table';
 import EditingCell from '../src/editing-cell';
 import TextEditor from '../src/text-editor';
 import EditorIndicator from '../src/editor-indicator';
-import { productsGenerator } from './test-helpers/productGenerator';
-import Row from '../src/row';
-import Cell from '../src/cell';
 
 describe('EditingCell', () => {
   let wrapper;
@@ -171,36 +167,6 @@ describe('EditingCell', () => {
       it('should call onComplete', () => {
         expect(onComplete.callCount).toBe(1);
       });
-    });
-  });
-
-  describe('when column.editable is function', () => {
-    const products = productsGenerator();
-    const mockFunction = jest.fn(content => content > 2102);
-    const col = [{
-      dataField: 'id',
-      text: 'Product ID'
-    }, {
-      dataField: 'name',
-      text: 'Product Name'
-    }, {
-      dataField: 'price',
-      text: 'Product Price',
-      editable: mockFunction
-    }];
-    const renderComponent = mount(<BootstrapTable keyField="id" data={ products } columns={ col } />);
-    const rowComponent = renderComponent.find(Row);
-    it(`column.editable function should be called ${products.length} times`, () => {
-      expect(mockFunction).toHaveBeenCalledTimes(products.length);
-    });
-    it('should call callBack with right args', () => {
-      expect(mockFunction).toHaveBeenLastCalledWith(2104, { id: 4, name: 'Item name 4', price: 2104 }, 4, 2);
-    });
-    it('should be "editable" === false', () => {
-      expect(rowComponent.at(2).find(Cell).at(2).props().editable).toBeFalsy();
-    });
-    it('should be "editable" === true', () => {
-      expect(rowComponent.at(3).find(Cell).at(2).props().editable).toBeTruthy();
     });
   });
 });

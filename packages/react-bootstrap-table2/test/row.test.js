@@ -86,7 +86,7 @@ describe('Row', () => {
       }
     });
 
-    describe('when have column.editable defined false', () => {
+    describe('and column.editable defined false', () => {
       const nonEditableColIndex = 1;
       beforeEach(() => {
         columns[nonEditableColIndex].editable = false;
@@ -101,7 +101,7 @@ describe('Row', () => {
         );
       });
 
-      it('Cell component should receive correct editMode props', () => {
+      it('Cell component should receive correct editable props', () => {
         expect(wrapper.length).toBe(1);
         for (let i = 0; i < columns.length; i += 1) {
           const column = columns[i];
@@ -111,6 +111,79 @@ describe('Row', () => {
             expect(wrapper.find(Cell).get(i).props.editable).toBeTruthy();
           }
         }
+      });
+    });
+
+    describe('and column.editable defined as function', () => {
+      const nonEditableColIndex = 1;
+      let editableCallBack;
+
+      afterEach(() => {
+        editableCallBack.reset();
+      });
+
+      describe('which return false', () => {
+        beforeEach(() => {
+          editableCallBack = sinon.stub().returns(false);
+          columns[nonEditableColIndex].editable = editableCallBack;
+          wrapper = shallow(
+            <Row
+              row={ row }
+              rowIndex={ rowIndex }
+              columns={ columns }
+              keyField={ keyField }
+              cellEdit={ cellEdit }
+            />
+          );
+        });
+
+        it('column.editable callback function should be called once', () => {
+          expect(editableCallBack.callCount).toBe(1);
+        });
+
+        it('Cell component should receive correct editable props', () => {
+          expect(wrapper.length).toBe(1);
+          for (let i = 0; i < columns.length; i += 1) {
+            const column = columns[i];
+            if (i === nonEditableColIndex || column.dataField === keyField) {
+              expect(wrapper.find(Cell).get(i).props.editable).toBeFalsy();
+            } else {
+              expect(wrapper.find(Cell).get(i).props.editable).toBeTruthy();
+            }
+          }
+        });
+      });
+
+      describe('which return true', () => {
+        beforeEach(() => {
+          editableCallBack = sinon.stub().returns(true);
+          columns[nonEditableColIndex].editable = editableCallBack;
+          wrapper = shallow(
+            <Row
+              row={ row }
+              rowIndex={ rowIndex }
+              columns={ columns }
+              keyField={ keyField }
+              cellEdit={ cellEdit }
+            />
+          );
+        });
+
+        it('column.editable callback function should be called once', () => {
+          expect(editableCallBack.callCount).toBe(1);
+        });
+
+        it('Cell component should receive correct editable props', () => {
+          expect(wrapper.length).toBe(1);
+          for (let i = 0; i < columns.length; i += 1) {
+            const column = columns[i];
+            if (column.dataField === keyField) {
+              expect(wrapper.find(Cell).get(i).props.editable).toBeFalsy();
+            } else {
+              expect(wrapper.find(Cell).get(i).props.editable).toBeTruthy();
+            }
+          }
+        });
       });
     });
 

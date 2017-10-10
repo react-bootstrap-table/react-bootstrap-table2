@@ -417,8 +417,19 @@ A new `Object` will be the result of element headerAttrs.
 > Same as [column.attrs](#attrs), it has lower priority and will be
 > overwrited when other props related to HTML attributes were given.
 
-## <a name='editable'>column.editable - [Bool]</a>
+## <a name='editable'>column.editable - [Bool | Function]</a>
 `column.editable` default is true, means every column is editable if you configure [`cellEdit`](./README.md#cellEdit). But you can disable some columns editable via setting `false`.
+
+If a callback function given, you can control the editable level as cell level:
+
+```js
+{
+  // omit...
+  editable: (cell, row, rowIndex, colIndex) => {
+    // return true or false;
+  }
+}
+```
 
 ## <a name='validator'>column.validator - [Function]</a>
 `column.validator` used for validate the data when cell on updating. it's should accept a callback function with following argument:
