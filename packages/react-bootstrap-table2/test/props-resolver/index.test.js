@@ -202,7 +202,7 @@ describe('TableResolver', () => {
           selectRow = {};
           const mockOptions = {
             foo: 'test',
-            bar: jest.fn()
+            bar: sinon.stub()
           };
           const mockElement = React.createElement(BootstrapTableMock, {
             data, keyField, columns, selectRow
@@ -280,7 +280,7 @@ describe('TableResolver', () => {
           selectRow = {};
           const mockOptions = {
             foo: 'test',
-            bar: jest.fn()
+            bar: sinon.stub()
           };
           const selectedRowKeys = [];
           const mockElement = React.createElement(BootstrapTableMock, {
