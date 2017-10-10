@@ -9,6 +9,7 @@ import BasicTable from 'examples/basic';
 import BorderlessTable from 'examples/basic/borderless-table';
 import StripHoverCondensedTable from 'examples/basic/striped-hover-condensed-table';
 import NoDataTable from 'examples/basic/no-data-table';
+import TableWithCaption from 'examples/basic/table-with-caption';
 
 // work on columns
 import NestedDataTable from 'examples/columns/nested-data-table';
@@ -61,7 +62,8 @@ storiesOf('Basic Table', module)
   .add('basic table', () => <BasicTable />)
   .add('striped, hover, condensed table', () => <StripHoverCondensedTable />)
   .add('borderless table', () => <BorderlessTable />)
-  .add('Indication For Empty Table', () => <NoDataTable />);
+  .add('Indication For Empty Table', () => <NoDataTable />)
+  .add('Table with caption', () => <TableWithCaption />);
 
 storiesOf('Work on Columns', module)
   .add('Display Nested Data', () => <NestedDataTable />)

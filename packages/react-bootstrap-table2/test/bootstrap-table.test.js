@@ -89,6 +89,16 @@ describe('BootstrapTable', () => {
     });
   });
 
+  describe('when table should have a caption', () => {
+    beforeEach(() => {
+      wrapper = shallow(<BootstrapTable caption={<span className="table-caption">test</span>} keyField="id" columns={ columns } data={ data } bordered={ false } />);
+    });
+
+    it('should render caption', () => {
+      expect(wrapper.find('.table-caption').length).toBe(1);
+    });
+  });
+
   describe('when cellEdit props is defined', () => {
     const nonEditableRows = [data[1].id];
     const cellEdit = {

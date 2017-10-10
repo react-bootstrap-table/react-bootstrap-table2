@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import Header from './header';
+import Caption from './caption';
 import Body from './body';
 import Store from './store/base';
 import PropsBaseResolver from './props-resolver';
@@ -38,7 +39,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       hover,
       bordered,
       condensed,
-      noDataIndication
+      noDataIndication,
+      caption
     } = this.props;
 
     const tableClass = cs('table', {
@@ -57,6 +59,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     return (
       <div className="react-bootstrap-table-container">
         <table className={ tableClass }>
+          <Caption>{ caption }</Caption>
           <Header
             columns={ columns }
             sortField={ this.store.sortField }
@@ -131,6 +134,10 @@ BootstrapTable.propTypes = {
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
   condensed: PropTypes.bool,
+  caption: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string
+  ]),
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
     onEditing: PropTypes.func.isRequired,
