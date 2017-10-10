@@ -60,14 +60,6 @@ class Cell extends Component {
       ? classes(content, row, rowIndex, columnIndex)
       : classes;
 
-    const setEditMode = () => {
-      if (editMode === Const.CLICK_TO_CELL_EDIT) {
-        cellAttrs.onClick = this.handleEditingCell;
-      } else {
-        cellAttrs.onDoubleClick = this.handleEditingCell;
-      }
-    };
-
     if (style) {
       cellStyle = _.isFunction(style) ? style(content, row, rowIndex, columnIndex) : style;
     }
@@ -94,7 +86,11 @@ class Cell extends Component {
 
     if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
     if (editable && editMode !== Const.UNABLE_TO_CELL_EDIT) {
-      setEditMode();
+      if (editMode === Const.CLICK_TO_CELL_EDIT) {
+        cellAttrs.onClick = this.handleEditingCell;
+      } else {
+        cellAttrs.onDoubleClick = this.handleEditingCell;
+      }
     }
     return (
       <td { ...cellAttrs }>{ content }</td>
