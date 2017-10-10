@@ -41,6 +41,7 @@ import DoubleClickToEditTable from 'examples/cell-edit/dbclick-to-edit-table';
 import BlurToSaveTable from 'examples/cell-edit/blur-to-save-table';
 import RowLevelEditableTable from 'examples/cell-edit/row-level-editable-table';
 import ColumnLevelEditableTable from 'examples/cell-edit/column-level-editable-table';
+import CellLevelEditable from 'examples/cell-edit/cell-level-editable-table';
 import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
 
@@ -94,4 +95,5 @@ storiesOf('Cell Editing', module)
   .add('Row Level Editable', () => <RowLevelEditableTable />)
   .add('Column Level Editable', () => <ColumnLevelEditableTable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
-  .add('Validation', () => <CellEditValidator />);
+  .add('Validation', () => <CellEditValidator />)
+  .add('Cell Level Editable', () => <CellLevelEditable />);

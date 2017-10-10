@@ -100,7 +100,7 @@ HeaderCell.propTypes = {
     align: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     sort: PropTypes.bool,
     sortFunc: PropTypes.func,
-    editable: PropTypes.bool,
+    editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     validator: PropTypes.func
   }).isRequired,
   index: PropTypes.number.isRequired,
