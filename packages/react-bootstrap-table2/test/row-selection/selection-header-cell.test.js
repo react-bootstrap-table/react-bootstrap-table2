@@ -1,7 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import Constant from '../../src/const';
+import sinon from 'sinon';
 
+import Constant from '../../src/const';
 import SelectionHeaderCell, { CheckBox } from '../../src/row-selection/selection-header-cell';
 
 let wrapper;
@@ -46,41 +47,47 @@ describe('<SelectionHeaderCell />', () => {
 
   describe('handleCheckBoxClick', () => {
     describe('when <th /> was clicked', () => {
-      let spy;
-      const mockOnAllRowsSelect = jest.fn();
+      const spy = sinon.spy(SelectionHeaderCell.prototype, 'handleCheckBoxClick');
+      const mockOnAllRowsSelect = sinon.stub();
+
+      beforeEach(() => {
+        spy.reset();
+        mockOnAllRowsSelect.reset();
+      });
 
       describe('if props.mode is radio', () => {
-        it('should do nothing', () => {
-          spy = jest.spyOn(SelectionHeaderCell.prototype, 'handleCheckBoxClick');
-
+        beforeEach(() => {
           wrapper = shallow(
             <SelectionHeaderCell
               mode="radio"
               checkedStatus={Constant.CHECKBOX_STATUS_CHECKED}
               onAllRowsSelect={mockOnAllRowsSelect}
             />);
+        });
+
+        it('should do nothing', () => {
           wrapper.find('th').simulate('click');
 
-          expect(spy).not.toHaveBeenCalled();
-          expect(mockOnAllRowsSelect).not.toHaveBeenCalled();
+          expect(spy.callCount).toBe(0);
+          expect(mockOnAllRowsSelect.callCount).toBe(0);
         });
       });
 
       describe('if props.mode is checkbox', () => {
-        it('should call handleCheckBoxClick', () => {
-          spy = jest.spyOn(SelectionHeaderCell.prototype, 'handleCheckBoxClick');
-
+        beforeEach(() => {
           wrapper = shallow(
             <SelectionHeaderCell
               mode="checkbox"
               checkedStatus={Constant.CHECKBOX_STATUS_CHECKED}
               onAllRowsSelect={mockOnAllRowsSelect}
             />);
+        });
 
+        it('should call handleCheckBoxClick', () => {
           wrapper.find('th').simulate('click');
 
-          expect(spy).toHaveBeenCalled();
-          expect(mockOnAllRowsSelect).toHaveBeenCalled();
+          expect(spy.calledOnce).toBe(true);
+          expect(mockOnAllRowsSelect.calledOnce).toBe(true);
         });
       });
     });

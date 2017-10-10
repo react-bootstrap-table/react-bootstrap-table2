@@ -62,12 +62,7 @@ Body.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  selectRow: PropTypes.shape({
-    mode: PropTypes.oneOf([
-      Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE, Const.ROW_SELECT_DISABLED
-    ]).isRequired,
-    onRowSelect: PropTypes.func
-  }),
+  selectRow: PropTypes.object,
   selectedRowKeys: PropTypes.array
 };
 

@@ -14,6 +14,7 @@
 * [hover](#hover)
 * [condensed](#condensed)
 * [cellEdit](#cellEdit)
+* [selectRow](#selectRow)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 `keyField` is a prop to tell `react-bootstrap-table2` which column is unigue key.
@@ -36,7 +37,7 @@ Same as `.table-hover` class for adding a hover effect (grey background color) o
 ### <a name='condensed'>condensed - [Bool]</a>
 Same as `.table-condensed` class for makeing a table more compact by cutting cell padding in half
 
-### <a name='cellEdit'>cellEdit - [Bool]</a>
+### <a name='cellEdit'>cellEdit - [Object]</a>
 Assign a valid `cellEdit` object can enable the cell editing on the cell. The default usage is click/dbclick to trigger cell editing and press `ENTER` to save cell or press `ESC` to cancel editing.
 
 > Note: The `keyField` column can't be edited
@@ -64,3 +65,6 @@ Default is `false`, enable it will be able to save the cell automatically when b
 
 #### <a name='cellEdit.timeToCloseMessage'>cellEdit.timeToCloseMessage - [Function]</a>
 If a [`column.validator`](./columns.md#validator) defined and the new value is invalid, `react-bootstrap-table2` will popup a alert at the bottom of editor. `cellEdit.timeToCloseMessage` is a chance to let you decide how long the alert should be stay. Default is 3000 millisecond.
+
+### <a name='selectRow'>selectRow - [Object]</a>
+Pass prop `selectRow` to enable row selection. For more detail, please navigate to [row selection document](./row-selection.md).

@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import sinon from 'sinon';
 
 import SelectionCell from '../../src/row-selection/selection-cell';
 
@@ -35,13 +36,15 @@ describe('<SelectionCell />', () => {
   describe('handleRowClick', () => {
     describe('when <input /> was been clicked', () => {
       const rowKey = 1;
-      const mockOnRowSelect = jest.fn();
-      const spy = jest.spyOn(SelectionCell.prototype, 'handleRowClick');
+      const mockOnRowSelect = sinon.stub();
+      const spy = sinon.spy(SelectionCell.prototype, 'handleRowClick');
+
+      beforeEach(() => {
+        spy.reset();
+        mockOnRowSelect.reset();
+      });
 
       it('should call handleRowClicked', () => {
-        mockOnRowSelect.mockClear();
-        spy.mockClear();
-
         wrapper = shallow(
           <SelectionCell
             selected
@@ -53,19 +56,12 @@ describe('<SelectionCell />', () => {
 
         wrapper.find('td').simulate('click');
 
-        expect(spy).toHaveBeenCalled();
-        expect(mockOnRowSelect).toHaveBeenCalled();
+        expect(spy.calledOnce).toBe(true);
+        expect(mockOnRowSelect.calledOnce).toBe(true);
       });
 
       describe('if selectRow.mode is radio', () => {
-        let calledCount;
-
         beforeEach(() => {
-          calledCount = 0;
-
-          mockOnRowSelect.mockClear();
-          spy.mockClear();
-
           wrapper = shallow(
             <SelectionCell
               selected
@@ -76,36 +72,23 @@ describe('<SelectionCell />', () => {
           );
         });
 
-        it('first param should get correct row key', () => {
+        it('should be called with correct paramters', () => {
+          // first click
           wrapper.find('td').simulate('click');
+          expect(mockOnRowSelect.callCount).toBe(1);
+          expect(mockOnRowSelect.calledWith(rowKey, true)).toBe(true);
 
-          expect(mockOnRowSelect.mock.calls[calledCount][0]).toBe(rowKey);
-        });
-
-        it('second param, checked, should always be true', () => {
+          // second click
           wrapper.find('td').simulate('click');
-          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(true);
-
-          calledCount += 1;
-          wrapper.find('td').simulate('click');
-          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(true);
+          expect(mockOnRowSelect.callCount).toBe(2);
+          expect(mockOnRowSelect.calledWith(rowKey, true)).toBe(true);
         });
       });
 
       describe('if selectRow.mode is checkbox', () => {
-        let calledCount;
-
-        const selected = true;
-
         beforeEach(() => {
-          calledCount = 0;
-
-          mockOnRowSelect.mockClear();
-          spy.mockClear();
-
           wrapper = shallow(
             <SelectionCell
-              selected={selected}
               rowKey={rowKey}
               mode="checkbox"
               onRowSelect={mockOnRowSelect}
@@ -113,20 +96,18 @@ describe('<SelectionCell />', () => {
           );
         });
 
-        it('first param should get correct row key', () => {
+        it('should be called with correct paramters', () => {
+          // first click
+          wrapper.setProps({ selected: true });
           wrapper.find('td').simulate('click');
+          expect(mockOnRowSelect.callCount).toBe(1);
+          expect(mockOnRowSelect.calledWith(rowKey, false)).toBe(true);
 
-          expect(mockOnRowSelect.mock.calls[calledCount][0]).toBe(rowKey);
-        });
-
-        it('second param, checked, should be toggled', () => {
+          // second click
+          wrapper.setProps({ selected: false });
           wrapper.find('td').simulate('click');
-          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(!selected);
-
-          calledCount += 1;
-          wrapper.setProps({ selected: !selected });
-          wrapper.find('td').simulate('click');
-          expect(mockOnRowSelect.mock.calls[calledCount][1]).toBe(selected);
+          expect(mockOnRowSelect.callCount).toBe(2);
+          expect(mockOnRowSelect.calledWith(rowKey, true)).toBe(true);
         });
       });
     });
