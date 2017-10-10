@@ -2,6 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
+import Caption from '../src/caption';
 import Header from '../src/header';
 import Body from '../src/body';
 import BootstrapTable from '../src/bootstrap-table';
@@ -91,10 +92,19 @@ describe('BootstrapTable', () => {
 
   describe('when table should have a caption', () => {
     beforeEach(() => {
-      wrapper = shallow(<BootstrapTable caption={<span className="table-caption">test</span>} keyField="id" columns={ columns } data={ data } bordered={ false } />);
+      wrapper = shallow(
+        <BootstrapTable
+          caption={ <span className="table-caption">test</span> }
+          keyField="id"
+          columns={ columns }
+          data={ data }
+          bordered={ false }
+        />
+      );
     });
 
-    it('should render caption', () => {
+    it('should render caption correctly', () => {
+      expect(wrapper.find(Caption).length).toBe(1);
       expect(wrapper.find('.table-caption').length).toBe(1);
     });
   });
