@@ -8,6 +8,7 @@
 * [columns (**required**)](#columns)
 
 #### Optional
+* [caption](#caption)
 * [striped](#striped)
 * [bordered](#bordered)
 * [hover](#hover)
@@ -22,6 +23,9 @@ Assign your table data via `data` prop. It only accept an Array object.
 
 ### <a name='columns'>columns(**required**) - [Object]</a>
 `columns` props accept an Array object, please see [columns definition](./columns.md) for more detail.
+
+### <a name='caption'>caption - [String | Node]</a>
+Same as [caption tag](https://www.w3schools.com/TAgs/tag_caption.asp) in HTML. You can give a String or a React JSX.
 
 ### <a name='striped'>striped - [Bool]</a>
 Same as `.table-striped` class for adding zebra-stripes to a table
