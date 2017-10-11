@@ -1,10 +1,13 @@
 /* eslint react/prop-types: 0 */
+/* eslint react/require-default-props: 0 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import _ from './utils';
 import Row from './row';
 import RowSection from './row-section';
+import Const from './const';
 
 const Body = (props) => {
   const {
@@ -14,7 +17,9 @@ const Body = (props) => {
     isEmpty,
     noDataIndication,
     visibleColumnSize,
-    cellEdit
+    cellEdit,
+    selectRow,
+    selectedRowKeys
   } = props;
 
   let content;
@@ -25,7 +30,13 @@ const Body = (props) => {
   } else {
     content = data.map((row, index) => {
       const key = _.get(row, keyField);
-      const editable = !(cellEdit && cellEdit.nonEditableRows.indexOf(key) > -1);
+      const editable = !(cellEdit.mode !== Const.UNABLE_TO_CELL_EDIT &&
+        cellEdit.nonEditableRows.indexOf(key) > -1);
+
+      const selected = selectRow.mode !== Const.ROW_SELECT_DISABLED
+        ? selectedRowKeys.includes(key)
+        : null;
+
       return (
         <Row
           key={ key }
@@ -35,6 +46,8 @@ const Body = (props) => {
           columns={ columns }
           cellEdit={ cellEdit }
           editable={ editable }
+          selected={ selected }
+          selectRow={ selectRow }
         />
       );
     });
@@ -48,7 +61,9 @@ const Body = (props) => {
 Body.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
-  columns: PropTypes.array.isRequired
+  columns: PropTypes.array.isRequired,
+  selectRow: PropTypes.object,
+  selectedRowKeys: PropTypes.array
 };
 
 export default Body;

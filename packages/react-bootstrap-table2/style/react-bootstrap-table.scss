@@ -22,6 +22,10 @@
     margin: 10px 6.5px;
   }
 
+  th[data-row-selection] {
+    width: 30px;
+  }
+
   td.react-bs-table-no-data {
     text-align: center;
   }

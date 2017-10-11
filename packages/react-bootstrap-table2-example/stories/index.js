@@ -46,6 +46,10 @@ import CellLevelEditable from 'examples/cell-edit/cell-level-editable-table';
 import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
 
+// work on row selection
+import SingleSelectionTable from 'examples/row-selection/single-selection';
+import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
+
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/tomorrow.min.css';
@@ -99,3 +103,7 @@ storiesOf('Cell Editing', module)
   .add('Cell Level Editable', () => <CellLevelEditable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
   .add('Validation', () => <CellEditValidator />);
+
+storiesOf('Row Selection', module)
+  .add('Single selection', () => <SingleSelectionTable />)
+  .add('Multiple selection', () => <MultipleSelectionTable />);

@@ -6,6 +6,7 @@ import Body from '../src/body';
 import Row from '../src/row';
 import Const from '../src/const';
 import RowSection from '../src/row-section';
+import mockBodyResolvedProps from '../test/mock-data/body-resolved-props';
 
 describe('Body', () => {
   let wrapper;
@@ -27,7 +28,7 @@ describe('Body', () => {
 
   describe('simplest body', () => {
     beforeEach(() => {
-      wrapper = shallow(<Body keyField="id" columns={ columns } data={ data } />);
+      wrapper = shallow(<Body {...mockBodyResolvedProps} keyField="id" columns={ columns } data={ data } />);
     });
 
     it('should render successfully', () => {
@@ -41,6 +42,7 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
+          {...mockBodyResolvedProps}
           keyField="id"
           columns={ columns }
           data={ data }
@@ -65,6 +67,7 @@ describe('Body', () => {
           emptyIndication = 'Table is empty';
           wrapper = shallow(
             <Body
+              {...mockBodyResolvedProps}
               keyField="id"
               columns={ columns }
               data={ data }
@@ -90,6 +93,7 @@ describe('Body', () => {
           emptyIndicationCallBack = sinon.stub().returns(content);
           wrapper = shallow(
             <Body
+              {...mockBodyResolvedProps}
               keyField="id"
               columns={ columns }
               data={ data }
@@ -123,6 +127,7 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
+          {...mockBodyResolvedProps}
           data={ data }
           columns={ columns }
           keyField={ keyField }
@@ -141,6 +146,60 @@ describe('Body', () => {
           expect(rows.get(i).props.editable).toBeTruthy();
         }
       }
+    });
+  });
+
+  describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
+    const keyField = 'id';
+    const selectRow = { mode: 'checkbox' };
+
+    it('props selected should be true if all rows were selected', () => {
+      wrapper = shallow(
+        <Body
+          {...mockBodyResolvedProps}
+          data={ data }
+          columns={ columns }
+          keyField={ keyField }
+          selectedRowKeys={[1, 2]}
+          selectRow={selectRow}
+        />
+      );
+
+      expect(wrapper.find(Row).get(0).props.selected).toBe(true);
+    });
+
+    it('props selected should be false if all rows were not selected', () => {
+      wrapper = shallow(
+        <Body
+          {...mockBodyResolvedProps}
+          data={ data }
+          columns={ columns }
+          keyField={ keyField }
+          selectedRowKeys={[]}
+          selectRow={selectRow}
+        />
+      );
+
+      expect(wrapper.find(Row).get(0).props.selected).toBe(false);
+    });
+  });
+
+  describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
+    beforeEach(() => {
+      const keyField = 'id';
+      wrapper = shallow(
+        <Body
+          {...mockBodyResolvedProps}
+          data={ data }
+          columns={ columns }
+          keyField={ keyField }
+          selectedRowKeys={[]}
+        />
+      );
+    });
+
+    it('prop selected should be null', () => {
+      expect(wrapper.find(Row).get(0).props.selected).toBeNull();
     });
   });
 });

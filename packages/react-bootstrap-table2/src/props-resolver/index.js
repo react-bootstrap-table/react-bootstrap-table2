@@ -40,4 +40,65 @@ export default ExtendBase =>
         ...cellEditInfo
       };
     }
+
+    /**
+     * props resolver for cell selection
+     * @param {Object} options - addtional options like callback which are about to merge into props
+     *
+     * @returns {Object} result - props for cell selections
+     * @returns {String} result.mode - input type of row selection or disabled.
+     */
+    resolveCellSelectionProps(options) {
+      const { selectRow } = this.props;
+      const { ROW_SELECT_DISABLED } = Const;
+
+      if (_.isDefined(selectRow)) {
+        return {
+          ...selectRow,
+          ...options
+        };
+      }
+
+      return {
+        mode: ROW_SELECT_DISABLED
+      };
+    }
+
+    /**
+     * props resolver for header cell selection
+     * @param {Object} options - addtional options like callback which are about to merge into props
+     *
+     * @returns {Object} result - props for cell selections
+     * @returns {String} result.mode - input type of row selection or disabled.
+     * @returns {String} result.checkedStatus - checkbox status depending on selected rows counts
+     */
+    resolveHeaderCellSelectionProps(options) {
+      const { selected } = this.store;
+      const { selectRow } = this.props;
+      const {
+        ROW_SELECT_DISABLED, CHECKBOX_STATUS_CHECKED,
+        CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_UNCHECKED
+      } = Const;
+
+      if (_.isDefined(selectRow)) {
+        let checkedStatus;
+
+        const allRowsSelected = this.store.isAllRowsSelected();
+
+        // checkbox status depending on selected rows counts
+        if (allRowsSelected) checkedStatus = CHECKBOX_STATUS_CHECKED;
+        else if (selected.length === 0) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
+        else checkedStatus = CHECKBOX_STATUS_INDETERMINATE;
+
+        return {
+          ...selectRow,
+          ...options,
+          checkedStatus
+        };
+      }
+
+      return {
+        mode: ROW_SELECT_DISABLED
+      };
+    }
   };

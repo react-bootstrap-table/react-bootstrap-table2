@@ -6,6 +6,8 @@ import Cell from '../src/cell';
 import Row from '../src/row';
 import Const from '../src/const';
 import EditingCell from '../src/editing-cell';
+import SelectionCell from '../src//row-selection/selection-cell';
+import mockBodyResolvedProps from '../test/mock-data/body-resolved-props';
 
 const defaultColumns = [{
   dataField: 'id',
@@ -30,7 +32,7 @@ describe('Row', () => {
   describe('simplest row', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <Row rowIndex={ 1 } columns={ defaultColumns } row={ row } cellEdit={ {} } />);
+        <Row {...mockBodyResolvedProps} rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
     });
 
     it('should render successfully', () => {
@@ -53,6 +55,7 @@ describe('Row', () => {
       };
       wrapper = shallow(
         <Row
+          {...mockBodyResolvedProps}
           row={ row }
           rowIndex={ rowIndex }
           columns={ columns }
@@ -92,6 +95,7 @@ describe('Row', () => {
         columns[nonEditableColIndex].editable = false;
         wrapper = shallow(
           <Row
+            {...mockBodyResolvedProps}
             row={ row }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -128,6 +132,7 @@ describe('Row', () => {
           columns[nonEditableColIndex].editable = editableCallBack;
           wrapper = shallow(
             <Row
+              {...mockBodyResolvedProps}
               row={ row }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -160,6 +165,7 @@ describe('Row', () => {
           columns[nonEditableColIndex].editable = editableCallBack;
           wrapper = shallow(
             <Row
+              {...mockBodyResolvedProps}
               row={ row }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -193,6 +199,7 @@ describe('Row', () => {
       beforeEach(() => {
         wrapper = shallow(
           <Row
+            {...mockBodyResolvedProps}
             row={ row }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -222,6 +229,7 @@ describe('Row', () => {
           cellEdit.onEscape = sinon.stub();
           wrapper = shallow(
             <Row
+              {...mockBodyResolvedProps}
               row={ row }
               rowIndex={ 1 }
               columns={ columns }
@@ -233,9 +241,12 @@ describe('Row', () => {
         });
 
         it('should render EditingCell correctly', () => {
+          const complexComponents = wrapper.find('tr').children().findWhere(
+            n => n.type().name === 'Cell' || n.type().name === 'EditingCell');
+
           expect(wrapper.length).toBe(1);
           expect(wrapper.find(EditingCell).length).toBe(1);
-          expect(wrapper.find('tr').children().at(editingColIndex).type()).toEqual(EditingCell);
+          expect(complexComponents.at(editingColIndex).type()).toEqual(EditingCell);
         });
       });
 
@@ -248,6 +259,7 @@ describe('Row', () => {
           cellEdit.onEscape = sinon.stub();
           wrapper = shallow(
             <Row
+              {...mockBodyResolvedProps}
               row={ row }
               rowIndex={ 1 }
               columns={ columns }
@@ -264,6 +276,35 @@ describe('Row', () => {
           expect(wrapper.find(Cell).length).toBe(columns.length);
         });
       });
+    });
+  });
+
+  describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
+    beforeEach(() => {
+      wrapper = shallow(
+        <Row {...mockBodyResolvedProps} rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
+    });
+
+    it('should not render <SelectionCell />', () => {
+      expect(wrapper.find(SelectionCell).length).toBe(0);
+    });
+  });
+
+  describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
+    beforeEach(() => {
+      const selectRow = { mode: 'checkbox' };
+      wrapper = shallow(
+        <Row
+          {...mockBodyResolvedProps}
+          rowIndex={ 1 }
+          columns={ defaultColumns }
+          row={ row }
+          selectRow={selectRow}
+        />);
+    });
+
+    it('should render <SelectionCell />', () => {
+      expect(wrapper.find(SelectionCell).length).toBe(1);
     });
   });
 });

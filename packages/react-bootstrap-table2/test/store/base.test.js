@@ -1,5 +1,6 @@
 import Base from '../../src/store/base';
 import Const from '../../src/const';
+import _ from '../../src/utils';
 
 describe('Store Base', () => {
   let store;
@@ -107,6 +108,43 @@ describe('Store Base', () => {
       expect(() => {
         store.edit(2, 'non_exist_field', 'value');
       }).toThrow();
+    });
+  });
+
+  describe('selectAllRowKeys', () => {
+    it('should return all row keys', () => {
+      const rowKeys = store.selectAllRowKeys();
+
+      expect(Array.isArray(rowKeys)).toBeTruthy();
+      expect(rowKeys).toEqual([3, 2, 4, 1]);
+    });
+  });
+
+  describe('isAllRowsSelected', () => {
+    it('should return true when all rows was selected', () => {
+      store.selected = data.map(row => _.get(row, store.keyField));
+
+      expect(store.isAllRowsSelected()).toBeTruthy();
+    });
+
+    it('should return false when all rows was not selected', () => {
+      store.selected = [1];
+
+      expect(store.isAllRowsSelected()).not.toBeTruthy();
+    });
+  });
+
+  describe('isAnySelectedRow', () => {
+    it('should return true when one or more than one rows were selected', () => {
+      store.selected = data.map(row => _.get(row, store.keyField));
+
+      expect(store.isAnySelectedRow()).toBeTruthy();
+    });
+
+    it('should return false when none was selected', () => {
+      store.selected = [];
+
+      expect(store.isAnySelectedRow()).not.toBeTruthy();
     });
   });
 });
