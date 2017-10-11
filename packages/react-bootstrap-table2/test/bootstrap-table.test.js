@@ -81,10 +81,8 @@ describe('BootstrapTable', () => {
     beforeEach(() => {
       wrapper = shallow(
         <BootstrapTable
+          {...baseProps}
           caption={ <span className="table-caption">test</span> }
-          keyField="id"
-          columns={ columns }
-          data={ data }
           bordered={ false }
         />
       );
