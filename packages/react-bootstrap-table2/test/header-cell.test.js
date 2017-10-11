@@ -2,20 +2,19 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Const from '../src/const';
-import SortCaret from '../src/sort-caret';
-import SortSymbol from '../src/sort-symbol';
-import HeaderCell from '../src/header-cell';
+import Const from 'src/const';
+import SortCaret from 'src/sort-caret';
+import SortSymbol from 'src/sort-symbol';
+import HeaderCell from 'src/header-cell';
+
+import { baseColumn } from 'test/factory';
 
 describe('HeaderCell', () => {
   let wrapper;
   const index = 1;
 
   describe('simplest header cell', () => {
-    const column = {
-      dataField: 'id',
-      text: 'ID'
-    };
+    const column = baseColumn();
 
     beforeEach(() => {
       wrapper = shallow(<HeaderCell column={ column } index={ index } />);
@@ -35,8 +34,7 @@ describe('HeaderCell', () => {
 
   describe('when column.hidden props is true', () => {
     const column = {
-      dataField: 'id',
-      text: 'ID',
+      ...baseColumn(),
       hidden: true
     };
 
@@ -142,10 +140,8 @@ describe('HeaderCell', () => {
   });
 
   describe('when column.headerFormatter prop is defined', () => {
-    const column = {
-      dataField: 'id',
-      text: 'ID'
-    };
+    const column = baseColumn();
+
     const formatterResult = (<h3>{ column.text }</h3>);
     const formatter = sinon.stub()
       .withArgs(column, index)

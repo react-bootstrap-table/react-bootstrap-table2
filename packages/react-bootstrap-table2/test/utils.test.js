@@ -1,4 +1,4 @@
-import _ from '../src/utils';
+import _ from 'src/utils';
 
 describe('Utils', () => {
   describe('get', () => {

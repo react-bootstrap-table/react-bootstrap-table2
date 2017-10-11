@@ -1,5 +1,4 @@
 /* eslint react/prop-types: 0 */
-/* eslint react/require-default-props: 0 */
 
 import React from 'react';
 import PropTypes from 'prop-types';

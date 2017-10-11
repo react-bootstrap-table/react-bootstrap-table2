@@ -3,24 +3,20 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
 
-import { TableRowWrapper } from './test-helpers/table-wrapper';
-import EditingCell from '../src/editing-cell';
-import TextEditor from '../src/text-editor';
-import EditorIndicator from '../src/editor-indicator';
+import EditingCell from 'src/editing-cell';
+import TextEditor from 'src/text-editor';
+import EditorIndicator from 'src/editor-indicator';
+
+import { TableRowWrapper } from 'test/test-helpers/table-wrapper';
+import { baseColumn, baseRow } from 'test/factory';
 
 describe('EditingCell', () => {
   let wrapper;
   let onEscape;
   let onComplete;
-  const row = {
-    id: 1,
-    name: 'A'
-  };
+  const row = baseRow();
 
-  let column = {
-    dataField: 'id',
-    text: 'ID'
-  };
+  let column = baseColumn();
 
   beforeEach(() => {
     onComplete = sinon.stub();

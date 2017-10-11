@@ -1,4 +1,3 @@
-/* eslint react/require-default-props: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Constant from '../const';

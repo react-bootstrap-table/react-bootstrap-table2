@@ -11,11 +11,12 @@
   ],
   "rules": {
     "comma-dangle": ["error", "never"],
-    "react/jsx-curly-spacing": 0,
     "react/forbid-prop-types": 0,
+    "react/jsx-curly-spacing": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-space-before-closing": 0,
     "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always" }],
+    "react/require-default-props": 0,
     "import/extensions": 0, // skip import extensions
     "import/no-unresolved": [0, { "ignore": ["^react-bootstrap-table"] }], // monorepo setup
     "import/prefer-default-export": 0,

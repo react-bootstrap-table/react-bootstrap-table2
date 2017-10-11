@@ -2,32 +2,21 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Cell from '../src/cell';
-import Row from '../src/row';
-import Const from '../src/const';
-import EditingCell from '../src/editing-cell';
-import SelectionCell from '../src//row-selection/selection-cell';
-import mockBodyResolvedProps from '../test/mock-data/body-resolved-props';
+import Cell from 'src/cell';
+import Row from 'src/row';
+import Const from 'src/const';
+import EditingCell from 'src/editing-cell';
+import SelectionCell from 'src/row-selection/selection-cell';
+import { bodyResolvedProps, baseColumns, baseRow } from 'test/factory';
 
-const defaultColumns = [{
-  dataField: 'id',
-  text: 'ID'
-}, {
-  dataField: 'name',
-  text: 'Name'
-}, {
-  dataField: 'price',
-  text: 'Price'
-}];
+const mockBodyResolvedProps = bodyResolvedProps();
+
+const defaultColumns = baseColumns();
 
 describe('Row', () => {
   let wrapper;
 
-  const row = {
-    id: 1,
-    name: 'A',
-    price: 1000
-  };
+  const row = baseRow();
 
   describe('simplest row', () => {
     beforeEach(() => {

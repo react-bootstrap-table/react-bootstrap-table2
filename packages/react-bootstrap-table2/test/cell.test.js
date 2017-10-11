@@ -2,21 +2,17 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Const from '../src/const';
-import Cell from '../src/cell';
+import Const from 'src/const';
+import Cell from 'src/cell';
+
+import { baseColumn, baseRow } from 'test/factory';
 
 describe('Cell', () => {
   let wrapper;
-  const row = {
-    id: 1,
-    name: 'A'
-  };
+  const row = baseRow();
 
   describe('simplest cell', () => {
-    const column = {
-      dataField: 'id',
-      text: 'ID'
-    };
+    const column = baseColumn();
 
     beforeEach(() => {
       wrapper = shallow(<Cell row={ row } columnIndex={ 1 } rowIndex={ 1 } column={ column } />);
@@ -30,8 +26,7 @@ describe('Cell', () => {
 
   describe('when column.hidden prop is true', () => {
     const column = {
-      dataField: 'id',
-      text: 'ID',
+      ...baseColumn(),
       hidden: true
     };
 
@@ -49,8 +44,7 @@ describe('Cell', () => {
   describe('when column.formatter prop is defined', () => {
     const rowIndex = 1;
     const column = {
-      dataField: 'id',
-      text: 'ID',
+      ...baseColumn(),
       formatExtraData: []
     };
     const formatterResult = (<h3>{ row[column.dataField] }</h3>);
@@ -85,10 +79,7 @@ describe('Cell', () => {
     const rowIndex = 1;
 
     beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
+      column = baseColumn();
     });
 
     describe('when style is an object', () => {
@@ -139,10 +130,7 @@ describe('Cell', () => {
     const rowIndex = 1;
 
     beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
+      column = baseColumn();
     });
 
     describe('when classes is an object', () => {
@@ -193,10 +181,7 @@ describe('Cell', () => {
     const rowIndex = 1;
 
     beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
+      column = baseColumn();
     });
 
     describe('when title is boolean', () => {
@@ -246,8 +231,7 @@ describe('Cell', () => {
 
     beforeEach(() => {
       column = {
-        dataField: 'id',
-        text: 'ID',
+        ...baseColumn(),
         events: {
           onClick: sinon.stub()
         }
@@ -274,10 +258,7 @@ describe('Cell', () => {
     const rowIndex = 1;
 
     beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
+      column = baseColumn();
     });
 
     describe('when align is string', () => {
@@ -326,10 +307,7 @@ describe('Cell', () => {
     const rowIndex = 1;
 
     beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
+      column = baseColumn();
     });
 
     describe('when attrs is an object', () => {
@@ -453,10 +431,7 @@ describe('Cell', () => {
     let onStartCallBack;
     const rowIndex = 1;
     const columnIndex = 1;
-    const column = {
-      dataField: 'id',
-      text: 'ID'
-    };
+    const column = baseColumn();
 
     beforeEach(() => {
       onStartCallBack = sinon.stub().withArgs(rowIndex, columnIndex);

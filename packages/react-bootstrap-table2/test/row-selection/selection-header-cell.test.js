@@ -2,8 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import Constant from '../../src/const';
-import SelectionHeaderCell, { CheckBox } from '../../src/row-selection/selection-header-cell';
+import Constant from 'src/const';
+import SelectionHeaderCell, { CheckBox } from 'src/row-selection/selection-header-cell';
 
 let wrapper;
 
