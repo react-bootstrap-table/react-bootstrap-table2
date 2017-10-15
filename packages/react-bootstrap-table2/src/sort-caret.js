@@ -4,18 +4,24 @@ import PropTypes from 'prop-types';
 
 import Const from './const';
 
-const SortCaret = ({ order }) => {
+const SortCaret = ({ order, sorting }) => {
   const orderClass = cs('react-bootstrap-table-sort-order', {
     dropup: order === Const.SORT_ASC
   });
+
+  const iconClass = cs('caret', {
+    sorting
+  });
+
   return (
     <span className={ orderClass }>
-      <span className="caret" />
+      <span className={ iconClass } />
     </span>
   );
 };
 
 SortCaret.propTypes = {
-  order: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]).isRequired
+  order: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]).isRequired,
+  sorting: PropTypes.bool.isRequired
 };
 export default SortCaret;

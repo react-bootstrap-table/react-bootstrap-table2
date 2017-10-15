@@ -13,7 +13,7 @@ const Header = (props) => {
     columns,
     onSort,
     sortField,
-    sortOrder,
+    sortOrderTable,
     selectRow
   } = props;
 
@@ -33,7 +33,7 @@ const Header = (props) => {
                 column={ column }
                 onSort={ onSort }
                 sorting={ currSort }
-                sortOrder={ sortOrder }
+                sortOrder={ sortOrderTable[column.dataField] }
               />);
           })
         }
@@ -46,7 +46,7 @@ Header.propTypes = {
   columns: PropTypes.array.isRequired,
   onSort: PropTypes.func,
   sortField: PropTypes.string,
-  sortOrder: PropTypes.string,
+  sortOrderTable: PropTypes.object,
   selectRow: PropTypes.object
 };
 

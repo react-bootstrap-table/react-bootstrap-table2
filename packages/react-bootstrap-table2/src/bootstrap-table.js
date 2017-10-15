@@ -74,7 +74,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Header
             columns={ columns }
             sortField={ this.store.sortField }
-            sortOrder={ this.store.sortOrder }
+            sortOrderTable={ this.store.sortOrderTable }
             onSort={ this.handleSort }
             selectRow={ headerCellSelectionInfo }
           />

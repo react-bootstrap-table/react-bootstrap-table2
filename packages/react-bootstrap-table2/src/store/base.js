@@ -1,4 +1,4 @@
-import { sort } from './sort';
+import { sort, getSortOrderTable } from './sort';
 import Const from '../const';
 import _ from '../utils';
 
@@ -8,7 +8,7 @@ export default class Store {
     this.keyField = keyField;
     this.data = data ? data.slice() : [];
 
-    this.sortOrder = undefined;
+    this.sortOrderTable = getSortOrderTable(props);
     this.sortField = undefined;
     this.selected = [];
   }
@@ -18,13 +18,22 @@ export default class Store {
   }
 
   sortBy({ dataField, sortFunc }) {
-    if (dataField !== this.sortField) {
-      this.sortOrder = Const.SORT_DESC;
-    } else {
-      this.sortOrder = this.sortOrder === Const.SORT_DESC ? Const.SORT_ASC : Const.SORT_DESC;
+    let order;
+
+    switch (this.sortOrderTable[dataField]) {
+      case Const.SORT_UNSET:
+        order = Const.SORT_DESC;
+        break;
+      case Const.SORT_DESC:
+        order = Const.SORT_ASC;
+        break;
+      default:
+        order = Const.SORT_DESC;
+        break;
     }
 
-    this.data = sort(dataField, this.data, this.sortOrder, sortFunc);
+    this.sortOrderTable[dataField] = order;
+    this.data = sort(dataField, this.data, this.sortOrderTable[dataField], sortFunc);
     this.sortField = dataField;
   }
 

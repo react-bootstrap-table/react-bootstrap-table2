@@ -1,6 +1,8 @@
 export default {
+  SORT_UNSET: 'unset',
   SORT_ASC: 'asc',
   SORT_DESC: 'desc',
+  SORT_UNSORTABLE: 'unsortable',
   UNABLE_TO_CELL_EDIT: 'none',
   CLICK_TO_CELL_EDIT: 'click',
   DBCLICK_TO_CELL_EDIT: 'dbclick',

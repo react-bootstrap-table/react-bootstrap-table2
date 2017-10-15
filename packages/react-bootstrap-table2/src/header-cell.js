@@ -19,7 +19,6 @@ const HeaderCell = (props) => {
   } = props;
   const {
     text,
-    sort,
     hidden,
     headerTitle,
     headerAlign,
@@ -60,7 +59,7 @@ const HeaderCell = (props) => {
 
   if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
-  if (sort) {
+  if (sortOrder !== Const.SORT_UNSORTABLE) {
     const customClick = cellAttrs.onClick;
     cellAttrs.onClick = (e) => {
       onSort(column);
@@ -68,10 +67,10 @@ const HeaderCell = (props) => {
     };
     cellAttrs.className = cs(cellAttrs.className, 'sortable');
 
-    if (sorting) {
-      sortSymbol = <SortCaret order={ sortOrder } />;
-    } else {
+    if (sortOrder === Const.SORT_UNSET) {
       sortSymbol = <SortSymbol />;
+    } else {
+      sortSymbol = <SortCaret order={ sortOrder } sorting={sorting} />;
     }
   }
 
@@ -106,7 +105,9 @@ HeaderCell.propTypes = {
   index: PropTypes.number.isRequired,
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
-  sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC])
+  sortOrder: PropTypes.oneOf([
+    Const.SORT_UNSET, Const.SORT_ASC, Const.SORT_DESC, Const.SORT_UNSORTABLE
+  ])
 };
 
 export default HeaderCell;
