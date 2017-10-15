@@ -37,4 +37,24 @@ const sort = (dataField, data, order, sortFunc) => {
   return _data;
 };
 
-export { sort };
+/**
+ *
+ * @param {Object} props - store props.
+ * @param {Object} props.columns - columns passing by user.
+ *
+ * @return {Object} - return table which contains initial sort order.
+ */
+const getSortOrderTable = ({ columns }) => {
+  const sortOrderTable = {};
+  const { SORT_UNSET, SORT_UNSORTABLE } = Const;
+
+  columns.forEach((column) => {
+    const { dataField, sort: sortable } = column;
+
+    sortOrderTable[dataField] = sortable ? SORT_UNSET : SORT_UNSORTABLE;
+  });
+
+  return sortOrderTable;
+};
+
+export { sort, getSortOrderTable };
