@@ -22,6 +22,10 @@
     margin: 10px 6.5px;
   }
 
+  th > .react-bootstrap-table-sort-order > .caret:not(.sorting) {
+    color: #cccccc;
+  }
+
   th[data-row-selection] {
     width: 30px;
   }
