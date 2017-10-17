@@ -2,7 +2,7 @@ import React from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 
-import Const from './const';
+import Const from '../const';
 
 const SortCaret = ({ order }) => {
   const orderClass = cs('react-bootstrap-table-sort-order', {

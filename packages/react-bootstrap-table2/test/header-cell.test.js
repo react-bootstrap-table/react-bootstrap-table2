@@ -3,8 +3,8 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import Const from '../src/const';
-import SortCaret from '../src/sort-caret';
-import SortSymbol from '../src/sort-symbol';
+import SortCaret from '../src/sort/caret';
+import SortSymbol from '../src/sort/symbol';
 import HeaderCell from '../src/header-cell';
 
 describe('HeaderCell', () => {

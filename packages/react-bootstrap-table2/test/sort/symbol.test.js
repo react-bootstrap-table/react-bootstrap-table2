@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import SortSymbol from '../src/sort-symbol';
+import SortSymbol from '../../src/sort/symbol';
 
 describe('SortSymbol', () => {
   let wrapper;

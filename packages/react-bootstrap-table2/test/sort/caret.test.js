@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Const from '../src/const';
-import SortCaret from '../src/sort-caret';
+import Const from '../../src/const';
+import SortCaret from '../../src/sort/caret';
 
 describe('SortCaret', () => {
   let wrapper;
