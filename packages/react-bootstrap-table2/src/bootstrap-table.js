@@ -6,36 +6,32 @@ import cs from 'classnames';
 import Header from './header';
 import Caption from './caption';
 import Body from './body';
-import Store from './store/base';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
-import _ from './utils';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
-    const { store } = this.props;
-    this.store = !store ? new Store(props) : store;
 
     this.handleSort = this.handleSort.bind(this);
-    this.startEditing = this.startEditing.bind(this);
-    this.escapeEditing = this.escapeEditing.bind(this);
-    this.completeEditing = this.completeEditing.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
     this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
     this.state = {
-      data: this.store.get(),
-      selectedRowKeys: this.store.getSelectedRowKeys(),
-      currEditCell: {
-        ridx: null,
-        cidx: null
-      }
+      data: props.store.get(),
+      selectedRowKeys: props.store.getSelectedRowKeys()
     };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      data: nextProps.store.get()
+    });
   }
 
   render() {
     const {
+      store,
       columns,
       keyField,
       striped,
@@ -54,9 +50,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     const cellEditInfo = this.resolveCellEditProps({
-      onStart: this.startEditing,
-      onEscape: this.escapeEditing,
-      onComplete: this.completeEditing
+      onStart: this.props.onStartEditing,
+      onEscape: this.props.onEscapeEditing,
+      onUpdate: this.props.onCellUpdate,
+      currEditCell: this.props.currEditCell
     });
 
     const cellSelectionInfo = this.resolveCellSelectionProps({
@@ -64,7 +61,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     const headerCellSelectionInfo = this.resolveHeaderCellSelectionProps({
-      onAllRowsSelect: this.handleAllRowsSelect
+      onAllRowsSelect: this.handleAllRowsSelect,
+      selected: store.selected,
+      allRowsSelected: store.isAllRowsSelected()
     });
 
     return (
@@ -73,8 +72,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Caption>{ caption }</Caption>
           <Header
             columns={ columns }
-            sortField={ this.store.sortField }
-            sortOrder={ this.store.sortOrder }
+            sortField={ store.sortField }
+            sortOrder={ store.sortOrder }
             onSort={ this.handleSort }
             selectRow={ headerCellSelectionInfo }
           />
@@ -100,10 +99,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
    * @param {Boolean} checked - next checked status of input button.
    */
   handleRowSelect(rowKey, checked) {
-    const { mode } = this.props.selectRow;
+    const { selectRow: { mode }, store } = this.props;
     const { ROW_SELECT_SINGLE } = Const;
 
-    let currSelected = [...this.store.getSelectedRowKeys()];
+    let currSelected = [...store.getSelectedRowKeys()];
 
     if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
       currSelected = [rowKey];
@@ -113,7 +112,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       currSelected = currSelected.filter(value => value !== rowKey);
     }
 
-    this.store.setSelectedRowKeys(currSelected);
+    store.setSelectedRowKeys(currSelected);
 
     this.setState(() => ({
       selectedRowKeys: currSelected
@@ -125,14 +124,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
    * @param {Boolean} option - customized result for all rows selection
    */
   handleAllRowsSelect(option) {
-    const selected = this.store.isAnySelectedRow();
+    const { store } = this.props;
+    const selected = store.isAnySelectedRow();
 
     // set next status of all row selected by store.selected or customizing by user.
     const result = option || !selected;
 
-    const currSelected = result ? this.store.selectAllRowKeys() : [];
+    const currSelected = result ? store.selectAllRowKeys() : [];
 
-    this.store.setSelectedRowKeys(currSelected);
+    store.setSelectedRowKeys(currSelected);
 
     this.setState(() => ({
       selectedRowKeys: currSelected
@@ -140,44 +140,12 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   }
 
   handleSort(column) {
-    this.store.sortBy(column);
+    const { store } = this.props;
+    store.sortBy(column);
 
     this.setState(() => {
       return {
-        data: this.store.get()
-      };
-    });
-  }
-
-  completeEditing(row, column, newValue) {
-    const { cellEdit, keyField } = this.props;
-    const { beforeSaveCell, onEditing, afterSaveCell } = cellEdit;
-    const oldValue = _.get(row, column.dataField);
-    const rowId = _.get(row, keyField);
-    if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
-    onEditing(rowId, column.dataField, newValue);
-    if (_.isFunction(afterSaveCell)) afterSaveCell(oldValue, newValue, row, column);
-
-    this.setState(() => {
-      return {
-        data: this.store.get(),
-        currEditCell: { ridx: null, cidx: null }
-      };
-    });
-  }
-
-  startEditing(ridx, cidx) {
-    this.setState(() => {
-      return {
-        currEditCell: { ridx, cidx }
-      };
-    });
-  }
-
-  escapeEditing() {
-    this.setState(() => {
-      return {
-        currEditCell: { ridx: null, cidx: null }
+        data: store.get()
       };
     });
   }
@@ -199,15 +167,27 @@ BootstrapTable.propTypes = {
   ]),
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
-    onEditing: PropTypes.func.isRequired,
+    onUpdate: PropTypes.func,
+    onErrorMessageDisappear: PropTypes.func,
     blurToSave: PropTypes.bool,
     beforeSaveCell: PropTypes.func,
     afterSaveCell: PropTypes.func,
     nonEditableRows: PropTypes.func,
-    timeToCloseMessage: PropTypes.number
+    editing: PropTypes.bool,
+    timeToCloseMessage: PropTypes.number,
+    errorMessage: PropTypes.string
   }),
   selectRow: PropTypes.shape({
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired
+  }),
+  onCellUpdate: PropTypes.func,
+  onStartEditing: PropTypes.func,
+  onEscapeEditing: PropTypes.func,
+  currEditCell: PropTypes.shape({
+    ridx: PropTypes.number,
+    cidx: PropTypes.number,
+    message: PropTypes.string,
+    editing: PropTypes.bool
   })
 };
 

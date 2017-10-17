@@ -10,8 +10,8 @@ import EditorIndicator from '../src/editor-indicator';
 
 describe('EditingCell', () => {
   let wrapper;
+  let onUpdate;
   let onEscape;
-  let onComplete;
   const row = {
     id: 1,
     name: 'A'
@@ -23,14 +23,14 @@ describe('EditingCell', () => {
   };
 
   beforeEach(() => {
-    onComplete = sinon.stub();
     onEscape = sinon.stub();
+    onUpdate = sinon.stub();
     wrapper = shallow(
       <EditingCell
         row={ row }
         column={ column }
+        onUpdate={ onUpdate }
         onEscape={ onEscape }
-        onComplete={ onComplete }
       />
     );
   });
@@ -55,12 +55,12 @@ describe('EditingCell', () => {
     expect(indicator.length).toEqual(0);
   });
 
-  it('when press ENTER on TextEditor should call onComplete correctly', () => {
+  it('when press ENTER on TextEditor should call onUpdate correctly', () => {
     const newValue = 'test';
     const textEditor = wrapper.find(TextEditor);
     textEditor.simulate('keyDown', { keyCode: 13, currentTarget: { value: newValue } });
-    expect(onComplete.callCount).toBe(1);
-    expect(onComplete.calledWith(row, column, newValue)).toBe(true);
+    expect(onUpdate.callCount).toBe(1);
+    expect(onUpdate.calledWith(row, column, newValue)).toBe(true);
   });
 
   it('when press ESC on TextEditor should call onEscape correctly', () => {
@@ -82,19 +82,19 @@ describe('EditingCell', () => {
           <EditingCell
             row={ row }
             column={ column }
+            onUpdate={ onUpdate }
             onEscape={ onEscape }
-            onComplete={ onComplete }
             blurToSave
           />
         </TableRowWrapper>
       );
     });
 
-    it('when blur from TextEditor should call onComplete correctly', () => {
+    it('when blur from TextEditor should call onUpdate correctly', () => {
       const textEditor = wrapper.find(TextEditor);
       textEditor.simulate('blur');
-      expect(onComplete.callCount).toBe(1);
-      expect(onComplete.calledWith(row, column, `${row[column.dataField]}`)).toBe(true);
+      expect(onUpdate.callCount).toBe(1);
+      expect(onUpdate.calledWith(row, column, `${row[column.dataField]}`)).toBe(true);
     });
   });
 
@@ -121,8 +121,8 @@ describe('EditingCell', () => {
         expect(validatorCallBack.calledWith(newValue, row, column)).toBe(true);
       });
 
-      it('should not call onComplete', () => {
-        expect(onComplete.callCount).toBe(0);
+      it('should not call onUpdate', () => {
+        expect(onUpdate.callCount).toBe(0);
       });
 
       it('should set indicatorTimer successfully', () => {
@@ -164,8 +164,8 @@ describe('EditingCell', () => {
         expect(validatorCallBack.calledWith(newValue, row, column)).toBe(true);
       });
 
-      it('should call onComplete', () => {
-        expect(onComplete.callCount).toBe(1);
+      it('should call onUpdate', () => {
+        expect(onUpdate.callCount).toBe(1);
       });
     });
   });

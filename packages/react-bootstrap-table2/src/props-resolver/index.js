@@ -18,13 +18,12 @@ export default ExtendBase =>
       return this.props.data.length === 0;
     }
 
-    resolveCellEditProps(options) {
+    resolveCellEditProps(options = { currEditCell: null }) {
       const { cellEdit } = this.props;
-      const { currEditCell } = this.state;
       const nonEditableRows =
         (cellEdit && _.isFunction(cellEdit.nonEditableRows)) ? cellEdit.nonEditableRows() : [];
       const cellEditInfo = {
-        ...currEditCell,
+        ...options.currEditCell,
         nonEditableRows
       };
 
@@ -72,9 +71,9 @@ export default ExtendBase =>
      * @returns {String} result.mode - input type of row selection or disabled.
      * @returns {String} result.checkedStatus - checkbox status depending on selected rows counts
      */
-    resolveHeaderCellSelectionProps(options) {
-      const { selected } = this.store;
+    resolveHeaderCellSelectionProps(options = {}) {
       const { selectRow } = this.props;
+      const { allRowsSelected, selected = [], ...rest } = options;
       const {
         ROW_SELECT_DISABLED, CHECKBOX_STATUS_CHECKED,
         CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_UNCHECKED
@@ -83,8 +82,6 @@ export default ExtendBase =>
       if (_.isDefined(selectRow)) {
         let checkedStatus;
 
-        const allRowsSelected = this.store.isAllRowsSelected();
-
         // checkbox status depending on selected rows counts
         if (allRowsSelected) checkedStatus = CHECKBOX_STATUS_CHECKED;
         else if (selected.length === 0) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
@@ -92,7 +89,7 @@ export default ExtendBase =>
 
         return {
           ...selectRow,
-          ...options,
+          ...rest,
           checkedStatus
         };
       }

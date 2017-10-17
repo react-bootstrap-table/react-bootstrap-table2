@@ -3,6 +3,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import Caption from '../src/caption';
+import Store from '../src/store/base';
 import Header from '../src/header';
 import Body from '../src/body';
 import BootstrapTable from '../src/bootstrap-table';
@@ -26,9 +27,12 @@ describe('BootstrapTable', () => {
     name: 'B'
   }];
 
+  const store = new Store({ data });
+
   describe('simplest table', () => {
     beforeEach(() => {
-      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } />);
+      wrapper = shallow(
+        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } />);
     });
 
     it('should render successfully', () => {
@@ -40,9 +44,8 @@ describe('BootstrapTable', () => {
     });
 
     it('should have correct default state', () => {
-      expect(wrapper.state().currEditCell).toBeDefined();
-      expect(wrapper.state().currEditCell.ridx).toBeNull();
-      expect(wrapper.state().currEditCell.cidx).toBeNull();
+      expect(wrapper.state().data).toBeDefined();
+      expect(wrapper.state().data).toEqual(store.get());
     });
 
     it('should have table-bordered class as default', () => {
@@ -52,7 +55,8 @@ describe('BootstrapTable', () => {
 
   describe('when hover props is true', () => {
     beforeEach(() => {
-      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } hover />);
+      wrapper = shallow(
+        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } hover />);
     });
 
     it('should have table-hover class on table', () => {
@@ -62,7 +66,8 @@ describe('BootstrapTable', () => {
 
   describe('when striped props is true', () => {
     beforeEach(() => {
-      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } striped />);
+      wrapper = shallow(
+        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } striped />);
     });
 
     it('should have table-striped class on table', () => {
@@ -72,7 +77,8 @@ describe('BootstrapTable', () => {
 
   describe('when condensed props is true', () => {
     beforeEach(() => {
-      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } condensed />);
+      wrapper = shallow(
+        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } condensed />);
     });
 
     it('should have table-condensed class on table', () => {
@@ -82,7 +88,8 @@ describe('BootstrapTable', () => {
 
   describe('when bordered props is false', () => {
     beforeEach(() => {
-      wrapper = shallow(<BootstrapTable keyField="id" columns={ columns } data={ data } bordered={ false } />);
+      wrapper = shallow(
+        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } bordered={ false } />);
     });
 
     it('should not have table-condensed class on table', () => {
@@ -94,6 +101,7 @@ describe('BootstrapTable', () => {
     beforeEach(() => {
       wrapper = shallow(
         <BootstrapTable
+          store={ store }
           caption={ <span className="table-caption">test</span> }
           keyField="id"
           columns={ columns }
@@ -111,6 +119,12 @@ describe('BootstrapTable', () => {
 
   describe('when cellEdit props is defined', () => {
     const nonEditableRows = [data[1].id];
+    const currEditCell = {
+      ridx: 1,
+      cidx: 2,
+      message: null,
+      editing: false
+    };
     const cellEdit = {
       mode: Const.CLICK_TO_CELL_EDIT,
       onEditing: sinon.stub(),
@@ -124,7 +138,12 @@ describe('BootstrapTable', () => {
           columns={ columns }
           data={ data }
           bordered={ false }
+          store={ store }
           cellEdit={ cellEdit }
+          onCellUpdate={ sinon.stub() }
+          onStartEditing={ sinon.stub() }
+          onEscapeEditing={ sinon.stub() }
+          currEditCell={ currEditCell }
         />
       );
     });
@@ -133,11 +152,13 @@ describe('BootstrapTable', () => {
       const body = wrapper.find(Body);
       expect(body.length).toBe(1);
       expect(body.props().cellEdit.nonEditableRows).toEqual(nonEditableRows);
-      expect(body.props().cellEdit.ridx).toEqual(wrapper.state().currEditCell.ridx);
-      expect(body.props().cellEdit.cidx).toEqual(wrapper.state().currEditCell.cidx);
+      expect(body.props().cellEdit.ridx).toEqual(currEditCell.ridx);
+      expect(body.props().cellEdit.cidx).toEqual(currEditCell.cidx);
+      expect(body.props().cellEdit.message).toEqual(currEditCell.message);
+      expect(body.props().cellEdit.editing).toEqual(currEditCell.editing);
       expect(body.props().cellEdit.onStart).toBeDefined();
       expect(body.props().cellEdit.onEscape).toBeDefined();
-      expect(body.props().cellEdit.onComplete).toBeDefined();
+      expect(body.props().cellEdit.onUpdate).toBeDefined();
     });
   });
 
@@ -149,6 +170,7 @@ describe('BootstrapTable', () => {
         wrapper = shallow(
           <BootstrapTable
             keyField="id"
+            store={ store }
             columns={ columns }
             data={ data }
             selectRow={{ mode: 'radio' }}
@@ -170,6 +192,7 @@ describe('BootstrapTable', () => {
         wrapper = shallow(
           <BootstrapTable
             keyField="id"
+            store={ store }
             columns={ columns }
             data={ data }
             selectRow={{ mode: 'checkbox' }}
@@ -199,6 +222,7 @@ describe('BootstrapTable', () => {
       wrapper = shallow(
         <BootstrapTable
           keyField="id"
+          store={ store }
           columns={ columns }
           data={ data }
         />
@@ -208,7 +232,7 @@ describe('BootstrapTable', () => {
     describe('when customized option was not given', () => {
       describe('when nothing was selected', () => {
         it('should select all rows', () => {
-          wrapper.instance().store.setSelectedRowKeys([]);
+          store.setSelectedRowKeys([]);
 
           wrapper.instance().handleAllRowsSelect();
 
@@ -218,7 +242,7 @@ describe('BootstrapTable', () => {
 
       describe('when one or more than one row was selected', () => {
         it('should unselect all rows', () => {
-          wrapper.instance().store.setSelectedRowKeys([1]);
+          store.setSelectedRowKeys([1]);
 
           wrapper.instance().handleAllRowsSelect();
 
@@ -238,7 +262,7 @@ describe('BootstrapTable', () => {
 
       describe('when option is falsy', () => {
         it('should unselect all rows', () => {
-          wrapper.instance().store.setSelectedRowKeys([1]);
+          store.setSelectedRowKeys([1]);
 
           wrapper.instance().handleAllRowsSelect(false);
 

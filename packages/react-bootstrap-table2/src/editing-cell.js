@@ -23,6 +23,15 @@ class EditingCell extends Component {
     };
   }
 
+  componentWillReceiveProps({ message }) {
+    if (_.isDefined(message)) {
+      this.createTimer();
+      this.setState(() => {
+        return { invalidMessage: message };
+      });
+    }
+  }
+
   componentWillUnmount() {
     this.clearTimer();
   }
@@ -33,24 +42,30 @@ class EditingCell extends Component {
     }
   }
 
-  beforeComplete(row, column, newValue) {
+  createTimer() {
     this.clearTimer();
-    const { onComplete, timeToCloseMessage } = this.props;
+    const { timeToCloseMessage, onErrorMessageDisappear } = this.props;
+    this.indicatorTimer = _.sleep(() => {
+      this.setState(() => {
+        return { invalidMessage: null };
+      });
+      if (_.isFunction(onErrorMessageDisappear)) onErrorMessageDisappear();
+    }, timeToCloseMessage);
+  }
+
+  beforeComplete(row, column, newValue) {
+    const { onUpdate } = this.props;
     if (_.isFunction(column.validator)) {
       const validateForm = column.validator(newValue, row, column);
       if (_.isObject(validateForm) && !validateForm.valid) {
         this.setState(() => {
           return { invalidMessage: validateForm.message };
         });
-        this.indicatorTimer = setTimeout(() => {
-          this.setState(() => {
-            return { invalidMessage: null };
-          });
-        }, timeToCloseMessage);
+        this.createTimer();
         return;
       }
     }
-    onComplete(row, column, newValue);
+    onUpdate(row, column, newValue);
   }
 
   handleBlur() {
@@ -90,7 +105,8 @@ class EditingCell extends Component {
       onBlur: this.handleBlur
     };
 
-    const editorClass = invalidMessage ? cs('animated', 'shake') : null;
+    const hasError = _.isDefined(invalidMessage);
+    const editorClass = hasError ? cs('animated', 'shake') : null;
     return (
       <td className="react-bootstrap-table-editing-cell">
         <TextEditor
@@ -99,7 +115,7 @@ class EditingCell extends Component {
           classNames={ editorClass }
           { ...editorAttrs }
         />
-        { invalidMessage ? <EditorIndicator invalidMessage={ invalidMessage } /> : null }
+        { hasError ? <EditorIndicator invalidMessage={ invalidMessage } /> : null }
       </td>
     );
   }
@@ -108,7 +124,7 @@ class EditingCell extends Component {
 EditingCell.propTypes = {
   row: PropTypes.object.isRequired,
   column: PropTypes.object.isRequired,
-  onComplete: PropTypes.func.isRequired,
+  onUpdate: PropTypes.func.isRequired,
   onEscape: PropTypes.func.isRequired,
   timeToCloseMessage: PropTypes.number
 };

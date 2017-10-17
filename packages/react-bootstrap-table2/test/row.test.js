@@ -225,8 +225,9 @@ describe('Row', () => {
         beforeEach(() => {
           cellEdit.ridx = rowIndex;
           cellEdit.cidx = editingColIndex;
-          cellEdit.onComplete = sinon.stub();
+          cellEdit.onUpdate = sinon.stub();
           cellEdit.onEscape = sinon.stub();
+          cellEdit.onUpdate = sinon.stub();
           wrapper = shallow(
             <Row
               {...mockBodyResolvedProps}
@@ -255,7 +256,7 @@ describe('Row', () => {
         beforeEach(() => {
           cellEdit.ridx = 3;
           cellEdit.cidx = editingColIndex;
-          cellEdit.onComplete = sinon.stub();
+          cellEdit.onUpdate = sinon.stub();
           cellEdit.onEscape = sinon.stub();
           wrapper = shallow(
             <Row

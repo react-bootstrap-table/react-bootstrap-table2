@@ -86,18 +86,6 @@ describe('TableResolver', () => {
         expect(cellEdit).toBeDefined();
         expect(cellEdit.mode).toEqual(Const.UNABLE_TO_CELL_EDIT);
         expect(cellEdit.nonEditableRows.length).toEqual(0);
-        expect(cellEdit.ridx).toBeNull();
-        expect(cellEdit.cidx).toBeNull();
-      });
-
-      it('should resolve a default cellEdit instance even if state.currEditCell changed', () => {
-        const ridx = 1;
-        const cidx = 1;
-        wrapper.setState({ currEditCell: { ridx, cidx } });
-        const cellEdit = wrapper.instance().resolveCellEditProps();
-        expect(cellEdit).toBeDefined();
-        expect(cellEdit.ridx).toEqual(ridx);
-        expect(cellEdit.cidx).toEqual(cidx);
       });
     });
 
@@ -105,7 +93,7 @@ describe('TableResolver', () => {
       const expectNonEditableRows = [1, 2];
       const cellEdit = {
         mode: Const.DBCLICK_TO_CELL_EDIT,
-        onEditing: sinon.stub(),
+        onUpdate: sinon.stub(),
         blurToSave: true,
         beforeSaveCell: sinon.stub(),
         afterSaveCell: sinon.stub(),
@@ -122,10 +110,8 @@ describe('TableResolver', () => {
       it('should resolve a cellEdit correctly', () => {
         const cellEditInfo = wrapper.instance().resolveCellEditProps();
         expect(cellEditInfo).toBeDefined();
-        expect(cellEditInfo.ridx).toBeNull();
-        expect(cellEditInfo.cidx).toBeNull();
         expect(cellEditInfo.mode).toEqual(cellEdit.mode);
-        expect(cellEditInfo.onEditing).toEqual(cellEdit.onEditing);
+        expect(cellEditInfo.onUpdate).toEqual(cellEdit.onUpdate);
         expect(cellEditInfo.blurToSave).toEqual(cellEdit.blurToSave);
         expect(cellEditInfo.beforeSaveCell).toEqual(cellEdit.beforeSaveCell);
         expect(cellEditInfo.afterSaveCell).toEqual(cellEdit.afterSaveCell);
@@ -280,7 +266,9 @@ describe('TableResolver', () => {
           selectRow = {};
           const mockOptions = {
             foo: 'test',
-            bar: sinon.stub()
+            bar: sinon.stub(),
+            allRowsSelected: false,
+            selected: []
           };
           const selectedRowKeys = [];
           const mockElement = React.createElement(BootstrapTableMock, {
@@ -290,11 +278,19 @@ describe('TableResolver', () => {
           headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps(mockOptions);
         });
 
-        it('should return object which contain options', () => {
+        it('should return object which contain specified options', () => {
           expect(headerCellSelectionInfo).toEqual(expect.objectContaining({
             foo: 'test',
             bar: expect.any(Function)
           }));
+        });
+
+        it('should return object which can not contain allRowsSelected option', () => {
+          expect(headerCellSelectionInfo.allRowsSelected).not.toBeDefined();
+        });
+
+        it('should return object which can not contain allRowsSelected option', () => {
+          expect(headerCellSelectionInfo.selected).not.toBeDefined();
         });
       });
 
@@ -307,9 +303,11 @@ describe('TableResolver', () => {
           }, null);
 
           wrapper = shallow(mockElement);
-          wrapper.instance().store.setSelectedRowKeys(selectedRowKeys);
 
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
+          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps({
+            allRowsSelected: true,
+            selected: selectedRowKeys
+          });
         });
 
         it('should return checkedStatus which eqauls to checked', () => {
@@ -318,6 +316,7 @@ describe('TableResolver', () => {
           }));
         });
       });
+
       describe('if part of rows were selected', () => {
         beforeEach(() => {
           selectRow = {};
@@ -327,8 +326,10 @@ describe('TableResolver', () => {
           }, null);
 
           wrapper = shallow(mockElement);
-          wrapper.instance().store.setSelectedRowKeys(selectedRowKeys);
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
+          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps({
+            allRowsSelected: false,
+            selected: selectedRowKeys
+          });
         });
 
         it('should return checkedStatus which eqauls to indeterminate', () => {
@@ -347,9 +348,11 @@ describe('TableResolver', () => {
           }, null);
 
           wrapper = shallow(mockElement);
-          wrapper.instance().store.setSelectedRowKeys(selectedRowKeys);
 
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
+          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps({
+            allRowsSelected: false,
+            selected: selectedRowKeys
+          });
         });
 
         it('should return checkedStatus which eqauls to unchecked', () => {
