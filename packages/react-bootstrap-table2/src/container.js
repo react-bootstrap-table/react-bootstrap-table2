@@ -4,6 +4,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import Store from './store/base';
+import SortWrapper from './sort/wrapper';
 import CellEditWrapper from './cell-edit/wrapper';
 import RowSelectionWrapper from './row-selection/wrapper';
 import _ from './utils';
@@ -68,6 +69,12 @@ const withDataStore = (Base) => {
       );
     }
 
+    renderSort(elem) {
+      return (
+        <SortWrapper elem={ elem } store={ this.store } />
+      );
+    }
+
     render() {
       const baseProps = {
         ...this.props,
@@ -75,6 +82,13 @@ const withDataStore = (Base) => {
       };
 
       let element = React.createElement(Base, baseProps);
+
+      // @TODO
+      // the logic of checking sort is enable or not should be placed in the props resolver..
+      // but currently, I've no idea to refactoring this
+      if (this.props.columns.filter(col => col.sort).length > 0) {
+        element = this.renderSort(element);
+      }
 
       if (this.props.selectRow) {
         element = this.renderRowSelection(element);
