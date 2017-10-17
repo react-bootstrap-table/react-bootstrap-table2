@@ -14,7 +14,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     super(props);
     this.validateProps();
 
-    this.handleSort = this.handleSort.bind(this);
     this.state = {
       data: props.store.get()
     };
@@ -71,7 +70,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             columns={ columns }
             sortField={ store.sortField }
             sortOrder={ store.sortOrder }
-            onSort={ this.handleSort }
+            onSort={ this.props.onSort }
             selectRow={ headerCellSelectionInfo }
           />
           <Body
@@ -89,17 +88,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       </div>
     );
   }
-
-  handleSort(column) {
-    const { store } = this.props;
-    store.sortBy(column);
-
-    this.setState(() => {
-      return {
-        data: store.get()
-      };
-    });
-  }
 }
 
 BootstrapTable.propTypes = {
@@ -116,6 +104,7 @@ BootstrapTable.propTypes = {
     PropTypes.node,
     PropTypes.string
   ]),
+  onSort: PropTypes.func,
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
     onUpdate: PropTypes.func,

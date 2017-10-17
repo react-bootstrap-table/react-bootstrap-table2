@@ -4,8 +4,8 @@ import cs from 'classnames';
 import PropTypes from 'prop-types';
 
 import Const from './const';
-import SortSymbol from './sort-symbol';
-import SortCaret from './sort-caret';
+import SortSymbol from './sort/symbol';
+import SortCaret from './sort/caret';
 import _ from './utils';
 
 
