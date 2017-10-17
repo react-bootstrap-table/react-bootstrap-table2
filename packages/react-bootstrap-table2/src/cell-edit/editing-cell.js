@@ -5,8 +5,8 @@ import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 
-import _ from './utils';
-import Const from './const';
+import _ from '../utils';
+import Const from '../const';
 import TextEditor from './text-editor';
 import EditorIndicator from './editor-indicator';
 
