@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import BootstrapTable from '../src';
 
-describe('withStateful', () => {
+describe('withDataStore', () => {
   let wrapper;
 
   const keyField = 'id';
