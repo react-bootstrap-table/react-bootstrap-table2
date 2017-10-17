@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import Store from './store/base';
 import CellEditWrapper from './cell-edit/wrapper';
+import RowSelectionWrapper from './row-selection/wrapper';
 import _ from './utils';
 
 const withDataStore = (Base) => {
@@ -35,10 +36,10 @@ const withDataStore = (Base) => {
           if (_.isObject(response)) {
             const { value } = response;
             this.store.edit(rowId, dataField, value || newValue);
-            this.table.completeEditing();
+            this.cellEditWrapper.completeEditing();
           }
         }).catch((e) => {
-          this.table.updateEditingWithErr(e.message);
+          this.cellEditWrapper.updateEditingWithErr(e.message);
         });
       }
       return false;
@@ -49,9 +50,20 @@ const withDataStore = (Base) => {
         <CellEditWrapper
           keyField={ this.props.keyField }
           cellEdit={ this.props.cellEdit }
-          ref={ node => this.table = node }
+          ref={ node => this.cellEditWrapper = node }
           elem={ elem }
           onUpdateCell={ this.handleUpdateCell }
+        />
+      );
+    }
+
+    renderRowSelection(elem) {
+      return (
+        <RowSelectionWrapper
+          keyField={ this.props.keyField }
+          selectRow={ this.props.selectRow }
+          store={ this.store }
+          elem={ elem }
         />
       );
     }
@@ -63,9 +75,15 @@ const withDataStore = (Base) => {
       };
 
       let element = React.createElement(Base, baseProps);
+
+      if (this.props.selectRow) {
+        element = this.renderRowSelection(element);
+      }
+
       if (this.props.cellEdit) {
         element = this.renderCellEdit(element);
       }
+
       return element;
     }
   };
