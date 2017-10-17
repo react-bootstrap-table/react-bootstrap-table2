@@ -4,7 +4,7 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import { BootstrapTableful, createTable } from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table2';
 
 require('react-bootstrap-table2/style/react-bootstrap-table.scss');
 
@@ -114,5 +114,5 @@ const cellEdit = {
 // Table = createTable(Table);
 
 ReactDom.render(
-  <BootstrapTableful keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />,
+  <BootstrapTable keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />,
   document.getElementById('example'));

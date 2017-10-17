@@ -2,7 +2,7 @@
 /* eslint no-alert: 0 */
 import React from 'react';
 
-import { BootstrapTableful } from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table2';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -37,13 +37,13 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<BootstrapTableful keyField='id' data={ products } columns={ columns } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } />
 `;
 
 export default () => (
   <div>
     <h3>Try to Click on Product ID header column</h3>
-    <BootstrapTableful keyField="id" data={ products } columns={ columns } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>
 );
