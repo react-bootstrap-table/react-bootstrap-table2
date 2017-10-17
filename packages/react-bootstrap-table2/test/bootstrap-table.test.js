@@ -170,6 +170,7 @@ describe('BootstrapTable', () => {
         wrapper = shallow(
           <BootstrapTable
             keyField="id"
+            store={ store }
             columns={ columns }
             data={ data }
             selectRow={{ mode: 'radio' }}
@@ -191,6 +192,7 @@ describe('BootstrapTable', () => {
         wrapper = shallow(
           <BootstrapTable
             keyField="id"
+            store={ store }
             columns={ columns }
             data={ data }
             selectRow={{ mode: 'checkbox' }}
@@ -220,6 +222,7 @@ describe('BootstrapTable', () => {
       wrapper = shallow(
         <BootstrapTable
           keyField="id"
+          store={ store }
           columns={ columns }
           data={ data }
         />
@@ -229,7 +232,7 @@ describe('BootstrapTable', () => {
     describe('when customized option was not given', () => {
       describe('when nothing was selected', () => {
         it('should select all rows', () => {
-          wrapper.instance().store.setSelectedRowKeys([]);
+          store.setSelectedRowKeys([]);
 
           wrapper.instance().handleAllRowsSelect();
 
@@ -239,7 +242,7 @@ describe('BootstrapTable', () => {
 
       describe('when one or more than one row was selected', () => {
         it('should unselect all rows', () => {
-          wrapper.instance().store.setSelectedRowKeys([1]);
+          store.setSelectedRowKeys([1]);
 
           wrapper.instance().handleAllRowsSelect();
 
@@ -259,7 +262,7 @@ describe('BootstrapTable', () => {
 
       describe('when option is falsy', () => {
         it('should unselect all rows', () => {
-          wrapper.instance().store.setSelectedRowKeys([1]);
+          store.setSelectedRowKeys([1]);
 
           wrapper.instance().handleAllRowsSelect(false);
 

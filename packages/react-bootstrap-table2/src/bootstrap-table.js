@@ -15,15 +15,11 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
 
     this.handleSort = this.handleSort.bind(this);
-    this.startEditing = this.startEditing.bind(this);
-    this.escapeEditing = this.escapeEditing.bind(this);
-    this.completeEditing = this.completeEditing.bind(this);
     this.handleRowSelect = this.handleRowSelect.bind(this);
     this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
-    this.handleCellUpdate = this.handleCellUpdate.bind(this);
     this.state = {
-      data: this.store.get(),
-      selectedRowKeys: this.store.getSelectedRowKeys()
+      data: props.store.get(),
+      selectedRowKeys: props.store.getSelectedRowKeys()
     };
   }
 
@@ -65,7 +61,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     const headerCellSelectionInfo = this.resolveHeaderCellSelectionProps({
-      onAllRowsSelect: this.handleAllRowsSelect
+      onAllRowsSelect: this.handleAllRowsSelect,
+      selected: store.selected,
+      allRowsSelected: store.isAllRowsSelected()
     });
 
     return (
@@ -101,10 +99,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
    * @param {Boolean} checked - next checked status of input button.
    */
   handleRowSelect(rowKey, checked) {
-    const { mode } = this.props.selectRow;
+    const { selectRow: { mode }, store } = this.props;
     const { ROW_SELECT_SINGLE } = Const;
 
-    let currSelected = [...this.store.getSelectedRowKeys()];
+    let currSelected = [...store.getSelectedRowKeys()];
 
     if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
       currSelected = [rowKey];
@@ -114,7 +112,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       currSelected = currSelected.filter(value => value !== rowKey);
     }
 
-    this.store.setSelectedRowKeys(currSelected);
+    store.setSelectedRowKeys(currSelected);
 
     this.setState(() => ({
       selectedRowKeys: currSelected
@@ -126,14 +124,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
    * @param {Boolean} option - customized result for all rows selection
    */
   handleAllRowsSelect(option) {
-    const selected = this.store.isAnySelectedRow();
+    const { store } = this.props;
+    const selected = store.isAnySelectedRow();
 
     // set next status of all row selected by store.selected or customizing by user.
     const result = option || !selected;
 
-    const currSelected = result ? this.store.selectAllRowKeys() : [];
+    const currSelected = result ? store.selectAllRowKeys() : [];
 
-    this.store.setSelectedRowKeys(currSelected);
+    store.setSelectedRowKeys(currSelected);
 
     this.setState(() => ({
       selectedRowKeys: currSelected
