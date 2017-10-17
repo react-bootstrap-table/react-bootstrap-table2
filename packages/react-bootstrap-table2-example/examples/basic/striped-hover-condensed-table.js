@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { BootstrapTableful } from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table2';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -18,7 +18,7 @@ const columns = [{
 }];
 
 const sourceCode = `\
-<BootstrapTableful
+<BootstrapTable
   keyField="id"
   data={ products }
   columns={ columns }
@@ -30,7 +30,7 @@ const sourceCode = `\
 
 export default () => (
   <div>
-    <BootstrapTableful
+    <BootstrapTable
       keyField="id"
       data={ products }
       columns={ columns }

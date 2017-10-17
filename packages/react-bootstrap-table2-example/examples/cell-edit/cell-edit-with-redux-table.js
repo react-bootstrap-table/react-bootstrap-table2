@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 import thunk from 'redux-thunk';
 import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BootstrapTableful } from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table2';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -64,7 +64,7 @@ class CellEditWithRedux extends Component {
 
     return (
       <div>
-        <BootstrapTableful keyField="id" data={ this.props.data } columns={ columns } cellEdit={ cellEdit } />
+        <BootstrapTable keyField="id" data={ this.props.data } columns={ columns } cellEdit={ cellEdit } />
         <Code>{ sourceCode }</Code>
       </div>
     );
@@ -157,7 +157,7 @@ class CellEditWithRedux extends Component {
 
     return (
       <div>
-        <BootstrapTableful keyField="id" data={ this.props.data } columns={ columns } cellEdit={ cellEdit } />
+        <BootstrapTable keyField="id" data={ this.props.data } columns={ columns } cellEdit={ cellEdit } />
         <Code>{ sourceCode }</Code>
       </div>
     );

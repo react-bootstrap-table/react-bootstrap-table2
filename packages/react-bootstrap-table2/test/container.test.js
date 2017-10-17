@@ -2,9 +2,9 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import { BootstrapTable, BootstrapTableful } from '../src';
+import BootstrapTable from '../src';
 
-describe('withStateful', () => {
+describe('withDataStore', () => {
   let wrapper;
 
   const keyField = 'id';
@@ -28,13 +28,12 @@ describe('withStateful', () => {
   describe('initialization', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTableful keyField={ keyField } data={ data } columns={ columns } />
+        <BootstrapTable keyField={ keyField } data={ data } columns={ columns } />
       );
     });
 
     it('should render BootstrapTable successfully', () => {
       expect(wrapper.length).toBe(1);
-      expect(wrapper.find(BootstrapTable).length).toBe(1);
     });
 
     it('should creating store successfully', () => {
@@ -46,14 +45,14 @@ describe('withStateful', () => {
   });
 
   describe('when cellEdit is defined', () => {
-    const spy = jest.spyOn(BootstrapTableful.prototype, 'renderCellEdit');
+    const spy = jest.spyOn(BootstrapTable.prototype, 'renderCellEdit');
     const cellEdit = {
       mode: 'click'
     };
 
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTableful
+        <BootstrapTable
           keyField={ keyField }
           data={ data }
           columns={ columns }
@@ -99,7 +98,7 @@ describe('withStateful', () => {
         beforeEach(() => {
           cellEdit.onUpdate = sinon.stub().returns(false);
           wrapper = shallow(
-            <BootstrapTableful
+            <BootstrapTable
               keyField={ keyField }
               data={ data }
               columns={ columns }

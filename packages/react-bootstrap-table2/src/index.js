@@ -1,9 +1,5 @@
 import BootstrapTable from './bootstrap-table';
-import withStateful from './stateful-layer';
+import withDataStore from './container';
 
-const BootstrapTableful = withStateful(BootstrapTable);
+export default withDataStore(BootstrapTable);
 
-export {
-  BootstrapTable,
-  BootstrapTableful
-};

@@ -1,6 +1,6 @@
 import React from 'react';
 /* eslint no-unused-vars: 0 */
-import { BootstrapTableful } from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table2';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -64,7 +64,7 @@ const cellEdit = {
   blurToSave: true
 };
 
-<BootstrapTableful
+<BootstrapTable
   keyField='id'
   data={ products }
   columns={ columns }
@@ -79,7 +79,7 @@ const cellEdit = {
 export default () => (
   <div>
     <h3>Product Price should bigger than $2000</h3>
-    <BootstrapTableful keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
     <Code>{ sourceCode }</Code>
   </div>
 );

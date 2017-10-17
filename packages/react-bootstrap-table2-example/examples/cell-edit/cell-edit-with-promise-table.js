@@ -2,7 +2,7 @@
 /* eslint arrow-body-style: 0 */
 import React, { Component } from 'react';
 
-import { BootstrapTableful } from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table2';
 import Code from 'components/common/code-block';
 import { productsGenerator, sleep } from 'utils/common';
 
@@ -38,7 +38,7 @@ class CellEditWithPromise extends Component {
 
     return (
       <div>
-        <BootstrapTableful keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
+        <BootstrapTable keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
         <Code>{ sourceCode }</Code>
       </div>
     );
@@ -64,7 +64,7 @@ class CellEditWithPromise extends Component {
 
     return (
       <div>
-        <BootstrapTableful keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
+        <BootstrapTable keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
         <Code>{ sourceCode }</Code>
       </div>
     );

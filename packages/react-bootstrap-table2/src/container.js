@@ -7,8 +7,8 @@ import Store from './store/base';
 import CellEditWrapper from './cell-edit/wrapper';
 import _ from './utils';
 
-const withStateful = (Base) => {
-  class StatefulComponent extends Component {
+const withDataStore = (Base) => {
+  return class BootstrapTableContainer extends Component {
     constructor(props) {
       super(props);
       this.store = new Store(props);
@@ -68,8 +68,7 @@ const withStateful = (Base) => {
       }
       return element;
     }
-  }
-  return StatefulComponent;
+  };
 };
 
-export default withStateful;
+export default withDataStore;

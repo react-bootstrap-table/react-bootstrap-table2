@@ -26,7 +26,7 @@ Specifying the selection way for `single(radio)` or `multiple(checkbox)`. If `ra
 const selectRowProp = {
   mode: 'radio' // single row selection
 };
-<BootstrapTableful
+<BootstrapTable
   keyField='id'
   data={ products }
   columns={ columns }
@@ -39,7 +39,7 @@ const selectRowProp = {
   mode: 'checkbox' // multiple row selection
 };
 
-<BootstrapTableful
+<BootstrapTable
   keyField='id'
   data={ products }
   columns={ columns }

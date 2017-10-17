@@ -2,7 +2,7 @@
 /* eslint no-console: 0 */
 import React from 'react';
 
-import { BootstrapTableful } from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table2';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -37,7 +37,7 @@ const cellEdit = {
   afterSaveCell: (oldValue, newValue, row, column) => { console.log('After Saving Cell!!'); }
 };
 
-<BootstrapTableful
+<BootstrapTable
   keyField='id'
   data={ products }
   columns={ columns }
@@ -52,7 +52,7 @@ const cellEdit = {
 };
 export default () => (
   <div>
-    <BootstrapTableful keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
     <Code>{ sourceCode }</Code>
   </div>
 );
