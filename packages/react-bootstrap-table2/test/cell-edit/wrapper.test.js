@@ -2,9 +2,9 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Store from '../src/store/base';
-import BootstrapTable from '../src/bootstrap-table';
-import CellEditWrapper from '../src/cell-edit-wrapper';
+import Store from '../../src/store/base';
+import BootstrapTable from '../../src/bootstrap-table';
+import CellEditWrapper from '../../src/cell-edit/wrapper';
 
 describe('CellEditWrapper', () => {
   let wrapper;

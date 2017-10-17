@@ -4,7 +4,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import Store from './store/base';
-import CellEditWrapper from './cell-edit-wrapper';
+import CellEditWrapper from './cell-edit/wrapper';
 import _ from './utils';
 
 const withStateful = (Base) => {

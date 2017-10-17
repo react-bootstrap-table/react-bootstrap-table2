@@ -2,7 +2,7 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import _ from './utils';
+import _ from '../utils';
 
 class CellEditWrapper extends Component {
   constructor(props) {

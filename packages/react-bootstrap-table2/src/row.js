@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 import Cell from './cell';
 import SelectionCell from './row-selection/selection-cell';
-import EditingCell from './editing-cell';
+import EditingCell from './cell-edit/editing-cell';
 import Const from './const';
 
 const Row = (props) => {
