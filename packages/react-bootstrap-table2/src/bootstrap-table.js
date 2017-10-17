@@ -15,11 +15,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
 
     this.handleSort = this.handleSort.bind(this);
-    this.handleRowSelect = this.handleRowSelect.bind(this);
-    this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
     this.state = {
-      data: props.store.get(),
-      selectedRowKeys: props.store.getSelectedRowKeys()
+      data: props.store.get()
     };
   }
 
@@ -57,11 +54,11 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     const cellSelectionInfo = this.resolveCellSelectionProps({
-      onRowSelect: this.handleRowSelect
+      onRowSelect: this.props.onRowSelect
     });
 
     const headerCellSelectionInfo = this.resolveHeaderCellSelectionProps({
-      onAllRowsSelect: this.handleAllRowsSelect,
+      onAllRowsSelect: this.props.onAllRowsSelect,
       selected: store.selected,
       allRowsSelected: store.isAllRowsSelected()
     });
@@ -86,57 +83,11 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             noDataIndication={ noDataIndication }
             cellEdit={ cellEditInfo }
             selectRow={cellSelectionInfo}
-            selectedRowKeys={this.state.selectedRowKeys}
+            selectedRowKeys={store.getSelectedRowKeys()}
           />
         </table>
       </div>
     );
-  }
-
-  /**
-   * row selection handler
-   * @param {String} rowKey - row key of what was selected.
-   * @param {Boolean} checked - next checked status of input button.
-   */
-  handleRowSelect(rowKey, checked) {
-    const { selectRow: { mode }, store } = this.props;
-    const { ROW_SELECT_SINGLE } = Const;
-
-    let currSelected = [...store.getSelectedRowKeys()];
-
-    if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
-      currSelected = [rowKey];
-    } else if (checked) { // when select mode is checkbox
-      currSelected.push(rowKey);
-    } else {
-      currSelected = currSelected.filter(value => value !== rowKey);
-    }
-
-    store.setSelectedRowKeys(currSelected);
-
-    this.setState(() => ({
-      selectedRowKeys: currSelected
-    }));
-  }
-
-  /**
-   * handle all rows selection on header cell by store.selected or given specific result.
-   * @param {Boolean} option - customized result for all rows selection
-   */
-  handleAllRowsSelect(option) {
-    const { store } = this.props;
-    const selected = store.isAnySelectedRow();
-
-    // set next status of all row selected by store.selected or customizing by user.
-    const result = option || !selected;
-
-    const currSelected = result ? store.selectAllRowKeys() : [];
-
-    store.setSelectedRowKeys(currSelected);
-
-    this.setState(() => ({
-      selectedRowKeys: currSelected
-    }));
   }
 
   handleSort(column) {
@@ -180,6 +131,8 @@ BootstrapTable.propTypes = {
   selectRow: PropTypes.shape({
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired
   }),
+  onRowSelect: PropTypes.func,
+  onAllRowsSelect: PropTypes.func,
   onCellUpdate: PropTypes.func,
   onStartEditing: PropTypes.func,
   onEscapeEditing: PropTypes.func,
