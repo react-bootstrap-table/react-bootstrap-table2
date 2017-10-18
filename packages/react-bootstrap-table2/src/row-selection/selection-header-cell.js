@@ -1,7 +1,7 @@
 /* eslint react/require-default-props: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Constant from '../const';
+import Const from '../const';
 
 export const CheckBox = ({ checked, indeterminate }) => (
   <input
@@ -36,7 +36,7 @@ export default class SelectionHeaderCell extends Component {
    * 2. status was not changed.
    */
   shouldComponentUpdate(nextProps) {
-    const { ROW_SELECT_SINGLE } = Constant;
+    const { ROW_SELECT_SINGLE } = Const;
     const { mode, checkedStatus } = this.props;
 
     if (mode === ROW_SELECT_SINGLE) return false;
@@ -53,7 +53,7 @@ export default class SelectionHeaderCell extends Component {
   render() {
     const {
       CHECKBOX_STATUS_CHECKED, CHECKBOX_STATUS_INDETERMINATE, ROW_SELECT_SINGLE
-    } = Constant;
+    } = Const;
 
     const { mode, checkedStatus } = this.props;
 

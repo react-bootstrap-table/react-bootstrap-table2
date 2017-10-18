@@ -131,7 +131,7 @@ describe('TableResolver', () => {
     });
   });
 
-  describe('resolveCellSelectionProps', () => {
+  describe('resolveSelectRowProps', () => {
     let cellSelectionInfo;
     let selectRow;
 
@@ -141,7 +141,7 @@ describe('TableResolver', () => {
           data, keyField, columns
         }, null);
         wrapper = shallow(mockElement);
-        cellSelectionInfo = wrapper.instance().resolveCellSelectionProps();
+        cellSelectionInfo = wrapper.instance().resolveSelectRowProps();
       });
 
       it('should return object', () => {
@@ -162,7 +162,7 @@ describe('TableResolver', () => {
             data, keyField, columns, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          cellSelectionInfo = wrapper.instance().resolveCellSelectionProps();
+          cellSelectionInfo = wrapper.instance().resolveSelectRowProps();
 
           expect(cellSelectionInfo).toBeDefined();
           expect(cellSelectionInfo.constructor).toEqual(Object);
@@ -175,7 +175,7 @@ describe('TableResolver', () => {
             data, keyField, columns, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          cellSelectionInfo = wrapper.instance().resolveCellSelectionProps();
+          cellSelectionInfo = wrapper.instance().resolveSelectRowProps();
 
           expect(cellSelectionInfo).toBeDefined();
           expect(cellSelectionInfo.constructor).toEqual(Object);
@@ -194,7 +194,7 @@ describe('TableResolver', () => {
             data, keyField, columns, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          cellSelectionInfo = wrapper.instance().resolveCellSelectionProps(mockOptions);
+          cellSelectionInfo = wrapper.instance().resolveSelectRowProps(mockOptions);
         });
 
         it('should return object which contain options', () => {
@@ -207,7 +207,7 @@ describe('TableResolver', () => {
     });
   });
 
-  describe('resolveHeaderCellSelectionProps', () => {
+  describe('resolveSelectRowPropsForHeader', () => {
     let headerCellSelectionInfo;
     let selectRow;
 
@@ -216,7 +216,7 @@ describe('TableResolver', () => {
         data, keyField, columns
       }, null);
       wrapper = shallow(mockElement);
-      headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
+      headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader();
     });
 
     describe('if selectRow was not defined', () => {
@@ -239,7 +239,7 @@ describe('TableResolver', () => {
             data, keyField, columns, selectedRowKeys, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
+          headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader();
 
           expect(headerCellSelectionInfo).toBeDefined();
           expect(headerCellSelectionInfo.constructor).toEqual(Object);
@@ -253,7 +253,7 @@ describe('TableResolver', () => {
             data, keyField, columns, selectedRowKeys, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps();
+          headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader();
 
           expect(headerCellSelectionInfo).toBeDefined();
           expect(headerCellSelectionInfo.constructor).toEqual(Object);
@@ -275,7 +275,7 @@ describe('TableResolver', () => {
             data, keyField, columns, selectedRowKeys, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps(mockOptions);
+          headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader(mockOptions);
         });
 
         it('should return object which contain specified options', () => {
@@ -304,7 +304,7 @@ describe('TableResolver', () => {
 
           wrapper = shallow(mockElement);
 
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps({
+          headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader({
             allRowsSelected: true,
             selected: selectedRowKeys
           });
@@ -326,7 +326,7 @@ describe('TableResolver', () => {
           }, null);
 
           wrapper = shallow(mockElement);
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps({
+          headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader({
             allRowsSelected: false,
             selected: selectedRowKeys
           });
@@ -349,7 +349,7 @@ describe('TableResolver', () => {
 
           wrapper = shallow(mockElement);
 
-          headerCellSelectionInfo = wrapper.instance().resolveHeaderCellSelectionProps({
+          headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader({
             allRowsSelected: false,
             selected: selectedRowKeys
           });

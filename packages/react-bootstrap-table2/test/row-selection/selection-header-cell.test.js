@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
-import Constant from '../../src/const';
+import Const from '../../src/const';
 import SelectionHeaderCell, { CheckBox } from '../../src/row-selection/selection-header-cell';
 
 let wrapper;
@@ -20,7 +20,7 @@ describe('<SelectionHeaderCell />', () => {
     describe('when props.mode is checkbox', () => {
       describe('if checkedStatus prop has not been changed', () => {
         it('should not update component', () => {
-          const checkedStatus = Constant.CHECKBOX_STATUS_CHECKED;
+          const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
           const nextProps = { checkedStatus };
 
           wrapper = shallow(
@@ -32,7 +32,7 @@ describe('<SelectionHeaderCell />', () => {
 
       describe('if checkedStatus prop has been changed', () => {
         it('should update component', () => {
-          const { CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_CHECKED } = Constant;
+          const { CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_CHECKED } = Const;
           const checkedStatus = CHECKBOX_STATUS_CHECKED;
           const nextProps = { checkedStatus };
 
@@ -60,7 +60,7 @@ describe('<SelectionHeaderCell />', () => {
           wrapper = shallow(
             <SelectionHeaderCell
               mode="radio"
-              checkedStatus={Constant.CHECKBOX_STATUS_CHECKED}
+              checkedStatus={Const.CHECKBOX_STATUS_CHECKED}
               onAllRowsSelect={mockOnAllRowsSelect}
             />);
         });
@@ -78,7 +78,7 @@ describe('<SelectionHeaderCell />', () => {
           wrapper = shallow(
             <SelectionHeaderCell
               mode="checkbox"
-              checkedStatus={Constant.CHECKBOX_STATUS_CHECKED}
+              checkedStatus={Const.CHECKBOX_STATUS_CHECKED}
               onAllRowsSelect={mockOnAllRowsSelect}
             />);
         });
@@ -96,7 +96,7 @@ describe('<SelectionHeaderCell />', () => {
   describe('render', () => {
     describe('when props.mode is radio', () => {
       beforeEach(() => {
-        const checkedStatus = Constant.CHECKBOX_STATUS_CHECKED;
+        const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
 
         wrapper = shallow(<SelectionHeaderCell mode="radio" checkedStatus={checkedStatus} />);
       });
@@ -109,15 +109,15 @@ describe('<SelectionHeaderCell />', () => {
     });
 
     describe('when props.mode is checkbox', () => {
-      const checkedStatus = Constant.CHECKBOX_STATUS_CHECKED;
+      const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
 
       beforeEach(() => {
         wrapper = shallow(<SelectionHeaderCell mode="checkbox" checkedStatus={checkedStatus} />);
       });
 
       it('should render checkbox', () => {
-        const checked = checkedStatus === Constant.CHECKBOX_STATUS_CHECKED;
-        const indeterminate = checkedStatus === Constant.CHECKBOX_STATUS_INDETERMINATE;
+        const checked = checkedStatus === Const.CHECKBOX_STATUS_CHECKED;
+        const indeterminate = checkedStatus === Const.CHECKBOX_STATUS_INDETERMINATE;
 
         expect(wrapper.find('th').length).toBe(1);
         expect(wrapper.find('th[data-row-selection]').length).toBe(1);

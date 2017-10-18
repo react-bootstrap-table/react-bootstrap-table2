@@ -38,4 +38,7 @@ Same as `.table-hover` class for adding a hover effect (grey background color) o
 Same as `.table-condensed` class for makeing a table more compact by cutting cell padding in half
 
 ### <a name='cellEdit'>cellEdit - [Object]</a>
-`cellEdit` props accept an object, please see [cellEdit definition](./cell-edit-prop.md) for more detail.
+`cellEdit` allow you to enable cell editing on table, please see [cellEdit definition](./cell-edit.md) for more detail.
+
+### <a name='selectRow'>selectRow - [Object]</a>
+`selectRow` allow you to have a mechanism to select rows, please see [selectRow definition](./row-selection.md) for more detail.
