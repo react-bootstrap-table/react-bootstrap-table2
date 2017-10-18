@@ -6,10 +6,10 @@ import Const from '../const';
 export const CheckBox = ({ checked, indeterminate }) => (
   <input
     type="checkbox"
-    checked={checked}
-    ref={(input) => {
+    checked={ checked }
+    ref={ (input) => {
       if (input) input.indeterminate = indeterminate; // eslint-disable-line no-param-reassign
-    }}
+    } }
   />
 );
 
@@ -64,11 +64,11 @@ export default class SelectionHeaderCell extends Component {
     return mode === ROW_SELECT_SINGLE
       ? <th data-row-selection />
       : (
-        <th data-row-selection onClick={this.handleCheckBoxClick}>
+        <th data-row-selection onClick={ this.handleCheckBoxClick }>
           <CheckBox
-            {...this.props}
-            checked={checked}
-            indeterminate={indeterminate}
+            { ...this.props }
+            checked={ checked }
+            indeterminate={ indeterminate }
           />
         </th>
       );

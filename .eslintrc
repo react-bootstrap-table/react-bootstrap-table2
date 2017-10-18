@@ -11,7 +11,7 @@
   ],
   "rules": {
     "comma-dangle": ["error", "never"],
-    "react/jsx-curly-spacing": 0,
+    "react/jsx-curly-spacing": [2, "always"],
     "react/forbid-prop-types": 0,
     "react/jsx-filename-extension": 0,
     "react/jsx-space-before-closing": 0,

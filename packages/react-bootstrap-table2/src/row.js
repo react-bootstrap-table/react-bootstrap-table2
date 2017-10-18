@@ -38,8 +38,8 @@ const Row = (props) => {
           : (
             <SelectionCell
               { ...selectRow }
-              rowKey={_.get(row, keyField)}
-              selected={selected}
+              rowKey={ _.get(row, keyField) }
+              selected={ selected }
             />
           )
       }

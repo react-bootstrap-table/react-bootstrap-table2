@@ -28,7 +28,7 @@ describe('Body', () => {
 
   describe('simplest body', () => {
     beforeEach(() => {
-      wrapper = shallow(<Body {...mockBodyResolvedProps} keyField="id" columns={ columns } data={ data } />);
+      wrapper = shallow(<Body { ...mockBodyResolvedProps } keyField="id" columns={ columns } data={ data } />);
     });
 
     it('should render successfully', () => {
@@ -42,7 +42,7 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
-          {...mockBodyResolvedProps}
+          { ...mockBodyResolvedProps }
           keyField="id"
           columns={ columns }
           data={ data }
@@ -67,7 +67,7 @@ describe('Body', () => {
           emptyIndication = 'Table is empty';
           wrapper = shallow(
             <Body
-              {...mockBodyResolvedProps}
+              { ...mockBodyResolvedProps }
               keyField="id"
               columns={ columns }
               data={ data }
@@ -93,7 +93,7 @@ describe('Body', () => {
           emptyIndicationCallBack = sinon.stub().returns(content);
           wrapper = shallow(
             <Body
-              {...mockBodyResolvedProps}
+              { ...mockBodyResolvedProps }
               keyField="id"
               columns={ columns }
               data={ data }
@@ -127,7 +127,7 @@ describe('Body', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
-          {...mockBodyResolvedProps}
+          { ...mockBodyResolvedProps }
           data={ data }
           columns={ columns }
           keyField={ keyField }
@@ -156,12 +156,12 @@ describe('Body', () => {
     it('props selected should be true if all rows were selected', () => {
       wrapper = shallow(
         <Body
-          {...mockBodyResolvedProps}
+          { ...mockBodyResolvedProps }
           data={ data }
           columns={ columns }
           keyField={ keyField }
-          selectedRowKeys={[1, 2]}
-          selectRow={selectRow}
+          selectedRowKeys={ [1, 2] }
+          selectRow={ selectRow }
         />
       );
 
@@ -171,12 +171,12 @@ describe('Body', () => {
     it('props selected should be false if all rows were not selected', () => {
       wrapper = shallow(
         <Body
-          {...mockBodyResolvedProps}
+          { ...mockBodyResolvedProps }
           data={ data }
           columns={ columns }
           keyField={ keyField }
-          selectedRowKeys={[]}
-          selectRow={selectRow}
+          selectedRowKeys={ [] }
+          selectRow={ selectRow }
         />
       );
 
@@ -189,11 +189,11 @@ describe('Body', () => {
       const keyField = 'id';
       wrapper = shallow(
         <Body
-          {...mockBodyResolvedProps}
+          { ...mockBodyResolvedProps }
           data={ data }
           columns={ columns }
           keyField={ keyField }
-          selectedRowKeys={[]}
+          selectedRowKeys={ [] }
         />
       );
     });

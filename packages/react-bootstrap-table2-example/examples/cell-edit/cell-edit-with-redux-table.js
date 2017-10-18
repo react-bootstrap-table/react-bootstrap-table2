@@ -203,7 +203,7 @@ const reducers = (state, action) => {
 const store = createStore(reducers, initialState, applyMiddleware(thunk));
 
 const Index = () => (
-  <Provider store={store}>
+  <Provider store={ store }>
     <CellEditWithRedux />
   </Provider>
 );
