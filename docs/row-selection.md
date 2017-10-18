@@ -1,6 +1,6 @@
 
 # Row selection
-`react-bootstrap-table2` supports the row selection feature. By passing prop `selectRow ` to enable row selection. When you enable this feature, `react-bootstrap-table2` will append a new selection column at first. 
+`react-bootstrap-table2` supports the row selection feature. By passing prop `selectRow` to enable row selection. When you enable this feature, `react-bootstrap-table2` will append a new selection column at first. 
 
 
 ## Available properties
@@ -8,7 +8,7 @@
 The following are available properties in `selectRow`:
 
 #### Required
-* [mode (required)](#mode)
+* [mode (**required**)](#mode)
 
 #### Optional
 
@@ -23,7 +23,7 @@ Specifying the selection way for `single(radio)` or `multiple(checkbox)`. If `ra
 #### examples
 
 ```js
-const selectRowProp = {
+const selectRow = {
   mode: 'radio' // single row selection
 };
 <BootstrapTable
@@ -35,7 +35,7 @@ const selectRowProp = {
 ```
 
 ```js
-const selectRowProp = {
+const selectRow = {
   mode: 'checkbox' // multiple row selection
 };
 
