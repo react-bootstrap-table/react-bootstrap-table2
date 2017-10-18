@@ -52,11 +52,11 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       currEditCell: this.props.currEditCell
     });
 
-    const cellSelectionInfo = this.resolveCellSelectionProps({
+    const cellSelectionInfo = this.resolveSelectRowProps({
       onRowSelect: this.props.onRowSelect
     });
 
-    const headerCellSelectionInfo = this.resolveHeaderCellSelectionProps({
+    const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
       onAllRowsSelect: this.props.onAllRowsSelect,
       selected: store.selected,
       allRowsSelected: store.isAllRowsSelected()

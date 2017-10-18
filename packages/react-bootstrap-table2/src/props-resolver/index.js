@@ -47,7 +47,7 @@ export default ExtendBase =>
      * @returns {Object} result - props for cell selections
      * @returns {String} result.mode - input type of row selection or disabled.
      */
-    resolveCellSelectionProps(options) {
+    resolveSelectRowProps(options) {
       const { selectRow } = this.props;
       const { ROW_SELECT_DISABLED } = Const;
 
@@ -71,7 +71,7 @@ export default ExtendBase =>
      * @returns {String} result.mode - input type of row selection or disabled.
      * @returns {String} result.checkedStatus - checkbox status depending on selected rows counts
      */
-    resolveHeaderCellSelectionProps(options = {}) {
+    resolveSelectRowPropsForHeader(options = {}) {
       const { selectRow } = this.props;
       const { allRowsSelected, selected = [], ...rest } = options;
       const {
