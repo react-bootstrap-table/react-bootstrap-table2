@@ -48,10 +48,10 @@ export default class SelectionCell extends Component {
     } = this.props;
 
     return (
-      <td onClick={this.handleRowClick}>
+      <td onClick={ this.handleRowClick }>
         <input
-          type={inputType}
-          checked={selected}
+          type={ inputType }
+          checked={ selected }
         />
       </td>
     );

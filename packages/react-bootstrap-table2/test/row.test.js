@@ -32,7 +32,7 @@ describe('Row', () => {
   describe('simplest row', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <Row {...mockBodyResolvedProps} rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
+        <Row { ...mockBodyResolvedProps } rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
     });
 
     it('should render successfully', () => {
@@ -55,7 +55,7 @@ describe('Row', () => {
       };
       wrapper = shallow(
         <Row
-          {...mockBodyResolvedProps}
+          { ...mockBodyResolvedProps }
           row={ row }
           rowIndex={ rowIndex }
           columns={ columns }
@@ -95,7 +95,7 @@ describe('Row', () => {
         columns[nonEditableColIndex].editable = false;
         wrapper = shallow(
           <Row
-            {...mockBodyResolvedProps}
+            { ...mockBodyResolvedProps }
             row={ row }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -132,7 +132,7 @@ describe('Row', () => {
           columns[nonEditableColIndex].editable = editableCallBack;
           wrapper = shallow(
             <Row
-              {...mockBodyResolvedProps}
+              { ...mockBodyResolvedProps }
               row={ row }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -165,7 +165,7 @@ describe('Row', () => {
           columns[nonEditableColIndex].editable = editableCallBack;
           wrapper = shallow(
             <Row
-              {...mockBodyResolvedProps}
+              { ...mockBodyResolvedProps }
               row={ row }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -199,7 +199,7 @@ describe('Row', () => {
       beforeEach(() => {
         wrapper = shallow(
           <Row
-            {...mockBodyResolvedProps}
+            { ...mockBodyResolvedProps }
             row={ row }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -230,7 +230,7 @@ describe('Row', () => {
           cellEdit.onUpdate = sinon.stub();
           wrapper = shallow(
             <Row
-              {...mockBodyResolvedProps}
+              { ...mockBodyResolvedProps }
               row={ row }
               rowIndex={ 1 }
               columns={ columns }
@@ -260,7 +260,7 @@ describe('Row', () => {
           cellEdit.onEscape = sinon.stub();
           wrapper = shallow(
             <Row
-              {...mockBodyResolvedProps}
+              { ...mockBodyResolvedProps }
               row={ row }
               rowIndex={ 1 }
               columns={ columns }
@@ -283,7 +283,7 @@ describe('Row', () => {
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <Row {...mockBodyResolvedProps} rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
+        <Row { ...mockBodyResolvedProps } rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
     });
 
     it('should not render <SelectionCell />', () => {
@@ -296,11 +296,11 @@ describe('Row', () => {
       const selectRow = { mode: 'checkbox' };
       wrapper = shallow(
         <Row
-          {...mockBodyResolvedProps}
+          { ...mockBodyResolvedProps }
           rowIndex={ 1 }
           columns={ defaultColumns }
           row={ row }
-          selectRow={selectRow}
+          selectRow={ selectRow }
         />);
     });
 

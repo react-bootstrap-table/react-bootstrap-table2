@@ -19,7 +19,7 @@ describe('Header', () => {
 
   describe('simplest header', () => {
     beforeEach(() => {
-      wrapper = shallow(<Header {...mockHeaderResolvedProps} columns={ columns } />);
+      wrapper = shallow(<Header { ...mockHeaderResolvedProps } columns={ columns } />);
     });
 
     it('should render successfully', () => {
@@ -35,7 +35,7 @@ describe('Header', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Header
-          {...mockHeaderResolvedProps}
+          { ...mockHeaderResolvedProps }
           columns={ columns }
           sortField={ sortField }
           sortOrder={ Const.SORT_ASC }
@@ -53,7 +53,7 @@ describe('Header', () => {
 
   describe('when the selectRow.mode is radio(single selection)', () => {
     beforeEach(() => {
-      wrapper = shallow(<Header {...mockHeaderResolvedProps} columns={ columns } />);
+      wrapper = shallow(<Header { ...mockHeaderResolvedProps } columns={ columns } />);
     });
 
     it('should not render <SelectionHeaderCell />', () => {
@@ -66,9 +66,9 @@ describe('Header', () => {
       const selectRow = { mode: 'checkbox' };
       wrapper = shallow(
         <Header
-          {...mockHeaderResolvedProps}
+          { ...mockHeaderResolvedProps }
           columns={ columns }
-          selectRow={selectRow}
+          selectRow={ selectRow }
         />
       );
     });

@@ -16,7 +16,7 @@ describe('<SelectionCell />', () => {
       it('should not update component', () => {
         const nextProps = { selected };
 
-        wrapper = shallow(<SelectionCell rowKey={1} mode={mode} selected={selected} />);
+        wrapper = shallow(<SelectionCell rowKey={ 1 } mode={ mode } selected={ selected } />);
 
         expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(false);
       });
@@ -26,7 +26,7 @@ describe('<SelectionCell />', () => {
       it('should update component', () => {
         const nextProps = { selected: !selected };
 
-        wrapper = shallow(<SelectionCell rowKey={1} mode={mode} selected={selected} />);
+        wrapper = shallow(<SelectionCell rowKey={ 1 } mode={ mode } selected={ selected } />);
 
         expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
       });
@@ -48,9 +48,9 @@ describe('<SelectionCell />', () => {
         wrapper = shallow(
           <SelectionCell
             selected
-            rowKey={rowKey}
-            mode={mode}
-            onRowSelect={mockOnRowSelect}
+            rowKey={ rowKey }
+            mode={ mode }
+            onRowSelect={ mockOnRowSelect }
           />
         );
 
@@ -65,9 +65,9 @@ describe('<SelectionCell />', () => {
           wrapper = shallow(
             <SelectionCell
               selected
-              rowKey={rowKey}
+              rowKey={ rowKey }
               mode="radio"
-              onRowSelect={mockOnRowSelect}
+              onRowSelect={ mockOnRowSelect }
             />
           );
         });
@@ -89,9 +89,9 @@ describe('<SelectionCell />', () => {
         beforeEach(() => {
           wrapper = shallow(
             <SelectionCell
-              rowKey={rowKey}
+              rowKey={ rowKey }
               mode="checkbox"
-              onRowSelect={mockOnRowSelect}
+              onRowSelect={ mockOnRowSelect }
             />
           );
         });
@@ -119,9 +119,9 @@ describe('<SelectionCell />', () => {
     beforeEach(() => {
       wrapper = shallow(
         <SelectionCell
-          rowKey={1}
-          mode={mode}
-          selected={selected}
+          rowKey={ 1 }
+          mode={ mode }
+          selected={ selected }
         />
       );
     });

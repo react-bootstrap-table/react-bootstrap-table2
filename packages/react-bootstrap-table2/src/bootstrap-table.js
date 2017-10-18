@@ -81,8 +81,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
             cellEdit={ cellEditInfo }
-            selectRow={cellSelectionInfo}
-            selectedRowKeys={store.getSelectedRowKeys()}
+            selectRow={ cellSelectionInfo }
+            selectedRowKeys={ store.getSelectedRowKeys() }
           />
         </table>
       </div>

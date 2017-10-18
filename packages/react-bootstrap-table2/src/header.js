@@ -21,7 +21,7 @@ const Header = (props) => {
     <thead>
       <tr>
         {
-          selectRow.mode === ROW_SELECT_DISABLED ? null : <SelectionHeaderCell {...selectRow} />
+          selectRow.mode === ROW_SELECT_DISABLED ? null : <SelectionHeaderCell { ...selectRow } />
         }
         {
           columns.map((column, i) => {
