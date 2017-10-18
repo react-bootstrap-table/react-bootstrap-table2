@@ -117,11 +117,6 @@ BootstrapTable.propTypes = {
     timeToCloseMessage: PropTypes.number,
     errorMessage: PropTypes.string
   }),
-  selectRow: PropTypes.shape({
-    mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired
-  }),
-  onRowSelect: PropTypes.func,
-  onAllRowsSelect: PropTypes.func,
   onCellUpdate: PropTypes.func,
   onStartEditing: PropTypes.func,
   onEscapeEditing: PropTypes.func,
@@ -130,7 +125,12 @@ BootstrapTable.propTypes = {
     cidx: PropTypes.number,
     message: PropTypes.string,
     editing: PropTypes.bool
-  })
+  }),
+  selectRow: PropTypes.shape({
+    mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired
+  }),
+  onRowSelect: PropTypes.func,
+  onAllRowsSelect: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {
