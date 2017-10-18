@@ -45,6 +45,8 @@ import ColumnLevelEditableTable from 'examples/cell-edit/column-level-editable-t
 import CellLevelEditable from 'examples/cell-edit/cell-level-editable-table';
 import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
+import CellEditStyleTable from 'examples/cell-edit/cell-edit-style-table';
+import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
 import CellEditWithPromise from 'examples/cell-edit/cell-edit-with-promise-table';
 import CellEditWithRedux from 'examples/cell-edit/cell-edit-with-redux-table';
 
@@ -105,6 +107,8 @@ storiesOf('Cell Editing', module)
   .add('Cell Level Editable', () => <CellLevelEditable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
   .add('Validation', () => <CellEditValidator />)
+  .add('Custom Cell Style When Editing', () => <CellEditStyleTable />)
+  .add('Custom Cell Classes When Editing', () => <CellEditClassTable />)
   .add('Async Cell Editing(Promise)', () => <CellEditWithPromise />)
   .add('Async Cell Editing(Redux)', () => <CellEditWithRedux />);
 
