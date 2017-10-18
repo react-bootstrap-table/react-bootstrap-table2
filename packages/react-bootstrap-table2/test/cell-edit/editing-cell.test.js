@@ -75,6 +75,46 @@ describe('EditingCell', () => {
     expect(onEscape.callCount).toBe(1);
   });
 
+  describe('if style prop is defined', () => {
+    const customStyle = { backgroundColor: 'red' };
+    beforeEach(() => {
+      wrapper = shallow(
+        <EditingCell
+          row={ row }
+          column={ column }
+          onUpdate={ onUpdate }
+          onEscape={ onEscape }
+          style={ customStyle }
+        />
+      );
+    });
+
+    it('should render component with style successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('td').prop('style')).toEqual(customStyle);
+    });
+  });
+
+  describe('if className prop is defined', () => {
+    const className = 'test-class';
+    beforeEach(() => {
+      wrapper = shallow(
+        <EditingCell
+          row={ row }
+          column={ column }
+          onUpdate={ onUpdate }
+          onEscape={ onEscape }
+          className={ className }
+        />
+      );
+    });
+
+    it('should render component with style successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.hasClass(className)).toBe(true);
+    });
+  });
+
   describe('if blurToSave prop is true', () => {
     beforeEach(() => {
       wrapper = mount(

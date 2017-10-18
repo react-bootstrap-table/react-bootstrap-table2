@@ -249,6 +249,122 @@ describe('Row', () => {
           expect(wrapper.find(EditingCell).length).toBe(1);
           expect(complexComponents.at(editingColIndex).type()).toEqual(EditingCell);
         });
+
+        describe('if column.editCellStyle defined as object', () => {
+          const definedStyleColIndex = editingColIndex;
+
+          beforeEach(() => {
+            columns[definedStyleColIndex].editCellStyle = { backgroundColor: 'red' };
+            wrapper = shallow(
+              <Row
+                { ...mockBodyResolvedProps }
+                row={ row }
+                rowIndex={ rowIndex }
+                columns={ columns }
+                keyField={ keyField }
+                cellEdit={ cellEdit }
+              />
+            );
+          });
+
+          it('should also rendering EditingCell with correct style object', () => {
+            expect(wrapper.find(EditingCell).length).toBe(1);
+            expect(wrapper.find(EditingCell).props().style)
+              .toEqual(columns[definedStyleColIndex].editCellStyle);
+          });
+        });
+
+        describe('if column.editCellStyle defined as function', () => {
+          const definedStyleColIndex = editingColIndex;
+          const customStyle = { backgroundColor: 'red' };
+          let editCellStyleCallBack;
+
+          beforeEach(() => {
+            editCellStyleCallBack = sinon.stub().returns(customStyle);
+            columns[definedStyleColIndex].editCellStyle = editCellStyleCallBack;
+            wrapper = shallow(
+              <Row
+                { ...mockBodyResolvedProps }
+                row={ row }
+                rowIndex={ rowIndex }
+                columns={ columns }
+                keyField={ keyField }
+                cellEdit={ cellEdit }
+              />
+            );
+          });
+
+          it('should calling custom column.editCellStyle callback correctly', () => {
+            expect(editCellStyleCallBack.callCount).toBe(1);
+            expect(
+              editCellStyleCallBack.calledWith(
+                row[columns[editingColIndex].dataField], row, rowIndex, editingColIndex)
+            ).toBe(true);
+          });
+
+          it('should also rendering EditingCell with correct style object', () => {
+            expect(wrapper.find(EditingCell).length).toBe(1);
+            expect(wrapper.find(EditingCell).props().style).toEqual(customStyle);
+          });
+        });
+
+        describe('if column.editCellClasses defined as string', () => {
+          const definedStyleColIndex = editingColIndex;
+
+          beforeEach(() => {
+            columns[definedStyleColIndex].editCellClasses = 'custom-class';
+            wrapper = shallow(
+              <Row
+                { ...mockBodyResolvedProps }
+                row={ row }
+                rowIndex={ rowIndex }
+                columns={ columns }
+                keyField={ keyField }
+                cellEdit={ cellEdit }
+              />
+            );
+          });
+
+          it('should also rendering EditingCell with correct class', () => {
+            expect(wrapper.find(EditingCell).length).toBe(1);
+            expect(wrapper.find(EditingCell).props().className)
+              .toEqual(columns[definedStyleColIndex].editCellClasses);
+          });
+        });
+
+        describe('if column.editCellClasses defined as function', () => {
+          const definedStyleColIndex = editingColIndex;
+          const customClass = 'custom-class';
+          let editCellClassesCallBack;
+
+          beforeEach(() => {
+            editCellClassesCallBack = sinon.stub().returns(customClass);
+            columns[definedStyleColIndex].editCellClasses = editCellClassesCallBack;
+            wrapper = shallow(
+              <Row
+                { ...mockBodyResolvedProps }
+                row={ row }
+                rowIndex={ rowIndex }
+                columns={ columns }
+                keyField={ keyField }
+                cellEdit={ cellEdit }
+              />
+            );
+          });
+
+          it('should calling custom column.editCellStyle callback correctly', () => {
+            expect(editCellClassesCallBack.callCount).toBe(1);
+            expect(
+              editCellClassesCallBack.calledWith(
+                row[columns[editingColIndex].dataField], row, rowIndex, editingColIndex)
+            ).toBe(true);
+          });
+
+          it('should also rendering EditingCell with correct class', () => {
+            expect(wrapper.find(EditingCell).length).toBe(1);
+            expect(wrapper.find(EditingCell).props().className).toEqual(customClass);
+          });
+        });
       });
 
       describe('and cellEdit.ridx is not match to current row index', () => {

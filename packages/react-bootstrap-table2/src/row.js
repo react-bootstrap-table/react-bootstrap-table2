@@ -53,11 +53,21 @@ const Row = (props) => {
             editable = column.editable(content, row, rowIndex, index);
           }
           if (rowIndex === editingRowIdx && index === editingColIdx) {
+            let style = column.editCellStyle || {};
+            let classes = column.editCellClasses;
+            if (_.isFunction(column.editCellStyle)) {
+              style = column.editCellStyle(content, row, rowIndex, index);
+            }
+            if (_.isFunction(column.editCellClasses)) {
+              classes = column.editCellClasses(content, row, rowIndex, index);
+            }
             return (
               <EditingCell
                 key={ content }
                 row={ row }
                 column={ column }
+                className={ classes }
+                style={ style }
                 { ...rest }
               />
             );

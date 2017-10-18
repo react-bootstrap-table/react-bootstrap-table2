@@ -96,7 +96,7 @@ class EditingCell extends Component {
 
   render() {
     const { invalidMessage } = this.state;
-    const { row, column } = this.props;
+    const { row, column, className, style } = this.props;
     const { dataField } = column;
 
     const value = _.get(row, dataField);
@@ -108,7 +108,10 @@ class EditingCell extends Component {
     const hasError = _.isDefined(invalidMessage);
     const editorClass = hasError ? cs('animated', 'shake') : null;
     return (
-      <td className="react-bootstrap-table-editing-cell">
+      <td
+        className={ cs('react-bootstrap-table-editing-cell', className) }
+        style={ style }
+      >
         <TextEditor
           ref={ node => this.editor = node }
           defaultValue={ value }
@@ -126,11 +129,15 @@ EditingCell.propTypes = {
   column: PropTypes.object.isRequired,
   onUpdate: PropTypes.func.isRequired,
   onEscape: PropTypes.func.isRequired,
-  timeToCloseMessage: PropTypes.number
+  timeToCloseMessage: PropTypes.number,
+  className: PropTypes.string,
+  style: PropTypes.object
 };
 
 EditingCell.defaultProps = {
-  timeToCloseMessage: Const.TIME_TO_CLOSE_MESSAGE
+  timeToCloseMessage: Const.TIME_TO_CLOSE_MESSAGE,
+  className: null,
+  style: {}
 };
 
 export default EditingCell;

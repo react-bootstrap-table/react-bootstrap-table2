@@ -27,6 +27,8 @@ Available properties in a column object:
 * [headerAttrs](#headerAttrs)
 * [editable](#editable)
 * [validator](#validator)
+* [editCellStyle](#editCellStyle)
+* [editCellClasses](#editCellClasses)
 
 Following is a most simplest and basic usage:
 
@@ -449,5 +451,47 @@ The return value can be a bool or an object. If your valiation is pass, return `
 {
   valid: false,
   message: 'SOME_REASON_HERE'
+}
+```
+
+## <a name='editCellStyle'>column.editCellStyle - [Object | Function]</a>
+You can use `column.editCellStyle` to custom the style of `<td>` when cell editing. It like most of customizable functionality, it also accept a callback function with following params:
+
+**Parameters**
+* `cell`: The value of current cell. 
+* `row`: The object of `row` being processed in the `BootstrapTable`.
+* `rowIndex`: The index of the current `row` being processed in the `BootstrapTable`.
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+```js
+{
+  editCellStyle: { ... }
+}
+```
+Or take a callback function
+
+```js
+{
+  editCellStyle: (cell, row, rowIndex, colIndex) => {
+    // it is suppose to return an object
+  }
+}
+```
+
+## <a name='editCellClasses'>column.editCellClasses - [Object | Function]</a>
+You can use `column.editCellClasses` to add custom class on `<td>` when cell editing. It's same as [`column.editCellStyle`](#editCellStyle) which also accept a callback function to able to custom your class more flexible. Following is the arguments of this callback function: `cell`, `row`, `rowIndex`, `colIndex`.
+
+```js
+{
+  editCellClasses: 'custom-class'
+}
+```
+Or take a callback function
+
+```js
+{
+  editCellClasses: (cell, row, rowIndex, colIndex) => {
+    // it is suppose to return a string
+  }
 }
 ```
