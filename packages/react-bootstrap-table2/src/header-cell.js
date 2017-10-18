@@ -105,6 +105,8 @@ HeaderCell.propTypes = {
     sort: PropTypes.bool,
     sortFunc: PropTypes.func,
     editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    editCellStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    editCellClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     validator: PropTypes.func
   }).isRequired,
   index: PropTypes.number.isRequired,
