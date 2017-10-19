@@ -9,6 +9,8 @@ The following are available properties in `selectRow`:
 
 #### Required
 * [mode (**required**)](#mode)
+* [style](#style)
+* [classes)](#classes)
 
 #### Optional
 
@@ -45,4 +47,42 @@ const selectRow = {
   columns={ columns }
   selectRow={ selectRowProp }
 />
+```
+
+## <a name='style'>selectRow.style - [Object | Function]</a>
+`selectRow.style` allow you to have custom style on selected rows:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  style: { background: 'red' }
+};
+```
+
+If you wanna more flexible customization, `selectRow.style` also accept a function:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  style: (row, rowIndex) => { return ...; }
+};
+```
+
+## <a name='classes'>selectRow.classes - [String | Function]</a>
+`selectRow.classes` allow you to add css class on selected rows:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  classes: 'custom-class'
+};
+```
+
+If you wanna more flexible customization, `selectRow.classes` also accept a function:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  classes: (row, rowIndex) => { return ...; }
+};
 ```
