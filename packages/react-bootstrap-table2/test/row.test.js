@@ -42,6 +42,44 @@ describe('Row', () => {
     });
   });
 
+  describe('when style prop is defined', () => {
+    const customStyle = { backgroundColor: 'red' };
+    beforeEach(() => {
+      wrapper = shallow(
+        <Row
+          { ...mockBodyResolvedProps }
+          rowIndex={ 1 }
+          columns={ defaultColumns }
+          row={ row }
+          style={ customStyle }
+        />);
+    });
+
+    it('should render component with style successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.prop('style')).toEqual(customStyle);
+    });
+  });
+
+  describe('when className prop is defined', () => {
+    const className = 'test-class';
+    beforeEach(() => {
+      wrapper = shallow(
+        <Row
+          { ...mockBodyResolvedProps }
+          rowIndex={ 1 }
+          columns={ defaultColumns }
+          row={ row }
+          className={ className }
+        />);
+    });
+
+    it('should render component with style successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.hasClass(className)).toBe(true);
+    });
+  });
+
   describe('when cellEdit prop is defined', () => {
     let columns;
     let cellEdit;
