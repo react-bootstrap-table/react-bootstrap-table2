@@ -152,6 +152,8 @@ describe('Body', () => {
   describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
     const keyField = 'id';
     const selectRow = { mode: 'checkbox' };
+    const selectedRowKey = data[0][keyField];
+    const selectedRowKeys = [selectedRowKey];
 
     beforeEach(() => {
       wrapper = shallow(
@@ -160,15 +162,18 @@ describe('Body', () => {
           data={ data }
           columns={ columns }
           keyField={ keyField }
-          selectedRowKeys={ [1] }
+          selectedRowKeys={ selectedRowKeys }
           selectRow={ selectRow }
         />
       );
     });
 
     it('should render Row component with correct selected prop', () => {
-      expect(wrapper.find(Row).get(0).props.selected).toBe(true);
-      expect(wrapper.find(Row).get(1).props.selected).toBe(false);
+      const rows = wrapper.find(Row);
+      for (let i = 0; i < rows.length; i += 1) {
+        const row = rows.get(i);
+        expect(row.props.selected).toBe(selectedRowKeys.indexOf(row.props.row[keyField]) > -1);
+      }
     });
 
     describe('if selectRow.style is defined as an object', () => {
@@ -182,7 +187,7 @@ describe('Body', () => {
             data={ data }
             columns={ columns }
             keyField={ keyField }
-            selectedRowKeys={ [1] }
+            selectedRowKeys={ selectedRowKeys }
             selectRow={ selectRow }
           />
         );
@@ -205,7 +210,7 @@ describe('Body', () => {
             data={ data }
             columns={ columns }
             keyField={ keyField }
-            selectedRowKeys={ [1] }
+            selectedRowKeys={ selectedRowKeys }
             selectRow={ selectRow }
           />
         );
@@ -232,7 +237,7 @@ describe('Body', () => {
             data={ data }
             columns={ columns }
             keyField={ keyField }
-            selectedRowKeys={ [1] }
+            selectedRowKeys={ selectedRowKeys }
             selectRow={ selectRow }
           />
         );
@@ -255,7 +260,7 @@ describe('Body', () => {
             data={ data }
             columns={ columns }
             keyField={ keyField }
-            selectedRowKeys={ [1] }
+            selectedRowKeys={ selectedRowKeys }
             selectRow={ selectRow }
           />
         );
