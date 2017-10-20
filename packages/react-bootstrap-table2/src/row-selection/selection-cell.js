@@ -11,7 +11,8 @@ export default class SelectionCell extends Component {
     mode: PropTypes.string.isRequired,
     rowKey: PropTypes.any,
     selected: PropTypes.bool,
-    onRowSelect: PropTypes.func
+    onRowSelect: PropTypes.func,
+    disabled: PropTypes.bool
   }
 
   constructor() {
@@ -26,15 +27,17 @@ export default class SelectionCell extends Component {
   }
 
   handleRowClick() {
-    const { ROW_SELECT_SINGLE } = Const;
     const {
       mode: inputType,
       rowKey,
       selected,
-      onRowSelect
+      onRowSelect,
+      disabled
     } = this.props;
 
-    const checked = inputType === ROW_SELECT_SINGLE
+    if (disabled) return;
+
+    const checked = inputType === Const.ROW_SELECT_SINGLE
       ? true
       : !selected;
 
@@ -44,7 +47,8 @@ export default class SelectionCell extends Component {
   render() {
     const {
       mode: inputType,
-      selected
+      selected,
+      disabled
     } = this.props;
 
     return (
@@ -52,6 +56,7 @@ export default class SelectionCell extends Component {
         <input
           type={ inputType }
           checked={ selected }
+          disabled={ disabled }
         />
       </td>
     );

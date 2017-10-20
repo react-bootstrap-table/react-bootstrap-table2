@@ -54,15 +54,30 @@ export default class Store {
     return this.selected;
   }
 
-  selectAllRowKeys() {
-    return this.data.map(row => _.get(row, this.keyField));
+  selectAllRows(nonSelectableRows = []) {
+    if (nonSelectableRows.length === 0) {
+      return this.data.map(row => _.get(row, this.keyField));
+    }
+    return this.data
+      .filter(row => !nonSelectableRows.includes(_.get(row, this.keyField)))
+      .map(row => _.get(row, this.keyField));
+  }
+
+  cleanSelectedRows(nonSelectableRows = []) {
+    if (nonSelectableRows.length === 0) {
+      return [];
+    }
+    return this.selected.filter(x => nonSelectableRows.includes(x));
   }
 
   isAllRowsSelected() {
     return this.data.length === this.selected.length;
   }
 
-  isAnySelectedRow() {
-    return this.selected.length > 0;
+  isAnySelectedRow(nonSelectableRows = []) {
+    if (nonSelectableRows.length === 0) {
+      return this.selected.length > 0;
+    }
+    return this.selected.filter(x => !nonSelectableRows.includes(x)).length;
   }
 }

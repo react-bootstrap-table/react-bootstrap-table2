@@ -30,6 +30,9 @@ const Row = (props) => {
     ...rest
   } = cellEdit;
 
+  const key = _.get(row, keyField);
+  const { nonSelectable } = selectRow;
+
   return (
     <tr style={ style } className={ className }>
       {
@@ -40,6 +43,7 @@ const Row = (props) => {
               { ...selectRow }
               rowKey={ _.get(row, keyField) }
               selected={ selected }
+              disabled={ nonSelectable && nonSelectable.includes(key) }
             />
           )
       }
