@@ -36,45 +36,65 @@ describe('<SelectionCell />', () => {
   describe('handleRowClick', () => {
     describe('when <input /> was been clicked', () => {
       const rowKey = 1;
-      const mockOnRowSelect = sinon.stub();
+      const selected = true;
+      let mockOnRowSelect;
       const spy = sinon.spy(SelectionCell.prototype, 'handleRowClick');
 
       beforeEach(() => {
+        mockOnRowSelect = sinon.stub();
+      });
+
+      afterEach(() => {
         spy.reset();
         mockOnRowSelect.reset();
       });
 
-      it('should call handleRowClicked', () => {
-        wrapper = shallow(
-          <SelectionCell
-            selected
-            rowKey={ rowKey }
-            mode={ mode }
-            onRowSelect={ mockOnRowSelect }
-          />
-        );
+      describe('when disabled prop is false', () => {
+        beforeEach(() => {
+          wrapper = shallow(
+            <SelectionCell
+              selected
+              rowKey={ rowKey }
+              mode={ mode }
+              onRowSelect={ mockOnRowSelect }
+            />
+          );
+          wrapper.find('td').simulate('click');
+        });
 
-        wrapper.find('td').simulate('click');
+        it('should calling handleRowClicked', () => {
+          expect(spy.calledOnce).toBe(true);
+        });
 
-        expect(spy.calledOnce).toBe(true);
-        expect(mockOnRowSelect.calledOnce).toBe(true);
+        it('should calling onRowSelect callback correctly', () => {
+          expect(mockOnRowSelect.calledOnce).toBe(true);
+          expect(
+            mockOnRowSelect.calledWith(rowKey, !selected)
+          ).toBe(true);
+        });
       });
 
-      it('should not calling onRowSelect when disabled prop is true', () => {
-        wrapper = shallow(
-          <SelectionCell
-            selected
-            rowKey={ rowKey }
-            mode={ mode }
-            onRowSelect={ mockOnRowSelect }
-            disabled
-          />
-        );
+      describe('when disabled prop is true', () => {
+        beforeEach(() => {
+          wrapper = shallow(
+            <SelectionCell
+              selected
+              rowKey={ rowKey }
+              mode={ mode }
+              onRowSelect={ mockOnRowSelect }
+              disabled
+            />
+          );
+          wrapper.find('td').simulate('click');
+        });
 
-        wrapper.find('td').simulate('click');
+        it('should calling handleRowClicked', () => {
+          expect(spy.calledOnce).toBe(true);
+        });
 
-        expect(spy.calledOnce).toBe(true);
-        expect(mockOnRowSelect.calledOnce).toBe(false);
+        it('should not calling onRowSelect callback', () => {
+          expect(mockOnRowSelect.calledOnce).toBe(false);
+        });
       });
 
       describe('if selectRow.mode is radio', () => {

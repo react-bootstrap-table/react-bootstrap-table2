@@ -133,16 +133,16 @@ describe('Store Base', () => {
   });
 
   describe('isAllRowsSelected', () => {
-    it('should return true when all rows was selected', () => {
+    it('should return true when all rows is selected', () => {
       store.selected = data.map(row => _.get(row, store.keyField));
 
       expect(store.isAllRowsSelected()).toBeTruthy();
     });
 
-    it('should return false when all rows was not selected', () => {
+    it('should return false when not all of rows is selected', () => {
       store.selected = [1];
 
-      expect(store.isAllRowsSelected()).not.toBeTruthy();
+      expect(store.isAllRowsSelected()).toBeFalsy();
     });
   });
 
