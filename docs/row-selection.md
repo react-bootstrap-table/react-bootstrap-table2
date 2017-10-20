@@ -11,6 +11,7 @@ The following are available properties in `selectRow`:
 * [mode (**required**)](#mode)
 * [style](#style)
 * [classes)](#classes)
+* [bgColor](#bgColor)
 * [nonSelectable)](#nonSelectable)
 
 #### Optional
@@ -85,6 +86,27 @@ If you wanna more flexible customization, `selectRow.classes` also accept a func
 const selectRow = {
   mode: 'checkbox',
   classes: (row, rowIndex) => { return ...; }
+};
+```
+
+## <a name='bgColor'>selectRow.bgColor - [String | Function]</a>
+The backgroud color when row is selected
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  bgColor: 'red'
+};
+```
+
+There's also a more good way to custom it:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  bgColor: (row, rowIndex) => {
+    return ....;  // return a color code
+  }
 };
 ```
 
