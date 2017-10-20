@@ -9,13 +9,13 @@ import EditingCell from './cell-edit/editing-cell';
 import Const from './const';
 
 const Row = (props) => {
-  const { ROW_SELECT_DISABLED } = Const;
-
   const {
     row,
     columns,
     keyField,
     rowIndex,
+    className,
+    style,
     cellEdit,
     selected,
     selectRow,
@@ -31,9 +31,9 @@ const Row = (props) => {
   } = cellEdit;
 
   return (
-    <tr>
+    <tr style={ style } className={ className }>
       {
-        selectRow.mode === ROW_SELECT_DISABLED
+        selectRow.mode === Const.ROW_SELECT_DISABLED
           ? null
           : (
             <SelectionCell
@@ -53,21 +53,21 @@ const Row = (props) => {
             editable = column.editable(content, row, rowIndex, index);
           }
           if (rowIndex === editingRowIdx && index === editingColIdx) {
-            let style = column.editCellStyle || {};
-            let classes = column.editCellClasses;
+            let editCellstyle = column.editCellStyle || {};
+            let editCellclasses = column.editCellClasses;
             if (_.isFunction(column.editCellStyle)) {
-              style = column.editCellStyle(content, row, rowIndex, index);
+              editCellstyle = column.editCellStyle(content, row, rowIndex, index);
             }
             if (_.isFunction(column.editCellClasses)) {
-              classes = column.editCellClasses(content, row, rowIndex, index);
+              editCellclasses = column.editCellClasses(content, row, rowIndex, index);
             }
             return (
               <EditingCell
                 key={ content }
                 row={ row }
                 column={ column }
-                className={ classes }
-                style={ style }
+                className={ editCellclasses }
+                style={ editCellstyle }
                 { ...rest }
               />
             );
@@ -93,11 +93,15 @@ const Row = (props) => {
 Row.propTypes = {
   row: PropTypes.object.isRequired,
   rowIndex: PropTypes.number.isRequired,
-  columns: PropTypes.array.isRequired
+  columns: PropTypes.array.isRequired,
+  style: PropTypes.object,
+  className: PropTypes.string
 };
 
 Row.defaultProps = {
-  editable: true
+  editable: true,
+  style: {},
+  className: null
 };
 
 export default Row;

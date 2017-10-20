@@ -478,7 +478,7 @@ Or take a callback function
 }
 ```
 
-## <a name='editCellClasses'>column.editCellClasses - [Object | Function]</a>
+## <a name='editCellClasses'>column.editCellClasses - [String | Function]</a>
 You can use `column.editCellClasses` to add custom class on `<td>` when cell editing. It's same as [`column.editCellStyle`](#editCellStyle) which also accept a callback function to able to custom your class more flexible. Following is the arguments of this callback function: `cell`, `row`, `rowIndex`, `colIndex`.
 
 ```js

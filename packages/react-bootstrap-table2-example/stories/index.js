@@ -53,6 +53,8 @@ import CellEditWithRedux from 'examples/cell-edit/cell-edit-with-redux-table';
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
 import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
+import SelectionStyleTable from 'examples/row-selection/selection-style';
+import SelectionClassTable from 'examples/row-selection/selection-class';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -113,6 +115,8 @@ storiesOf('Cell Editing', module)
   .add('Async Cell Editing(Redux)', () => <CellEditWithRedux />);
 
 storiesOf('Row Selection', module)
-  .add('Single selection', () => <SingleSelectionTable />)
-  .add('Multiple selection', () => <MultipleSelectionTable />);
+  .add('Single Selection', () => <SingleSelectionTable />)
+  .add('Multiple Selection', () => <MultipleSelectionTable />)
+  .add('Selection Style', () => <SelectionStyleTable />)
+  .add('Selection Class', () => <SelectionClassTable />);
 

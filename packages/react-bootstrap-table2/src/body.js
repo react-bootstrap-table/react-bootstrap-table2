@@ -22,6 +22,11 @@ const Body = (props) => {
     selectedRowKeys
   } = props;
 
+  const {
+    style: selectedStyle,
+    classes: selectedClasses
+  } = selectRow;
+
   let content;
 
   if (isEmpty) {
@@ -37,6 +42,13 @@ const Body = (props) => {
         ? selectedRowKeys.includes(key)
         : null;
 
+      let style = {};
+      let classes = '';
+      if (selected) {
+        style = _.isFunction(selectedStyle) ? selectedStyle(row, index) : selectedStyle;
+        classes = _.isFunction(selectedClasses) ? selectedClasses(row, index) : selectedClasses;
+      }
+
       return (
         <Row
           key={ key }
@@ -48,6 +60,8 @@ const Body = (props) => {
           editable={ editable }
           selected={ selected }
           selectRow={ selectRow }
+          style={ style }
+          className={ classes }
         />
       );
     });
