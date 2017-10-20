@@ -11,6 +11,7 @@ The following are available properties in `selectRow`:
 * [mode (**required**)](#mode)
 * [style](#style)
 * [classes)](#classes)
+* [nonSelectable)](#nonSelectable)
 
 #### Optional
 
@@ -84,5 +85,15 @@ If you wanna more flexible customization, `selectRow.classes` also accept a func
 const selectRow = {
   mode: 'checkbox',
   classes: (row, rowIndex) => { return ...; }
+};
+```
+
+## <a name='nonSelectable'>selectRow.nonSelectable - [Array]</a>
+This prop allow you to restrict some rows which can not be selected by user. `selectRow.nonSelectable` accept an rowkeys array.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5]
 };
 ```
