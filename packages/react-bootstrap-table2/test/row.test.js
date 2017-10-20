@@ -20,6 +20,9 @@ const defaultColumns = [{
   text: 'Price'
 }];
 
+const keyField = 'id';
+const rowIndex = 1;
+
 describe('Row', () => {
   let wrapper;
 
@@ -32,7 +35,13 @@ describe('Row', () => {
   describe('simplest row', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <Row { ...mockBodyResolvedProps } rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
+        <Row
+          { ...mockBodyResolvedProps }
+          rowIndex={ rowIndex }
+          columns={ defaultColumns }
+          row={ row }
+        />
+      );
     });
 
     it('should render successfully', () => {
@@ -48,7 +57,7 @@ describe('Row', () => {
       wrapper = shallow(
         <Row
           { ...mockBodyResolvedProps }
-          rowIndex={ 1 }
+          rowIndex={ rowIndex }
           columns={ defaultColumns }
           row={ row }
           style={ customStyle }
@@ -67,7 +76,7 @@ describe('Row', () => {
       wrapper = shallow(
         <Row
           { ...mockBodyResolvedProps }
-          rowIndex={ 1 }
+          rowIndex={ rowIndex }
           columns={ defaultColumns }
           row={ row }
           className={ className }
@@ -83,8 +92,6 @@ describe('Row', () => {
   describe('when cellEdit prop is defined', () => {
     let columns;
     let cellEdit;
-    const rowIndex = 1;
-    const keyField = 'id';
 
     beforeEach(() => {
       columns = defaultColumns;
@@ -270,7 +277,7 @@ describe('Row', () => {
             <Row
               { ...mockBodyResolvedProps }
               row={ row }
-              rowIndex={ 1 }
+              rowIndex={ rowIndex }
               columns={ columns }
               keyField={ keyField }
               cellEdit={ cellEdit }
@@ -437,29 +444,83 @@ describe('Row', () => {
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <Row { ...mockBodyResolvedProps } rowIndex={ 1 } columns={ defaultColumns } row={ row } />);
+        <Row
+          { ...mockBodyResolvedProps }
+          rowIndex={ rowIndex }
+          columns={ defaultColumns }
+          row={ row }
+        />
+      );
     });
 
-    it('should not render <SelectionCell />', () => {
+    it('should not render SelectionCell component', () => {
       expect(wrapper.find(SelectionCell).length).toBe(0);
     });
   });
 
   describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
+    let selectRow;
     beforeEach(() => {
-      const selectRow = { mode: 'checkbox' };
+      selectRow = { mode: 'checkbox' };
       wrapper = shallow(
         <Row
           { ...mockBodyResolvedProps }
-          rowIndex={ 1 }
+          rowIndex={ rowIndex }
           columns={ defaultColumns }
           row={ row }
           selectRow={ selectRow }
+          selected
         />);
     });
 
-    it('should render <SelectionCell />', () => {
+    it('should rendering SelectionCell component correctly', () => {
       expect(wrapper.find(SelectionCell).length).toBe(1);
+    });
+
+    it('should render SelectionCell component with correct props', () => {
+      expect(wrapper.find(SelectionCell).props().selected).toBeTruthy();
+      expect(wrapper.find(SelectionCell).props().disabled).toBeFalsy();
+      expect(wrapper.find(SelectionCell).props().mode).toEqual(selectRow.mode);
+    });
+
+    describe('if selectRow.nonSelectable is defined and contain a rowkey which is match to current row', () => {
+      beforeEach(() => {
+        selectRow = { mode: 'checkbox', nonSelectable: [row.id] };
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            keyField={ keyField }
+            selectRow={ selectRow }
+          />);
+      });
+
+      it('should render SelectionCell component with correct disable prop correctly', () => {
+        expect(wrapper.find(SelectionCell).length).toBe(1);
+        expect(wrapper.find(SelectionCell).prop('disabled')).toBeTruthy();
+      });
+    });
+
+    describe('if selectRow.nonSelectable is defined and not contain any rowkey which is match to current row', () => {
+      beforeEach(() => {
+        selectRow = { mode: 'checkbox', nonSelectable: [3, 4, 6] };
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            keyField={ keyField }
+            selectRow={ selectRow }
+          />);
+      });
+
+      it('should render SelectionCell component with correct disable prop correctly', () => {
+        expect(wrapper.find(SelectionCell).length).toBe(1);
+        expect(wrapper.find(SelectionCell).prop('disabled')).toBeFalsy();
+      });
     });
   });
 });

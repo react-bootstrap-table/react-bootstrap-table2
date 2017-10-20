@@ -46,13 +46,16 @@ class RowSelectionWrapper extends Component {
    * @param {Boolean} option - customized result for all rows selection
    */
   handleAllRowsSelect(option) {
-    const { store } = this.props;
-    const selected = store.isAnySelectedRow();
+    const { store, selectRow } = this.props;
+    const selected = store.isAnySelectedRow(selectRow.nonSelectable);
 
     // set next status of all row selected by store.selected or customizing by user.
     const result = option || !selected;
 
-    const currSelected = result ? store.selectAllRowKeys() : [];
+    const currSelected = result ?
+      store.selectAllRows(selectRow.nonSelectable) :
+      store.cleanSelectedRows(selectRow.nonSelectable);
+
 
     store.setSelectedRowKeys(currSelected);
 

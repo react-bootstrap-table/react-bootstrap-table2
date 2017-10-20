@@ -55,6 +55,7 @@ import SingleSelectionTable from 'examples/row-selection/single-selection';
 import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
+import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -118,5 +119,5 @@ storiesOf('Row Selection', module)
   .add('Single Selection', () => <SingleSelectionTable />)
   .add('Multiple Selection', () => <MultipleSelectionTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
-  .add('Selection Class', () => <SelectionClassTable />);
-
+  .add('Selection Class', () => <SelectionClassTable />)
+  .add('Not Selectabled Rows', () => <NonSelectableRowsTable />);

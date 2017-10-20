@@ -129,7 +129,8 @@ BootstrapTable.propTypes = {
   selectRow: PropTypes.shape({
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    nonSelectable: PropTypes.array
   }),
   onRowSelect: PropTypes.func,
   onAllRowsSelect: PropTypes.func
