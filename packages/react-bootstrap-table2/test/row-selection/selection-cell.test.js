@@ -60,6 +60,23 @@ describe('<SelectionCell />', () => {
         expect(mockOnRowSelect.calledOnce).toBe(true);
       });
 
+      it('should not calling onRowSelect when disabled prop is true', () => {
+        wrapper = shallow(
+          <SelectionCell
+            selected
+            rowKey={ rowKey }
+            mode={ mode }
+            onRowSelect={ mockOnRowSelect }
+            disabled
+          />
+        );
+
+        wrapper.find('td').simulate('click');
+
+        expect(spy.calledOnce).toBe(true);
+        expect(mockOnRowSelect.calledOnce).toBe(false);
+      });
+
       describe('if selectRow.mode is radio', () => {
         beforeEach(() => {
           wrapper = shallow(
@@ -131,6 +148,23 @@ describe('<SelectionCell />', () => {
       expect(wrapper.find('input').length).toBe(1);
       expect(wrapper.find('input').get(0).props.type).toBe(mode);
       expect(wrapper.find('input').get(0).props.checked).toBe(selected);
+    });
+
+    describe('when disabled prop give as true', () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <SelectionCell
+            rowKey={ 1 }
+            mode={ mode }
+            selected={ selected }
+            disabled
+          />
+        );
+      });
+
+      it('should render component with disabled attribute', () => {
+        expect(wrapper.find('input').get(0).props.disabled).toBeTruthy();
+      });
     });
   });
 });

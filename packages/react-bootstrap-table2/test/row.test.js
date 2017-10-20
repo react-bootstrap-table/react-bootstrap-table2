@@ -20,6 +20,8 @@ const defaultColumns = [{
   text: 'Price'
 }];
 
+const keyField = 'id';
+
 describe('Row', () => {
   let wrapper;
 
@@ -84,7 +86,6 @@ describe('Row', () => {
     let columns;
     let cellEdit;
     const rowIndex = 1;
-    const keyField = 'id';
 
     beforeEach(() => {
       columns = defaultColumns;
@@ -458,8 +459,48 @@ describe('Row', () => {
         />);
     });
 
-    it('should render <SelectionCell />', () => {
+    it('should render <SelectionCell /> correctly', () => {
       expect(wrapper.find(SelectionCell).length).toBe(1);
+    });
+
+    describe('if selectRow.nonSelectable is defined and contain a rowkey which is match to current row', () => {
+      beforeEach(() => {
+        const selectRow = { mode: 'checkbox', nonSelectable: [row.id] };
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ 1 }
+            columns={ defaultColumns }
+            row={ row }
+            keyField={ keyField }
+            selectRow={ selectRow }
+          />);
+      });
+
+      it('should render <SelectionCell /> with correct disable prop correctly', () => {
+        expect(wrapper.find(SelectionCell).length).toBe(1);
+        expect(wrapper.find(SelectionCell).prop('disabled')).toBeTruthy();
+      });
+    });
+
+    describe('if selectRow.nonSelectable is defined and not contain any rowkey which is match to current row', () => {
+      beforeEach(() => {
+        const selectRow = { mode: 'checkbox', nonSelectable: [3, 4, 6] };
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ 1 }
+            columns={ defaultColumns }
+            row={ row }
+            keyField={ keyField }
+            selectRow={ selectRow }
+          />);
+      });
+
+      it('should render <SelectionCell /> with correct disable prop correctly', () => {
+        expect(wrapper.find(SelectionCell).length).toBe(1);
+        expect(wrapper.find(SelectionCell).prop('disabled')).toBeFalsy();
+      });
     });
   });
 });

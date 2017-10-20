@@ -111,12 +111,24 @@ describe('Store Base', () => {
     });
   });
 
-  describe('selectAllRowKeys', () => {
+  describe('selectAllRows', () => {
     it('should return all row keys', () => {
-      const rowKeys = store.selectAllRowKeys();
+      const rowKeys = store.selectAllRows();
 
       expect(Array.isArray(rowKeys)).toBeTruthy();
-      expect(rowKeys).toEqual([3, 2, 4, 1]);
+      expect(rowKeys).toEqual(data.map(x => x[store.keyField]));
+    });
+
+    it('should return correct row keys when nonSelectableRows args is not empty', () => {
+      const nonSelectableRows = [1, 3];
+      const rowKeys = store.selectAllRows(nonSelectableRows);
+
+      expect(Array.isArray(rowKeys)).toBeTruthy();
+      expect(rowKeys).toEqual(
+        data
+          .filter(x => !nonSelectableRows.includes(_.get(x, store.keyField)))
+          .map(x => x[store.keyField])
+      );
     });
   });
 
@@ -135,13 +147,36 @@ describe('Store Base', () => {
   });
 
   describe('isAnySelectedRow', () => {
-    it('should return true when one or more than one rows were selected', () => {
-      store.selected = data.map(row => _.get(row, store.keyField));
+    describe('if store.selected not empty', () => {
+      it('should return true', () => {
+        store.selected = data.map(row => _.get(row, store.keyField));
+        expect(store.isAnySelectedRow()).toBeTruthy();
+      });
 
-      expect(store.isAnySelectedRow()).toBeTruthy();
+      describe('when nonSelectableRows given and not all of nonselectable rows are match current store.selected', () => {
+        const nonSelectableRows = [1, 3];
+        beforeEach(() => {
+          store.selected = [1, 4];
+        });
+
+        it('should return true', () => {
+          expect(store.isAnySelectedRow(nonSelectableRows)).toBeTruthy();
+        });
+      });
+
+      describe('when nonSelectableRows given and all of nonselectable rows are match current store.selected', () => {
+        const nonSelectableRows = [1, 3];
+        beforeEach(() => {
+          store.selected = nonSelectableRows;
+        });
+
+        it('should return false', () => {
+          expect(store.isAnySelectedRow(nonSelectableRows)).toBeFalsy();
+        });
+      });
     });
 
-    it('should return false when none was selected', () => {
+    it('should return false if store.selected is empty', () => {
       store.selected = [];
 
       expect(store.isAnySelectedRow()).not.toBeTruthy();
