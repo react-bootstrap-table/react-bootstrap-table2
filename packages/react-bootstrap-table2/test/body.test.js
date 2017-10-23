@@ -275,6 +275,80 @@ describe('Body', () => {
         expect(wrapper.find(Row).get(0).props.className).toEqual(className);
       });
     });
+
+    describe('if selectRow.bgColor is defined as a string', () => {
+      const bgColor = 'red';
+
+      beforeEach(() => {
+        selectRow.bgColor = bgColor;
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            data={ data }
+            columns={ columns }
+            keyField={ keyField }
+            selectedRowKeys={ selectedRowKeys }
+            selectRow={ selectRow }
+          />
+        );
+      });
+
+      it('should render Row component with correct style.backgroundColor prop', () => {
+        expect(wrapper.find(Row).get(0).props.style).toEqual({ backgroundColor: bgColor });
+      });
+    });
+
+    describe('if selectRow.bgColor is defined as a string', () => {
+      const bgColor = 'red';
+      const bgColorCallBack = sinon.stub().returns(bgColor);
+
+      beforeEach(() => {
+        selectRow.bgColor = bgColorCallBack;
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            data={ data }
+            columns={ columns }
+            keyField={ keyField }
+            selectedRowKeys={ selectedRowKeys }
+            selectRow={ selectRow }
+          />
+        );
+      });
+
+      it('should calling selectRow.bgColor callback correctly', () => {
+        expect(bgColorCallBack.calledOnce).toBeTruthy();
+        expect(bgColorCallBack.calledWith(data[0]), 1);
+      });
+
+      it('should render Row component with correct style.backgroundColor prop', () => {
+        expect(wrapper.find(Row).get(0).props.style).toEqual({ backgroundColor: bgColor });
+      });
+    });
+
+    describe('if selectRow.bgColor defined and selectRow.style.backgroundColor defined', () => {
+      const bgColor = 'yellow';
+      const style = { backgroundColor: 'red' };
+
+      beforeEach(() => {
+        selectRow.style = style;
+        selectRow.bgColor = bgColor;
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            data={ data }
+            columns={ columns }
+            keyField={ keyField }
+            selectedRowKeys={ selectedRowKeys }
+            selectRow={ selectRow }
+          />
+        );
+      });
+
+      it('should take selectRow.bgColor as higher priority', () => {
+        expect(wrapper.find(Row).get(0).props.style.backgroundColor).toBe(bgColor);
+      });
+    });
   });
 
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {

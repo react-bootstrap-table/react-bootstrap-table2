@@ -130,7 +130,8 @@ BootstrapTable.propTypes = {
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    nonSelectable: PropTypes.array
+    nonSelectable: PropTypes.array,
+    bgColor: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   }),
   onRowSelect: PropTypes.func,
   onAllRowsSelect: PropTypes.func
