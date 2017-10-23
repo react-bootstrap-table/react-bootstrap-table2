@@ -1,7 +1,8 @@
 /* eslint arrow-body-style: 0 */
 /* eslint react/prop-types: 0 */
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
+import { selectionElement } from '../table-factory';
 
 import Const from '../const';
 
@@ -65,7 +66,8 @@ class RowSelectionWrapper extends Component {
   }
 
   render() {
-    return React.cloneElement(this.props.elem, {
+    return selectionElement({
+      ...this.props,
       onRowSelect: this.handleRowSelect,
       onAllRowsSelect: this.handleAllRowsSelect
     });
@@ -73,7 +75,6 @@ class RowSelectionWrapper extends Component {
 }
 
 RowSelectionWrapper.propTypes = {
-  elem: PropTypes.element.isRequired,
   store: PropTypes.object.isRequired
 };
 

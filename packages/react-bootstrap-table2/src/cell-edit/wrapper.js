@@ -1,8 +1,10 @@
 /* eslint arrow-body-style: 0 */
 /* eslint react/prop-types: 0 */
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from '../utils';
+
+import { cellEditElement } from '../table-factory';
 
 class CellEditWrapper extends Component {
   constructor(props) {
@@ -88,7 +90,8 @@ class CellEditWrapper extends Component {
   }
 
   render() {
-    return React.cloneElement(this.props.elem, {
+    return cellEditElement({
+      ...this.props,
       onCellUpdate: this.handleCellUpdate,
       onStartEditing: this.startEditing,
       onEscapeEditing: this.escapeEditing,
@@ -98,7 +101,6 @@ class CellEditWrapper extends Component {
 }
 
 CellEditWrapper.propTypes = {
-  elem: PropTypes.element.isRequired,
   onUpdateCell: PropTypes.func.isRequired
 };
 
