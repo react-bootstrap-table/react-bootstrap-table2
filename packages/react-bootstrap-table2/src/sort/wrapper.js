@@ -1,8 +1,10 @@
 /* eslint arrow-body-style: 0 */
 /* eslint react/prop-types: 0 */
 /* eslint no-return-assign: 0 */
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
+
+import { sortableElement } from '../table-factory';
 
 class SortWrapper extends Component {
   constructor(props) {
@@ -20,7 +22,8 @@ class SortWrapper extends Component {
   }
 
   render() {
-    return React.cloneElement(this.props.elem, {
+    return sortableElement({
+      ...this.props,
       ref: node => this.table = node,
       onSort: this.handleSort
     });
@@ -28,7 +31,6 @@ class SortWrapper extends Component {
 }
 
 SortWrapper.propTypes = {
-  elem: PropTypes.element.isRequired,
   store: PropTypes.object.isRequired
 };
 

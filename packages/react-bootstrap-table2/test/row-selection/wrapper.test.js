@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import Store from '../../src/store/base';
@@ -8,7 +7,6 @@ import RowSelectionWrapper from '../../src/row-selection/wrapper';
 
 describe('RowSelectionWrapper', () => {
   let wrapper;
-  let elem;
 
   const columns = [{
     dataField: 'id',
@@ -35,14 +33,13 @@ describe('RowSelectionWrapper', () => {
   const store = new Store({ data, keyField });
 
   beforeEach(() => {
-    elem = React.createElement(BootstrapTable, { data, selectRow, columns, keyField, store });
     wrapper = shallow(
       <RowSelectionWrapper
         keyField={ keyField }
+        data={ data }
+        columns={ columns }
         selectRow={ selectRow }
-        elem={ elem }
         store={ store }
-        onUpdateCell={ sinon.stub() }
       />
     );
   });
@@ -57,7 +54,7 @@ describe('RowSelectionWrapper', () => {
     expect(wrapper.state().selectedRowKeys.length).toEqual(0);
   });
 
-  it('should inject correct props to elem', () => {
+  it('should inject correct props to base component', () => {
     expect(wrapper.props().onRowSelect).toBeDefined();
     expect(wrapper.props().onAllRowsSelect).toBeDefined();
   });
@@ -81,14 +78,13 @@ describe('RowSelectionWrapper', () => {
 
     beforeEach(() => {
       selectRow.mode = 'checkbox';
-      elem = React.createElement(BootstrapTable, { data, selectRow, columns, keyField, store });
       wrapper = shallow(
         <RowSelectionWrapper
           keyField={ keyField }
+          data={ data }
+          columns={ columns }
           selectRow={ selectRow }
-          elem={ elem }
           store={ store }
-          onUpdateCell={ sinon.stub() }
         />
       );
     });

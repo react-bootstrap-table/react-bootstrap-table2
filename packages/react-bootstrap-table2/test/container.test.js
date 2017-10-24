@@ -3,6 +3,9 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import BootstrapTable from '../src';
+import SortWrapper from '../src/sort/wrapper';
+import CellEditWrapper from '../src/cell-edit/wrapper';
+import RowSelectionWrapper from '../src/row-selection/wrapper';
 
 describe('withDataStore', () => {
   let wrapper;
@@ -44,8 +47,7 @@ describe('withDataStore', () => {
     });
   });
 
-  describe('when cellEdit is defined', () => {
-    const spy = jest.spyOn(BootstrapTable.prototype, 'renderCellEdit');
+  describe('when cellEdit prop is defined', () => {
     const cellEdit = {
       mode: 'click'
     };
@@ -61,15 +63,14 @@ describe('withDataStore', () => {
       );
     });
 
-    it('should calling renderCellEdit function', () => {
-      expect(spy).toHaveBeenCalled();
+    it('should render CellEditWrapper component successfully', () => {
+      const component = wrapper.find(CellEditWrapper);
+      expect(component.length).toBe(1);
     });
 
-    it('should injecting correct props', () => {
-      expect(wrapper.props().keyField).toEqual('id');
-      expect(wrapper.props().cellEdit).toEqual(cellEdit);
-      expect(wrapper.props().elem).toBeDefined();
-      expect(wrapper.props().onUpdateCell).toBeDefined();
+    it('should injecting correct props to CellEditWrapper', () => {
+      const component = wrapper.find(CellEditWrapper);
+      expect(component.props().onUpdateCell).toBeDefined();
     });
 
     describe('for handleUpdateCell function', () => {
@@ -127,6 +128,48 @@ describe('withDataStore', () => {
       // We need refactoring handleUpdateCell function for handling promise firstly
       // then it will be much easier to test
       describe.skip('when cellEdit.onUpdate callback is define and which return a Promise', () => {});
+    });
+  });
+
+  describe('when selectRow prop is defined', () => {
+    const selectRow = {
+      mode: 'checkbox'
+    };
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          selectRow={ selectRow }
+        />
+      );
+    });
+
+    it('should render RowSelectionWrapper component successfully', () => {
+      expect(wrapper.find(RowSelectionWrapper).length).toBe(1);
+    });
+  });
+
+  describe('when any column.sort is defined', () => {
+    beforeEach(() => {
+      const columnsWithSort = [{
+        dataField: keyField,
+        text: 'ID',
+        sort: true
+      }];
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columnsWithSort }
+        />
+      );
+    });
+
+    it('should render SortWrapper component successfully', () => {
+      expect(wrapper.find(SortWrapper).length).toBe(1);
     });
   });
 });
