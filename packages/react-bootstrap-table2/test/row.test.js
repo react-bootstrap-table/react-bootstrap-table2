@@ -470,6 +470,7 @@ describe('Row', () => {
           row={ row }
           selectRow={ selectRow }
           selected
+          selectable
         />);
     });
 
@@ -483,9 +484,8 @@ describe('Row', () => {
       expect(wrapper.find(SelectionCell).props().mode).toEqual(selectRow.mode);
     });
 
-    describe('if selectRow.nonSelectable is defined and contain a rowkey which is match to current row', () => {
+    describe('if selectable prop is false', () => {
       beforeEach(() => {
-        selectRow = { mode: 'checkbox', nonSelectable: [row.id] };
         wrapper = shallow(
           <Row
             { ...mockBodyResolvedProps }
@@ -494,6 +494,7 @@ describe('Row', () => {
             row={ row }
             keyField={ keyField }
             selectRow={ selectRow }
+            selectable={ false }
           />);
       });
 
@@ -503,9 +504,8 @@ describe('Row', () => {
       });
     });
 
-    describe('if selectRow.nonSelectable is defined and not contain any rowkey which is match to current row', () => {
+    describe('if selectable prop is true', () => {
       beforeEach(() => {
-        selectRow = { mode: 'checkbox', nonSelectable: [3, 4, 6] };
         wrapper = shallow(
           <Row
             { ...mockBodyResolvedProps }
@@ -514,6 +514,7 @@ describe('Row', () => {
             row={ row }
             keyField={ keyField }
             selectRow={ selectRow }
+            selectable
           />);
       });
 

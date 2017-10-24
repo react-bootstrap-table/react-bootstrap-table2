@@ -349,6 +349,30 @@ describe('Body', () => {
         expect(wrapper.find(Row).get(0).props.style.backgroundColor).toBe(bgColor);
       });
     });
+
+    describe('if selectRow.nonSelectable is defined', () => {
+      const nonSelectableRowIndex = 1;
+      const nonSelectable = [data[nonSelectableRowIndex][keyField]];
+
+      beforeEach(() => {
+        selectRow.nonSelectable = nonSelectable;
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            data={ data }
+            columns={ columns }
+            keyField={ keyField }
+            selectedRowKeys={ selectedRowKeys }
+            selectRow={ selectRow }
+          />
+        );
+      });
+
+      it('should render Row component with correct selectable prop', () => {
+        expect(wrapper.find(Row).get(0).props.selectable).toBeTruthy();
+        expect(wrapper.find(Row).get(nonSelectableRowIndex).props.selectable).toBeFalsy();
+      });
+    });
   });
 
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {

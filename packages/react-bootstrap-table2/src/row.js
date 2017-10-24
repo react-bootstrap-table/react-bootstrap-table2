@@ -20,14 +20,14 @@ class Row extends Component {
       row,
       selected,
       keyField,
+      selectable,
       selectRow: {
         onRowSelect,
-        nonSelectable,
         clickToEdit
       }
     } = this.props;
     const key = _.get(row, keyField);
-    if (!nonSelectable || !nonSelectable.includes(key)) {
+    if (selectable) {
       const { cellEdit: { mode } } = this.props;
       if (mode === Const.DBCLICK_TO_CELL_EDIT && clickToEdit) {
         this.clickNum += 1;
@@ -54,6 +54,7 @@ class Row extends Component {
       cellEdit,
       selected,
       selectRow,
+      selectable,
       editable: editableRow
     } = this.props;
 
@@ -66,7 +67,7 @@ class Row extends Component {
     } = cellEdit;
 
     const key = _.get(row, keyField);
-    const { nonSelectable, clickToSelect } = selectRow;
+    const { clickToSelect } = selectRow;
 
     const trAttrs = {};
     if (clickToSelect) {
@@ -83,7 +84,7 @@ class Row extends Component {
                 { ...selectRow }
                 rowKey={ key }
                 selected={ selected }
-                disabled={ nonSelectable && nonSelectable.includes(key) }
+                disabled={ !selectable }
               />
             )
         }
