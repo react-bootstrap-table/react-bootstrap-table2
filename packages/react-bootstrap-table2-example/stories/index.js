@@ -53,6 +53,8 @@ import CellEditWithRedux from 'examples/cell-edit/cell-edit-with-redux-table';
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
 import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
+import ClickToSelectTable from 'examples/row-selection/click-to-select';
+import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-select-with-cell-edit';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
@@ -119,6 +121,8 @@ storiesOf('Cell Editing', module)
 storiesOf('Row Selection', module)
   .add('Single Selection', () => <SingleSelectionTable />)
   .add('Multiple Selection', () => <MultipleSelectionTable />)
+  .add('Click to Select', () => <ClickToSelectTable />)
+  .add('Click to Select and Edit Cell', () => <ClickToSelectWithCellEditTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
