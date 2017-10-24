@@ -13,6 +13,8 @@ The following are available properties in `selectRow`:
 * [classes)](#classes)
 * [bgColor](#bgColor)
 * [nonSelectable)](#nonSelectable)
+* [clickToSelect)](#clickToSelect)
+* [clickToEdit](#clickToEdit)
 
 #### Optional
 
@@ -117,5 +119,29 @@ This prop allow you to restrict some rows which can not be selected by user. `se
 const selectRow = {
   mode: 'checkbox',
   nonSelectable: [1, 3 ,5]
+};
+```
+
+## <a name='clickToSelect'>selectRow.clickToSelect - [Bool]</a>
+Able to select row when clicking on row.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true
+};
+```
+
+> Note: if you also enable [cellEdit](./cell-edit.md), the `selectRow.clickToSelect` will deactivate the functionality of cell editing   
+> If you want to click on row to select row and edit cell simultaneously, you are suppose to enable [`selectRow.clickToEdit`](#clickToEdit)
+
+## <a name='clickToEdit'>selectRow.clickToEdit - [Bool]</a>
+Able to click to edit cell and select row
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true
+  clickToEdit: true
 };
 ```
