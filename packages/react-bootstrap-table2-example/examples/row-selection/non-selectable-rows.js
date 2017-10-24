@@ -19,6 +19,7 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
+  clickToSelect: true,
   nonSelectable: [0, 2, 4]
 };
 
@@ -36,6 +37,7 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
+  clickToSelect: true,
   nonSelectable: [0, 2, 4]
 };
 

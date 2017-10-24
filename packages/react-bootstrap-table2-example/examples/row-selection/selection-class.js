@@ -20,11 +20,13 @@ const columns = [{
 
 const selectRow1 = {
   mode: 'checkbox',
+  clickToSelect: true,
   classes: 'selection-row'
 };
 
 const selectRow2 = {
   mode: 'checkbox',
+  clickToSelect: true,
   classes: (row, rowIndex) =>
     (rowIndex > 1 ? 'row-index-bigger-than-2101' : 'row-index-small-than-2101')
 };
@@ -43,6 +45,7 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
+  clickToSelect: true,
   classes: 'selection-row'
 };
 
@@ -68,6 +71,7 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
+  clickToSelect: true,
   classes: (row, rowIndex) =>
     (rowIndex > 1 ? 'row-index-bigger-than-2101' : 'row-index-small-than-2101')
 };

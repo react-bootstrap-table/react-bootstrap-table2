@@ -20,11 +20,13 @@ const columns = [{
 
 const selectRow1 = {
   mode: 'checkbox',
+  clickToSelect: true,
   style: { backgroundColor: '#c8e6c9' }
 };
 
 const selectRow2 = {
   mode: 'checkbox',
+  clickToSelect: true,
   style: (row, rowIndex) => {
     const backgroundColor = rowIndex > 1 ? '#00BFFF' : '#00FFFF';
     return { backgroundColor };
@@ -45,6 +47,7 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
+  clickToSelect: true,
   style: { backgroundColor: '#c8e6c9' }
 };
 
@@ -70,6 +73,7 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
+  clickToSelect: true,
   style: (row, rowIndex) => {
     const backgroundColor = rowIndex > 1 ? '#00BFFF' : '#00FFFF';
     return { backgroundColor };
