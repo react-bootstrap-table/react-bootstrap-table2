@@ -37,6 +37,7 @@ describe('Row', () => {
       wrapper = shallow(
         <Row
           { ...mockBodyResolvedProps }
+          keyField={ keyField }
           rowIndex={ rowIndex }
           columns={ defaultColumns }
           row={ row }
@@ -521,6 +522,158 @@ describe('Row', () => {
       it('should render SelectionCell component with correct disable prop correctly', () => {
         expect(wrapper.find(SelectionCell).length).toBe(1);
         expect(wrapper.find(SelectionCell).prop('disabled')).toBeFalsy();
+      });
+    });
+
+    describe('if selectRow.clickToSelect is true', () => {
+      beforeEach(() => {
+        selectRow.clickToSelect = true;
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            selectRow={ selectRow }
+            selected
+            selectable
+          />);
+      });
+
+      it('should render Row component successfully with onClick event', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find('tr').prop('onClick')).toBeDefined();
+      });
+    });
+  });
+
+  describe('handleRowClick', () => {
+    let selectRow;
+    let onRowSelectCallBack;
+
+    describe('selectable prop is false', () => {
+      beforeEach(() => {
+        onRowSelectCallBack = sinon.stub();
+        selectRow = {
+          mode: 'checkbox',
+          clickToSelect: true,
+          onRowSelect: onRowSelectCallBack
+        };
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            selectRow={ selectRow }
+            selected
+            selectable={ false }
+          />);
+        wrapper.find('tr').simulate('click');
+      });
+
+      it('should not calling selectRow.onRowSelect callback', () => {
+        expect(onRowSelectCallBack.callCount).toEqual(0);
+      });
+    });
+
+    describe('selectable prop is true', () => {
+      describe('and selected prop is true', () => {
+        beforeEach(() => {
+          onRowSelectCallBack = sinon.stub();
+          selectRow = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            onRowSelect: onRowSelectCallBack
+          };
+          wrapper = shallow(
+            <Row
+              { ...mockBodyResolvedProps }
+              keyField={ keyField }
+              rowIndex={ rowIndex }
+              columns={ defaultColumns }
+              row={ row }
+              selectRow={ selectRow }
+              selected
+              selectable
+            />);
+          wrapper.find('tr').simulate('click');
+        });
+
+        it('should calling selectRow.onRowSelect callback', () => {
+          expect(onRowSelectCallBack.callCount).toEqual(1);
+        });
+
+        it('should calling selectRow.onRowSelect with correct argument', () => {
+          expect(onRowSelectCallBack.calledWith(row[keyField], false)).toBeTruthy();
+        });
+      });
+
+      describe('and selected prop is false', () => {
+        beforeEach(() => {
+          onRowSelectCallBack = sinon.stub();
+          selectRow = {
+            mode: 'checkbox',
+            clickToSelect: true,
+            onRowSelect: onRowSelectCallBack
+          };
+          wrapper = shallow(
+            <Row
+              { ...mockBodyResolvedProps }
+              keyField={ keyField }
+              rowIndex={ rowIndex }
+              columns={ defaultColumns }
+              row={ row }
+              selectRow={ selectRow }
+              selected={ false }
+              selectable
+            />);
+          wrapper.find('tr').simulate('click');
+        });
+
+        it('should calling selectRow.onRowSelect callback', () => {
+          expect(onRowSelectCallBack.callCount).toEqual(1);
+        });
+
+        it('should calling selectRow.onRowSelect with correct argument', () => {
+          expect(onRowSelectCallBack.calledWith(row[keyField], true)).toBeTruthy();
+        });
+      });
+    });
+
+    describe('if cellEdit.mode is dbclick and selectRow.clickToEdit is true', () => {
+      beforeEach(() => {
+        onRowSelectCallBack = sinon.stub();
+        const cellEdit = {
+          mode: Const.DBCLICK_TO_CELL_EDIT,
+          ridx: undefined,
+          cidx: undefined,
+          onStart: sinon.stub()
+        };
+        selectRow = {
+          mode: 'checkbox',
+          clickToSelect: true,
+          clickToEdit: true,
+          onRowSelect: onRowSelectCallBack
+        };
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            keyField={ keyField }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            selectRow={ selectRow }
+            cellEdit={ cellEdit }
+            selected
+            selectable
+          />);
+        wrapper.instance().handleRowClick();
+        wrapper.instance().handleRowClick();
+      });
+
+      it('should increase clickNum as 2', () => {
+        expect(wrapper.instance().clickNum).toEqual(2);
       });
     });
   });

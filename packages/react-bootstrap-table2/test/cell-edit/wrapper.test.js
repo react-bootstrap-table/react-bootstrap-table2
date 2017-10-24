@@ -146,13 +146,60 @@ describe('CellEditWrapper', () => {
   });
 
   describe('call startEditing function', () => {
+    const ridx = 1;
+    const cidx = 3;
     it('should set state correctly', () => {
-      const ridx = 1;
-      const cidx = 3;
       wrapper.instance().startEditing(ridx, cidx);
       expect(wrapper.state().ridx).toEqual(ridx);
       expect(wrapper.state().cidx).toEqual(cidx);
       expect(wrapper.state().editing).toBeTruthy();
+    });
+
+    describe('if selectRow.clickToSelect is defined', () => {
+      beforeEach(() => {
+        const selectRow = { mode: 'checkbox', clickToSelect: true };
+        wrapper = shallow(
+          <CellEditWrapper
+            keyField={ keyField }
+            data={ data }
+            columns={ columns }
+            cellEdit={ cellEdit }
+            selectRow={ selectRow }
+            store={ store }
+            onUpdateCell={ sinon.stub() }
+          />
+        );
+      });
+
+      it('should not set state', () => {
+        wrapper.instance().startEditing(ridx, cidx);
+        expect(wrapper.state().ridx).toBeNull();
+        expect(wrapper.state().cidx).toBeDefined();
+      });
+    });
+
+    describe('if selectRow.clickToSelect and selectRow.clickToEdit is defined', () => {
+      beforeEach(() => {
+        const selectRow = { mode: 'checkbox', clickToSelect: true, clickToEdit: true };
+        wrapper = shallow(
+          <CellEditWrapper
+            keyField={ keyField }
+            data={ data }
+            columns={ columns }
+            cellEdit={ cellEdit }
+            selectRow={ selectRow }
+            store={ store }
+            onUpdateCell={ sinon.stub() }
+          />
+        );
+      });
+
+      it('should set state correctly', () => {
+        wrapper.instance().startEditing(ridx, cidx);
+        expect(wrapper.state().ridx).toEqual(ridx);
+        expect(wrapper.state().cidx).toEqual(cidx);
+        expect(wrapper.state().editing).toBeTruthy();
+      });
     });
   });
 
