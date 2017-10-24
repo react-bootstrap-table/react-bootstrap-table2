@@ -61,13 +61,18 @@ class CellEditWrapper extends Component {
   }
 
   startEditing(ridx, cidx) {
-    this.setState(() => {
-      return {
-        ridx,
-        cidx,
-        editing: true
-      };
-    });
+    const editing = () => {
+      this.setState(() => {
+        return {
+          ridx,
+          cidx,
+          editing: true
+        };
+      });
+    };
+
+    const { selectRow } = this.props;
+    if (!selectRow || (selectRow.clickToEdit || !selectRow.clickToSelect)) editing();
   }
 
   escapeEditing() {

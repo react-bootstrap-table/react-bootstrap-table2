@@ -1,5 +1,6 @@
 /* eslint no-empty: 0 */
 /* eslint no-param-reassign: 0 */
+/* eslint prefer-rest-params: 0 */
 
 function splitNested(str) {
   return [str]
@@ -72,6 +73,29 @@ function sleep(fn, ms) {
   return setTimeout(() => fn(), ms);
 }
 
+function debounce(func, wait, immediate) {
+  let timeout;
+
+  return () => {
+    const later = () => {
+      timeout = null;
+
+      if (!immediate) {
+        func.apply(this, arguments);
+      }
+    };
+
+    const callNow = immediate && !timeout;
+
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait || 0);
+
+    if (callNow) {
+      func.appy(this, arguments);
+    }
+  };
+}
+
 export default {
   get,
   set,
@@ -79,5 +103,6 @@ export default {
   isObject,
   isEmptyObject,
   isDefined,
-  sleep
+  sleep,
+  debounce
 };
