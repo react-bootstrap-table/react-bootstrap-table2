@@ -9,7 +9,6 @@ import SortWrapper from '../../src/sort/wrapper';
 
 describe('SortWrapper', () => {
   let wrapper;
-  let elem;
 
   const columns = [{
     dataField: 'id',
@@ -33,10 +32,11 @@ describe('SortWrapper', () => {
   let store = new Store({ data, keyField });
 
   beforeEach(() => {
-    elem = React.createElement(BootstrapTable, { data, columns, keyField, store });
     wrapper = shallow(
       <SortWrapper
-        elem={ elem }
+        keyField={ keyField }
+        data={ data }
+        columns={ columns }
         store={ store }
       />
     );
@@ -47,7 +47,7 @@ describe('SortWrapper', () => {
     expect(wrapper.find(BootstrapTable)).toBeDefined();
   });
 
-  it('should inject correct props to elem', () => {
+  it('should inject correct props to base component', () => {
     expect(wrapper.props().onSort).toBeDefined();
   });
 
@@ -58,7 +58,9 @@ describe('SortWrapper', () => {
       store = new Store({ data, keyField });
       wrapper = mount(
         <SortWrapper
-          elem={ elem }
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
           store={ store }
         />
       );

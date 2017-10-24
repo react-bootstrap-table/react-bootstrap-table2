@@ -8,7 +8,6 @@ import CellEditWrapper from '../../src/cell-edit/wrapper';
 
 describe('CellEditWrapper', () => {
   let wrapper;
-  let elem;
 
   const columns = [{
     dataField: 'id',
@@ -35,12 +34,13 @@ describe('CellEditWrapper', () => {
   const store = new Store({ data, keyField });
 
   beforeEach(() => {
-    elem = React.createElement(BootstrapTable, { data, cellEdit, columns, keyField, store });
     wrapper = shallow(
       <CellEditWrapper
         keyField={ keyField }
+        data={ data }
+        columns={ columns }
         cellEdit={ cellEdit }
-        elem={ elem }
+        store={ store }
         onUpdateCell={ sinon.stub() }
       />
     );
@@ -58,7 +58,7 @@ describe('CellEditWrapper', () => {
     expect(wrapper.state().editing).toBeFalsy();
   });
 
-  it('should inject correct props to elem', () => {
+  it('should inject correct props to base component', () => {
     expect(wrapper.props().onCellUpdate).toBeDefined();
     expect(wrapper.props().onStartEditing).toBeDefined();
     expect(wrapper.props().onEscapeEditing).toBeDefined();
@@ -74,12 +74,13 @@ describe('CellEditWrapper', () => {
 
     describe('and cellEdit.editing is false', () => {
       beforeEach(() => {
-        elem = React.createElement(BootstrapTable, { data, cellEdit, columns, keyField, store });
         wrapper = shallow(
           <CellEditWrapper
             keyField={ keyField }
+            data={ data }
+            columns={ columns }
             cellEdit={ cellEdit }
-            elem={ elem }
+            store={ store }
             onUpdateCell={ sinon.stub() }
           />
         );
@@ -104,12 +105,13 @@ describe('CellEditWrapper', () => {
       const cidx = 2;
 
       beforeEach(() => {
-        elem = React.createElement(BootstrapTable, { data, cellEdit, columns, keyField, store });
         wrapper = shallow(
           <CellEditWrapper
             keyField={ keyField }
+            data={ data }
+            columns={ columns }
             cellEdit={ cellEdit }
-            elem={ elem }
+            store={ store }
             onUpdateCell={ sinon.stub() }
           />
         );
@@ -175,8 +177,10 @@ describe('CellEditWrapper', () => {
       wrapper = shallow(
         <CellEditWrapper
           keyField={ keyField }
+          data={ data }
+          columns={ columns }
           cellEdit={ cellEdit }
-          elem={ elem }
+          store={ store }
           onUpdateCell={ onUpdateCellCallBack }
         />
       );
@@ -204,8 +208,10 @@ describe('CellEditWrapper', () => {
           wrapper = shallow(
             <CellEditWrapper
               keyField={ keyField }
+              data={ data }
+              columns={ columns }
               cellEdit={ cellEdit }
-              elem={ elem }
+              store={ store }
               onUpdateCell={ onUpdateCellCallBack }
             />
           );
@@ -229,8 +235,10 @@ describe('CellEditWrapper', () => {
         wrapper = shallow(
           <CellEditWrapper
             keyField={ keyField }
+            data={ data }
+            columns={ columns }
             cellEdit={ cellEdit }
-            elem={ elem }
+            store={ store }
             onUpdateCell={ onUpdateCellCallBack }
           />
         );
@@ -249,8 +257,10 @@ describe('CellEditWrapper', () => {
         wrapper = shallow(
           <CellEditWrapper
             keyField={ keyField }
+            data={ data }
+            columns={ columns }
             cellEdit={ cellEdit }
-            elem={ elem }
+            store={ store }
             onUpdateCell={ onUpdateCellCallBack }
           />
         );
