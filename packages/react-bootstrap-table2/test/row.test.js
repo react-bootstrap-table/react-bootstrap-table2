@@ -605,7 +605,7 @@ describe('Row', () => {
         });
 
         it('should calling selectRow.onRowSelect with correct argument', () => {
-          expect(onRowSelectCallBack.calledWith(row[keyField], false)).toBeTruthy();
+          expect(onRowSelectCallBack.calledWith(row[keyField], false, rowIndex)).toBeTruthy();
         });
       });
 
@@ -636,7 +636,7 @@ describe('Row', () => {
         });
 
         it('should calling selectRow.onRowSelect with correct argument', () => {
-          expect(onRowSelectCallBack.calledWith(row[keyField], true)).toBeTruthy();
+          expect(onRowSelectCallBack.calledWith(row[keyField], true, rowIndex)).toBeTruthy();
         });
       });
     });
