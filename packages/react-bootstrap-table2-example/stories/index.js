@@ -59,6 +59,7 @@ import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
+import SelectionHooks from 'examples/row-selection/selection-hooks';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -126,4 +127,5 @@ storiesOf('Row Selection', module)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
-  .add('Not Selectabled Rows', () => <NonSelectableRowsTable />);
+  .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
+  .add('Selection Hooks', () => <SelectionHooks />);
