@@ -15,6 +15,8 @@ The following are available properties in `selectRow`:
 * [nonSelectable)](#nonSelectable)
 * [clickToSelect)](#clickToSelect)
 * [clickToEdit](#clickToEdit)
+* [onSelect](#onSelect)
+* [onSelectAll](#onSelectAll)
 
 #### Optional
 
@@ -143,5 +145,30 @@ const selectRow = {
   mode: 'checkbox',
   clickToSelect: true
   clickToEdit: true
+};
+```
+
+# <a name='onSelect'>selectRow.onSelect - [Function]</a>
+This callback function will be called when a row is select/unselect and pass following three arguments:
+`row`, `isSelect` and `rowIndex`.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  onSelect: (row, isSelect, rowIndex) => {
+    // ...
+  }
+};
+```
+
+# <a name='onSelectAll'>selectRow.onSelectAll - [Function]</a>
+This callback function will be called when select/unselect all and it only work when you configure [`selectRow.mode`](#mode) as `checkbox`.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  onSelectAll: (isSelect, results) => {
+    // ...
+  }
 };
 ```
