@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import Store from '../../src/store/base';
@@ -27,6 +28,8 @@ describe('RowSelectionWrapper', () => {
   const selectRow = {
     mode: 'radio'
   };
+
+  const rowIndex = 1;
 
   const keyField = 'id';
 
@@ -64,10 +67,10 @@ describe('RowSelectionWrapper', () => {
     const secondSelectedRow = data[1][keyField];
 
     it('call handleRowSelect function should seting correct state.selectedRowKeys', () => {
-      wrapper.instance().handleRowSelect(firstSelectedRow);
+      wrapper.instance().handleRowSelect(firstSelectedRow, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual([firstSelectedRow]);
 
-      wrapper.instance().handleRowSelect(secondSelectedRow);
+      wrapper.instance().handleRowSelect(secondSelectedRow, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual([secondSelectedRow]);
     });
   });
@@ -90,16 +93,16 @@ describe('RowSelectionWrapper', () => {
     });
 
     it('call handleRowSelect function should seting correct state.selectedRowKeys', () => {
-      wrapper.instance().handleRowSelect(firstSelectedRow, true);
+      wrapper.instance().handleRowSelect(firstSelectedRow, true, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual(expect.arrayContaining([firstSelectedRow]));
 
-      wrapper.instance().handleRowSelect(secondSelectedRow, true);
+      wrapper.instance().handleRowSelect(secondSelectedRow, true, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual(expect.arrayContaining([firstSelectedRow, secondSelectedRow]));
 
-      wrapper.instance().handleRowSelect(firstSelectedRow, false);
+      wrapper.instance().handleRowSelect(firstSelectedRow, false, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual(expect.arrayContaining([secondSelectedRow]));
 
-      wrapper.instance().handleRowSelect(secondSelectedRow, false);
+      wrapper.instance().handleRowSelect(secondSelectedRow, false, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual([]);
     });
 
@@ -117,6 +120,63 @@ describe('RowSelectionWrapper', () => {
 
       wrapper.instance().handleAllRowsSelect(false);
       expect(wrapper.state('selectedRowKeys')).toEqual([]);
+    });
+  });
+
+  describe('when selectRow.onSelect is defined', () => {
+    const selectedRow = data[0][keyField];
+    const onSelectCallBack = sinon.stub();
+
+    beforeEach(() => {
+      selectRow.mode = 'checkbox';
+      selectRow.onSelect = onSelectCallBack;
+      wrapper = shallow(
+        <RowSelectionWrapper
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          selectRow={ selectRow }
+          store={ store }
+        />
+      );
+    });
+
+    it('selectRow.onSelect callback should be called correctly when calling handleRowSelect function', () => {
+      wrapper.instance().handleRowSelect(selectedRow, true, rowIndex);
+      expect(onSelectCallBack.callCount).toEqual(1);
+      expect(onSelectCallBack.calledWith(data[0], true, rowIndex)).toBeTruthy();
+
+      wrapper.instance().handleRowSelect(selectedRow, false, rowIndex);
+      expect(onSelectCallBack.callCount).toEqual(2);
+      expect(onSelectCallBack.calledWith(data[0], false, rowIndex)).toBeTruthy();
+    });
+  });
+
+  describe('when selectRow.onSelectAll is defined', () => {
+    const onSelectAllCallBack = sinon.stub();
+
+    beforeEach(() => {
+      selectRow.mode = 'checkbox';
+      selectRow.onSelectAll = onSelectAllCallBack;
+      wrapper = shallow(
+        <RowSelectionWrapper
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          selectRow={ selectRow }
+          store={ store }
+        />
+      );
+    });
+
+    it('selectRow.onSelect callback should be called correctly when calling handleRowSelect function', () => {
+      wrapper.instance().handleAllRowsSelect();
+      expect(onSelectAllCallBack.callCount).toEqual(1);
+      expect(onSelectAllCallBack.calledWith(true, data)).toBeTruthy();
+
+      wrapper.instance().handleAllRowsSelect();
+      expect(onSelectAllCallBack.callCount).toEqual(2);
+      expect(onSelectAllCallBack.calledWith(false, [])).toBeTruthy();
     });
   });
 });

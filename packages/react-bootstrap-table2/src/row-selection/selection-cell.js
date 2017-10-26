@@ -12,7 +12,8 @@ export default class SelectionCell extends Component {
     rowKey: PropTypes.any,
     selected: PropTypes.bool,
     onRowSelect: PropTypes.func,
-    disabled: PropTypes.bool
+    disabled: PropTypes.bool,
+    rowIndex: PropTypes.number
   }
 
   constructor() {
@@ -32,7 +33,8 @@ export default class SelectionCell extends Component {
       rowKey,
       selected,
       onRowSelect,
-      disabled
+      disabled,
+      rowIndex
     } = this.props;
 
     if (disabled) return;
@@ -41,7 +43,7 @@ export default class SelectionCell extends Component {
       ? true
       : !selected;
 
-    onRowSelect(rowKey, checked);
+    onRowSelect(rowKey, checked, rowIndex);
   }
 
   render() {

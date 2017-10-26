@@ -21,6 +21,7 @@ class Row extends Component {
       selected,
       keyField,
       selectable,
+      rowIndex,
       selectRow: {
         onRowSelect,
         clickToEdit
@@ -33,12 +34,12 @@ class Row extends Component {
         this.clickNum += 1;
         _.debounce(() => {
           if (this.clickNum === 1) {
-            onRowSelect(key, !selected);
+            onRowSelect(key, !selected, rowIndex);
           }
           this.clickNum = 0;
         }, Const.DELAY_FOR_DBCLICK)();
       } else {
-        onRowSelect(key, !selected);
+        onRowSelect(key, !selected, rowIndex);
       }
     }
   }
@@ -83,6 +84,7 @@ class Row extends Component {
               <SelectionCell
                 { ...selectRow }
                 rowKey={ key }
+                rowIndex={ rowIndex }
                 selected={ selected }
                 disabled={ !selectable }
               />

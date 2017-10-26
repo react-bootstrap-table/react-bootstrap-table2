@@ -87,6 +87,31 @@ describe('Store Base', () => {
     });
   });
 
+  describe('getSelectedRows', () => {
+    const selected = [1, 4];
+    beforeEach(() => {
+      store.setSelectedRowKeys(selected);
+    });
+
+    it('should return all selected rows by store.selected', () => {
+      const result = store.getSelectedRows();
+      expect(result).toBeDefined();
+      expect(result.length).toEqual(2);
+      result.forEach((r) => {
+        expect(r).toBeDefined();
+        expect(selected.includes(r[store.keyField])).toBeTruthy();
+      });
+    });
+  });
+
+  describe('setSelectedRowKeys', () => {
+    const selected = [1, 4];
+    it('should set store.selected correctly', () => {
+      store.setSelectedRowKeys(selected);
+      expect(store.getSelectedRowKeys()).toEqual(selected);
+    });
+  });
+
   describe('edit', () => {
     it('should update a specified field correctly', () => {
       const newValue = 'newValue';

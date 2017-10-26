@@ -6,6 +6,7 @@ import SelectionCell from '../../src/row-selection/selection-cell';
 
 describe('<SelectionCell />', () => {
   const mode = 'checkbox';
+  const rowIndex = 1;
 
   let wrapper;
 
@@ -56,6 +57,7 @@ describe('<SelectionCell />', () => {
               selected
               rowKey={ rowKey }
               mode={ mode }
+              rowIndex={ rowIndex }
               onRowSelect={ mockOnRowSelect }
             />
           );
@@ -69,7 +71,7 @@ describe('<SelectionCell />', () => {
         it('should calling onRowSelect callback correctly', () => {
           expect(mockOnRowSelect.calledOnce).toBe(true);
           expect(
-            mockOnRowSelect.calledWith(rowKey, !selected)
+            mockOnRowSelect.calledWith(rowKey, !selected, rowIndex)
           ).toBe(true);
         });
       });
@@ -81,6 +83,7 @@ describe('<SelectionCell />', () => {
               selected
               rowKey={ rowKey }
               mode={ mode }
+              rowIndex={ rowIndex }
               onRowSelect={ mockOnRowSelect }
               disabled
             />
@@ -104,6 +107,7 @@ describe('<SelectionCell />', () => {
               selected
               rowKey={ rowKey }
               mode="radio"
+              rowIndex={ rowIndex }
               onRowSelect={ mockOnRowSelect }
             />
           );
@@ -113,12 +117,12 @@ describe('<SelectionCell />', () => {
           // first click
           wrapper.find('td').simulate('click');
           expect(mockOnRowSelect.callCount).toBe(1);
-          expect(mockOnRowSelect.calledWith(rowKey, true)).toBe(true);
+          expect(mockOnRowSelect.calledWith(rowKey, true, rowIndex)).toBe(true);
 
           // second click
           wrapper.find('td').simulate('click');
           expect(mockOnRowSelect.callCount).toBe(2);
-          expect(mockOnRowSelect.calledWith(rowKey, true)).toBe(true);
+          expect(mockOnRowSelect.calledWith(rowKey, true, rowIndex)).toBe(true);
         });
       });
 
@@ -128,6 +132,7 @@ describe('<SelectionCell />', () => {
             <SelectionCell
               rowKey={ rowKey }
               mode="checkbox"
+              rowIndex={ rowIndex }
               onRowSelect={ mockOnRowSelect }
             />
           );
@@ -138,13 +143,13 @@ describe('<SelectionCell />', () => {
           wrapper.setProps({ selected: true });
           wrapper.find('td').simulate('click');
           expect(mockOnRowSelect.callCount).toBe(1);
-          expect(mockOnRowSelect.calledWith(rowKey, false)).toBe(true);
+          expect(mockOnRowSelect.calledWith(rowKey, false, rowIndex)).toBe(true);
 
           // second click
           wrapper.setProps({ selected: false });
           wrapper.find('td').simulate('click');
           expect(mockOnRowSelect.callCount).toBe(2);
-          expect(mockOnRowSelect.calledWith(rowKey, true)).toBe(true);
+          expect(mockOnRowSelect.calledWith(rowKey, true, rowIndex)).toBe(true);
         });
       });
     });
@@ -158,6 +163,7 @@ describe('<SelectionCell />', () => {
         <SelectionCell
           rowKey={ 1 }
           mode={ mode }
+          rowIndex={ rowIndex }
           selected={ selected }
         />
       );
@@ -176,6 +182,7 @@ describe('<SelectionCell />', () => {
           <SelectionCell
             rowKey={ 1 }
             mode={ mode }
+            rowIndex={ rowIndex }
             selected={ selected }
             disabled
           />

@@ -318,7 +318,7 @@ describe('Body', () => {
 
       it('should calling selectRow.bgColor callback correctly', () => {
         expect(bgColorCallBack.calledOnce).toBeTruthy();
-        expect(bgColorCallBack.calledWith(data[0]), 1);
+        expect(bgColorCallBack.calledWith(data[0]), 1).toBeTruthy();
       });
 
       it('should render Row component with correct style.backgroundColor prop', () => {
