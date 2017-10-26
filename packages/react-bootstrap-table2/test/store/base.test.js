@@ -104,6 +104,14 @@ describe('Store Base', () => {
     });
   });
 
+  describe('setSelectedRowKeys', () => {
+    const selected = [1, 4];
+    it('should set store.selected correctly', () => {
+      store.setSelectedRowKeys(selected);
+      expect(store.getSelectedRowKeys()).toEqual(selected);
+    });
+  });
+
   describe('edit', () => {
     it('should update a specified field correctly', () => {
       const newValue = 'newValue';
