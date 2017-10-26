@@ -21,8 +21,8 @@ class RowSelectionWrapper extends Component {
    * @param {String} rowKey - row key of what was selected.
    * @param {Boolean} checked - next checked status of input button.
    */
-  handleRowSelect(rowKey, checked) {
-    const { selectRow: { mode }, store } = this.props;
+  handleRowSelect(rowKey, checked, rowIndex) {
+    const { selectRow: { mode, onSelect }, store } = this.props;
     const { ROW_SELECT_SINGLE } = Const;
 
     let currSelected = [...store.getSelectedRowKeys()];
@@ -37,6 +37,11 @@ class RowSelectionWrapper extends Component {
 
     store.setSelectedRowKeys(currSelected);
 
+    if (onSelect) {
+      const row = store.getRowByRowId(rowKey);
+      onSelect(row, checked, rowIndex);
+    }
+
     this.setState(() => ({
       selectedRowKeys: currSelected
     }));
@@ -47,18 +52,25 @@ class RowSelectionWrapper extends Component {
    * @param {Boolean} option - customized result for all rows selection
    */
   handleAllRowsSelect(option) {
-    const { store, selectRow } = this.props;
-    const selected = store.isAnySelectedRow(selectRow.nonSelectable);
+    const { store, selectRow: {
+      onSelectAll,
+      nonSelectable
+    } } = this.props;
+    const selected = store.isAnySelectedRow(nonSelectable);
 
     // set next status of all row selected by store.selected or customizing by user.
     const result = option || !selected;
 
     const currSelected = result ?
-      store.selectAllRows(selectRow.nonSelectable) :
-      store.cleanSelectedRows(selectRow.nonSelectable);
+      store.selectAllRows(nonSelectable) :
+      store.cleanSelectedRows(nonSelectable);
 
 
     store.setSelectedRowKeys(currSelected);
+
+    if (onSelectAll) {
+      onSelectAll(result, store.getSelectedRows());
+    }
 
     this.setState(() => ({
       selectedRowKeys: currSelected

@@ -50,6 +50,10 @@ export default class Store {
     this.selected = selectedKeys;
   }
 
+  getSelectedRows() {
+    return this.selected.map(k => this.getRowByRowId(k));
+  }
+
   getSelectedRowKeys() {
     return this.selected;
   }
