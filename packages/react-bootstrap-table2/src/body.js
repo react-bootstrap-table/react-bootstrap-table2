@@ -25,7 +25,8 @@ const Body = (props) => {
   const {
     style: selectedStyle,
     classes: selectedClasses,
-    bgColor
+    bgColor,
+    nonSelectable
   } = selectRow;
 
   let content;
@@ -55,6 +56,8 @@ const Body = (props) => {
         }
       }
 
+      const selectable = !nonSelectable || !nonSelectable.includes(key);
+
       return (
         <Row
           key={ key }
@@ -64,6 +67,7 @@ const Body = (props) => {
           columns={ columns }
           cellEdit={ cellEdit }
           editable={ editable }
+          selectable={ selectable }
           selected={ selected }
           selectRow={ selectRow }
           style={ style }

@@ -20,7 +20,11 @@ const columns = [{
 const selectRow = {
   mode: 'checkbox',
   clickToSelect: true,
-  nonSelectable: [0, 2, 4]
+  clickToEdit: true
+};
+
+const cellEdit = {
+  mode: 'click'
 };
 
 const sourceCode = `\
@@ -38,7 +42,11 @@ const columns = [{
 const selectRow = {
   mode: 'checkbox',
   clickToSelect: true,
-  nonSelectable: [0, 2, 4]
+  clickToEdit: true  // Click to edit cell also
+};
+
+const cellEdit = {
+  mode: 'click'
 };
 
 <BootstrapTable
@@ -51,7 +59,7 @@ const selectRow = {
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } cellEdit={ cellEdit } />
     <Code>{ sourceCode }</Code>
   </div>
 );

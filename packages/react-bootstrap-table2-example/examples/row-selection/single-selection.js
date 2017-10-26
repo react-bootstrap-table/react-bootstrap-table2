@@ -17,8 +17,9 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const selectRowProp = {
-  mode: 'radio'
+const selectRow = {
+  mode: 'radio',
+  clickToSelect: true
 };
 
 const sourceCode = `\
@@ -33,21 +34,22 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const selectRowProp = {
-  mode: 'radio'
+const selectRow = {
+  mode: 'radio',
+  clickToSelect: true
 };
 
 <BootstrapTable
   keyField='id'
   data={ products }
   columns={ columns }
-  selectRow={ selectRowProp }
+  selectRow={ selectRow }
 />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRowProp } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } />
     <Code>{ sourceCode }</Code>
   </div>
 );

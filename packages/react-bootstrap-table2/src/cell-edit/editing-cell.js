@@ -1,6 +1,8 @@
 /* eslint arrow-body-style: 0 */
 /* eslint react/prop-types: 0 */
 /* eslint no-return-assign: 0 */
+/* eslint class-methods-use-this: 0 */
+/* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
 import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
@@ -16,6 +18,7 @@ class EditingCell extends Component {
     this.indicatorTimer = null;
     this.clearTimer = this.clearTimer.bind(this);
     this.handleBlur = this.handleBlur.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.handleKeyDown = this.handleKeyDown.bind(this);
     this.beforeComplete = this.beforeComplete.bind(this);
     this.state = {
@@ -94,6 +97,15 @@ class EditingCell extends Component {
     }
   }
 
+  handleClick(e) {
+    if (e.target.tagName !== 'TD') {
+      // To avoid the row selection event be triggered,
+      // When user define selectRow.clickToSelect and selectRow.clickToEdit
+      // We shouldn't trigger selection event even if user click on the cell editor(input)
+      e.stopPropagation();
+    }
+  }
+
   render() {
     const { invalidMessage } = this.state;
     const { row, column, className, style } = this.props;
@@ -111,6 +123,7 @@ class EditingCell extends Component {
       <td
         className={ cs('react-bootstrap-table-editing-cell', className) }
         style={ style }
+        onClick={ this.handleClick }
       >
         <TextEditor
           ref={ node => this.editor = node }
