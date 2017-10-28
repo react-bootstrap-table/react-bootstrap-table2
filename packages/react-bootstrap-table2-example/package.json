@@ -20,6 +20,7 @@
     "react-bootstrap-table2": "0.0.1"
   },
   "devDependencies": {
+    "@storybook/addon-console": "^1.0.0",
     "@storybook/react": "^3.2.8",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
