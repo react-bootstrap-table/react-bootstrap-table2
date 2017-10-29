@@ -88,7 +88,7 @@ class Row extends Component {
     return (
       <tr style={ style } className={ className } { ...trAttrs }>
         {
-          (selectRow.mode === Const.ROW_SELECT_MULTIPLE && !hideSelectColumn)
+          (selectRow.mode !== Const.ROW_SELECT_DISABLED && !hideSelectColumn)
             ? (
               <SelectionCell
                 { ...selectRow }
