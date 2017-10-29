@@ -26,6 +26,8 @@ describe('Body', () => {
     name: 'B'
   }];
 
+  const keyField = 'id';
+
   describe('simplest body', () => {
     beforeEach(() => {
       wrapper = shallow(<Body { ...mockBodyResolvedProps } keyField="id" columns={ columns } data={ data } />);
@@ -117,9 +119,148 @@ describe('Body', () => {
     });
   });
 
+  describe('when rowStyle prop is defined', () => {
+    const rowStyle = { backgroundColor: 'red', color: 'white' };
+
+    describe('and it is a style object', () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowStyle={ rowStyle }
+          />);
+      });
+
+      it('should rendering Row component with correct style', () => {
+        const rows = wrapper.find(Row);
+        rows.forEach((row) => {
+          expect(row.props().style).toEqual(rowStyle);
+        });
+      });
+    });
+
+    describe('and it is a callback functoin', () => {
+      const rowStyleCallBack = sinon.stub().returns(rowStyle);
+      beforeEach(() => {
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowStyle={ rowStyleCallBack }
+          />);
+      });
+
+      it('should calling rowStyleCallBack correctly', () => {
+        expect(rowStyleCallBack.callCount).toBe(data.length);
+      });
+
+      it('should calling rowStyleCallBack with correct argument', () => {
+        expect(rowStyleCallBack.firstCall.calledWith(data[0], 0)).toBeTruthy();
+        expect(rowStyleCallBack.secondCall.calledWith(data[1], 1)).toBeTruthy();
+      });
+
+      it('should rendering Row component with correct style', () => {
+        const rows = wrapper.find(Row);
+        rows.forEach((row) => {
+          expect(row.props().style).toEqual(rowStyle);
+        });
+      });
+    });
+
+    describe('when selectRow.style is defined', () => {
+      const selectedRowKey = data[0][keyField];
+      const selectedRowKeys = [selectedRowKey];
+      const selectedStyle = { backgroundColor: 'green', fontWeight: 'bold' };
+      const selectRow = { mode: 'radio', style: selectedStyle };
+
+      beforeEach(() => {
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowStyle={ rowStyle }
+            selectRow={ selectRow }
+            selectedRowKeys={ selectedRowKeys }
+          />);
+      });
+
+      it('should rendering selected Row component with mixing selectRow.style correctly', () => {
+        const selectedRow = wrapper.find(Row).get(0);
+        expect(JSON.stringify(selectedRow.props.style)).toBe(JSON.stringify({
+          ...rowStyle,
+          ...selectedStyle
+        }));
+      });
+
+      describe('and selectRow.bgColor is also defined', () => {
+        beforeEach(() => {
+          selectRow.bgColor = 'gray';
+          wrapper = shallow(
+            <Body
+              { ...mockBodyResolvedProps }
+              keyField="id"
+              columns={ columns }
+              data={ data }
+              rowStyle={ rowStyle }
+              selectRow={ selectRow }
+              selectedRowKeys={ selectedRowKeys }
+            />);
+        });
+
+        it('should rendering selected Row component with mixing selectRow.style correctly', () => {
+          const selectedRow = wrapper.find(Row).get(0);
+          expect(JSON.stringify(selectedRow.props.style)).toBe(JSON.stringify({
+            ...rowStyle,
+            ...selectedStyle,
+            backgroundColor: selectRow.bgColor
+          }));
+        });
+
+        it('should render selected Row component with correct style.backgroundColor', () => {
+          const selectedRow = wrapper.find(Row).get(0);
+          expect(selectedRow.props.style.backgroundColor).toEqual(selectRow.bgColor);
+        });
+      });
+    });
+
+    describe('when selectRow.bgColor is defined', () => {
+      const selectedRowKey = data[0][keyField];
+      const selectedRowKeys = [selectedRowKey];
+      const selectRow = { mode: 'radio', bgColor: 'gray' };
+
+      beforeEach(() => {
+        selectRow.bgColor = 'gray';
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowStyle={ rowStyle }
+            selectRow={ selectRow }
+            selectedRowKeys={ selectedRowKeys }
+          />);
+      });
+
+      it('should rendering selected Row component with correct style', () => {
+        const selectedRow = wrapper.find(Row).get(0);
+        expect(JSON.stringify(selectedRow.props.style)).toBe(JSON.stringify({
+          ...rowStyle,
+          backgroundColor: selectRow.bgColor
+        }));
+      });
+    });
+  });
+
   describe('when cellEdit.nonEditableRows props is defined', () => {
     const nonEditableRows = [data[1].id];
-    const keyField = 'id';
     const cellEdit = {
       mode: Const.CLICK_TO_CELL_EDIT,
       nonEditableRows
@@ -150,7 +291,6 @@ describe('Body', () => {
   });
 
   describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
-    const keyField = 'id';
     const selectRow = { mode: 'checkbox' };
     const selectedRowKey = data[0][keyField];
     const selectedRowKeys = [selectedRowKey];
@@ -194,7 +334,7 @@ describe('Body', () => {
       });
 
       it('should render Row component with correct style prop', () => {
-        expect(wrapper.find(Row).get(0).props.style).toBe(style);
+        expect(JSON.stringify(wrapper.find(Row).get(0).props.style)).toBe(JSON.stringify(style));
       });
     });
 
@@ -222,7 +362,7 @@ describe('Body', () => {
       });
 
       it('should render Row component with correct style prop', () => {
-        expect(wrapper.find(Row).get(0).props.style).toBe(style);
+        expect(JSON.stringify(wrapper.find(Row).get(0).props.style)).toBe(JSON.stringify(style));
       });
     });
 
@@ -377,7 +517,6 @@ describe('Body', () => {
 
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
     beforeEach(() => {
-      const keyField = 'id';
       wrapper = shallow(
         <Body
           { ...mockBodyResolvedProps }
