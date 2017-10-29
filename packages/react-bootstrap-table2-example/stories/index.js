@@ -34,6 +34,7 @@ import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
+import RowClassTable from 'examples/rows/row-class';
 
 // table sort
 import EnableSortTable from 'examples/sort/enable-sort-table';
@@ -107,7 +108,8 @@ storiesOf('Work on Header Columns', module)
   .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);
 
 storiesOf('Work on Rows', module)
-  .add('Row Style', () => <RowStyleTable />);
+  .add('Customize Row Style', () => <RowStyleTable />)
+  .add('Customize Row Class', () => <RowClassTable />);
 
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
