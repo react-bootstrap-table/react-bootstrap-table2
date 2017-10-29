@@ -15,6 +15,7 @@
 * [condensed](#condensed)
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
+* [rowStyle](#rowStyle)
 * [defaultSorted](#defaultSorted)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
@@ -43,6 +44,23 @@ Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for
 
 ### <a name='selectRow'>selectRow - [Object]</a>
 Makes table rows selectable, please see [selectRow definition](./row-selection.md) for more detail.
+
+### <a name='rowStyle'>rowStyle = [Object | Function]</a>
+Custom the style of table rows:
+
+```js
+<BootstrapTable data={ ... } columns={ ... } rowStyle={ { backgroundColor: 'red' } } />
+```
+
+This prop also accept a callback function for flexible to custom row style:
+
+```js
+const rowStyle = (row, rowIndex) => {
+  return { ... };
+};
+
+<BootstrapTable data={ ... } columns={ ... } rowStyle={ rowStyle } />
+```
 
 ### <a name='defaultSorted'>defaultSorted - [Array]</a>
 `defaultSorted` accept an object array which allow you to define the default sort columns when first render.

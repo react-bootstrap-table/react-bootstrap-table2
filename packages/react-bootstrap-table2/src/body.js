@@ -19,11 +19,11 @@ const Body = (props) => {
     visibleColumnSize,
     cellEdit,
     selectRow,
-    selectedRowKeys
+    selectedRowKeys,
+    rowStyle
   } = props;
 
   const {
-    style: selectedStyle,
     classes: selectedClasses,
     bgColor,
     nonSelectable
@@ -44,10 +44,16 @@ const Body = (props) => {
         ? selectedRowKeys.includes(key)
         : null;
 
-      let style;
+      let style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
       let classes;
       if (selected) {
-        style = _.isFunction(selectedStyle) ? selectedStyle(row, index) : selectedStyle;
+        const selectedStyle = _.isFunction(selectRow.style)
+          ? selectRow.style(row, index)
+          : selectRow.style;
+        style = {
+          ...style,
+          ...selectedStyle
+        };
         classes = _.isFunction(selectedClasses) ? selectedClasses(row, index) : selectedClasses;
 
         if (bgColor) {
