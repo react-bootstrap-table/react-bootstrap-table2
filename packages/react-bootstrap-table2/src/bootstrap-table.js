@@ -135,7 +135,8 @@ BootstrapTable.propTypes = {
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     nonSelectable: PropTypes.array,
-    bgColor: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    bgColor: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    hideSelectColumn: PropTypes.bool
   }),
   onRowSelect: PropTypes.func,
   onAllRowsSelect: PropTypes.func

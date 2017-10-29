@@ -7,7 +7,7 @@ import HeaderCell from './header-cell';
 import SelectionHeaderCell from './row-selection/selection-header-cell';
 
 const Header = (props) => {
-  const { ROW_SELECT_DISABLED } = Const;
+  const { ROW_SELECT_MULTIPLE } = Const;
 
   const {
     columns,
@@ -21,7 +21,8 @@ const Header = (props) => {
     <thead>
       <tr>
         {
-          selectRow.mode === ROW_SELECT_DISABLED ? null : <SelectionHeaderCell { ...selectRow } />
+          (selectRow.mode === ROW_SELECT_MULTIPLE && !selectRow.hideSelectColumn)
+            ? <SelectionHeaderCell { ...selectRow } /> : null
         }
         {
           columns.map((column, i) => {
