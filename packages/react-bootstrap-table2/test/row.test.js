@@ -545,6 +545,27 @@ describe('Row', () => {
         expect(wrapper.find('tr').prop('onClick')).toBeDefined();
       });
     });
+
+    describe('if selectRow.hideSelectColumn is true', () => {
+      beforeEach(() => {
+        selectRow.hideSelectColumn = true;
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            selectRow={ selectRow }
+            selected
+            selectable
+          />);
+      });
+
+      it('should render Row component without selection column', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find(SelectionCell).length).toBe(0);
+      });
+    });
   });
 
   describe('handleRowClick', () => {
