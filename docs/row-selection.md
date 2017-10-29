@@ -17,6 +17,7 @@ The following are available properties in `selectRow`:
 * [clickToEdit](#clickToEdit)
 * [onSelect](#onSelect)
 * [onSelectAll](#onSelectAll)
+* [hideSelectColumn](#hideSelectColumn)
 
 #### Optional
 
@@ -148,7 +149,7 @@ const selectRow = {
 };
 ```
 
-# <a name='onSelect'>selectRow.onSelect - [Function]</a>
+## <a name='onSelect'>selectRow.onSelect - [Function]</a>
 This callback function will be called when a row is select/unselect and pass following three arguments:
 `row`, `isSelect` and `rowIndex`.
 
@@ -161,7 +162,7 @@ const selectRow = {
 };
 ```
 
-# <a name='onSelectAll'>selectRow.onSelectAll - [Function]</a>
+## <a name='onSelectAll'>selectRow.onSelectAll - [Function]</a>
 This callback function will be called when select/unselect all and it only work when you configure [`selectRow.mode`](#mode) as `checkbox`.
 
 ```js
@@ -170,5 +171,17 @@ const selectRow = {
   onSelectAll: (isSelect, results) => {
     // ...
   }
+};
+```
+
+## <a name='hideSelectColumn'>selectRow.hideSelectColumn - [Bool]</a>
+Default is `false`, if you don't want to have a selection column, give this prop as `true`
+
+```js
+const selectRow = {
+  mode: 'radio',
+  hideSelectColumn: true,
+  clickToSelect: true,
+  bgColor: 'red'
 };
 ```
