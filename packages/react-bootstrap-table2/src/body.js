@@ -3,6 +3,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import cs from 'classnames';
 
 import _ from './utils';
 import Row from './row';
@@ -20,11 +21,11 @@ const Body = (props) => {
     cellEdit,
     selectRow,
     selectedRowKeys,
-    rowStyle
+    rowStyle,
+    rowClasses
   } = props;
 
   const {
-    classes: selectedClasses,
     bgColor,
     nonSelectable
   } = selectRow;
@@ -45,16 +46,21 @@ const Body = (props) => {
         : null;
 
       let style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
-      let classes;
+      let classes = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
       if (selected) {
         const selectedStyle = _.isFunction(selectRow.style)
           ? selectRow.style(row, index)
           : selectRow.style;
+
+        const selectedClasses = _.isFunction(selectRow.classes)
+          ? selectRow.classes(row, index)
+          : selectRow.classes;
+
         style = {
           ...style,
           ...selectedStyle
         };
-        classes = _.isFunction(selectedClasses) ? selectedClasses(row, index) : selectedClasses;
+        classes = cs(classes, selectedClasses);
 
         if (bgColor) {
           style = style || {};
