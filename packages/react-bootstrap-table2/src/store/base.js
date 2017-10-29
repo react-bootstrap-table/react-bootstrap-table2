@@ -18,8 +18,10 @@ export default class Store {
     return this.data.length === 0;
   }
 
-  sortBy({ dataField, sortFunc }) {
-    if (dataField !== this.sortField) {
+  sortBy({ dataField, sortFunc }, order) {
+    if (order) {
+      this.sortOrder = order;
+    } else if (dataField !== this.sortField) {
       this.sortOrder = Const.SORT_DESC;
     } else {
       this.sortOrder = this.sortOrder === Const.SORT_DESC ? Const.SORT_ASC : Const.SORT_DESC;
