@@ -32,6 +32,9 @@ import HeaderColumnClassTable from 'examples/header-columns/column-class-table';
 import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
 import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
+// work on rows
+import RowStyleTable from 'examples/rows/row-style';
+
 // table sort
 import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
@@ -102,6 +105,9 @@ storiesOf('Work on Header Columns', module)
   .add('Customize Column Class', () => <HeaderColumnClassTable />)
   .add('Customize Column Style', () => <HeaderColumnStyleTable />)
   .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);
+
+storiesOf('Work on Rows', module)
+  .add('Row Style', () => <RowStyleTable />);
 
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
