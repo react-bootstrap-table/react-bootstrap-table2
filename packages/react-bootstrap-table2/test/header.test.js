@@ -53,11 +53,35 @@ describe('Header', () => {
 
   describe('when the selectRow.mode is radio(single selection)', () => {
     beforeEach(() => {
-      wrapper = shallow(<Header { ...mockHeaderResolvedProps } columns={ columns } />);
+      const selectRow = { mode: 'radio' };
+      wrapper = shallow(
+        <Header
+          { ...mockHeaderResolvedProps }
+          columns={ columns }
+          selectRow={ selectRow }
+        />
+      );
     });
 
     it('should not render <SelectionHeaderCell />', () => {
       expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+    });
+
+    describe('when selectRow.hideSelectColumn is true', () => {
+      beforeEach(() => {
+        const selectRow = { mode: 'radio', hideSelectColumn: true };
+        wrapper = shallow(
+          <Header
+            { ...mockHeaderResolvedProps }
+            columns={ columns }
+            selectRow={ selectRow }
+          />
+        );
+      });
+
+      it('should rendering header with selection column', () => {
+        expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+      });
     });
   });
 
@@ -75,6 +99,23 @@ describe('Header', () => {
 
     it('should render <SelectionHeaderCell />', () => {
       expect(wrapper.find(SelectionHeaderCell).length).toBe(1);
+    });
+
+    describe('when selectRow.hideSelectColumn is true', () => {
+      beforeEach(() => {
+        const selectRow = { mode: 'checkbox', hideSelectColumn: true };
+        wrapper = shallow(
+          <Header
+            { ...mockHeaderResolvedProps }
+            columns={ columns }
+            selectRow={ selectRow }
+          />
+        );
+      });
+
+      it('should rendering header with selection column', () => {
+        expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+      });
     });
   });
 });

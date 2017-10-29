@@ -68,7 +68,7 @@ class Row extends Component {
     } = cellEdit;
 
     const key = _.get(row, keyField);
-    const { clickToSelect } = selectRow;
+    const { clickToSelect, hideSelectColumn } = selectRow;
 
     const trAttrs = {};
     if (clickToSelect) {
@@ -78,9 +78,8 @@ class Row extends Component {
     return (
       <tr style={ style } className={ className } { ...trAttrs }>
         {
-          selectRow.mode === Const.ROW_SELECT_DISABLED
-            ? null
-            : (
+          (selectRow.mode === Const.ROW_SELECT_MULTIPLE && !hideSelectColumn)
+            ? (
               <SelectionCell
                 { ...selectRow }
                 rowKey={ key }
@@ -89,6 +88,7 @@ class Row extends Component {
                 disabled={ !selectable }
               />
             )
+            : null
         }
         {
           columns.map((column, index) => {
