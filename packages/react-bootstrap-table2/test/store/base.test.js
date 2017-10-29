@@ -73,6 +73,11 @@ describe('Store Base', () => {
         expect(e[dataField]).toEqual(result[i]);
       });
     });
+
+    it('should force assign sortOrder correctly if second argument is passed', () => {
+      store.sortBy({ dataField }, Const.SORT_DESC);
+      expect(store.sortOrder).toEqual(Const.SORT_DESC);
+    });
   });
 
   describe('getRowByRowId', () => {

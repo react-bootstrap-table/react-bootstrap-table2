@@ -34,6 +34,7 @@ import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
 // table sort
 import EnableSortTable from 'examples/sort/enable-sort-table';
+import DefaultSortTable from 'examples/sort/default-sort-table';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 
 // cell editing
@@ -104,6 +105,7 @@ storiesOf('Work on Header Columns', module)
 
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
+  .add('Default Sort Table', () => <DefaultSortTable />)
   .add('Custom Sort Fuction', () => <CustomSortTable />);
 
 storiesOf('Cell Editing', module)

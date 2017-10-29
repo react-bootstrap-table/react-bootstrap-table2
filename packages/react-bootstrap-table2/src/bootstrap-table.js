@@ -139,7 +139,11 @@ BootstrapTable.propTypes = {
     hideSelectColumn: PropTypes.bool
   }),
   onRowSelect: PropTypes.func,
-  onAllRowsSelect: PropTypes.func
+  onAllRowsSelect: PropTypes.func,
+  defaultSorted: PropTypes.arrayOf(PropTypes.shape({
+    dataField: PropTypes.string.isRequired,
+    order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
+  }))
 };
 
 BootstrapTable.defaultProps = {

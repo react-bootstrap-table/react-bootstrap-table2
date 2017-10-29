@@ -15,6 +15,7 @@
 * [condensed](#condensed)
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
+* [defaultSorted](#defaultSorted)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -42,3 +43,13 @@ Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for
 
 ### <a name='selectRow'>selectRow - [Object]</a>
 Makes table rows selectable, please see [selectRow definition](./row-selection.md) for more detail.
+
+### <a name='defaultSorted'>defaultSorted - [Array]</a>
+`defaultSorted` accept an object array which allow you to define the default sort columns when first render.
+
+```js
+const defaultSorted = [{
+  dataField: 'name', // if dataField is not match to any column you defined, it will be ignored.
+  order: 'desc' // desc or asc
+}];
+```

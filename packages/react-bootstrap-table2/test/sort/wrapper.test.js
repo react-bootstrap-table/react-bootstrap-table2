@@ -16,7 +16,8 @@ describe('SortWrapper', () => {
     sort: true
   }, {
     dataField: 'name',
-    text: 'Name'
+    text: 'Name',
+    sort: true
   }];
 
   const data = [{
@@ -78,6 +79,37 @@ describe('SortWrapper', () => {
       wrapper.instance().handleSort(sortColumn); // sort same column again
       expect(store.sortOrder).toEqual(Const.SORT_ASC);
       expect(store.sortField).toEqual(sortColumn.dataField);
+    });
+  });
+
+  describe('when defaultSorted prop is defined', () => {
+    const defaultSorted = [{
+      dataField: 'name',
+      order: Const.SORT_DESC
+    }];
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <SortWrapper
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          store={ store }
+          defaultSorted={ defaultSorted }
+        />
+      );
+    });
+
+    it('should render table with correct default sorted', () => {
+      expect(wrapper.props().data).toEqual(store.get());
+    });
+
+    it('should update store.sortField correctly', () => {
+      expect(store.sortField).toEqual(defaultSorted[0].dataField);
+    });
+
+    it('should update store.sortOrder correctly', () => {
+      expect(store.sortOrder).toEqual(defaultSorted[0].order);
     });
   });
 });
