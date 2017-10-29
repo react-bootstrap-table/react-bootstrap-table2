@@ -1,3 +1,4 @@
+/* eslint react/prefer-stateless-function: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table2';
@@ -43,9 +44,16 @@ const columns = [{
 <BootstrapTable keyField='id' data={ products } columns={ columns } />
 `;
 
-export default () => (
-  <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSorted={ defaultSorted } />
-    <Code>{ sourceCode }</Code>
-  </div>
-);
+
+class DefaultSortTable extends React.PureComponent {
+  render() {
+    return (
+      <div>
+        <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSorted={ defaultSorted } />
+        <Code>{ sourceCode }</Code>
+      </div>
+    );
+  }
+}
+
+export default DefaultSortTable;
