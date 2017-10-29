@@ -51,25 +51,25 @@ describe('Header', () => {
     });
   });
 
-  describe('when the selectRow.mode is radio(single selection)', () => {
-    beforeEach(() => {
-      const selectRow = { mode: 'radio' };
-      wrapper = shallow(
-        <Header
-          { ...mockHeaderResolvedProps }
-          columns={ columns }
-          selectRow={ selectRow }
-        />
-      );
-    });
-
-    it('should not render <SelectionHeaderCell />', () => {
-      expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
-    });
-
-    describe('when selectRow.hideSelectColumn is true', () => {
+  describe('selectRow', () => {
+    describe('when selectRow.mode is ROW_SELECT_DISABLED (row is not able to select)', () => {
       beforeEach(() => {
-        const selectRow = { mode: 'radio', hideSelectColumn: true };
+        wrapper = shallow(
+          <Header
+            { ...mockHeaderResolvedProps }
+            columns={ columns }
+          />
+        );
+      });
+
+      it('should not render <SelectionHeaderCell />', () => {
+        expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+      });
+    });
+
+    describe('when selectRow.mode is radio (single selection)', () => {
+      beforeEach(() => {
+        const selectRow = { mode: 'radio' };
         wrapper = shallow(
           <Header
             { ...mockHeaderResolvedProps }
@@ -79,31 +79,31 @@ describe('Header', () => {
         );
       });
 
-      it('should rendering header with selection column', () => {
-        expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+      it('should render <SelectionHeaderCell />', () => {
+        expect(wrapper.find(SelectionHeaderCell).length).toBe(1);
+      });
+
+      describe('when selectRow.hideSelectColumn is true', () => {
+        beforeEach(() => {
+          const selectRow = { mode: 'radio', hideSelectColumn: true };
+          wrapper = shallow(
+            <Header
+              { ...mockHeaderResolvedProps }
+              columns={ columns }
+              selectRow={ selectRow }
+            />
+          );
+        });
+
+        it('should not render <SelectionHeaderCell />', () => {
+          expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+        });
       });
     });
-  });
 
-  describe('when the selectRow.mode is checkbox(multiple selection)', () => {
-    beforeEach(() => {
-      const selectRow = { mode: 'checkbox' };
-      wrapper = shallow(
-        <Header
-          { ...mockHeaderResolvedProps }
-          columns={ columns }
-          selectRow={ selectRow }
-        />
-      );
-    });
-
-    it('should render <SelectionHeaderCell />', () => {
-      expect(wrapper.find(SelectionHeaderCell).length).toBe(1);
-    });
-
-    describe('when selectRow.hideSelectColumn is true', () => {
+    describe('when selectRow.mode is checkbox (multiple selection)', () => {
       beforeEach(() => {
-        const selectRow = { mode: 'checkbox', hideSelectColumn: true };
+        const selectRow = { mode: 'checkbox' };
         wrapper = shallow(
           <Header
             { ...mockHeaderResolvedProps }
@@ -113,8 +113,25 @@ describe('Header', () => {
         );
       });
 
-      it('should rendering header with selection column', () => {
-        expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+      it('should render <SelectionHeaderCell />', () => {
+        expect(wrapper.find(SelectionHeaderCell).length).toBe(1);
+      });
+
+      describe('when selectRow.hideSelectColumn is true', () => {
+        beforeEach(() => {
+          const selectRow = { mode: 'checkbox', hideSelectColumn: true };
+          wrapper = shallow(
+            <Header
+              { ...mockHeaderResolvedProps }
+              columns={ columns }
+              selectRow={ selectRow }
+            />
+          );
+        });
+
+        it('should not render <SelectionHeaderCell />', () => {
+          expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
+        });
       });
     });
   });
