@@ -15,7 +15,7 @@ class Row extends Component {
     this.handleRowClick = this.handleRowClick.bind(this);
   }
 
-  handleRowClick() {
+  handleRowClick(e) {
     const {
       row,
       selected,
@@ -25,22 +25,31 @@ class Row extends Component {
       selectRow: {
         onRowSelect,
         clickToEdit
-      }
+      },
+      cellEdit: { mode },
+      attrs
     } = this.props;
-    const key = _.get(row, keyField);
-    if (selectable) {
-      const { cellEdit: { mode } } = this.props;
-      if (mode === Const.DBCLICK_TO_CELL_EDIT && clickToEdit) {
-        this.clickNum += 1;
-        _.debounce(() => {
-          if (this.clickNum === 1) {
-            onRowSelect(key, !selected, rowIndex);
-          }
-          this.clickNum = 0;
-        }, Const.DELAY_FOR_DBCLICK)();
-      } else {
+
+    const clickFn = () => {
+      if (attrs.onClick) {
+        attrs.onClick(e);
+      }
+      if (selectable) {
+        const key = _.get(row, keyField);
         onRowSelect(key, !selected, rowIndex);
       }
+    };
+
+    if (mode === Const.DBCLICK_TO_CELL_EDIT && clickToEdit) {
+      this.clickNum += 1;
+      _.debounce(() => {
+        if (this.clickNum === 1) {
+          clickFn();
+        }
+        this.clickNum = 0;
+      }, Const.DELAY_FOR_DBCLICK)();
+    } else {
+      clickFn();
     }
   }
 
@@ -52,6 +61,7 @@ class Row extends Component {
       rowIndex,
       className,
       style,
+      attrs,
       cellEdit,
       selected,
       selectRow,
@@ -70,7 +80,7 @@ class Row extends Component {
     const key = _.get(row, keyField);
     const { clickToSelect, hideSelectColumn } = selectRow;
 
-    const trAttrs = {};
+    const trAttrs = { ...attrs };
     if (clickToSelect) {
       trAttrs.onClick = this.handleRowClick;
     }
@@ -143,13 +153,15 @@ Row.propTypes = {
   rowIndex: PropTypes.number.isRequired,
   columns: PropTypes.array.isRequired,
   style: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
+  attrs: PropTypes.object
 };
 
 Row.defaultProps = {
   editable: true,
   style: {},
-  className: null
+  className: null,
+  attrs: {}
 };
 
 export default Row;
