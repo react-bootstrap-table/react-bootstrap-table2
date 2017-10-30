@@ -16,6 +16,7 @@
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
 * [rowStyle](#rowStyle)
+* [rowClasses](#rowClasses)
 * [defaultSorted](#defaultSorted)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
@@ -60,6 +61,23 @@ const rowStyle = (row, rowIndex) => {
 };
 
 <BootstrapTable data={ ... } columns={ ... } rowStyle={ rowStyle } />
+```
+
+### <a name='rowClasses'>rowClasses = [String | Function]</a>
+Custom the style of table rows:
+
+```js
+<BootstrapTable data={ ... } columns={ ... } rowClasses="custom-row-class" />
+```
+
+This prop also accept a callback function for flexible to custom row style:
+
+```js
+const rowClasses = (row, rowIndex) => {
+  return 'custom-row-class';
+};
+
+<BootstrapTable data={ ... } columns={ ... } rowClasses={ rowClasses } />
 ```
 
 ### <a name='defaultSorted'>defaultSorted - [Array]</a>

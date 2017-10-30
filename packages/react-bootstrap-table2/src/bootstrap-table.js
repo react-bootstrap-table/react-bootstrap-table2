@@ -36,7 +36,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       condensed,
       noDataIndication,
       caption,
-      rowStyle
+      rowStyle,
+      rowClasses
     } = this.props;
 
     const tableClass = cs('table', {
@@ -85,6 +86,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             selectRow={ cellSelectionInfo }
             selectedRowKeys={ store.getSelectedRowKeys() }
             rowStyle={ rowStyle }
+            rowClasses={ rowClasses }
           />
         </table>
       </div>
@@ -143,6 +145,7 @@ BootstrapTable.propTypes = {
   onRowSelect: PropTypes.func,
   onAllRowsSelect: PropTypes.func,
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+  rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired

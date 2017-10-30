@@ -155,11 +155,11 @@ describe('Body', () => {
           />);
       });
 
-      it('should calling rowStyleCallBack correctly', () => {
+      it('should calling rowStyle callBack correctly', () => {
         expect(rowStyleCallBack.callCount).toBe(data.length);
       });
 
-      it('should calling rowStyleCallBack with correct argument', () => {
+      it('should calling rowStyle callBack with correct argument', () => {
         expect(rowStyleCallBack.firstCall.calledWith(data[0], 0)).toBeTruthy();
         expect(rowStyleCallBack.secondCall.calledWith(data[1], 1)).toBeTruthy();
       });
@@ -255,6 +255,86 @@ describe('Body', () => {
           ...rowStyle,
           backgroundColor: selectRow.bgColor
         }));
+      });
+    });
+  });
+
+  describe('when rowClasses prop is defined', () => {
+    const rowClasses = 'test-classe';
+
+    describe('and it is a string', () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowClasses={ rowClasses }
+          />);
+      });
+
+      it('should rendering Row component with correct className', () => {
+        const rows = wrapper.find(Row);
+        rows.forEach((row) => {
+          expect(row.props().className).toEqual(rowClasses);
+        });
+      });
+    });
+
+    describe('and it is a callback function', () => {
+      const rowClassesCallBack = sinon.stub().returns(rowClasses);
+
+      beforeEach(() => {
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowClasses={ rowClassesCallBack }
+          />);
+      });
+
+      it('should calling rowClasses callback correctly', () => {
+        expect(rowClassesCallBack.callCount).toBe(data.length);
+      });
+
+      it('should calling rowClasses callback with correct argument', () => {
+        expect(rowClassesCallBack.firstCall.calledWith(data[0], 0)).toBeTruthy();
+        expect(rowClassesCallBack.secondCall.calledWith(data[1], 1)).toBeTruthy();
+      });
+
+      it('should rendering Row component with correct className', () => {
+        const rows = wrapper.find(Row);
+        rows.forEach((row) => {
+          expect(row.props().className).toEqual(rowClasses);
+        });
+      });
+    });
+
+    describe('when selectRow.classes is defined', () => {
+      const selectedRowKey = data[0][keyField];
+      const selectedRowKeys = [selectedRowKey];
+      const selectedClasses = 'selected-classes';
+      const selectRow = { mode: 'radio', classes: selectedClasses };
+
+      beforeEach(() => {
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowClasses={ rowClasses }
+            selectRow={ selectRow }
+            selectedRowKeys={ selectedRowKeys }
+          />);
+      });
+
+      it('should rendering selected Row component with mixing selectRow.classes correctly', () => {
+        const selectedRow = wrapper.find(Row).get(0);
+        expect(selectedRow.props.className).toBe(`${rowClasses} ${selectedClasses}`);
       });
     });
   });
