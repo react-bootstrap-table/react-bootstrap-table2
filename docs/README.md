@@ -17,6 +17,7 @@
 * [selectRow](#selectRow)
 * [rowStyle](#rowStyle)
 * [rowClasses](#rowClasses)
+* [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
@@ -50,7 +51,7 @@ Makes table rows selectable, please see [selectRow definition](./row-selection.m
 Custom the style of table rows:
 
 ```js
-<BootstrapTable data={ ... } columns={ ... } rowStyle={ { backgroundColor: 'red' } } />
+<BootstrapTable data={ data } columns={ columns } rowStyle={ { backgroundColor: 'red' } } />
 ```
 
 This prop also accept a callback function for flexible to custom row style:
@@ -60,14 +61,14 @@ const rowStyle = (row, rowIndex) => {
   return { ... };
 };
 
-<BootstrapTable data={ ... } columns={ ... } rowStyle={ rowStyle } />
+<BootstrapTable data={ data } columns={ columns } rowStyle={ rowStyle } />
 ```
 
 ### <a name='rowClasses'>rowClasses = [String | Function]</a>
 Custom the style of table rows:
 
 ```js
-<BootstrapTable data={ ... } columns={ ... } rowClasses="custom-row-class" />
+<BootstrapTable data={ data } columns={ columns } rowClasses="custom-row-class" />
 ```
 
 This prop also accept a callback function for flexible to custom row style:
@@ -77,7 +78,19 @@ const rowClasses = (row, rowIndex) => {
   return 'custom-row-class';
 };
 
-<BootstrapTable data={ ... } columns={ ... } rowClasses={ rowClasses } />
+<BootstrapTable data={ data } columns={ columns } rowClasses={ rowClasses } />
+```
+
+### <a name='rowEvents'>rowEvents - [Object]</a>
+Custom the events on row:
+
+```js
+const rowEvents = {
+  onClick: (e) => {
+    ....
+  }
+};
+<BootstrapTable data={ data } columns={ columns } rowEvents={ rowEvents } />
 ```
 
 ### <a name='defaultSorted'>defaultSorted - [Array]</a>
