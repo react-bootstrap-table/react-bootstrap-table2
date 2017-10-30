@@ -84,7 +84,7 @@ describe('Row', () => {
         />);
     });
 
-    it('should render component with style successfully', () => {
+    it('should render component with className successfully', () => {
       expect(wrapper.length).toBe(1);
       expect(wrapper.hasClass(className)).toBe(true);
     });
@@ -442,6 +442,27 @@ describe('Row', () => {
     });
   });
 
+  describe('when attrs prop is defined', () => {
+    const customClickCallBack = sinon.stub();
+    const attrs = { 'data-index': 1, onClick: customClickCallBack };
+    beforeEach(() => {
+      wrapper = shallow(
+        <Row
+          { ...mockBodyResolvedProps }
+          rowIndex={ rowIndex }
+          columns={ defaultColumns }
+          row={ row }
+          attrs={ attrs }
+        />);
+    });
+
+    it('should render component with correct attributes', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.prop('data-index')).toBe(attrs['data-index']);
+      expect(wrapper.prop('onClick')).toBeDefined();
+    });
+  });
+
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
     beforeEach(() => {
       wrapper = shallow(
@@ -695,6 +716,40 @@ describe('Row', () => {
 
       it('should increase clickNum as 2', () => {
         expect(wrapper.instance().clickNum).toEqual(2);
+      });
+    });
+
+    describe('when attrs.onClick prop is defined', () => {
+      const customClickCallBack = sinon.stub();
+      const attrs = { onClick: customClickCallBack };
+
+      beforeEach(() => {
+        onRowSelectCallBack = sinon.stub();
+        selectRow = {
+          mode: 'checkbox',
+          clickToSelect: true,
+          onRowSelect: onRowSelectCallBack
+        };
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            selectRow={ selectRow }
+            attrs={ attrs }
+            selected
+            selectable
+          />);
+        wrapper.find('tr').simulate('click');
+      });
+
+      it('should calling attrs.onClick callback', () => {
+        expect(customClickCallBack.callCount).toEqual(1);
+      });
+
+      it('should calling selectRow.onRowSelect callback', () => {
+        expect(onRowSelectCallBack.callCount).toEqual(1);
       });
     });
   });
