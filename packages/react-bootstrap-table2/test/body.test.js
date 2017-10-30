@@ -339,6 +339,30 @@ describe('Body', () => {
     });
   });
 
+  describe('when rowEvents prop is defined', () => {
+    const rowEvents = { onClick: sinon.stub() };
+
+    describe('and it is a string', () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <Body
+            { ...mockBodyResolvedProps }
+            keyField="id"
+            columns={ columns }
+            data={ data }
+            rowEvents={ rowEvents }
+          />);
+      });
+
+      it('should rendering Row component with correct attrs prop', () => {
+        const rows = wrapper.find(Row);
+        rows.forEach((row) => {
+          expect(row.props().attrs).toEqual(rowEvents);
+        });
+      });
+    });
+  });
+
   describe('when cellEdit.nonEditableRows props is defined', () => {
     const nonEditableRows = [data[1].id];
     const cellEdit = {

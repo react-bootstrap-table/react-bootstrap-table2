@@ -22,7 +22,8 @@ const Body = (props) => {
     selectRow,
     selectedRowKeys,
     rowStyle,
-    rowClasses
+    rowClasses,
+    rowEvents
   } = props;
 
   const {
@@ -45,6 +46,7 @@ const Body = (props) => {
         ? selectedRowKeys.includes(key)
         : null;
 
+      const attrs = rowEvents || {};
       let style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
       let classes = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
       if (selected) {
@@ -84,6 +86,7 @@ const Body = (props) => {
           selectRow={ selectRow }
           style={ style }
           className={ classes }
+          attrs={ attrs }
         />
       );
     });
