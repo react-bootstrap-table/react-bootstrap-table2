@@ -66,7 +66,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     return (
-      <div className="react-bootstrap-table-container">
+      <div className="react-bootstrap-table">
         <table className={ tableClass }>
           <Caption>{ caption }</Caption>
           <Header
