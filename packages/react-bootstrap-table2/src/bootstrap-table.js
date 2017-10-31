@@ -110,6 +110,7 @@ BootstrapTable.propTypes = {
     PropTypes.node,
     PropTypes.string
   ]),
+  pagination: PropTypes.object,
   onSort: PropTypes.func,
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
