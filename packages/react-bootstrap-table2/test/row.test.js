@@ -595,9 +595,8 @@ describe('Row', () => {
       });
 
       describe('if selectable prop is true', () => {
-        selectRow = { mode: 'checkbox' };
-
         beforeEach(() => {
+          selectRow = { mode: 'checkbox' };
           wrapper = shallow(
             <Row
               { ...mockBodyResolvedProps }
@@ -617,9 +616,8 @@ describe('Row', () => {
       });
 
       describe('if selectRow.clickToSelect is true', () => {
-        selectRow = { mode: 'checkbox' };
-
         beforeEach(() => {
+          selectRow = { mode: 'checkbox' };
           selectRow.clickToSelect = true;
           wrapper = shallow(
             <Row
