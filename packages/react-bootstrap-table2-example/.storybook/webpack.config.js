@@ -3,6 +3,7 @@ const path = require('path');
 const sourcePath = path.join(__dirname, '../../react-bootstrap-table2/src');
 const paginationSourcePath = path.join(__dirname, '../../react-bootstrap-table2-paginator/src');
 const sourceStylePath = path.join(__dirname, '../../react-bootstrap-table2/style');
+const paginationStylePath = path.join(__dirname, '../../react-bootstrap-table2-paginator/style');
 const storyPath = path.join(__dirname, '../stories');
 const examplesPath = path.join(__dirname, '../examples');
 const srcPath = path.join(__dirname, '../src');
@@ -31,7 +32,7 @@ const loaders = [{
 }, {
   test: /\.scss$/,
   use: ['style-loader', 'css-loader', 'sass-loader'],
-  include: [storyPath, sourceStylePath],
+  include: [storyPath, sourceStylePath, paginationStylePath],
 }, {
   test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
   loader: 'url-loader?limit=100000',
