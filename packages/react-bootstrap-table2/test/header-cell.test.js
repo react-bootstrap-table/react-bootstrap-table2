@@ -436,6 +436,86 @@ describe('HeaderCell', () => {
           });
         });
       });
+
+      describe('when sortedHeader.classes was defined ', () => {
+        let sortedHeader;
+
+        describe('if sortedHeader.classes is a string', () => {
+          beforeEach(() => {
+            sortedHeader = { classes: 'foo' };
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ Const.SORT_DESC }
+                sortedHeader={ sortedHeader }
+              />);
+          });
+
+          it('should append classes correcly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.hasClass(sortedHeader.classes)).toBe(true);
+          });
+
+          it('should have sortable class on header cell', () => {
+            expect(wrapper.hasClass('sortable')).toBe(true);
+          });
+        });
+
+        describe('if sortedHeader.classes is a function', () => {
+          let classesCallBack;
+          const classes = 'foo';
+
+          beforeEach(() => {
+            classesCallBack = sinon.stub()
+              .withArgs(column, index)
+              .returns(classes);
+
+            sortedHeader = { classes: classesCallBack };
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ Const.SORT_DESC }
+                sortedHeader={ sortedHeader }
+              />);
+          });
+
+          it('should append classes correcly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.hasClass(classes)).toBe(true);
+          });
+
+          it('should call custom classes function correctly', () => {
+            expect(classesCallBack.callCount).toBe(1);
+            expect(classesCallBack.calledWith(column, index)).toBe(true);
+          });
+
+          it('should have sortable class on header cell', () => {
+            expect(wrapper.hasClass('sortable')).toBe(true);
+          });
+        });
+      });
+
+      describe('when sortedHeader.classes was not defined', () => {
+        it('should do nothing and keep the same on classes of header cell', () => {
+          column.headerClasses = 'td-test-class';
+
+          wrapper = shallow(
+            <HeaderCell
+              column={ column }
+              index={ index }
+              sorting
+              sortOrder={ Const.SORT_DESC }
+            />
+          );
+          expect(wrapper.length).toBe(1);
+          expect(wrapper.hasClass('sortable')).toBe(true);
+          expect(wrapper.hasClass(column.headerClasses)).toBe(true);
+        });
+      });
     });
 
     describe('when column.headerEvents prop is defined and have custom onClick', () => {
