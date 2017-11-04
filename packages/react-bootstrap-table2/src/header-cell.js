@@ -32,7 +32,10 @@ const HeaderCell = (props) => {
     headerAttrs
   } = column;
 
-  const { classes: sortedHeaderClasses } = sortedHeader;
+  const {
+    classes: sortedHeaderClasses,
+    style: sortedHeaderStyle
+  } = sortedHeader;
 
   const cellAttrs = {
     ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
@@ -71,13 +74,20 @@ const HeaderCell = (props) => {
     if (sorting) {
       sortSymbol = <SortCaret order={ sortOrder } />;
 
-      // appending customized sorted classes
+      // append customized classes or style if table was sorting based on the current column.
       cellClasses = cs(
         cellClasses,
         _.isFunction(sortedHeaderClasses)
           ? sortedHeaderClasses(column, index)
           : sortedHeaderClasses
       );
+
+      cellStyle = {
+        ...cellStyle,
+        ..._.isFunction(sortedHeaderStyle)
+          ? sortedHeaderStyle(column, index)
+          : sortedHeaderStyle
+      };
     } else {
       sortSymbol = <SortSymbol />;
     }
@@ -126,7 +136,8 @@ HeaderCell.propTypes = {
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
   sortedHeader: PropTypes.shape({
-    classes: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+    classes: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    style: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   })
 };
 

@@ -156,7 +156,8 @@ BootstrapTable.propTypes = {
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
   })),
   sortedHeader: PropTypes.shape({
-    classes: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+    classes: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+    style: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
   })
 };
 
