@@ -19,6 +19,7 @@
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
+* [sortedHeader](#sortedHeader)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -101,4 +102,42 @@ const defaultSorted = [{
   dataField: 'name', // if dataField is not match to any column you defined, it will be ignored.
   order: 'desc' // desc or asc
 }];
+```
+
+### <a name='sortedHeader'>sortedHeader - [Object]</a>
+
+`sortedHeader` allows you to customize `class` or `style` for `header cell` which is currently sorting. `sortedHeader` accepts two `attributes`, `classes` and `style`. 
+
+* classes
+* style
+
+**sortedHeader.classes - [String | Function]**
+
+Append customized classes for `header cell` which the table was sorting based on.
+
+```js
+sortedHeader = {
+  classes: 'demo-sorted'
+};
+```
+
+Furthermore, it also accepts a callback function which takes `2` arguments and `String` is expected to return:
+
+```js
+sortedHeader = {
+  classes: function callback(column, colIndex) { ... }
+}
+```
+
+* column: The value of current column.
+* colIndex: The index of the current column being processed in BootstrapTable.
+
+**sortedHeader.style - [Object | Function]**
+
+It's similiar to `sortedHeader.classes`. It allow to customize style of `header cell` which is sorting based on. `Object` and `callback` function are acceptable. `callback` takes `2` arguments and an `Object` is expected to return:
+
+```js
+sortedHeader = {
+  style: { backgroundColor: 'red' }
+};
 ```
