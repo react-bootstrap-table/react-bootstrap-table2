@@ -41,6 +41,7 @@ import RowEventTable from 'examples/rows/row-event';
 import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
 import CustomSortTable from 'examples/sort/custom-sort-table';
+import SortedHeaderClassesTable from 'examples/sort/sorted-header-classes';
 
 // cell editing
 import ClickToEditTable from 'examples/cell-edit/click-to-edit-table';
@@ -116,7 +117,8 @@ storiesOf('Work on Rows', module)
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Default Sort Table', () => <DefaultSortTable />)
-  .add('Custom Sort Fuction', () => <CustomSortTable />);
+  .add('Custom Sort Fuction', () => <CustomSortTable />)
+  .add('Sorted header classes', () => <SortedHeaderClassesTable />);
 
 storiesOf('Cell Editing', module)
   .add('Click to Edit', () => <ClickToEditTable />)

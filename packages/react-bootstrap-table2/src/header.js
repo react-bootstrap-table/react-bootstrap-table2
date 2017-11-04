@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -14,6 +15,7 @@ const Header = (props) => {
     onSort,
     sortField,
     sortOrder,
+    sortedHeader,
     selectRow
   } = props;
 
@@ -35,6 +37,7 @@ const Header = (props) => {
                 onSort={ onSort }
                 sorting={ currSort }
                 sortOrder={ sortOrder }
+                sortedHeader={ sortedHeader }
               />);
           })
         }
