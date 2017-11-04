@@ -516,6 +516,83 @@ describe('HeaderCell', () => {
           expect(wrapper.hasClass(column.headerClasses)).toBe(true);
         });
       });
+
+      describe('when sortedHeader.style was defined', () => {
+        let sortedHeader;
+
+        describe('if sortedHeader.style is an object', () => {
+          beforeEach(() => {
+            sortedHeader = {
+              style: { backgroundColor: 'red' }
+            };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ Const.SORT_DESC }
+                sortedHeader={ sortedHeader }
+              />);
+          });
+
+          it('should append style correcly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(sortedHeader.style);
+          });
+        });
+
+        describe('if sortedHeader.style is a function', () => {
+          const style = { backgroundColor: 'red' };
+          let styleCallBack;
+
+          beforeEach(() => {
+            styleCallBack = sinon.stub()
+              .withArgs(column, index)
+              .returns(style);
+
+            sortedHeader = {
+              style: styleCallBack
+            };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ Const.SORT_DESC }
+                sortedHeader={ sortedHeader }
+              />);
+          });
+
+          it('should append style correcly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(style);
+          });
+
+          it('should call custom style function correctly', () => {
+            expect(styleCallBack.callCount).toBe(1);
+            expect(styleCallBack.calledWith(column, index)).toBe(true);
+          });
+        });
+      });
+
+      describe('when sortedHeader.style was not defined', () => {
+        it('should do nothing and keep the same on style of header cell', () => {
+          column.headerStyle = { backgroundColor: 'red' };
+
+          wrapper = shallow(
+            <HeaderCell
+              column={ column }
+              index={ index }
+              sorting
+              sortOrder={ Const.SORT_DESC }
+            />
+          );
+          expect(wrapper.length).toBe(1);
+          expect(wrapper.find('th').prop('style')).toEqual(column.headerStyle);
+        });
+      });
     });
 
     describe('when column.headerEvents prop is defined and have custom onClick', () => {
