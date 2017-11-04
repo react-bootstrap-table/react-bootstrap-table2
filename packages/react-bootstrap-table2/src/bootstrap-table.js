@@ -15,13 +15,13 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
 
     this.state = {
-      data: props.store.get()
+      data: props.data
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      data: nextProps.store.get()
+      data: nextProps.data
     });
   }
 
@@ -153,7 +153,17 @@ BootstrapTable.propTypes = {
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
-  }))
+  })),
+  options: PropTypes.shape({
+    paginationSize: PropTypes.number,
+    pageStartIndex: PropTypes.number,
+    withFirstAndLast: PropTypes.bool,
+    alwaysShowAllBtns: PropTypes.bool,
+    firstPageText: PropTypes.string,
+    prePageText: PropTypes.string,
+    nextPageText: PropTypes.string,
+    lastPageText: PropTypes.string
+  })
 };
 
 BootstrapTable.defaultProps = {
@@ -161,7 +171,17 @@ BootstrapTable.defaultProps = {
   bordered: true,
   hover: false,
   condensed: false,
-  noDataIndication: null
+  noDataIndication: null,
+  options: {
+    paginationSize: Const.PAGINATION_SIZE,
+    pageStartIndex: Const.PAGE_START_INDEX,
+    withFirstAndLast: Const.With_FIRST_AND_LAST,
+    alwaysShowAllBtns: Const.SHOW_ALL_PAGE_BTNS,
+    firstPageText: Const.FIRST_PAGE_TEXT,
+    prePageText: Const.PRE_PAGE_TEXT,
+    nextPageText: Const.NEXT_PAGE_TEXT,
+    lastPageText: Const.LAST_PAGE_TEXT
+  }
 };
 
 export default BootstrapTable;
