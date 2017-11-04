@@ -116,7 +116,7 @@ const defaultSorted = [{
 Append customized classes for `header cell` which the table was sorting based on.
 
 ```js
-sortedHeader = {
+const sortedHeader = {
   classes: 'demo-sorted'
 };
 ```
@@ -124,7 +124,7 @@ sortedHeader = {
 Furthermore, it also accepts a callback function which takes `2` arguments and `String` is expected to return:
 
 ```js
-sortedHeader = {
+const sortedHeader = {
   classes: function callback(column, colIndex) { ... }
 }
 ```
@@ -134,10 +134,10 @@ sortedHeader = {
 
 **sortedHeader.style - [Object | Function]**
 
-It's similiar to `sortedHeader.classes`. It allow to customize style of `header cell` which is sorting based on. `Object` and `callback` function are acceptable. `callback` takes `2` arguments and an `Object` is expected to return:
+It's similiar to `sortedHeader.classes`. It allows to customize style of `header cell` which is sorting based on. `Object` and `callback` function are acceptable. `callback` takes `2` arguments and an `Object` is expected to return:
 
 ```js
-sortedHeader = {
+const sortedHeader = {
   style: { backgroundColor: 'red' }
 };
 ```

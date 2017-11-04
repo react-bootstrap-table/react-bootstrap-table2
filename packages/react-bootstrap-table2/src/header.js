@@ -1,4 +1,3 @@
-/* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -51,7 +50,8 @@ Header.propTypes = {
   onSort: PropTypes.func,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
-  selectRow: PropTypes.object
+  selectRow: PropTypes.object,
+  sortedHeader: PropTypes.object
 };
 
 export default Header;
