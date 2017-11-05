@@ -463,50 +463,11 @@ describe('Row', () => {
     });
   });
 
-  describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
-    beforeEach(() => {
-      wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
-          rowIndex={ rowIndex }
-          columns={ defaultColumns }
-          row={ row }
-        />
-      );
-    });
 
-    it('should not render SelectionCell component', () => {
-      expect(wrapper.find(SelectionCell).length).toBe(0);
-    });
-  });
-
-  describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
+  describe('selectRow', () => {
     let selectRow;
-    beforeEach(() => {
-      selectRow = { mode: 'checkbox' };
-      wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
-          rowIndex={ rowIndex }
-          columns={ defaultColumns }
-          row={ row }
-          selectRow={ selectRow }
-          selected
-          selectable
-        />);
-    });
 
-    it('should rendering SelectionCell component correctly', () => {
-      expect(wrapper.find(SelectionCell).length).toBe(1);
-    });
-
-    it('should render SelectionCell component with correct props', () => {
-      expect(wrapper.find(SelectionCell).props().selected).toBeTruthy();
-      expect(wrapper.find(SelectionCell).props().disabled).toBeFalsy();
-      expect(wrapper.find(SelectionCell).props().mode).toEqual(selectRow.mode);
-    });
-
-    describe('if selectable prop is false', () => {
+    describe('when selectRow.mode is ROW_SELECT_DISABLED (row is not able to select)', () => {
       beforeEach(() => {
         wrapper = shallow(
           <Row
@@ -514,77 +475,166 @@ describe('Row', () => {
             rowIndex={ rowIndex }
             columns={ defaultColumns }
             row={ row }
-            keyField={ keyField }
-            selectRow={ selectRow }
-            selectable={ false }
-          />);
+          />
+        );
       });
 
-      it('should render SelectionCell component with correct disable prop correctly', () => {
-        expect(wrapper.find(SelectionCell).length).toBe(1);
-        expect(wrapper.find(SelectionCell).prop('disabled')).toBeTruthy();
-      });
-    });
-
-    describe('if selectable prop is true', () => {
-      beforeEach(() => {
-        wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
-            rowIndex={ rowIndex }
-            columns={ defaultColumns }
-            row={ row }
-            keyField={ keyField }
-            selectRow={ selectRow }
-            selectable
-          />);
-      });
-
-      it('should render SelectionCell component with correct disable prop correctly', () => {
-        expect(wrapper.find(SelectionCell).length).toBe(1);
-        expect(wrapper.find(SelectionCell).prop('disabled')).toBeFalsy();
-      });
-    });
-
-    describe('if selectRow.clickToSelect is true', () => {
-      beforeEach(() => {
-        selectRow.clickToSelect = true;
-        wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
-            rowIndex={ rowIndex }
-            columns={ defaultColumns }
-            row={ row }
-            selectRow={ selectRow }
-            selected
-            selectable
-          />);
-      });
-
-      it('should render Row component successfully with onClick event', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('tr').prop('onClick')).toBeDefined();
-      });
-    });
-
-    describe('if selectRow.hideSelectColumn is true', () => {
-      beforeEach(() => {
-        selectRow.hideSelectColumn = true;
-        wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
-            rowIndex={ rowIndex }
-            columns={ defaultColumns }
-            row={ row }
-            selectRow={ selectRow }
-            selected
-            selectable
-          />);
-      });
-
-      it('should render Row component without selection column', () => {
-        expect(wrapper.length).toBe(1);
+      it('should not render <SelectionCell />', () => {
         expect(wrapper.find(SelectionCell).length).toBe(0);
+      });
+    });
+
+    describe('when selectRow.mode was defined  (single or multiple selection)', () => {
+      describe('if selectRow.mode is radio (single selection)', () => {
+        beforeEach(() => {
+          selectRow = { mode: 'radio' };
+          wrapper = shallow(
+            <Row
+              { ...mockBodyResolvedProps }
+              rowIndex={ rowIndex }
+              columns={ defaultColumns }
+              row={ row }
+              selectRow={ selectRow }
+              selected
+              selectable
+            />);
+        });
+
+        it('should render <SelectionCell />', () => {
+          expect(wrapper.find(SelectionCell).length).toBe(1);
+        });
+
+        it('should render <SelectionCell /> with correct props', () => {
+          expect(wrapper.find(SelectionCell).props().selected).toBeTruthy();
+          expect(wrapper.find(SelectionCell).props().disabled).toBeFalsy();
+          expect(wrapper.find(SelectionCell).props().mode).toEqual(selectRow.mode);
+        });
+
+        describe('when selectRow.hideSelectColumn is true', () => {
+          beforeEach(() => {
+            selectRow = { mode: 'radio', hideSelectColumn: true };
+            wrapper = shallow(
+              <Row
+                { ...mockBodyResolvedProps }
+                rowIndex={ rowIndex }
+                columns={ defaultColumns }
+                row={ row }
+                selectRow={ selectRow }
+              />);
+          });
+
+          it('should not render <SelectionCell />', () => {
+            expect(wrapper.find(SelectionCell).length).toBe(0);
+          });
+        });
+      });
+
+      describe('if selectRow.mode is checkbox (multiple selection)', () => {
+        beforeEach(() => {
+          selectRow = { mode: 'checkbox' };
+          wrapper = shallow(
+            <Row
+              { ...mockBodyResolvedProps }
+              rowIndex={ rowIndex }
+              columns={ defaultColumns }
+              row={ row }
+              selectRow={ selectRow }
+              selected
+              selectable
+            />);
+        });
+
+        it('should render <SelectionCell />', () => {
+          expect(wrapper.find(SelectionCell).length).toBe(1);
+        });
+
+        it('should render <SelectionCell /> with correct props', () => {
+          expect(wrapper.find(SelectionCell).props().selected).toBeTruthy();
+          expect(wrapper.find(SelectionCell).props().disabled).toBeFalsy();
+          expect(wrapper.find(SelectionCell).props().mode).toEqual(selectRow.mode);
+        });
+
+        describe('when selectRow.hideSelectColumn is true', () => {
+          beforeEach(() => {
+            selectRow = { mode: 'checkbox', hideSelectColumn: true };
+            wrapper = shallow(
+              <Row
+                { ...mockBodyResolvedProps }
+                rowIndex={ rowIndex }
+                columns={ defaultColumns }
+                row={ row }
+                selectRow={ selectRow }
+              />);
+          });
+
+          it('should not render <SelectionCell />', () => {
+            expect(wrapper.find(SelectionCell).length).toBe(0);
+          });
+        });
+      });
+
+      describe('if selectable prop is false', () => {
+        beforeEach(() => {
+          selectRow = { mode: 'checkbox' };
+          wrapper = shallow(
+            <Row
+              { ...mockBodyResolvedProps }
+              rowIndex={ rowIndex }
+              columns={ defaultColumns }
+              row={ row }
+              keyField={ keyField }
+              selectRow={ selectRow }
+              selectable={ false }
+            />);
+        });
+
+        it('should render SelectionCell component with correct disable prop correctly', () => {
+          expect(wrapper.find(SelectionCell).length).toBe(1);
+          expect(wrapper.find(SelectionCell).prop('disabled')).toBeTruthy();
+        });
+      });
+
+      describe('if selectable prop is true', () => {
+        beforeEach(() => {
+          selectRow = { mode: 'checkbox' };
+          wrapper = shallow(
+            <Row
+              { ...mockBodyResolvedProps }
+              rowIndex={ rowIndex }
+              columns={ defaultColumns }
+              row={ row }
+              keyField={ keyField }
+              selectRow={ selectRow }
+              selectable
+            />);
+        });
+
+        it('should render SelectionCell component with correct disable prop correctly', () => {
+          expect(wrapper.find(SelectionCell).length).toBe(1);
+          expect(wrapper.find(SelectionCell).prop('disabled')).toBeFalsy();
+        });
+      });
+
+      describe('if selectRow.clickToSelect is true', () => {
+        beforeEach(() => {
+          selectRow = { mode: 'checkbox' };
+          selectRow.clickToSelect = true;
+          wrapper = shallow(
+            <Row
+              { ...mockBodyResolvedProps }
+              rowIndex={ rowIndex }
+              columns={ defaultColumns }
+              row={ row }
+              selectRow={ selectRow }
+              selected
+              selectable
+            />);
+        });
+
+        it('should render Row component successfully with onClick event', () => {
+          expect(wrapper.length).toBe(1);
+          expect(wrapper.find('tr').prop('onClick')).toBeDefined();
+        });
       });
     });
   });
