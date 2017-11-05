@@ -437,25 +437,24 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when sortedHeader.classes was defined ', () => {
-        let sortedHeader;
+      describe('when sortingHeaderClasses was defined ', () => {
+        const classes = 'foo';
 
-        describe('if sortedHeader.classes is a string', () => {
+        describe('if sortingHeaderClasses is a string', () => {
           beforeEach(() => {
-            sortedHeader = { classes: 'foo' };
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
                 sortOrder={ Const.SORT_DESC }
-                sortedHeader={ sortedHeader }
+                sortingHeaderClasses={ classes }
               />);
           });
 
           it('should append classes correcly', () => {
             expect(wrapper.length).toBe(1);
-            expect(wrapper.hasClass(sortedHeader.classes)).toBe(true);
+            expect(wrapper.hasClass(classes)).toBe(true);
           });
 
           it('should have sortable class on header cell', () => {
@@ -463,23 +462,21 @@ describe('HeaderCell', () => {
           });
         });
 
-        describe('if sortedHeader.classes is a function', () => {
+        describe('if sortingHeaderClasses is a function', () => {
           let classesCallBack;
-          const classes = 'foo';
 
           beforeEach(() => {
             classesCallBack = sinon.stub()
               .withArgs(column, index)
               .returns(classes);
 
-            sortedHeader = { classes: classesCallBack };
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
                 sortOrder={ Const.SORT_DESC }
-                sortedHeader={ sortedHeader }
+                sortingHeaderClasses={ classesCallBack }
               />);
           });
 
@@ -499,7 +496,7 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when sortedHeader.classes was not defined', () => {
+      describe('when sortingHeaderClasses was not defined', () => {
         it('should do nothing and keep the same on classes of header cell', () => {
           column.headerClasses = 'td-test-class';
 
@@ -517,33 +514,28 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when sortedHeader.style was defined', () => {
-        let sortedHeader;
+      describe('when sortingHeaderStyle was defined', () => {
+        const style = { backgroundColor: 'red' };
 
-        describe('if sortedHeader.style is an object', () => {
+        describe('if sortingHeaderStyle is an object', () => {
           beforeEach(() => {
-            sortedHeader = {
-              style: { backgroundColor: 'red' }
-            };
-
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
                 sortOrder={ Const.SORT_DESC }
-                sortedHeader={ sortedHeader }
+                sortingHeaderStyle={ style }
               />);
           });
 
           it('should append style correcly', () => {
             expect(wrapper.length).toBe(1);
-            expect(wrapper.find('th').prop('style')).toEqual(sortedHeader.style);
+            expect(wrapper.find('th').prop('style')).toEqual(style);
           });
         });
 
-        describe('if sortedHeader.style is a function', () => {
-          const style = { backgroundColor: 'red' };
+        describe('if sortingHeaderStyle is a function', () => {
           let styleCallBack;
 
           beforeEach(() => {
@@ -551,17 +543,13 @@ describe('HeaderCell', () => {
               .withArgs(column, index)
               .returns(style);
 
-            sortedHeader = {
-              style: styleCallBack
-            };
-
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
                 sortOrder={ Const.SORT_DESC }
-                sortedHeader={ sortedHeader }
+                sortingHeaderStyle={ styleCallBack }
               />);
           });
 
@@ -577,7 +565,7 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when sortedHeader.style was not defined', () => {
+      describe('when sortingHeaderStyle was not defined', () => {
         it('should do nothing and keep the same on style of header cell', () => {
           column.headerStyle = { backgroundColor: 'red' };
 

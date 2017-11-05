@@ -20,9 +20,7 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const sortedHeader = {
-  style: { backgroundColor: '#c8e6c9' }
-};
+const sortingHeaderStyle = { backgroundColor: '#c8e6c9' };
 
 const sourceCode = `\
 const columns = [{
@@ -38,16 +36,14 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const sortedHeader = {
-  style: { backgroundColor: '#c8e6c9' }
-};
+const sortingHeaderStyle = { backgroundColor: '#c8e6c9' };
 
-<BootstrapTable keyField="id" data={ products } columns={ columns } sortedHeader={ sortedHeader } />
+<BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderStyle={ sortingHeaderStyle } />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } sortedHeader={ sortedHeader } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderStyle={ sortingHeaderStyle } />
     <Code>{ sourceCode }</Code>
   </div>
 );

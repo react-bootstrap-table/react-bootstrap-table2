@@ -39,7 +39,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowStyle,
       rowClasses,
       rowEvents,
-      sortedHeader
+      sortingHeaderClasses,
+      sortingHeaderStyle
     } = this.props;
 
     const tableClass = cs('table', {
@@ -76,7 +77,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortOrder={ store.sortOrder }
             onSort={ this.props.onSort }
             selectRow={ headerCellSelectionInfo }
-            sortedHeader={ sortedHeader }
+            sortingHeaderClasses={ sortingHeaderClasses }
+            sortingHeaderStyle={ sortingHeaderStyle }
           />
           <Body
             data={ this.state.data }
@@ -155,10 +157,8 @@ BootstrapTable.propTypes = {
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
   })),
-  sortedHeader: PropTypes.shape({
-    classes: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    style: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-  })
+  sortingHeaderClasses: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  sortingHeaderStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
 };
 
 BootstrapTable.defaultProps = {

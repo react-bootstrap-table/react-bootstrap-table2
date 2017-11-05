@@ -20,9 +20,7 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const sortedHeader = {
-  classes: (column, colIndex) => 'demo-sorted'
-};
+const sortingHeaderClasses = (column, colIndex) => 'demo-sorting';
 
 const sourceCode = `\
 const columns = [{
@@ -38,16 +36,14 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const sortedHeader = {
-  classes: (column, colIndex) => 'demo-sorted'
-};
+const sortingHeaderClasses = (column, colIndex) => 'demo-sorting';
 
-<BootstrapTable keyField="id" data={ products } columns={ columns } sortedHeader={ sortedHeader } />
+<BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderClasses={ sortingHeaderClasses } />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } sortedHeader={ sortedHeader } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderClasses={ sortingHeaderClasses } />
     <Code>{ sourceCode }</Code>
   </div>
 );

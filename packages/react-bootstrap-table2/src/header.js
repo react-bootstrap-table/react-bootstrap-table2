@@ -14,7 +14,8 @@ const Header = (props) => {
     onSort,
     sortField,
     sortOrder,
-    sortedHeader,
+    sortingHeaderClasses,
+    sortingHeaderStyle,
     selectRow
   } = props;
 
@@ -36,7 +37,8 @@ const Header = (props) => {
                 onSort={ onSort }
                 sorting={ currSort }
                 sortOrder={ sortOrder }
-                sortedHeader={ sortedHeader }
+                sortingHeaderClasses={ sortingHeaderClasses }
+                sortingHeaderStyle={ sortingHeaderStyle }
               />);
           })
         }
@@ -51,7 +53,8 @@ Header.propTypes = {
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
-  sortedHeader: PropTypes.object
+  sortingHeaderClasses: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  sortingHeaderStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
 };
 
 export default Header;

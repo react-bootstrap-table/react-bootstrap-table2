@@ -19,7 +19,8 @@
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
-* [sortedHeader](#sortedHeader)
+* [sortingHeaderClasses](#sortingHeaderClasses)
+* [sortingHeaderStyle](#sortingHeaderStyle)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -104,40 +105,29 @@ const defaultSorted = [{
 }];
 ```
 
-### <a name='sortedHeader'>sortedHeader - [Object]</a>
+### <a name='sortingHeaderClasses'>sortingHeaderClasses - [String | Function]</a>
 
-`sortedHeader` allows you to customize `class` or `style` for `header cell` which is currently sorting. `sortedHeader` accepts two `attributes`, `classes` and `style`. 
-
-* classes
-* style
-
-**sortedHeader.classes - [String | Function]**
-
-Append customized classes for `header cell` which the table was sorting based on.
+`sortingHeaderClasses` allows you to customize `class` for `header cell` which the table was sorting based on. 
 
 ```js
-const sortedHeader = {
-  classes: 'demo-sorted'
-};
+const sortingHeaderClasses = 'demo-sorting';
 ```
 
 Furthermore, it also accepts a callback function which takes `2` arguments and `String` is expected to return:
 
 ```js
-const sortedHeader = {
-  classes: function callback(column, colIndex) { ... }
-}
+const sortingHeaderClasses = function callback(column, colIndex) { ... }
 ```
 
 * column: The value of current column.
 * colIndex: The index of the current column being processed in BootstrapTable.
 
-**sortedHeader.style - [Object | Function]**
+### <a name='sortingHeaderStyle'>sortingHeaderStyle - [Object | Function]</a>
 
-It's similiar to `sortedHeader.classes`. It allows to customize style of `header cell` which is sorting based on. `Object` and `callback` function are acceptable. `callback` takes `2` arguments and an `Object` is expected to return:
+It's similiar to `sortingHeaderClasses`. It allows to customize style of `header cell` which is sorting based on. `Object` and `callback` function are acceptable. `callback` takes `2` arguments and an `Object` is expected to return:
 
 ```js
-const sortedHeader = {
-  style: { backgroundColor: 'red' }
+const sortingHeaderStyle = {
+  backgroundColor: 'red'
 };
 ```

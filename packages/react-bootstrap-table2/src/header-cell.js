@@ -16,7 +16,8 @@ const HeaderCell = (props) => {
     onSort,
     sorting,
     sortOrder,
-    sortedHeader
+    sortingHeaderClasses,
+    sortingHeaderStyle
   } = props;
 
   const {
@@ -31,11 +32,6 @@ const HeaderCell = (props) => {
     headerStyle,
     headerAttrs
   } = column;
-
-  const {
-    classes: sortedHeaderClasses,
-    style: sortedHeaderStyle
-  } = sortedHeader;
 
   const cellAttrs = {
     ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
@@ -77,16 +73,16 @@ const HeaderCell = (props) => {
       // append customized classes or style if table was sorting based on the current column.
       cellClasses = cs(
         cellClasses,
-        _.isFunction(sortedHeaderClasses)
-          ? sortedHeaderClasses(column, index)
-          : sortedHeaderClasses
+        _.isFunction(sortingHeaderClasses)
+          ? sortingHeaderClasses(column, index)
+          : sortingHeaderClasses
       );
 
       cellStyle = {
         ...cellStyle,
-        ..._.isFunction(sortedHeaderStyle)
-          ? sortedHeaderStyle(column, index)
-          : sortedHeaderStyle
+        ..._.isFunction(sortingHeaderStyle)
+          ? sortingHeaderStyle(column, index)
+          : sortingHeaderStyle
       };
     } else {
       sortSymbol = <SortSymbol />;
@@ -135,14 +131,8 @@ HeaderCell.propTypes = {
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
-  sortedHeader: PropTypes.shape({
-    classes: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    style: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
-  })
-};
-
-HeaderCell.defaultProps = {
-  sortedHeader: {}
+  sortingHeaderClasses: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  sortingHeaderStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
 };
 
 export default HeaderCell;
