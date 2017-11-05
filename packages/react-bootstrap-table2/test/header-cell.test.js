@@ -494,23 +494,25 @@ describe('HeaderCell', () => {
             expect(wrapper.hasClass('sortable')).toBe(true);
           });
         });
-      });
 
-      describe('when sortingHeaderClasses was not defined', () => {
-        it('should do nothing and keep the same on classes of header cell', () => {
-          column.headerClasses = 'td-test-class';
+        describe('if column.headerClasses was defined as well', () => {
+          it('should keep both classes', () => {
+            column.headerClasses = 'td-test-class';
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ Const.SORT_DESC }
+                sortingHeaderClasses={ classes }
+              />
+            );
 
-          wrapper = shallow(
-            <HeaderCell
-              column={ column }
-              index={ index }
-              sorting
-              sortOrder={ Const.SORT_DESC }
-            />
-          );
-          expect(wrapper.length).toBe(1);
-          expect(wrapper.hasClass('sortable')).toBe(true);
-          expect(wrapper.hasClass(column.headerClasses)).toBe(true);
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.hasClass('sortable')).toBe(true);
+            expect(wrapper.hasClass(classes)).toBe(true);
+            expect(wrapper.hasClass(column.headerClasses)).toBe(true);
+          });
         });
       });
 
@@ -563,22 +565,47 @@ describe('HeaderCell', () => {
             expect(styleCallBack.calledWith(column, index)).toBe(true);
           });
         });
-      });
 
-      describe('when sortingHeaderStyle was not defined', () => {
-        it('should do nothing and keep the same on style of header cell', () => {
-          column.headerStyle = { backgroundColor: 'red' };
+        describe('if column.headerStyle was defined as well', () => {
+          it('should keep both styles', () => {
+            column.headerStyle = { opacity: '1' };
 
-          wrapper = shallow(
-            <HeaderCell
-              column={ column }
-              index={ index }
-              sorting
-              sortOrder={ Const.SORT_DESC }
-            />
-          );
-          expect(wrapper.length).toBe(1);
-          expect(wrapper.find('th').prop('style')).toEqual(column.headerStyle);
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ Const.SORT_DESC }
+                sortingHeaderStyle={ style }
+              />
+            );
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(expect.objectContaining({
+              ...style,
+              ...column.headerStyle
+            }));
+          });
+
+          it('sortingHeaderStyle should have higher priority', () => {
+            column.headerStyle = { backgroundColor: 'green' };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ Const.SORT_DESC }
+                sortingHeaderStyle={ style }
+              />
+            );
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(expect.objectContaining({
+              ...style
+            }));
+            expect(wrapper.find('th').prop('style')).not.toEqual(expect.objectContaining({
+              ...column.headerStyle
+            }));
+          });
         });
       });
     });
