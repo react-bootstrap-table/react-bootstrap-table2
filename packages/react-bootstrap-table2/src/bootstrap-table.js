@@ -162,7 +162,8 @@ BootstrapTable.propTypes = {
     firstPageText: PropTypes.string,
     prePageText: PropTypes.string,
     nextPageText: PropTypes.string,
-    lastPageText: PropTypes.string
+    lastPageText: PropTypes.string,
+    sizePerPageList: PropTypes.array
   })
 };
 
@@ -180,7 +181,8 @@ BootstrapTable.defaultProps = {
     firstPageText: Const.FIRST_PAGE_TEXT,
     prePageText: Const.PRE_PAGE_TEXT,
     nextPageText: Const.NEXT_PAGE_TEXT,
-    lastPageText: Const.LAST_PAGE_TEXT
+    lastPageText: Const.LAST_PAGE_TEXT,
+    sizePerPageList: Const.SIZE_PER_PAGE_LIST
   }
 };
 

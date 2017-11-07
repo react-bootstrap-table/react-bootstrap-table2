@@ -21,7 +21,8 @@ const wrapperFactory = (baseElement, Const) =>
         firstPageText: Const.FIRST_PAGE_TEXT,
         prePageText: Const.PRE_PAGE_TEXT,
         nextPageText: Const.NEXT_PAGE_TEXT,
-        lastPageText: Const.LAST_PAGE_TEXT
+        lastPageText: Const.LAST_PAGE_TEXT,
+        sizePerPageList: Const.SIZE_PER_PAGE_LIST
       }
     }
 
@@ -30,6 +31,7 @@ const wrapperFactory = (baseElement, Const) =>
       const options = props.options || {};
       const currPage = options.pageStartIndex || Const.PAGE_START_INDEX;
       this.handleChangePage = this.handleChangePage.bind(this);
+      this.handleChangeSizePerPage = this.handleChangeSizePerPage.bind(this);
       this.state = {
         currPage,
         currSizePerPage: Const.SIZE_PER_PAGE_LIST[0]
@@ -40,6 +42,15 @@ const wrapperFactory = (baseElement, Const) =>
       this.setState(() => {
         return {
           currPage
+        };
+      });
+    }
+
+    handleChangeSizePerPage(currSizePerPage, currPage) {
+      this.setState(() => {
+        return {
+          currPage,
+          currSizePerPage
         };
       });
     }
@@ -65,6 +76,8 @@ const wrapperFactory = (baseElement, Const) =>
             currPage={ currPage }
             currSizePerPage={ currSizePerPage }
             onPageChange={ this.handleChangePage }
+            onSizePerPageChange={ this.handleChangeSizePerPage }
+            sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
             paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
             pageStartIndex={ options.pageStartIndex || Const.PAGE_START_INDEX }
             withFirstAndLast={ withFirstAndLast }

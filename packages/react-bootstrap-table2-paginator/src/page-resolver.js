@@ -15,12 +15,12 @@ export default ExtendBase =>
     initialState() {
       const totalPages = this.calculateTotalPage();
       const lastPage = this.calculateLastPage(totalPages);
-      return { totalPages, lastPage };
+      return { totalPages, lastPage, dropdownOpen: false };
     }
 
-    calculateTotalPage() {
-      const { dataSize, currSizePerPage } = this.props;
-      return Math.ceil(dataSize / currSizePerPage);
+    calculateTotalPage(sizePerPage = this.props.currSizePerPage) {
+      const { dataSize } = this.props;
+      return Math.ceil(dataSize / sizePerPage);
     }
 
     calculateLastPage(totalPages) {
@@ -117,6 +117,18 @@ export default ExtendBase =>
 
           return { page, active, disabled, title };
         });
+    }
+
+    calculateSizePerPageStatus() {
+      const { sizePerPageList } = this.props;
+      return sizePerPageList.map((_sizePerPage) => {
+        const pageText = _sizePerPage.text || _sizePerPage;
+        const pageNumber = _sizePerPage.value || _sizePerPage;
+        return {
+          text: `${pageText}`,
+          page: pageNumber
+        };
+      });
     }
   };
 
