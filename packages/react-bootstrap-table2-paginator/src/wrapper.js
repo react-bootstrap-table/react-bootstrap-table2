@@ -1,5 +1,4 @@
 /* eslint react/prop-types: 0 */
-/* eslint react/prefer-stateless-function: 0 */
 /* eslint arrow-body-style: 0 */
 
 import React, { Component } from 'react';
@@ -22,7 +21,9 @@ const wrapperFactory = (baseElement, Const) =>
         prePageText: Const.PRE_PAGE_TEXT,
         nextPageText: Const.NEXT_PAGE_TEXT,
         lastPageText: Const.LAST_PAGE_TEXT,
-        sizePerPageList: Const.SIZE_PER_PAGE_LIST
+        sizePerPageList: Const.SIZE_PER_PAGE_LIST,
+        onSizePerPageChange: undefined,
+        onPageChange: undefined
       }
     }
 
@@ -39,6 +40,10 @@ const wrapperFactory = (baseElement, Const) =>
     }
 
     handleChangePage(currPage) {
+      const { options } = this.props;
+      if (options.onPageChange) {
+        options.onPageChange(currPage, this.state.currSizePerPage);
+      }
       this.setState(() => {
         return {
           currPage
@@ -47,6 +52,10 @@ const wrapperFactory = (baseElement, Const) =>
     }
 
     handleChangeSizePerPage(currSizePerPage, currPage) {
+      const { options } = this.props;
+      if (options.onSizePerPageChange) {
+        options.onSizePerPageChange(currSizePerPage, currPage);
+      }
       this.setState(() => {
         return {
           currPage,

@@ -48,9 +48,6 @@ class Pagination extends pageResolver(Component) {
       const newLastPage = this.calculateLastPage(newTotalPages);
       if (currPage > newLastPage) currPage = newLastPage;
       onSizePerPageChange(selectedSize, currPage);
-      // if (this.props.onSizePerPageList) {
-      //   this.props.onSizePerPageList(selectedSize);
-      // }
     }
     this.closeDropDown();
   }
