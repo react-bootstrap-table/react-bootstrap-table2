@@ -56,13 +56,13 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "react": "^15.0.0 || ^16",
+    "react-dom": "^15.0.0 || ^16"
   },
   "jest": {
     "collectCoverageFrom": [

@@ -65,30 +65,30 @@ const wrapperFactory = (baseElement, Const) =>
 
       const base = baseElement({
         ...this.props,
+        key: 'table',
         data: store.getByCurrPage(currPage, currSizePerPage)
       });
 
-      return (
-        <div className="react-bootstrap-table-container">
-          { base }
-          <Pagination
-            dataSize={ this.props.store.getDataSize() }
-            currPage={ currPage }
-            currSizePerPage={ currSizePerPage }
-            onPageChange={ this.handleChangePage }
-            onSizePerPageChange={ this.handleChangeSizePerPage }
-            sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
-            paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
-            pageStartIndex={ options.pageStartIndex || Const.PAGE_START_INDEX }
-            withFirstAndLast={ withFirstAndLast }
-            alwaysShowAllBtns={ alwaysShowAllBtns }
-            firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
-            prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
-            nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }
-            lastPageText={ options.lastPageText || Const.LAST_PAGE_TEXT }
-          />
-        </div>
-      );
+      return [
+        base,
+        <Pagination
+          key="pagination"
+          dataSize={ this.props.store.getDataSize() }
+          currPage={ currPage }
+          currSizePerPage={ currSizePerPage }
+          onPageChange={ this.handleChangePage }
+          onSizePerPageChange={ this.handleChangeSizePerPage }
+          sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
+          paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
+          pageStartIndex={ options.pageStartIndex || Const.PAGE_START_INDEX }
+          withFirstAndLast={ withFirstAndLast }
+          alwaysShowAllBtns={ alwaysShowAllBtns }
+          firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
+          prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
+          nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }
+          lastPageText={ options.lastPageText || Const.LAST_PAGE_TEXT }
+        />
+      ];
     }
   };
 
