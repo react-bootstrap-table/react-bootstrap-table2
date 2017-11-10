@@ -1,5 +1,6 @@
+import 'jsdom-global/register';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import TextEditor from '../../src/cell-edit/text-editor';
 
@@ -8,7 +9,7 @@ describe('TextEditor', () => {
   const value = 'test';
 
   beforeEach(() => {
-    wrapper = shallow(
+    wrapper = mount(
       <TextEditor
         defaultValue={ value }
       />
@@ -25,7 +26,7 @@ describe('TextEditor', () => {
   describe('whenclassNames prop defined', () => {
     const className = 'test-class';
     beforeEach(() => {
-      wrapper = shallow(
+      wrapper = mount(
         <TextEditor
           defaultValue={ value }
           classNames={ className }
