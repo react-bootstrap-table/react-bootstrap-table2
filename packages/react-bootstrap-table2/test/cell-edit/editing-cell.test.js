@@ -47,7 +47,7 @@ describe('EditingCell', () => {
     expect(textEditor.props().defaultValue).toEqual(row[column.dataField]);
     expect(textEditor.props().onKeyDown).toBeDefined();
     expect(textEditor.props().onBlur).toBeDefined();
-    expect(textEditor.props().classNames).toBeNull();
+    expect(textEditor.props().className).toBeNull();
   });
 
   it('should not render EditorIndicator due to state.invalidMessage is null', () => {

@@ -11,8 +11,8 @@ class TextEditor extends Component {
   }
 
   render() {
-    const { defaultValue, classNames, ...rest } = this.props;
-    const editorClass = cs('form-control editor edit-text', classNames);
+    const { defaultValue, className, ...rest } = this.props;
+    const editorClass = cs('form-control editor edit-text', className);
     return (
       <input
         ref={ node => this.text = node }
@@ -25,7 +25,7 @@ class TextEditor extends Component {
 }
 
 TextEditor.propTypes = {
-  classNames: PropTypes.oneOfType([
+  className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
@@ -35,6 +35,6 @@ TextEditor.propTypes = {
   ]).isRequired
 };
 TextEditor.defaultProps = {
-  classNames: null
+  className: null
 };
 export default TextEditor;
