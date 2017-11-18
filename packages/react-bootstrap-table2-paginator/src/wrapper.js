@@ -33,14 +33,14 @@ const wrapperFactory = (baseElement, Const) =>
 
     constructor(props) {
       super(props);
-      const options = props.options || {};
-      const currPage = options.pageStartIndex || Const.PAGE_START_INDEX;
       this.handleChangePage = this.handleChangePage.bind(this);
       this.handleChangeSizePerPage = this.handleChangeSizePerPage.bind(this);
-      this.state = {
-        currPage,
-        currSizePerPage: Const.SIZE_PER_PAGE_LIST[0]
-      };
+
+      const options = props.options || {};
+      const currPage = options.pageStartIndex || Const.PAGE_START_INDEX;
+      const sizePerPageList = options.sizePerPageList || Const.SIZE_PER_PAGE_LIST;
+      const currSizePerPage = typeof sizePerPageList[0] === 'object' ? sizePerPageList[0].value : sizePerPageList[0];
+      this.state = { currPage, currSizePerPage };
     }
 
     handleChangePage(currPage) {
