@@ -76,6 +76,9 @@
     "setupFiles": [
       "<rootDir>/enzyme-setup.js"
     ],
+    "modulePaths": [
+      "<rootDir>/packages/react-bootstrap-table2"
+    ],
     "testEnvironment": "node",
     "testMatch": [
       "**/test/**/*.test.js"
