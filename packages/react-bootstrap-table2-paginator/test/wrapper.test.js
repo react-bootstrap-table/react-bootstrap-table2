@@ -18,7 +18,11 @@ const getConst = () => ({
   PRE_PAGE_TEXT: '<',
   NEXT_PAGE_TEXT: '>',
   LAST_PAGE_TEXT: '>>',
-  SIZE_PER_PAGE_LIST: [10, 25, 30, 50]
+  SIZE_PER_PAGE_LIST: [10, 25, 30, 50],
+  NEXT_PAGE_TITLE: 'next page',
+  LAST_PAGE_TITLE: 'last page',
+  PRE_PAGE_TITLE: 'previous page',
+  FIRST_PAGE_TITLE: 'first page'
 });
 
 const data = [];
@@ -97,6 +101,10 @@ describe('Wrapper', () => {
       expect(pagination.prop('prePageText')).toEqual(constants.PRE_PAGE_TEXT);
       expect(pagination.prop('nextPageText')).toEqual(constants.NEXT_PAGE_TEXT);
       expect(pagination.prop('lastPageText')).toEqual(constants.LAST_PAGE_TEXT);
+      expect(pagination.prop('firstPageTitle')).toEqual(constants.FIRST_PAGE_TITLE);
+      expect(pagination.prop('prePageTitle')).toEqual(constants.PRE_PAGE_TITLE);
+      expect(pagination.prop('nextPageTitle')).toEqual(constants.NEXT_PAGE_TITLE);
+      expect(pagination.prop('lastPageTitle')).toEqual(constants.LAST_PAGE_TITLE);
     });
   });
 
@@ -263,6 +271,78 @@ describe('Wrapper', () => {
       expect(wrapper.length).toBe(1);
       expect(pagination.length).toBe(1);
       expect(pagination.prop('lastPageText')).toEqual(props.options.lastPageText);
+    });
+  });
+
+  describe('when options.firstPageTitle is defined', () => {
+    const props = createTableProps({ options: { firstPageTitle: '1st' } });
+    beforeEach(() => {
+      PaginationWrapper = wrapperFactory(pureTable, constants);
+      wrapper = shallow(<PaginationWrapper { ...props } />);
+      instance = wrapper.instance();
+      const fragment = instance.render();
+      wrapper = shallow(<div>{ fragment }</div>);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('firstPageTitle')).toEqual(props.options.firstPageTitle);
+    });
+  });
+
+  describe('when options.prePageTitle is defined', () => {
+    const props = createTableProps({ options: { prePageTitle: 'PRE' } });
+    beforeEach(() => {
+      PaginationWrapper = wrapperFactory(pureTable, constants);
+      wrapper = shallow(<PaginationWrapper { ...props } />);
+      instance = wrapper.instance();
+      const fragment = instance.render();
+      wrapper = shallow(<div>{ fragment }</div>);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('prePageTitle')).toEqual(props.options.prePageTitle);
+    });
+  });
+
+  describe('when options.nextPageTitle is defined', () => {
+    const props = createTableProps({ options: { nextPageTitle: 'NEXT' } });
+    beforeEach(() => {
+      PaginationWrapper = wrapperFactory(pureTable, constants);
+      wrapper = shallow(<PaginationWrapper { ...props } />);
+      instance = wrapper.instance();
+      const fragment = instance.render();
+      wrapper = shallow(<div>{ fragment }</div>);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('nextPageTitle')).toEqual(props.options.nextPageTitle);
+    });
+  });
+
+  describe('when options.lastPageTitle is defined', () => {
+    const props = createTableProps({ options: { lastPageTitle: 'nth' } });
+    beforeEach(() => {
+      PaginationWrapper = wrapperFactory(pureTable, constants);
+      wrapper = shallow(<PaginationWrapper { ...props } />);
+      instance = wrapper.instance();
+      const fragment = instance.render();
+      wrapper = shallow(<div>{ fragment }</div>);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('lastPageTitle')).toEqual(props.options.lastPageTitle);
     });
   });
 
