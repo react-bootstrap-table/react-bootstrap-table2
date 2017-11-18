@@ -37,15 +37,9 @@ const columns = [{
 <BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator } />
 `;
 
-class BasicPaginationTable extends React.PureComponent {
-  render() {
-    return (
-      <div>
-        <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginator } />
-        <Code>{ sourceCode }</Code>
-      </div>
-    );
-  }
-}
-
-export default BasicPaginationTable;
+export default () => (
+  <div>
+    <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginator } />
+    <Code>{ sourceCode }</Code>
+  </div>
+);
