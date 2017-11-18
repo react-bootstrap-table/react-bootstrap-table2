@@ -185,6 +185,10 @@ BootstrapTable.defaultProps = {
     nextPageText: Const.NEXT_PAGE_TEXT,
     lastPageText: Const.LAST_PAGE_TEXT,
     sizePerPageList: Const.SIZE_PER_PAGE_LIST,
+    nextPageTitle: Const.NEXT_PAGE_TITLE,
+    prePageTitle: Const.PRE_PAGE_TITLE,
+    firstPageTitle: Const.FIRST_PAGE_TITLE,
+    lastPageTitle: Const.LAST_PAGE_TITLE,
     onSizePerPageChange: undefined,
     onPageChange: undefined
   }

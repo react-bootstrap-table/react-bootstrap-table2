@@ -127,6 +127,10 @@ Pagination.propTypes = {
   prePageText: PropTypes.string,
   nextPageText: PropTypes.string,
   lastPageText: PropTypes.string,
+  nextPageTitle: PropTypes.string,
+  prePageTitle: PropTypes.string,
+  firstPageTitle: PropTypes.string,
+  lastPageTitle: PropTypes.string,
   withFirstAndLast: PropTypes.bool,
   alwaysShowAllBtns: PropTypes.bool
 };

@@ -22,6 +22,10 @@ const wrapperFactory = (baseElement, Const) =>
         nextPageText: Const.NEXT_PAGE_TEXT,
         lastPageText: Const.LAST_PAGE_TEXT,
         sizePerPageList: Const.SIZE_PER_PAGE_LIST,
+        nextPageTitle: Const.NEXT_PAGE_TITLE,
+        prePageTitle: Const.PRE_PAGE_TITLE,
+        firstPageTitle: Const.FIRST_PAGE_TITLE,
+        lastPageTitle: Const.LAST_PAGE_TITLE,
         onSizePerPageChange: undefined,
         onPageChange: undefined
       }
@@ -96,6 +100,10 @@ const wrapperFactory = (baseElement, Const) =>
           prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
           nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }
           lastPageText={ options.lastPageText || Const.LAST_PAGE_TEXT }
+          prePageTitle={ options.prePageTitle || Const.PRE_PAGE_TITLE }
+          nextPageTitle={ options.nextPageTitle || Const.NEXT_PAGE_TITLE }
+          firstPageTitle={ options.firstPageTitle || Const.FIRST_PAGE_TITLE }
+          lastPageTitle={ options.lastPageTitle || Const.LAST_PAGE_TITLE }
         />
       ];
     }

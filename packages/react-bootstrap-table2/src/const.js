@@ -20,5 +20,9 @@ export default {
   PRE_PAGE_TEXT: '<',
   NEXT_PAGE_TEXT: '>',
   LAST_PAGE_TEXT: '>>',
+  NEXT_PAGE_TITLE: 'next page',
+  LAST_PAGE_TITLE: 'last page',
+  PRE_PAGE_TITLE: 'previous page',
+  FIRST_PAGE_TITLE: 'first page',
   SIZE_PER_PAGE_LIST: [10, 25, 30, 50]
 };
