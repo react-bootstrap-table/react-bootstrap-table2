@@ -2,7 +2,6 @@
 import React from 'react';
 
 import BootstrapTable from './bootstrap-table';
-import Const from './const';
 import SortWrapper from './sort/wrapper';
 import RowSelectionWrapper from './row-selection/wrapper';
 import CellEditWrapper from './cell-edit/wrapper';
@@ -23,7 +22,7 @@ export const pureTable = props =>
 export const wrapWithPagination = (props) => {
   if (props.pagination) {
     const { wrapper } = props.pagination;
-    const PaginationBase = wrapper(pureTable, Const);
+    const PaginationBase = wrapper(pureTable);
     return React.createElement(PaginationBase, { ...props });
   }
 

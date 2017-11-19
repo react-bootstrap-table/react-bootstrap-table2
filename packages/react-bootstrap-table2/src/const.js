@@ -11,18 +11,5 @@ export default {
   CHECKBOX_STATUS_CHECKED: 'checked',
   CHECKBOX_STATUS_INDETERMINATE: 'indeterminate',
   CHECKBOX_STATUS_UNCHECKED: 'unchecked',
-  DELAY_FOR_DBCLICK: 200,
-  PAGINATION_SIZE: 5,
-  PAGE_START_INDEX: 1,
-  With_FIRST_AND_LAST: true,
-  SHOW_ALL_PAGE_BTNS: false,
-  FIRST_PAGE_TEXT: '<<',
-  PRE_PAGE_TEXT: '<',
-  NEXT_PAGE_TEXT: '>',
-  LAST_PAGE_TEXT: '>>',
-  NEXT_PAGE_TITLE: 'next page',
-  LAST_PAGE_TITLE: 'last page',
-  PRE_PAGE_TITLE: 'previous page',
-  FIRST_PAGE_TITLE: 'first page',
-  SIZE_PER_PAGE_LIST: [10, 25, 30, 50]
+  DELAY_FOR_DBCLICK: 200
 };

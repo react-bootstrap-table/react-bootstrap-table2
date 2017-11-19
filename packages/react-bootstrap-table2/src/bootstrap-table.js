@@ -153,20 +153,7 @@ BootstrapTable.propTypes = {
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
-  })),
-  options: PropTypes.shape({
-    paginationSize: PropTypes.number,
-    pageStartIndex: PropTypes.number,
-    withFirstAndLast: PropTypes.bool,
-    alwaysShowAllBtns: PropTypes.bool,
-    firstPageText: PropTypes.string,
-    prePageText: PropTypes.string,
-    nextPageText: PropTypes.string,
-    lastPageText: PropTypes.string,
-    sizePerPageList: PropTypes.array,
-    onSizePerPageChange: PropTypes.func,
-    onPageChange: PropTypes.func
-  })
+  }))
 };
 
 BootstrapTable.defaultProps = {
@@ -174,24 +161,7 @@ BootstrapTable.defaultProps = {
   bordered: true,
   hover: false,
   condensed: false,
-  noDataIndication: null,
-  options: {
-    paginationSize: Const.PAGINATION_SIZE,
-    pageStartIndex: Const.PAGE_START_INDEX,
-    withFirstAndLast: Const.With_FIRST_AND_LAST,
-    alwaysShowAllBtns: Const.SHOW_ALL_PAGE_BTNS,
-    firstPageText: Const.FIRST_PAGE_TEXT,
-    prePageText: Const.PRE_PAGE_TEXT,
-    nextPageText: Const.NEXT_PAGE_TEXT,
-    lastPageText: Const.LAST_PAGE_TEXT,
-    sizePerPageList: Const.SIZE_PER_PAGE_LIST,
-    nextPageTitle: Const.NEXT_PAGE_TITLE,
-    prePageTitle: Const.PRE_PAGE_TITLE,
-    firstPageTitle: Const.FIRST_PAGE_TITLE,
-    lastPageTitle: Const.LAST_PAGE_TITLE,
-    onSizePerPageChange: undefined,
-    onPageChange: undefined
-  }
+  noDataIndication: null
 };
 
 export default BootstrapTable;

@@ -1,7 +1,8 @@
 import Pagination from './pagination';
 import wrapper from './wrapper';
 
-export default {
+export default (options = {}) => ({
   Pagination,
-  wrapper
-};
+  wrapper,
+  options
+});

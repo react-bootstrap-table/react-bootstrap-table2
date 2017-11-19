@@ -4,31 +4,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const wrapperFactory = (baseElement, Const) =>
+import Const from './const';
+
+const wrapperFactory = baseElement =>
   class PaginationWrapper extends Component {
     static propTypes = {
-      store: PropTypes.object.isRequired,
-      options: PropTypes.object
-    }
-
-    static defaultProps = {
-      options: {
-        paginationSize: Const.PAGINATION_SIZE,
-        pageStartIndex: Const.PAGE_START_INDEX,
-        withFirstAndLast: Const.With_FIRST_AND_LAST,
-        alwaysShowAllBtns: Const.SHOW_ALL_PAGE_BTNS,
-        firstPageText: Const.FIRST_PAGE_TEXT,
-        prePageText: Const.PRE_PAGE_TEXT,
-        nextPageText: Const.NEXT_PAGE_TEXT,
-        lastPageText: Const.LAST_PAGE_TEXT,
-        sizePerPageList: Const.SIZE_PER_PAGE_LIST,
-        nextPageTitle: Const.NEXT_PAGE_TITLE,
-        prePageTitle: Const.PRE_PAGE_TITLE,
-        firstPageTitle: Const.FIRST_PAGE_TITLE,
-        lastPageTitle: Const.LAST_PAGE_TITLE,
-        onSizePerPageChange: undefined,
-        onPageChange: undefined
-      }
+      store: PropTypes.object.isRequired
     }
 
     constructor(props) {
@@ -36,7 +17,7 @@ const wrapperFactory = (baseElement, Const) =>
       this.handleChangePage = this.handleChangePage.bind(this);
       this.handleChangeSizePerPage = this.handleChangeSizePerPage.bind(this);
 
-      const options = props.options || {};
+      const options = props.pagination.options || {};
       const currPage = options.pageStartIndex || Const.PAGE_START_INDEX;
       const sizePerPageList = options.sizePerPageList || Const.SIZE_PER_PAGE_LIST;
       const currSizePerPage = typeof sizePerPageList[0] === 'object' ? sizePerPageList[0].value : sizePerPageList[0];
@@ -44,7 +25,7 @@ const wrapperFactory = (baseElement, Const) =>
     }
 
     handleChangePage(currPage) {
-      const { options } = this.props;
+      const { pagination: { options } } = this.props;
       if (options.onPageChange) {
         options.onPageChange(currPage, this.state.currSizePerPage);
       }
@@ -56,7 +37,7 @@ const wrapperFactory = (baseElement, Const) =>
     }
 
     handleChangeSizePerPage(currSizePerPage, currPage) {
-      const { options } = this.props;
+      const { pagination: { options } } = this.props;
       if (options.onSizePerPageChange) {
         options.onSizePerPageChange(currSizePerPage, currPage);
       }
@@ -69,7 +50,7 @@ const wrapperFactory = (baseElement, Const) =>
     }
 
     render() {
-      const { pagination: { Pagination }, options, store } = this.props;
+      const { pagination: { Pagination, options }, store } = this.props;
       const { currPage, currSizePerPage } = this.state;
       const withFirstAndLast = typeof options.withFirstAndLast === 'undefined' ?
         Const.With_FIRST_AND_LAST : options.withFirstAndLast;

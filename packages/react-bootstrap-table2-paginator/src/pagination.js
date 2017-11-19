@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import pageResolver from './page-resolver';
 import SizePerPageDropDown from './size-per-page-dropdown';
 import PaginationList from './pagination-list';
+import Const from './const';
 
 class Pagination extends pageResolver(Component) {
   constructor(props) {
@@ -133,6 +134,22 @@ Pagination.propTypes = {
   lastPageTitle: PropTypes.string,
   withFirstAndLast: PropTypes.bool,
   alwaysShowAllBtns: PropTypes.bool
+};
+
+Pagination.defaultProps = {
+  pageStartIndex: Const.PAGE_START_INDEX,
+  paginationSize: Const.PAGINATION_SIZE,
+  withFirstAndLast: Const.With_FIRST_AND_LAST,
+  alwaysShowAllBtns: Const.SHOW_ALL_PAGE_BTNS,
+  firstPageText: Const.FIRST_PAGE_TEXT,
+  prePageText: Const.PRE_PAGE_TEXT,
+  nextPageText: Const.NEXT_PAGE_TEXT,
+  lastPageText: Const.LAST_PAGE_TEXT,
+  sizePerPageList: Const.SIZE_PER_PAGE_LIST,
+  nextPageTitle: Const.NEXT_PAGE_TITLE,
+  prePageTitle: Const.PRE_PAGE_TITLE,
+  firstPageTitle: Const.FIRST_PAGE_TITLE,
+  lastPageTitle: Const.LAST_PAGE_TITLE
 };
 
 export default Pagination;
