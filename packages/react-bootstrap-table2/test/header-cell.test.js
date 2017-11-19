@@ -437,18 +437,19 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when sortingHeaderClasses was defined ', () => {
+      describe('when headerSortingClasses was defined ', () => {
         const classes = 'foo';
+        const order = Const.SORT_DESC;
 
-        describe('if sortingHeaderClasses is a string', () => {
+        describe('if headerSortingClasses is a string', () => {
           beforeEach(() => {
+            column = { ...column, headerSortingClasses: classes };
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
-                sortOrder={ Const.SORT_DESC }
-                sortingHeaderClasses={ classes }
+                sortOrder={ order }
               />);
           });
 
@@ -462,21 +463,22 @@ describe('HeaderCell', () => {
           });
         });
 
-        describe('if sortingHeaderClasses is a function', () => {
+        describe('if headerSortingClasses is a function', () => {
           let classesCallBack;
+          let isLastSorting;
 
           beforeEach(() => {
             classesCallBack = sinon.stub()
-              .withArgs(column, index)
+              .withArgs(column, order, isLastSorting, index)
               .returns(classes);
 
+            column = { ...column, headerSortingClasses: classesCallBack };
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
-                sortOrder={ Const.SORT_DESC }
-                sortingHeaderClasses={ classesCallBack }
+                sortOrder={ order }
               />);
           });
 
@@ -485,26 +487,49 @@ describe('HeaderCell', () => {
             expect(wrapper.hasClass(classes)).toBe(true);
           });
 
-          it('should call custom classes function correctly', () => {
-            expect(classesCallBack.callCount).toBe(1);
-            expect(classesCallBack.calledWith(column, index)).toBe(true);
-          });
-
           it('should have sortable class on header cell', () => {
             expect(wrapper.hasClass('sortable')).toBe(true);
+          });
+
+          it('should call custom class function with correct params', () => {
+            expect(classesCallBack.callCount).toBe(1);
+            expect(classesCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+          });
+
+          describe('when the field is last sorting', () => {
+            it('should call custom classes function with isLastSorting being true', () => {
+              isLastSorting = true;
+              classesCallBack.reset();
+
+              wrapper = shallow(
+                <HeaderCell
+                  column={ column }
+                  index={ index }
+                  sorting
+                  sortOrder={ order }
+                  isLastSorting
+                />);
+
+              expect(classesCallBack.callCount).toBe(1);
+              expect(classesCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+            });
           });
         });
 
         describe('if column.headerClasses was defined as well', () => {
           it('should keep both classes', () => {
-            column.headerClasses = 'td-test-class';
+            column = {
+              ...column,
+              headerClasses: 'td-test-class',
+              headerSortingClasses: classes
+            };
+
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
-                sortOrder={ Const.SORT_DESC }
-                sortingHeaderClasses={ classes }
+                sortOrder={ order }
               />
             );
 
@@ -516,19 +541,22 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when sortingHeaderStyle was defined', () => {
+      describe('when headerSortingStyle was defined', () => {
         const style = { backgroundColor: 'red' };
+        const order = Const.SORT_DESC;
 
-        describe('if sortingHeaderStyle is an object', () => {
+        describe('if headerSortingStyle is an object', () => {
           beforeEach(() => {
+            column = { ...column, headerSortingStyle: style };
+
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
-                sortOrder={ Const.SORT_DESC }
-                sortingHeaderStyle={ style }
-              />);
+                sortOrder={ order }
+              />
+            );
           });
 
           it('should append style correcly', () => {
@@ -537,21 +565,23 @@ describe('HeaderCell', () => {
           });
         });
 
-        describe('if sortingHeaderStyle is a function', () => {
+        describe('if headerSortingStyle is a function', () => {
           let styleCallBack;
+          let isLastSorting;
 
           beforeEach(() => {
             styleCallBack = sinon.stub()
-              .withArgs(column, index)
+              .withArgs(column, order, isLastSorting, index)
               .returns(style);
+
+            column = { ...column, headerSortingStyle: styleCallBack };
 
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
-                sortOrder={ Const.SORT_DESC }
-                sortingHeaderStyle={ styleCallBack }
+                sortOrder={ order }
               />);
           });
 
@@ -560,23 +590,45 @@ describe('HeaderCell', () => {
             expect(wrapper.find('th').prop('style')).toEqual(style);
           });
 
-          it('should call custom style function correctly', () => {
+          it('should call custom style function with correct params', () => {
             expect(styleCallBack.callCount).toBe(1);
-            expect(styleCallBack.calledWith(column, index)).toBe(true);
+            expect(styleCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+          });
+
+          describe('when the field is last sorting', () => {
+            it('should call custom classes function with isLastSorting being true', () => {
+              isLastSorting = true;
+              styleCallBack.reset();
+
+              wrapper = shallow(
+                <HeaderCell
+                  column={ column }
+                  index={ index }
+                  sorting
+                  sortOrder={ order }
+                  isLastSorting
+                />);
+
+              expect(styleCallBack.callCount).toBe(1);
+              expect(styleCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+            });
           });
         });
 
         describe('if column.headerStyle was defined as well', () => {
           it('should keep both styles', () => {
-            column.headerStyle = { opacity: '1' };
+            column = {
+              ...column,
+              headerStyle: { opacity: '1' },
+              headerSortingStyle: style
+            };
 
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
-                sortOrder={ Const.SORT_DESC }
-                sortingHeaderStyle={ style }
+                sortOrder={ order }
               />
             );
             expect(wrapper.length).toBe(1);
@@ -586,16 +638,19 @@ describe('HeaderCell', () => {
             }));
           });
 
-          it('sortingHeaderStyle should have higher priority', () => {
-            column.headerStyle = { backgroundColor: 'green' };
+          it('headerSortingStyle should have higher priority', () => {
+            column = {
+              ...column,
+              headerStyle: { backgroundColor: 'green' },
+              headerSortingStyle: style
+            };
 
             wrapper = shallow(
               <HeaderCell
                 column={ column }
                 index={ index }
                 sorting
-                sortOrder={ Const.SORT_DESC }
-                sortingHeaderStyle={ style }
+                sortOrder={ order }
               />
             );
             expect(wrapper.length).toBe(1);
