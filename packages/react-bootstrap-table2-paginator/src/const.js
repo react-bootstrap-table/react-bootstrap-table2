@@ -11,5 +11,6 @@ export default {
   LAST_PAGE_TITLE: 'last page',
   PRE_PAGE_TITLE: 'previous page',
   FIRST_PAGE_TITLE: 'first page',
-  SIZE_PER_PAGE_LIST: [10, 25, 30, 50]
+  SIZE_PER_PAGE_LIST: [10, 25, 30, 50],
+  HIDE_SIZE_PER_PAGE: false
 };

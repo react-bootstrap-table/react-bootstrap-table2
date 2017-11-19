@@ -88,13 +88,13 @@ class Pagination extends pageResolver(Component) {
 
   render() {
     const { totalPages, lastPage, dropdownOpen: open } = this.state;
-    const { sizePerPageList, currSizePerPage } = this.props;
+    const { sizePerPageList, currSizePerPage, hideSizePerPage } = this.props;
     const pages = this.calculatePageStatus(this.calculatePages(totalPages), lastPage);
     return (
       <div className="row react-bootstrap-table-pagination">
         <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
           {
-            sizePerPageList.length > 1 ?
+            sizePerPageList.length > 1 && !hideSizePerPage ?
               (
                 <SizePerPageDropDown
                   currSizePerPage={ `${currSizePerPage}` }
@@ -133,7 +133,8 @@ Pagination.propTypes = {
   firstPageTitle: PropTypes.string,
   lastPageTitle: PropTypes.string,
   withFirstAndLast: PropTypes.bool,
-  alwaysShowAllBtns: PropTypes.bool
+  alwaysShowAllBtns: PropTypes.bool,
+  hideSizePerPage: PropTypes.bool
 };
 
 Pagination.defaultProps = {
@@ -149,7 +150,8 @@ Pagination.defaultProps = {
   nextPageTitle: Const.NEXT_PAGE_TITLE,
   prePageTitle: Const.PRE_PAGE_TITLE,
   firstPageTitle: Const.FIRST_PAGE_TITLE,
-  lastPageTitle: Const.LAST_PAGE_TITLE
+  lastPageTitle: Const.LAST_PAGE_TITLE,
+  hideSizePerPage: Const.HIDE_SIZE_PER_PAGE
 };
 
 export default Pagination;

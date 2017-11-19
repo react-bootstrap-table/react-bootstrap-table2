@@ -88,6 +88,7 @@ describe('Wrapper', () => {
       expect(pagination.prop('prePageTitle')).toEqual(Const.PRE_PAGE_TITLE);
       expect(pagination.prop('nextPageTitle')).toEqual(Const.NEXT_PAGE_TITLE);
       expect(pagination.prop('lastPageTitle')).toEqual(Const.LAST_PAGE_TITLE);
+      expect(pagination.prop('hideSizePerPage')).toEqual(Const.HIDE_SIZE_PER_PAGE);
     });
   });
 
@@ -339,6 +340,25 @@ describe('Wrapper', () => {
       expect(wrapper.length).toBe(1);
       expect(pagination.length).toBe(1);
       expect(pagination.prop('lastPageTitle')).toEqual(lastPageTitle);
+    });
+  });
+
+  describe('when options.hideSizePerPage is defined', () => {
+    const hideSizePerPage = true;
+    const props = createTableProps({ options: { hideSizePerPage } });
+    beforeEach(() => {
+      PaginationWrapper = wrapperFactory(pureTable);
+      wrapper = shallow(<PaginationWrapper { ...props } />);
+      instance = wrapper.instance();
+      const fragment = instance.render();
+      wrapper = shallow(<div>{ fragment }</div>);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('hideSizePerPage')).toEqual(hideSizePerPage);
     });
   });
 

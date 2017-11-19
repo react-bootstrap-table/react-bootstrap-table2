@@ -56,6 +56,8 @@ const wrapperFactory = baseElement =>
         Const.With_FIRST_AND_LAST : options.withFirstAndLast;
       const alwaysShowAllBtns = typeof options.alwaysShowAllBtns === 'undefined' ?
         Const.SHOW_ALL_PAGE_BTNS : options.alwaysShowAllBtns;
+      const hideSizePerPage = typeof options.hideSizePerPage === 'undefined' ?
+        Const.HIDE_SIZE_PER_PAGE : options.hideSizePerPage;
 
       const base = baseElement({
         ...this.props,
@@ -77,6 +79,7 @@ const wrapperFactory = baseElement =>
           pageStartIndex={ options.pageStartIndex || Const.PAGE_START_INDEX }
           withFirstAndLast={ withFirstAndLast }
           alwaysShowAllBtns={ alwaysShowAllBtns }
+          hideSizePerPage={ hideSizePerPage }
           firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
           prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
           nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }

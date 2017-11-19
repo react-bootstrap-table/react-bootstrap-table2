@@ -81,6 +81,19 @@ describe('Pagination', () => {
     });
   });
 
+  describe('when props.hideSizePerPage is true', () => {
+    beforeEach(() => {
+      const props = createMockProps({ hideSizePerPage: true });
+      wrapper = shallow(<Pagination { ...props } />);
+      instance = wrapper.instance();
+    });
+
+    it('should not rendering SizePerPageDropDown component', () => {
+      const sizePerPageDropDown = wrapper.find(SizePerPageDropDown);
+      expect(sizePerPageDropDown.length).toBe(0);
+    });
+  });
+
   describe('componentWillReceiveProps', () => {
     describe('when next props.currSizePerPage is diff than current one', () => {
       const nextProps = createMockProps({ currSizePerPage: 20 });
