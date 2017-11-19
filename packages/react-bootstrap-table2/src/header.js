@@ -14,8 +14,6 @@ const Header = (props) => {
     onSort,
     sortField,
     sortOrder,
-    sortingHeaderClasses,
-    sortingHeaderStyle,
     selectRow
   } = props;
 
@@ -29,6 +27,8 @@ const Header = (props) => {
         {
           columns.map((column, i) => {
             const currSort = column.dataField === sortField;
+            const isLastSorting = column.dataField === sortField;
+
             return (
               <HeaderCell
                 index={ i }
@@ -37,8 +37,7 @@ const Header = (props) => {
                 onSort={ onSort }
                 sorting={ currSort }
                 sortOrder={ sortOrder }
-                sortingHeaderClasses={ sortingHeaderClasses }
-                sortingHeaderStyle={ sortingHeaderStyle }
+                isLastSorting={ isLastSorting }
               />);
           })
         }
@@ -52,9 +51,7 @@ Header.propTypes = {
   onSort: PropTypes.func,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
-  selectRow: PropTypes.object,
-  sortingHeaderClasses: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  sortingHeaderStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  selectRow: PropTypes.object
 };
 
 export default Header;

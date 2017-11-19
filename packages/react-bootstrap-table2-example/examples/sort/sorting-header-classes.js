@@ -1,4 +1,8 @@
-/* eslint no-unused-vars: 0 */
+/* eslint
+  no-unused-vars: 0
+  arrow-body-style: 0
+*/
+
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table2';
@@ -7,43 +11,55 @@ import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
 
+const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
+  sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
+);
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  sort: true
+  sort: true,
+  headerSortingClasses
 }, {
   dataField: 'name',
   text: 'Product Name',
-  sort: true
+  sort: true,
+  headerSortingClasses
 }, {
   dataField: 'price',
   text: 'Product Price'
 }];
-
-const sortingHeaderClasses = (column, colIndex) => 'demo-sorting';
 
 const sourceCode = `\
+const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
+  sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
+);
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  sort: true
+  sort: true,
+  headerSortingClasses
 }, {
   dataField: 'name',
   text: 'Product Name',
-  sort: true
+  sort: true,
+  headerSortingClasses
 }, {
   dataField: 'price',
   text: 'Product Price'
 }];
 
-const sortingHeaderClasses = (column, colIndex) => 'demo-sorting';
+const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
+  sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
+);
 
-<BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderClasses={ sortingHeaderClasses } />
+<BootstrapTable keyField="id" data={ products } columns={ columns } />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderClasses={ sortingHeaderClasses } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>
 );

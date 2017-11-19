@@ -16,8 +16,7 @@ const HeaderCell = (props) => {
     onSort,
     sorting,
     sortOrder,
-    sortingHeaderClasses,
-    sortingHeaderStyle
+    isLastSorting
   } = props;
 
   const {
@@ -30,7 +29,9 @@ const HeaderCell = (props) => {
     headerEvents,
     headerClasses,
     headerStyle,
-    headerAttrs
+    headerAttrs,
+    headerSortingClasses,
+    headerSortingStyle
   } = column;
 
   const cellAttrs = {
@@ -73,16 +74,16 @@ const HeaderCell = (props) => {
       // append customized classes or style if table was sorting based on the current column.
       cellClasses = cs(
         cellClasses,
-        _.isFunction(sortingHeaderClasses)
-          ? sortingHeaderClasses(column, index)
-          : sortingHeaderClasses
+        _.isFunction(headerSortingClasses)
+          ? headerSortingClasses(column, sortOrder, isLastSorting, index)
+          : headerSortingClasses
       );
 
       cellStyle = {
         ...cellStyle,
-        ..._.isFunction(sortingHeaderStyle)
-          ? sortingHeaderStyle(column, index)
-          : sortingHeaderStyle
+        ..._.isFunction(headerSortingStyle)
+          ? headerSortingStyle(column, sortOrder, isLastSorting, index)
+          : headerSortingStyle
       };
     } else {
       sortSymbol = <SortSymbol />;
@@ -131,8 +132,7 @@ HeaderCell.propTypes = {
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
-  sortingHeaderClasses: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-  sortingHeaderStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object])
+  isLastSorting: PropTypes.bool
 };
 
 export default HeaderCell;

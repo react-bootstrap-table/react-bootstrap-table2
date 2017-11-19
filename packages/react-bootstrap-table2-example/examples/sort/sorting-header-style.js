@@ -7,43 +7,48 @@ import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
 
+const headerSortingStyle = { backgroundColor: '#c8e6c9' };
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  sort: true
+  sort: true,
+  headerSortingStyle
 }, {
   dataField: 'name',
   text: 'Product Name',
-  sort: true
+  sort: true,
+  headerSortingStyle
 }, {
   dataField: 'price',
   text: 'Product Price'
 }];
 
-const sortingHeaderStyle = { backgroundColor: '#c8e6c9' };
 
 const sourceCode = `\
+const headerSortingStyle = { backgroundColor: '#c8e6c9' };
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  sort: true
+  sort: true,
+  headerSortingStyle
 }, {
   dataField: 'name',
   text: 'Product Name',
-  sort: true
+  sort: true,
+  headerSortingStyle
 }, {
   dataField: 'price',
   text: 'Product Price'
 }];
 
-const sortingHeaderStyle = { backgroundColor: '#c8e6c9' };
-
-<BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderStyle={ sortingHeaderStyle } />
+<BootstrapTable keyField="id" data={ products } columns={ columns } />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } sortingHeaderStyle={ sortingHeaderStyle } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>
 );
