@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import PageButton from '../src/page-button';
 import PaginationList from '../src/pagination-list';
 
-describe('SizePerPageOption', () => {
+describe('PaginationList', () => {
   let wrapper;
   const onPageChange = sinon.stub();
   const pages = [{

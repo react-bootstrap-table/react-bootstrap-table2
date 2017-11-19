@@ -25,6 +25,8 @@ describe('Pagination', () => {
     alwaysShowAllBtns: false,
     onPageChange: sinon.stub(),
     onSizePerPageChange: sinon.stub(),
+    hidePageListOnlyOnePage: false,
+    hideSizePerPage: false,
     ...props
   });
 
@@ -39,6 +41,7 @@ describe('Pagination', () => {
     it('should rendering correctly', () => {
       expect(wrapper.length).toBe(1);
       expect(wrapper.hasClass('react-bootstrap-table-pagination')).toBeTruthy();
+      expect(wrapper.find('.react-bootstrap-table-pagination-list-hidden').length).toBe(0);
     });
 
     it('should having correct state', () => {
@@ -91,6 +94,18 @@ describe('Pagination', () => {
     it('should not rendering SizePerPageDropDown component', () => {
       const sizePerPageDropDown = wrapper.find(SizePerPageDropDown);
       expect(sizePerPageDropDown.length).toBe(0);
+    });
+  });
+
+  describe('when props.hidePageListOnlyOnePage is true', () => {
+    beforeEach(() => {
+      const props = createMockProps({ hidePageListOnlyOnePage: true, dataSize: 7 });
+      wrapper = shallow(<Pagination { ...props } />);
+      instance = wrapper.instance();
+    });
+
+    it('should find react-bootstrap-table-pagination-list-hidden class when only one page', () => {
+      expect(wrapper.find('.react-bootstrap-table-pagination-list-hidden').length).toBe(1);
     });
   });
 

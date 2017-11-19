@@ -1,5 +1,6 @@
 /* eslint react/require-default-props: 0 */
 /* eslint arrow-body-style: 0 */
+import cs from 'classnames';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import pageResolver from './page-resolver';
@@ -88,8 +89,19 @@ class Pagination extends pageResolver(Component) {
 
   render() {
     const { totalPages, lastPage, dropdownOpen: open } = this.state;
-    const { sizePerPageList, currSizePerPage, hideSizePerPage } = this.props;
+    const {
+      sizePerPageList,
+      currSizePerPage,
+      hideSizePerPage,
+      hidePageListOnlyOnePage
+    } = this.props;
     const pages = this.calculatePageStatus(this.calculatePages(totalPages), lastPage);
+
+    const pageListClass = cs(
+      'react-bootstrap-table-pagination-list',
+      'col-md-6 col-xs-6 col-sm-6 col-lg-6', {
+        'react-bootstrap-table-pagination-list-hidden': (hidePageListOnlyOnePage && totalPages === 1)
+      });
     return (
       <div className="row react-bootstrap-table-pagination">
         <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
@@ -107,7 +119,7 @@ class Pagination extends pageResolver(Component) {
               ) : null
           }
         </div>
-        <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
+        <div className={ pageListClass }>
           <PaginationList pages={ pages } onPageChange={ this.handleChangePage } />
         </div>
       </div>
@@ -134,7 +146,8 @@ Pagination.propTypes = {
   lastPageTitle: PropTypes.string,
   withFirstAndLast: PropTypes.bool,
   alwaysShowAllBtns: PropTypes.bool,
-  hideSizePerPage: PropTypes.bool
+  hideSizePerPage: PropTypes.bool,
+  hidePageListOnlyOnePage: PropTypes.bool
 };
 
 Pagination.defaultProps = {
@@ -151,7 +164,8 @@ Pagination.defaultProps = {
   prePageTitle: Const.PRE_PAGE_TITLE,
   firstPageTitle: Const.FIRST_PAGE_TITLE,
   lastPageTitle: Const.LAST_PAGE_TITLE,
-  hideSizePerPage: Const.HIDE_SIZE_PER_PAGE
+  hideSizePerPage: Const.HIDE_SIZE_PER_PAGE,
+  hidePageListOnlyOnePage: Const.HIDE_PAGE_LIST_ONLY_ONE_PAGE
 };
 
 export default Pagination;

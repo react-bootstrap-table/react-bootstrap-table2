@@ -362,6 +362,25 @@ describe('Wrapper', () => {
     });
   });
 
+  describe('when options.hidePageListOnlyOnePage is defined', () => {
+    const hidePageListOnlyOnePage = true;
+    const props = createTableProps({ options: { hidePageListOnlyOnePage } });
+    beforeEach(() => {
+      PaginationWrapper = wrapperFactory(pureTable);
+      wrapper = shallow(<PaginationWrapper { ...props } />);
+      instance = wrapper.instance();
+      const fragment = instance.render();
+      wrapper = shallow(<div>{ fragment }</div>);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('hidePageListOnlyOnePage')).toEqual(hidePageListOnlyOnePage);
+    });
+  });
+
   describe('handleChangePage', () => {
     const newPage = 3;
     const props = createTableProps({ options: { onPageChange: sinon.stub() } });
