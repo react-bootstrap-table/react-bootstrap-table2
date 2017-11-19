@@ -51,7 +51,7 @@ const SizePerPageDropDown = (props) => {
           options.map(option => (
             <SizePerPageOption
               { ...option }
-              key={ option.page }
+              key={ option.text }
               onSizePerPageChange={ onSizePerPageChange }
             />
           ))
