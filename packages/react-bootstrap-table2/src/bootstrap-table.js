@@ -15,13 +15,13 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
 
     this.state = {
-      data: props.store.get()
+      data: props.data
     };
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
-      data: nextProps.store.get()
+      data: nextProps.data
     });
   }
 
@@ -66,7 +66,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     });
 
     return (
-      <div className="react-bootstrap-table-container">
+      <div className="react-bootstrap-table">
         <table className={ tableClass }>
           <Caption>{ caption }</Caption>
           <Header
@@ -110,6 +110,7 @@ BootstrapTable.propTypes = {
     PropTypes.node,
     PropTypes.string
   ]),
+  pagination: PropTypes.object,
   onSort: PropTypes.func,
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,

@@ -68,11 +68,17 @@ import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
 import HideSelectionColumnTable from 'examples/row-selection/hide-selection-column';
 
+// pagination
+import PaginationTable from 'examples/pagination';
+import PaginationHooksTable from 'examples/pagination/pagination-hooks';
+import CustomPaginationTable from 'examples/pagination/custom-pagination';
+
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/tomorrow.min.css';
 import 'stories/stylesheet/storybook.scss';
 import 'react-bootstrap-table2/style/react-bootstrap-table.scss';
+import 'react-bootstrap-table2-paginator/style/react-bootstrap-table-paginator.scss';
 
 // import { action } from '@storybook/addon-actions';
 
@@ -143,3 +149,8 @@ storiesOf('Row Selection', module)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
   .add('Selection Hooks', () => <SelectionHooks />)
   .add('Hide Selection Column', () => <HideSelectionColumnTable />);
+
+storiesOf('Pagination', module)
+  .add('Basic Pagination Table', () => <PaginationTable />)
+  .add('Pagination Hooks', () => <PaginationHooksTable />)
+  .add('Custom Pagination', () => <CustomPaginationTable />);
