@@ -19,6 +19,7 @@
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
+* [pagination](#pagination)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -101,4 +102,49 @@ const defaultSorted = [{
   dataField: 'name', // if dataField is not match to any column you defined, it will be ignored.
   order: 'desc' // desc or asc
 }];
+```
+
+### <a name='pagination'>pagination - [Object]</a>
+`pagination` allow user to render a pagination panel on the bottom of table. But pagination funcitonality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-paginator` additionaly.
+
+```sh
+$ npm install react-bootstrap-table2-paginator --save
+```
+
+After installation of `react-bootstrap-table2-paginator`, you can enable pagination on `react-bootstrap-table2` easily:
+
+```js
+import paginator from 'react-bootstrap-table2-paginator';
+
+// omit...
+
+<BootstrapTable data={ data } columns={ columns } pagination={ paginator() } />
+```
+
+`paginator` is a function actually and allow to pass some pagination options, following we list all the available options:
+
+```js
+paginator({
+  pageStartIndex: 0, // first page will be 0, default is 1
+  paginationSize: 3,  // the pagination bar size, default is 5
+  sizePerPageList: [ {
+    text: '5', value: 5
+  }, {
+    text: '10', value: 10
+  }, {
+    text: 'All', value: products.length
+  } ], // A numeric array is also available: [5, 10]. the purpose of above example is custom the text
+  withFirstAndLast: false, // hide the going to first and last page button
+  alwaysShowAllBtns: true, // always show the next and previous page button
+  firstPageText: 'First', // the text of first page button
+  prePageText: 'Prev', // the text of previous page button
+  nextPageText: 'Next', // the text of next page button
+  lastPageText: 'Last', // the text of last page button
+  nextPageTitle: 'Go to next', // the title of next page button
+  prePageTitle: 'Go to previous', // the title of previous page button
+  firstPageTitle: 'Go to first', // the title of first page button
+  lastPageTitle: 'Go to last', // the title of last page button
+  hideSizePerPage: true, // hide the size per page dorpdown
+  hidePageListOnlyOnePage: true// hide pagination bar when only one page, default is false
+})
 ```
