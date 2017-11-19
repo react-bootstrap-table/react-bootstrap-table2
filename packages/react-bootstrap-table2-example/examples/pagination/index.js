@@ -34,12 +34,12 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator() } />
 `;
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginator } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginator() } />
     <Code>{ sourceCode }</Code>
   </div>
 );

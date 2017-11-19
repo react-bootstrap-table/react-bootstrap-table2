@@ -46,7 +46,7 @@ const options = {
   }] // A numeric array is also available. the purpose of above example is custom the text
 };
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator(options) } />
 `;
 const options = {
   paginationSize: 4,
@@ -72,7 +72,7 @@ const options = {
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginator } options={ options } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginator(options) } />
     <Code>{ sourceCode }</Code>
   </div>
 );

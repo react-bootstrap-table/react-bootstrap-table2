@@ -52,8 +52,7 @@ const options = {
   keyField="id"
   data={ products }
   columns={ columns }
-  pagination={ paginator }
-  options={ options }
+  pagination={ paginator(options) }
 />
 `;
 
@@ -76,8 +75,7 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
-      pagination={ paginator }
-      options={ options }
+      pagination={ paginator(options) }
     />
     <Code>{ sourceCode }</Code>
   </div>
