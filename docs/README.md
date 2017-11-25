@@ -19,8 +19,6 @@
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
-* [sortingHeaderClasses](#sortingHeaderClasses)
-* [sortingHeaderStyle](#sortingHeaderStyle)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -103,31 +101,4 @@ const defaultSorted = [{
   dataField: 'name', // if dataField is not match to any column you defined, it will be ignored.
   order: 'desc' // desc or asc
 }];
-```
-
-### <a name='sortingHeaderClasses'>sortingHeaderClasses - [String | Function]</a>
-
-`sortingHeaderClasses` allows you to customize `class` for `header cell` which the table was sorting based on. 
-
-```js
-const sortingHeaderClasses = 'demo-sorting';
-```
-
-Furthermore, it also accepts a callback function which takes `2` arguments and `String` is expected to return:
-
-```js
-const sortingHeaderClasses = function callback(column, colIndex) { ... }
-```
-
-* column: The value of current column.
-* colIndex: The index of the current column being processed in BootstrapTable.
-
-### <a name='sortingHeaderStyle'>sortingHeaderStyle - [Object | Function]</a>
-
-It's similiar to `sortingHeaderClasses`. It allows to customize style of `header cell` which is sorting based on. `Object` and `callback` function are acceptable. `callback` takes `2` arguments and an `Object` is expected to return:
-
-```js
-const sortingHeaderStyle = {
-  backgroundColor: 'red'
-};
 ```
