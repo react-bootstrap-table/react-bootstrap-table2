@@ -40,8 +40,24 @@ export default class Store {
     return this.data;
   }
 
+  getByCurrPage(page, sizePerPage) {
+    const end = (page * sizePerPage) - 1;
+    const start = end - (sizePerPage - 1);
+
+    const result = [];
+    for (let i = start; i <= end; i += 1) {
+      result.push(this.data[i]);
+      if (i + 1 === this.getDataSize()) break;
+    }
+    return result;
+  }
+
   set(data) {
     this.data = data ? JSON.parse(JSON.stringify(data)) : [];
+  }
+
+  getDataSize() {
+    return this.data.length;
   }
 
   getRowByRowId(rowId) {

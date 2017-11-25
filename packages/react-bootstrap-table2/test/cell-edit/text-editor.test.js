@@ -1,5 +1,6 @@
+import 'jsdom-global/register';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 
 import TextEditor from '../../src/cell-edit/text-editor';
 
@@ -8,7 +9,7 @@ describe('TextEditor', () => {
   const value = 'test';
 
   beforeEach(() => {
-    wrapper = shallow(
+    wrapper = mount(
       <TextEditor
         defaultValue={ value }
       />
@@ -22,20 +23,20 @@ describe('TextEditor', () => {
     expect(wrapper.find('.form-control.editor.edit-text').length).toBe(1);
   });
 
-  describe('whenclassNames prop defined', () => {
+  describe('when className prop defined', () => {
     const className = 'test-class';
     beforeEach(() => {
-      wrapper = shallow(
+      wrapper = mount(
         <TextEditor
           defaultValue={ value }
-          classNames={ className }
+          className={ className }
         />
       );
     });
 
     it('should render correct custom classname', () => {
       expect(wrapper.length).toBe(1);
-      expect(wrapper.find(`.${className}`).length).toBe(1);
+      expect(wrapper.hasClass(className)).toBeTruthy();
     });
   });
 });

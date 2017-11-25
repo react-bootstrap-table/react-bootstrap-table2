@@ -40,7 +40,6 @@ describe('BootstrapTable', () => {
       expect(wrapper.find('table.table').length).toBe(1);
       expect(wrapper.find(Header).length).toBe(1);
       expect(wrapper.find(Body).length).toBe(1);
-      expect(wrapper.find('.react-bootstrap-table-container').length).toBe(1);
     });
 
     it('should have correct default state', () => {

@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "bootstrap": "^3.3.7",
-    "react-bootstrap-table2": "0.0.1"
+    "react-bootstrap-table2": "0.0.1",
+    "react-bootstrap-table2-paginator": "0.0.1"
   },
   "devDependencies": {
     "@storybook/addon-console": "^1.0.0",

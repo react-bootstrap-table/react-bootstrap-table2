@@ -6,7 +6,8 @@ import Store from './store/base';
 import {
   wrapWithCellEdit,
   wrapWithSelection,
-  wrapWithSort
+  wrapWithSort,
+  wrapWithPagination
 } from './table-factory';
 
 import _ from './utils';
@@ -64,6 +65,8 @@ const withDataStore = Base =>
         return wrapWithSelection(baseProps);
       } else if (this.props.columns.filter(col => col.sort).length > 0) {
         return wrapWithSort(baseProps);
+      } else if (this.props.pagination) {
+        return wrapWithPagination(baseProps);
       }
 
       return React.createElement(Base, baseProps);

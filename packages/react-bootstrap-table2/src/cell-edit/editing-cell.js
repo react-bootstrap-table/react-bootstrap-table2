@@ -128,7 +128,7 @@ class EditingCell extends Component {
         <TextEditor
           ref={ node => this.editor = node }
           defaultValue={ value }
-          classNames={ editorClass }
+          className={ editorClass }
           { ...editorAttrs }
         />
         { hasError ? <EditorIndicator invalidMessage={ invalidMessage } /> : null }

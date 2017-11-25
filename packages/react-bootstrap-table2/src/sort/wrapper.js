@@ -4,7 +4,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { sortableElement } from '../table-factory';
+import { paginationElement } from '../table-factory';
 
 class SortWrapper extends Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class SortWrapper extends Component {
   }
 
   render() {
-    return sortableElement({
+    return paginationElement({
       ...this.props,
       ref: node => this.table = node,
       onSort: this.handleSort,
