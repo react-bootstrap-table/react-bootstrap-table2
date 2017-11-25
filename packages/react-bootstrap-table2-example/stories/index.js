@@ -41,8 +41,8 @@ import RowEventTable from 'examples/rows/row-event';
 import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
 import CustomSortTable from 'examples/sort/custom-sort-table';
-import SortingHeaderClassesTable from 'examples/sort/sorting-header-classes';
-import SortingHeaderStyleTable from 'examples/sort/sorting-header-style';
+import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
+import HeaderSortingStyleTable from 'examples/sort/header-sorting-style';
 
 // cell editing
 import ClickToEditTable from 'examples/cell-edit/click-to-edit-table';
@@ -119,8 +119,8 @@ storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Default Sort Table', () => <DefaultSortTable />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
-  .add('Sorting header classes', () => <SortingHeaderClassesTable />)
-  .add('Sorting header style', () => <SortingHeaderStyleTable />);
+  .add('Header sorting classes', () => <HeaderSortingClassesTable />)
+  .add('Header sorting style', () => <HeaderSortingStyleTable />);
 
 storiesOf('Cell Editing', module)
   .add('Click to Edit', () => <ClickToEditTable />)

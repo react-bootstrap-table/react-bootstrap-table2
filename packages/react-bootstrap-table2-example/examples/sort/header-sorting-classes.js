@@ -50,10 +50,6 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
-  sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
-);
-
 <BootstrapTable keyField="id" data={ products } columns={ columns } />
 `;
 
