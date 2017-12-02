@@ -72,6 +72,7 @@ import HideSelectionColumnTable from 'examples/row-selection/hide-selection-colu
 import PaginationTable from 'examples/pagination';
 import PaginationHooksTable from 'examples/pagination/pagination-hooks';
 import CustomPaginationTable from 'examples/pagination/custom-pagination';
+import RemotePaginationTable from 'examples/pagination/remote-pagination';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -153,4 +154,5 @@ storiesOf('Row Selection', module)
 storiesOf('Pagination', module)
   .add('Basic Pagination Table', () => <PaginationTable />)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
-  .add('Custom Pagination', () => <CustomPaginationTable />);
+  .add('Custom Pagination', () => <CustomPaginationTable />)
+  .add('Remote Pagination', () => <RemotePaginationTable />);
