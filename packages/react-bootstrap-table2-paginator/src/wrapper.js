@@ -17,17 +17,46 @@ const wrapperFactory = baseElement =>
       this.handleChangePage = this.handleChangePage.bind(this);
       this.handleChangeSizePerPage = this.handleChangeSizePerPage.bind(this);
 
+      let currPage;
+      let currSizePerPage;
       const options = props.pagination.options || {};
-      const currPage = options.pageStartIndex || Const.PAGE_START_INDEX;
       const sizePerPageList = options.sizePerPageList || Const.SIZE_PER_PAGE_LIST;
-      const currSizePerPage = typeof sizePerPageList[0] === 'object' ? sizePerPageList[0].value : sizePerPageList[0];
+
+      // initialize current page
+      if (typeof options.page !== 'undefined') {
+        currPage = options.page;
+      } else if (typeof options.pageStartIndex !== 'undefined') {
+        currPage = options.pageStartIndex;
+      } else {
+        currPage = Const.PAGE_START_INDEX;
+      }
+
+      // initialize current sizePerPage
+      if (typeof options.sizePerPage !== 'undefined') {
+        currSizePerPage = options.sizePerPage;
+      } else if (typeof sizePerPageList[0] === 'object') {
+        currSizePerPage = sizePerPageList[0].value;
+      } else {
+        currSizePerPage = sizePerPageList[0];
+      }
+
       this.state = { currPage, currSizePerPage };
     }
 
+    isRemote() {
+      const { remote } = this.props;
+      return remote === true || (typeof remote === 'object' && remote.pagination);
+    }
+
     handleChangePage(currPage) {
-      const { pagination: { options } } = this.props;
+      const { currSizePerPage } = this.state;
+      const { pagination: { options }, onRemotePageChange } = this.props;
       if (options.onPageChange) {
-        options.onPageChange(currPage, this.state.currSizePerPage);
+        options.onPageChange(currPage, currSizePerPage);
+      }
+      if (this.isRemote()) {
+        onRemotePageChange(currPage, currSizePerPage);
+        return;
       }
       this.setState(() => {
         return {
@@ -37,9 +66,13 @@ const wrapperFactory = baseElement =>
     }
 
     handleChangeSizePerPage(currSizePerPage, currPage) {
-      const { pagination: { options } } = this.props;
+      const { pagination: { options }, onRemotePageChange } = this.props;
       if (options.onSizePerPageChange) {
         options.onSizePerPageChange(currSizePerPage, currPage);
+      }
+      if (this.isRemote()) {
+        onRemotePageChange(currPage, currSizePerPage);
+        return;
       }
       this.setState(() => {
         return {
@@ -60,25 +93,31 @@ const wrapperFactory = baseElement =>
         Const.HIDE_SIZE_PER_PAGE : options.hideSizePerPage;
       const hidePageListOnlyOnePage = typeof options.hidePageListOnlyOnePage === 'undefined' ?
         Const.HIDE_PAGE_LIST_ONLY_ONE_PAGE : options.hidePageListOnlyOnePage;
+      const pageStartIndex = typeof options.pageStartIndex === 'undefined' ?
+        Const.PAGE_START_INDEX : options.pageStartIndex;
+
+      const data = this.isRemote() ?
+        this.props.data :
+        store.getByCurrPage(currPage, currSizePerPage, pageStartIndex);
 
       const base = baseElement({
         ...this.props,
         key: 'table',
-        data: store.getByCurrPage(currPage, currSizePerPage)
+        data
       });
 
       return [
         base,
         <Pagination
           key="pagination"
-          dataSize={ this.props.store.getDataSize() }
+          dataSize={ options.totalSize || store.getDataSize() }
           currPage={ currPage }
           currSizePerPage={ currSizePerPage }
           onPageChange={ this.handleChangePage }
           onSizePerPageChange={ this.handleChangeSizePerPage }
           sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
           paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
-          pageStartIndex={ options.pageStartIndex || Const.PAGE_START_INDEX }
+          pageStartIndex={ pageStartIndex }
           withFirstAndLast={ withFirstAndLast }
           alwaysShowAllBtns={ alwaysShowAllBtns }
           hideSizePerPage={ hideSizePerPage }
