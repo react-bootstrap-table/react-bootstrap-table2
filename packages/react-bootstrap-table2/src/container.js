@@ -18,10 +18,16 @@ const withDataStore = Base =>
       super(props);
       this.store = new Store(props);
       this.handleUpdateCell = this.handleUpdateCell.bind(this);
+      this.onRemotePageChange = this.onRemotePageChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
       this.store.set(nextProps.data);
+    }
+
+    onRemotePageChange(page, sizePerPage) {
+      const newState = { page, sizePerPage };
+      this.props.onTableChange(newState);
     }
 
     handleUpdateCell(rowId, dataField, newValue) {
@@ -66,7 +72,10 @@ const withDataStore = Base =>
       } else if (this.props.columns.filter(col => col.sort).length > 0) {
         return wrapWithSort(baseProps);
       } else if (this.props.pagination) {
-        return wrapWithPagination(baseProps);
+        return wrapWithPagination({
+          ...baseProps,
+          onRemotePageChange: this.onRemotePageChange
+        });
       }
 
       return React.createElement(Base, baseProps);

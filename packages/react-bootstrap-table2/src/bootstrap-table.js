@@ -100,6 +100,9 @@ BootstrapTable.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
+    pagination: PropTypes.bool
+  })]),
   store: PropTypes.object,
   noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
@@ -153,10 +156,12 @@ BootstrapTable.propTypes = {
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
-  }))
+  })),
+  onTableChange: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {
+  remote: false,
   striped: false,
   bordered: true,
   hover: false,

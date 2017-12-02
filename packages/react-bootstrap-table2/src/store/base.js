@@ -40,14 +40,19 @@ export default class Store {
     return this.data;
   }
 
-  getByCurrPage(page, sizePerPage) {
-    const end = (page * sizePerPage) - 1;
+  getByCurrPage(page, sizePerPage, pageStartIndex) {
+    const getNormalizedPage = () => {
+      const offset = Math.abs(1 - pageStartIndex);
+      return page + offset;
+    };
+    const end = (getNormalizedPage() * sizePerPage) - 1;
     const start = end - (sizePerPage - 1);
+    const dataSize = this.getDataSize();
 
     const result = [];
     for (let i = start; i <= end; i += 1) {
       result.push(this.data[i]);
-      if (i + 1 === this.getDataSize()) break;
+      if (i + 1 === dataSize) break;
     }
     return result;
   }
