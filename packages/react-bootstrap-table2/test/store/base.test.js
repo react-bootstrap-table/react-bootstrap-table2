@@ -212,4 +212,34 @@ describe('Store Base', () => {
       expect(store.isAnySelectedRow()).not.toBeTruthy();
     });
   });
+
+  describe('getByCurrPage', () => {
+    beforeEach(() => {
+      data = [];
+      for (let i = 0; i < 100; i += 1) {
+        data.push({ id: i, name: `test_name${i}` });
+      }
+      store = new Base({ data, keyField: 'id' });
+    });
+
+    it('should always return correct data', () => {
+      [
+        // [page, sizePerPage, pageStartIndex]
+        [1, 10, 1],
+        [1, 25, 1],
+        [1, 30, 1],
+        [3, 30, 1],
+        [4, 30, 1],
+        [10, 10, 1],
+        [0, 10, 0],
+        [1, 10, 0],
+        [9, 10, 0]
+      ].forEach(([page, sizePerPage, pageStartIndex]) => {
+        const rows = store.getByCurrPage(page, sizePerPage, pageStartIndex);
+        expect(rows).toBeDefined();
+        expect(Array.isArray(rows)).toBeTruthy();
+        expect(rows.every(row => !!row)).toBeTruthy();
+      });
+    });
+  });
 });

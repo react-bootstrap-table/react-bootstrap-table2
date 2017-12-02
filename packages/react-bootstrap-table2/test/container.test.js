@@ -152,6 +152,33 @@ describe('withDataStore', () => {
     });
   });
 
+  describe('when pagination prop is defined', () => {
+    const PaginationWrapper = () => <div>test</div>;
+    const pagination = {
+      wrapper: jest.fn().mockReturnValue(PaginationWrapper)
+    };
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          pagination={ pagination }
+        />
+      );
+    });
+
+    it('should render Pagination wrapper successfully', () => {
+      expect(wrapper.find(PaginationWrapper).length).toBe(1);
+    });
+
+    it('should injecting correct props to Pagination wrapper', () => {
+      const component = wrapper.find(PaginationWrapper);
+      expect(component.props().onRemotePageChange).toBeDefined();
+    });
+  });
+
   describe('when any column.sort is defined', () => {
     beforeEach(() => {
       const columnsWithSort = [{
@@ -170,6 +197,29 @@ describe('withDataStore', () => {
 
     it('should render SortWrapper component successfully', () => {
       expect(wrapper.find(SortWrapper).length).toBe(1);
+    });
+  });
+
+  describe('onRemotePageChange', () => {
+    const page = 2;
+    const sizePerPage = 25;
+    const onTableChangeCallBack = sinon.stub();
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          onTableChange={ onTableChangeCallBack }
+        />
+      );
+      wrapper.instance().onRemotePageChange(page, sizePerPage);
+    });
+
+    it('should calling onTableChange correctly', () => {
+      expect(onTableChangeCallBack.calledOnce).toBeTruthy();
+      expect(onTableChangeCallBack.calledWith({ page, sizePerPage })).toBeTruthy();
     });
   });
 });
