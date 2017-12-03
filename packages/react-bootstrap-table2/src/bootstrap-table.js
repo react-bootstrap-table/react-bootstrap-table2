@@ -1,4 +1,5 @@
 /* eslint arrow-body-style: 0 */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
@@ -26,6 +27,16 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   }
 
   render() {
+    const { loading, overlay } = this.props;
+    const table = this.renderTable();
+    if (loading && overlay) {
+      const LoadingOverlay = overlay(table, loading);
+      return <LoadingOverlay />;
+    }
+    return table;
+  }
+
+  renderTable() {
     const {
       store,
       columns,
@@ -157,7 +168,8 @@ BootstrapTable.propTypes = {
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
   })),
-  onTableChange: PropTypes.func
+  onTableChange: PropTypes.func,
+  overlay: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {
