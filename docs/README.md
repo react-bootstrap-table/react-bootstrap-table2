@@ -9,6 +9,7 @@
 
 #### Optional
 * [remote](#remote)
+* [loading](#loading)
 * [caption](#caption)
 * [striped](#striped)
 * [bordered](#bordered)
@@ -45,6 +46,33 @@ In above case, only pagination will be handled on remote.
 
 > Note: when remote is enable, you are suppose to give [`onTableChange`](#onTableChange) prop on `BootstrapTable`
 > It's the only way to communicate to your remote server and update table states.
+
+### <a name='loading'>loading - [Bool]</a>
+Telling if table is loading or not, for example: waiting data loading, filtering etc. It's **only** valid when [`remote`](#remote) is enabled.
+When `loading` is `true`, `react-bootstrap-table` will attend to render a overlay on table via [`overlay`](#overlay) prop, if [`overlay`](#overlay) prop is not given, `react-bootstrap-table` will ignore the overlay rendering.
+
+### <a name='overlay'>overlay - [Function]</a>
+`overlay` accept a factory funtion which should returning a higher order component. By default, `react-bootstrap-table-overlay` can be a good option for you:
+
+```sh
+$ npm install react-bootstrap-table-overlay
+```
+```js
+import overlayFactory from 'react-bootstrap-table-overlay';
+
+<BootstrapTable
+  data={ data }
+  columns={ columns }
+  loading={ true }  //only loading is true, react-bootstrap-table will render overlay
+  overlay={ overlayFactory() }
+/>
+```
+
+Actually, `react-bootstrap-table-overlay` is depends on [`react-loading-overlay`](https://github.com/derrickpelletier/react-loading-overlay) and `overlayFactory` just a factory function and you can pass any props which available for `react-loading-overlay`:
+
+```js
+overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
+```
 
 ### <a name='caption'>caption - [String | Node]</a>
 Same as HTML [caption tag](https://www.w3schools.com/TAgs/tag_caption.asp), you can set it as String or a React JSX.
