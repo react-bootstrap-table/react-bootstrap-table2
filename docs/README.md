@@ -8,6 +8,8 @@
 * [columns (**required**)](#columns)
 
 #### Optional
+* [remote](#remote)
+* [loading](#loading)
 * [caption](#caption)
 * [striped](#striped)
 * [bordered](#bordered)
@@ -20,6 +22,7 @@
 * [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
 * [pagination](#pagination)
+* [onTableChange](#onTableChange)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -29,6 +32,47 @@ Provides data for your table. It accepts a single Array object.
 
 ### <a name='columns'>columns(**required**) - [Object]</a>
 Accepts a single Array object, please see [columns definition](./columns.md) for more detail.
+
+### <a name='remote'>remote - [Bool | Object]</a>
+Default is `false`, if enable`remote`, you are suppose to handle all the table change events, like: pagination, insert, filtering etc.
+This is a chance that you can connect to your remote server or database to manipulate your data.   
+For flexibility reason, you can control what functionality should be handled on remote via a object return:
+
+```js
+remote={ { pagination: true } }
+```
+
+In above case, only pagination will be handled on remote.
+
+> Note: when remote is enable, you are suppose to give [`onTableChange`](#onTableChange) prop on `BootstrapTable`
+> It's the only way to communicate to your remote server and update table states.
+
+### <a name='loading'>loading - [Bool]</a>
+Telling if table is loading or not, for example: waiting data loading, filtering etc. It's **only** valid when [`remote`](#remote) is enabled.
+When `loading` is `true`, `react-bootstrap-table` will attend to render a overlay on table via [`overlay`](#overlay) prop, if [`overlay`](#overlay) prop is not given, `react-bootstrap-table` will ignore the overlay rendering.
+
+### <a name='overlay'>overlay - [Function]</a>
+`overlay` accept a factory funtion which should returning a higher order component. By default, `react-bootstrap-table-overlay` can be a good option for you:
+
+```sh
+$ npm install react-bootstrap-table-overlay
+```
+```js
+import overlayFactory from 'react-bootstrap-table-overlay';
+
+<BootstrapTable
+  data={ data }
+  columns={ columns }
+  loading={ true }  //only loading is true, react-bootstrap-table will render overlay
+  overlay={ overlayFactory() }
+/>
+```
+
+Actually, `react-bootstrap-table-overlay` is depends on [`react-loading-overlay`](https://github.com/derrickpelletier/react-loading-overlay) and `overlayFactory` just a factory function and you can pass any props which available for `react-loading-overlay`:
+
+```js
+overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
+```
 
 ### <a name='caption'>caption - [String | Node]</a>
 Same as HTML [caption tag](https://www.w3schools.com/TAgs/tag_caption.asp), you can set it as String or a React JSX.
@@ -147,4 +191,23 @@ paginator({
   hideSizePerPage: true, // hide the size per page dorpdown
   hidePageListOnlyOnePage: true// hide pagination bar when only one page, default is false
 })
+```
+
+### <a name='onTableChange'>onTableChange - [Function]</a>
+This callback function will be called when [`remote`](#remote) enabled only.
+
+```js
+const onTableChange = (newState) => {
+  // handle any data change here
+}
+<BootstrapTable data={ data } columns={ columns } onTableChange={ onTableChange } />
+```
+
+There's only one argument will be passed to `onTableChange`, `newState`:
+
+```js
+{
+  page,  // newest page
+  sizePerPage  //newest sizePerPage
+}
 ```

@@ -74,6 +74,10 @@ import PaginationHooksTable from 'examples/pagination/pagination-hooks';
 import CustomPaginationTable from 'examples/pagination/custom-pagination';
 import RemotePaginationTable from 'examples/pagination/remote-pagination';
 
+// loading overlay
+import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
+import TableOverlay from 'examples/loading-overlay/table-overlay';
+
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/tomorrow.min.css';
@@ -156,3 +160,7 @@ storiesOf('Pagination', module)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
   .add('Custom Pagination', () => <CustomPaginationTable />)
   .add('Remote Pagination', () => <RemotePaginationTable />);
+
+storiesOf('EmptyTableOverlay', module)
+  .add('Empty Table Overlay', () => <EmptyTableOverlay />)
+  .add('Table Overlay', () => <TableOverlay />);
