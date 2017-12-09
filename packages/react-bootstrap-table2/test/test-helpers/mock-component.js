@@ -1,4 +1,4 @@
-import Store from '../../src/store/base';
+import Store from '../../src/store';
 
 export const extendTo = Base =>
   class MockComponent extends Base {
@@ -7,7 +7,8 @@ export const extendTo = Base =>
 
       const { data } = props;
 
-      this.store = new Store(props);
+      this.store = new Store(props.keyField);
+      this.store.data = data;
       this.state = { data };
     }
 

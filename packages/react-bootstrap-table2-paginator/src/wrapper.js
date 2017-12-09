@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import Const from './const';
+import { getByCurrPage } from './page';
 
 const wrapperFactory = baseElement =>
   class PaginationWrapper extends Component {
@@ -98,7 +99,7 @@ const wrapperFactory = baseElement =>
 
       const data = this.isRemote() ?
         this.props.data :
-        store.getByCurrPage(currPage, currSizePerPage, pageStartIndex);
+        getByCurrPage(store)(currPage, currSizePerPage, pageStartIndex);
 
       const base = baseElement({
         ...this.props,
@@ -110,7 +111,7 @@ const wrapperFactory = baseElement =>
         base,
         <Pagination
           key="pagination"
-          dataSize={ options.totalSize || store.getDataSize() }
+          dataSize={ options.totalSize || store.data.length }
           currPage={ currPage }
           currSizePerPage={ currSizePerPage }
           onPageChange={ this.handleChangePage }

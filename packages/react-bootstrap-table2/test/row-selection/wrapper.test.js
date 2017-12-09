@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Store from '../../src/store/base';
+import Store from '../../src/store';
 import BootstrapTable from '../../src/bootstrap-table';
 import RowSelectionWrapper from '../../src/row-selection/wrapper';
 
@@ -33,7 +33,8 @@ describe('RowSelectionWrapper', () => {
 
   const keyField = 'id';
 
-  const store = new Store({ data, keyField });
+  const store = new Store(keyField);
+  store.data = data;
 
   beforeEach(() => {
     wrapper = shallow(

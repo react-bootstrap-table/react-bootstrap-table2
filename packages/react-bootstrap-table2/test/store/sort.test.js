@@ -1,6 +1,7 @@
 import sinon from 'sinon';
 
-import { sort } from '../../src/store/sort';
+import Store from '../../src/store';
+import { sort, nextOrder } from '../../src/store/sort';
 import Const from '../../src/const';
 
 describe('Sort Function', () => {
@@ -11,29 +12,65 @@ describe('Sort Function', () => {
     { id: 1, name: '!@#' }
   ];
 
-  it('should sort array with ASC order correctly', () => {
-    const result = sort('id', data, Const.SORT_ASC);
-    expect(result.length).toEqual(data.length);
+  let store;
 
-    const sortedArray = data.map(e => e.id).sort((a, b) => a - b);
-    sortedArray.forEach((e, i) => {
-      expect(e).toEqual(result[i].id);
+  describe('sort', () => {
+    beforeEach(() => {
+      store = new Store('id');
+      store.data = data;
+    });
+
+    it('should sort array with ASC order correctly', () => {
+      store.sortField = 'id';
+      store.sortOrder = Const.SORT_ASC;
+      const result = sort(store)();
+      expect(result.length).toEqual(data.length);
+
+      const sortedArray = data.map(e => e.id).sort((a, b) => a - b);
+      sortedArray.forEach((e, i) => {
+        expect(e).toEqual(result[i].id);
+      });
+    });
+
+    it('should sort array with DESC order correctly', () => {
+      store.sortField = 'id';
+      store.sortOrder = Const.SORT_DESC;
+      const result = sort(store)();
+      expect(result.length).toEqual(data.length);
+
+      const sortedArray = data.map(e => e.id).sort((a, b) => b - a);
+      sortedArray.forEach((e, i) => {
+        expect(e).toEqual(result[i].id);
+      });
+    });
+
+    it('should call custom sort function when sortFunc given', () => {
+      const sortFunc = sinon.stub().returns(1);
+      store.sortField = 'id';
+      store.sortOrder = Const.SORT_DESC;
+      sort(store)(sortFunc);
+      expect(sortFunc.callCount).toBe(6);
     });
   });
 
-  it('should sort array with DESC order correctly', () => {
-    const result = sort('id', data, Const.SORT_DESC);
-    expect(result.length).toEqual(data.length);
-
-    const sortedArray = data.map(e => e.id).sort((a, b) => b - a);
-    sortedArray.forEach((e, i) => {
-      expect(e).toEqual(result[i].id);
+  describe('nextOrder', () => {
+    beforeEach(() => {
+      store = new Store('id');
+      store.data = data;
     });
-  });
 
-  it('should call custom sort function when sortFunc given', () => {
-    const sortFunc = sinon.stub().returns(1);
-    sort('id', data, Const.SORT_DESC, sortFunc);
-    expect(sortFunc.callCount).toBe(6);
+    it('should return correcly order when store.sortField is not eq next sort field', () => {
+      expect(nextOrder(store)('name')).toBe(Const.SORT_DESC);
+    });
+
+    it('should return correcly order when store.sortField is eq next sort field', () => {
+      store.sortField = 'name';
+      store.sortOrder = Const.SORT_DESC;
+      expect(nextOrder(store)('name')).toBe(Const.SORT_ASC);
+    });
+
+    it('should return correcly order when order is specified', () => {
+      expect(nextOrder(store)('name', Const.SORT_ASC)).toBe(Const.SORT_ASC);
+    });
   });
 });

@@ -6,6 +6,7 @@ import BootstrapTable from '../src';
 import SortWrapper from '../src/sort/wrapper';
 import CellEditWrapper from '../src/cell-edit/wrapper';
 import RowSelectionWrapper from '../src/row-selection/wrapper';
+import { getRowByRowId } from '../src/store/rows';
 
 describe('withDataStore', () => {
   let wrapper;
@@ -42,7 +43,7 @@ describe('withDataStore', () => {
     it('should creating store successfully', () => {
       const store = wrapper.instance().store;
       expect(store).toBeDefined();
-      expect(store.get()).toEqual(data);
+      expect(store.data).toEqual(data);
       expect(store.keyField).toEqual(keyField);
     });
   });
@@ -90,7 +91,7 @@ describe('withDataStore', () => {
 
         it('should update store data directly', () => {
           const store = wrapper.instance().store;
-          const row = store.getRowByRowId(rowId);
+          const row = getRowByRowId(store)(rowId);
           expect(row[dataField]).toEqual(newValue);
         });
       });
@@ -120,7 +121,7 @@ describe('withDataStore', () => {
 
         it('shouldn\'t update store data', () => {
           const store = wrapper.instance().store;
-          const row = store.getRowByRowId(rowId);
+          const row = getRowByRowId(store)(rowId);
           expect(row[dataField]).not.toEqual(newValue);
         });
       });

@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
-import Store from 'react-bootstrap-table2/src/store/base';
+import Store from 'react-bootstrap-table2/src/store';
 import paginator from '../src';
 import wrapperFactory from '../src/wrapper';
 import Pagination from '../src/pagination';
@@ -23,19 +23,23 @@ describe('Wrapper', () => {
   let wrapper;
   let instance;
 
-  const createTableProps = (props = {}) => ({
-    keyField: 'id',
-    columns: [{
-      dataField: 'id',
-      text: 'ID'
-    }, {
-      dataField: 'name',
-      text: 'Name'
-    }],
-    data,
-    pagination: paginator(props.options),
-    store: new Store({ data })
-  });
+  const createTableProps = (props = {}) => {
+    const tableProps = {
+      keyField: 'id',
+      columns: [{
+        dataField: 'id',
+        text: 'ID'
+      }, {
+        dataField: 'name',
+        text: 'Name'
+      }],
+      data,
+      pagination: paginator(props.options),
+      store: new Store('id')
+    };
+    tableProps.store.data = data;
+    return tableProps;
+  };
 
   const pureTable = props => (<BootstrapTable { ...props } />);
 
@@ -76,7 +80,7 @@ describe('Wrapper', () => {
     it('should rendering Pagination correctly', () => {
       const pagination = wrapper.find(Pagination);
       expect(pagination.length).toBe(1);
-      expect(pagination.prop('dataSize')).toEqual(props.store.getDataSize());
+      expect(pagination.prop('dataSize')).toEqual(props.store.data.length);
       expect(pagination.prop('currPage')).toEqual(instance.state.currPage);
       expect(pagination.prop('currSizePerPage')).toEqual(instance.state.currSizePerPage);
       expect(pagination.prop('onPageChange')).toEqual(instance.handleChangePage);
