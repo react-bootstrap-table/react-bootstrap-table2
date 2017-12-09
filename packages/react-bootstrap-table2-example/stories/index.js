@@ -130,8 +130,8 @@ storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Default Sort Table', () => <DefaultSortTable />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
-  .add('Header sorting classes', () => <HeaderSortingClassesTable />)
-  .add('Header sorting style', () => <HeaderSortingStyleTable />);
+  .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
+  .add('Custom Style on Sorting Header Column', () => <HeaderSortingStyleTable />);
 
 storiesOf('Cell Editing', module)
   .add('Click to Edit', () => <ClickToEditTable />)

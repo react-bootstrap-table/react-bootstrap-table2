@@ -437,7 +437,7 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when headerSortingClasses was defined ', () => {
+      describe('when headerSortingClasses is defined ', () => {
         const classes = 'foo';
         const order = Const.SORT_DESC;
 
@@ -453,7 +453,7 @@ describe('HeaderCell', () => {
               />);
           });
 
-          it('should append classes correcly', () => {
+          it('should append classes correctly', () => {
             expect(wrapper.length).toBe(1);
             expect(wrapper.hasClass(classes)).toBe(true);
           });
@@ -482,7 +482,7 @@ describe('HeaderCell', () => {
               />);
           });
 
-          it('should append classes correcly', () => {
+          it('should append classes correctly', () => {
             expect(wrapper.length).toBe(1);
             expect(wrapper.hasClass(classes)).toBe(true);
           });
@@ -516,7 +516,7 @@ describe('HeaderCell', () => {
           });
         });
 
-        describe('if column.headerClasses was defined as well', () => {
+        describe('if column.headerClasses is defined as well', () => {
           it('should keep both classes', () => {
             column = {
               ...column,
@@ -541,7 +541,7 @@ describe('HeaderCell', () => {
         });
       });
 
-      describe('when headerSortingStyle was defined', () => {
+      describe('when headerSortingStyle is defined', () => {
         const style = { backgroundColor: 'red' };
         const order = Const.SORT_DESC;
 
@@ -559,7 +559,7 @@ describe('HeaderCell', () => {
             );
           });
 
-          it('should append style correcly', () => {
+          it('should append style correctly', () => {
             expect(wrapper.length).toBe(1);
             expect(wrapper.find('th').prop('style')).toEqual(style);
           });
@@ -585,7 +585,7 @@ describe('HeaderCell', () => {
               />);
           });
 
-          it('should append style correcly', () => {
+          it('should append style correctly', () => {
             expect(wrapper.length).toBe(1);
             expect(wrapper.find('th').prop('style')).toEqual(style);
           });

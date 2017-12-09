@@ -423,7 +423,7 @@ A new `Object` will be the result of element headerAttrs.
 
 ### <a name='headerSortingClasses'>headerSortingClasses - [String | Function]</a>
 
-`headerSortingClasses` allows to customize `class` for header cell which the table was sorting based on. 
+`headerSortingClasses` allows to customize `class` for header cell when this column is sorting.
 
 ```js
 const headerSortingClasses = 'demo-sorting';
@@ -437,12 +437,12 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => { .
 
 * `column`: The value of current column.
 * `sortOrder`: The order of current sorting
-* `isLastSorting`: Is the last one of sorting.
+* `isLastSorting`: Is the last one of sorted columns.
 * `colIndex`: The index of the current column being processed in BootstrapTable.
 
 ### <a name='headerSortingStyle'>headerSortingStyle - [Object | Function]</a>
 
-It's similiar to [headerSortingClasses](#headerSortingClasses). It allows to customize the style of header cell which the table was sorting based on. A style `Object` and `callback` are acceptable. `callback` takes **4** arguments and an `Object` is expected to return:
+It's similiar to [headerSortingClasses](#headerSortingClasses). It allows to customize the style of header cell when this column is sorting. A style `Object` and `callback` are acceptable. `callback` takes **4** arguments and an `Object` is expected to return:
 
 ```js
 const sortingHeaderStyle = {
