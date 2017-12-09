@@ -30,9 +30,7 @@ class SortWrapper extends Component {
     const { store } = this.props;
     store.sortBy(column);
 
-    this.table.setState({
-      data: store.get()
-    });
+    this.table.setState({ data: store.data });
   }
 
   render() {
@@ -40,7 +38,7 @@ class SortWrapper extends Component {
       ...this.props,
       ref: node => this.table = node,
       onSort: this.handleSort,
-      data: this.props.store.get()
+      data: this.props.store.data
     });
   }
 }

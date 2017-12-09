@@ -2,7 +2,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Store from '../../src/store/base';
+import Store from '../../src/store';
 import BootstrapTable from '../../src/bootstrap-table';
 import CellEditWrapper from '../../src/cell-edit/wrapper';
 
@@ -31,7 +31,8 @@ describe('CellEditWrapper', () => {
 
   const keyField = 'id';
 
-  const store = new Store({ data, keyField });
+  const store = new Store(keyField);
+  store.data = data;
 
   beforeEach(() => {
     wrapper = shallow(

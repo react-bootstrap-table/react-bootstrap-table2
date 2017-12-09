@@ -1,4 +1,5 @@
 /* eslint arrow-body-style: 0 */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cs from 'classnames';
@@ -8,6 +9,7 @@ import Caption from './caption';
 import Body from './body';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
+import { isSelectedAll } from './store/selection';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
@@ -26,6 +28,16 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   }
 
   render() {
+    const { loading, overlay } = this.props;
+    const table = this.renderTable();
+    if (loading && overlay) {
+      const LoadingOverlay = overlay(table, loading);
+      return <LoadingOverlay />;
+    }
+    return table;
+  }
+
+  renderTable() {
     const {
       store,
       columns,
@@ -62,7 +74,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
       onAllRowsSelect: this.props.onAllRowsSelect,
       selected: store.selected,
-      allRowsSelected: store.isAllRowsSelected()
+      allRowsSelected: isSelectedAll(store)
     });
 
     return (
@@ -85,7 +97,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             noDataIndication={ noDataIndication }
             cellEdit={ cellEditInfo }
             selectRow={ cellSelectionInfo }
-            selectedRowKeys={ store.getSelectedRowKeys() }
+            selectedRowKeys={ store.selected }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
@@ -100,6 +112,9 @@ BootstrapTable.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
+    pagination: PropTypes.bool
+  })]),
   store: PropTypes.object,
   noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
@@ -153,10 +168,13 @@ BootstrapTable.propTypes = {
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
-  }))
+  })),
+  onTableChange: PropTypes.func,
+  overlay: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {
+  remote: false,
   striped: false,
   bordered: true,
   hover: false,

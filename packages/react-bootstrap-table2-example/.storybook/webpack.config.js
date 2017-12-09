@@ -2,6 +2,7 @@ const path = require('path');
 
 const sourcePath = path.join(__dirname, '../../react-bootstrap-table2/src');
 const paginationSourcePath = path.join(__dirname, '../../react-bootstrap-table2-paginator/src');
+const overlaySourcePath = path.join(__dirname, '../../react-bootstrap-table2-overlay/src');
 const sourceStylePath = path.join(__dirname, '../../react-bootstrap-table2/style');
 const paginationStylePath = path.join(__dirname, '../../react-bootstrap-table2-paginator/style');
 const storyPath = path.join(__dirname, '../stories');
@@ -25,7 +26,7 @@ const loaders = [{
   test: /\.js?$/,
   use: ['babel-loader'],
   exclude: /node_modules/,
-  include: [sourcePath, paginationSourcePath, storyPath],
+  include: [sourcePath, paginationSourcePath, overlaySourcePath, storyPath],
 }, {
   test: /\.css$/,
   use: ['style-loader', 'css-loader'],

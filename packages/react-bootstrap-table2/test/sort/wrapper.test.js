@@ -3,7 +3,7 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 import Const from '../../src/const';
-import Store from '../../src/store/base';
+import Store from '../../src/store';
 import BootstrapTable from '../../src/bootstrap-table';
 import SortWrapper from '../../src/sort/wrapper';
 
@@ -30,7 +30,8 @@ describe('SortWrapper', () => {
 
   const keyField = 'id';
 
-  let store = new Store({ data, keyField });
+  let store = new Store(keyField);
+  store.data = data;
 
   beforeEach(() => {
     wrapper = shallow(
@@ -56,7 +57,8 @@ describe('SortWrapper', () => {
     const sortColumn = columns[0];
 
     beforeEach(() => {
-      store = new Store({ data, keyField });
+      store = new Store(keyField);
+      store.data = data;
       wrapper = mount(
         <SortWrapper
           keyField={ keyField }
@@ -101,7 +103,7 @@ describe('SortWrapper', () => {
     });
 
     it('should render table with correct default sorted', () => {
-      expect(wrapper.props().data).toEqual(store.get());
+      expect(wrapper.props().data).toEqual(store.data);
     });
 
     it('should update store.sortField correctly', () => {

@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
-import Store from 'react-bootstrap-table2/src/store/base';
+import Store from 'react-bootstrap-table2/src/store';
 import paginator from '../src';
 import wrapperFactory from '../src/wrapper';
 import Pagination from '../src/pagination';
@@ -23,31 +23,41 @@ describe('Wrapper', () => {
   let wrapper;
   let instance;
 
-  const createTableProps = (props = {}) => ({
-    keyField: 'id',
-    columns: [{
-      dataField: 'id',
-      text: 'ID'
-    }, {
-      dataField: 'name',
-      text: 'Name'
-    }],
-    data,
-    pagination: paginator(props.options),
-    store: new Store({ data })
-  });
+  const createTableProps = (props = {}) => {
+    const tableProps = {
+      keyField: 'id',
+      columns: [{
+        dataField: 'id',
+        text: 'ID'
+      }, {
+        dataField: 'name',
+        text: 'Name'
+      }],
+      data,
+      pagination: paginator(props.options),
+      store: new Store('id')
+    };
+    tableProps.store.data = data;
+    return tableProps;
+  };
 
   const pureTable = props => (<BootstrapTable { ...props } />);
+
+  const createPaginationWrapper = (props, renderFragment = true) => {
+    PaginationWrapper = wrapperFactory(pureTable);
+    wrapper = shallow(<PaginationWrapper { ...props } />);
+    instance = wrapper.instance();
+    if (renderFragment) {
+      const fragment = instance.render();
+      wrapper = shallow(<div>{ fragment }</div>);
+    }
+  };
 
   describe('default pagination', () => {
     const props = createTableProps();
 
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering correctly', () => {
@@ -70,7 +80,7 @@ describe('Wrapper', () => {
     it('should rendering Pagination correctly', () => {
       const pagination = wrapper.find(Pagination);
       expect(pagination.length).toBe(1);
-      expect(pagination.prop('dataSize')).toEqual(props.store.getDataSize());
+      expect(pagination.prop('dataSize')).toEqual(props.store.data.length);
       expect(pagination.prop('currPage')).toEqual(instance.state.currPage);
       expect(pagination.prop('currSizePerPage')).toEqual(instance.state.currSizePerPage);
       expect(pagination.prop('onPageChange')).toEqual(instance.handleChangePage);
@@ -92,15 +102,64 @@ describe('Wrapper', () => {
     });
   });
 
+  describe('when options.page is defined', () => {
+    const page = 3;
+    const props = createTableProps({ options: { page } });
+    beforeEach(() => {
+      createPaginationWrapper(props);
+    });
+
+    it('should setting correct state.currPage', () => {
+      expect(instance.state.currPage).toEqual(page);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('currPage')).toEqual(page);
+    });
+  });
+
+  describe('when options.sizePerPage is defined', () => {
+    const sizePerPage = 30;
+    const props = createTableProps({ options: { sizePerPage } });
+    beforeEach(() => {
+      createPaginationWrapper(props);
+    });
+
+    it('should setting correct state.currPage', () => {
+      expect(instance.state.currSizePerPage).toEqual(sizePerPage);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('currSizePerPage')).toEqual(sizePerPage);
+    });
+  });
+
+  describe('when options.totalSize is defined', () => {
+    const totalSize = 100;
+    const props = createTableProps({ options: { totalSize } });
+    beforeEach(() => {
+      createPaginationWrapper(props);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('dataSize')).toEqual(totalSize);
+    });
+  });
+
   describe('when options.pageStartIndex is defined', () => {
     const pageStartIndex = -1;
     const props = createTableProps({ options: { pageStartIndex } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should setting correct state.currPage', () => {
@@ -119,11 +178,7 @@ describe('Wrapper', () => {
     const sizePerPageList = [10, 40];
     const props = createTableProps({ options: { sizePerPageList } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -138,11 +193,7 @@ describe('Wrapper', () => {
     const paginationSize = 10;
     const props = createTableProps({ options: { paginationSize } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -157,11 +208,7 @@ describe('Wrapper', () => {
     const withFirstAndLast = false;
     const props = createTableProps({ options: { withFirstAndLast } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -176,11 +223,7 @@ describe('Wrapper', () => {
     const alwaysShowAllBtns = true;
     const props = createTableProps({ options: { alwaysShowAllBtns } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -195,11 +238,7 @@ describe('Wrapper', () => {
     const firstPageText = '1st';
     const props = createTableProps({ options: { firstPageText } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -214,11 +253,7 @@ describe('Wrapper', () => {
     const prePageText = 'PRE';
     const props = createTableProps({ options: { prePageText } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -233,11 +268,7 @@ describe('Wrapper', () => {
     const nextPageText = 'NEXT';
     const props = createTableProps({ options: { nextPageText } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -252,11 +283,7 @@ describe('Wrapper', () => {
     const lastPageText = 'nth';
     const props = createTableProps({ options: { lastPageText } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -271,11 +298,7 @@ describe('Wrapper', () => {
     const firstPageTitle = '1st';
     const props = createTableProps({ options: { firstPageTitle } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -290,11 +313,7 @@ describe('Wrapper', () => {
     const prePageTitle = 'PRE';
     const props = createTableProps({ options: { prePageTitle } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -309,11 +328,7 @@ describe('Wrapper', () => {
     const nextPageTitle = 'NEXT';
     const props = createTableProps({ options: { nextPageTitle } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -328,11 +343,7 @@ describe('Wrapper', () => {
     const lastPageTitle = 'nth';
     const props = createTableProps({ options: { lastPageTitle } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -347,11 +358,7 @@ describe('Wrapper', () => {
     const hideSizePerPage = true;
     const props = createTableProps({ options: { hideSizePerPage } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -366,11 +373,7 @@ describe('Wrapper', () => {
     const hidePageListOnlyOnePage = true;
     const props = createTableProps({ options: { hidePageListOnlyOnePage } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
-      const fragment = instance.render();
-      wrapper = shallow(<div>{ fragment }</div>);
+      createPaginationWrapper(props);
     });
 
     it('should rendering Pagination correctly', () => {
@@ -385,9 +388,7 @@ describe('Wrapper', () => {
     const newPage = 3;
     const props = createTableProps({ options: { onPageChange: sinon.stub() } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
+      createPaginationWrapper(props, false);
       instance.handleChangePage(newPage);
     });
 
@@ -404,6 +405,25 @@ describe('Wrapper', () => {
       expect(onPageChange.calledOnce).toBeTruthy();
       expect(onPageChange.calledWith(newPage, instance.state.currSizePerPage)).toBeTruthy();
     });
+
+    describe('when pagination remote is enable', () => {
+      beforeEach(() => {
+        props.remote = true;
+        props.onRemotePageChange = sinon.stub();
+        createPaginationWrapper(props, false);
+        instance.handleChangePage(newPage);
+      });
+
+      it('should not setting state.currPage', () => {
+        expect(instance.state.currPage).not.toEqual(newPage);
+      });
+
+      it('should calling options.onRemotePageChange correctly', () => {
+        expect(props.onRemotePageChange.calledOnce).toBeTruthy();
+        expect(props.onRemotePageChange.calledWith(
+          newPage, instance.state.currSizePerPage)).toBeTruthy();
+      });
+    });
   });
 
   describe('handleChangeSizePerPage', () => {
@@ -411,9 +431,7 @@ describe('Wrapper', () => {
     const newSizePerPage = 30;
     const props = createTableProps({ options: { onSizePerPageChange: sinon.stub() } });
     beforeEach(() => {
-      PaginationWrapper = wrapperFactory(pureTable);
-      wrapper = shallow(<PaginationWrapper { ...props } />);
-      instance = wrapper.instance();
+      createPaginationWrapper(props, false);
       instance.handleChangeSizePerPage(newSizePerPage, newPage);
     });
 
@@ -430,6 +448,86 @@ describe('Wrapper', () => {
       const { onSizePerPageChange } = props.pagination.options;
       expect(onSizePerPageChange.calledOnce).toBeTruthy();
       expect(onSizePerPageChange.calledWith(newSizePerPage, newPage)).toBeTruthy();
+    });
+
+    describe('when pagination remote is enable', () => {
+      beforeEach(() => {
+        props.remote = true;
+        props.onRemotePageChange = sinon.stub();
+        createPaginationWrapper(props, false);
+        instance.handleChangeSizePerPage(newSizePerPage, newPage);
+      });
+
+      it('should not setting state.currPage', () => {
+        expect(instance.state.currPage).not.toEqual(newPage);
+        expect(instance.state.currSizePerPage).not.toEqual(newSizePerPage);
+      });
+
+      it('should calling options.onRemotePageChange correctly', () => {
+        expect(props.onRemotePageChange.calledOnce).toBeTruthy();
+        expect(props.onRemotePageChange.calledWith(newPage, newSizePerPage)).toBeTruthy();
+      });
+    });
+  });
+
+  describe('isRemote', () => {
+    let result;
+    describe('when options.remote is true', () => {
+      const props = createTableProps();
+      props.remote = true;
+
+      beforeEach(() => {
+        createPaginationWrapper(props, false);
+        result = instance.isRemote();
+      });
+
+      it('should return true', () => {
+        expect(result).toBeTruthy();
+      });
+    });
+
+    describe('when options.remote is false', () => {
+      const props = createTableProps();
+      props.remote = false;
+
+      beforeEach(() => {
+        createPaginationWrapper(props, false);
+        result = instance.isRemote();
+      });
+
+      it('should return false', () => {
+        expect(result).toBeFalsy();
+      });
+    });
+
+    describe('when options.remote.pagination is defined as true', () => {
+      const props = createTableProps();
+      props.remote = {};
+      props.remote.pagination = true;
+
+      beforeEach(() => {
+        createPaginationWrapper(props, false);
+        result = instance.isRemote();
+      });
+
+      it('should return true', () => {
+        expect(result).toBeTruthy();
+      });
+    });
+
+    describe('when options.remote.pagination is defined as false', () => {
+      const props = createTableProps();
+      props.remote = {};
+      props.remote.pagination = false;
+
+      beforeEach(() => {
+        createPaginationWrapper(props, false);
+        result = instance.isRemote();
+      });
+
+      it('should return false', () => {
+        expect(result).toBeFalsy();
+      });
     });
   });
 });

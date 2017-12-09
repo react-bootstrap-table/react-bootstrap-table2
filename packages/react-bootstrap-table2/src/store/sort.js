@@ -14,19 +14,19 @@ function comparator(a, b) {
   return result;
 }
 
-const sort = (dataField, data, order, sortFunc) => {
+export const sort = ({ data, sortOrder, sortField }) => (sortFunc) => {
   const _data = [...data];
   _data.sort((a, b) => {
     let result;
-    let valueA = _.get(a, dataField);
-    let valueB = _.get(b, dataField);
+    let valueA = _.get(a, sortField);
+    let valueB = _.get(b, sortField);
     valueA = _.isDefined(valueA) ? valueA : '';
     valueB = _.isDefined(valueB) ? valueB : '';
 
     if (sortFunc) {
-      result = sortFunc(valueA, valueB, order, dataField);
+      result = sortFunc(valueA, valueB, sortOrder, sortField);
     } else {
-      if (order === Const.SORT_DESC) {
+      if (sortOrder === Const.SORT_DESC) {
         result = comparator(valueA, valueB);
       } else {
         result = comparator(valueB, valueA);
@@ -37,4 +37,11 @@ const sort = (dataField, data, order, sortFunc) => {
   return _data;
 };
 
-export { sort };
+export const nextOrder = store => (field, order) => {
+  if (order) return order;
+
+  if (field !== store.sortField) {
+    return Const.SORT_DESC;
+  }
+  return store.sortOrder === Const.SORT_DESC ? Const.SORT_ASC : Const.SORT_DESC;
+};

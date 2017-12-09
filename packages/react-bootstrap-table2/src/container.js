@@ -1,7 +1,7 @@
 /* eslint no-return-assign: 0 */
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
-import Store from './store/base';
+import Store from './store';
 
 import {
   wrapWithCellEdit,
@@ -16,12 +16,19 @@ const withDataStore = Base =>
   class BootstrapTableContainer extends Component {
     constructor(props) {
       super(props);
-      this.store = new Store(props);
+      this.store = new Store(props.keyField);
+      this.store.data = props.data;
       this.handleUpdateCell = this.handleUpdateCell.bind(this);
+      this.onRemotePageChange = this.onRemotePageChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-      this.store.set(nextProps.data);
+      this.store.data = nextProps.data;
+    }
+
+    onRemotePageChange(page, sizePerPage) {
+      const newState = { page, sizePerPage };
+      this.props.onTableChange(newState);
     }
 
     handleUpdateCell(rowId, dataField, newValue) {
@@ -66,7 +73,10 @@ const withDataStore = Base =>
       } else if (this.props.columns.filter(col => col.sort).length > 0) {
         return wrapWithSort(baseProps);
       } else if (this.props.pagination) {
-        return wrapWithPagination(baseProps);
+        return wrapWithPagination({
+          ...baseProps,
+          onRemotePageChange: this.onRemotePageChange
+        });
       }
 
       return React.createElement(Base, baseProps);
