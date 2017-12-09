@@ -9,6 +9,7 @@ import Caption from './caption';
 import Body from './body';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
+import { isSelectedAll } from './store/selection';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
@@ -73,7 +74,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
       onAllRowsSelect: this.props.onAllRowsSelect,
       selected: store.selected,
-      allRowsSelected: store.isAllRowsSelected()
+      allRowsSelected: isSelectedAll(store)
     });
 
     return (
@@ -96,7 +97,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             noDataIndication={ noDataIndication }
             cellEdit={ cellEditInfo }
             selectRow={ cellSelectionInfo }
-            selectedRowKeys={ store.getSelectedRowKeys() }
+            selectedRowKeys={ store.selected }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }

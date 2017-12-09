@@ -5,6 +5,13 @@ import PropTypes from 'prop-types';
 import { selectionElement } from '../table-factory';
 
 import Const from '../const';
+import {
+  isAnySelectedRow,
+  selectableKeys,
+  unSelectableKeys,
+  getSelectedRows
+} from '../store/selection';
+import { getRowByRowId } from '../store/rows';
 
 class RowSelectionWrapper extends Component {
   constructor(props) {
@@ -12,7 +19,7 @@ class RowSelectionWrapper extends Component {
     this.handleRowSelect = this.handleRowSelect.bind(this);
     this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
     this.state = {
-      selectedRowKeys: props.store.getSelectedRowKeys()
+      selectedRowKeys: props.store.selected
     };
   }
 
@@ -25,7 +32,7 @@ class RowSelectionWrapper extends Component {
     const { selectRow: { mode, onSelect }, store } = this.props;
     const { ROW_SELECT_SINGLE } = Const;
 
-    let currSelected = [...store.getSelectedRowKeys()];
+    let currSelected = [...store.selected];
 
     if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
       currSelected = [rowKey];
@@ -35,10 +42,10 @@ class RowSelectionWrapper extends Component {
       currSelected = currSelected.filter(value => value !== rowKey);
     }
 
-    store.setSelectedRowKeys(currSelected);
+    store.selected = currSelected;
 
     if (onSelect) {
-      const row = store.getRowByRowId(rowKey);
+      const row = getRowByRowId(store)(rowKey);
       onSelect(row, checked, rowIndex);
     }
 
@@ -56,20 +63,20 @@ class RowSelectionWrapper extends Component {
       onSelectAll,
       nonSelectable
     } } = this.props;
-    const selected = store.isAnySelectedRow(nonSelectable);
+    const selected = isAnySelectedRow(store)(nonSelectable);
 
     // set next status of all row selected by store.selected or customizing by user.
     const result = option || !selected;
 
     const currSelected = result ?
-      store.selectAllRows(nonSelectable) :
-      store.cleanSelectedRows(nonSelectable);
+      selectableKeys(store)(nonSelectable) :
+      unSelectableKeys(store)(nonSelectable);
 
 
-    store.setSelectedRowKeys(currSelected);
+    store.selected = currSelected;
 
     if (onSelectAll) {
-      onSelectAll(result, store.getSelectedRows());
+      onSelectAll(result, getSelectedRows(store));
     }
 
     this.setState(() => ({

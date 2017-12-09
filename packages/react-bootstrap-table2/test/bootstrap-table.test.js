@@ -3,7 +3,7 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import Caption from '../src/caption';
-import Store from '../src/store/base';
+import Store from '../src/store';
 import Header from '../src/header';
 import Body from '../src/body';
 import BootstrapTable from '../src/bootstrap-table';
@@ -27,7 +27,8 @@ describe('BootstrapTable', () => {
     name: 'B'
   }];
 
-  const store = new Store({ data });
+  const store = new Store('id');
+  store.data = data;
 
   describe('simplest table', () => {
     beforeEach(() => {
@@ -44,7 +45,7 @@ describe('BootstrapTable', () => {
 
     it('should have correct default state', () => {
       expect(wrapper.state().data).toBeDefined();
-      expect(wrapper.state().data).toEqual(store.get());
+      expect(wrapper.state().data).toEqual(store.data);
     });
 
     it('should have table-bordered class as default', () => {
