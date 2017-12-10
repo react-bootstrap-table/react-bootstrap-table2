@@ -436,6 +436,233 @@ describe('HeaderCell', () => {
           });
         });
       });
+
+      describe('when headerSortingClasses is defined ', () => {
+        const classes = 'foo';
+        const order = Const.SORT_DESC;
+
+        describe('if headerSortingClasses is a string', () => {
+          beforeEach(() => {
+            column = { ...column, headerSortingClasses: classes };
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ order }
+              />);
+          });
+
+          it('should append classes correctly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.hasClass(classes)).toBe(true);
+          });
+
+          it('should have sortable class on header cell', () => {
+            expect(wrapper.hasClass('sortable')).toBe(true);
+          });
+        });
+
+        describe('if headerSortingClasses is a function', () => {
+          let classesCallBack;
+          let isLastSorting;
+
+          beforeEach(() => {
+            classesCallBack = sinon.stub()
+              .withArgs(column, order, isLastSorting, index)
+              .returns(classes);
+
+            column = { ...column, headerSortingClasses: classesCallBack };
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ order }
+              />);
+          });
+
+          it('should append classes correctly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.hasClass(classes)).toBe(true);
+          });
+
+          it('should have sortable class on header cell', () => {
+            expect(wrapper.hasClass('sortable')).toBe(true);
+          });
+
+          it('should call custom class function with correct params', () => {
+            expect(classesCallBack.callCount).toBe(1);
+            expect(classesCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+          });
+
+          describe('when the field is last sorting', () => {
+            it('should call custom classes function with isLastSorting being true', () => {
+              isLastSorting = true;
+              classesCallBack.reset();
+
+              wrapper = shallow(
+                <HeaderCell
+                  column={ column }
+                  index={ index }
+                  sorting
+                  sortOrder={ order }
+                  isLastSorting
+                />);
+
+              expect(classesCallBack.callCount).toBe(1);
+              expect(classesCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+            });
+          });
+        });
+
+        describe('if column.headerClasses is defined as well', () => {
+          it('should keep both classes', () => {
+            column = {
+              ...column,
+              headerClasses: 'td-test-class',
+              headerSortingClasses: classes
+            };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ order }
+              />
+            );
+
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.hasClass('sortable')).toBe(true);
+            expect(wrapper.hasClass(classes)).toBe(true);
+            expect(wrapper.hasClass(column.headerClasses)).toBe(true);
+          });
+        });
+      });
+
+      describe('when headerSortingStyle is defined', () => {
+        const style = { backgroundColor: 'red' };
+        const order = Const.SORT_DESC;
+
+        describe('if headerSortingStyle is an object', () => {
+          beforeEach(() => {
+            column = { ...column, headerSortingStyle: style };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ order }
+              />
+            );
+          });
+
+          it('should append style correctly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(style);
+          });
+        });
+
+        describe('if headerSortingStyle is a function', () => {
+          let styleCallBack;
+          let isLastSorting;
+
+          beforeEach(() => {
+            styleCallBack = sinon.stub()
+              .withArgs(column, order, isLastSorting, index)
+              .returns(style);
+
+            column = { ...column, headerSortingStyle: styleCallBack };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ order }
+              />);
+          });
+
+          it('should append style correctly', () => {
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(style);
+          });
+
+          it('should call custom style function with correct params', () => {
+            expect(styleCallBack.callCount).toBe(1);
+            expect(styleCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+          });
+
+          describe('when the field is last sorting', () => {
+            it('should call custom classes function with isLastSorting being true', () => {
+              isLastSorting = true;
+              styleCallBack.reset();
+
+              wrapper = shallow(
+                <HeaderCell
+                  column={ column }
+                  index={ index }
+                  sorting
+                  sortOrder={ order }
+                  isLastSorting
+                />);
+
+              expect(styleCallBack.callCount).toBe(1);
+              expect(styleCallBack.calledWith(column, order, isLastSorting, index)).toBe(true);
+            });
+          });
+        });
+
+        describe('if column.headerStyle was defined as well', () => {
+          it('should keep both styles', () => {
+            column = {
+              ...column,
+              headerStyle: { opacity: '1' },
+              headerSortingStyle: style
+            };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ order }
+              />
+            );
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(expect.objectContaining({
+              ...style,
+              ...column.headerStyle
+            }));
+          });
+
+          it('headerSortingStyle should have higher priority', () => {
+            column = {
+              ...column,
+              headerStyle: { backgroundColor: 'green' },
+              headerSortingStyle: style
+            };
+
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortOrder={ order }
+              />
+            );
+            expect(wrapper.length).toBe(1);
+            expect(wrapper.find('th').prop('style')).toEqual(expect.objectContaining({
+              ...style
+            }));
+            expect(wrapper.find('th').prop('style')).not.toEqual(expect.objectContaining({
+              ...column.headerStyle
+            }));
+          });
+        });
+      });
     });
 
     describe('when column.headerEvents prop is defined and have custom onClick', () => {

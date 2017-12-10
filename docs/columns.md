@@ -25,6 +25,8 @@ Available properties in a column object:
 * [headerEvents](#headerEvents)
 * [headerAlign](#headerAlign)
 * [headerAttrs](#headerAttrs)
+* [headerSortingClasses](#headerSortingClasses)
+* [headerSortingStyle](#headerSortingStyle)
 * [editable](#editable)
 * [validator](#validator)
 * [editCellStyle](#editCellStyle)
@@ -418,6 +420,35 @@ A new `Object` will be the result of element headerAttrs.
 > Caution:   
 > Same as [column.attrs](#attrs), it has lower priority and will be
 > overwrited when other props related to HTML attributes were given.
+
+### <a name='headerSortingClasses'>headerSortingClasses - [String | Function]</a>
+
+`headerSortingClasses` allows to customize `class` for header cell when this column is sorting.
+
+```js
+const headerSortingClasses = 'demo-sorting';
+```
+
+Furthermore, it also accepts a callback which takes **4** arguments and `String` is expected to return:
+
+```js
+const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => { ... }
+```
+
+* `column`: The value of current column.
+* `sortOrder`: The order of current sorting
+* `isLastSorting`: Is the last one of sorted columns.
+* `colIndex`: The index of the current column being processed in BootstrapTable.
+
+### <a name='headerSortingStyle'>headerSortingStyle - [Object | Function]</a>
+
+It's similiar to [headerSortingClasses](#headerSortingClasses). It allows to customize the style of header cell when this column is sorting. A style `Object` and `callback` are acceptable. `callback` takes **4** arguments and an `Object` is expected to return:
+
+```js
+const sortingHeaderStyle = {
+  backgroundColor: 'red'
+};
+```
 
 ## <a name='editable'>column.editable - [Bool | Function]</a>
 `column.editable` default is true, means every column is editable if you configure [`cellEdit`](./README.md#cellEdit). But you can disable some columns editable via setting `false`.

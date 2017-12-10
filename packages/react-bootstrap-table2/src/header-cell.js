@@ -15,8 +15,10 @@ const HeaderCell = (props) => {
     index,
     onSort,
     sorting,
-    sortOrder
+    sortOrder,
+    isLastSorting
   } = props;
+
   const {
     text,
     sort,
@@ -27,7 +29,9 @@ const HeaderCell = (props) => {
     headerEvents,
     headerClasses,
     headerStyle,
-    headerAttrs
+    headerAttrs,
+    headerSortingClasses,
+    headerSortingStyle
   } = column;
 
   const cellAttrs = {
@@ -35,10 +39,10 @@ const HeaderCell = (props) => {
     ...headerEvents
   };
   const children = headerFormatter ? headerFormatter(column, index) : text;
-  const cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
   let cellStyle = {};
   let sortSymbol;
+  let cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
   if (headerStyle) {
     cellStyle = _.isFunction(headerStyle) ? headerStyle(column, index) : headerStyle;
@@ -56,10 +60,6 @@ const HeaderCell = (props) => {
     cellStyle.display = 'none';
   }
 
-  if (cellClasses) cellAttrs.className = cellClasses;
-
-  if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
-
   if (sort) {
     const customClick = cellAttrs.onClick;
     cellAttrs.onClick = (e) => {
@@ -70,10 +70,29 @@ const HeaderCell = (props) => {
 
     if (sorting) {
       sortSymbol = <SortCaret order={ sortOrder } />;
+
+      // append customized classes or style if table was sorting based on the current column.
+      cellClasses = cs(
+        cellClasses,
+        _.isFunction(headerSortingClasses)
+          ? headerSortingClasses(column, sortOrder, isLastSorting, index)
+          : headerSortingClasses
+      );
+
+      cellStyle = {
+        ...cellStyle,
+        ..._.isFunction(headerSortingStyle)
+          ? headerSortingStyle(column, sortOrder, isLastSorting, index)
+          : headerSortingStyle
+      };
     } else {
       sortSymbol = <SortSymbol />;
     }
   }
+
+  if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
+
+  if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
   return (
     <th { ...cellAttrs }>
@@ -112,7 +131,8 @@ HeaderCell.propTypes = {
   index: PropTypes.number.isRequired,
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
-  sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC])
+  sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
+  isLastSorting: PropTypes.bool
 };
 
 export default HeaderCell;

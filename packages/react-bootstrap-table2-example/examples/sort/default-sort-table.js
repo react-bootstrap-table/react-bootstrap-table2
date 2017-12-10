@@ -41,7 +41,17 @@ const columns = [{
   sort: true
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+const defaultSorted = [{
+  dataField: 'name',
+  order: 'desc'
+}];
+
+<BootstrapTable
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  defaultSorted={ defaultSorted } 
+/>
 `;
 
 
