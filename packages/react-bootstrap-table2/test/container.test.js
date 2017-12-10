@@ -156,7 +156,7 @@ describe('withDataStore', () => {
   describe('when pagination prop is defined', () => {
     const PaginationWrapper = () => <div>test</div>;
     const pagination = {
-      wrapper: jest.fn().mockReturnValue(PaginationWrapper)
+      PaginationWrapper
     };
 
     beforeEach(() => {
@@ -177,6 +177,7 @@ describe('withDataStore', () => {
     it('should injecting correct props to Pagination wrapper', () => {
       const component = wrapper.find(PaginationWrapper);
       expect(component.props().onRemotePageChange).toBeDefined();
+      expect(component.props().baseElement).toBeDefined();
     });
   });
 
