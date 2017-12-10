@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
 import Store from 'react-bootstrap-table2/src/store';
 import paginator from '../src';
-import wrapperFactory from '../src/wrapper';
+import PaginationWrapper from '../src/wrapper';
 import Pagination from '../src/pagination';
 import Const from '../src/const';
 
@@ -19,7 +19,6 @@ for (let i = 0; i < 100; i += 1) {
 }
 
 describe('Wrapper', () => {
-  let PaginationWrapper;
   let wrapper;
   let instance;
 
@@ -44,8 +43,7 @@ describe('Wrapper', () => {
   const pureTable = props => (<BootstrapTable { ...props } />);
 
   const createPaginationWrapper = (props, renderFragment = true) => {
-    PaginationWrapper = wrapperFactory(pureTable);
-    wrapper = shallow(<PaginationWrapper { ...props } />);
+    wrapper = shallow(<PaginationWrapper { ...props } baseElement={ pureTable } />);
     instance = wrapper.instance();
     if (renderFragment) {
       const fragment = instance.render();
@@ -99,6 +97,32 @@ describe('Wrapper', () => {
       expect(pagination.prop('nextPageTitle')).toEqual(Const.NEXT_PAGE_TITLE);
       expect(pagination.prop('lastPageTitle')).toEqual(Const.LAST_PAGE_TITLE);
       expect(pagination.prop('hideSizePerPage')).toEqual(Const.HIDE_SIZE_PER_PAGE);
+    });
+
+    describe('componentWillReceiveProps', () => {
+      it('should setting currPage state correclt by options.page', () => {
+        props.pagination.options.page = 2;
+        instance.componentWillReceiveProps(props);
+        expect(instance.state.currPage).toEqual(props.pagination.options.page);
+      });
+
+      it('should not setting currPage state if options.page not existing', () => {
+        const { currPage } = instance.state;
+        instance.componentWillReceiveProps(props);
+        expect(instance.state.currPage).toBe(currPage);
+      });
+
+      it('should setting currSizePerPage state correclt by options.sizePerPage', () => {
+        props.pagination.options.sizePerPage = 20;
+        instance.componentWillReceiveProps(props);
+        expect(instance.state.currSizePerPage).toEqual(props.pagination.options.sizePerPage);
+      });
+
+      it('should not setting currSizePerPage state if options.sizePerPage not existing', () => {
+        const { currSizePerPage } = instance.state;
+        instance.componentWillReceiveProps(props);
+        expect(instance.state.currSizePerPage).toBe(currSizePerPage);
+      });
     });
   });
 

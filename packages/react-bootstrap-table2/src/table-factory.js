@@ -21,9 +21,8 @@ export const pureTable = props =>
 
 export const wrapWithPagination = (props) => {
   if (props.pagination) {
-    const { wrapper } = props.pagination;
-    const PaginationBase = wrapper(pureTable);
-    return React.createElement(PaginationBase, { ...props });
+    const { PaginationWrapper } = props.pagination;
+    return React.createElement(PaginationWrapper, { ...props, baseElement: pureTable });
   }
   return pureTable(props);
 };
