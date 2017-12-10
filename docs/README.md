@@ -189,7 +189,19 @@ paginator({
   firstPageTitle: 'Go to first', // the title of first page button
   lastPageTitle: 'Go to last', // the title of last page button
   hideSizePerPage: true, // hide the size per page dorpdown
-  hidePageListOnlyOnePage: true// hide pagination bar when only one page, default is false
+  hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
+  onPageChange: (page, sizePerPage) => {}, // callback function when page was changing
+  onSizePerPageChange: (sizePerPage, page) => {}, // callback function when page size was changing
+})
+```
+
+When [`remote`](#remote) was enabled, the following **3** arguments were required.
+
+```js
+paginator({
+  page, // Indicate the current page number.
+  sizePerPage, // Indicate how many rows per page.
+  totalSize, // Total size of table rows.
 })
 ```
 
