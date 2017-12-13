@@ -32,6 +32,9 @@ import HeaderColumnClassTable from 'examples/header-columns/column-class-table';
 import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
 import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
+// column filter
+import TextFilter from 'examples/column-filter/text-filter';
+
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
 import RowClassTable from 'examples/rows/row-class';
@@ -120,6 +123,9 @@ storiesOf('Work on Header Columns', module)
   .add('Customize Column Class', () => <HeaderColumnClassTable />)
   .add('Customize Column Style', () => <HeaderColumnStyleTable />)
   .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);
+
+storiesOf('Column Filter', module)
+  .add('Text Filter', () => <TextFilter />);
 
 storiesOf('Work on Rows', module)
   .add('Customize Row Style', () => <RowStyleTable />)
