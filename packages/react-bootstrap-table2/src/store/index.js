@@ -12,7 +12,6 @@ export default class Store {
     this._sortField = undefined;
     this._selected = [];
     this._filtering = false;
-    this._isDataChanged = false;
   }
 
   edit(rowId, dataField, newValue) {
@@ -49,9 +48,6 @@ export default class Store {
 
   get keyField() { return this._keyField; }
   set keyField(keyField) { this._keyField = keyField; }
-
-  get isDataChanged() { return this._isDataChanged; }
-  set isDataChanged(isDataChanged) { this._isDataChanged = isDataChanged; }
 
   get sortOrder() { return this._sortOrder; }
   set sortOrder(sortOrder) { this._sortOrder = sortOrder; }
