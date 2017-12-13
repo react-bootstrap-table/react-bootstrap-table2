@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 
+import _ from './utils';
 import BootstrapTable from './bootstrap-table';
 import SortWrapper from './sort/wrapper';
 import RowSelectionWrapper from './row-selection/wrapper';
@@ -19,6 +20,15 @@ export const wrapWithSort = props =>
 export const pureTable = props =>
   React.createElement(BootstrapTable, { ...props });
 
+export const wrapWithFilter = (props) => {
+  if (props.filter) {
+    const { wrapper } = props.filter;
+    const FilterBase = wrapper(wrapWithSort, _);
+    return React.createElement(FilterBase, { ...props });
+  }
+  return wrapWithSort(props);
+};
+
 export const wrapWithPagination = (props) => {
   if (props.pagination) {
     const { PaginationWrapper } = props.pagination;
@@ -29,6 +39,6 @@ export const wrapWithPagination = (props) => {
 
 export const sortableElement = props => wrapWithPagination(props);
 
-export const selectionElement = props => wrapWithSort(props);
+export const selectionElement = props => wrapWithFilter(props);
 
 export const cellEditElement = props => wrapWithSelection(props);

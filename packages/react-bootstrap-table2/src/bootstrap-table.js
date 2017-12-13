@@ -86,6 +86,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortField={ store.sortField }
             sortOrder={ store.sortOrder }
             onSort={ this.props.onSort }
+            onFilter={ this.props.onFilter }
             selectRow={ headerCellSelectionInfo }
           />
           <Body
@@ -126,7 +127,7 @@ BootstrapTable.propTypes = {
     PropTypes.string
   ]),
   pagination: PropTypes.object,
-  onSort: PropTypes.func,
+  filter: PropTypes.object,
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
     onUpdate: PropTypes.func,
@@ -169,8 +170,10 @@ BootstrapTable.propTypes = {
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
   })),
+  overlay: PropTypes.func,
   onTableChange: PropTypes.func,
-  overlay: PropTypes.func
+  onSort: PropTypes.func,
+  onFilter: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {

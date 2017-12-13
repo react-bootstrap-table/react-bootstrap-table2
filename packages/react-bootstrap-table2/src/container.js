@@ -6,6 +6,7 @@ import Store from './store';
 import {
   wrapWithCellEdit,
   wrapWithSelection,
+  wrapWithFilter,
   wrapWithSort,
   wrapWithPagination
 } from './table-factory';
@@ -70,6 +71,8 @@ const withDataStore = Base =>
         });
       } else if (this.props.selectRow) {
         return wrapWithSelection(baseProps);
+      } else if (this.props.filter) {
+        return wrapWithFilter(baseProps);
       } else if (this.props.columns.filter(col => col.sort).length > 0) {
         return wrapWithSort(baseProps);
       } else if (this.props.pagination) {
