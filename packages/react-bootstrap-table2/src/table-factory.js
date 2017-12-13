@@ -22,9 +22,8 @@ export const pureTable = props =>
 
 export const wrapWithFilter = (props) => {
   if (props.filter) {
-    const { wrapper } = props.filter;
-    const FilterBase = wrapper(wrapWithSort, _);
-    return React.createElement(FilterBase, { ...props });
+    const { FilterWrapper } = props.filter;
+    return React.createElement(FilterWrapper, { ...props, baseElement: wrapWithSort, _ });
   }
   return wrapWithSort(props);
 };
