@@ -143,12 +143,13 @@ describe('Pagination', () => {
       it('should setting correct state.totalPages', () => {
         instance.componentWillReceiveProps(nextProps);
         expect(instance.state.totalPages).toEqual(
-          instance.calculateTotalPage(nextProps.currSizePerPage));
+          instance.calculateTotalPage(nextProps.currSizePerPage, nextProps.dataSize));
       });
 
       it('should setting correct state.lastPage', () => {
         instance.componentWillReceiveProps(nextProps);
-        const totalPages = instance.calculateTotalPage(nextProps.currSizePerPage);
+        const totalPages = instance.calculateTotalPage(
+          nextProps.currSizePerPage, nextProps.dataSize);
         expect(instance.state.lastPage).toEqual(
           instance.calculateLastPage(totalPages));
       });
