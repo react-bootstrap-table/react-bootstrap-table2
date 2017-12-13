@@ -1,5 +1,5 @@
 /* eslint react/require-default-props: 0 */
-/* eslint react/no-unused-prop-types: 0 */
+/* eslint react/prop-types: 0 */
 /* eslint no-return-assign: 0 */
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
@@ -11,6 +11,7 @@ class TextFilter extends Component {
   constructor(props) {
     super(props);
     this.filter = this.filter.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.timeout = null;
     this.state = {
       value: props.defaultValue
@@ -30,19 +31,23 @@ class TextFilter extends Component {
   }
 
   componentWillUnmount() {
-    clearTimeout(this.timeout);
+    this.cleanTimer();
   }
 
   filter(e) {
     e.stopPropagation();
-    if (this.timeout) {
-      clearTimeout(this.timeout);
-    }
+    this.cleanTimer();
     const filterValue = e.target.value;
     this.setState(() => ({ value: filterValue }));
     this.timeout = setTimeout(() => {
       this.props.onFilter(this.props.column, filterValue, FILTER_TYPE.TEXT);
     }, this.props.delay);
+  }
+
+  cleanTimer() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   }
 
   cleanFiltered() {
@@ -56,17 +61,25 @@ class TextFilter extends Component {
     this.props.onFilter(this.props.column, filterText, FILTER_TYPE.TEXT);
   }
 
+  handleClick(e) {
+    e.stopPropagation();
+    if (this.props.onClick) {
+      this.props.onClick(e);
+    }
+  }
+
   render() {
-    const { placeholder, column: { text }, style } = this.props;
+    const { placeholder, column: { text }, style, className, onFilter, ...rest } = this.props;
     // stopPropagation for onClick event is try to prevent sort was triggered.
     return (
       <input
+        { ...rest }
         ref={ n => this.input = n }
         type="text"
-        className="filter text-filter form-control"
+        className={ `filter text-filter form-control ${className}` }
         style={ style }
         onChange={ this.filter }
-        onClick={ e => e.stopPropagation() }
+        onClick={ this.handleClick }
         placeholder={ placeholder || `Enter ${text}...` }
         value={ this.state.value }
       />
@@ -76,12 +89,13 @@ class TextFilter extends Component {
 
 TextFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
+  column: PropTypes.object.isRequired,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   defaultValue: PropTypes.string,
   delay: PropTypes.number,
   placeholder: PropTypes.string,
-  column: PropTypes.object,
-  style: PropTypes.object
+  style: PropTypes.object,
+  className: PropTypes.string
 };
 
 TextFilter.defaultProps = {
