@@ -5,6 +5,7 @@ import { filters } from './filter';
 export default class FilterWrapper extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
+    columns: PropTypes.array.isRequired,
     baseElement: PropTypes.func.isRequired,
     _: PropTypes.object.isRequired
   }
@@ -20,7 +21,7 @@ export default class FilterWrapper extends Component {
   }
 
   onFilter(column, filterVal, filterType) {
-    const { store, _ } = this.props;
+    const { store, columns, _ } = this.props;
     const { currFilters } = this.state;
     const { dataField, filter } = column;
 
@@ -31,7 +32,7 @@ export default class FilterWrapper extends Component {
       currFilters[dataField] = { filterVal, filterType, comparator };
     }
 
-    store.filteredData = filters(store, _)(currFilters);
+    store.filteredData = filters(store, columns, _)(currFilters);
     store.filtering = Object.keys(currFilters).length > 0;
 
     this.setState(() => ({ currFilters, isDataChanged: true }));

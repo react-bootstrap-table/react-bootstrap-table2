@@ -1,9 +1,17 @@
 import { FILTER_TYPE } from './const';
 import { LIKE, EQ } from './comparison';
 
-export const filterByText = _ => (data, dataField, { filterVal, comparator = LIKE }) =>
+export const filterByText = _ => (
+  data,
+  dataField,
+  { filterVal, comparator = LIKE },
+  customFilterValue
+) =>
   data.filter((row) => {
-    const cell = _.get(row, dataField);
+    let cell = _.get(row, dataField);
+    if (customFilterValue) {
+      cell = customFilterValue(cell, row);
+    }
     const cellStr = _.isDefined(cell) ? cell.toString() : '';
     if (comparator === EQ) {
       return cellStr === filterVal;
@@ -23,14 +31,15 @@ export const filterFactory = _ => (filterType) => {
   return filterFn;
 };
 
-export const filters = (store, _) => (currFilters) => {
+export const filters = (store, columns, _) => (currFilters) => {
   const factory = filterFactory(_);
   let result = store.getAllData();
   let filterFn;
   Object.keys(currFilters).forEach((dataField) => {
     const filterObj = currFilters[dataField];
     filterFn = factory(filterObj.filterType);
-    result = filterFn(result, dataField, filterObj);
+    const { filterValue } = columns.find(col => col.dataField === dataField);
+    result = filterFn(result, dataField, filterObj, filterValue);
   });
   return result;
 };
