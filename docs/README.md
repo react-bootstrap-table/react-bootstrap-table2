@@ -169,6 +169,9 @@ import paginator from 'react-bootstrap-table2-paginator';
 
 ```js
 paginator({
+  page, // Specify the current page. It's necessary when remote is enabled
+  sizePerPage, // Specify the size per page. It's necessary when remote is enabled
+  totalSize, // Total data size. It's necessary when remote is enabled
   pageStartIndex: 0, // first page will be 0, default is 1
   paginationSize: 3,  // the pagination bar size, default is 5
   sizePerPageList: [ {
@@ -189,7 +192,9 @@ paginator({
   firstPageTitle: 'Go to first', // the title of first page button
   lastPageTitle: 'Go to last', // the title of last page button
   hideSizePerPage: true, // hide the size per page dorpdown
-  hidePageListOnlyOnePage: true// hide pagination bar when only one page, default is false
+  hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
+  onPageChange: (page, sizePerPage) => {}, // callback function when page was changing
+  onSizePerPageChange: (sizePerPage, page) => {}, // callback function when page size was changing
 })
 ```
 
