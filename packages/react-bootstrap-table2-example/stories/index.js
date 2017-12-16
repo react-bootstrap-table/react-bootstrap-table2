@@ -34,6 +34,9 @@ import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
 // column filter
 import TextFilter from 'examples/column-filter/text-filter';
+import TextFilterWithDefaultValue from 'examples/column-filter/text-filter-default-value';
+import TextFilterComparator from 'examples/column-filter/text-filter-eq-comparator';
+import CustomTextFilter from 'examples/column-filter/custom-text-filter';
 import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 
 // work on rows
@@ -127,6 +130,9 @@ storiesOf('Work on Header Columns', module)
 
 storiesOf('Column Filter', module)
   .add('Text Filter', () => <TextFilter />)
+  .add('Text Filter with Default Value', () => <TextFilterWithDefaultValue />)
+  .add('Text Filter with Comparator', () => <TextFilterComparator />)
+  .add('Custom Text Filter', () => <CustomTextFilter />)
   // add another filter type example right here.
   .add('Custom Filter Value', () => <CustomFilterValue />);
 
