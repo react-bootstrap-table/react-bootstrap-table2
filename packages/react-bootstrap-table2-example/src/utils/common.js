@@ -20,4 +20,12 @@ export const productsGenerator = (quantity = 5, callback) => {
   );
 };
 
+export const jobsGenerator = (quantity = 5) =>
+  Array.from({ length: quantity }, (value, index) => ({
+    id: index,
+    name: `Job name ${index}`,
+    owner: Math.floor(Math.random() * 3),
+    type: Math.floor(Math.random() * 5)
+  }));
+
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));

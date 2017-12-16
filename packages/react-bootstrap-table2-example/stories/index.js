@@ -34,6 +34,7 @@ import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 
 // column filter
 import TextFilter from 'examples/column-filter/text-filter';
+import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -125,7 +126,9 @@ storiesOf('Work on Header Columns', module)
   .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);
 
 storiesOf('Column Filter', module)
-  .add('Text Filter', () => <TextFilter />);
+  .add('Text Filter', () => <TextFilter />)
+  // add another filter type example right here.
+  .add('Custom Filter Value', () => <CustomFilterValue />);
 
 storiesOf('Work on Rows', module)
   .add('Customize Row Style', () => <RowStyleTable />)
