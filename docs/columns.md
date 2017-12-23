@@ -31,20 +31,22 @@ Available properties in a column object:
 * [validator](#validator)
 * [editCellStyle](#editCellStyle)
 * [editCellClasses](#editCellClasses)
+* [filter](#filter)
+* [filterValue](#filterValue)
 
 Following is a most simplest and basic usage:
 
 ```js
 const rows = [ { id: 1, name: '...', price: '102' } ];
 const columns = [ {
-    dataField: id, 
-    text: Production ID
+    dataField: 'id', 
+    text: 'Production ID'
   }, {
-    dataField: name,
-    text: Production Name
+    dataField: 'name',
+    text: 'Production Name'
   }, {
-    dataField: price,
-    text: Production Price
+    dataField: 'price',
+    text: 'Production Price'
   }
 ];
 ```
@@ -526,3 +528,23 @@ Or take a callback function
   }
 }
 ```
+
+## <a name='filter'>column.filter - [Object]</a>
+Configure `column.filter` will able to setup a column level filter on the header column. Currently, `react-bootstrap-table2` support following filters:
+
+* Text(`textFilter`)
+
+We have a quick example to show you how to use `column.filter`:
+
+```
+import { textFilter } from 'react-bootstrap-table2-filter';
+
+// omit...
+{
+  dataField: 'price',
+  text: 'Product Price',
+  filter: textFilter()
+}
+```
+
+For some reason of simple customization, `react-bootstrap-table2` allow you to pass some props to filter factory function. Please check [here](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/master/packages/react-bootstrap-table2-filter/README.md) for more detail tutorial.

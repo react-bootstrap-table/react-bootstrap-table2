@@ -48,11 +48,16 @@ class PaginationWrapper extends Component {
   componentWillReceiveProps(nextProps) {
     let needNewState = false;
     let { currPage, currSizePerPage } = this.state;
-    const { page, sizePerPage } = nextProps.pagination.options;
-    if (typeof page !== 'undefined') {
+    const { page, sizePerPage, pageStartIndex } = nextProps.pagination.options;
+
+    if (typeof page !== 'undefined') { // user defined page
       currPage = page;
       needNewState = true;
+    } else if (nextProps.isDataChanged) { // user didn't defined page but data change
+      currPage = typeof pageStartIndex !== 'undefined' ? pageStartIndex : Const.PAGE_START_INDEX;
+      needNewState = true;
     }
+
     if (typeof sizePerPage !== 'undefined') {
       currSizePerPage = sizePerPage;
       needNewState = true;

@@ -6,11 +6,12 @@ import { getRowByRowId } from './rows';
 export default class Store {
   constructor(keyField) {
     this._data = [];
+    this._filteredData = [];
     this._keyField = keyField;
-
     this._sortOrder = undefined;
     this._sortField = undefined;
     this._selected = [];
+    this._filtering = false;
   }
 
   edit(rowId, dataField, newValue) {
@@ -24,8 +25,26 @@ export default class Store {
     this.data = sort(this)(sortFunc);
   }
 
-  get data() { return this._data; }
-  set data(data) { this._data = (data ? JSON.parse(JSON.stringify(data)) : []); }
+  getAllData() {
+    return this._data;
+  }
+
+  get data() {
+    if (this._filtering) {
+      return this._filteredData;
+    }
+    return this._data;
+  }
+  set data(data) {
+    if (this._filtering) {
+      this._filteredData = data;
+    } else {
+      this._data = (data ? JSON.parse(JSON.stringify(data)) : []);
+    }
+  }
+
+  get filteredData() { return this._filteredData; }
+  set filteredData(filteredData) { this._filteredData = filteredData; }
 
   get keyField() { return this._keyField; }
   set keyField(keyField) { this._keyField = keyField; }
@@ -38,4 +57,7 @@ export default class Store {
 
   get selected() { return this._selected; }
   set selected(selected) { this._selected = selected; }
+
+  get filtering() { return this._filtering; }
+  set filtering(filtering) { this._filtering = filtering; }
 }

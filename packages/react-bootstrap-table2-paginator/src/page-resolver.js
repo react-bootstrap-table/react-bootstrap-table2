@@ -18,8 +18,7 @@ export default ExtendBase =>
       return { totalPages, lastPage, dropdownOpen: false };
     }
 
-    calculateTotalPage(sizePerPage = this.props.currSizePerPage) {
-      const { dataSize } = this.props;
+    calculateTotalPage(sizePerPage = this.props.currSizePerPage, dataSize = this.props.dataSize) {
       return Math.ceil(dataSize / sizePerPage);
     }
 

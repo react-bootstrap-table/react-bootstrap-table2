@@ -16,12 +16,14 @@ const HeaderCell = (props) => {
     onSort,
     sorting,
     sortOrder,
-    isLastSorting
+    isLastSorting,
+    onFilter
   } = props;
 
   const {
     text,
     sort,
+    filter,
     hidden,
     headerTitle,
     headerAlign,
@@ -38,10 +40,13 @@ const HeaderCell = (props) => {
     ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
     ...headerEvents
   };
+  // we are suppose to pass sortSymbol and filerElm
+  // the headerFormatter is not only header text but also the all of header cell customization
   const children = headerFormatter ? headerFormatter(column, index) : text;
 
-  let cellStyle = {};
   let sortSymbol;
+  let filterElm;
+  let cellStyle = {};
   let cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
   if (headerStyle) {
@@ -91,12 +96,14 @@ const HeaderCell = (props) => {
   }
 
   if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
-
   if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
+  if (filter) {
+    filterElm = <filter.Filter { ...filter.props } onFilter={ onFilter } column={ column } />;
+  }
 
   return (
     <th { ...cellAttrs }>
-      { children }{ sortSymbol }
+      { children }{ sortSymbol }{ filterElm }
     </th>
   );
 };
@@ -126,13 +133,16 @@ HeaderCell.propTypes = {
     editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     editCellStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     editCellClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    validator: PropTypes.func
+    validator: PropTypes.func,
+    filter: PropTypes.object,
+    filterValue: PropTypes.func
   }).isRequired,
   index: PropTypes.number.isRequired,
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
-  isLastSorting: PropTypes.bool
+  isLastSorting: PropTypes.bool,
+  onFilter: PropTypes.func
 };
 
 export default HeaderCell;

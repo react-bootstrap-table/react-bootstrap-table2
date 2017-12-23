@@ -26,6 +26,16 @@ class SortWrapper extends Component {
     }
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isDataChanged) {
+      const sortedColumn = nextProps.columns.find(
+        column => column.dataField === nextProps.store.sortField);
+      if (sortedColumn) {
+        nextProps.store.sortBy(sortedColumn, nextProps.store.sortOrder);
+      }
+    }
+  }
+
   handleSort(column) {
     const { store } = this.props;
     store.sortBy(column);

@@ -20,9 +20,8 @@ class Pagination extends pageResolver(Component) {
 
   componentWillReceiveProps(nextProps) {
     const { dataSize, currSizePerPage } = nextProps;
-
     if (currSizePerPage !== this.props.currSizePerPage || dataSize !== this.props.dataSize) {
-      const totalPages = this.calculateTotalPage(currSizePerPage);
+      const totalPages = this.calculateTotalPage(currSizePerPage, dataSize);
       const lastPage = this.calculateLastPage(totalPages);
       this.setState({ totalPages, lastPage });
     }

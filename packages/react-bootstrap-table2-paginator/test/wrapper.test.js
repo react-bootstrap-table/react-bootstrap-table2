@@ -100,28 +100,46 @@ describe('Wrapper', () => {
     });
 
     describe('componentWillReceiveProps', () => {
-      it('should setting currPage state correclt by options.page', () => {
-        props.pagination.options.page = 2;
-        instance.componentWillReceiveProps(props);
-        expect(instance.state.currPage).toEqual(props.pagination.options.page);
+      let nextProps;
+      beforeEach(() => {
+        nextProps = createTableProps();
+      });
+
+      it('should setting currPage state correctly by options.page', () => {
+        nextProps.pagination.options.page = 2;
+        instance.componentWillReceiveProps(nextProps);
+        expect(instance.state.currPage).toEqual(nextProps.pagination.options.page);
       });
 
       it('should not setting currPage state if options.page not existing', () => {
         const { currPage } = instance.state;
-        instance.componentWillReceiveProps(props);
+        instance.componentWillReceiveProps(nextProps);
         expect(instance.state.currPage).toBe(currPage);
       });
 
-      it('should setting currSizePerPage state correclt by options.sizePerPage', () => {
-        props.pagination.options.sizePerPage = 20;
-        instance.componentWillReceiveProps(props);
-        expect(instance.state.currSizePerPage).toEqual(props.pagination.options.sizePerPage);
+      it('should setting currSizePerPage state correctly by options.sizePerPage', () => {
+        nextProps.pagination.options.sizePerPage = 20;
+        instance.componentWillReceiveProps(nextProps);
+        expect(instance.state.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
       });
 
       it('should not setting currSizePerPage state if options.sizePerPage not existing', () => {
         const { currSizePerPage } = instance.state;
-        instance.componentWillReceiveProps(props);
+        instance.componentWillReceiveProps(nextProps);
         expect(instance.state.currSizePerPage).toBe(currSizePerPage);
+      });
+
+      it('should setting currPage state when nextProps.isDataChanged is true', () => {
+        nextProps.isDataChanged = true;
+        instance.componentWillReceiveProps(nextProps);
+        expect(instance.state.currPage).toBe(Const.PAGE_START_INDEX);
+      });
+
+      it('should setting currPage state when nextProps.isDataChanged is true and options.pageStartIndex is existing', () => {
+        nextProps.isDataChanged = true;
+        nextProps.pagination.options.pageStartIndex = 0;
+        instance.componentWillReceiveProps(nextProps);
+        expect(instance.state.currPage).toBe(nextProps.pagination.options.pageStartIndex);
       });
     });
   });

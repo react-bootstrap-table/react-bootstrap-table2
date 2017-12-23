@@ -1,5 +1,6 @@
 import 'jsdom-global/register';
 import React from 'react';
+import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
 
 import Const from '../../src/const';
@@ -112,6 +113,40 @@ describe('SortWrapper', () => {
 
     it('should update store.sortOrder correctly', () => {
       expect(store.sortOrder).toEqual(defaultSorted[0].order);
+    });
+  });
+
+  describe('componentWillReceiveProps', () => {
+    let nextProps;
+
+    beforeEach(() => {
+      nextProps = { columns, store };
+      store.sortField = columns[1].dataField;
+      store.sortOrder = Const.SORT_DESC;
+    });
+
+    describe('if nextProps.isDataChanged is true', () => {
+      beforeEach(() => {
+        nextProps.isDataChanged = true;
+        store.sortBy = sinon.stub();
+      });
+
+      it('should sorting again', () => {
+        wrapper.instance().componentWillReceiveProps(nextProps);
+        expect(store.sortBy.calledOnce).toBeTruthy();
+      });
+    });
+
+    describe('if nextProps.isDataChanged is false', () => {
+      beforeEach(() => {
+        nextProps.isDataChanged = false;
+        store.sortBy = sinon.stub();
+      });
+
+      it('should not sorting', () => {
+        wrapper.instance().componentWillReceiveProps(nextProps);
+        expect(store.sortBy.calledOnce).toBeFalsy();
+      });
     });
   });
 });
