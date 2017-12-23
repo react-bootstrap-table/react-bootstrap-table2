@@ -1,7 +1,7 @@
 /* eslint no-unused-vars: 0 */
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table2';
-import fitlerFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
 import { jobsGenerator } from 'utils/common';
 
@@ -32,6 +32,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+
 const owners = ['Allen', 'Bob', 'Cat'];
 const types = ['Cloud Service', 'Message Service', 'Add Service', 'Edit Service', 'Money'];
 const columns = [{
@@ -56,7 +58,7 @@ const columns = [{
 
 // shape of job: { id: 0, name: 'Job name 0', owner: 1, type: 3 }
 
-<BootstrapTable keyField='id' data={ jobs } columns={ columns } filter={ fitlerFactory() } />
+<BootstrapTable keyField='id' data={ jobs } columns={ columns } filter={ filterFactory() } />
 `;
 
 export default () => (
@@ -65,7 +67,7 @@ export default () => (
       keyField="id"
       data={ jobs }
       columns={ columns }
-      filter={ fitlerFactory() }
+      filter={ filterFactory() }
     />
     <Code>{ sourceCode }</Code>
   </div>

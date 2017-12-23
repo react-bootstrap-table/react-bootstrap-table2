@@ -1,6 +1,6 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table2';
-import fitlerFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -20,6 +20,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
@@ -33,7 +35,7 @@ const columns = [{
   filter: textFilter()
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ fitlerFactory() } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 `;
 
 export default () => (
@@ -42,7 +44,7 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
-      filter={ fitlerFactory() }
+      filter={ filterFactory() }
     />
     <Code>{ sourceCode }</Code>
   </div>
