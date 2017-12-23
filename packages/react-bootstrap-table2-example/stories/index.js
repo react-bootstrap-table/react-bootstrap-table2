@@ -25,6 +25,7 @@ import ColumnAttrsTable from 'examples/columns/column-attrs-table';
 
 // work on header columns
 import HeaderColumnFormatTable from 'examples/header-columns/column-format-table';
+import HeaderColumnFormatWithSortFilterTable from 'examples/header-columns/column-format-filter-sort-table.js';
 import HeaderColumnAlignTable from 'examples/header-columns/column-align-table';
 import HeaderColumnTitleTable from 'examples/header-columns/column-title-table';
 import HeaderColumnEventTable from 'examples/header-columns/column-event-table';
@@ -121,6 +122,7 @@ storiesOf('Work on Columns', module)
 
 storiesOf('Work on Header Columns', module)
   .add('Column Formatter', () => <HeaderColumnFormatTable />)
+  .add('Column Format with Filter and Sort', () => <HeaderColumnFormatWithSortFilterTable />)
   .add('Column Align', () => <HeaderColumnAlignTable />)
   .add('Column Title', () => <HeaderColumnTitleTable />)
   .add('Column Event', () => <HeaderColumnEventTable />)
