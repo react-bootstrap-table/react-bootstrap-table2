@@ -165,7 +165,8 @@ describe('HeaderCell', () => {
 
     it('should call custom headerFormatter correctly', () => {
       expect(formatter.callCount).toBe(1);
-      expect(formatter.calledWith(column, index)).toBe(true);
+      expect(formatter.calledWith(
+        column, index, { sortElement: undefined, filterElement: undefined })).toBe(true);
     });
   });
 

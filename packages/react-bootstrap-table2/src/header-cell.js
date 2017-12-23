@@ -40,9 +40,6 @@ const HeaderCell = (props) => {
     ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
     ...headerEvents
   };
-  // we are suppose to pass sortSymbol and filerElm
-  // the headerFormatter is not only header text but also the all of header cell customization
-  const children = headerFormatter ? headerFormatter(column, index) : text;
 
   let sortSymbol;
   let filterElm;
@@ -101,11 +98,15 @@ const HeaderCell = (props) => {
     filterElm = <filter.Filter { ...filter.props } onFilter={ onFilter } column={ column } />;
   }
 
-  return (
-    <th { ...cellAttrs }>
-      { children }{ sortSymbol }{ filterElm }
-    </th>
-  );
+  const children = headerFormatter ?
+    headerFormatter(column, index, { sortElement: sortSymbol, filterElement: filterElm }) :
+    text;
+
+  if (headerFormatter) {
+    return React.createElement('th', cellAttrs, children);
+  }
+
+  return React.createElement('th', cellAttrs, children, sortSymbol, filterElm);
 };
 
 HeaderCell.propTypes = {
