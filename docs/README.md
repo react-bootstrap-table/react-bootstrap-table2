@@ -22,6 +22,7 @@
 * [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
 * [pagination](#pagination)
+* [filter](#filter)
 * [onTableChange](#onTableChange)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
@@ -191,6 +192,33 @@ paginator({
   hideSizePerPage: true, // hide the size per page dorpdown
   hidePageListOnlyOnePage: true// hide pagination bar when only one page, default is false
 })
+```
+
+### <a name='filter'>filter - [Object]</a>
+`filter` allow user to filter data by column. However, filter funcitonality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-filter` firstly.
+
+```sh
+$ npm install react-bootstrap-table2-filter --save
+```
+
+After installation of `react-bootstrap-table2-filter`, you can configure filter on `react-bootstrap-table2` easily:
+
+```js
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+
+// omit...
+const columns = [ {
+  dataField: 'id', 
+  text: 'Production ID'
+}, {
+  dataField: 'name',
+  text: 'Production Name',
+  filter: textFilter()  // apply text filter
+}, {
+  dataField: 'price',
+  text: 'Production Price'
+} ];
+<BootstrapTable data={ data } columns={ columns } filter={ filterFactory() } />
 ```
 
 ### <a name='onTableChange'>onTableChange - [Function]</a>
