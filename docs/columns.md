@@ -87,10 +87,19 @@ dataField: 'address.city'
 * [`formatExtraData`](#formatExtraData)
 
 ## <a name='headerFormatter'>column.headerFormatter - [Function]</a>
-`headerFormatter` allow you to customize the header column and only accept a callback function which take two arguments and a JSX/String are expected for return.
+`headerFormatter` allow you to customize the header column and only accept a callback function which take three arguments and a JSX/String are expected for return.
 
 * `column`: column object itself
 * `colIndex`
+* `components`: it's an object which contain all of other react element, like sort caret or filter etc.
+
+The third argument: `components` have following specified properties:
+```js
+{
+  sortElement, // sort caret element, it will not be undefined when you enable sort on this column
+  filterElement // filter element, it will not be undefined when you enable column.filter on this column
+}
+```
 
 ## <a name='formatExtraData'>column.formatExtraData - [Any]</a>
 It's only used for [`column.formatter`](#formatter), you can define any value for it and will be passed as fourth argument for [`column.formatter`](#formatter) callback function.
