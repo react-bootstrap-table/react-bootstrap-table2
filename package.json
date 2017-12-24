@@ -48,6 +48,7 @@
     "lerna": "2.0.0",
     "node-sass": "4.5.3",
     "react-test-renderer": "16.0.0",
+    "rimraf": "2.6.2",
     "sass-loader": "6.0.6",
     "sinon": "3.2.1",
     "style-loader": "0.17.0",
