@@ -28,6 +28,7 @@
   },
   "homepage": "https://github.com/react-bootstrap-table/react-bootstrap-table2#readme",
   "devDependencies": {
+    "babel-cli": "6.26.0",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
