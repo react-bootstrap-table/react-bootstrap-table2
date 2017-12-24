@@ -11,44 +11,20 @@ import {
   wrapWithPagination
 } from './table-factory';
 
+import remoteResolver from './props-resolver/remote-resolver';
 import _ from './utils';
 
 const withDataStore = Base =>
-  class BootstrapTableContainer extends Component {
+  class BootstrapTableContainer extends remoteResolver(Component) {
     constructor(props) {
       super(props);
       this.store = new Store(props.keyField);
       this.store.data = props.data;
       this.handleUpdateCell = this.handleUpdateCell.bind(this);
-      this.handleRemotePageChange = this.handleRemotePageChange.bind(this);
-      this.handleRemoteFilterChange = this.handleRemoteFilterChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
       this.store.data = nextProps.data;
-    }
-
-    getNewestState(state = {}) {
-      return {
-        page: this.store.page,
-        sizePerPage: this.store.sizePerPage,
-        filters: this.store.filters,
-        ...state
-      };
-    }
-
-    handleRemotePageChange() {
-      this.props.onTableChange('pagination', this.getNewestState());
-    }
-
-    // refactoring later for isRemotePagination
-    handleRemoteFilterChange(isRemotePagination) {
-      const newState = {};
-      if (isRemotePagination) {
-        const options = this.props.pagination.options || {};
-        newState.page = _.isDefined(options.pageStartIndex) ? options.pageStartIndex : 1;
-      }
-      this.props.onTableChange('filter', this.getNewestState(newState));
     }
 
     handleUpdateCell(rowId, dataField, newValue) {
