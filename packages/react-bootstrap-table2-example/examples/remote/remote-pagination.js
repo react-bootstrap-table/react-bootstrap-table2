@@ -105,7 +105,7 @@ class Container extends React.Component {
     };
   }
 
-  handleTableChange = ({ page, sizePerPage }) => {
+  handleTableChange = (type, { page, sizePerPage }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
       this.setState(() => ({

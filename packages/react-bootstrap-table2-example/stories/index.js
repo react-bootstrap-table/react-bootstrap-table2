@@ -82,11 +82,15 @@ import HideSelectionColumnTable from 'examples/row-selection/hide-selection-colu
 import PaginationTable from 'examples/pagination';
 import PaginationHooksTable from 'examples/pagination/pagination-hooks';
 import CustomPaginationTable from 'examples/pagination/custom-pagination';
-import RemotePaginationTable from 'examples/pagination/remote-pagination';
 
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
 import TableOverlay from 'examples/loading-overlay/table-overlay';
+
+// remote
+import RemoteFilter from 'examples/remote/remote-filter';
+import RemotePaginationTable from 'examples/remote/remote-pagination';
+import RemoteAll from 'examples/remote/remote-all';
 
 // css style
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -179,9 +183,13 @@ storiesOf('Row Selection', module)
 storiesOf('Pagination', module)
   .add('Basic Pagination Table', () => <PaginationTable />)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
-  .add('Custom Pagination', () => <CustomPaginationTable />)
-  .add('Remote Pagination', () => <RemotePaginationTable />);
+  .add('Custom Pagination', () => <CustomPaginationTable />);
 
 storiesOf('EmptyTableOverlay', module)
   .add('Empty Table Overlay', () => <EmptyTableOverlay />)
   .add('Table Overlay', () => <TableOverlay />);
+
+storiesOf('Remote', module)
+  .add('Remote Filter', () => <RemoteFilter />)
+  .add('Remote Pagination', () => <RemotePaginationTable />)
+  .add('Remote All', () => <RemoteAll />);
