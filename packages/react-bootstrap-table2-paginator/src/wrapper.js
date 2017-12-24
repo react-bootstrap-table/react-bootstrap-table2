@@ -11,7 +11,8 @@ import { getByCurrPage } from './page';
 class PaginationWrapper extends Component {
   static propTypes = {
     store: PropTypes.object.isRequired,
-    baseElement: PropTypes.func.isRequired
+    baseElement: PropTypes.func.isRequired,
+    onRemotePageChange: PropTypes.func.isRequired
   }
 
   constructor(props) {
@@ -43,14 +44,15 @@ class PaginationWrapper extends Component {
     }
 
     this.state = { currPage, currSizePerPage };
+    this.saveToStore(currPage, currSizePerPage);
   }
 
   componentWillReceiveProps(nextProps) {
     let needNewState = false;
     let { currPage, currSizePerPage } = this.state;
-    const { page, sizePerPage, pageStartIndex } = nextProps.pagination.options;
+    const { page, sizePerPage, pageStartIndex, onPageChange } = nextProps.pagination.options;
 
-    if (typeof page !== 'undefined') { // user defined page
+    if (typeof page !== 'undefined' && currPage !== page) { // user defined page
       currPage = page;
       needNewState = true;
     } else if (nextProps.isDataChanged) { // user didn't defined page but data change
@@ -63,7 +65,19 @@ class PaginationWrapper extends Component {
       needNewState = true;
     }
 
-    if (needNewState) this.setState(() => ({ currPage, currSizePerPage }));
+    this.saveToStore(currPage, currSizePerPage);
+
+    if (needNewState) {
+      if (onPageChange) {
+        onPageChange(currPage, currSizePerPage);
+      }
+      this.setState(() => ({ currPage, currSizePerPage }));
+    }
+  }
+
+  saveToStore(page, sizePerPage) {
+    this.props.store.page = page;
+    this.props.store.sizePerPage = sizePerPage;
   }
 
   isRemote() {
@@ -74,11 +88,13 @@ class PaginationWrapper extends Component {
   handleChangePage(currPage) {
     const { currSizePerPage } = this.state;
     const { pagination: { options }, onRemotePageChange } = this.props;
+    this.saveToStore(currPage, currSizePerPage);
+
     if (options.onPageChange) {
       options.onPageChange(currPage, currSizePerPage);
     }
     if (this.isRemote()) {
-      onRemotePageChange(currPage, currSizePerPage);
+      onRemotePageChange();
       return;
     }
     this.setState(() => {
@@ -90,11 +106,13 @@ class PaginationWrapper extends Component {
 
   handleChangeSizePerPage(currSizePerPage, currPage) {
     const { pagination: { options }, onRemotePageChange } = this.props;
+    this.saveToStore(currPage, currSizePerPage);
+
     if (options.onSizePerPageChange) {
       options.onSizePerPageChange(currSizePerPage, currPage);
     }
     if (this.isRemote()) {
-      onRemotePageChange(currPage, currSizePerPage);
+      onRemotePageChange();
       return;
     }
     this.setState(() => {

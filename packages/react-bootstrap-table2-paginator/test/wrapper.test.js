@@ -21,6 +21,11 @@ for (let i = 0; i < 100; i += 1) {
 describe('Wrapper', () => {
   let wrapper;
   let instance;
+  const onRemotePageChangeCB = sinon.stub();
+
+  afterEach(() => {
+    onRemotePageChangeCB.reset();
+  });
 
   const createTableProps = (props = {}) => {
     const tableProps = {
@@ -34,7 +39,8 @@ describe('Wrapper', () => {
       }],
       data,
       pagination: paginator(props.options),
-      store: new Store('id')
+      store: new Store('id'),
+      onRemotePageChange: onRemotePageChangeCB
     };
     tableProps.store.data = data;
     return tableProps;
@@ -67,6 +73,11 @@ describe('Wrapper', () => {
       expect(instance.state.currPage).toEqual(Const.PAGE_START_INDEX);
       expect(instance.state.currSizePerPage).toBeDefined();
       expect(instance.state.currSizePerPage).toEqual(Const.SIZE_PER_PAGE_LIST[0]);
+    });
+
+    it('should saving page and sizePerPage to store correctly', () => {
+      expect(props.store.page).toBe(instance.state.currPage);
+      expect(props.store.sizePerPage).toBe(instance.state.currSizePerPage);
     });
 
     it('should rendering BootstraTable correctly', () => {
@@ -105,10 +116,19 @@ describe('Wrapper', () => {
         nextProps = createTableProps();
       });
 
-      it('should setting currPage state correctly by options.page', () => {
-        nextProps.pagination.options.page = 2;
-        instance.componentWillReceiveProps(nextProps);
-        expect(instance.state.currPage).toEqual(nextProps.pagination.options.page);
+      describe('when options.page is existing', () => {
+        beforeEach(() => {
+          nextProps.pagination.options.page = 2;
+          instance.componentWillReceiveProps(nextProps);
+        });
+
+        it('should setting currPage state correctly', () => {
+          expect(instance.state.currPage).toEqual(nextProps.pagination.options.page);
+        });
+
+        it('should saving store.page correctly', () => {
+          expect(props.store.page).toEqual(instance.state.currPage);
+        });
       });
 
       it('should not setting currPage state if options.page not existing', () => {
@@ -117,10 +137,19 @@ describe('Wrapper', () => {
         expect(instance.state.currPage).toBe(currPage);
       });
 
-      it('should setting currSizePerPage state correctly by options.sizePerPage', () => {
-        nextProps.pagination.options.sizePerPage = 20;
-        instance.componentWillReceiveProps(nextProps);
-        expect(instance.state.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
+      describe('when options.sizePerPage is existing', () => {
+        beforeEach(() => {
+          nextProps.pagination.options.sizePerPage = 20;
+          instance.componentWillReceiveProps(nextProps);
+        });
+
+        it('should setting currSizePerPage state correctly', () => {
+          expect(instance.state.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
+        });
+
+        it('should saving store.sizePerPage correctly', () => {
+          expect(props.store.sizePerPage).toEqual(instance.state.currSizePerPage);
+        });
       });
 
       it('should not setting currSizePerPage state if options.sizePerPage not existing', () => {
@@ -129,17 +158,35 @@ describe('Wrapper', () => {
         expect(instance.state.currSizePerPage).toBe(currSizePerPage);
       });
 
-      it('should setting currPage state when nextProps.isDataChanged is true', () => {
-        nextProps.isDataChanged = true;
-        instance.componentWillReceiveProps(nextProps);
-        expect(instance.state.currPage).toBe(Const.PAGE_START_INDEX);
+      describe('when nextProps.isDataChanged is true', () => {
+        beforeEach(() => {
+          nextProps.isDataChanged = true;
+          instance.componentWillReceiveProps(nextProps);
+        });
+
+        it('should setting currPage state correctly', () => {
+          expect(instance.state.currPage).toBe(Const.PAGE_START_INDEX);
+        });
+
+        it('should saving store.page correctly', () => {
+          expect(props.store.page).toEqual(instance.state.currPage);
+        });
       });
 
-      it('should setting currPage state when nextProps.isDataChanged is true and options.pageStartIndex is existing', () => {
-        nextProps.isDataChanged = true;
-        nextProps.pagination.options.pageStartIndex = 0;
-        instance.componentWillReceiveProps(nextProps);
-        expect(instance.state.currPage).toBe(nextProps.pagination.options.pageStartIndex);
+      describe('when nextProps.isDataChanged is true and options.pageStartIndex is existing', () => {
+        beforeEach(() => {
+          nextProps.isDataChanged = true;
+          nextProps.pagination.options.pageStartIndex = 0;
+          instance.componentWillReceiveProps(nextProps);
+        });
+
+        it('should setting currPage state correctly', () => {
+          expect(instance.state.currPage).toBe(nextProps.pagination.options.pageStartIndex);
+        });
+
+        it('should saving store.page correctly', () => {
+          expect(props.store.page).toEqual(instance.state.currPage);
+        });
       });
     });
   });
@@ -448,11 +495,16 @@ describe('Wrapper', () => {
       expect(onPageChange.calledWith(newPage, instance.state.currSizePerPage)).toBeTruthy();
     });
 
+    it('should saving page and sizePerPage to store correctly', () => {
+      expect(props.store.page).toBe(newPage);
+      expect(props.store.sizePerPage).toBe(instance.state.currSizePerPage);
+    });
+
     describe('when pagination remote is enable', () => {
       beforeEach(() => {
         props.remote = true;
-        props.onRemotePageChange = sinon.stub();
         createPaginationWrapper(props, false);
+        onRemotePageChangeCB.reset();
         instance.handleChangePage(newPage);
       });
 
@@ -460,10 +512,8 @@ describe('Wrapper', () => {
         expect(instance.state.currPage).not.toEqual(newPage);
       });
 
-      it('should calling options.onRemotePageChange correctly', () => {
-        expect(props.onRemotePageChange.calledOnce).toBeTruthy();
-        expect(props.onRemotePageChange.calledWith(
-          newPage, instance.state.currSizePerPage)).toBeTruthy();
+      it('should calling props.onRemotePageChange correctly', () => {
+        expect(onRemotePageChangeCB.calledOnce).toBeTruthy();
       });
     });
   });
@@ -492,11 +542,16 @@ describe('Wrapper', () => {
       expect(onSizePerPageChange.calledWith(newSizePerPage, newPage)).toBeTruthy();
     });
 
+    it('should saving page and sizePerPage to store correctly', () => {
+      expect(props.store.page).toBe(newPage);
+      expect(props.store.sizePerPage).toBe(newSizePerPage);
+    });
+
     describe('when pagination remote is enable', () => {
       beforeEach(() => {
         props.remote = true;
-        props.onRemotePageChange = sinon.stub();
         createPaginationWrapper(props, false);
+        onRemotePageChangeCB.reset();
         instance.handleChangeSizePerPage(newSizePerPage, newPage);
       });
 
@@ -505,9 +560,8 @@ describe('Wrapper', () => {
         expect(instance.state.currSizePerPage).not.toEqual(newSizePerPage);
       });
 
-      it('should calling options.onRemotePageChange correctly', () => {
-        expect(props.onRemotePageChange.calledOnce).toBeTruthy();
-        expect(props.onRemotePageChange.calledWith(newPage, newSizePerPage)).toBeTruthy();
+      it('should calling props.onRemotePageChange correctly', () => {
+        expect(onRemotePageChangeCB.calledOnce).toBeTruthy();
       });
     });
   });

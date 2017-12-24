@@ -20,16 +20,35 @@ const withDataStore = Base =>
       this.store = new Store(props.keyField);
       this.store.data = props.data;
       this.handleUpdateCell = this.handleUpdateCell.bind(this);
-      this.onRemotePageChange = this.onRemotePageChange.bind(this);
+      this.handleRemotePageChange = this.handleRemotePageChange.bind(this);
+      this.handleRemoteFilterChange = this.handleRemoteFilterChange.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
       this.store.data = nextProps.data;
     }
 
-    onRemotePageChange(page, sizePerPage) {
-      const newState = { page, sizePerPage };
-      this.props.onTableChange(newState);
+    getNewestState(state = {}) {
+      return {
+        page: this.store.page,
+        sizePerPage: this.store.sizePerPage,
+        filters: this.store.filters,
+        ...state
+      };
+    }
+
+    handleRemotePageChange() {
+      this.props.onTableChange('pagination', this.getNewestState());
+    }
+
+    // refactoring later for isRemotePagination
+    handleRemoteFilterChange(isRemotePagination) {
+      const newState = {};
+      if (isRemotePagination) {
+        const options = this.props.pagination.options || {};
+        newState.page = _.isDefined(options.pageStartIndex) ? options.pageStartIndex : 1;
+      }
+      this.props.onTableChange('filter', this.getNewestState(newState));
     }
 
     handleUpdateCell(rowId, dataField, newValue) {
@@ -72,13 +91,17 @@ const withDataStore = Base =>
       } else if (this.props.selectRow) {
         return wrapWithSelection(baseProps);
       } else if (this.props.filter) {
-        return wrapWithFilter(baseProps);
+        return wrapWithFilter({
+          ...baseProps,
+          onRemoteFilterChange: this.handleRemoteFilterChange,
+          onRemotePageChange: this.handleRemotePageChange
+        });
       } else if (this.props.columns.filter(col => col.sort).length > 0) {
         return wrapWithSort(baseProps);
       } else if (this.props.pagination) {
         return wrapWithPagination({
           ...baseProps,
-          onRemotePageChange: this.onRemotePageChange
+          onRemotePageChange: this.handleRemotePageChange
         });
       }
 
