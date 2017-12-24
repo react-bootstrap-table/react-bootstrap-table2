@@ -40,13 +40,20 @@ This is a chance that you can connect to your remote server or database to manip
 For flexibility reason, you can control what functionality should be handled on remote via a object return:
 
 ```js
-remote={ { pagination: true } }
+remote={ { filter: true } }
 ```
 
-In above case, only pagination will be handled on remote.
+In above case, only column filter will be handled on remote.
 
 > Note: when remote is enable, you are suppose to give [`onTableChange`](#onTableChange) prop on `BootstrapTable`
 > It's the only way to communicate to your remote server and update table states.
+
+A special case for remote pagination:
+```js
+remote={ { pagination: true, filter: false, sort: false } }
+```
+
+In pagination case, even you only specified the paignation need to handle as remote, `react-bootstrap-table2` will handle all the table changes(`filter`, `sort` etc) as remote mode, because `react-bootstrap-table` only know the data of current page, but filtering, searching or sort need to work on overall datas.
 
 ### <a name='loading'>loading - [Bool]</a>
 Telling if table is loading or not, for example: waiting data loading, filtering etc. It's **only** valid when [`remote`](#remote) is enabled.
@@ -230,17 +237,25 @@ const columns = [ {
 This callback function will be called when [`remote`](#remote) enabled only.
 
 ```js
-const onTableChange = (newState) => {
+const onTableChange = (type, newState) => {
   // handle any data change here
 }
 <BootstrapTable data={ data } columns={ columns } onTableChange={ onTableChange } />
 ```
 
-There's only one argument will be passed to `onTableChange`, `newState`:
+There's only two arguments will be passed to `onTableChange`: `type` and `newState`:
+
+`type` is tell you what kind of functionality to trigger this table's change: available values at the below:
+
+* `filter`
+* `pagination`
+
+Following is a shape of `newState`
 
 ```js
 {
   page,  // newest page
-  sizePerPage  //newest sizePerPage
+  sizePerPage,  //newest sizePerPage
+  filters // an object which have current filter status per column
 }
 ```
