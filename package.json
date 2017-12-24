@@ -11,7 +11,11 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook"
+    "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook",
+    "gh-pages:clean": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:clean",
+    "gh-pages:build": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:build",
+    "gh-pages:deploy": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:deploy",
+    "gh-pages:publish": "yarn gh-pages:clean && yarn gh-pages:build && yarn gh-pages:deploy"
   },
   "repository": {
     "type": "git",
