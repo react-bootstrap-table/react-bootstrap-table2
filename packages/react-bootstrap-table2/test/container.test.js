@@ -202,9 +202,7 @@ describe('withDataStore', () => {
     });
   });
 
-  describe('onRemotePageChange', () => {
-    const page = 2;
-    const sizePerPage = 25;
+  describe('handleRemotePageChange', () => {
     const onTableChangeCallBack = sinon.stub();
 
     beforeEach(() => {
@@ -216,12 +214,86 @@ describe('withDataStore', () => {
           onTableChange={ onTableChangeCallBack }
         />
       );
-      wrapper.instance().onRemotePageChange(page, sizePerPage);
+      wrapper.instance().handleRemotePageChange();
     });
 
     it('should calling onTableChange correctly', () => {
       expect(onTableChangeCallBack.calledOnce).toBeTruthy();
-      expect(onTableChangeCallBack.calledWith({ page, sizePerPage })).toBeTruthy();
+      expect(onTableChangeCallBack.calledWith('pagination', wrapper.instance().getNewestState())).toBeTruthy();
+    });
+  });
+
+  describe('handleRemoteFilterChange', () => {
+    const onTableChangeCallBack = sinon.stub();
+
+    beforeEach(() => {
+      onTableChangeCallBack.reset();
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          onTableChange={ onTableChangeCallBack }
+        />
+      );
+    });
+
+    describe('when isRemotePagination argument is false', () => {
+      beforeEach(() => {
+        wrapper.instance().handleRemoteFilterChange(false);
+      });
+
+      it('should calling onTableChange correctly', () => {
+        expect(onTableChangeCallBack.calledOnce).toBeTruthy();
+        expect(onTableChangeCallBack.calledWith('filter', wrapper.instance().getNewestState())).toBeTruthy();
+      });
+    });
+
+    describe('when isRemotePagination argument is false', () => {
+      describe('and pagination.options.pageStartIndex is defined', () => {
+        const options = { pageStartIndex: 0 };
+        beforeEach(() => {
+          wrapper = shallow(
+            <BootstrapTable
+              keyField={ keyField }
+              data={ data }
+              columns={ columns }
+              pagination={ { options, PaginationWrapper: () => {} } }
+              onTableChange={ onTableChangeCallBack }
+            />
+          );
+          wrapper.instance().handleRemoteFilterChange(true);
+        });
+
+        it('should calling onTableChange correctly', () => {
+          expect(onTableChangeCallBack.calledOnce).toBeTruthy();
+          const newState = wrapper.instance().getNewestState();
+          newState.page = options.pageStartIndex;
+          expect(onTableChangeCallBack.calledWith('filter', newState)).toBeTruthy();
+        });
+      });
+
+      describe('and pagination.options.pageStartIndex is not defined', () => {
+        beforeEach(() => {
+          wrapper = shallow(
+            <BootstrapTable
+              keyField={ keyField }
+              data={ data }
+              columns={ columns }
+              pagination={ { PaginationWrapper: () => {} } }
+              onTableChange={ onTableChangeCallBack }
+            />
+          );
+          wrapper.instance().handleRemoteFilterChange(true);
+        });
+
+        it('should calling onTableChange correctly', () => {
+          expect(onTableChangeCallBack.calledOnce).toBeTruthy();
+          const newState = wrapper.instance().getNewestState();
+          newState.page = 1;
+          expect(onTableChangeCallBack.calledWith('filter', newState)).toBeTruthy();
+        });
+      });
     });
   });
 });

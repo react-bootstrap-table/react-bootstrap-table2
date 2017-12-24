@@ -11,7 +11,9 @@ export default class Store {
     this._sortOrder = undefined;
     this._sortField = undefined;
     this._selected = [];
-    this._filtering = false;
+    this._filters = {};
+    this._page = undefined;
+    this._sizePerPage = undefined;
   }
 
   edit(rowId, dataField, newValue) {
@@ -30,13 +32,13 @@ export default class Store {
   }
 
   get data() {
-    if (this._filtering) {
+    if (Object.keys(this._filters).length > 0) {
       return this._filteredData;
     }
     return this._data;
   }
   set data(data) {
-    if (this._filtering) {
+    if (Object.keys(this._filters).length > 0) {
       this._filteredData = data;
     } else {
       this._data = (data ? JSON.parse(JSON.stringify(data)) : []);
@@ -52,12 +54,18 @@ export default class Store {
   get sortOrder() { return this._sortOrder; }
   set sortOrder(sortOrder) { this._sortOrder = sortOrder; }
 
+  get page() { return this._page; }
+  set page(page) { this._page = page; }
+
+  get sizePerPage() { return this._sizePerPage; }
+  set sizePerPage(sizePerPage) { this._sizePerPage = sizePerPage; }
+
   get sortField() { return this._sortField; }
   set sortField(sortField) { this._sortField = sortField; }
 
   get selected() { return this._selected; }
   set selected(selected) { this._selected = selected; }
 
-  get filtering() { return this._filtering; }
-  set filtering(filtering) { this._filtering = filtering; }
+  get filters() { return this._filters; }
+  set filters(filters) { this._filters = filters; }
 }

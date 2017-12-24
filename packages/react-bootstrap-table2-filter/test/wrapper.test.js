@@ -1,4 +1,5 @@
 import React from 'react';
+import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import _ from 'react-bootstrap-table2/src/utils';
@@ -20,7 +21,11 @@ for (let i = 0; i < 20; i += 1) {
 describe('Wrapper', () => {
   let wrapper;
   let instance;
+  const onRemoteFilterChangeCB = sinon.stub();
 
+  afterEach(() => {
+    onRemoteFilterChangeCB.reset();
+  });
 
   const createTableProps = () => {
     const tableProps = {
@@ -40,7 +45,8 @@ describe('Wrapper', () => {
       data,
       filter: filter(),
       _,
-      store: new Store('id')
+      store: new Store('id'),
+      onRemoteFilterChange: onRemoteFilterChangeCB
     };
     tableProps.store.data = data;
     return tableProps;
@@ -84,13 +90,28 @@ describe('Wrapper', () => {
   describe('componentWillReceiveProps', () => {
     let nextProps;
 
-    beforeEach(() => {
-      nextProps = createTableProps();
-      instance.componentWillReceiveProps(nextProps);
+    describe('when props.store.filters is same as current state.currFilters', () => {
+      beforeEach(() => {
+        nextProps = createTableProps();
+        instance.componentWillReceiveProps(nextProps);
+      });
+
+      it('should setting isDataChanged as false (Temporary solution)', () => {
+        expect(instance.state.isDataChanged).toBeFalsy();
+      });
     });
 
-    it('should setting isDataChanged as false always(Temporary solution)', () => {
-      expect(instance.state.isDataChanged).toBeFalsy();
+    describe('when props.store.filters is different from current state.currFilters', () => {
+      beforeEach(() => {
+        nextProps = createTableProps();
+        nextProps.store.filters = { price: { filterVal: 20, filterType: FILTER_TYPE.TEXT } };
+        instance.componentWillReceiveProps(nextProps);
+      });
+
+      it('should setting states correctly', () => {
+        expect(instance.state.isDataChanged).toBeTruthy();
+        expect(instance.state.currFilters).toBe(nextProps.store.filters);
+      });
     });
   });
 
@@ -126,7 +147,7 @@ describe('Wrapper', () => {
 
       it('should setting store object correctly', () => {
         instance.onFilter(props.columns[1], filterVal, FILTER_TYPE.TEXT);
-        expect(props.store.filtering).toBeTruthy();
+        expect(props.store.filters).toEqual(instance.state.currFilters);
       });
 
       it('should setting state correctly', () => {
@@ -136,30 +157,54 @@ describe('Wrapper', () => {
       });
     });
 
+    describe('when remote filter is enabled', () => {
+      const filterVal = '3';
+
+      beforeEach(() => {
+        props = createTableProps();
+        props.remote = { filter: true };
+        createFilterWrapper(props);
+        instance.onFilter(props.columns[1], filterVal, FILTER_TYPE.TEXT);
+      });
+
+      it('should not setting store object correctly', () => {
+        expect(props.store.filters).not.toEqual(instance.state.currFilters);
+      });
+
+      it('should not setting state', () => {
+        expect(instance.state.isDataChanged).toBeFalsy();
+        expect(Object.keys(instance.state.currFilters)).toHaveLength(0);
+      });
+
+      it('should calling props.onRemoteFilterChange correctly', () => {
+        expect(onRemoteFilterChangeCB.calledOnce).toBeTruthy();
+      });
+    });
+
     describe('combination', () => {
       it('should setting store object correctly', () => {
         instance.onFilter(props.columns[1], '3', FILTER_TYPE.TEXT);
-        expect(props.store.filtering).toBeTruthy();
+        expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(1);
 
         instance.onFilter(props.columns[1], '2', FILTER_TYPE.TEXT);
-        expect(props.store.filtering).toBeTruthy();
+        expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(1);
 
         instance.onFilter(props.columns[2], '2', FILTER_TYPE.TEXT);
-        expect(props.store.filtering).toBeTruthy();
+        expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(2);
 
         instance.onFilter(props.columns[2], '', FILTER_TYPE.TEXT);
-        expect(props.store.filtering).toBeTruthy();
+        expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(1);
 
         instance.onFilter(props.columns[1], '', FILTER_TYPE.TEXT);
-        expect(props.store.filtering).toBeFalsy();
+        expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(0);
       });
