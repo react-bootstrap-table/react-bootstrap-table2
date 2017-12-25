@@ -1,12 +1,12 @@
 import 'jsdom-global/register';
 import React from 'react';
 import sinon from 'sinon';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 
 import Const from '../../src/const';
 import Store from '../../src/store';
 import BootstrapTable from '../../src/bootstrap-table';
-import SortWrapper from '../../src/sort/wrapper';
+import wrapperFactory from '../../src/sort/wrapper';
 
 describe('SortWrapper', () => {
   let wrapper;
@@ -34,6 +34,8 @@ describe('SortWrapper', () => {
   let store = new Store(keyField);
   store.data = data;
 
+  const SortWrapper = wrapperFactory(BootstrapTable);
+
   beforeEach(() => {
     wrapper = shallow(
       <SortWrapper
@@ -56,11 +58,10 @@ describe('SortWrapper', () => {
 
   describe('call handleSort function', () => {
     const sortColumn = columns[0];
-
     beforeEach(() => {
       store = new Store(keyField);
       store.data = data;
-      wrapper = mount(
+      wrapper = shallow(
         <SortWrapper
           keyField={ keyField }
           data={ data }
@@ -69,10 +70,6 @@ describe('SortWrapper', () => {
         />
       );
       wrapper.instance().handleSort(sortColumn);
-    });
-
-    it('should sorting data correctly', () => {
-      expect(wrapper.instance().table.state.data[0][keyField]).toEqual(data[1][keyField]);
     });
 
     it('should operating on store correctly', () => {

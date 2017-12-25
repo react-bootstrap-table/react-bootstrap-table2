@@ -3,10 +3,11 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import _ from 'react-bootstrap-table2/src/utils';
+import remoteResolver from 'react-bootstrap-table2/src/props-resolver/remote-resolver';
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
 import Store from 'react-bootstrap-table2/src/store';
 import filter, { textFilter } from '../src';
-import FilterWrapper from '../src/wrapper';
+import wrapperFactory from '../src/wrapper';
 import { FILTER_TYPE } from '../src/const';
 
 const data = [];
@@ -21,10 +22,10 @@ for (let i = 0; i < 20; i += 1) {
 describe('Wrapper', () => {
   let wrapper;
   let instance;
-  const onRemoteFilterChangeCB = sinon.stub();
+  const onTableChangeCB = sinon.stub();
 
   afterEach(() => {
-    onRemoteFilterChangeCB.reset();
+    onTableChangeCB.reset();
   });
 
   const createTableProps = () => {
@@ -46,16 +47,19 @@ describe('Wrapper', () => {
       filter: filter(),
       _,
       store: new Store('id'),
-      onRemoteFilterChange: onRemoteFilterChangeCB
+      onTableChange: onTableChangeCB
     };
     tableProps.store.data = data;
     return tableProps;
   };
 
-  const pureTable = props => (<BootstrapTable { ...props } />);
+  const FilterWrapper = wrapperFactory(BootstrapTable, {
+    _,
+    remoteResolver
+  });
 
   const createFilterWrapper = (props, renderFragment = true) => {
-    wrapper = shallow(<FilterWrapper { ...props } baseElement={ pureTable } />);
+    wrapper = shallow(<FilterWrapper { ...props } />);
     instance = wrapper.instance();
     if (renderFragment) {
       const fragment = instance.render();
@@ -177,7 +181,7 @@ describe('Wrapper', () => {
       });
 
       it('should calling props.onRemoteFilterChange correctly', () => {
-        expect(onRemoteFilterChangeCB.calledOnce).toBeTruthy();
+        expect(onTableChangeCB.calledOnce).toBeTruthy();
       });
     });
 

@@ -2,14 +2,9 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import Store from './store';
-
-import {
-  wrapWithCellEdit,
-  wrapWithSelection,
-  wrapWithFilter,
-  wrapWithSort,
-  wrapWithPagination
-} from './table-factory';
+import withSort from './sort/wrapper';
+import withCellEdit from './cell-edit/wrapper';
+import withSelection from './row-selection/wrapper';
 
 import remoteResolver from './props-resolver/remote-resolver';
 import _ from './utils';
@@ -20,11 +15,46 @@ const withDataStore = Base =>
       super(props);
       this.store = new Store(props.keyField);
       this.store.data = props.data;
+      this.wrapComponents();
       this.handleUpdateCell = this.handleUpdateCell.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
       this.store.data = nextProps.data;
+    }
+
+    wrapComponents() {
+      this.BaseComponent = Base;
+      const { pagination, columns, filter, selectRow, cellEdit } = this.props;
+      if (pagination) {
+        const { wrapperFactory } = pagination;
+        this.BaseComponent = wrapperFactory(this.BaseComponent, {
+          remoteResolver
+        });
+      }
+
+      if (columns.filter(col => col.sort).length > 0) {
+        this.BaseComponent = withSort(this.BaseComponent);
+      }
+
+      if (filter) {
+        const { wrapperFactory } = filter;
+        this.BaseComponent = wrapperFactory(this.BaseComponent, {
+          _,
+          remoteResolver
+        });
+      }
+
+      if (selectRow) {
+        this.BaseComponent = withSelection(this.BaseComponent);
+      }
+
+      if (cellEdit) {
+        this.BaseComponent = withCellEdit(this.BaseComponent, {
+          ref: node => this.cellEditWrapper = node,
+          onUpdateCell: this.handleUpdateCell
+        });
+      }
     }
 
     handleUpdateCell(rowId, dataField, newValue) {
@@ -58,30 +88,9 @@ const withDataStore = Base =>
         store: this.store
       };
 
-      if (this.props.cellEdit) {
-        return wrapWithCellEdit({
-          ref: node => this.cellEditWrapper = node,
-          onUpdateCell: this.handleUpdateCell,
-          ...baseProps
-        });
-      } else if (this.props.selectRow) {
-        return wrapWithSelection(baseProps);
-      } else if (this.props.filter) {
-        return wrapWithFilter({
-          ...baseProps,
-          onRemoteFilterChange: this.handleRemoteFilterChange,
-          onRemotePageChange: this.handleRemotePageChange
-        });
-      } else if (this.props.columns.filter(col => col.sort).length > 0) {
-        return wrapWithSort(baseProps);
-      } else if (this.props.pagination) {
-        return wrapWithPagination({
-          ...baseProps,
-          onRemotePageChange: this.handleRemotePageChange
-        });
-      }
-
-      return React.createElement(Base, baseProps);
+      return (
+        <this.BaseComponent { ...baseProps } />
+      );
     }
   };
 

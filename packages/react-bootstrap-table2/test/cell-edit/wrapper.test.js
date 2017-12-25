@@ -3,8 +3,9 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import Store from '../../src/store';
+import Container from '../../src';
 import BootstrapTable from '../../src/bootstrap-table';
-import CellEditWrapper from '../../src/cell-edit/wrapper';
+import wrapperFactory from '../../src/cell-edit/wrapper';
 
 describe('CellEditWrapper', () => {
   let wrapper;
@@ -30,9 +31,13 @@ describe('CellEditWrapper', () => {
   };
 
   const keyField = 'id';
-
+  let onUpdateCellCB = sinon.stub();
   const store = new Store(keyField);
   store.data = data;
+
+  const CellEditWrapper = wrapperFactory(Container, {
+    onUpdateCell: onUpdateCellCB
+  });
 
   beforeEach(() => {
     wrapper = shallow(
@@ -42,7 +47,6 @@ describe('CellEditWrapper', () => {
         columns={ columns }
         cellEdit={ cellEdit }
         store={ store }
-        onUpdateCell={ sinon.stub() }
       />
     );
   });
@@ -82,7 +86,6 @@ describe('CellEditWrapper', () => {
             columns={ columns }
             cellEdit={ cellEdit }
             store={ store }
-            onUpdateCell={ sinon.stub() }
           />
         );
         wrapper.setProps({ cellEdit: { ...cellEdit, editing: false } });
@@ -113,7 +116,6 @@ describe('CellEditWrapper', () => {
             columns={ columns }
             cellEdit={ cellEdit }
             store={ store }
-            onUpdateCell={ sinon.stub() }
           />
         );
         wrapper.setState({ ridx, cidx, editing: true });
@@ -167,7 +169,6 @@ describe('CellEditWrapper', () => {
             cellEdit={ cellEdit }
             selectRow={ selectRow }
             store={ store }
-            onUpdateCell={ sinon.stub() }
           />
         );
       });
@@ -190,7 +191,6 @@ describe('CellEditWrapper', () => {
             cellEdit={ cellEdit }
             selectRow={ selectRow }
             store={ store }
-            onUpdateCell={ sinon.stub() }
           />
         );
       });
@@ -215,13 +215,11 @@ describe('CellEditWrapper', () => {
   });
 
   describe('call handleCellUpdate function', () => {
-    let onUpdateCellCallBack;
     const row = data[0];
     const column = columns[1];
     const newValue = 'new name';
 
     beforeEach(() => {
-      onUpdateCellCallBack = sinon.stub().returns(true);
       wrapper = shallow(
         <CellEditWrapper
           keyField={ keyField }
@@ -229,17 +227,14 @@ describe('CellEditWrapper', () => {
           columns={ columns }
           cellEdit={ cellEdit }
           store={ store }
-          onUpdateCell={ onUpdateCellCallBack }
         />
       );
       wrapper.instance().handleCellUpdate(row, column, newValue);
     });
 
-    afterEach(() => { onUpdateCellCallBack.reset(); });
-
     it('should calling onUpdateCell callback correctly', () => {
-      expect(onUpdateCellCallBack.callCount).toBe(1);
-      expect(onUpdateCellCallBack.calledWith(row.id, column.dataField, newValue)).toBe(true);
+      expect(onUpdateCellCB.callCount).toBe(1);
+      expect(onUpdateCellCB.calledWith(row.id, column.dataField, newValue)).toBe(true);
     });
 
     describe('when onUpdateCell function return true', () => {
@@ -260,7 +255,6 @@ describe('CellEditWrapper', () => {
               columns={ columns }
               cellEdit={ cellEdit }
               store={ store }
-              onUpdateCell={ onUpdateCellCallBack }
             />
           );
           wrapper.instance().handleCellUpdate(row, column, newValue);
@@ -279,7 +273,7 @@ describe('CellEditWrapper', () => {
       const spy = jest.spyOn(CellEditWrapper.prototype, 'completeEditing');
 
       beforeEach(() => {
-        onUpdateCellCallBack = sinon.stub().returns(false);
+        onUpdateCellCB = sinon.stub().returns(false);
         wrapper = shallow(
           <CellEditWrapper
             keyField={ keyField }
@@ -287,7 +281,6 @@ describe('CellEditWrapper', () => {
             columns={ columns }
             cellEdit={ cellEdit }
             store={ store }
-            onUpdateCell={ onUpdateCellCallBack }
           />
         );
         wrapper.instance().handleCellUpdate(row, column, newValue);
@@ -309,7 +302,6 @@ describe('CellEditWrapper', () => {
             columns={ columns }
             cellEdit={ cellEdit }
             store={ store }
-            onUpdateCell={ onUpdateCellCallBack }
           />
         );
         wrapper.instance().handleCellUpdate(row, column, newValue);

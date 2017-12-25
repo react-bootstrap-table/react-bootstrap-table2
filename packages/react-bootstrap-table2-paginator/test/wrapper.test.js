@@ -4,9 +4,10 @@ import { shallow } from 'enzyme';
 
 
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
+import remoteResolver from 'react-bootstrap-table2/src/props-resolver/remote-resolver';
 import Store from 'react-bootstrap-table2/src/store';
 import paginator from '../src';
-import PaginationWrapper from '../src/wrapper';
+import wrapperFactory from '../src/wrapper';
 import Pagination from '../src/pagination';
 import Const from '../src/const';
 
@@ -21,10 +22,10 @@ for (let i = 0; i < 100; i += 1) {
 describe('Wrapper', () => {
   let wrapper;
   let instance;
-  const onRemotePageChangeCB = sinon.stub();
+  const onTableChangeCB = sinon.stub();
 
   afterEach(() => {
-    onRemotePageChangeCB.reset();
+    onTableChangeCB.reset();
   });
 
   const createTableProps = (props = {}) => {
@@ -40,16 +41,18 @@ describe('Wrapper', () => {
       data,
       pagination: paginator(props.options),
       store: new Store('id'),
-      onRemotePageChange: onRemotePageChangeCB
+      onTableChange: onTableChangeCB
     };
     tableProps.store.data = data;
     return tableProps;
   };
 
-  const pureTable = props => (<BootstrapTable { ...props } />);
+  const PaginationWrapper = wrapperFactory(BootstrapTable, {
+    remoteResolver
+  });
 
   const createPaginationWrapper = (props, renderFragment = true) => {
-    wrapper = shallow(<PaginationWrapper { ...props } baseElement={ pureTable } />);
+    wrapper = shallow(<PaginationWrapper { ...props } />);
     instance = wrapper.instance();
     if (renderFragment) {
       const fragment = instance.render();
@@ -504,7 +507,7 @@ describe('Wrapper', () => {
       beforeEach(() => {
         props.remote = true;
         createPaginationWrapper(props, false);
-        onRemotePageChangeCB.reset();
+        onTableChangeCB.reset();
         instance.handleChangePage(newPage);
       });
 
@@ -513,7 +516,7 @@ describe('Wrapper', () => {
       });
 
       it('should calling props.onRemotePageChange correctly', () => {
-        expect(onRemotePageChangeCB.calledOnce).toBeTruthy();
+        expect(onTableChangeCB.calledOnce).toBeTruthy();
       });
     });
   });
@@ -551,7 +554,7 @@ describe('Wrapper', () => {
       beforeEach(() => {
         props.remote = true;
         createPaginationWrapper(props, false);
-        onRemotePageChangeCB.reset();
+        onTableChangeCB.reset();
         instance.handleChangeSizePerPage(newSizePerPage, newPage);
       });
 
@@ -561,68 +564,7 @@ describe('Wrapper', () => {
       });
 
       it('should calling props.onRemotePageChange correctly', () => {
-        expect(onRemotePageChangeCB.calledOnce).toBeTruthy();
-      });
-    });
-  });
-
-  describe('isRemote', () => {
-    let result;
-    describe('when options.remote is true', () => {
-      const props = createTableProps();
-      props.remote = true;
-
-      beforeEach(() => {
-        createPaginationWrapper(props, false);
-        result = instance.isRemote();
-      });
-
-      it('should return true', () => {
-        expect(result).toBeTruthy();
-      });
-    });
-
-    describe('when options.remote is false', () => {
-      const props = createTableProps();
-      props.remote = false;
-
-      beforeEach(() => {
-        createPaginationWrapper(props, false);
-        result = instance.isRemote();
-      });
-
-      it('should return false', () => {
-        expect(result).toBeFalsy();
-      });
-    });
-
-    describe('when options.remote.pagination is defined as true', () => {
-      const props = createTableProps();
-      props.remote = {};
-      props.remote.pagination = true;
-
-      beforeEach(() => {
-        createPaginationWrapper(props, false);
-        result = instance.isRemote();
-      });
-
-      it('should return true', () => {
-        expect(result).toBeTruthy();
-      });
-    });
-
-    describe('when options.remote.pagination is defined as false', () => {
-      const props = createTableProps();
-      props.remote = {};
-      props.remote.pagination = false;
-
-      beforeEach(() => {
-        createPaginationWrapper(props, false);
-        result = instance.isRemote();
-      });
-
-      it('should return false', () => {
-        expect(result).toBeFalsy();
+        expect(onTableChangeCB.calledOnce).toBeTruthy();
       });
     });
   });

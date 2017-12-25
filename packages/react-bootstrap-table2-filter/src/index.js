@@ -1,9 +1,9 @@
 import TextFilter from './components/text';
-import FilterWrapper from './wrapper';
+import wrapperFactory from './wrapper';
 import * as Comparison from './comparison';
 
 export default (options = {}) => ({
-  FilterWrapper,
+  wrapperFactory,
   options
 });
 
