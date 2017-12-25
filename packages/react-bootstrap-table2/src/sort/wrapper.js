@@ -1,60 +1,55 @@
-/* eslint arrow-body-style: 0 */
 /* eslint react/prop-types: 0 */
-/* eslint no-return-assign: 0 */
-import { Component } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import { sortableElement } from '../table-factory';
+export default Base =>
+  class SortWrapper extends Component {
+    static propTypes = {
+      store: PropTypes.object.isRequired
+    }
 
-class SortWrapper extends Component {
-  constructor(props) {
-    super(props);
-    this.handleSort = this.handleSort.bind(this);
-  }
+    constructor(props) {
+      super(props);
+      this.handleSort = this.handleSort.bind(this);
+    }
 
-  componentWillMount() {
-    const { columns, defaultSorted, store } = this.props;
-    // defaultSorted is an array, it's ready to use as multi / single sort
-    // when we start to support multi sort, please update following code to use array.forEach
-    if (defaultSorted && defaultSorted.length > 0) {
-      const dataField = defaultSorted[0].dataField;
-      const order = defaultSorted[0].order;
-      const column = columns.filter(col => col.dataField === dataField);
-      if (column.length > 0) {
-        store.sortBy(column[0], order);
+    componentWillMount() {
+      const { columns, defaultSorted, store } = this.props;
+      // defaultSorted is an array, it's ready to use as multi / single sort
+      // when we start to support multi sort, please update following code to use array.forEach
+      if (defaultSorted && defaultSorted.length > 0) {
+        const dataField = defaultSorted[0].dataField;
+        const order = defaultSorted[0].order;
+        const column = columns.filter(col => col.dataField === dataField);
+        if (column.length > 0) {
+          store.sortBy(column[0], order);
+        }
       }
     }
-  }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isDataChanged) {
-      const sortedColumn = nextProps.columns.find(
-        column => column.dataField === nextProps.store.sortField);
-      if (sortedColumn) {
-        nextProps.store.sortBy(sortedColumn, nextProps.store.sortOrder);
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.isDataChanged) {
+        const sortedColumn = nextProps.columns.find(
+          column => column.dataField === nextProps.store.sortField);
+        if (sortedColumn) {
+          nextProps.store.sortBy(sortedColumn, nextProps.store.sortOrder);
+        }
       }
     }
-  }
 
-  handleSort(column) {
-    const { store } = this.props;
-    store.sortBy(column);
+    handleSort(column) {
+      const { store } = this.props;
+      store.sortBy(column);
+      this.forceUpdate();
+    }
 
-    this.table.setState({ data: store.data });
-  }
-
-  render() {
-    return sortableElement({
-      ...this.props,
-      ref: node => this.table = node,
-      onSort: this.handleSort,
-      data: this.props.store.data
-    });
-  }
-}
-
-SortWrapper.propTypes = {
-  store: PropTypes.object.isRequired
-};
-
-export default SortWrapper;
+    render() {
+      return (
+        <Base
+          { ...this.props }
+          onSort={ this.handleSort }
+          data={ this.props.store.data }
+        />
+      );
+    }
+  };

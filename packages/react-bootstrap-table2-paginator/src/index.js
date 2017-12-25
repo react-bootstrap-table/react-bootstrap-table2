@@ -1,6 +1,6 @@
-import PaginationWrapper from './wrapper';
+import wrapperFactory from './wrapper';
 
 export default (options = {}) => ({
-  PaginationWrapper,
+  wrapperFactory,
   options
 });

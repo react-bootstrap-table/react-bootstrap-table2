@@ -29,7 +29,9 @@ describe('Page Functions', () => {
 
     it('should always return correct data', () => {
       params.forEach(([page, sizePerPage, pageStartIndex]) => {
-        const rows = getByCurrPage(store)(page, sizePerPage, pageStartIndex);
+        store.page = page;
+        store.sizePerPage = sizePerPage;
+        const rows = getByCurrPage(store, pageStartIndex);
         expect(rows).toBeDefined();
         expect(Array.isArray(rows)).toBeTruthy();
         expect(rows.every(row => !!row)).toBeTruthy();
@@ -39,7 +41,9 @@ describe('Page Functions', () => {
     it('should return empty array when store.data is empty', () => {
       store.data = [];
       params.forEach(([page, sizePerPage, pageStartIndex]) => {
-        const rows = getByCurrPage(store)(page, sizePerPage, pageStartIndex);
+        store.page = page;
+        store.sizePerPage = sizePerPage;
+        const rows = getByCurrPage(store, pageStartIndex);
         expect(rows).toHaveLength(0);
       });
     });

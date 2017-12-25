@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import Store from '../../src/store';
 import BootstrapTable from '../../src/bootstrap-table';
-import RowSelectionWrapper from '../../src/row-selection/wrapper';
+import wrapperFactory from '../../src/row-selection/wrapper';
 
 describe('RowSelectionWrapper', () => {
   let wrapper;
@@ -35,6 +35,7 @@ describe('RowSelectionWrapper', () => {
 
   const store = new Store(keyField);
   store.data = data;
+  const RowSelectionWrapper = wrapperFactory(BootstrapTable);
 
   beforeEach(() => {
     wrapper = shallow(

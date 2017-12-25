@@ -1,14 +1,14 @@
+/* eslint react/prefer-stateless-function: 0 */
+/* eslint react/no-multi-comp: 0 */
 import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import BootstrapTable from '../src';
-import SortWrapper from '../src/sort/wrapper';
-import CellEditWrapper from '../src/cell-edit/wrapper';
-import RowSelectionWrapper from '../src/row-selection/wrapper';
+import BootstrapTable from '../src/bootstrap-table';
+import Container from '../src';
 import { getRowByRowId } from '../src/store/rows';
 
-describe('withDataStore', () => {
+describe('container', () => {
   let wrapper;
 
   const keyField = 'id';
@@ -32,12 +32,16 @@ describe('withDataStore', () => {
   describe('initialization', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable keyField={ keyField } data={ data } columns={ columns } />
+        <Container keyField={ keyField } data={ data } columns={ columns } />
       );
     });
 
+    it('should initialize BaseComponent', () => {
+      expect(wrapper.instance().BaseComponent.name).toBe('BootstrapTable');
+    });
+
     it('should render BootstrapTable successfully', () => {
-      expect(wrapper.length).toBe(1);
+      expect(wrapper.find(BootstrapTable)).toHaveLength(1);
     });
 
     it('should creating store successfully', () => {
@@ -55,7 +59,7 @@ describe('withDataStore', () => {
 
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable
+        <Container
           keyField={ keyField }
           data={ data }
           columns={ columns }
@@ -64,14 +68,16 @@ describe('withDataStore', () => {
       );
     });
 
-    it('should render CellEditWrapper component successfully', () => {
-      const component = wrapper.find(CellEditWrapper);
-      expect(component.length).toBe(1);
+    it('should initialize BaseComponent correctly', () => {
+      expect(wrapper.instance().BaseComponent.name).toBe('CellEditWrapper');
     });
 
-    it('should injecting correct props to CellEditWrapper', () => {
-      const component = wrapper.find(CellEditWrapper);
-      expect(component.props().onUpdateCell).toBeDefined();
+    it('should render CellEditWrapper component successfully', () => {
+      expect(wrapper.find('CellEditWrapper')).toHaveLength(1);
+    });
+
+    it('should render BootstrapTable component successfully', () => {
+      expect(wrapper.dive().find(BootstrapTable)).toHaveLength(1);
     });
 
     describe('for handleUpdateCell function', () => {
@@ -100,7 +106,7 @@ describe('withDataStore', () => {
         beforeEach(() => {
           cellEdit.onUpdate = sinon.stub().returns(false);
           wrapper = shallow(
-            <BootstrapTable
+            <Container
               keyField={ keyField }
               data={ data }
               columns={ columns }
@@ -139,7 +145,7 @@ describe('withDataStore', () => {
 
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable
+        <Container
           keyField={ keyField }
           data={ data }
           columns={ columns }
@@ -148,20 +154,30 @@ describe('withDataStore', () => {
       );
     });
 
+    it('should initialize BaseComponent correctly', () => {
+      expect(wrapper.instance().BaseComponent.name).toBe('RowSelectionWrapper');
+    });
+
+    it('should render BootstrapTable component successfully', () => {
+      expect(wrapper.dive().find(BootstrapTable)).toHaveLength(1);
+    });
+
     it('should render RowSelectionWrapper component successfully', () => {
-      expect(wrapper.find(RowSelectionWrapper).length).toBe(1);
+      expect(wrapper.find('RowSelectionWrapper').length).toBe(1);
     });
   });
 
   describe('when pagination prop is defined', () => {
-    const PaginationWrapper = () => <div>test</div>;
+    const wrapperFactory = Base => class PaginationWrapper extends React.Component {
+      render() { return <Base { ...this.props } />; }
+    };
     const pagination = {
-      PaginationWrapper
+      wrapperFactory
     };
 
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable
+        <Container
           keyField={ keyField }
           data={ data }
           columns={ columns }
@@ -170,14 +186,47 @@ describe('withDataStore', () => {
       );
     });
 
-    it('should render Pagination wrapper successfully', () => {
-      expect(wrapper.find(PaginationWrapper).length).toBe(1);
+    it('should initialize BaseComponent correctly', () => {
+      expect(wrapper.instance().BaseComponent.name).toBe('PaginationWrapper');
     });
 
-    it('should injecting correct props to Pagination wrapper', () => {
-      const component = wrapper.find(PaginationWrapper);
-      expect(component.props().onRemotePageChange).toBeDefined();
-      expect(component.props().baseElement).toBeDefined();
+    it('should render BootstrapTable component successfully', () => {
+      expect(wrapper.dive().find(BootstrapTable)).toHaveLength(1);
+    });
+
+    it('should render PaginationWrapper component successfully', () => {
+      expect(wrapper.find('PaginationWrapper').length).toBe(1);
+    });
+  });
+
+  describe('when filter prop is defined', () => {
+    const wrapperFactory = Base => class FilterWrapper extends React.Component {
+      render() { return <Base { ...this.props } />; }
+    };
+
+    const filter = { wrapperFactory };
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <Container
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          filter={ filter }
+        />
+      );
+    });
+
+    it('should initialize BaseComponent correctly', () => {
+      expect(wrapper.instance().BaseComponent.name).toBe('FilterWrapper');
+    });
+
+    it('should render BootstrapTable component successfully', () => {
+      expect(wrapper.dive().find(BootstrapTable)).toHaveLength(1);
+    });
+
+    it('should render FilterWrapper component successfully', () => {
+      expect(wrapper.find('FilterWrapper').length).toBe(1);
     });
   });
 
@@ -189,7 +238,7 @@ describe('withDataStore', () => {
         sort: true
       }];
       wrapper = shallow(
-        <BootstrapTable
+        <Container
           keyField={ keyField }
           data={ data }
           columns={ columnsWithSort }
@@ -197,103 +246,16 @@ describe('withDataStore', () => {
       );
     });
 
+    it('should initialize BaseComponent correctly', () => {
+      expect(wrapper.instance().BaseComponent.name).toBe('SortWrapper');
+    });
+
+    it('should render BootstrapTable component successfully', () => {
+      expect(wrapper.dive().find(BootstrapTable)).toHaveLength(1);
+    });
+
     it('should render SortWrapper component successfully', () => {
-      expect(wrapper.find(SortWrapper).length).toBe(1);
-    });
-  });
-
-  describe('handleRemotePageChange', () => {
-    const onTableChangeCallBack = sinon.stub();
-
-    beforeEach(() => {
-      wrapper = shallow(
-        <BootstrapTable
-          keyField={ keyField }
-          data={ data }
-          columns={ columns }
-          onTableChange={ onTableChangeCallBack }
-        />
-      );
-      wrapper.instance().handleRemotePageChange();
-    });
-
-    it('should calling onTableChange correctly', () => {
-      expect(onTableChangeCallBack.calledOnce).toBeTruthy();
-      expect(onTableChangeCallBack.calledWith('pagination', wrapper.instance().getNewestState())).toBeTruthy();
-    });
-  });
-
-  describe('handleRemoteFilterChange', () => {
-    const onTableChangeCallBack = sinon.stub();
-
-    beforeEach(() => {
-      onTableChangeCallBack.reset();
-      wrapper = shallow(
-        <BootstrapTable
-          keyField={ keyField }
-          data={ data }
-          columns={ columns }
-          onTableChange={ onTableChangeCallBack }
-        />
-      );
-    });
-
-    describe('when isRemotePagination argument is false', () => {
-      beforeEach(() => {
-        wrapper.instance().handleRemoteFilterChange(false);
-      });
-
-      it('should calling onTableChange correctly', () => {
-        expect(onTableChangeCallBack.calledOnce).toBeTruthy();
-        expect(onTableChangeCallBack.calledWith('filter', wrapper.instance().getNewestState())).toBeTruthy();
-      });
-    });
-
-    describe('when isRemotePagination argument is false', () => {
-      describe('and pagination.options.pageStartIndex is defined', () => {
-        const options = { pageStartIndex: 0 };
-        beforeEach(() => {
-          wrapper = shallow(
-            <BootstrapTable
-              keyField={ keyField }
-              data={ data }
-              columns={ columns }
-              pagination={ { options, PaginationWrapper: () => {} } }
-              onTableChange={ onTableChangeCallBack }
-            />
-          );
-          wrapper.instance().handleRemoteFilterChange(true);
-        });
-
-        it('should calling onTableChange correctly', () => {
-          expect(onTableChangeCallBack.calledOnce).toBeTruthy();
-          const newState = wrapper.instance().getNewestState();
-          newState.page = options.pageStartIndex;
-          expect(onTableChangeCallBack.calledWith('filter', newState)).toBeTruthy();
-        });
-      });
-
-      describe('and pagination.options.pageStartIndex is not defined', () => {
-        beforeEach(() => {
-          wrapper = shallow(
-            <BootstrapTable
-              keyField={ keyField }
-              data={ data }
-              columns={ columns }
-              pagination={ { PaginationWrapper: () => {} } }
-              onTableChange={ onTableChangeCallBack }
-            />
-          );
-          wrapper.instance().handleRemoteFilterChange(true);
-        });
-
-        it('should calling onTableChange correctly', () => {
-          expect(onTableChangeCallBack.calledOnce).toBeTruthy();
-          const newState = wrapper.instance().getNewestState();
-          newState.page = 1;
-          expect(onTableChangeCallBack.calledWith('filter', newState)).toBeTruthy();
-        });
-      });
+      expect(wrapper.find('SortWrapper').length).toBe(1);
     });
   });
 });
