@@ -57,28 +57,78 @@ describe('SortWrapper', () => {
   });
 
   describe('call handleSort function', () => {
+    let sortBySpy;
     const sortColumn = columns[0];
+
     beforeEach(() => {
       store = new Store(keyField);
       store.data = data;
-      wrapper = shallow(
-        <SortWrapper
-          keyField={ keyField }
-          data={ data }
-          columns={ columns }
-          store={ store }
-        />
-      );
-      wrapper.instance().handleSort(sortColumn);
+      sortBySpy = sinon.spy(store, 'sortBy');
     });
 
-    it('should operating on store correctly', () => {
-      expect(store.sortOrder).toEqual(Const.SORT_DESC);
-      expect(store.sortField).toEqual(sortColumn.dataField);
+    describe('when remote.sort is false', () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <SortWrapper
+            keyField={ keyField }
+            data={ data }
+            columns={ columns }
+            store={ store }
+          />
+        );
 
-      wrapper.instance().handleSort(sortColumn); // sort same column again
-      expect(store.sortOrder).toEqual(Const.SORT_ASC);
-      expect(store.sortField).toEqual(sortColumn.dataField);
+        wrapper.instance().handleSort(sortColumn);
+      });
+
+      it('should operating on store correctly', () => {
+        expect(store.sortOrder).toEqual(Const.SORT_DESC);
+        expect(store.sortField).toEqual(sortColumn.dataField);
+
+        wrapper.instance().handleSort(sortColumn); // sort same column again
+        expect(store.sortOrder).toEqual(Const.SORT_ASC);
+        expect(store.sortField).toEqual(sortColumn.dataField);
+      });
+
+      it('should calling store.sortBy correctly', () => {
+        expect(sortBySpy.calledOnce).toBeTruthy();
+        expect(sortBySpy.calledWith(sortColumn)).toBeTruthy();
+      });
+    });
+
+    describe('when remote.sort is true', () => {
+      let onTableChangeCB;
+
+      beforeEach(() => {
+        onTableChangeCB = sinon.stub();
+        wrapper = shallow(
+          <SortWrapper
+            remote
+            keyField={ keyField }
+            data={ data }
+            columns={ columns }
+            store={ store }
+            onTableChange={ onTableChangeCB }
+          />
+        );
+        wrapper.instance().handleSort(sortColumn);
+      });
+
+      it('should operating on store correctly', () => {
+        expect(store.sortOrder).toEqual(Const.SORT_DESC);
+        expect(store.sortField).toEqual(sortColumn.dataField);
+
+        wrapper.instance().handleSort(sortColumn); // sort same column again
+        expect(store.sortOrder).toEqual(Const.SORT_ASC);
+        expect(store.sortField).toEqual(sortColumn.dataField);
+      });
+
+      it('should not calling store.sortBy', () => {
+        expect(sortBySpy.calledOnce).toBeFalsy();
+      });
+
+      it('should calling props.onTableChange', () => {
+        expect(onTableChangeCB.calledOnce).toBeTruthy();
+      });
     });
   });
 

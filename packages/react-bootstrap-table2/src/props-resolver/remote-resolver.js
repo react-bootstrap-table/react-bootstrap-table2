@@ -8,6 +8,9 @@ export default ExtendBase =>
         page: store.page,
         sizePerPage: store.sizePerPage,
         filters: store.filters,
+        sortField: store.sortField,
+        sortOrder: store.sortOrder,
+        data: store.data,
         ...state
       };
     }
@@ -22,6 +25,11 @@ export default ExtendBase =>
       return remote === true || (_.isObject(remote) && remote.filter);
     }
 
+    isRemoteSort() {
+      const { remote } = this.props;
+      return remote === true || (_.isObject(remote) && remote.sort);
+    }
+
     handleRemotePageChange() {
       this.props.onTableChange('pagination', this.getNewestState());
     }
@@ -33,5 +41,9 @@ export default ExtendBase =>
         newState.page = _.isDefined(options.pageStartIndex) ? options.pageStartIndex : 1;
       }
       this.props.onTableChange('filter', this.getNewestState(newState));
+    }
+
+    handleSortChange() {
+      this.props.onTableChange('sort', this.getNewestState());
     }
   };

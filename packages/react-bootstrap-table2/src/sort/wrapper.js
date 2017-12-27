@@ -1,9 +1,10 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import remoteResolver from '../props-resolver/remote-resolver';
 
 export default Base =>
-  class SortWrapper extends Component {
+  class SortWrapper extends remoteResolver(Component) {
     static propTypes = {
       store: PropTypes.object.isRequired
     }
@@ -22,7 +23,13 @@ export default Base =>
         const order = defaultSorted[0].order;
         const column = columns.filter(col => col.dataField === dataField);
         if (column.length > 0) {
-          store.sortBy(column[0], order);
+          store.setSort(column[0], order);
+
+          if (this.isRemoteSort() || this.isRemotePagination()) {
+            this.handleSortChange();
+          } else {
+            store.sortBy(column[0]);
+          }
         }
       }
     }
@@ -32,15 +39,21 @@ export default Base =>
         const sortedColumn = nextProps.columns.find(
           column => column.dataField === nextProps.store.sortField);
         if (sortedColumn) {
-          nextProps.store.sortBy(sortedColumn, nextProps.store.sortOrder);
+          nextProps.store.sortBy(sortedColumn);
         }
       }
     }
 
     handleSort(column) {
       const { store } = this.props;
-      store.sortBy(column);
-      this.forceUpdate();
+      store.setSort(column);
+
+      if (this.isRemoteSort() || this.isRemotePagination()) {
+        this.handleSortChange();
+      } else {
+        store.sortBy(column);
+        this.forceUpdate();
+      }
     }
 
     render() {

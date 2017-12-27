@@ -21,9 +21,12 @@ export default class Store {
     if (row) _.set(row, dataField, newValue);
   }
 
-  sortBy({ dataField, sortFunc }, order) {
+  setSort({ dataField }, order) {
     this.sortOrder = nextOrder(this)(dataField, order);
     this.sortField = dataField;
+  }
+
+  sortBy({ sortFunc }) {
     this.data = sort(this)(sortFunc);
   }
 

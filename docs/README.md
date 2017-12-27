@@ -249,13 +249,17 @@ There's only two arguments will be passed to `onTableChange`: `type` and `newSta
 
 * `filter`
 * `pagination`
+* `sort`
 
 Following is a shape of `newState`
 
 ```js
 {
   page,  // newest page
-  sizePerPage,  //newest sizePerPage
-  filters // an object which have current filter status per column
+  sizePerPage,  // newest sizePerPage
+  sortField,  // newest sort field
+  sortOrder,  // newest sort order
+  filters, // an object which have current filter status per column
+  data // when you enable remote sort, you may need to base on data to sort if data is filtered/searched
 }
 ```

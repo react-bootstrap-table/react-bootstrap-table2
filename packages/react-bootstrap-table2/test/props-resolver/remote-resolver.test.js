@@ -102,6 +102,52 @@ describe('remoteResolver', () => {
     });
   });
 
+  describe('isRemoteSort', () => {
+    describe('when remote is false', () => {
+      beforeEach(() => {
+        shallowContainer();
+      });
+
+      it('should return false', () => {
+        expect(wrapper.instance().isRemoteSort()).toBeFalsy();
+      });
+    });
+
+    describe('when remote is true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: true });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteSort()).toBeTruthy();
+      });
+    });
+
+    describe('when remote.sort is true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: { sort: true } });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteSort()).toBeTruthy();
+      });
+    });
+  });
+
+  describe('handleSortChange', () => {
+    const onTableChangeCB = sinon.stub();
+    beforeEach(() => {
+      onTableChangeCB.reset();
+      shallowContainer({ onTableChange: onTableChangeCB });
+      wrapper.instance().handleSortChange();
+    });
+
+    it('should calling props.onTableChange correctly', () => {
+      expect(onTableChangeCB.calledOnce).toBeTruthy();
+      expect(onTableChangeCB.calledWith('sort', wrapper.instance().getNewestState())).toBeTruthy();
+    });
+  });
+
   describe('handleRemotePageChange', () => {
     const onTableChangeCB = sinon.stub();
     beforeEach(() => {
