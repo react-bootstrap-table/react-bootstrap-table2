@@ -88,6 +88,7 @@ import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
 import TableOverlay from 'examples/loading-overlay/table-overlay';
 
 // remote
+import RemoteSort from 'examples/remote/remote-sort';
 import RemoteFilter from 'examples/remote/remote-filter';
 import RemotePaginationTable from 'examples/remote/remote-pagination';
 import RemoteAll from 'examples/remote/remote-all';
@@ -190,6 +191,7 @@ storiesOf('EmptyTableOverlay', module)
   .add('Table Overlay', () => <TableOverlay />);
 
 storiesOf('Remote', module)
+  .add('Remote Sort', () => <RemoteSort />)
   .add('Remote Filter', () => <RemoteFilter />)
   .add('Remote Pagination', () => <RemotePaginationTable />)
   .add('Remote All', () => <RemoteAll />);

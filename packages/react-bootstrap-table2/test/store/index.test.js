@@ -24,7 +24,7 @@ describe('Store Base', () => {
     });
   });
 
-  describe('sortBy', () => {
+  describe('setSort', () => {
     let dataField;
 
     beforeEach(() => {
@@ -32,28 +32,41 @@ describe('Store Base', () => {
     });
 
     it('should change sortField by dataField param', () => {
-      store.sortBy({ dataField });
+      store.setSort({ dataField });
       expect(store.sortField).toEqual(dataField);
     });
 
     it('should change sortOrder correctly when sortBy same dataField', () => {
-      store.sortBy({ dataField });
+      store.setSort({ dataField });
       expect(store.sortOrder).toEqual(Const.SORT_DESC);
-      store.sortBy({ dataField });
+      store.setSort({ dataField });
       expect(store.sortOrder).toEqual(Const.SORT_ASC);
     });
 
     it('should change sortOrder correctly when sortBy different dataField', () => {
-      store.sortBy({ dataField });
+      store.setSort({ dataField });
       expect(store.sortOrder).toEqual(Const.SORT_DESC);
 
       dataField = 'id';
-      store.sortBy({ dataField });
+      store.setSort({ dataField });
       expect(store.sortOrder).toEqual(Const.SORT_DESC);
 
       dataField = 'name';
-      store.sortBy({ dataField });
+      store.setSort({ dataField });
       expect(store.sortOrder).toEqual(Const.SORT_DESC);
+    });
+
+    it('should force assign sortOrder correctly if second argument is passed', () => {
+      store.setSort({ dataField }, Const.SORT_DESC);
+      expect(store.sortOrder).toEqual(Const.SORT_DESC);
+    });
+  });
+
+  describe('sortBy', () => {
+    let dataField;
+
+    beforeEach(() => {
+      dataField = 'name';
     });
 
     it('should have correct result after sortBy', () => {
@@ -62,11 +75,6 @@ describe('Store Base', () => {
       store.data.forEach((e, i) => {
         expect(e[dataField]).toEqual(result[i]);
       });
-    });
-
-    it('should force assign sortOrder correctly if second argument is passed', () => {
-      store.sortBy({ dataField }, Const.SORT_DESC);
-      expect(store.sortOrder).toEqual(Const.SORT_DESC);
     });
   });
 
