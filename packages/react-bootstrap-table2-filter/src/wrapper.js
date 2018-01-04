@@ -1,3 +1,5 @@
+/* eslint no-param-reassign: 0 */
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { filters } from './filter';
@@ -15,14 +17,20 @@ export default (Base, {
 
     constructor(props) {
       super(props);
-      this.state = { currFilters: {}, isDataChanged: false };
+      this.state = { currFilters: {}, isDataChanged: props.isDataChanged || false };
       this.onFilter = this.onFilter.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps({ isDataChanged, store, columns }) {
       // consider to use lodash.isEqual
-      if (JSON.stringify(this.state.currFilters) !== JSON.stringify(nextProps.store.filters)) {
-        this.setState(() => ({ isDataChanged: true, currFilters: nextProps.store.filters }));
+      if (JSON.stringify(this.state.currFilters) !== JSON.stringify(store.filters)) {
+        this.setState(() => ({ isDataChanged: true, currFilters: store.filters }));
+      } else if (isDataChanged) {
+        if (!(this.isRemoteFiltering() || this.isRemotePagination()) &&
+          Object.keys(this.state.currFilters).length > 0) {
+          store.filteredData = filters(store, columns, _)(this.state.currFilters);
+        }
+        this.setState(() => ({ isDataChanged }));
       } else {
         this.setState(() => ({ isDataChanged: false }));
       }

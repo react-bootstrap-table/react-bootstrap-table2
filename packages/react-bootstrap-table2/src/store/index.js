@@ -34,6 +34,10 @@ export default class Store {
     return this._data;
   }
 
+  setAllData(data) {
+    this._data = data;
+  }
+
   get data() {
     if (Object.keys(this._filters).length > 0) {
       return this._filteredData;
