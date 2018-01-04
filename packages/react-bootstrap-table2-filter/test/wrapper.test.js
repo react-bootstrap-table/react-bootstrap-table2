@@ -28,7 +28,7 @@ describe('Wrapper', () => {
     onTableChangeCB.reset();
   });
 
-  const createTableProps = () => {
+  const createTableProps = (props) => {
     const tableProps = {
       keyField: 'id',
       columns: [{
@@ -47,7 +47,8 @@ describe('Wrapper', () => {
       filter: filter(),
       _,
       store: new Store('id'),
-      onTableChange: onTableChangeCB
+      onTableChange: onTableChangeCB,
+      ...props
     };
     tableProps.store.data = data;
     return tableProps;
@@ -102,6 +103,17 @@ describe('Wrapper', () => {
 
       it('should setting isDataChanged as false (Temporary solution)', () => {
         expect(instance.state.isDataChanged).toBeFalsy();
+      });
+    });
+
+    describe('when props.isDataChanged is true and remote is enable', () => {
+      beforeEach(() => {
+        nextProps = createTableProps({ isDataChanged: true });
+        instance.componentWillReceiveProps(nextProps);
+      });
+
+      it('should setting isDataChanged as true', () => {
+        expect(instance.state.isDataChanged).toBeTruthy();
       });
     });
 

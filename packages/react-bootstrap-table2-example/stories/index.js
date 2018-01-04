@@ -63,8 +63,6 @@ import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
 import CellEditStyleTable from 'examples/cell-edit/cell-edit-style-table';
 import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
-import CellEditWithPromise from 'examples/cell-edit/cell-edit-with-promise-table';
-import CellEditWithRedux from 'examples/cell-edit/cell-edit-with-redux-table';
 
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
@@ -91,6 +89,7 @@ import TableOverlay from 'examples/loading-overlay/table-overlay';
 import RemoteSort from 'examples/remote/remote-sort';
 import RemoteFilter from 'examples/remote/remote-filter';
 import RemotePaginationTable from 'examples/remote/remote-pagination';
+import RemoteCellEdit from 'examples/remote/remote-celledit';
 import RemoteAll from 'examples/remote/remote-all';
 
 // css style
@@ -165,9 +164,7 @@ storiesOf('Cell Editing', module)
   .add('Rich Hook Functions', () => <CellEditHooks />)
   .add('Validation', () => <CellEditValidator />)
   .add('Custom Cell Style When Editing', () => <CellEditStyleTable />)
-  .add('Custom Cell Classes When Editing', () => <CellEditClassTable />)
-  .add('Async Cell Editing(Promise)', () => <CellEditWithPromise />)
-  .add('Async Cell Editing(Redux)', () => <CellEditWithRedux />);
+  .add('Custom Cell Classes When Editing', () => <CellEditClassTable />);
 
 storiesOf('Row Selection', module)
   .add('Single Selection', () => <SingleSelectionTable />)
@@ -194,4 +191,5 @@ storiesOf('Remote', module)
   .add('Remote Sort', () => <RemoteSort />)
   .add('Remote Filter', () => <RemoteFilter />)
   .add('Remote Pagination', () => <RemotePaginationTable />)
+  .add('Remote Cell Editing', () => <RemoteCellEdit />)
   .add('Remote All', () => <RemoteAll />);
