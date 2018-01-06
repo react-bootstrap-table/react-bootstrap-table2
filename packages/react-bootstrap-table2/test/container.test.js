@@ -1,12 +1,10 @@
 /* eslint react/prefer-stateless-function: 0 */
 /* eslint react/no-multi-comp: 0 */
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import BootstrapTable from '../src/bootstrap-table';
 import Container from '../src';
-import { getRowByRowId } from '../src/store/rows';
 
 describe('container', () => {
   let wrapper;
@@ -78,63 +76,6 @@ describe('container', () => {
 
     it('should render BootstrapTable component successfully', () => {
       expect(wrapper.dive().find(BootstrapTable)).toHaveLength(1);
-    });
-
-    describe('for handleUpdateCell function', () => {
-      const rowId = data[1].id;
-      const dataField = columns[1].dataField;
-      const newValue = 'tester';
-      let result;
-
-      describe('when cellEdit.onUpdate callback is not defined', () => {
-        beforeEach(() => {
-          result = wrapper.instance().handleUpdateCell(rowId, dataField, newValue);
-        });
-
-        it('should return true', () => {
-          expect(result).toBeTruthy();
-        });
-
-        it('should update store data directly', () => {
-          const store = wrapper.instance().store;
-          const row = getRowByRowId(store)(rowId);
-          expect(row[dataField]).toEqual(newValue);
-        });
-      });
-
-      describe('when cellEdit.onUpdate callback is define and which return false', () => {
-        beforeEach(() => {
-          cellEdit.onUpdate = sinon.stub().returns(false);
-          wrapper = shallow(
-            <Container
-              keyField={ keyField }
-              data={ data }
-              columns={ columns }
-              cellEdit={ cellEdit }
-            />
-          );
-          result = wrapper.instance().handleUpdateCell(rowId, dataField, newValue);
-        });
-
-        it('should calling cellEdit.onUpdate callback correctly', () => {
-          expect(cellEdit.onUpdate.callCount).toBe(1);
-          expect(cellEdit.onUpdate.calledWith(rowId, dataField, newValue)).toBe(true);
-        });
-
-        it('should return false', () => {
-          expect(result).toBeFalsy();
-        });
-
-        it('shouldn\'t update store data', () => {
-          const store = wrapper.instance().store;
-          const row = getRowByRowId(store)(rowId);
-          expect(row[dataField]).not.toEqual(newValue);
-        });
-      });
-
-      // We need refactoring handleUpdateCell function for handling promise firstly
-      // then it will be much easier to test
-      describe.skip('when cellEdit.onUpdate callback is define and which return a Promise', () => {});
     });
   });
 

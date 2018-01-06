@@ -93,7 +93,6 @@ describe('TableResolver', () => {
       const expectNonEditableRows = [1, 2];
       const cellEdit = {
         mode: Const.DBCLICK_TO_CELL_EDIT,
-        onUpdate: sinon.stub(),
         blurToSave: true,
         beforeSaveCell: sinon.stub(),
         afterSaveCell: sinon.stub(),

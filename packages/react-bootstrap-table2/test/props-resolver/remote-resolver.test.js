@@ -134,6 +134,58 @@ describe('remoteResolver', () => {
     });
   });
 
+  describe('isRemoteCellEdit', () => {
+    describe('when remote is false', () => {
+      beforeEach(() => {
+        shallowContainer();
+      });
+
+      it('should return false', () => {
+        expect(wrapper.instance().isRemoteCellEdit()).toBeFalsy();
+      });
+    });
+
+    describe('when remote is true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: true });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteCellEdit()).toBeTruthy();
+      });
+    });
+
+    describe('when remote.cellEdit is true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: { cellEdit: true } });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteCellEdit()).toBeTruthy();
+      });
+    });
+  });
+
+  describe('handleCellChange', () => {
+    const onTableChangeCB = sinon.stub();
+    const rowId = 1;
+    const dataField = 'name';
+    const newValue = 'test';
+
+    beforeEach(() => {
+      onTableChangeCB.reset();
+      shallowContainer({ onTableChange: onTableChangeCB });
+      wrapper.instance().handleCellChange(rowId, dataField, newValue);
+    });
+
+    it('should calling props.onTableChange correctly', () => {
+      const cellEdit = { rowId, dataField, newValue };
+      expect(onTableChangeCB.calledOnce).toBeTruthy();
+      expect(onTableChangeCB.calledWith(
+        'cellEdit', wrapper.instance().getNewestState({ cellEdit }))).toBeTruthy();
+    });
+  });
+
   describe('handleSortChange', () => {
     const onTableChangeCB = sinon.stub();
     beforeEach(() => {

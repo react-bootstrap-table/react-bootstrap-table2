@@ -273,7 +273,6 @@ describe('Row', () => {
           cellEdit.cidx = editingColIndex;
           cellEdit.onUpdate = sinon.stub();
           cellEdit.onEscape = sinon.stub();
-          cellEdit.onUpdate = sinon.stub();
           wrapper = shallow(
             <Row
               { ...mockBodyResolvedProps }

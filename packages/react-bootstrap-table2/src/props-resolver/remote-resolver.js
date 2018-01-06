@@ -10,7 +10,7 @@ export default ExtendBase =>
         filters: store.filters,
         sortField: store.sortField,
         sortOrder: store.sortOrder,
-        data: store.data,
+        data: store.getAllData(),
         ...state
       };
     }
@@ -30,6 +30,11 @@ export default ExtendBase =>
       return remote === true || (_.isObject(remote) && remote.sort);
     }
 
+    isRemoteCellEdit() {
+      const { remote } = this.props;
+      return remote === true || (_.isObject(remote) && remote.cellEdit);
+    }
+
     handleRemotePageChange() {
       this.props.onTableChange('pagination', this.getNewestState());
     }
@@ -45,5 +50,10 @@ export default ExtendBase =>
 
     handleSortChange() {
       this.props.onTableChange('sort', this.getNewestState());
+    }
+
+    handleCellChange(rowId, dataField, newValue) {
+      const cellEdit = { rowId, dataField, newValue };
+      this.props.onTableChange('cellEdit', this.getNewestState({ cellEdit }));
     }
   };

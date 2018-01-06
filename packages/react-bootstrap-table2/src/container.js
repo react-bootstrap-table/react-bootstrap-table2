@@ -16,11 +16,10 @@ const withDataStore = Base =>
       this.store = new Store(props.keyField);
       this.store.data = props.data;
       this.wrapComponents();
-      this.handleUpdateCell = this.handleUpdateCell.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-      this.store.data = nextProps.data;
+      this.store.setAllData(nextProps.data);
     }
 
     wrapComponents() {
@@ -45,41 +44,13 @@ const withDataStore = Base =>
         });
       }
 
+      if (cellEdit) {
+        this.BaseComponent = withCellEdit(this.BaseComponent);
+      }
+
       if (selectRow) {
         this.BaseComponent = withSelection(this.BaseComponent);
       }
-
-      if (cellEdit) {
-        this.BaseComponent = withCellEdit(this.BaseComponent, {
-          ref: node => this.cellEditWrapper = node,
-          onUpdateCell: this.handleUpdateCell
-        });
-      }
-    }
-
-    handleUpdateCell(rowId, dataField, newValue) {
-      const { cellEdit } = this.props;
-      // handle cell editing internal
-      if (!cellEdit.onUpdate) {
-        this.store.edit(rowId, dataField, newValue);
-        return true;
-      }
-
-      // handle cell editing external
-      const aPromise = cellEdit.onUpdate(rowId, dataField, newValue);
-      if (_.isDefined(aPromise) && aPromise !== false) { // TODO: should be a promise here
-        aPromise.then((result = true) => {
-          const response = result === true ? {} : result;
-          if (_.isObject(response)) {
-            const { value } = response;
-            this.store.edit(rowId, dataField, value || newValue);
-            this.cellEditWrapper.completeEditing();
-          }
-        }).catch((e) => {
-          this.cellEditWrapper.updateEditingWithErr(e.message);
-        });
-      }
-      return false;
     }
 
     render() {

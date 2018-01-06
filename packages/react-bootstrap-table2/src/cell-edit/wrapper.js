@@ -1,44 +1,54 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
 import _ from '../utils';
+import remoteResolver from '../props-resolver/remote-resolver';
 
-export default (Base, parentProps) =>
-  class CellEditWrapper extends Component {
+export default Base =>
+  class CellEditWrapper extends remoteResolver(Component) {
     constructor(props) {
       super(props);
       this.startEditing = this.startEditing.bind(this);
       this.escapeEditing = this.escapeEditing.bind(this);
       this.completeEditing = this.completeEditing.bind(this);
       this.handleCellUpdate = this.handleCellUpdate.bind(this);
-      this.updateEditingWithErr = this.updateEditingWithErr.bind(this);
       this.state = {
         ridx: null,
         cidx: null,
         message: null,
-        editing: false
+        isDataChanged: false
       };
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.cellEdit) {
-        if (nextProps.cellEdit.editing) {
+      if (nextProps.cellEdit && this.isRemoteCellEdit()) {
+        if (nextProps.cellEdit.errorMessage) {
           this.setState(() => ({
-            ...this.state,
+            isDataChanged: false,
             message: nextProps.cellEdit.errorMessage
           }));
         } else {
+          this.setState(() => ({
+            isDataChanged: true
+          }));
           this.escapeEditing();
         }
+      } else {
+        this.setState(() => ({
+          isDataChanged: false
+        }));
       }
     }
 
     handleCellUpdate(row, column, newValue) {
-      const { keyField, cellEdit } = this.props;
+      const { keyField, cellEdit, store } = this.props;
       const { beforeSaveCell, afterSaveCell } = cellEdit;
       const oldValue = _.get(row, column.dataField);
       const rowId = _.get(row, keyField);
       if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
-      if (parentProps.onUpdateCell(rowId, column.dataField, newValue)) {
+      if (this.isRemoteCellEdit()) {
+        this.handleCellChange(rowId, column.dataField, newValue);
+      } else {
+        store.edit(rowId, column.dataField, newValue);
         if (_.isFunction(afterSaveCell)) afterSaveCell(oldValue, newValue, row, column);
         this.completeEditing();
       }
@@ -49,7 +59,7 @@ export default (Base, parentProps) =>
         ridx: null,
         cidx: null,
         message: null,
-        editing: false
+        isDataChanged: true
       }));
     }
 
@@ -58,7 +68,7 @@ export default (Base, parentProps) =>
         this.setState(() => ({
           ridx,
           cidx,
-          editing: true
+          isDataChanged: false
         }));
       };
 
@@ -69,27 +79,21 @@ export default (Base, parentProps) =>
     escapeEditing() {
       this.setState(() => ({
         ridx: null,
-        cidx: null,
-        editing: false
-      }));
-    }
-
-    updateEditingWithErr(message) {
-      this.setState(() => ({
-        ...this.state,
-        message
+        cidx: null
       }));
     }
 
     render() {
+      const { isDataChanged, ...rest } = this.state;
       return (
         <Base
           { ...this.props }
+          isDataChanged={ isDataChanged }
           data={ this.props.store.data }
           onCellUpdate={ this.handleCellUpdate }
           onStartEditing={ this.startEditing }
           onEscapeEditing={ this.escapeEditing }
-          currEditCell={ { ...this.state } }
+          currEditCell={ { ...rest } }
         />
       );
     }

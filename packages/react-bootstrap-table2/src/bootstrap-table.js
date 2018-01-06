@@ -130,13 +130,11 @@ BootstrapTable.propTypes = {
   filter: PropTypes.object,
   cellEdit: PropTypes.shape({
     mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
-    onUpdate: PropTypes.func,
     onErrorMessageDisappear: PropTypes.func,
     blurToSave: PropTypes.bool,
     beforeSaveCell: PropTypes.func,
     afterSaveCell: PropTypes.func,
     nonEditableRows: PropTypes.func,
-    editing: PropTypes.bool,
     timeToCloseMessage: PropTypes.number,
     errorMessage: PropTypes.string
   }),
@@ -146,8 +144,7 @@ BootstrapTable.propTypes = {
   currEditCell: PropTypes.shape({
     ridx: PropTypes.number,
     cidx: PropTypes.number,
-    message: PropTypes.string,
-    editing: PropTypes.bool
+    message: PropTypes.string
   }),
   selectRow: PropTypes.shape({
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired,

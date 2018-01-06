@@ -40,7 +40,13 @@ This is a chance that you can connect to your remote server or database to manip
 For flexibility reason, you can control what functionality should be handled on remote via a object return:
 
 ```js
-remote={ { filter: true } }
+remote={ {
+  filter: true,
+  pagination: true,
+  filter: true,
+  sort: true,
+  cellEdit: true
+} }
 ```
 
 In above case, only column filter will be handled on remote.
@@ -53,7 +59,7 @@ A special case for remote pagination:
 remote={ { pagination: true, filter: false, sort: false } }
 ```
 
-In pagination case, even you only specified the paignation need to handle as remote, `react-bootstrap-table2` will handle all the table changes(`filter`, `sort` etc) as remote mode, because `react-bootstrap-table` only know the data of current page, but filtering, searching or sort need to work on overall datas.
+In pagination case, even you only specified the paignation need to handle as remote, `react-bootstrap-table2` will handle all the table changes(`filter`, `sort`) as remote mode, because `react-bootstrap-table` only know the data of current page, but filtering, searching or sort need to work on overall datas.
 
 ### <a name='loading'>loading - [Bool]</a>
 Telling if table is loading or not, for example: waiting data loading, filtering etc. It's **only** valid when [`remote`](#remote) is enabled.
@@ -250,6 +256,7 @@ There's only two arguments will be passed to `onTableChange`: `type` and `newSta
 * `filter`
 * `pagination`
 * `sort`
+* `cellEdit`
 
 Following is a shape of `newState`
 
@@ -260,6 +267,11 @@ Following is a shape of `newState`
   sortField,  // newest sort field
   sortOrder,  // newest sort order
   filters, // an object which have current filter status per column
-  data // when you enable remote sort, you may need to base on data to sort if data is filtered/searched
+  data, // when you enable remote sort, you may need to base on data to sort if data is filtered/searched
+  cellEdit: {  // You can only see this prop when type is cellEdit
+    rowId,
+    dataField,
+    newValue
+  }
 }
 ```
