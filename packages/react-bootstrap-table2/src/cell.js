@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-import Const from './const';
 import _ from './utils';
 
 class Cell extends Component {
@@ -12,18 +11,20 @@ class Cell extends Component {
   }
 
   handleEditingCell(e) {
-    const { editMode, column, onStart, rowIndex, columnIndex } = this.props;
+    const { column, onStart, rowIndex, columnIndex, clickToEdit, dbclickToEdit } = this.props;
     const { events } = column;
     if (events) {
-      if (editMode === Const.CLICK_TO_CELL_EDIT) {
+      if (clickToEdit) {
         const customClick = events.onClick;
         if (_.isFunction(customClick)) customClick(e);
-      } else {
+      } else if (dbclickToEdit) {
         const customDbClick = events.onDoubleClick;
         if (_.isFunction(customDbClick)) customDbClick(e);
       }
     }
-    onStart(rowIndex, columnIndex);
+    if (onStart) {
+      onStart(rowIndex, columnIndex);
+    }
   }
 
   render() {
@@ -32,8 +33,9 @@ class Cell extends Component {
       rowIndex,
       column,
       columnIndex,
-      editMode,
-      editable
+      editable,
+      clickToEdit,
+      dbclickToEdit
     } = this.props;
     const {
       dataField,
@@ -85,12 +87,10 @@ class Cell extends Component {
     if (cellClasses) cellAttrs.className = cellClasses;
 
     if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
-    if (editable && editMode !== Const.UNABLE_TO_CELL_EDIT) {
-      if (editMode === Const.CLICK_TO_CELL_EDIT) {
-        cellAttrs.onClick = this.handleEditingCell;
-      } else {
-        cellAttrs.onDoubleClick = this.handleEditingCell;
-      }
+    if (clickToEdit && editable) {
+      cellAttrs.onClick = this.handleEditingCell;
+    } else if (dbclickToEdit && editable) {
+      cellAttrs.onDoubleClick = this.handleEditingCell;
     }
     return (
       <td { ...cellAttrs }>{ content }</td>

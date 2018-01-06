@@ -1,10 +1,27 @@
 /* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
-import _ from '../utils';
-import remoteResolver from '../props-resolver/remote-resolver';
+import PropTypes from 'prop-types';
 
-export default Base =>
+import { CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT } from './const';
+
+export default (
+  Base,
+  { _, remoteResolver }
+) =>
   class CellEditWrapper extends remoteResolver(Component) {
+    static propTypes = {
+      options: PropTypes.shape({
+        mode: PropTypes.oneOf([CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT]).isRequired,
+        onErrorMessageDisappear: PropTypes.func,
+        blurToSave: PropTypes.bool,
+        beforeSaveCell: PropTypes.func,
+        afterSaveCell: PropTypes.func,
+        nonEditableRows: PropTypes.func,
+        timeToCloseMessage: PropTypes.number,
+        errorMessage: PropTypes.string
+      })
+    }
+
     constructor(props) {
       super(props);
       this.startEditing = this.startEditing.bind(this);
@@ -21,10 +38,10 @@ export default Base =>
 
     componentWillReceiveProps(nextProps) {
       if (nextProps.cellEdit && this.isRemoteCellEdit()) {
-        if (nextProps.cellEdit.errorMessage) {
+        if (nextProps.cellEdit.options.errorMessage) {
           this.setState(() => ({
             isDataChanged: false,
-            message: nextProps.cellEdit.errorMessage
+            message: nextProps.cellEdit.options.errorMessage
           }));
         } else {
           this.setState(() => ({
@@ -41,7 +58,7 @@ export default Base =>
 
     handleCellUpdate(row, column, newValue) {
       const { keyField, cellEdit, store } = this.props;
-      const { beforeSaveCell, afterSaveCell } = cellEdit;
+      const { beforeSaveCell, afterSaveCell } = cellEdit.options;
       const oldValue = _.get(row, column.dataField);
       const rowId = _.get(row, keyField);
       if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
@@ -84,16 +101,31 @@ export default Base =>
     }
 
     render() {
-      const { isDataChanged, ...rest } = this.state;
+      const { isDataChanged, ...stateRest } = this.state;
+      const {
+        cellEdit: {
+          options: { nonEditableRows, ...optionsRest },
+          editingCellFactory,
+          ...cellEditRest
+        }
+      } = this.props;
+      const newCellEdit = {
+        ...optionsRest,
+        ...cellEditRest,
+        ...stateRest,
+        nonEditableRows: _.isDefined(nonEditableRows) ? nonEditableRows() : [],
+        EditingCell: editingCellFactory(_),
+        onStart: this.startEditing,
+        onEscape: this.escapeEditing,
+        onUpdate: this.handleCellUpdate
+      };
+
       return (
         <Base
           { ...this.props }
-          isDataChanged={ isDataChanged }
           data={ this.props.store.data }
-          onCellUpdate={ this.handleCellUpdate }
-          onStartEditing={ this.startEditing }
-          onEscapeEditing={ this.escapeEditing }
-          currEditCell={ { ...rest } }
+          isDataChanged={ isDataChanged }
+          cellEdit={ newCellEdit }
         />
       );
     }

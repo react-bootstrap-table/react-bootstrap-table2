@@ -18,28 +18,6 @@ export default ExtendBase =>
       return this.props.data.length === 0;
     }
 
-    resolveCellEditProps(options = { currEditCell: null }) {
-      const { cellEdit } = this.props;
-      const nonEditableRows =
-        (cellEdit && _.isFunction(cellEdit.nonEditableRows)) ? cellEdit.nonEditableRows() : [];
-      const cellEditInfo = {
-        ...options.currEditCell,
-        nonEditableRows
-      };
-
-      if (_.isDefined(cellEdit)) {
-        return {
-          ...cellEdit,
-          ...cellEditInfo,
-          ...options
-        };
-      }
-      return {
-        mode: Const.UNABLE_TO_CELL_EDIT,
-        ...cellEditInfo
-      };
-    }
-
     /**
      * props resolver for cell selection
      * @param {Object} options - addtional options like callback which are about to merge into props

@@ -60,13 +60,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-condensed': condensed
     });
 
-    const cellEditInfo = this.resolveCellEditProps({
-      onStart: this.props.onStartEditing,
-      onEscape: this.props.onEscapeEditing,
-      onUpdate: this.props.onCellUpdate,
-      currEditCell: this.props.currEditCell
-    });
-
     const cellSelectionInfo = this.resolveSelectRowProps({
       onRowSelect: this.props.onRowSelect
     });
@@ -96,7 +89,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             isEmpty={ this.isEmpty() }
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
-            cellEdit={ cellEditInfo }
+            cellEdit={ this.props.cellEdit || {} }
             selectRow={ cellSelectionInfo }
             selectedRowKeys={ store.selected }
             rowStyle={ rowStyle }
@@ -128,24 +121,7 @@ BootstrapTable.propTypes = {
   ]),
   pagination: PropTypes.object,
   filter: PropTypes.object,
-  cellEdit: PropTypes.shape({
-    mode: PropTypes.oneOf([Const.CLICK_TO_CELL_EDIT, Const.DBCLICK_TO_CELL_EDIT]).isRequired,
-    onErrorMessageDisappear: PropTypes.func,
-    blurToSave: PropTypes.bool,
-    beforeSaveCell: PropTypes.func,
-    afterSaveCell: PropTypes.func,
-    nonEditableRows: PropTypes.func,
-    timeToCloseMessage: PropTypes.number,
-    errorMessage: PropTypes.string
-  }),
-  onCellUpdate: PropTypes.func,
-  onStartEditing: PropTypes.func,
-  onEscapeEditing: PropTypes.func,
-  currEditCell: PropTypes.shape({
-    ridx: PropTypes.number,
-    cidx: PropTypes.number,
-    message: PropTypes.string
-  }),
+  cellEdit: PropTypes.object,
   selectRow: PropTypes.shape({
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired,
     clickToSelect: PropTypes.bool,
