@@ -7,8 +7,9 @@ import { CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT } from './const';
 export default (
   Base,
   { _, remoteResolver }
-) =>
-  class CellEditWrapper extends remoteResolver(Component) {
+) => {
+  let EditingCell;
+  return class CellEditWrapper extends remoteResolver(Component) {
     static propTypes = {
       options: PropTypes.shape({
         mode: PropTypes.oneOf([CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT]).isRequired,
@@ -24,6 +25,7 @@ export default (
 
     constructor(props) {
       super(props);
+      EditingCell = props.cellEdit.editingCellFactory(_);
       this.startEditing = this.startEditing.bind(this);
       this.escapeEditing = this.escapeEditing.bind(this);
       this.completeEditing = this.completeEditing.bind(this);
@@ -104,7 +106,7 @@ export default (
       const { isDataChanged, ...stateRest } = this.state;
       const {
         cellEdit: {
-          options: { nonEditableRows, ...optionsRest },
+          options: { nonEditableRows, errorMessage, ...optionsRest },
           editingCellFactory,
           ...cellEditRest
         }
@@ -113,8 +115,8 @@ export default (
         ...optionsRest,
         ...cellEditRest,
         ...stateRest,
+        EditingCell,
         nonEditableRows: _.isDefined(nonEditableRows) ? nonEditableRows() : [],
-        EditingCell: editingCellFactory(_),
         onStart: this.startEditing,
         onEscape: this.escapeEditing,
         onUpdate: this.handleCellUpdate
@@ -130,3 +132,4 @@ export default (
       );
     }
   };
+};
