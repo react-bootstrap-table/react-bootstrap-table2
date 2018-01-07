@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 import Cell from './cell';
 import SelectionCell from './row-selection/selection-cell';
-import EditingCell from './cell-edit/editing-cell';
 import Const from './const';
 
 class Row extends Component {
@@ -26,7 +25,11 @@ class Row extends Component {
         onRowSelect,
         clickToEdit
       },
-      cellEdit: { mode },
+      cellEdit: {
+        mode,
+        DBCLICK_TO_CELL_EDIT,
+        DELAY_FOR_DBCLICK
+      },
       attrs
     } = this.props;
 
@@ -40,14 +43,14 @@ class Row extends Component {
       }
     };
 
-    if (mode === Const.DBCLICK_TO_CELL_EDIT && clickToEdit) {
+    if (mode === DBCLICK_TO_CELL_EDIT && clickToEdit) {
       this.clickNum += 1;
       _.debounce(() => {
         if (this.clickNum === 1) {
           clickFn();
         }
         this.clickNum = 0;
-      }, Const.DELAY_FOR_DBCLICK)();
+      }, DELAY_FOR_DBCLICK)();
     } else {
       clickFn();
     }
@@ -72,8 +75,11 @@ class Row extends Component {
     const {
       mode,
       onStart,
+      EditingCell,
       ridx: editingRowIdx,
       cidx: editingColIdx,
+      CLICK_TO_CELL_EDIT,
+      DBCLICK_TO_CELL_EDIT,
       ...rest
     } = cellEdit;
 
@@ -136,9 +142,10 @@ class Row extends Component {
                 rowIndex={ rowIndex }
                 columnIndex={ index }
                 column={ column }
-                editMode={ mode }
-                editable={ editable }
                 onStart={ onStart }
+                editable={ editable }
+                clickToEdit={ mode === CLICK_TO_CELL_EDIT }
+                dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
               />
             );
           })

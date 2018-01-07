@@ -1,6 +1,7 @@
-import React from 'react';
 /* eslint no-unused-vars: 0 */
+import React from 'react';
 import BootstrapTable from 'react-bootstrap-table2';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -33,6 +34,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import cellEditFactory from 'react-bootstrap-table2-editor';
+// ...
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -59,27 +62,29 @@ const columns = [{
   }
 }];
 
-const cellEdit = {
-  mode: 'click',
-  blurToSave: true
-};
-
 <BootstrapTable
-  keyField='id'
+  keyField="id"
   data={ products }
   columns={ columns }
-  cellEdit={ cellEdit }
+  cellEdit={ cellEditFactory({
+    mode: 'click',
+    blurToSave: true
+  }) }
 />
 `;
 
-const cellEdit = {
-  mode: 'click',
-  blurToSave: true
-};
 export default () => (
   <div>
     <h3>Product Price should bigger than $2000</h3>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      cellEdit={ cellEditFactory({
+        mode: 'click',
+        blurToSave: true
+      }) }
+    />
     <Code>{ sourceCode }</Code>
   </div>
 );

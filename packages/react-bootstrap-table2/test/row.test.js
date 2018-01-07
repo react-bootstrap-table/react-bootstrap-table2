@@ -5,7 +5,6 @@ import { shallow } from 'enzyme';
 import Cell from '../src/cell';
 import Row from '../src/row';
 import Const from '../src/const';
-import EditingCell from '../src/cell-edit/editing-cell';
 import SelectionCell from '../src//row-selection/selection-cell';
 import mockBodyResolvedProps from './test-helpers/mock/body-resolved-props';
 
@@ -97,7 +96,9 @@ describe('Row', () => {
     beforeEach(() => {
       columns = defaultColumns;
       cellEdit = {
-        mode: Const.CLICK_TO_CELL_EDIT
+        mode: 'click',
+        CLICK_TO_CELL_EDIT: 'click',
+        DBCLICK_TO_CELL_EDIT: 'dbclick'
       };
       wrapper = shallow(
         <Row
@@ -128,11 +129,48 @@ describe('Row', () => {
       }
     });
 
-    it('Cell component should receive correct editMode props', () => {
+    it('Cell component should receive correct clickToEdit props', () => {
       expect(wrapper.length).toBe(1);
       for (let i = 0; i < columns.length; i += 1) {
-        expect(wrapper.find(Cell).get(i).props.editMode).toEqual(cellEdit.mode);
+        expect(wrapper.find(Cell).get(i).props.clickToEdit).toBeTruthy();
       }
+    });
+
+    it('Cell component should receive correct dbclickToEdit props', () => {
+      expect(wrapper.length).toBe(1);
+      for (let i = 0; i < columns.length; i += 1) {
+        expect(wrapper.find(Cell).get(i).props.dbclickToEdit).toBeFalsy();
+      }
+    });
+
+    describe('when props.cellEdit.mode is dbclick', () => {
+      beforeEach(() => {
+        cellEdit.mode = cellEdit.DBCLICK_TO_CELL_EDIT;
+        wrapper = shallow(
+          <Row
+            { ...mockBodyResolvedProps }
+            row={ row }
+            rowIndex={ rowIndex }
+            columns={ columns }
+            keyField={ keyField }
+            cellEdit={ cellEdit }
+          />
+        );
+      });
+
+      it('Cell component should receive correct clickToEdit props', () => {
+        expect(wrapper.length).toBe(1);
+        for (let i = 0; i < columns.length; i += 1) {
+          expect(wrapper.find(Cell).get(i).props.clickToEdit).toBeFalsy();
+        }
+      });
+
+      it('Cell component should receive correct dbclickToEdit props', () => {
+        expect(wrapper.length).toBe(1);
+        for (let i = 0; i < columns.length; i += 1) {
+          expect(wrapper.find(Cell).get(i).props.dbclickToEdit).toBeTruthy();
+        }
+      });
     });
 
     describe('and column.editable defined false', () => {
@@ -266,6 +304,7 @@ describe('Row', () => {
 
     // Means a cell now is undering editing
     describe('when cellEdit.ridx and cellEdit.cidx is defined', () => {
+      const EditingCell = () => null;
       describe('and cellEdit.ridx is match to current row index', () => {
         const editingColIndex = 1;
         beforeEach(() => {
@@ -273,6 +312,7 @@ describe('Row', () => {
           cellEdit.cidx = editingColIndex;
           cellEdit.onUpdate = sinon.stub();
           cellEdit.onEscape = sinon.stub();
+          cellEdit.EditingCell = EditingCell;
           wrapper = shallow(
             <Row
               { ...mockBodyResolvedProps }

@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import Store from './store';
 import withSort from './sort/wrapper';
-import withCellEdit from './cell-edit/wrapper';
 import withSelection from './row-selection/wrapper';
 
 import remoteResolver from './props-resolver/remote-resolver';
@@ -45,7 +44,11 @@ const withDataStore = Base =>
       }
 
       if (cellEdit) {
-        this.BaseComponent = withCellEdit(this.BaseComponent);
+        const { wrapperFactory } = cellEdit;
+        this.BaseComponent = wrapperFactory(this.BaseComponent, {
+          _,
+          remoteResolver
+        });
       }
 
       if (selectRow) {

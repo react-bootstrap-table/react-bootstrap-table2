@@ -1,5 +1,4 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
 import Caption from '../src/caption';
@@ -7,7 +6,6 @@ import Store from '../src/store';
 import Header from '../src/header';
 import Body from '../src/body';
 import BootstrapTable from '../src/bootstrap-table';
-import Const from '../src/const';
 
 describe('BootstrapTable', () => {
   let wrapper;
@@ -114,51 +112,6 @@ describe('BootstrapTable', () => {
     it('should render caption correctly', () => {
       expect(wrapper.find(Caption).length).toBe(1);
       expect(wrapper.find('.table-caption').length).toBe(1);
-    });
-  });
-
-  describe('when cellEdit props is defined', () => {
-    const nonEditableRows = [data[1].id];
-    const currEditCell = {
-      ridx: 1,
-      cidx: 2,
-      message: null,
-      editing: false
-    };
-    const cellEdit = {
-      mode: Const.CLICK_TO_CELL_EDIT,
-      onEditing: sinon.stub(),
-      nonEditableRows: () => nonEditableRows
-    };
-
-    beforeEach(() => {
-      wrapper = shallow(
-        <BootstrapTable
-          keyField="id"
-          columns={ columns }
-          data={ data }
-          bordered={ false }
-          store={ store }
-          cellEdit={ cellEdit }
-          onCellUpdate={ sinon.stub() }
-          onStartEditing={ sinon.stub() }
-          onEscapeEditing={ sinon.stub() }
-          currEditCell={ currEditCell }
-        />
-      );
-    });
-
-    it('should resolve correct cellEdit object to Body component', () => {
-      const body = wrapper.find(Body);
-      expect(body.length).toBe(1);
-      expect(body.props().cellEdit.nonEditableRows).toEqual(nonEditableRows);
-      expect(body.props().cellEdit.ridx).toEqual(currEditCell.ridx);
-      expect(body.props().cellEdit.cidx).toEqual(currEditCell.cidx);
-      expect(body.props().cellEdit.message).toEqual(currEditCell.message);
-      expect(body.props().cellEdit.editing).toEqual(currEditCell.editing);
-      expect(body.props().cellEdit.onStart).toBeDefined();
-      expect(body.props().cellEdit.onEscape).toBeDefined();
-      expect(body.props().cellEdit.onUpdate).toBeDefined();
     });
   });
 });

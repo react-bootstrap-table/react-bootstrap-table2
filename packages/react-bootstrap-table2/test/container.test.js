@@ -51,8 +51,15 @@ describe('container', () => {
   });
 
   describe('when cellEdit prop is defined', () => {
+    const wrapperFactory = Base => class CellEditWrapper extends React.Component {
+      render() { return <Base { ...this.props } />; }
+    };
+
     const cellEdit = {
-      mode: 'click'
+      wrapperFactory,
+      options: {
+        mode: 'click'
+      }
     };
 
     beforeEach(() => {

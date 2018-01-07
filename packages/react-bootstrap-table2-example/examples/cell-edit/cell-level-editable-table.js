@@ -2,6 +2,7 @@
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table2';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -20,6 +21,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import cellEditFactory from 'react-bootstrap-table2-editor';
+// ...
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -32,24 +35,22 @@ const columns = [{
   editable: (content, row, rowIndex, columnIndex) => content > 2101
 }];
 
-const cellEdit = {
-  mode: 'click'
-};
-
 <BootstrapTable
-  keyField='id'
+  keyField="id"
   data={ products }
   columns={ columns }
-  cellEdit={ cellEdit }
+  cellEdit={ cellEditFactory({ mode: 'click' }) }
 />
 `;
 
-const cellEdit = {
-  mode: 'click'
-};
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } cellEdit={ cellEdit } />
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      cellEdit={ cellEditFactory({ mode: 'click' }) }
+    />
     <Code>{ sourceCode }</Code>
   </div>
 );

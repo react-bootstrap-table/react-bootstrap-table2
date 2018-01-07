@@ -1,12 +1,23 @@
+/* eslint react/prop-types: 0 */
 import 'jsdom-global/register';
 import React from 'react';
 import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
 
-import { TableRowWrapper } from '../test-helpers/table-wrapper';
-import EditingCell from '../../src/cell-edit/editing-cell';
-import TextEditor from '../../src/cell-edit/text-editor';
-import EditorIndicator from '../../src/cell-edit/editor-indicator';
+import _ from 'react-bootstrap-table2/src/utils';
+import editingCellFactory from '../src/editing-cell';
+import TextEditor from '../src/text-editor';
+import EditorIndicator from '../src/editor-indicator';
+
+const EditingCell = editingCellFactory(_);
+const TableRowWrapper = props => (
+  <table>
+    <tbody>
+      <tr>{ props.children }</tr>
+    </tbody>
+  </table>
+);
+
 
 describe('EditingCell', () => {
   let wrapper;

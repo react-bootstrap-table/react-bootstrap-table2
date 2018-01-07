@@ -2,7 +2,7 @@ import 'jsdom-global/register';
 import React from 'react';
 import { mount } from 'enzyme';
 
-import TextEditor from '../../src/cell-edit/text-editor';
+import TextEditor from '../src/text-editor';
 
 describe('TextEditor', () => {
   let wrapper;

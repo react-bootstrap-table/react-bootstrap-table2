@@ -37,10 +37,10 @@ const Body = (props) => {
     const indication = _.isFunction(noDataIndication) ? noDataIndication() : noDataIndication;
     content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
   } else {
+    const nonEditableRows = cellEdit.nonEditableRows || [];
     content = data.map((row, index) => {
       const key = _.get(row, keyField);
-      const editable = !(cellEdit.mode !== Const.UNABLE_TO_CELL_EDIT &&
-        cellEdit.nonEditableRows.indexOf(key) > -1);
+      const editable = !(nonEditableRows.length > 0 && nonEditableRows.indexOf(key) > -1);
 
       const selected = selectRow.mode !== Const.ROW_SELECT_DISABLED
         ? selectedRowKeys.includes(key)

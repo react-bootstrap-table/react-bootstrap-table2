@@ -72,64 +72,6 @@ describe('TableResolver', () => {
     });
   });
 
-  describe('resolveCellEditProps', () => {
-    describe('if cellEdit prop not defined', () => {
-      beforeEach(() => {
-        const mockElement = React.createElement(BootstrapTableMock, {
-          data, keyField, columns
-        }, null);
-        wrapper = shallow(mockElement);
-      });
-
-      it('should resolve a default cellEdit instance', () => {
-        const cellEdit = wrapper.instance().resolveCellEditProps();
-        expect(cellEdit).toBeDefined();
-        expect(cellEdit.mode).toEqual(Const.UNABLE_TO_CELL_EDIT);
-        expect(cellEdit.nonEditableRows.length).toEqual(0);
-      });
-    });
-
-    describe('if cellEdit prop defined', () => {
-      const expectNonEditableRows = [1, 2];
-      const cellEdit = {
-        mode: Const.DBCLICK_TO_CELL_EDIT,
-        blurToSave: true,
-        beforeSaveCell: sinon.stub(),
-        afterSaveCell: sinon.stub(),
-        nonEditableRows: sinon.stub().returns(expectNonEditableRows)
-      };
-
-      beforeEach(() => {
-        const mockElement = React.createElement(BootstrapTableMock, {
-          data, keyField, columns, cellEdit
-        }, null);
-        wrapper = shallow(mockElement);
-      });
-
-      it('should resolve a cellEdit correctly', () => {
-        const cellEditInfo = wrapper.instance().resolveCellEditProps();
-        expect(cellEditInfo).toBeDefined();
-        expect(cellEditInfo.mode).toEqual(cellEdit.mode);
-        expect(cellEditInfo.onUpdate).toEqual(cellEdit.onUpdate);
-        expect(cellEditInfo.blurToSave).toEqual(cellEdit.blurToSave);
-        expect(cellEditInfo.beforeSaveCell).toEqual(cellEdit.beforeSaveCell);
-        expect(cellEditInfo.afterSaveCell).toEqual(cellEdit.afterSaveCell);
-        expect(cellEditInfo.nonEditableRows).toEqual(expectNonEditableRows);
-      });
-
-      it('should attach options to cellEdit props', () => {
-        const something = {
-          test: 1,
-          cb: sinon.stub()
-        };
-        const cellEditInfo = wrapper.instance().resolveCellEditProps(something);
-        expect(cellEditInfo).toBeDefined();
-        expect(cellEditInfo.test).toEqual(something.test);
-        expect(cellEditInfo.cb).toEqual(something.cb);
-      });
-    });
-  });
-
   describe('resolveSelectRowProps', () => {
     let cellSelectionInfo;
     let selectRow;

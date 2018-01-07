@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table2';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -18,6 +19,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import cellEditFactory from 'react-bootstrap-table2-editor';
+// ...
 const RemoteCellEdit = (props) => {
   const cellEdit = {
     mode: 'click',
@@ -31,7 +34,7 @@ const RemoteCellEdit = (props) => {
         keyField="id"
         data={ props.data }
         columns={ columns }
-        cellEdit={ cellEdit }
+        cellEdit={ cellEditFactory(cellEdit) }
         onTableChange={ props.onTableChange }
       />
       <Code>{ sourceCode }</Code>
@@ -104,7 +107,7 @@ const RemoteCellEdit = (props) => {
         keyField="id"
         data={ props.data }
         columns={ columns }
-        cellEdit={ cellEdit }
+        cellEdit={ cellEditFactory(cellEdit) }
         onTableChange={ props.onTableChange }
       />
       <Code>{ sourceCode }</Code>
