@@ -1,3 +1,10 @@
+# Cell Editing
+Before start to use cell edit, please remember to install `react-bootstrap-table2-editor`
+
+```sh
+$ npm install react-bootstrap-table2-editor --save
+```
+
 # Properties on cellEdit prop
 * [mode (**required**)](#mode)
 * [blurToSave](#blurToSave)
