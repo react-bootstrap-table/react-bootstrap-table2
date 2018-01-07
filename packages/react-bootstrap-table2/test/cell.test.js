@@ -2,7 +2,6 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Const from '../src/const';
 import Cell from '../src/cell';
 
 describe('Cell', () => {
@@ -462,7 +461,7 @@ describe('Cell', () => {
       onStartCallBack = sinon.stub().withArgs(rowIndex, columnIndex);
     });
 
-    describe(`and editMode is ${Const.CLICK_TO_CELL_EDIT}`, () => {
+    describe('and clickToEdit is true', () => {
       beforeEach(() => {
         wrapper = shallow(
           <Cell
@@ -471,7 +470,7 @@ describe('Cell', () => {
             column={ column }
             columnIndex={ columnIndex }
             editable
-            editMode={ Const.CLICK_TO_CELL_EDIT }
+            clickToEdit
             onStart={ onStartCallBack }
           />
         );
@@ -502,7 +501,7 @@ describe('Cell', () => {
       });
     });
 
-    describe(`and editMode is ${Const.DBCLICK_TO_CELL_EDIT}`, () => {
+    describe('and dbclickToEdit is true', () => {
       beforeEach(() => {
         wrapper = shallow(
           <Cell
@@ -511,7 +510,7 @@ describe('Cell', () => {
             column={ column }
             columnIndex={ 1 }
             editable
-            editMode={ Const.DBCLICK_TO_CELL_EDIT }
+            dbclickToEdit
             onStart={ onStartCallBack }
           />
         );
