@@ -1,0 +1,29 @@
+{
+  "docs": {
+    "Getting Started": [
+      "about",
+      "getting-started"
+    ],
+    "Usage": ["usage"]
+  },
+  "api": {
+    "Table Definitation": [
+      "table-props"
+    ],
+    "Column Definitation": [
+      "column-props"
+    ],
+    "Cell Editing Definitation": [
+      "cell-edit-props"
+    ],
+    "Pagination Definitation": [
+      "pagination-props"
+    ],
+    "Row Select Definitation": [
+      "row-select-props"
+    ],
+    "Column Filter Definitation": [
+      "filter-props"
+    ]
+  }
+}
