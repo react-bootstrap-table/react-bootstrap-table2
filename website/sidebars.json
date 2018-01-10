@@ -4,7 +4,11 @@
       "about",
       "getting-started"
     ],
-    "Usage": ["usage"]
+    "Basic Usage": [
+      "basic-column",
+      "basic-sort",
+      "basic-row-select"
+    ]
   },
   "api": {
     "Table Definitation": [
