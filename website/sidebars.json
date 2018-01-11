@@ -8,7 +8,8 @@
       "basic-column",
       "basic-sort",
       "basic-row-select",
-      "basic-filter"
+      "basic-filter",
+      "basic-celledit"
     ]
   },
   "api": {

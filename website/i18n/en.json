@@ -6,6 +6,8 @@
     "tagline": "Next Generation of react-bootstrap-table",
     "about": "react-bootstrap-table2",
     "About": "About",
+    "basic-celledit": "Cell Edit",
+    "Cell Edit": "Cell Edit",
     "basic-column": "Work on Column",
     "Work on Column": "Work on Column",
     "basic-filter": "Column Filter",
