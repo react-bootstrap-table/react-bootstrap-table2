@@ -35,23 +35,23 @@ class Footer extends React.Component {
           </a>
           <div>
             <h5>Docs</h5>
-            <a href={this.docUrl('doc1.html', this.props.language)}>
-              Getting Started (or other categories)
+            <a href={this.docUrl('getting-started.html', this.props.language)}>
+              Getting Started
             </a>
-            <a href={this.docUrl('doc2.html', this.props.language)}>
-              Guides (or other categories)
+            <a href={this.docUrl('table-props.html', this.props.language)}>
+              API References
             </a>
-            <a href={this.docUrl('doc3.html', this.props.language)}>
+            {/* <a href={this.docUrl('doc3.html', this.props.language)}>
               API Reference (or other categories)
-            </a>
+            </a> */}
           </div>
           <div>
             <h5>Community</h5>
-            <a href={this.pageUrl('users.html', this.props.language)}>
+            {/* <a href={this.pageUrl('users.html', this.props.language)}>
               User Showcase
-            </a>
+            </a> */}
             <a
-              href="http://stackoverflow.com/questions/tagged/"
+              href="https://stackoverflow.com/questions/tagged/react-bootstrap-table"
               target="_blank">
               Stack Overflow
             </a>
@@ -63,7 +63,7 @@ class Footer extends React.Component {
           <div>
             <h5>More</h5>
             <a href={this.props.config.baseUrl + 'blog'}>Blog</a>
-            <a href="https://github.com/">GitHub</a>
+            <a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a>
             <a
               className="github-button"
               href={this.props.config.repoUrl}
@@ -77,7 +77,7 @@ class Footer extends React.Component {
           </div>
         </section>
 
-        <a
+        {/* <a
           href="https://code.facebook.com/projects/"
           target="_blank"
           className="fbOpenSource">
@@ -87,9 +87,9 @@ class Footer extends React.Component {
             width="170"
             height="45"
           />
-        </a>
+        </a> */}
         <section className="copyright">
-          Copyright &copy; {currentYear} Facebook Inc.
+          Copyright &copy; {currentYear} react-bootstrap-table2.
         </section>
       </footer>
     );

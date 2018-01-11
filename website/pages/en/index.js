@@ -76,13 +76,13 @@ class HomeSplash extends React.Component {
     let language = this.props.language || '';
     return (
       <SplashContainer>
-        <Logo img_src={imgUrl('docusaurus.svg')} />
+        {/* <Logo img_src={imgUrl('docusaurus.svg')} /> */}
         <div className="inner">
           <ProjectTitle />
           <PromoSection>
-            <Button href="#try">Try It Out</Button>
-            <Button href={docUrl('doc1.html', language)}>Example Link</Button>
-            <Button href={docUrl('doc2.html', language)}>Example Link 2</Button>
+            <Button href={docUrl('getting-started.html', language)}>Try It Out</Button>
+            <Button href='./storybook/index.html'>Live Demo</Button>
+            <Button href={docUrl('table-props.html', language)}>Docs</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -95,7 +95,7 @@ const Block = props => (
     padding={['bottom', 'top']}
     id={props.id}
     background={props.background}>
-    <GridBlock align="center" contents={props.children} layout={props.layout} />
+    <GridBlock align={ props.align || 'center' } contents={props.children} layout={props.layout} />
   </Container>
 );
 
@@ -103,38 +103,44 @@ const Features = props => (
   <Block layout="fourColumn">
     {[
       {
-        content: 'This is the content of my feature',
-        image: imgUrl('docusaurus.svg'),
+        content: 'Sortable, Row Selection, Cell Editor, Row Expand, Column Filter Pagination etc.',
+        // image: imgUrl('docusaurus.svg'),
         imageAlign: 'top',
-        title: 'Feature One',
+        title: 'Rich Functionality',
       },
       {
-        content: 'The content of my second feature',
-        image: imgUrl('docusaurus.svg'),
+        content: 'Configurable and customizable table',
+        // image: imgUrl('docusaurus.svg'),
         imageAlign: 'top',
-        title: 'Feature Two',
+        title: 'Customization',
+      },
+      {
+        content: 'Satisfy for Redux/Mobx or any other state management tool.',
+        // image: imgUrl('docusaurus.svg'),
+        imageAlign: 'top',
+        title: 'Remote',
       },
     ]}
   </Block>
 );
 
-const FeatureCallout = props => (
-  <div
-    className="productShowcaseSection paddingBottom"
-    style={{textAlign: 'center'}}>
-    <h2>Feature Callout</h2>
-    <MarkdownBlock>These are features of this project</MarkdownBlock>
-  </div>
-);
+// const FeatureCallout = props => (
+//   <div
+//     className="productShowcaseSection paddingBottom"
+//     style={{textAlign: 'center'}}>
+//     <h2>Feature Callout</h2>
+//     <MarkdownBlock>These are features of this project</MarkdownBlock>
+//   </div>
+// );
 
 const LearnHow = props => (
-  <Block background="light">
+  <Block background="light" align="left">
     {[
       {
-        content: 'Talk about learning how to use this',
-        image: imgUrl('docusaurus.svg'),
+        content: 'Intuitive to use. <br/>Compatitable for Bootstrap 3 and 4. <br/>Better than legacy react-bootstrap-table2!!<br/>',
+        image: imgUrl('react-bootstrap-table2-sample.png'),
         imageAlign: 'right',
-        title: 'Learn How',
+        title: 'react-bootstrap-table2',
       },
     ]}
   </Block>
@@ -205,11 +211,11 @@ class Index extends React.Component {
         <HomeSplash language={language} />
         <div className="mainContainer">
           <Features />
-          <FeatureCallout />
+          {/* <FeatureCallout /> */}
           <LearnHow />
-          <TryOut />
+          {/* <TryOut />
           <Description />
-          <Showcase language={language} />
+          <Showcase language={language} /> */}
         </div>
       </div>
     );

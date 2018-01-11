@@ -9,8 +9,8 @@
 const users = [
   {
     caption: '',
-    image: '/react-bootstrap-table2/img/docusaurus.svg',
-    infoLink: 'https://www.facebook.com',
+    // image: '/react-bootstrap-table2/img/docusaurus.svg',
+    infoLink: 'https://github.com/react-bootstrap-table/react-bootstrap-table2',
     pinned: true,
   },
 ];
@@ -29,8 +29,8 @@ const siteConfig = {
   ],
   users,
   /* path to images for header/footer */
-  headerIcon: 'img/docusaurus.svg',
-  footerIcon: 'img/docusaurus.svg',
+  // headerIcon: 'img/docusaurus.svg',
+  // footerIcon: 'img/docusaurus.svg',
   favicon: 'img/favicon.png',
   /* colors for website */
   colors: {
