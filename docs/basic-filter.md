@@ -6,6 +6,8 @@ sidebar_label: Column Filter
 
 `react-bootstrap-table2` separate the filter core code base to [`react-bootstrap-table2-filter`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/develop/packages/react-bootstrap-table2-filter), so there's a little bit different when you use column filter than `react-bootstrap-table`. In the following, we are going to show you how to enable the column filter:
 
+**[Live Demo For Column Filter](../storybook/index.html?selectedKind=Column%20Filter)**
+
 -----
 
 ## Install

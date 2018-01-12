@@ -6,6 +6,10 @@ sidebar_label: Table Sort
 
 `react-bootstrap-table2` allow you to configure columns to be sortable. Currently, we don't support the multi-column sort, but it will be implemented in the future.
 
+**[Live Demo For Table Sort](../storybook/index.html?selectedKind=Sort%20Table)**
+
+-----
+
 ## Enable Sort on Column
 Firstly, you need to know what column you allow user to sort and give the [`sort`](./column-props.html#columnsort-bool) as `true` in the column definitation.
 
