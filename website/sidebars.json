@@ -9,7 +9,11 @@
       "basic-sort",
       "basic-row-select",
       "basic-filter",
-      "basic-celledit"
+      "basic-celledit",
+      "basic-pagination"
+    ],
+    "Remote Table": [
+      "basic-remote"
     ]
   },
   "api": {
