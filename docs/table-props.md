@@ -109,7 +109,7 @@ Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for
 ## selectRow - [Object]
 Makes table rows selectable, please see [selectRow definition](./row-selection.md) for more detail.
 
-## rowStyle = [Object | Function]
+## rowStyle - [Object | Function]
 Custom the style of table rows:
 
 ```js
@@ -126,7 +126,7 @@ const rowStyle = (row, rowIndex) => {
 <BootstrapTable data={ data } columns={ columns } rowStyle={ rowStyle } />
 ```
 
-## rowClasses = [String | Function]
+## rowClasses - [String | Function]
 Custom the style of table rows:
 
 ```js

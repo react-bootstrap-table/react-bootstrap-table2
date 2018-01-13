@@ -5,6 +5,7 @@
       "getting-started"
     ],
     "Basic Usage": [
+      "basic-row",
       "basic-column",
       "basic-sort",
       "basic-row-select",

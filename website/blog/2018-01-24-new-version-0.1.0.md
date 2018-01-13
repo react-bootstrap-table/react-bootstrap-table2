@@ -35,7 +35,7 @@ For the first drop, I really can't finish all the legacy features, but I will wo
 ### Enhancement
 - One table structure, never unalign again.
 - Remote enhancement, please read [**it**](../docs/basic-remote.html).
-- 100% easy to customize the header columns, cells and rows!!!
+- 100% easy to customize the [**header columns, cells**](../docs/basic-column.html) and [**rows**](../docs/basic-row.html)!!!
 
 -----
 
