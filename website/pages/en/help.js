@@ -26,7 +26,7 @@ class Help extends React.Component {
         title: 'Join the community',
       },
       {
-        content: '<a href="../blog" target="_blank">Find out</a> what\'s new with this project',
+        content: '<a href="../blog/index.html" target="_blank">Find out</a> what\'s new with this project',
         title: 'Stay up to date',
       },
     ];

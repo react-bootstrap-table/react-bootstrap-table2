@@ -62,7 +62,7 @@ class Footer extends React.Component {
           </div>
           <div>
             <h5>More</h5>
-            <a href={this.props.config.baseUrl + 'blog'}>Blog</a>
+            <a href={this.props.config.baseUrl + 'blog/index.html'}>Blog</a>
             <a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a>
             <a
               className="github-button"
