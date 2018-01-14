@@ -20,4 +20,4 @@ yarn-error.log*
 storybook-static
 
 # build
-lib
+dist
