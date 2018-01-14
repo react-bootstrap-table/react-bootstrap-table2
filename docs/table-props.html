@@ -1,0 +1,227 @@
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>BootstrapTable Props · react-bootstrap-table2</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="BootstrapTable Props · react-bootstrap-table2"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-bootstrap-table.github.io/react-bootstrap-table2/index.html"/><meta property="og:description" content="## Required"/><link rel="shortcut icon" href="/react-bootstrap-table2/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://react-bootstrap-table.github.io/blog/atom.xml" title="react-bootstrap-table2 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://react-bootstrap-table.github.io/blog/feed.xml" title="react-bootstrap-table2 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/react-bootstrap-table2/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-bootstrap-table2/"><h2 class="headerTitle">react-bootstrap-table2</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/react-bootstrap-table2/docs/about.html" target="_self">Docs</a></li><li><a href="/react-bootstrap-table2/docs/table-props.html" target="_self">API</a></li><li><a href="/react-bootstrap-table2/en/help.html" target="_self">Help</a></li><li><a href="/react-bootstrap-table2/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Table Definitation</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Table Definitation</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/react-bootstrap-table2/docs/table-props.html">BootstrapTable Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/column-props.html">Columns Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Cell Editing Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/cell-edit-props.html">Cell Editing Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Pagination Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/pagination-props.html">Pagination Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Row Select Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/row-select-props.html">Row Selection Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Filter Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/filter-props.html">Column Filter Props</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>BootstrapTable Props</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="required"></a><a href="#required" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required</h2>
+<ul>
+<li><a href="#keyfield-required-string">keyField (<strong>required</strong>)</a></li>
+<li><a href="#data-required-array">data (<strong>required</strong>)</a></li>
+<li><a href="#columns-required-object">columns (<strong>required</strong>)</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="optional"></a><a href="#optional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional</h2>
+<ul>
+<li><a href="#remote-bool-object">remote</a></li>
+<li><a href="#nodataindication-function">noDataIndication</a></li>
+<li><a href="#loading-bool">loading</a></li>
+<li><a href="#overlay-function">overlay</a></li>
+<li><a href="#caption-string-node">caption</a></li>
+<li><a href="#striped-bool">striped</a></li>
+<li><a href="#bordered-bool">bordered</a></li>
+<li><a href="#hover-bool">hover</a></li>
+<li><a href="#condensed-bool">condensed</a></li>
+<li><a href="#celledit-object">cellEdit</a></li>
+<li><a href="#selectrow-object">selectRow</a></li>
+<li><a href="#rowstyle-object-function">rowStyle</a></li>
+<li><a href="#rowclasses-string-function">rowClasses</a></li>
+<li><a href="#rowevents-object">rowEvents</a></li>
+<li><a href="#defaultsorted-array">defaultSorted</a></li>
+<li><a href="#pagination-object">pagination</a></li>
+<li><a href="#filter-object">filter</a></li>
+<li><a href="#ontablechange-function">onTableChange</a></li>
+</ul>
+<hr>
+<h2><a class="anchor" aria-hidden="true" name="keyfield-required-string"></a><a href="#keyfield-required-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>keyField(<strong>required</strong>) - [String]</h2>
+<p>Tells <code>react-bootstrap-table2</code> which column is unique.</p>
+<h2><a class="anchor" aria-hidden="true" name="data-required-array"></a><a href="#data-required-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>data(<strong>required</strong>) - [Array]</h2>
+<p>Provides data for your table. It accepts a single Array object.</p>
+<h2><a class="anchor" aria-hidden="true" name="columns-required-object"></a><a href="#columns-required-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>columns(<strong>required</strong>) - [Object]</h2>
+<p>Accepts a single Array object, please see <a href="./columns.md">columns definition</a> for more detail.</p>
+<h2><a class="anchor" aria-hidden="true" name="remote-bool-object"></a><a href="#remote-bool-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remote - [Bool | Object]</h2>
+<p>Default is <code>false</code>, if enable <code>remote</code>, you are supposed to be handle all the table change events, like: pagination, insert, filtering etc.
+This is a chance that you can connect to your remote server or database to manipulate your data.<br>
+For flexibility reason, you can control what functionality should be handled on remote via a object return:</p>
+<pre><code class="hljs css js">remote={ {
+  <span class="hljs-attr">filter</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">pagination</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">filter</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">sort</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">cellEdit</span>: <span class="hljs-literal">true</span>
+} }
+</code></pre>
+<p>In above case, only column filter will be handled on remote.</p>
+<blockquote>
+<p>Note: when remote is enable, you are suppose to give <a href="#ontablechange-function"><code>onTableChange</code></a> prop on <code>BootstrapTable</code>
+It's the only way to communicate to your remote server and update table states.</p>
+</blockquote>
+<p>A special case for remote pagination:</p>
+<pre><code class="hljs css js">remote={ { <span class="hljs-attr">pagination</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">filter</span>: <span class="hljs-literal">false</span>, <span class="hljs-attr">sort</span>: <span class="hljs-literal">false</span> } }
+</code></pre>
+<p>There'r a apecial case for remote pagination, even you only specified the paignation need to handle as remote, <code>react-bootstrap-table2</code> will handle all the table changes(filter, sort etc) as remote mode, because <code>react-bootstrap-table2</code> only know the data of current page, but filtering, searching or sort need to work on overall datas.</p>
+<h2><a class="anchor" aria-hidden="true" name="nodataindication-function"></a><a href="#nodataindication-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>noDataIndication - [Function]</h2>
+<p><code>noDataIndication</code> should be a callback function which return anything that will be showed in the table when data is <strong>empty</strong>.</p>
+<h2><a class="anchor" aria-hidden="true" name="loading-bool"></a><a href="#loading-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>loading - [Bool]</h2>
+<p>Telling if table is loading or not, for example: waiting data loading, filtering etc. It's <strong>only</strong> valid when <a href="#remote-bool-object"><code>remote</code></a> is enabled.
+When <code>loading</code> is <code>true</code>, <code>react-bootstrap-table2</code> will attend to render a overlay on table via <a href="#overlay-function"><code>overlay</code></a> prop, if <a href="#overlay-function"><code>overlay</code></a> prop is not given, <code>react-bootstrap-table2</code> will ignore the overlay rendering.</p>
+<h2><a class="anchor" aria-hidden="true" name="overlay-function"></a><a href="#overlay-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>overlay - [Function]</h2>
+<p><code>overlay</code> accept a factory funtion which should returning a higher order component. By default, <code>react-bootstrap-table2-overlay</code> can be a good option for you:</p>
+<pre><code class="hljs css sh">$ npm install react-bootstrap-table2-overlay
+</code></pre>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> overlayFactory <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-overlay'</span>;
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span>
+  <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">data</span> }
+  <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> }
+  <span class="hljs-attr">loading</span>=<span class="hljs-string">{</span> <span class="hljs-attr">true</span> }  //<span class="hljs-attr">only</span> <span class="hljs-attr">loading</span> <span class="hljs-attr">is</span> <span class="hljs-attr">true</span>, <span class="hljs-attr">react-bootstrap-table</span> <span class="hljs-attr">will</span> <span class="hljs-attr">render</span> <span class="hljs-attr">overlay</span>
+  <span class="hljs-attr">overlay</span>=<span class="hljs-string">{</span> <span class="hljs-attr">overlayFactory</span>() }
+/&gt;</span>
+</span></code></pre>
+<p>Actually, <code>react-bootstrap-table2-overlay</code> is depends on <a href="https://github.com/derrickpelletier/react-loading-overlay"><code>react-loading-overlay</code></a> and <code>overlayFactory</code> just a factory function and you can pass any props which available for <code>react-loading-overlay</code>:</p>
+<pre><code class="hljs css js">overlay={ overlayFactory({ <span class="hljs-attr">spinner</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">background</span>: <span class="hljs-string">'rgba(192,192,192,0.3)'</span> }) }
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="caption-string-node"></a><a href="#caption-string-node" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>caption - [String | Node]</h2>
+<p>Same as HTML <a href="https://www.w3schools.com/TAgs/tag_caption.asp">caption tag</a>, you can set it as String or a React JSX.</p>
+<h2><a class="anchor" aria-hidden="true" name="striped-bool"></a><a href="#striped-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>striped - [Bool]</h2>
+<p>Same as bootstrap <code>.table-striped</code> class for adding zebra-stripes to a table.</p>
+<h2><a class="anchor" aria-hidden="true" name="bordered-bool"></a><a href="#bordered-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>bordered - [Bool]</h2>
+<p>Same as bootstrap <code>.table-bordered</code> class for adding borders to a table and table cells.</p>
+<h2><a class="anchor" aria-hidden="true" name="hover-bool"></a><a href="#hover-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>hover - [Bool]</h2>
+<p>Same as bootstrap <code>.table-hover</code> class for adding mouse hover effect (grey background color) on table rows.</p>
+<h2><a class="anchor" aria-hidden="true" name="condensed-bool"></a><a href="#condensed-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>condensed - [Bool]</h2>
+<p>Same as bootstrap <code>.table-condensed</code> class for making a table more compact by cutting cell padding in half.</p>
+<h2><a class="anchor" aria-hidden="true" name="celledit-object"></a><a href="#celledit-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>cellEdit - [Object]</h2>
+<p>Makes table cells editable, please see <a href="./cell-edit.md">cellEdit definition</a> for more detail.</p>
+<h2><a class="anchor" aria-hidden="true" name="selectrow-object"></a><a href="#selectrow-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectRow - [Object]</h2>
+<p>Makes table rows selectable, please see <a href="./row-selection.md">selectRow definition</a> for more detail.</p>
+<h2><a class="anchor" aria-hidden="true" name="rowstyle-object-function"></a><a href="#rowstyle-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>rowStyle - [Object | Function]</h2>
+<p>Custom the style of table rows:</p>
+<pre><code class="hljs css js">&lt;BootstrapTable data={ data } columns={ columns } rowStyle={ { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'red'</span> } } /&gt;
+</code></pre>
+<p>This prop also accept a callback function for flexible to custom row style:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> rowStyle = <span class="hljs-function">(<span class="hljs-params">row, rowIndex</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> { ... };
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">data</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">rowStyle</span>=<span class="hljs-string">{</span> <span class="hljs-attr">rowStyle</span> } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="rowclasses-string-function"></a><a href="#rowclasses-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>rowClasses - [String | Function]</h2>
+<p>Custom the style of table rows:</p>
+<pre><code class="hljs css js">&lt;BootstrapTable data={ data } columns={ columns } rowClasses=<span class="hljs-string">"custom-row-class"</span> /&gt;
+</code></pre>
+<p>This prop also accept a callback function for flexible to custom row style:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> rowClasses = <span class="hljs-function">(<span class="hljs-params">row, rowIndex</span>) =&gt;</span> {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">'custom-row-class'</span>;
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">data</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">rowClasses</span>=<span class="hljs-string">{</span> <span class="hljs-attr">rowClasses</span> } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="rowevents-object"></a><a href="#rowevents-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>rowEvents - [Object]</h2>
+<p>Custom the events on row:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> rowEvents = {
+  <span class="hljs-attr">onClick</span>: <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+    ....
+  }
+};
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">data</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">rowEvents</span>=<span class="hljs-string">{</span> <span class="hljs-attr">rowEvents</span> } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="defaultsorted-array"></a><a href="#defaultsorted-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>defaultSorted - [Array]</h2>
+<p><code>defaultSorted</code> accept an object array which allow you to define the default sort columns when first render.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> defaultSorted = [{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'name'</span>, <span class="hljs-comment">// if dataField is not match to any column you defined, it will be ignored.</span>
+  order: <span class="hljs-string">'desc'</span> <span class="hljs-comment">// desc or asc</span>
+}];
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="pagination-object"></a><a href="#pagination-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination - [Object]</h2>
+<p><code>pagination</code> allow user to render a pagination panel on the bottom of table. But pagination funcitonality is separated from core of <code>react-bootstrap-table2</code> so that you are suppose to install <code>react-bootstrap-table2-paginator</code> additionaly.</p>
+<pre><code class="hljs css sh">$ npm install react-bootstrap-table2-paginator --save
+</code></pre>
+<p>After installation of <code>react-bootstrap-table2-paginator</code>, you can enable pagination on <code>react-bootstrap-table2</code> easily:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> paginator <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-paginator'</span>;
+
+<span class="hljs-comment">// omit...</span>
+
+&lt;BootstrapTable data={ data } columns={ columns } pagination={ paginator() } /&gt;
+</code></pre>
+<p><code>paginator</code> is a function actually and allow to pass some pagination options, following we list all the available options:</p>
+<pre><code class="hljs css js">paginator({
+  page, <span class="hljs-comment">// Specify the current page. It's necessary when remote is enabled</span>
+  sizePerPage, <span class="hljs-comment">// Specify the size per page. It's necessary when remote is enabled</span>
+  totalSize, <span class="hljs-comment">// Total data size. It's necessary when remote is enabled</span>
+  pageStartIndex: <span class="hljs-number">0</span>, <span class="hljs-comment">// first page will be 0, default is 1</span>
+  paginationSize: <span class="hljs-number">3</span>,  <span class="hljs-comment">// the pagination bar size, default is 5</span>
+  sizePerPageList: [ {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">'5'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">5</span>
+  }, {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">'10'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">10</span>
+  }, {
+    <span class="hljs-attr">text</span>: <span class="hljs-string">'All'</span>, <span class="hljs-attr">value</span>: products.length
+  } ], <span class="hljs-comment">// A numeric array is also available: [5, 10]. the purpose of above example is custom the text</span>
+  withFirstAndLast: <span class="hljs-literal">false</span>, <span class="hljs-comment">// hide the going to first and last page button</span>
+  alwaysShowAllBtns: <span class="hljs-literal">true</span>, <span class="hljs-comment">// always show the next and previous page button</span>
+  firstPageText: <span class="hljs-string">'First'</span>, <span class="hljs-comment">// the text of first page button</span>
+  prePageText: <span class="hljs-string">'Prev'</span>, <span class="hljs-comment">// the text of previous page button</span>
+  nextPageText: <span class="hljs-string">'Next'</span>, <span class="hljs-comment">// the text of next page button</span>
+  lastPageText: <span class="hljs-string">'Last'</span>, <span class="hljs-comment">// the text of last page button</span>
+  nextPageTitle: <span class="hljs-string">'Go to next'</span>, <span class="hljs-comment">// the title of next page button</span>
+  prePageTitle: <span class="hljs-string">'Go to previous'</span>, <span class="hljs-comment">// the title of previous page button</span>
+  firstPageTitle: <span class="hljs-string">'Go to first'</span>, <span class="hljs-comment">// the title of first page button</span>
+  lastPageTitle: <span class="hljs-string">'Go to last'</span>, <span class="hljs-comment">// the title of last page button</span>
+  hideSizePerPage: <span class="hljs-literal">true</span>, <span class="hljs-comment">// hide the size per page dorpdown</span>
+  hidePageListOnlyOnePage: <span class="hljs-literal">true</span>, <span class="hljs-comment">// hide pagination bar when only one page, default is false</span>
+  onPageChange: <span class="hljs-function">(<span class="hljs-params">page, sizePerPage</span>) =&gt;</span> {}, <span class="hljs-comment">// callback function when page was changing</span>
+  onSizePerPageChange: <span class="hljs-function">(<span class="hljs-params">sizePerPage, page</span>) =&gt;</span> {}, <span class="hljs-comment">// callback function when page size was changing</span>
+})
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="filter-object"></a><a href="#filter-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>filter - [Object]</h2>
+<p><code>filter</code> allow user to filter data by column. However, filter funcitonality is separated from core of <code>react-bootstrap-table2</code> so that you are suppose to install <code>react-bootstrap-table2-filter</code> firstly.</p>
+<pre><code class="hljs css sh">$ npm install react-bootstrap-table2-filter --save
+</code></pre>
+<p>After installation of <code>react-bootstrap-table2-filter</code>, you can configure filter on <code>react-bootstrap-table2</code> easily:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> filterFactory, { textFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-comment">// omit...</span>
+<span class="hljs-keyword">const</span> columns = [ {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>, 
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Production ID'</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'name'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Production Name'</span>,
+  <span class="hljs-attr">filter</span>: textFilter()  <span class="hljs-comment">// apply text filter</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Production Price'</span>
+} ];
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">data</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="ontablechange-function"></a><a href="#ontablechange-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>onTableChange - [Function]</h2>
+<p>This callback function will be called when <a href="#remote-bool-object"><code>remote</code></a> enabled only.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> onTableChange = <span class="hljs-function">(<span class="hljs-params">type, newState</span>) =&gt;</span> {
+  <span class="hljs-comment">// handle any data change here</span>
+}
+&lt;BootstrapTable data={ data } columns={ columns } onTableChange={ onTableChange } /&gt;
+</code></pre>
+<p>There's only two arguments will be passed to <code>onTableChange</code>: <code>type</code> and <code>newState</code>:</p>
+<p><code>type</code> is tell you what kind of functionality to trigger this table's change: available values at the below:</p>
+<ul>
+<li><code>filter</code></li>
+<li><code>pagination</code></li>
+<li><code>sort</code></li>
+<li><code>cellEdit</code></li>
+</ul>
+<p>Following is a shape of <code>newState</code></p>
+<pre><code class="hljs css js">{
+  page,  <span class="hljs-comment">// newest page</span>
+  sizePerPage,  <span class="hljs-comment">// newest sizePerPage</span>
+  sortField,  <span class="hljs-comment">// newest sort field</span>
+  sortOrder,  <span class="hljs-comment">// newest sort order</span>
+  filters, <span class="hljs-comment">// an object which have current filter status per column</span>
+  data, <span class="hljs-comment">// when you enable remote sort, you may need to base on data to sort if data is filtered/searched</span>
+  cellEdit: {  <span class="hljs-comment">// You can only see this prop when type is cellEdit</span>
+    rowId,
+    dataField,
+    newValue
+  }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="column-props.html">Columns Props →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>

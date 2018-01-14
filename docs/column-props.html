@@ -1,0 +1,449 @@
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Columns Props · react-bootstrap-table2</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Columns Props · react-bootstrap-table2"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-bootstrap-table.github.io/react-bootstrap-table2/index.html"/><meta property="og:description" content="Definition of columns props on BootstrapTable"/><link rel="shortcut icon" href="/react-bootstrap-table2/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://react-bootstrap-table.github.io/blog/atom.xml" title="react-bootstrap-table2 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://react-bootstrap-table.github.io/blog/feed.xml" title="react-bootstrap-table2 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/react-bootstrap-table2/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-bootstrap-table2/"><h2 class="headerTitle">react-bootstrap-table2</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/react-bootstrap-table2/docs/about.html" target="_self">Docs</a></li><li><a href="/react-bootstrap-table2/docs/table-props.html" target="_self">API</a></li><li><a href="/react-bootstrap-table2/en/help.html" target="_self">Help</a></li><li><a href="/react-bootstrap-table2/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Column Definitation</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Table Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/table-props.html">BootstrapTable Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Definitation</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/react-bootstrap-table2/docs/column-props.html">Columns Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Cell Editing Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/cell-edit-props.html">Cell Editing Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Pagination Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/pagination-props.html">Pagination Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Row Select Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/row-select-props.html">Row Selection Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Filter Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/filter-props.html">Column Filter Props</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Columns Props</h1></header><article><div><span><p>Definition of columns props on BootstrapTable</p>
+<h2><a class="anchor" aria-hidden="true" name="required"></a><a href="#required" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required</h2>
+<ul>
+<li><a href="#columndatafield-required-string">dataField (<strong>required</strong>)</a></li>
+<li><a href="#columntext-required-string">text (<strong>required</strong>)</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="optional"></a><a href="#optional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional</h2>
+<ul>
+<li><a href="#columnhidden-bool">hidden</a></li>
+<li><a href="#columnformatter-function">formatter</a></li>
+<li><a href="#columnformatextradata-any">formatExtraData</a></li>
+<li><a href="#columnsort-bool">sort</a></li>
+<li><a href="#columnsortfunc-function">sortFunc</a></li>
+<li><a href="#columnclasses-string-function">classes</a></li>
+<li><a href="#columnstyle-object-function">style</a></li>
+<li><a href="#columntitle-bool-function">title</a></li>
+<li><a href="#columnevents-object">events</a></li>
+<li><a href="#columnalign-string-function">align</a></li>
+<li><a href="#columnattrs-object-function">attrs</a></li>
+<li><a href="#columnheaderformatter-function">headerFormatter</a></li>
+<li><a href="#columnheaderclasses-string-function">headerClasses</a></li>
+<li><a href="#columnheaderstyle-object-function">headerStyle</a></li>
+<li><a href="#columnheadertitle-bool-function">headerTitle</a></li>
+<li><a href="#columnheaderevents-object">headerEvents</a></li>
+<li><a href="#columnheaderalign-string-function">headerAlign</a></li>
+<li><a href="#columnheaderattrs-object-function">headerAttrs</a></li>
+<li><a href="#headersortingclasses-string-function">headerSortingClasses</a></li>
+<li><a href="#headersortingstyle-object-function">headerSortingStyle</a></li>
+<li><a href="#columneditable-bool-function">editable</a></li>
+<li><a href="#columnvalidator-function">validator</a></li>
+<li><a href="#columneditcellstyle-object-function">editCellStyle</a></li>
+<li><a href="#columneditcellclasses-string-function">editCellClasses</a></li>
+<li><a href="#columnfilter-object">filter</a></li>
+<li><a href="#columnfiltervalue-function">filterValue</a></li>
+</ul>
+<hr>
+<h2><a class="anchor" aria-hidden="true" name="columndatafield-required-string"></a><a href="#columndatafield-required-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.dataField (<strong>required</strong>) - [String]</h2>
+<p>Use <code>dataField</code> to specify what field should be apply on this column. If your raw data is nested, for example:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> row = {
+  <span class="hljs-attr">id</span>: <span class="hljs-string">'A001'</span>,
+  <span class="hljs-attr">address</span>: {
+    <span class="hljs-attr">postal</span>: <span class="hljs-string">'1234-12335'</span>,
+    <span class="hljs-attr">city</span>: <span class="hljs-string">'Chicago'</span>
+  }
+}
+</code></pre>
+<p>You can use <code>dataField</code> with dot(<code>.</code>) to describe nested object:</p>
+<pre><code class="hljs css js">dataField: <span class="hljs-string">'address.postal'</span>
+dataField: <span class="hljs-string">'address.city'</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columntext-required-string"></a><a href="#columntext-required-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.text (<strong>required</strong>) - [String]</h2>
+<p><code>text</code> will be the column text in header column by default, if your header is not only text or you want to customize the header column, please check <a href="#columnheaderformatter-function"><code>column.headerFormatter</code></a></p>
+<h2><a class="anchor" aria-hidden="true" name="columnhidden-bool"></a><a href="#columnhidden-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.hidden - [Bool]</h2>
+<p><code>hidden</code> allow you to hide column when <code>true</code> given.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnformatter-function"></a><a href="#columnformatter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.formatter - [Function]</h2>
+<p><code>formatter</code> allow you to customize the table column and only accept a callback function which take four arguments and a JSX/String are expected for return.</p>
+<ul>
+<li><code>cell</code></li>
+<li><code>row</code></li>
+<li><code>rowIndex</code></li>
+<li><a href="#columnformatextradata-any"><code>formatExtraData</code></a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="columnheaderformatter-function"></a><a href="#columnheaderformatter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerFormatter - [Function]</h2>
+<p><code>headerFormatter</code> allow you to customize the header column and only accept a callback function which take three arguments and a JSX/String are expected for return.</p>
+<ul>
+<li><code>column</code>: current column object itself</li>
+<li><code>colIndex</code>: index of current column</li>
+<li><code>components</code>: an object which contain all of other react element, like sort caret or filter etc.</li>
+</ul>
+<p>The third argument: <code>components</code> have following specified properties:</p>
+<pre><code class="hljs css js">{
+  sortElement, <span class="hljs-comment">// sort caret element, it will not be undefined when you enable sort on this column</span>
+  filterElement <span class="hljs-comment">// filter element, it will not be undefined when you enable column.filter on this column</span>
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnformatextradata-any"></a><a href="#columnformatextradata-any" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.formatExtraData - [Any]</h2>
+<p>It's only used for <a href="#columnformatter-function"><code>column.formatter</code></a>, you can define any value for it and will be passed as fourth argument for <a href="#columnformatter-function"><code>column.formatter</code></a> callback function.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnsort-bool"></a><a href="#columnsort-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.sort - [Bool]</h2>
+<p>Enable the column sort via a <code>true</code> value given.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnsortfunc-function"></a><a href="#columnsortfunc-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.sortFunc - [Function]</h2>
+<p><code>column.sortFunc</code> only work when <code>column.sort</code> is enable. <code>sortFunc</code> allow you to define your sorting algorithm. This callback function accept four arguments:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  sort: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">sortFunc</span>: <span class="hljs-function">(<span class="hljs-params">a, b, order, dataField</span>) =&gt;</span> {
+    <span class="hljs-keyword">if</span> (order === <span class="hljs-string">'asc'</span>) <span class="hljs-keyword">return</span> a - b;
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> b - a;
+  }
+}
+</code></pre>
+<blockquote>
+<p>The possible value of <code>order</code> argument is <strong><code>asc</code></strong> and <strong><code>desc</code></strong>.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" name="columnclasses-string-function"></a><a href="#columnclasses-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.classes - [String | Function]</h2>
+<p>It's availabe to have custom class on table column:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  classes: <span class="hljs-string">'id-custom-cell'</span>
+}
+</code></pre>
+<p>In addition, <code>classes</code> also accept a callback function which have more power to custom the css class on each columns. This callback function take <strong>4</strong> arguments and a <code>String</code> is expected to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">classes</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>cell</code>: The value of current cell.</li>
+<li><code>row</code>: The value of <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>rowIndex</code>: The index of the current <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>String</code> will be the result as element class.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnheaderclasses-string-function"></a><a href="#columnheaderclasses-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerClasses - [String | Function]</h2>
+<p>It's similar to <a href="#columnclasses-string-function"><code>column.classes</code></a>, <code>headerClasses</code> is availabe to have customized class on table header column:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerClasses: <span class="hljs-string">'id-custom-cell'</span>
+}
+</code></pre>
+<p>Furthermore, it also accept a callback function which takes 2 arguments and a <code>String</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">headerClasses</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">column, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>String</code> will be the result of element headerClasses.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnstyle-object-function"></a><a href="#columnstyle-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.style - [Object | Function]</h2>
+<p>It's availabe to have custom style on table column:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  style: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'green'</span> }
+}
+</code></pre>
+<p>In addition, similar to <a href="#columnclasses-string-function"><code>column.classes</code></a>, <code>style</code> also accept a callback function which have more power to customize the <code>inline style</code> on each columns. This callback function takes <strong>4</strong> arguments and an <code>Object</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">style</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>cell</code>: The value of current cell.</li>
+<li><code>row</code>: The value of <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>rowIndex</code>: The index of the current <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>Object</code> will be the result of element style.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnheaderstyle-object-function"></a><a href="#columnheaderstyle-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerStyle - [Object | Function]</h2>
+<p>It's availabe to have customized inline-style on table header column:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'green'</span> }
+}
+</code></pre>
+<p>Moreover, it also accept a callback function which takes 2 arguments and an <code>Object</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">headerStyle</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">column, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>Object</code> will be the result of element headerStyle.</p>
+<h2><a class="anchor" aria-hidden="true" name="columntitle-bool-function"></a><a href="#columntitle-bool-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.title - [Bool | Function]</h2>
+<p><code>react-bootstrap-table2</code> is disable <a href="https://www.w3schools.com/tags/tag_title.asp"><code>HTML title</code></a> as default. You can assign <code>title</code> as <code>true</code> to enable the HTML title on table column and take <code>cell content</code> as default value. Additionally, you could customize title via a callback. It takes <strong>4</strong> arguments and a <code>String</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  title: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) </span>{ ... }
+  <span class="hljs-comment">// return custom title here</span>
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>cell</code>: The value of current cell.</li>
+<li><code>row</code>: The value of <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>rowIndex</code>: The index of the current <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>String</code> will be the result of element title.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnheadertitle-bool-function"></a><a href="#columnheadertitle-bool-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerTitle - [Bool | Function]</h2>
+<p><code>headerTitle</code> is only for the title on header column, default is disable. The usage almost same as <a href="#columntitle-bool-function"><code>column.title</code></a>,</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerTitle: <span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>It's also availabe to custom via a callback function:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">headerTitle</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">column, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>String</code> will be the result of element headerTitle.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnalign-string-function"></a><a href="#columnalign-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.align - [String | Function]</h2>
+<p>You can configure the <a href="https://www.w3schools.com/cssref/pr_text_text-align.asp">CSS text-align</a> for table column by <code>align</code> property.</p>
+<p>Besides, <code>align</code> also accept a callback function for dynamically setting text align. It takes <strong>4</strong> arguments and a <code>String</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  align: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>cell</code>: The value of current cell.</li>
+<li><code>row</code>: The value of <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>rowIndex</code>: The index of the current <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>String</code> will be the result of element text alignment.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnheaderalign-string-function"></a><a href="#columnheaderalign-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerAlign - [String | Function]</h2>
+<p>It's almost same as <a href="#columnalign-string-function"><code>column.align</code></a>, but it's for the <a href="https://www.w3schools.com/cssref/pr_text_text-align.asp">CSS text-align</a> on header column.</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerAlign: <span class="hljs-string">'center'</span>
+}
+</code></pre>
+<p>Also, you can custom the align by a callback function:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerAlign: <span class="hljs-function">(<span class="hljs-params">column, colIndex</span>) =&gt;</span> {
+    <span class="hljs-comment">// column is an object and perform itself</span>
+    <span class="hljs-comment">// return custom title here</span>
+  }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>String</code> will be the result of element headerAlign.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnevents-object"></a><a href="#columnevents-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.events - [Object]</h2>
+<p>You can assign any <a href="https://www.w3schools.com/tags/ref_eventattributes.asp">HTML Event</a> on table column via event property:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  events: {
+    <span class="hljs-attr">onClick</span>: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> { ... }
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnheaderevents-object"></a><a href="#columnheaderevents-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerEvents - [Object]</h2>
+<p><code>headerEvents</code> same as <a href="#columnevents-object"><code>column.events</code></a> but this is for header column.</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerEvents: {
+    <span class="hljs-attr">onClick</span>: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> { ... }
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnattrs-object-function"></a><a href="#columnattrs-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.attrs - [Object | Function]</h2>
+<p>Via <code>attrs</code> property, You can customize table column <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes">HTML attribute</a> which allow user to configure the elements or adjust their behavior.</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  attrs: {
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'bar'</span>,
+    <span class="hljs-string">'data-test'</span>: <span class="hljs-string">'foo'</span>
+  }
+}
+</code></pre>
+<p>Not only <code>Object</code>, <code>callback function</code> is also acceptable. It takes <strong>4</strong> arguments and an <code>Object</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">attrs</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>cell</code>: The value of current cell.</li>
+<li><code>row</code>: The value of <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>rowIndex</code>: The index of the current <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>Object</code> will be the result of element HTML attributes.</p>
+<blockquote>
+<p>Caution:<br>
+If <code>column.classes</code>, <code>column.style</code>, <code>column.title</code>, <code>column.hidden</code> or <code>column.align</code> was given at the same time, property <code>attrs</code> has lower priorty and it will be overwrited:</p>
+</blockquote>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  title: <span class="hljs-literal">true</span>, <span class="hljs-comment">// get higher priority</span>
+  attrs: { <span class="hljs-attr">title</span>: <span class="hljs-string">'test'</span> }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnheaderattrs-object-function"></a><a href="#columnheaderattrs-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerAttrs - [Object | Function]</h2>
+<p><code>headerAttrs</code> is similiar to <a href="#columnattrs-object-function"><code>column.attrs</code></a> but it works for header column.</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerAttrs: {
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'bar'</span>,
+    <span class="hljs-string">'data-test'</span>: <span class="hljs-string">'foo'</span>
+  }
+}
+</code></pre>
+<p>Additionally, customize the header attributes by a <strong>2</strong> arguments callback function:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  headerAttrs: <span class="hljs-function">(<span class="hljs-params">column, colIndex</span>) =&gt;</span> ({
+    <span class="hljs-comment">// return customized HTML attribute here</span>
+  })
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A new <code>Object</code> will be the result of element headerAttrs.</p>
+<blockquote>
+<p>Caution:<br>
+Same as <a href="#columnattrs-object-function">column.attrs</a>, it has lower priority and will be
+overwrited when other props related to HTML attributes were given.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" name="headersortingclasses-string-function"></a><a href="#headersortingclasses-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>headerSortingClasses - [String | Function]</h2>
+<p><code>headerSortingClasses</code> allows to customize <code>class</code> for header cell when this column is sorting.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> headerSortingClasses = <span class="hljs-string">'demo-sorting'</span>;
+</code></pre>
+<p>Furthermore, it also accepts a callback which takes <strong>4</strong> arguments and <code>String</code> is expected to return:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> headerSortingClasses = <span class="hljs-function">(<span class="hljs-params">column, sortOrder, isLastSorting, colIndex</span>) =&gt;</span> { ... }
+</code></pre>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>sortOrder</code>: The order of current sorting</li>
+<li><code>isLastSorting</code>: Is the last one of sorted columns.</li>
+<li><code>colIndex</code>: The index of the current column being processed in BootstrapTable.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="headersortingstyle-object-function"></a><a href="#headersortingstyle-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>headerSortingStyle - [Object | Function]</h2>
+<p>It's similiar to <a href="#headersortingclasses-string-function">headerSortingClasses</a>. It allows to customize the style of header cell when this column is sorting. A style <code>Object</code> and <code>callback</code> are acceptable. <code>callback</code> takes <strong>4</strong> arguments and an <code>Object</code> is expected to return:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> sortingHeaderStyle = {
+  <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'red'</span>
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columneditable-bool-function"></a><a href="#columneditable-bool-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.editable - [Bool | Function]</h2>
+<p><code>column.editable</code> default is true, means every column is editable if you configure <a href="./README.md#cellEdit"><code>cellEdit</code></a>. But you can disable some columns editable via setting <code>false</code>.</p>
+<p>If a callback function given, you can control the editable level as cell level:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  editable: <span class="hljs-function">(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) =&gt;</span> {
+    <span class="hljs-comment">// return true or false;</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnvalidator-function"></a><a href="#columnvalidator-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.validator - [Function]</h2>
+<p><code>column.validator</code> used for validate the data when cell on updating. it's should accept a callback function with following argument:
+<code>newValue</code>, <code>row</code> and <code>column</code>:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  validator: <span class="hljs-function">(<span class="hljs-params">newValue, row, column</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> ...;
+  }
+}
+</code></pre>
+<p>The return value can be a bool or an object. If your valiation is pass, return <code>true</code> explicitly. If your valiation is invalid, return following object instead:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">valid</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">message</span>: <span class="hljs-string">'SOME_REASON_HERE'</span>
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columneditcellstyle-object-function"></a><a href="#columneditcellstyle-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.editCellStyle - [Object | Function]</h2>
+<p>You can use <code>column.editCellStyle</code> to custom the style of <code>&lt;td&gt;</code> when cell editing. It like most of customizable functionality, it also accept a callback function with following params:</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>cell</code>: The value of current cell.</li>
+<li><code>row</code>: The object of <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>rowIndex</code>: The index of the current <code>row</code> being processed in the <code>BootstrapTable</code>.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">editCellStyle</span>: { ... }
+}
+</code></pre>
+<p>Or take a callback function</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">editCellStyle</span>: <span class="hljs-function">(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) =&gt;</span> {
+    <span class="hljs-comment">// it is suppose to return an object</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columneditcellclasses-string-function"></a><a href="#columneditcellclasses-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.editCellClasses - [String | Function]</h2>
+<p>You can use <code>column.editCellClasses</code> to add custom class on <code>&lt;td&gt;</code> when cell editing. It's same as <a href="#columneditcellstyle-object-function"><code>column.editCellStyle</code></a> which also accept a callback function to able to custom your class more flexible. Following is the arguments of this callback function: <code>cell</code>, <code>row</code>, <code>rowIndex</code>, <code>colIndex</code>.</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">editCellClasses</span>: <span class="hljs-string">'custom-class'</span>
+}
+</code></pre>
+<p>Or take a callback function</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">editCellClasses</span>: <span class="hljs-function">(<span class="hljs-params">cell, row, rowIndex, colIndex</span>) =&gt;</span> {
+    <span class="hljs-comment">// it is suppose to return a string</span>
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnfilter-object"></a><a href="#columnfilter-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.filter - [Object]</h2>
+<p>Configure <code>column.filter</code> will able to setup a column level filter on the header column. Currently, <code>react-bootstrap-table2</code> support following filters:</p>
+<ul>
+<li>Text Filter</li>
+</ul>
+<p>We have a quick example to show you how to use <code>column.filter</code>:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> { textFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-comment">// omit...</span>
+{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">filter</span>: textFilter()
+}
+</code></pre>
+<p>For some reason of simple customization, <code>react-bootstrap-table2</code> allow you to pass some props to filter factory function. Please check <a href="https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/master/packages/react-bootstrap-table2-filter/README.md">here</a> for more detail tutorial.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnfiltervalue-function"></a><a href="#columnfiltervalue-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.filterValue - [Function]</h2>
+<p>Sometimes, if the cell/column value that you don't want to filter on them, you can define <code>filterValue</code> to return a actual value you wanna be filterd:</p>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>cell</code>: The value of current cell.</li>
+<li><code>row</code>: The value of current row.</li>
+</ul>
+<p><strong>Return value</strong></p>
+<p>A final <code>String</code> value you want to be filtered.</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// omit...</span>
+{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">filter</span>: textFilter(),
+  <span class="hljs-attr">filterValue</span>: <span class="hljs-function">(<span class="hljs-params">cell, row</span>) =&gt;</span> owners[cell]
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="table-props.html">← BootstrapTable Props</a><a class="docs-next button" href="cell-edit-props.html">Cell Editing Props →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>
