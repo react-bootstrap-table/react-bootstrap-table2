@@ -3,17 +3,9 @@
   "version": "0.0.1",
   "description": "it's a loading overlay component for react-bootstrap-table2",
   "main": "./lib",
-  "scripts": {
-    "prepublish": "yarn build",
-    "build": "rimraf ./lib && babel ./src -d lib"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "react-loading-overlay": "0.2.8"
-  },
-  "devDependencies": {
-    "babel-cli": "6.26.0",
-    "rimraf": "2.6.2"
   }
 }
