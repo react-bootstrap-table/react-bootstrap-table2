@@ -12,7 +12,7 @@ $ npm install react-bootstrap-table2 --save
 
 ## Add CSS
 
-> `react-bootstrap-table2` compatible with bootstrap 3 and 4 but you need to add bootstrap css in your application firstly.
+> `react-bootstrap-table2` need you to add bootstrap css in your application firstly. About bootstrap css, we only compatible with bootstrap 3 but will start to compatible for bootstrap 4 on **v0.2.0**
 
 Finish above step, let's add the `react-bootstrap-table2` styles: 
 

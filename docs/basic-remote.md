@@ -30,4 +30,4 @@ Because, **sort** and **filter** need to work on overall data. In the remote pag
 
 You can see [this](../storybook/index.html?selectedKind=Remote&selectedStory=Remote%20All) example to see how it work for above case.   
 
-A good news is we are consider to easing this limitation through partical sorting/filtering on current page.
+A good news is we are consider to easing this limitation through partial sorting/filtering on current page.

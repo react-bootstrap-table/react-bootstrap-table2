@@ -27,6 +27,7 @@ authorURL: https://twitter.com/allenfang_tw
 
 ### 0.2.0
 * Expand row
+* Start compatible for bootstrap@4
 * Sort management(External sort)
 * Work on partial data(sort, filter) for pagination(remote or not remote)
 
