@@ -2,7 +2,7 @@
   "name": "react-bootstrap-table2-editor",
   "version": "0.0.1",
   "description": "it's the editor addon for react-bootstrap-table2",
-  "main": "src/index.js",
+  "main": "./dist/react-bootstrap-table2-editor.min.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

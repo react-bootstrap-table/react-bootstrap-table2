@@ -2,7 +2,7 @@
   "name": "react-bootstrap-table2",
   "version": "0.0.1",
   "description": "Rebuilt for react-bootstrap-table",
-  "main": "./lib",
+  "main": "./dist/react-bootstrap-table2.min.js",
   "author": "",
   "license": "ISC"
 }
