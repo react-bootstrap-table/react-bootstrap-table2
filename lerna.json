@@ -3,5 +3,15 @@
   "packages": [
     "packages/*"
   ],
-  "version": "0.0.0"
+  "version": "independent",  
+  "changelog": {
+    "repo": "react-bootstrap-table/react-bootstrap-table2",
+    "labels": {
+      "breaking change": ":boom: Breaking Change",
+      "enhancement": ":rocket: Enhancement",
+      "bug": ":bug: Bug Fix",
+      "document": ":memo: Documentation"
+    },
+    "cacheDir": ".changelog"
+  }
 }
