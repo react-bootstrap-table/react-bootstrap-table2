@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>react-bootstrap-table2 Blog</title>
+        <link>https://react-bootstrap-table.github.io/blog</link>
+        <description>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</description>
+        <lastBuildDate>Wed, 24 Jan 2018 06:00:00 GMT</lastBuildDate>
+        <docs>http://blogs.law.harvard.edu/tech/rss</docs>
+        <generator>Feed for Node.js</generator>
+        <image>
+            <title>react-bootstrap-table2 Blog</title>
+            <url>https://react-bootstrap-table.github.ioundefined</url>
+            <link>https://react-bootstrap-table.github.io/blog</link>
+        </image>
+        <copyright>Copyright © 2018 react-bootstrap-table2</copyright>
+        <item>
+            <title><![CDATA[Roadmap]]></title>
+            <link>https://react-bootstrap-table.github.io/blog/2018/01/24/release-plan.html</link>
+            <guid>https://react-bootstrap-table.github.io/blog/2018/01/24/release-plan.html</guid>
+            <pubDate>Wed, 24 Jan 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[## 2018 Q1
+
+### 0.1.0 
+* First drop
+
+### 0.1.1
+* Select Filter
+* Regex Filter
+
+### 0.1.2
+* Date Filter
+* Number Filter
+
+### 0.1.3
+* Filter functionality enhancement
+  * Clean filter or clean all
+  * Programmatically filter 
+
+### 0.1.4
+* Custom Filter]]></description>
+        </item>
+        <item>
+            <title><![CDATA[New Version 0.1.0]]></title>
+            <link>https://react-bootstrap-table.github.io/blog/2018/01/24/new-version-0.1.0.html</link>
+            <guid>https://react-bootstrap-table.github.io/blog/2018/01/24/new-version-0.1.0.html</guid>
+            <pubDate>Wed, 24 Jan 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[## Preface
+
+About five months works, we finally get a first drop for `react-bootstrap-table2`. I just want to say that I'm very sorry to let you guys to wait for a long time.   
+
+I know a lots of people experienced many bugs or feel hard to customize]]></description>
+        </item>
+    </channel>
+</rss>
