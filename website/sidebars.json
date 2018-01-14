@@ -14,7 +14,8 @@
       "basic-pagination"
     ],
     "Remote Table": [
-      "basic-remote"
+      "basic-remote",
+      "overlay"
     ]
   },
   "api": {

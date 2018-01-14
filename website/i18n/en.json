@@ -27,6 +27,8 @@
     "filter-props": "Column Filter Props",
     "getting-started": "Getting Started",
     "Getting Started": "Getting Started",
+    "overlay": "Remote Loading/Overlay",
+    "Overlay": "Overlay",
     "pagination-props": "Pagination Props",
     "row-select-props": "Row Selection Props",
     "table-props": "BootstrapTable Props",
