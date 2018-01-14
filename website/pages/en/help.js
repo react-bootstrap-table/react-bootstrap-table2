@@ -18,15 +18,15 @@ class Help extends React.Component {
     const supportLinks = [
       {
         content:
-          'Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)',
+          'Learn more using the [documentation on this site.](../docs/about.html)',
         title: 'Browse Docs',
       },
       {
-        content: 'Ask questions about the documentation and project',
+        content: '<a href="https://github.com/react-bootstrap-table/react-bootstrap-table2/issues" target="_blank" >Ask questions</a> about the documentation and project',
         title: 'Join the community',
       },
       {
-        content: "Find out what's new with this project",
+        content: '<a href="../blog" target="_blank">Find out</a> what\'s new with this project',
         title: 'Stay up to date',
       },
     ];
@@ -38,7 +38,7 @@ class Help extends React.Component {
             <header className="postHeader">
               <h2>Need help?</h2>
             </header>
-            <p>This project is maintained by a dedicated group of people.</p>
+            <p>This project is maintained by a dedicated group of <b><a href="https://github.com/orgs/react-bootstrap-table/people" target="_blank">people</a></b>.</p>
             <GridBlock contents={supportLinks} layout="threeColumn" />
           </div>
         </Container>

@@ -20,7 +20,7 @@ const siteConfig = {
   tagline: 'Next Generation of react-bootstrap-table',
   url: 'https://react-bootstrap-table.github.io' /* your website url */,
   baseUrl: '/react-bootstrap-table2/' /* base url for your project */,
-  projectName: 'react-boostrap-table2-docs',
+  projectName: 'react-bootstrap-table2',
   headerLinks: [
     {doc: 'about', label: 'Docs'},
     {doc: 'table-props', label: 'API'},
@@ -31,7 +31,7 @@ const siteConfig = {
   /* path to images for header/footer */
   // headerIcon: 'img/docusaurus.svg',
   // footerIcon: 'img/docusaurus.svg',
-  favicon: 'img/favicon.png',
+  // favicon: 'img/favicon.png',
   /* colors for website */
   colors: {
     primaryColor: '#294E80',
@@ -42,8 +42,8 @@ const siteConfig = {
     'Copyright © ' +
     new Date().getFullYear() +
     ' react-bootstrap-table2',
-  // organizationName: 'deltice', // or set an env variable ORGANIZATION_NAME
-  // projectName: 'test-site', // or set an env variable PROJECT_NAME
+  organizationName: 'react-bootstrap-table', // or set an env variable ORGANIZATION_NAME
+  projectName: 'react-bootstrap-table2', // or set an env variable PROJECT_NAME
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks
     theme: 'default',
