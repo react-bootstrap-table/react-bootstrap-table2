@@ -6,7 +6,7 @@ import _ from 'react-bootstrap-table2/src/utils';
 import remoteResolver from 'react-bootstrap-table2/src/props-resolver/remote-resolver';
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
 import Store from 'react-bootstrap-table2/src/store';
-import filter, { textFilter } from '../src';
+import filter, { textFilter } from '..';
 import wrapperFactory from '../src/wrapper';
 import { FILTER_TYPE } from '../src/const';
 

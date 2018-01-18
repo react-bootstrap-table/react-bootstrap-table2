@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, render } from 'enzyme';
 import LoadingOverlay from 'react-loading-overlay';
 
-import overlayFactory from '../src';
+import overlayFactory from '..';
 
 describe('overlayFactory', () => {
   let wrapper;

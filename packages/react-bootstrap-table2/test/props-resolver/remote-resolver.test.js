@@ -3,7 +3,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Container from '../../src/';
+import Container from '../../';
 // import remoteResolver from '../../src/props-resolver/remote-resolver';
 
 describe('remoteResolver', () => {
