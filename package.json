@@ -5,13 +5,17 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "publish": "lerna run build && lerna publish --silent",
+    "build": "./node_modules/.bin/gulp prod",
     "start": "node -r babel-register ./node_modules/.bin/webpack-dev-server --config webpack.config.babel.js",
     "lint": "eslint ./packages --ext .js --ext .jsx --ignore-path .gitignore",
     "pretest": "yarn lint --cache",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook"
+    "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook",
+    "gh-pages:clean": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:clean",
+    "gh-pages:build": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:build"
   },
   "repository": {
     "type": "git",
@@ -24,6 +28,7 @@
   },
   "homepage": "https://github.com/react-bootstrap-table/react-bootstrap-table2#readme",
   "devDependencies": {
+    "babel-cli": "6.26.0",
     "babel-core": "6.25.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -41,6 +46,13 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.2.1",
+    "gulp": "4.0.0",
+    "gulp-babel": "7.0.0",
+    "gulp-clean": "0.4.0",
+    "gulp-clean-css": "3.9.2",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "3.1.0",
+    "gulp-shell": "0.6.5",
     "html-webpack-plugin": "2.30.1",
     "jest": "20.0.4",
     "jsdom": "11.2.0",

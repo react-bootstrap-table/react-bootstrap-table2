@@ -4,7 +4,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import BootstrapTable from '../src/bootstrap-table';
-import Container from '../src';
+import Container from '../index.js';
 
 describe('container', () => {
   let wrapper;

@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "gh-pages:clean": "rimraf ./storybook-static",
+    "gh-pages:build": "build-storybook"
   },
   "author": "",
   "license": "ISC",
@@ -16,16 +18,12 @@
     "react-dom": "^15.0.0"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
-    "react-bootstrap-table2": "0.0.1",
-    "react-bootstrap-table2-editor": "0.0.1",
-    "react-bootstrap-table2-paginator": "0.0.1",
-    "react-bootstrap-table2-overlay": "0.0.1",
-    "react-bootstrap-table2-filter": "0.0.1"
+    "bootstrap": "^3.3.7"
   },
   "devDependencies": {
     "@storybook/addon-console": "^1.0.0",
     "@storybook/react": "^3.2.8",
+    "babel-preset-env": "^1.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",

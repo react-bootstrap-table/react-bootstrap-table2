@@ -1,6 +1,6 @@
-import TextFilter from './components/text';
-import wrapperFactory from './wrapper';
-import * as Comparison from './comparison';
+import TextFilter from './src/components/text';
+import wrapperFactory from './src/wrapper';
+import * as Comparison from './src/comparison';
 
 export default (options = {}) => ({
   wrapperFactory,

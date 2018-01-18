@@ -1,4 +1,4 @@
-import wrapperFactory from './wrapper';
+import wrapperFactory from './src/wrapper';
 
 export default (options = {}) => ({
   wrapperFactory,

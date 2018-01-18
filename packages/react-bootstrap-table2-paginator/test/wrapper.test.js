@@ -6,7 +6,7 @@ import { shallow } from 'enzyme';
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
 import remoteResolver from 'react-bootstrap-table2/src/props-resolver/remote-resolver';
 import Store from 'react-bootstrap-table2/src/store';
-import paginator from '../src';
+import paginator from '..';
 import wrapperFactory from '../src/wrapper';
 import Pagination from '../src/pagination';
 import Const from '../src/const';

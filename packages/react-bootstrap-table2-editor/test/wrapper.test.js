@@ -6,7 +6,7 @@ import _ from 'react-bootstrap-table2/src/utils';
 import remoteResolver from 'react-bootstrap-table2/src/props-resolver/remote-resolver';
 import Store from 'react-bootstrap-table2/src/store';
 import BootstrapTable from 'react-bootstrap-table2/src/bootstrap-table';
-import cellEditFactory from '../src';
+import cellEditFactory from '..';
 import * as Const from '../src/const';
 import wrapperFactory from '../src/wrapper';
 
