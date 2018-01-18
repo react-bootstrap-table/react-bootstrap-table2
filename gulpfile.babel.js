@@ -2,59 +2,83 @@ import gulp from 'gulp';
 import babel from 'gulp-babel';
 import sass from 'gulp-sass';
 import cleanCSS from 'gulp-clean-css';
+import cleanDir from 'gulp-clean';
 import rename from 'gulp-rename';
-import rimraf from 'rimraf';
-import * as path from 'path';
+import shell from 'gulp-shell';
 
-gulp.task('default', ['prod']);
+const LIB = 'lib';
+const DIST = 'dist';
+const TEST = 'test';
+const PKG_PATH = './packages';
+const NODE_MODULES = 'node_modules';
 
-gulp.task('clean', () => {
-  [
-    path.join(__dirname, 'packages/react-bootstrap-table2/lib'),
-    path.join(__dirname, 'packages/react-bootstrap-table2-editor/lib'),
-    path.join(__dirname, 'packages/react-bootstrap-table2-filter/lib'),
-    path.join(__dirname, 'packages/react-bootstrap-table2-overlay/lib'),
-    path.join(__dirname, 'packages/react-bootstrap-table2-paginator/lib')
-  ].forEach((dir) => {
-    rimraf.sync(dir);
-  });
-});
+const JS_PKGS = [
+  'react-bootstrap-table2',
+  'react-bootstrap-table2-editor',
+  'react-bootstrap-table2-filter',
+  'react-bootstrap-table2-overlay',
+  'react-bootstrap-table2-paginator'
+].reduce((pkg, curr) => `${curr}|${pkg}`, '');
 
-gulp.task('build-js', () => {
-  [
-    'react-bootstrap-table2',
-    'react-bootstrap-table2-editor',
-    'react-bootstrap-table2-filter',
-    'react-bootstrap-table2-overlay',
-    'react-bootstrap-table2-paginator'
-  ].forEach((pkg) => {
-    gulp.src([
-      `./packages/${pkg}/**/*.js`,
-      `!packages/${pkg}/+(test|dist|node_modules)/**/*.js`
+const JS_SKIPS = `+(${TEST}|${LIB}|${DIST}|${NODE_MODULES})`;
+
+const STYLE_PKGS = [
+  'react-bootstrap-table2',
+  'react-bootstrap-table2-paginator'
+].reduce((pkg, curr) => `${curr}|${pkg}`, '');
+
+const STYLE_SKIPS = `+(${NODE_MODULES})`;
+
+
+function clean() {
+  return gulp
+    .src(`./packages/+(${JS_PKGS})/+(${LIB}|${DIST})`, { allowEmpty: true })
+    .pipe(cleanDir());
+}
+
+function scripts() {
+  return gulp
+    .src([
+      `./packages/+(${JS_PKGS})/**/*.js`,
+      `!packages/+(${JS_PKGS})/${JS_SKIPS}/**/*.js`
     ])
-      .pipe(babel())
-      .pipe(gulp.dest(`./packages/${pkg}/lib`));
-  });
-});
+    .pipe(babel())
+    .pipe(rename((path) => {
+      if (path.dirname.indexOf('src') > -1) {
+        path.dirname = path.dirname.replace('src', `${LIB}/src`);
+      } else {
+        path.dirname += `/${LIB}`;
+      }
+    }))
+    .pipe(gulp.dest(PKG_PATH));
+}
 
-gulp.task('build-sass', () => {
-  [
-    'react-bootstrap-table2',
-    'react-bootstrap-table2-paginator'
-  ].forEach((pkg) => {
-    gulp
-      .src([
-        `./packages/${pkg}/style/**/*.scss`,
-        `!packages/${pkg}/+(dist|node_modules)/**/*.scss`
-      ])
-      .pipe(sass().on('error', sass.logError))
-      .pipe(gulp.dest(`./packages/${pkg}/dist`))
-      .pipe(cleanCSS({ compatibility: 'ie8' }))
-      .pipe(rename((path) => {
-        path.extname = '.min.css';
-      }))
-      .pipe(gulp.dest(`./packages/${pkg}/dist`));
-  });
-});
+function styles() {
+  return gulp
+    .src([
+      `./packages/+(${STYLE_PKGS})/style/**/*.scss`,
+      `!packages/+(${STYLE_PKGS})/${STYLE_SKIPS}/**/*.scss`
+    ])
+    .pipe(sass().on('error', sass.logError))
+    .pipe(rename((path) => {
+      path.dirname = path.dirname.replace('style', DIST);
+    }))
+    .pipe(gulp.dest(PKG_PATH))
+    .pipe(cleanCSS({ compatibility: 'ie8' }))
+    .pipe(rename((path) => {
+      path.extname = '.min.css';
+    }))
+    .pipe(gulp.dest(PKG_PATH));
+}
 
-gulp.task('prod', ['clean', 'build-js', 'build-sass']);
+function umd() {
+  return gulp.src('./webpack.prod.config.babel.js')
+    .pipe(shell(['webpack --config <%= file.path %>']));
+}
+
+const buildJS = gulp.parallel(umd, scripts);
+const buildCSS = styles;
+const build = gulp.series(clean, gulp.parallel(buildJS, buildCSS));
+
+gulp.task('prod', build);
+gulp.task('default', build);

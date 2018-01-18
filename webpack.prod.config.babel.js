@@ -1,21 +1,18 @@
 import * as path from 'path';
 import webpack from 'webpack';
 
-const sourceStylePath = path.join(__dirname, 'packages/react-bootstrap-table2/style');
-const paginationSourceStylePath = path.join(__dirname, 'packages/react-bootstrap-table2-paginator/style');
-
 module.exports = {
   entry: {
-    'react-bootstrap-table2/dist/react-bootstrap-table2': ['./packages/react-bootstrap-table2'],
-    'react-bootstrap-table2/dist/react-bootstrap-table2.min': ['./packages/react-bootstrap-table2'],
-    'react-bootstrap-table2-editor/dist/react-bootstrap-table2-editor': ['./packages/react-bootstrap-table2-editor'],
-    'react-bootstrap-table2-editor/dist/react-bootstrap-table2-editor.min': ['./packages/react-bootstrap-table2-editor'],
-    'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter': ['./packages/react-bootstrap-table2-filter'],
-    'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min': ['./packages/react-bootstrap-table2-filter'],
-    'react-bootstrap-table2-overlay/dist/react-bootstrap-table2-overlay': ['./packages/react-bootstrap-table2-overlay'],
-    'react-bootstrap-table2-overlay/dist/react-bootstrap-table2-overlay.min': ['./packages/react-bootstrap-table2-overlay'],
-    'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator': ['./packages/react-bootstrap-table2-paginator'],
-    'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min': ['./packages/react-bootstrap-table2-paginator']
+    'react-bootstrap-table2/dist/react-bootstrap-table2': './packages/react-bootstrap-table2/index.js',
+    'react-bootstrap-table2/dist/react-bootstrap-table2.min': './packages/react-bootstrap-table2/index.js',
+    'react-bootstrap-table2-editor/dist/react-bootstrap-table2-editor': './packages/react-bootstrap-table2-editor/index.js',
+    'react-bootstrap-table2-editor/dist/react-bootstrap-table2-editor.min': './packages/react-bootstrap-table2-editor/index.js',
+    'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter': './packages/react-bootstrap-table2-filter/index.js',
+    'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min': './packages/react-bootstrap-table2-filter/index.js',
+    'react-bootstrap-table2-overlay/dist/react-bootstrap-table2-overlay': './packages/react-bootstrap-table2-overlay/index.js',
+    'react-bootstrap-table2-overlay/dist/react-bootstrap-table2-overlay.min': './packages/react-bootstrap-table2-overlay/index.js',
+    'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator': './packages/react-bootstrap-table2-paginator/index.js',
+    'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min': './packages/react-bootstrap-table2-paginator/index.js'
   },
   devtool: 'source-map',
   output: {
@@ -44,17 +41,11 @@ module.exports = {
       enforce: 'pre',
       test: /\.js?$/,
       exclude: /node_modules/,
-      // include: [sourcePath],
       loader: 'eslint-loader'
     }, {
       test: /\.js?$/,
       use: ['babel-loader'],
       exclude: /node_modules/
-      // include: [sourcePath]
-    }, {
-      test: /\.scss$/,
-      use: ['style-loader', 'css-loader', 'sass-loader'],
-      include: [sourceStylePath, paginationSourceStylePath]
     }]
   },
   plugins: [
