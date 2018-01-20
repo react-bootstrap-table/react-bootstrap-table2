@@ -9,7 +9,7 @@ $ lerna bootstrap  # ./node_modules/.bin/lerna bootstrap
 ```
 ### Development
 ```bash
-$ npm start
+$ npm run storybook
 ```
 
 ### Launch StoryBook
