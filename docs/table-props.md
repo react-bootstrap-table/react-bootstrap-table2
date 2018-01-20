@@ -179,17 +179,17 @@ $ npm install react-bootstrap-table2-paginator --save
 After installation of `react-bootstrap-table2-paginator`, you can enable pagination on `react-bootstrap-table2` easily:
 
 ```js
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 
 // omit...
 
-<BootstrapTable data={ data } columns={ columns } pagination={ paginator() } />
+<BootstrapTable data={ data } columns={ columns } pagination={ paginationFactory() } />
 ```
 
-`paginator` is a function actually and allow to pass some pagination options, following we list all the available options:
+`paginationFactory` is a function actually and allow to pass some pagination options, following we list all the available options:
 
 ```js
-paginator({
+paginationFactory({
   page, // Specify the current page. It's necessary when remote is enabled
   sizePerPage, // Specify the size per page. It's necessary when remote is enabled
   totalSize, // Total data size. It's necessary when remote is enabled
