@@ -1,0 +1,28 @@
+# react-bootstrap-table2-pagination
+
+`react-bootstrap-table2` separate the pagination code base to [`react-bootstrap-table2-pagination`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/develop/packages/react-bootstrap-table2-paginator), so there's a little bit different when you use pagination. In the following, we are going to show you how to enable and configure the a pagination table
+
+**[Live Demo For Pagination](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Pagination)**
+
+-----
+
+## Install
+
+```sh
+$ npm install react-bootstrap-table2-pagination --save
+```
+
+## How
+
+Let's enable a pagination on your table:
+
+```js
+import paginator from 'react-bootstrap-table2-paginator';
+// omit...
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator() } />
+```
+
+## Customization
+
+See [pagination props](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/pagination-props.html)

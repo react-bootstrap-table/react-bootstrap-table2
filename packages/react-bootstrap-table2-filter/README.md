@@ -1,13 +1,24 @@
 # react-bootstrap-table2-filter
 
-## Filters
+`react-bootstrap-table2` separate the filter core code base to [`react-bootstrap-table2-filter`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/develop/packages/react-bootstrap-table2-filter), so there's a little bit different when you use column filter than `react-bootstrap-table`. In the following, we are going to show you how to enable the column filter:
 
-* Text (`textFilter`)
+**[Live Demo For Column Filter](https://github.com/react-bootstrap-table/react-bootstrap-table2/blob/gh-pages-src/storybook/index.html?selectedKind=Column%20Filter)**
 
-You can get all of above filters via import and these filters are a factory function to create a individual filter instance.   
-In addition, for some simple customization reasons, these factory function allow to pass some props.
+-----
 
-### Text Filter
+## Install
+
+```sh
+$ npm install react-bootstrap-table2-filter --save
+```
+
+You can get all types of filters via import and these filters are a factory function to create a individual filter instance. Currently, we support following filters:
+
+* TextFilter
+* **Coming soon!**
+
+## Text Filter
+Following is a quick demo for enable the column filter on **Product Price** column!!
 
 ```js
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
@@ -23,18 +34,20 @@ const columns = [
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-Following we list all the availabe props for `textFilter` function:
+In addition, we preserve all of the filter features and functionality in legacy `react-bootstrap-table`, but in different way to do it:
 
 ```js
-import { Comparator } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-filter';
 // omit...
 
-const customTextFilter = textFilter({
+const priceFilter = textFilter({
   placeholder: 'My Custom PlaceHolder',  // custom the input placeholder
-  style: { ... }, // your custom styles on input
   className: 'my-custom-text-filter', // custom classname on input
   defaultValue: 'test', // default filtering value
-  delay: 1000, // how long will trigger filtering after user typing, default is 500 ms
-  comparator: Comparator.EQ // default is Comparator.LIKE
+  comparator: Comparator.EQ, // default is Comparator.LIKE
+  style: { ... }, // your custom styles on input
+  delay: 1000 // how long will trigger filtering after user typing, default is 500 ms
 });
+
+// omit...
 ```
