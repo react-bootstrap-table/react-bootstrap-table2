@@ -2,13 +2,10 @@
 # Row selection
 `react-bootstrap-table2` supports the row selection feature. By passing prop `selectRow` to enable row selection. When you enable this feature, `react-bootstrap-table2` will append a new selection column at first. 
 
-
-## Available properties
-
-The following are available properties in `selectRow`:
-
-#### Required
+## Required
 * [mode (**required**)](#mode)
+
+## Optional
 * [style](#style)
 * [classes)](#classes)
 * [bgColor](#bgColor)
@@ -19,15 +16,13 @@ The following are available properties in `selectRow`:
 * [onSelectAll](#onSelectAll)
 * [hideSelectColumn](#hideSelectColumn)
 
-#### Optional
-
-## <a name="mode">selectRow.mode - [String]</a>
+### <a name="mode">selectRow.mode - [String]</a>
 
 Specifying the selection way for `single(radio)` or `multiple(checkbox)`. If `radio` was assigned, there will be a radio button in the selection column; otherwise, the `checkbox` instead.
 
 #### values
-* `radio`
-* `checkbox`
+* **radio**
+* **checkbox**
 
 #### examples
 
@@ -35,6 +30,7 @@ Specifying the selection way for `single(radio)` or `multiple(checkbox)`. If `ra
 const selectRow = {
   mode: 'radio' // single row selection
 };
+
 <BootstrapTable
   keyField='id'
   data={ products }
@@ -56,7 +52,7 @@ const selectRow = {
 />
 ```
 
-## <a name='style'>selectRow.style - [Object | Function]</a>
+### <a name='style'>selectRow.style - [Object | Function]</a>
 `selectRow.style` allow you to have custom style on selected rows:
 
 ```js
@@ -75,7 +71,7 @@ const selectRow = {
 };
 ```
 
-## <a name='classes'>selectRow.classes - [String | Function]</a>
+### <a name='classes'>selectRow.classes - [String | Function]</a>
 `selectRow.classes` allow you to add css class on selected rows:
 
 ```js
@@ -94,7 +90,7 @@ const selectRow = {
 };
 ```
 
-## <a name='bgColor'>selectRow.bgColor - [String | Function]</a>
+### <a name='bgColor'>selectRow.bgColor - [String | Function]</a>
 The backgroud color when row is selected
 
 ```js
@@ -115,7 +111,7 @@ const selectRow = {
 };
 ```
 
-## <a name='nonSelectable'>selectRow.nonSelectable - [Array]</a>
+### <a name='nonSelectable'>selectRow.nonSelectable - [Array]</a>
 This prop allow you to restrict some rows which can not be selected by user. `selectRow.nonSelectable` accept an rowkeys array.
 
 ```js
@@ -125,8 +121,8 @@ const selectRow = {
 };
 ```
 
-## <a name='clickToSelect'>selectRow.clickToSelect - [Bool]</a>
-Able to select row when clicking on row.
+### <a name='clickToSelect'>selectRow.clickToSelect - [Bool]</a>
+Allow user to select row by clicking on the row.
 
 ```js
 const selectRow = {
@@ -135,10 +131,10 @@ const selectRow = {
 };
 ```
 
-> Note: if you also enable [cellEdit](./cell-edit.md), the `selectRow.clickToSelect` will deactivate the functionality of cell editing   
+> Note: When you also enable [cellEdit](./cell-edit.md), the `selectRow.clickToSelect` will deactivate the functionality of cell editing   
 > If you want to click on row to select row and edit cell simultaneously, you are suppose to enable [`selectRow.clickToEdit`](#clickToEdit)
 
-## <a name='clickToEdit'>selectRow.clickToEdit - [Bool]</a>
+### <a name='clickToEdit'>selectRow.clickToEdit - [Bool]</a>
 Able to click to edit cell and select row
 
 ```js
@@ -149,7 +145,7 @@ const selectRow = {
 };
 ```
 
-## <a name='onSelect'>selectRow.onSelect - [Function]</a>
+### <a name='onSelect'>selectRow.onSelect - [Function]</a>
 This callback function will be called when a row is select/unselect and pass following three arguments:
 `row`, `isSelect` and `rowIndex`.
 
@@ -162,7 +158,7 @@ const selectRow = {
 };
 ```
 
-## <a name='onSelectAll'>selectRow.onSelectAll - [Function]</a>
+### <a name='onSelectAll'>selectRow.onSelectAll - [Function]</a>
 This callback function will be called when select/unselect all and it only work when you configure [`selectRow.mode`](#mode) as `checkbox`.
 
 ```js
@@ -174,7 +170,7 @@ const selectRow = {
 };
 ```
 
-## <a name='hideSelectColumn'>selectRow.hideSelectColumn - [Bool]</a>
+### <a name='hideSelectColumn'>selectRow.hideSelectColumn - [Bool]</a>
 Default is `false`, if you don't want to have a selection column, give this prop as `true`
 
 ```js

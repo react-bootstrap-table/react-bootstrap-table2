@@ -67,8 +67,8 @@ const cellEdit = {
 ```
 
 ### <a name='errorMessage'>cellEdit.errorMessage - [String]</a>
-This prop is not often used. Only used when you keep the error message in your application state and also handle the cell editing on remote mode.
+This prop is not often used. Only used when you want to keep the error message in your application state and also handle the cell editing on remote mode.
 
 ### <a name='onErrorMessageDisappear'>cellEdit.onErrorMessageDisappear - [Function]</a>
-This callback function will be called when error message discard.
+This callback function will be called when error message discard so that you can sync the newest error message to your state if you have.
 

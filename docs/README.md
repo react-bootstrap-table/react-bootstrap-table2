@@ -59,20 +59,20 @@ A special case for remote pagination:
 remote={ { pagination: true, filter: false, sort: false } }
 ```
 
-In pagination case, even you only specified the paignation need to handle as remote, `react-bootstrap-table2` will handle all the table changes(`filter`, `sort`) as remote mode, because `react-bootstrap-table` only know the data of current page, but filtering, searching or sort need to work on overall datas.
+There is a apecial case for remote pagination, even you only specified the paignation need to handle as remote, `react-bootstrap-table2` will handle all the table changes(filter, sort etc) as remote mode, because `react-bootstrap-table2` only know the data of current page, but filtering, searching or sort need to work on overall datas.
 
 ### <a name='loading'>loading - [Bool]</a>
 Telling if table is loading or not, for example: waiting data loading, filtering etc. It's **only** valid when [`remote`](#remote) is enabled.
-When `loading` is `true`, `react-bootstrap-table` will attend to render a overlay on table via [`overlay`](#overlay) prop, if [`overlay`](#overlay) prop is not given, `react-bootstrap-table` will ignore the overlay rendering.
+When `loading` is `true`, `react-bootstrap-table2` will attend to render a overlay on table via [`overlay`](#overlay) prop, if [`overlay`](#overlay) prop is not given, `react-bootstrap-table2` will ignore the overlay rendering.
 
 ### <a name='overlay'>overlay - [Function]</a>
-`overlay` accept a factory funtion which should returning a higher order component. By default, `react-bootstrap-table-overlay` can be a good option for you:
+`overlay` accept a factory funtion which should returning a higher order component. By default, `react-bootstrap-table2-overlay` can be a good option for you:
 
 ```sh
-$ npm install react-bootstrap-table-overlay
+$ npm install react-bootstrap-table2-overlay
 ```
 ```js
-import overlayFactory from 'react-bootstrap-table-overlay';
+import overlayFactory from 'react-bootstrap-table2-overlay';
 
 <BootstrapTable
   data={ data }

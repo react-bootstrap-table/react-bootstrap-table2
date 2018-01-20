@@ -73,7 +73,7 @@ dataField: 'address.city'
 ```
 
 ## <a name='text'>column.text (**required**) - [String]</a>
-`text` will be apply as the column text in header column, if your header is not only text and you want to customize your header column, please check [`column.headerFormatter`](#headerFormatter)
+`text` will be the column text in header column by default, if your header is not only text or you want to customize the header column, please check [`column.headerFormatter`](#headerFormatter)
 
 ## <a name='hidden'>column.hidden - [Bool]</a>
 `hidden` allow you to hide column when `true` given.
@@ -89,9 +89,9 @@ dataField: 'address.city'
 ## <a name='headerFormatter'>column.headerFormatter - [Function]</a>
 `headerFormatter` allow you to customize the header column and only accept a callback function which take three arguments and a JSX/String are expected for return.
 
-* `column`: column object itself
-* `colIndex`
-* `components`: it's an object which contain all of other react element, like sort caret or filter etc.
+* `column`: current column object itself
+* `colIndex`: index of current column
+* `components`: an object which contain all of other react element, like sort caret or filter etc.
 
 The third argument: `components` have following specified properties:
 ```js
@@ -131,7 +131,7 @@ It's availabe to have custom class on table column:
   classes: 'id-custom-cell'
 }
 ```
-In addition, `classes` also accept a callback function which have more power to custom the css class on each columns. This callback function take `4` arguments and a `string` is expect to return: 
+In addition, `classes` also accept a callback function which have more power to custom the css class on each columns. This callback function take **4** arguments and a `String` is expected to return:: 
 
 
 ```js
@@ -148,7 +148,7 @@ In addition, `classes` also accept a callback function which have more power to 
 
 **Return value**
 
-A new `String` will be the result of element class.
+A new `String` will be the result as element class.
 
 ## <a name='headerClasses'>column.headerClasses - [String | Function]</a>
 It's similar to [`column.classes`](#classes), `headerClasses` is availabe to have customized class on table header column:
@@ -185,7 +185,7 @@ It's availabe to have custom style on table column:
 }
 ```
 
-In addition, similar to [`column.classes`](#classes), `style` also accept a callback function which have more power to customize the `inline style` on each columns. This callback function takes `4` arguments and an `Object` is expect to return: 
+In addition, similar to [`column.classes`](#classes), `style` also accept a callback function which have more power to customize the `inline style` on each columns. This callback function takes **4** arguments and an `Object` is expect to return: 
 
 
 ```js
@@ -215,7 +215,7 @@ It's availabe to have customized inline-style on table header column:
 }
 ```
 
-Moreover, it also accept a callback function which takes 2 arguments and an `Object` is expect to return:
+Moreover, it also accept a callback function which takes **2** arguments and an `Object` is expect to return:
 
 ```js
 {
@@ -233,7 +233,7 @@ A new `Object` will be the result of element headerStyle.
 
 
 ## <a name='title'>column.title - [Bool | Function]</a>
-`react-bootstrap-table2` is disable [`HTML title`](https://www.w3schools.com/tags/tag_title.asp) as default. You can assign `title` as `true` to enable the HTML title on table column and take `cell content` as default value. Additionally, you could customize title via a callback. It takes `4` arguments and a `String` is expect to return: 
+`react-bootstrap-table2` is disable [`HTML title`](https://www.w3schools.com/tags/tag_title.asp) as default. You can assign `title` as `true` to enable the HTML title on table column and take `cell content` as default value. Additionally, you could customize title via a callback. It takes **4** arguments and a `String` is expect to return: 
 
 
 ```js
@@ -282,7 +282,7 @@ A new `String` will be the result of element headerTitle.
 ## <a name='align'>column.align - [String | Function]</a>
 You can configure the [CSS text-align](https://www.w3schools.com/cssref/pr_text_text-align.asp) for table column by `align` property. 
 
-Besides, `align` also accept a callback function for dynamically setting text align. It takes `4` arguments and a `String` is expect to return: 
+Besides, `align` also accept a callback function for dynamically setting text align. It takes **4** arguments and a `String` is expect to return: 
 
 ```js
 {
@@ -385,14 +385,14 @@ Not only `Object`, `callback function` is also acceptable. It takes `4` argument
 
 A new `Object` will be the result of element HTML attributes.
 
-#### * Caution
+> Caution:   
 
-If `column.classes`, `column.style`, `column.title`, `column.hidden` or `column.align` was given at the same time, property `attrs` has lower priorty and it will be overwrited.
+> If `column.classes`, `column.style`, `column.title`, `column.hidden` or `column.align` was given at the same time, property `attrs` has lower priorty and it will be overwrited.
 
 ```js
 {
   // omit...
-  title: true, // it will be chosen.
+  title: true, // get higher priority
   attrs: { title: 'test' }
 }
 ```
@@ -409,7 +409,7 @@ If `column.classes`, `column.style`, `column.title`, `column.hidden` or `column.
 }
 ```
 
-Additionally, customize the header attributes by a `2-arguments` callback function:
+Additionally, customize the header attributes by a **2** arguments callback function:
 
 ```js
 {
@@ -557,3 +557,24 @@ import { textFilter } from 'react-bootstrap-table2-filter';
 ```
 
 For some reason of simple customization, `react-bootstrap-table2` allow you to pass some props to filter factory function. Please check [here](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/master/packages/react-bootstrap-table2-filter/README.md) for more detail tutorial.
+
+## <a name='filterValue'>column.filterValue - [Function]</a>
+Sometimes, if the cell/column value that you don't want to filter on them, you can define `filterValue` to return a actual value you wanna be filterd:
+
+**Parameters**
+* `cell`: The value of current cell. 
+* `row`: The value of current row.
+
+**Return value**
+
+A final `String` value you want to be filtered.
+
+```js
+// omit...
+{
+  dataField: 'price',
+  text: 'Product Price',
+  filter: textFilter(),
+  filterValue: (cell, row) => owners[cell]
+}
+```
