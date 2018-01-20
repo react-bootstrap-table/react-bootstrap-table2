@@ -1,11 +1,12 @@
 {
   "name": "react-bootstrap-table2-editor",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.3",
   "description": "it's the editor addon for react-bootstrap-table2",
   "main": "./lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
@@ -26,10 +27,16 @@
     "react"
   ],
   "author": "AllenFang",
-  "contributors": [{
-    "name": "Chun-MingChen",
-    "email": "nick830314@gmail.com",
-    "url": "https://github.com/Chun-MingChen"
-  }],
-  "license": "MIT"
+  "contributors": [
+    {
+      "name": "Chun-MingChen",
+      "email": "nick830314@gmail.com",
+      "url": "https://github.com/Chun-MingChen"
+    }
+  ],
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
 }

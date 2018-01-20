@@ -27,10 +27,10 @@ import 'react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.m
 Let's enable a pagination on your table:
 
 ```js
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 // omit...
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator() } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginationFactory() } />
 ```
 
 ## Customization

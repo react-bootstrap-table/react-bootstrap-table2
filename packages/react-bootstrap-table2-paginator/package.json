@@ -1,12 +1,13 @@
 {
   "name": "react-bootstrap-table2-paginator",
-  "version": "0.0.1",
+  "version": "0.0.1-beta.3",
   "description": "it's the pagination addon for react-bootstrap-table2",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
   },
+  "license": "MIT",
   "keywords": [
     "react",
     "bootstrap",
@@ -23,10 +24,16 @@
     "react"
   ],
   "author": "AllenFang",
-  "contributors": [{
-    "name": "Chun-MingChen",
-    "email": "nick830314@gmail.com",
-    "url": "https://github.com/Chun-MingChen"
-  }],
-  "license": "MIT"
+  "contributors": [
+    {
+      "name": "Chun-MingChen",
+      "email": "nick830314@gmail.com",
+      "url": "https://github.com/Chun-MingChen"
+    }
+  ],
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
 }

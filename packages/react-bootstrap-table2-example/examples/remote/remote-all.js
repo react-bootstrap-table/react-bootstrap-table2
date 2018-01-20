@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
@@ -25,7 +25,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-filter';
 // ...
 
@@ -50,7 +50,7 @@ const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
       data={ data }
       columns={ columns }
       filter={ filterFactory() }
-      pagination={ paginator({ page, sizePerPage, totalSize }) }
+      pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
     />
     <Code>{ sourceCode }</Code>
@@ -130,7 +130,7 @@ const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
       data={ data }
       columns={ columns }
       filter={ filterFactory() }
-      pagination={ paginator({ page, sizePerPage, totalSize }) }
+      pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
     />
     <Code>{ sourceCode }</Code>

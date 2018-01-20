@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import overlayFactory from 'react-bootstrap-table2-overlay';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
@@ -22,7 +22,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import overlayFactory from 'react-bootstrap-table2-overlay';
 
 // ...
@@ -34,7 +34,7 @@ const RemotePagination = ({ loading, data, page, sizePerPage, onTableChange, tot
       keyField="id"
       data={ data }
       columns={ columns }
-      pagination={ paginator({ page, sizePerPage, totalSize }) }
+      pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
       overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
     />
@@ -99,7 +99,7 @@ const RemotePagination = ({ loading, data, page, sizePerPage, onTableChange, tot
       keyField="id"
       data={ data }
       columns={ columns }
-      pagination={ paginator({ page, sizePerPage, totalSize }) }
+      pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
       overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
     />

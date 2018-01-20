@@ -2,7 +2,7 @@
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -21,7 +21,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 // ...
 
 const options = {
@@ -48,7 +48,7 @@ const options = {
   }] // A numeric array is also available. the purpose of above example is custom the text
 };
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginator(options) } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginationFactory(options) } />
 `;
 const options = {
   paginationSize: 4,
@@ -76,7 +76,7 @@ const options = {
 
 export default () => (
   <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginator(options) } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } pagination={ paginationFactory(options) } />
     <Code>{ sourceCode }</Code>
   </div>
 );

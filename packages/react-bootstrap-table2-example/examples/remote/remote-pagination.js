@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -21,7 +21,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import paginator from 'react-bootstrap-table2-paginator';
+import paginationFactory from 'react-bootstrap-table2-paginator';
 // ...
 const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
   <div>
@@ -30,7 +30,7 @@ const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize })
       keyField="id"
       data={ data }
       columns={ columns }
-      pagination={ paginator({ page, sizePerPage, totalSize }) }
+      pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
     />
     <Code>{ sourceCode }</Code>
@@ -80,7 +80,7 @@ const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize })
       keyField="id"
       data={ data }
       columns={ columns }
-      pagination={ paginator({ page, sizePerPage, totalSize }) }
+      pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
     />
     <Code>{ sourceCode }</Code>
