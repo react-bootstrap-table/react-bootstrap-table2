@@ -21,8 +21,13 @@
     "type": "git",
     "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "AllenFang",
+  "contributors": [{
+    "name": "Chun-MingChen",
+    "email": "nick830314@gmail.com",
+    "url": "https://github.com/Chun-MingChen"
+  }],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/react-bootstrap-table/react-bootstrap-table2/issues"
   },

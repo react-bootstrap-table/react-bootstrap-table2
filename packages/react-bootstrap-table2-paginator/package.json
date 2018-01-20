@@ -3,6 +3,30 @@
   "version": "0.0.1",
   "description": "it's the pagination addon for react-bootstrap-table2",
   "main": "./lib/index.js",
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+  },
+  "keywords": [
+    "react",
+    "bootstrap",
+    "table",
+    "grid",
+    "react-bootstrap-table-addons",
+    "react-component"
+  ],
+  "files": [
+    "lib/",
+    "dist/"
+  ],
+  "tags": [
+    "react"
+  ],
+  "author": "AllenFang",
+  "contributors": [{
+    "name": "Chun-MingChen",
+    "email": "nick830314@gmail.com",
+    "url": "https://github.com/Chun-MingChen"
+  }],
+  "license": "MIT"
 }

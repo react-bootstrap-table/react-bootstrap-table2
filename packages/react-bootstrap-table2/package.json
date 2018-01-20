@@ -1,8 +1,31 @@
 {
   "name": "react-bootstrap-table2",
   "version": "0.0.1",
-  "description": "Rebuilt for react-bootstrap-table",
+  "description": "Next generation of react-bootstrap-table",
   "main": "./lib/index.js",
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+  },
+  "keywords": [
+    "react",
+    "bootstrap",
+    "table",
+    "grid",
+    "react-component"
+  ],
+  "files": [
+    "lib/",
+    "dist/"
+  ],
+  "tags": [
+    "react"
+  ],
+  "author": "AllenFang",
+  "contributors": [{
+    "name": "Chun-MingChen",
+    "email": "nick830314@gmail.com",
+    "url": "https://github.com/Chun-MingChen"
+  }],
+  "license": "MIT"
 }
