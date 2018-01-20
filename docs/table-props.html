@@ -137,14 +137,14 @@ When <code>loading</code> is <code>true</code>, <code>react-bootstrap-table2</co
 <pre><code class="hljs css sh">$ npm install react-bootstrap-table2-paginator --save
 </code></pre>
 <p>After installation of <code>react-bootstrap-table2-paginator</code>, you can enable pagination on <code>react-bootstrap-table2</code> easily:</p>
-<pre><code class="hljs css js"><span class="hljs-keyword">import</span> paginator <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-paginator'</span>;
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> paginationFactory <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-paginator'</span>;
 
 <span class="hljs-comment">// omit...</span>
 
-&lt;BootstrapTable data={ data } columns={ columns } pagination={ paginator() } /&gt;
+&lt;BootstrapTable data={ data } columns={ columns } pagination={ paginationFactory() } /&gt;
 </code></pre>
-<p><code>paginator</code> is a function actually and allow to pass some pagination options, following we list all the available options:</p>
-<pre><code class="hljs css js">paginator({
+<p><code>paginationFactory</code> is a function actually and allow to pass some pagination options, following we list all the available options:</p>
+<pre><code class="hljs css js">paginationFactory({
   page, <span class="hljs-comment">// Specify the current page. It's necessary when remote is enabled</span>
   sizePerPage, <span class="hljs-comment">// Specify the size per page. It's necessary when remote is enabled</span>
   totalSize, <span class="hljs-comment">// Total data size. It's necessary when remote is enabled</span>
