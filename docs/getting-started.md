@@ -6,8 +6,10 @@ sidebar_label: Getting Started
 
 ## Installation
 
+> Due to `react-bootstrap-table2` already taked on npm so that our npm module name is **`react-bootstrap-table-next`**. Anyway, we still use or mention `react-bootstrap-table2` in any our git repository, offical website and documents!!, ony the npm name is different!!!!
+
 ```sh
-$ npm install react-bootstrap-table2 --save
+$ npm install react-bootstrap-table-next --save
 ```
 
 ## Add CSS
@@ -18,16 +20,16 @@ Finish above step, let's add the `react-bootstrap-table2` styles:
 
 ```js
 // es5 
-require('react-bootstrap-table/dist/react-bootstrap-table2.min.css');
+require('react-bootstrap-table-next/dist/react-bootstrap-table2.min.css');
 
 // es6
-import 'react-bootstrap-table/dist/react-bootstrap-table2.min.css';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 ```
 
 ## Your First Table
 
 ```js
-import BootstrapTable from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 const products = [ ... ];
 const columns = [{

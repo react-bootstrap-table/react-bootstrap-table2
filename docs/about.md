@@ -14,3 +14,5 @@ sidebar_label: About
 * Improve handling of DOM events well
 * Support nest data
 * Support table footer
+
+> Due to `react-bootstrap-table2` already taked on npm so that our npm module name is **`react-bootstrap-table-next`**. Anyway, we still use or mention `react-bootstrap-table2` in any our git repository, offical website and documents!!, ony the npm name is different!!!!

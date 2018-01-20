@@ -56,7 +56,7 @@ Currently, we only support the editing cell style/class customization, in the fu
 ### Editing Cell
 
 * Customize the editing cell style via [column.editCellStyle](./column-props.html#columneditcellstyle-object-function)
-* Customize the editing cell classname via [column.editCellStyle](./column-props.html#columneditcellstyle-object-function)
+* Customize the editing cell classname via [column.editCellClasses](./column-props.html#columneditcellclasses-string-function)
 
 ## Validation
 
