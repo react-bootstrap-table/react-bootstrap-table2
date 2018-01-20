@@ -1,6 +1,6 @@
 import sinon from 'sinon';
-import _ from 'react-bootstrap-table2/src/utils';
-import Store from 'react-bootstrap-table2/src/store';
+import _ from 'react-bootstrap-table-next/src/utils';
+import Store from 'react-bootstrap-table-next/src/store';
 
 import { filters } from '../src/filter';
 import { FILTER_TYPE } from '../src/const';

@@ -1,4 +1,4 @@
-import Store from 'react-bootstrap-table2/src/store';
+import Store from 'react-bootstrap-table-next/src/store';
 import { getByCurrPage } from '../src/page';
 
 describe('Page Functions', () => {

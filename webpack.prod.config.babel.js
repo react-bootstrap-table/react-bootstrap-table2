@@ -3,8 +3,8 @@ import webpack from 'webpack';
 
 module.exports = {
   entry: {
-    'react-bootstrap-table2/dist/react-bootstrap-table2': './packages/react-bootstrap-table2/index.js',
-    'react-bootstrap-table2/dist/react-bootstrap-table2.min': './packages/react-bootstrap-table2/index.js',
+    'react-bootstrap-table2/dist/react-bootstrap-table-next': './packages/react-bootstrap-table2/index.js',
+    'react-bootstrap-table2/dist/react-bootstrap-table-next.min': './packages/react-bootstrap-table2/index.js',
     'react-bootstrap-table2-editor/dist/react-bootstrap-table2-editor': './packages/react-bootstrap-table2-editor/index.js',
     'react-bootstrap-table2-editor/dist/react-bootstrap-table2-editor.min': './packages/react-bootstrap-table2-editor/index.js',
     'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter': './packages/react-bootstrap-table2-filter/index.js',
