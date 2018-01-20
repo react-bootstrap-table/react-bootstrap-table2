@@ -1,7 +1,7 @@
 /* eslint react/no-multi-comp: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import BootstrapTable from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table-next';
 import paginator from 'react-bootstrap-table2-paginator';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
@@ -20,7 +20,7 @@ const columns = [{
 }];
 
 const sourceCode = `\
-import BootstrapTable from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table-next';
 import paginator from 'react-bootstrap-table2-paginator';
 // ...
 const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize }) => (

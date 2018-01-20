@@ -1,7 +1,7 @@
 /* eslint react/no-multi-comp: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import BootstrapTable from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table-next';
 import paginator from 'react-bootstrap-table2-paginator';
 import overlayFactory from 'react-bootstrap-table2-overlay';
 import Code from 'components/common/code-block';
@@ -21,7 +21,7 @@ const columns = [{
 }];
 
 const sourceCode = `\
-import BootstrapTable from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table-next';
 import paginator from 'react-bootstrap-table2-paginator';
 import overlayFactory from 'react-bootstrap-table2-overlay';
 

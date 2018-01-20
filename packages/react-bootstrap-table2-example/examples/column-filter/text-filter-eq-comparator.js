@@ -1,5 +1,5 @@
 import React from 'react';
-import BootstrapTable from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';

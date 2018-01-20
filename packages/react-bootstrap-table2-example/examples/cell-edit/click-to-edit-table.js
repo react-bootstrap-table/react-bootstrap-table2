@@ -1,7 +1,7 @@
 /* eslint react/prefer-stateless-function: 0 */
 import React from 'react';
 
-import BootstrapTable from 'react-bootstrap-table2';
+import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
