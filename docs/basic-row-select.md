@@ -6,7 +6,8 @@ sidebar_label: Row Selection
 
 For the table row selection functionality, the usage is almost same as `react-bootstrap-table`. If you are a user from legacy `react-bootstrap-table`, you can consider to skip this part.
 
-**[Live Demo For Row Selection](../storybook/index.html?selectedKind=Row%20Selection)**
+**[Live Demo For Row Selection](../storybook/index.html?selectedKind=Row%20Selection)**   
+**[API & Props Definition](./row-select-props.html)**
 
 -----
 

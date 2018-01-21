@@ -3,6 +3,19 @@ id: pagination-props
 title: Pagination Props
 ---
 
+Following we list all props for `paginationFactory` from [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator).
+
+```js
+import paginationFactory from 'react-bootstrap-table2-paginator';
+
+const pagination = paginationFactory({
+  page: 2,
+  ...
+});
+
+<BootstrapTable pagination={ pagination } ... />
+```
+
 ## Required
 **NONE**
 

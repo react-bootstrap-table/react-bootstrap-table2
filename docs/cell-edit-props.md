@@ -2,6 +2,19 @@
 id: cell-edit-props
 title: Cell Editing Props
 ---
+Following we list all props for `cellEditFactory` from [`react-bootstrap-table2-editor`](https://www.npmjs.com/package/react-bootstrap-table2-editor).
+
+```js
+import cellEditFactory from 'react-bootstrap-table2-editor';
+
+const cellEdit = cellEditFactory({
+  mode: 'click',
+  ...
+});
+
+<BootstrapTable cellEdit={ cellEdit } ... />
+```
+
 
 ## Required
 * [mode (**required**)](#celleditmode-string)

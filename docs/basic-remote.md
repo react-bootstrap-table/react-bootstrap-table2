@@ -8,6 +8,8 @@ sidebar_label: Work on Remote
 
 By default, `react-bootstrap-table2` always handle the data changes internally, such as sorting, paging, filtering etc. However, you may want to handle those logic or sync up to backend or Redux store so that `remote` can help you on it as well.
 
+**[Live Demo for Remote Table](../storybook/index.html?selectedKind=Remote)**   
+
 -----
 
 ## How

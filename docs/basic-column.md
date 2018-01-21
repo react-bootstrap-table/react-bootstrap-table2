@@ -7,7 +7,8 @@ sidebar_label: Work on Column
 Firstly, legacy `react-bootstrap-table` is hard to customize the DOM Event, Attributes on column or header column. In the `react-bootstrap-table2`, we make those bad design become more easy and flexible.
 
 **[Live Demo For Column](../storybook/index.html?selectedKind=Work%20on%20Columns)**   
-**[Live Demo For Header Column](../storybook/index.html?selectedKind=Work%20on%20Header%20Columns)**
+**[Live Demo For Header Column](../storybook/index.html?selectedKind=Work%20on%20Header%20Columns)**   
+**[API & Props Definition](./column-props.html)**
 
 -----
 

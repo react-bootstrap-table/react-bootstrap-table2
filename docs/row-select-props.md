@@ -3,6 +3,17 @@ id: row-select-props
 title: Row Selection Props
 ---
 
+Following we list all props for [`selectRow` props](./table-props.html#selectrow-object)
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  ...
+});
+
+<BootstrapTable selectRow={ selectRow } ... />
+```
+
 ## Required
 * [mode (**required**)](#selectrowmode-string)
 

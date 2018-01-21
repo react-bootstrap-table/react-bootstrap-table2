@@ -6,7 +6,8 @@ sidebar_label: Pagination
 
 `react-bootstrap-table2` separate the pagination code base to [`react-bootstrap-table2-pagination`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/develop/packages/react-bootstrap-table2-paginator), so there's a little bit different when you use pagination. In the following, we are going to show you how to enable and configure the a pagination table
 
-**[Live Demo For Pagination](../storybook/index.html?selectedKind=Pagination)**
+**[Live Demo For Pagination](../storybook/index.html?selectedKind=Pagination)**   
+**[API & Props Definition](./pagination-props.html)**
 
 -----
 
