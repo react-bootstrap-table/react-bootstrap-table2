@@ -12,7 +12,7 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
 
 `react-bootstrap-table2` separate some functionalities from core modules to other modules like following:
 
-* [`react-bootstrap-table2-next`](https://www.npmjs.com/package/react-bootstrap-table-next)
+* [`react-bootstrap-table-next`](https://www.npmjs.com/package/react-bootstrap-table-next)
   * Core table module, include sorting and row selection
 * [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter)
   * Column filter Addons
