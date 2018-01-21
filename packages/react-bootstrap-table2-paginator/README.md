@@ -4,6 +4,8 @@
 
 **[Live Demo For Pagination](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Pagination)**
 
+**[API&Props Definitation](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/pagination-props.html)**
+
 -----
 
 ## Install

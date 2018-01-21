@@ -4,6 +4,8 @@
 
 **[Live Demo For Column Filter](https://github.com/react-bootstrap-table/react-bootstrap-table2/blob/gh-pages-src/storybook/index.html?selectedKind=Column%20Filter)**
 
+**[API&Props Definitation](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/filter-props.html)**
+
 -----
 
 ## Install

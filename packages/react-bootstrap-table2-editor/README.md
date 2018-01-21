@@ -4,6 +4,8 @@
 
 **[Live Demo For Cell Edit](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Cell%20Editing)**
 
+**[API&Props Definitation](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/cell-edit-props.html)**
+
 -----
 
 ## Install
