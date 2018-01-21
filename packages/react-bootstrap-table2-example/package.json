@@ -23,6 +23,7 @@
   "devDependencies": {
     "@storybook/addon-console": "^1.0.0",
     "@storybook/react": "^3.2.8",
+    "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "^1.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
