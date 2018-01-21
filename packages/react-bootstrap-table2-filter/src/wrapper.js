@@ -24,6 +24,7 @@ export default (Base, {
     componentWillReceiveProps({ isDataChanged, store, columns }) {
       // consider to use lodash.isEqual
       if (JSON.stringify(this.state.currFilters) !== JSON.stringify(store.filters)) {
+        store.filteredData = store.getAllData();
         this.setState(() => ({ isDataChanged: true, currFilters: store.filters }));
       } else if (isDataChanged) {
         if (!(this.isRemoteFiltering() || this.isRemotePagination()) &&

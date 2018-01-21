@@ -106,7 +106,7 @@ describe('Wrapper', () => {
       });
     });
 
-    describe('when props.isDataChanged is true and remote is enable', () => {
+    describe('when props.isDataChanged is true', () => {
       beforeEach(() => {
         nextProps = createTableProps({ isDataChanged: true });
         instance.componentWillReceiveProps(nextProps);
@@ -118,13 +118,17 @@ describe('Wrapper', () => {
     });
 
     describe('when props.store.filters is different from current state.currFilters', () => {
+      const nextData = [];
+
       beforeEach(() => {
         nextProps = createTableProps();
         nextProps.store.filters = { price: { filterVal: 20, filterType: FILTER_TYPE.TEXT } };
+        nextProps.store.setAllData(nextData);
         instance.componentWillReceiveProps(nextProps);
       });
 
       it('should setting states correctly', () => {
+        expect(nextProps.store.filteredData).toEqual(nextData);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(instance.state.currFilters).toBe(nextProps.store.filters);
       });
