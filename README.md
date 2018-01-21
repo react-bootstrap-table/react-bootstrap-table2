@@ -5,7 +5,7 @@ Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-tab
 
 `react-bootstrap-table2` separate some functionalities from core modules to other modules like following:
 
-* [`react-bootstrap-table2-next`](https://www.npmjs.com/package/react-bootstrap-table-next)
+* [`react-bootstrap-table-next`](https://www.npmjs.com/package/react-bootstrap-table-next)
 * [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter)
 * [`react-bootstrap-table2-editor`](https://www.npmjs.com/package/react-bootstrap-table2-editor)
 * [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator)
