@@ -133,6 +133,25 @@ describe('Wrapper', () => {
         expect(instance.state.currFilters).toBe(nextProps.store.filters);
       });
     });
+
+    describe('when remote filter is enabled', () => {
+      let props;
+      const nextData = [];
+
+      beforeEach(() => {
+        props = createTableProps({ remote: { filter: true } });
+        createFilterWrapper(props);
+        nextProps = createTableProps({ remote: { filter: true } });
+        nextProps.store.setAllData(nextData);
+        instance.componentWillReceiveProps(nextProps);
+      });
+
+      it('should setting states correctly', () => {
+        expect(nextProps.store.filteredData).toEqual(nextData);
+        expect(instance.state.isDataChanged).toBeTruthy();
+        expect(instance.state.currFilters).toBe(nextProps.store.filters);
+      });
+    });
   });
 
   describe('onFilter', () => {
