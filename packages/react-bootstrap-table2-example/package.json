@@ -1,0 +1,33 @@
+{
+  "name": "react-bootstrap-table2-example",
+  "version": "0.0.3",
+  "description": "",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "storybook": "start-storybook -p 6006",
+    "gh-pages:clean": "rimraf ./storybook-static",
+    "gh-pages:build": "build-storybook"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^15.0.0",
+    "react-dom": "^15.0.0"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  },
+  "devDependencies": {
+    "@storybook/addon-console": "^1.0.0",
+    "@storybook/react": "^3.2.8",
+    "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-preset-env": "^1.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "typed.js": "^2.0.5"
+  }
+}

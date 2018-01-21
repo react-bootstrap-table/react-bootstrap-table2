@@ -1,25 +1,46 @@
 # react-bootstrap-table2
 Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table)
 
-## The problems/features I want to solve
-* Performance
-* Fully compatiable with bootstrap 3 and 4(`react-bootstrap-table@4.0.0` already done) 
-* Clean Code and Testing
-* Decrease the size of bundled file
-* **Split module/functionality from core module, make core module more lightweight**
-* Use [`storybook`](https://github.com/storybooks/storybook) to build examples
-* Support the aggregation(summary) view
-* Support the table footer
-* Support column/row span on header and body
-* Support sticky header
-* Support table section([react-bootstrap-table#721](https://github.com/AllenFang/react-bootstrap-table/pull/721))
-* Handle events well
-* Fix unalign issues
-* Make **stateless** table more easy to use(`react-bootstrap-table` alread have `remote` mode but have some bugs)
-* Customizable table
-* Support the nested data([react-bootstrap-table#50](https://github.com/AllenFang/react-bootstrap-table/issues/50◊))
-* Consider to support column resize
-* Consider to make animation on `react-bootstrap-table2` more easy
+> `react-bootstrap-table2`'s npm module name is [**`react-bootstrap-table-next`**](https://www.npmjs.com/package/react-bootstrap-table-next) due to some guys already used it ;(   
 
-## The feature may lost on react-bootstrap-table
-* Have a great chance that I don't support the vertical scrollbar on table
+`react-bootstrap-table2` separate some functionalities from core modules to other modules like following:
+
+* [`react-bootstrap-table2-next`](https://www.npmjs.com/package/react-bootstrap-table-next)
+  * Core table module, include sorting and row selection
+* [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter)
+  * Column filter Addons
+* [`react-bootstrap-table2-editor`](https://www.npmjs.com/package/react-bootstrap-table2-editor)
+  * Cell Editing Addons
+* [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator)
+  * Pagination Addons
+* [`react-bootstrap-z-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
+  * Overlay/Loading Addons
+
+This can help your application with less bundled size and also help us have clean design to avoid handling to much logic in kernal module(SRP).
+
+## Migration
+If you are the user from legacy [`react-bootstrap-table`](https://github.com/AllenFang/react-bootstrap-table/), please have a look on [this](./docs/migration.md).
+
+## Usage
+See [getting started](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/getting-started.html).
+
+## Online Demo
+See `react-bootstrap-table2` [storybook](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html).
+
+## Roadmap
+See [release plans](https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html).
+
+## Development
+Please check [development guide](./docs/development.md).
+
+## How should I run storybook example in my local?
+
+```sh
+$ git clone https://github.com/react-bootstrap-table/react-bootstrap-table2.git
+$ cd react-bootstrap-table2
+$ yarn install
+$ yarn storybook
+$ Go to localhost:6006
+```
+
+**Storybook examples: [`packages/react-bootstrap-table2-example/examples`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/master/packages/react-bootstrap-table2-example/examples)**

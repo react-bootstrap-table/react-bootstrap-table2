@@ -1,0 +1,20 @@
+language: node_js
+
+node_js:
+  - "7"
+  - "6"
+
+cache:
+  yarn: true
+
+branches:
+  only:
+  # skip master branch when it's under development phase
+  # - master 
+  - develop
+
+before_install:
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s
+  - export PATH="$HOME/.yarn/bin:$PATH"
+
+install: yarn install

@@ -1,0 +1,94 @@
+import sinon from 'sinon';
+import _ from 'react-bootstrap-table-next/src/utils';
+import Store from 'react-bootstrap-table-next/src/store';
+
+import { filters } from '../src/filter';
+import { FILTER_TYPE } from '../src/const';
+import { LIKE, EQ } from '../src/comparison';
+
+const data = [];
+for (let i = 0; i < 20; i += 1) {
+  data.push({
+    id: i,
+    name: `itme name ${i}`,
+    price: 200 + i
+  });
+}
+
+describe('filter', () => {
+  let store;
+  let filterFn;
+  let currFilters;
+  let columns;
+
+  beforeEach(() => {
+    store = new Store('id');
+    store.data = data;
+    currFilters = {};
+    columns = [{
+      dataField: 'id',
+      text: 'ID'
+    }, {
+      dataField: 'name',
+      text: 'Name'
+    }, {
+      dataField: 'price',
+      text: 'Price'
+    }];
+  });
+
+  describe('text filter', () => {
+    beforeEach(() => {
+      filterFn = filters(store, columns, _);
+    });
+
+    describe(`when default comparator is ${LIKE}`, () => {
+      it('should returning correct result', () => {
+        currFilters.name = {
+          filterVal: '3',
+          filterType: FILTER_TYPE.TEXT
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toBeDefined();
+        expect(result).toHaveLength(2);
+      });
+    });
+
+    describe(`when default comparator is ${EQ}`, () => {
+      it('should returning correct result', () => {
+        currFilters.name = {
+          filterVal: 'itme name 3',
+          filterType: FILTER_TYPE.TEXT,
+          comparator: EQ
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toBeDefined();
+        expect(result).toHaveLength(1);
+      });
+    });
+
+    describe('column.filterValue is defined', () => {
+      beforeEach(() => {
+        columns[1].filterValue = sinon.stub();
+        filterFn = filters(store, columns, _);
+      });
+
+      it('should calling custom filterValue callback correctly', () => {
+        currFilters.name = {
+          filterVal: '3',
+          filterType: FILTER_TYPE.TEXT
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toBeDefined();
+        expect(columns[1].filterValue.callCount).toBe(data.length);
+        const calls = columns[1].filterValue.getCalls();
+        calls.forEach((call, i) => {
+          expect(call.calledWith(data[i].name, data[i])).toBeTruthy();
+        });
+      });
+    });
+  });
+});

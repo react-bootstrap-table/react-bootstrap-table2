@@ -1,0 +1,44 @@
+{
+  "name": "react-bootstrap-table2-filter",
+  "version": "0.0.3",
+  "description": "it's a column filter addon for react-bootstrap-table2",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "bootstrap",
+    "table",
+    "grid",
+    "react-bootstrap-table-addons",
+    "react-component"
+  ],
+  "files": [
+    "lib/",
+    "dist/"
+  ],
+  "tags": [
+    "react"
+  ],
+  "author": "AllenFang",
+  "contributors": [
+    {
+      "name": "Allen Fang",
+      "email": "ayu780129@hotmail.com",
+      "url": "https://github.com/AllenFang"
+    },
+    {
+      "name": "Chun-MingChen",
+      "email": "nick830314@gmail.com",
+      "url": "https://github.com/Chun-MingChen"
+    }
+  ],
+  "peerDependencies": {
+    "prop-types": "^15.0.0",
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  }
+}

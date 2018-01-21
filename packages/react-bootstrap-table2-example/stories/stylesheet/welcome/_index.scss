@@ -1,0 +1,38 @@
+.welcome {
+  margin-top: 70px;
+  text-align: center;
+  padding: 30px 30px;
+
+  &-title {
+    color: $grey-900;
+  }
+  &-sub-title {
+    font-size: 30px;
+    color: $grey-500;
+  }
+}
+
+span.love-icon {
+  color: $pink-500;
+}
+
+/* Adding cursor blinking animation */
+.typed-cursor{
+  font-size: 30px;
+  color: $grey-500;
+  opacity: 1;
+  animation: typedjsBlink 0.7s infinite;
+}
+@keyframes typedjsBlink{
+  50% { opacity: 0.0; }
+}
+@-webkit-keyframes typedjsBlink{
+  0% { opacity: 1; }
+  50% { opacity: 0.0; }
+  100% { opacity: 1; }
+}
+.typed-fade-out{
+  opacity: 0;
+  transition: opacity .25s;
+  animation: 0;
+}
