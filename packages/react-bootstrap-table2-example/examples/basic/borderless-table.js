@@ -18,6 +18,9 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+// omit...
+
 <BootstrapTable
   keyField="id"
   data={ products }

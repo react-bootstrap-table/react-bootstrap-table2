@@ -31,6 +31,8 @@ const selectRow2 = {
 };
 
 const sourceCode1 = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID'

@@ -21,7 +21,7 @@ const columns = [{
 }];
 
 const sourceCode = `\
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import BootstrapTable from 'react-bootstrap-table-next';
 
 const columns = [{
   dataField: 'id',
@@ -36,7 +36,64 @@ const columns = [{
   filter: textFilter()
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+const RemoteSort = props => (
+  <div>
+    <BootstrapTable
+      remote={ { sort: true } }
+      keyField="id"
+      data={ props.data }
+      columns={ columns }
+      onTableChange={ props.onTableChange }
+    />
+    <Code>{ sourceCode }</Code>
+  </div>
+);
+
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: products
+    };
+  }
+
+  handleTableChange = (type, { sortField, sortOrder, data }) => {
+    setTimeout(() => {
+      let result;
+      if (sortOrder === 'asc') {
+        result = data.sort((a, b) => {
+          if (a[sortField] > b[sortField]) {
+            return 1;
+          } else if (b[sortField] > a[sortField]) {
+            return -1;
+          }
+          return 0;
+        });
+      } else {
+        result = data.sort((a, b) => {
+          if (a[sortField] > b[sortField]) {
+            return -1;
+          } else if (b[sortField] > a[sortField]) {
+            return 1;
+          }
+          return 0;
+        });
+      }
+      this.setState(() => ({
+        data: result
+      }));
+    }, 2000);
+  }
+
+  render() {
+    return (
+      <RemoteSort
+        data={ this.state.data }
+        onTableChange={ this.handleTableChange }
+      />
+    );
+  }
+}
 `;
 
 const RemoteSort = props => (

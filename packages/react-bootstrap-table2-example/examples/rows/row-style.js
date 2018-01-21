@@ -20,6 +20,8 @@ const columns = [{
 const rowStyle1 = { backgroundColor: '#c8e6c9' };
 
 const sourceCode1 = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID'

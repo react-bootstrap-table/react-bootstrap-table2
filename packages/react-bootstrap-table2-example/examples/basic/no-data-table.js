@@ -15,9 +15,12 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+// omit...
+
 <BootstrapTable keyField='id' data={ [] } columns={ columns } noDataIndication="Table is Empty" />
 
-// Following is more customizable example
+// Following is a more flexible example
 
 function indication() {
   // return something here

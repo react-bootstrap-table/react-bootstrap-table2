@@ -41,6 +41,7 @@ const defaultSorted = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 // ...
 function priceFormatter(column, colIndex, { sortElement, filterElement }) {

@@ -34,6 +34,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 function rankFormatter(cell, row, rowIndex, formatExtraData) {
   return (
     <i className={ formatExtraData[cell] } />

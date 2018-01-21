@@ -21,8 +21,9 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
-// ...
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -45,6 +46,7 @@ const columns = [{
 
 export default () => (
   <div>
+    <h3>Only Product Price is bigger than 2101 is editable</h3>
     <BootstrapTable
       keyField="id"
       data={ products }

@@ -26,6 +26,8 @@ const columns = [{
 
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const headerSortingStyle = { backgroundColor: '#c8e6c9' };
 
 const columns = [{

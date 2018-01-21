@@ -31,6 +31,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 function priceFormatter(cell, row) {
   if (row.onSale) {
     return (

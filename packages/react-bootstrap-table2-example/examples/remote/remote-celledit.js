@@ -19,8 +19,10 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 // ...
+
 const RemoteCellEdit = (props) => {
   const cellEdit = {
     mode: 'click',
@@ -40,12 +42,6 @@ const RemoteCellEdit = (props) => {
       <Code>{ sourceCode }</Code>
     </div>
   );
-};
-
-RemoteCellEdit.propTypes = {
-  data: PropTypes.array.isRequired,
-  onTableChange: PropTypes.func.isRequired,
-  errorMessage: PropTypes.string.isRequired
 };
 
 class Container extends React.Component {

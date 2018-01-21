@@ -31,6 +31,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => (
   sortOrder === 'asc' ? 'demo-sorting-asc' : 'demo-sorting-desc'
 );

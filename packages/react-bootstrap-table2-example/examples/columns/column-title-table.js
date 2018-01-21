@@ -39,6 +39,7 @@ const columns = [{
 
 export default () => (
   <div>
+    <h3>Try to hover on any Product Name cells</h3>
     <BootstrapTable keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>

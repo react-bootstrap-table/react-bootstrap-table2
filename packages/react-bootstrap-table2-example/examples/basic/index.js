@@ -18,6 +18,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID'

@@ -26,6 +26,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 function priceFormatter(column, colIndex) {
   return (
     <h5><strong>$$ { column.text } $$</strong></h5>

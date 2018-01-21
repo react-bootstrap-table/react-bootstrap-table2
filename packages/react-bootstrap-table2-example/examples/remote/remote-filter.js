@@ -23,6 +23,7 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 const columns = [{
@@ -38,7 +39,61 @@ const columns = [{
   filter: textFilter()
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+const RemoteFilter = props => (
+  <div>
+    <BootstrapTable
+      remote={ { filter: true } }
+      keyField="id"
+      data={ props.data }
+      columns={ columns }
+      filter={ filterFactory() }
+      onTableChange={ props.onTableChange }
+    />
+    <Code>{ sourceCode }</Code>
+  </div>
+);
+
+class Container extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: products
+    };
+  }
+
+  handleTableChange = (type, { filters }) => {
+    setTimeout(() => {
+      const result = products.filter((row) => {
+        let valid = true;
+        for (const dataField in filters) {
+          const { filterVal, filterType, comparator } = filters[dataField];
+
+          if (filterType === 'TEXT') {
+            if (comparator === Comparator.LIKE) {
+              valid = row[dataField].toString().indexOf(filterVal) > -1;
+            } else {
+              valid = row[dataField] === filterVal;
+            }
+          }
+          if (!valid) break;
+        }
+        return valid;
+      });
+      this.setState(() => ({
+        data: result
+      }));
+    }, 2000);
+  }
+
+  render() {
+    return (
+      <RemoteFilter
+        data={ this.state.data }
+        onTableChange={ this.handleTableChange }
+      />
+    );
+  }
+}
 `;
 
 const RemoteFilter = props => (

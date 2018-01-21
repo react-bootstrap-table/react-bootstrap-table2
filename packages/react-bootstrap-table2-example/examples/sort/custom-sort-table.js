@@ -29,6 +29,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
@@ -54,6 +56,7 @@ const columns = [{
 
 export default () => (
   <div>
+    <h3>Product ID sorting is reverted</h3>
     <BootstrapTable keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>

@@ -21,6 +21,8 @@ const columns = [{
 }];
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
@@ -39,6 +41,7 @@ const columns = [{
 
 export default () => (
   <div>
+    <h3>Try to hover on Product Name header column</h3>
     <BootstrapTable keyField="id" data={ products } columns={ columns } />
     <Code>{ sourceCode }</Code>
   </div>

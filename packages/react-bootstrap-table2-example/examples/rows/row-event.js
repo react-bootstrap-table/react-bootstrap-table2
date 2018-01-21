@@ -1,5 +1,5 @@
 /* eslint no-unused-vars: 0 */
-/* eslint no-console: 0 */
+/* eslint no-alert: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -21,11 +21,13 @@ const columns = [{
 
 const rowEvents = {
   onClick: (e) => {
-    console.log('click on row');
+    alert('click on row');
   }
 };
 
 const sourceCode = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -39,15 +41,16 @@ const columns = [{
 
 const rowEvents = {
   onClick: (e) => {
-    console.log('click on row');
+    alert('click on row');
   }
 };
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } rowStyle={ rowStyle } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } rowEvents={ rowEvents } />
 `;
 
 export default () => (
   <div>
+    <h3>Try to click on any rows</h3>
     <BootstrapTable keyField="id" data={ products } columns={ columns } rowEvents={ rowEvents } />
     <Code>{ sourceCode }</Code>
   </div>
