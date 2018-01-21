@@ -1,7 +1,7 @@
 # react-bootstrap-table2
 Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table)
 
-> `react-bootstrap-table2`'s npm module name is [**`react-bootstrap-table-next`**](https://www.npmjs.com/package/react-bootstrap-table-next) due to some guys already used it ;(   
+> `react-bootstrap-table2`'s npm module name is [**`react-bootstrap-table-next`**](https://www.npmjs.com/package/react-bootstrap-table-next) due to some guys already used it   
 
 `react-bootstrap-table2` separate some functionalities from core modules to other modules like following:
 
