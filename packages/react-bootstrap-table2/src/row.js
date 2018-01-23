@@ -137,7 +137,7 @@ class Row extends Component {
             }
             return (
               <Cell
-                key={`${index}-${content}`}
+                key={ `${index}-${content}` }
                 row={ row }
                 rowIndex={ rowIndex }
                 columnIndex={ index }
