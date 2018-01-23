@@ -126,7 +126,7 @@ class Row extends Component {
               }
               return (
                 <EditingCell
-                  key={ content }
+                  key={ index }
                   row={ row }
                   column={ column }
                   className={ editCellclasses }
@@ -137,7 +137,7 @@ class Row extends Component {
             }
             return (
               <Cell
-                key={ content }
+                key={ `${index}-${content}` }
                 row={ row }
                 rowIndex={ rowIndex }
                 columnIndex={ index }

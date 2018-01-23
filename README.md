@@ -1,20 +1,15 @@
 # react-bootstrap-table2
 Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table)
 
-> `react-bootstrap-table2`'s npm module name is [**`react-bootstrap-table-next`**](https://www.npmjs.com/package/react-bootstrap-table-next) due to some guys already used it ;(   
+> `react-bootstrap-table2`'s npm module name is [**`react-bootstrap-table-next`**](https://www.npmjs.com/package/react-bootstrap-table-next) due to some guys already used it   
 
 `react-bootstrap-table2` separate some functionalities from core modules to other modules like following:
 
-* [`react-bootstrap-table2-next`](https://www.npmjs.com/package/react-bootstrap-table-next)
-  * Core table module, include sorting and row selection
+* [`react-bootstrap-table-next`](https://www.npmjs.com/package/react-bootstrap-table-next)
 * [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter)
-  * Column filter Addons
 * [`react-bootstrap-table2-editor`](https://www.npmjs.com/package/react-bootstrap-table2-editor)
-  * Cell Editing Addons
 * [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator)
-  * Pagination Addons
-* [`react-bootstrap-z-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
-  * Overlay/Loading Addons
+* [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
 
 This can help your application with less bundled size and also help us have clean design to avoid handling to much logic in kernal module(SRP).
 
