@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { filters } from './filter';
-import { LIKE } from './comparison';
+import { LIKE, EQ } from './comparison';
+import { FILTER_TYPE } from './const';
 
 export default (Base, {
   _,
@@ -47,7 +48,8 @@ export default (Base, {
       if (!_.isDefined(filterVal) || filterVal === '') {
         delete currFilters[dataField];
       } else {
-        const { comparator = LIKE } = filter.props;
+        // select default comparator is EQ, others are LIKE
+        const { comparator = (filterType === FILTER_TYPE.SELECT ? EQ : LIKE) } = filter.props;
         currFilters[dataField] = { filterVal, filterType, comparator };
       }
       store.filters = currFilters;
