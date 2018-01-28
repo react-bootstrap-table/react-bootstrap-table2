@@ -1,4 +1,5 @@
 /* eslint react/prop-types: 0 */
+/* eslint react/no-array-index-key: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -126,7 +127,7 @@ class Row extends Component {
               }
               return (
                 <EditingCell
-                  key={ content }
+                  key={ `${content}-${index}` }
                   row={ row }
                   column={ column }
                   className={ editCellclasses }
@@ -137,7 +138,7 @@ class Row extends Component {
             }
             return (
               <Cell
-                key={ content }
+                key={ `${content}-${index}` }
                 row={ row }
                 rowIndex={ rowIndex }
                 columnIndex={ index }
