@@ -102,6 +102,7 @@ import 'stories/stylesheet/tomorrow.min.css';
 import 'stories/stylesheet/storybook.scss';
 import '../../react-bootstrap-table2/style/react-bootstrap-table2.scss';
 import '../../react-bootstrap-table2-paginator/style/react-bootstrap-table2-paginator.scss';
+import '../../react-bootstrap-table2-filter/style/react-bootstrap-table2-filter.scss';
 
 // import { action } from '@storybook/addon-actions';
 
