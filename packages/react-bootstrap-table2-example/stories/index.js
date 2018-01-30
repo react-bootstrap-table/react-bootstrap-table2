@@ -39,6 +39,10 @@ import TextFilterWithDefaultValue from 'examples/column-filter/text-filter-defau
 import TextFilterComparator from 'examples/column-filter/text-filter-eq-comparator';
 import CustomTextFilter from 'examples/column-filter/custom-text-filter';
 import CustomFilterValue from 'examples/column-filter/custom-filter-value';
+import SelectFilter from 'examples/column-filter/select-filter';
+import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
+import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
+import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -98,6 +102,7 @@ import 'stories/stylesheet/tomorrow.min.css';
 import 'stories/stylesheet/storybook.scss';
 import '../../react-bootstrap-table2/style/react-bootstrap-table2.scss';
 import '../../react-bootstrap-table2-paginator/style/react-bootstrap-table2-paginator.scss';
+import '../../react-bootstrap-table2-filter/style/react-bootstrap-table2-filter.scss';
 
 // import { action } from '@storybook/addon-actions';
 
@@ -140,6 +145,10 @@ storiesOf('Column Filter', module)
   .add('Text Filter with Comparator', () => <TextFilterComparator />)
   .add('Custom Text Filter', () => <CustomTextFilter />)
   // add another filter type example right here.
+  .add('Select Filter', () => <SelectFilter />)
+  .add('Select Filter with Default Value', () => <SelectFilterWithDefaultValue />)
+  .add('Select Filter with Comparator', () => <SelectFilterComparator />)
+  .add('Custom Select Filter', () => <CustomSelectFilter />)
   .add('Custom Filter Value', () => <CustomFilterValue />);
 
 storiesOf('Work on Rows', module)

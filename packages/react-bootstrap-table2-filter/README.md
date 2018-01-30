@@ -17,6 +17,7 @@ $ npm install react-bootstrap-table2-filter --save
 You can get all types of filters via import and these filters are a factory function to create a individual filter instance. Currently, we support following filters:
 
 * TextFilter
+* SelectFilter
 * **Coming soon!**
 
 ## Text Filter
@@ -49,6 +50,51 @@ const priceFilter = textFilter({
   comparator: Comparator.EQ, // default is Comparator.LIKE
   style: { ... }, // your custom styles on input
   delay: 1000 // how long will trigger filtering after user typing, default is 500 ms
+});
+
+// omit...
+```
+
+## Select Filter
+A quick example: 
+
+```js
+import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
+
+// omit...
+const selectOptions = {
+  0: 'good',
+  1: 'Bad',
+  2: 'unknown'
+};
+
+const columns = [
+  ..., {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions[cell],
+  filter: selectFilter({
+    options: selectOptions
+  })
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+Following is an example for custom select filter:
+
+```js
+import filterFactory, { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
+// omit...
+
+const qualityFilter = selectFilter({
+  options: selectOptions,
+  placeholder: 'My Custom PlaceHolder',  // custom the input placeholder
+  className: 'my-custom-text-filter', // custom classname on input
+  defaultValue: '2', // default filtering value
+  comparator: Comparator.LIKE, // default is Comparator.EQ
+  style: { ... }, // your custom styles on input
+  withoutEmptyOption: true  // hide the default select option
 });
 
 // omit...

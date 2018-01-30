@@ -20,6 +20,13 @@ export const productsGenerator = (quantity = 5, callback) => {
   );
 };
 
+export const productsQualityGenerator = (quantity = 5) =>
+  Array.from({ length: quantity }, (value, index) => ({
+    id: index,
+    name: `Item name ${index}`,
+    quality: index % 3
+  }));
+
 export const jobsGenerator = (quantity = 5) =>
   Array.from({ length: quantity }, (value, index) => ({
     id: index,

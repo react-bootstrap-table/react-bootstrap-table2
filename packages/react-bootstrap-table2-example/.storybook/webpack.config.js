@@ -7,6 +7,7 @@ const filterSourcePath = path.join(__dirname, '../../react-bootstrap-table2-filt
 const editorSourcePath = path.join(__dirname, '../../react-bootstrap-table2-editor/index.js');
 const sourceStylePath = path.join(__dirname, '../../react-bootstrap-table2/style');
 const paginationStylePath = path.join(__dirname, '../../react-bootstrap-table2-paginator/style');
+const filterStylePath = path.join(__dirname, '../../react-bootstrap-table2-filter/style');
 const storyPath = path.join(__dirname, '../stories');
 const examplesPath = path.join(__dirname, '../examples');
 const srcPath = path.join(__dirname, '../src');
@@ -40,7 +41,7 @@ const loaders = [{
 }, {
   test: /\.scss$/,
   use: ['style-loader', 'css-loader', 'sass-loader'],
-  include: [storyPath, sourceStylePath, paginationStylePath],
+  include: [storyPath, sourceStylePath, paginationStylePath, filterStylePath],
 }, {
   test: /\.(jpg|png|woff|woff2|eot|ttf|svg)$/,
   loader: 'url-loader?limit=100000',
