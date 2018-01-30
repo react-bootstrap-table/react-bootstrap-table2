@@ -34,12 +34,12 @@ describe('<SelectionCell />', () => {
     });
   });
 
-  describe('handleRowClick', () => {
+  describe('handleClick', () => {
     describe('when <input /> was been clicked', () => {
       const rowKey = 1;
       const selected = true;
       let mockOnRowSelect;
-      const spy = sinon.spy(SelectionCell.prototype, 'handleRowClick');
+      const spy = sinon.spy(SelectionCell.prototype, 'handleClick');
 
       beforeEach(() => {
         mockOnRowSelect = sinon.stub();
