@@ -14,7 +14,7 @@ sidebar_label: Pagination
 ## Install
 
 ```sh
-$ npm install react-bootstrap-table2-pagination --save
+$ npm install react-bootstrap-table2-paginator --save
 ```
 ## Add CSS
 

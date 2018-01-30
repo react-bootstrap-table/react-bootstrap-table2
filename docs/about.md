@@ -10,7 +10,7 @@ sidebar_label: About
 * More customizable table
 * Reduce the bugs and bundled size
 * Solve the performance issue
-* Improve the [`remote mode`](https://allenfang.github.io/react-bootstrap-table/docs.html#remote)
+* Improve the [`remote`](https://allenfang.github.io/react-bootstrap-table/docs.html#remote) mode
 * Improve handling of DOM events well
 * Support nest data
 * Support table footer

@@ -226,7 +226,7 @@ paginationFactory({
 $ npm install react-bootstrap-table2-filter --save
 ```
 
-After installation of `react-bootstrap-table2-filter`, you can configure filter on `react-bootstrap-table2` easily:
+After installation of `react-bootstrap-table2-filter`, you can configure filter on table easily:
 
 ```js
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
