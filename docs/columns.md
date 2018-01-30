@@ -542,6 +542,7 @@ Or take a callback function
 Configure `column.filter` will able to setup a column level filter on the header column. Currently, `react-bootstrap-table2` support following filters:
 
 * Text(`textFilter`)
+* Select(`selectFilter`)
 
 We have a quick example to show you how to use `column.filter`:
 
