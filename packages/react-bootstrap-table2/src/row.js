@@ -12,6 +12,7 @@ class Row extends Component {
     super(props);
     this.clickNum = 0;
     this.handleRowClick = this.handleRowClick.bind(this);
+    this.handleSimpleRowClick = this.handleSimpleRowClick.bind(this);
   }
 
   handleRowClick(e) {
@@ -56,6 +57,15 @@ class Row extends Component {
     }
   }
 
+  handleSimpleRowClick(e) {
+    const {
+      rowIndex,
+      attrs
+    } = this.props;
+
+    attrs.onClick(e, rowIndex);
+  }
+
   render() {
     const {
       row,
@@ -89,6 +99,8 @@ class Row extends Component {
     const trAttrs = { ...attrs };
     if (clickToSelect) {
       trAttrs.onClick = this.handleRowClick;
+    } else {
+      trAttrs.onClick = this.handleSimpleRowClick;
     }
 
     return (
