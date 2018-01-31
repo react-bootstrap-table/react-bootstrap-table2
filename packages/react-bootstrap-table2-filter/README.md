@@ -20,6 +20,16 @@ You can get all types of filters via import and these filters are a factory func
 * SelectFilter
 * **Coming soon!**
 
+## Add CSS
+
+```js
+// es5 
+require('react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css');
+
+// es6
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
+```
+
 ## Text Filter
 Following is a quick demo for enable the column filter on **Product Price** column!!
 
