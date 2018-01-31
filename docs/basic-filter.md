@@ -17,6 +17,16 @@ sidebar_label: Column Filter
 $ npm install react-bootstrap-table2-filter --save
 ```
 
+## Add CSS
+
+```js
+// es5 
+require('react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css');
+
+// es6
+import 'react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.css';
+```
+
 You can get all types of filters via import and these filters are a factory function to create a individual filter instance. Currently, we support following filters:
 
 * TextFilter
