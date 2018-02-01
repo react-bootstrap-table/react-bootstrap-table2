@@ -1,0 +1,111 @@
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Migration · react-bootstrap-table2</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Migration · react-bootstrap-table2"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-bootstrap-table.github.io/react-bootstrap-table2/index.html"/><meta property="og:description" content="## Migration Guide"/><link rel="shortcut icon" href="/react-bootstrap-table2/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://react-bootstrap-table.github.io/blog/atom.xml" title="react-bootstrap-table2 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://react-bootstrap-table.github.io/blog/feed.xml" title="react-bootstrap-table2 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/react-bootstrap-table2/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-bootstrap-table2/"><h2 class="headerTitle">react-bootstrap-table2</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/react-bootstrap-table2/docs/about.html" target="_self">Docs</a></li><li><a href="/react-bootstrap-table2/docs/table-props.html" target="_self">API</a></li><li><a href="/react-bootstrap-table2/en/help.html" target="_self">Help</a></li><li><a href="/react-bootstrap-table2/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Getting Started</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Getting Started</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/about.html">About</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/getting-started.html">Getting Started</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/react-bootstrap-table2/docs/migration.html">Migration</a></li></ul></div><div class="navGroup navGroupActive"><h3>Basic Usage</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-row.html">Work on Row</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-column.html">Work on Column</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-sort.html">Table Sort</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-row-select.html">Row Selection</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-filter.html">Column Filter</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-celledit.html">Cell Edit</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-pagination.html">Pagination</a></li></ul></div><div class="navGroup navGroupActive"><h3>Remote Table</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-remote.html">Work on Remote</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/overlay.html">Overlay</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Migration</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="migration-guide"></a><a href="#migration-guide" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migration Guide</h2>
+<ul>
+<li>Please see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/new-version-0.1.0.html">CHANGELOG</a> for <code>react-bootstrap-table2</code> first drop.</li>
+<li>Please see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html">Roadmap</a>  for <code>react-bootstrap-table2</code> in 2018/Q1.</li>
+<li>Feel free to see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/about.html">offical docs</a>, we list all the basic usage here!!</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="preface"></a><a href="#preface" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preface</h2>
+<p>Currently, <strong>I still can't implement all the mainly features in legacy <code>react-bootstrap-table</code></strong>, so please watch our github repo or <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/">blog</a> to make sure the legacy features you wanted are already implemented on <code>react-bootstrap-table2</code>. Anyway, ask me by open issue is ok.</p>
+<hr>
+<p><code>react-bootstrap-table2</code> separate some functionalities from core modules to other modules like following:</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/react-bootstrap-table-next"><code>react-bootstrap-table-next</code></a>
+<ul>
+<li>Core table module, include sorting and row selection</li>
+</ul></li>
+<li><a href="https://www.npmjs.com/package/react-bootstrap-table2-filter"><code>react-bootstrap-table2-filter</code></a>
+<ul>
+<li>Column filter Addons</li>
+</ul></li>
+<li><a href="https://www.npmjs.com/package/react-bootstrap-table2-editor"><code>react-bootstrap-table2-editor</code></a>
+<ul>
+<li>Cell Editing Addons</li>
+</ul></li>
+<li><a href="https://www.npmjs.com/package/react-bootstrap-table2-paginator"><code>react-bootstrap-table2-paginator</code></a>
+<ul>
+<li>Pagination Addons</li>
+</ul></li>
+<li><a href="https://www.npmjs.com/package/react-bootstrap-table2-overlay"><code>react-bootstrap-table2-overlay</code></a>
+<ul>
+<li>Overlay/Loading Addons</li>
+</ul></li>
+</ul>
+<p>This can help your application with less bundled size and also help <code>react-bootstrap-table2</code> have clean design to avoid handling to much logic in kernal module(SRP). Hence, which means you probably need to install above addons when you need specific features.</p>
+<h2><a class="anchor" aria-hidden="true" name="core-table-migration"></a><a href="#core-table-migration" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Core Table Migration</h2>
+<p>There is a big chagne is that there's no <code>TableHeaderColumn</code> in the <code>react-bootstrap-table2</code>, instead you are supposed to be define the <code>columns</code> prop on <code>BootstrapTable</code>:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
+
+<span class="hljs-keyword">const</span> columns = [{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product ID'</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'name'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Name'</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } /&gt;</span>
+</span></code></pre>
+<p>The <code>text</code> property is just same as the children for the <code>TableHeaderColumn</code>, if you want to custom the header, there's a new property is: <a href="./column-props.html#columnheaderformatter-function"><code>headerFormatter</code></a>.</p>
+<ul>
+<li><a href="./table-props.html"><code>BootstrapTable</code> Definitation</a></li>
+<li><a href="./column-props.html">Column Definitation</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="table-sort"></a><a href="#table-sort" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table Sort</h2>
+<p>Please see <a href="./basic-sort.html">Work with table sort</a>.</p>
+<ul>
+<li>[x] Basic sorting</li>
+<li>[x] Custom sort function</li>
+<li>[x] Default Sort</li>
+<li>[x] Remote mode</li>
+<li>[x] Custom the sorting header</li>
+<li>[ ] Custom the sort caret</li>
+<li>[ ] Sort management</li>
+<li>[ ] Multi sort</li>
+</ul>
+<p>Due to no <code>TableHeaderColumn</code> so that no <code>dataSort</code> here, please add <a href="./column-props.html#columnsort-bool"><code>sort</code></a> property on column definitation.</p>
+<h2><a class="anchor" aria-hidden="true" name="row-selection"></a><a href="#row-selection" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Row Selection</h2>
+<p>Please see <a href="./basic-row-select.html">Work with selection</a>.<br>
+Please see <a href="./row-select-props.html">available selectRow configurations</a>.</p>
+<p>No huge change for row selection, but can not custom the selection column currently. Coming soon!!!</p>
+<h2><a class="anchor" aria-hidden="true" name="column-filter"></a><a href="#column-filter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Column Filter</h2>
+<p>Please see <a href="./basic-filter.html">Work with column filter</a>.<br>
+Please see <a href="./filter-props.html">available filter configuration</a>.</p>
+<ul>
+<li>[x] Text Filter</li>
+<li>[x] Custom Text Filter</li>
+<li>[x] Remote Filter</li>
+<li>[ ] Custom Filter Component</li>
+<li>[ ] Regex Filter</li>
+<li>[x] Select Filter</li>
+<li>[x] Custom Select Filter</li>
+<li>[ ] Number Filter</li>
+<li>[ ] Date Filter</li>
+<li>[ ] Array Filter</li>
+<li>[ ] Programmatically Filter</li>
+</ul>
+<p>Remember to install <a href="https://www.npmjs.com/package/react-bootstrap-table2-filter"><code>react-bootstrap-table2-filter</code></a> firstly.</p>
+<p>Due to no <code>TableHeaderColumn</code> so that no <code>filter</code> here, please add <a href="./column-props.html#columnfilter-object"><code>filter</code></a> property on column definitation and <a href="./table-props.html#filter-object"><code>filter</code></a> prop on <code>BootstrapTable</code>.</p>
+<h2><a class="anchor" aria-hidden="true" name="cell-edit"></a><a href="#cell-edit" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cell Edit</h2>
+<p>Please see <a href="./basic-celledit.html">Work with cell edit</a>.<br>
+Please see <a href="./cell-edit-props.html">available cell edit configurations</a>.</p>
+<p>Remember to install <a href="https://www.npmjs.com/package/react-bootstrap-table2-editor"><code>react-bootstrap-table2-editor</code></a> firstly.</p>
+<p>No big changes for cell editing, <a href="./column-props.html#columnvalidator-function"><code>validator</code></a> will not support the async call(Promise).</p>
+<h2><a class="anchor" aria-hidden="true" name="pagination"></a><a href="#pagination" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pagination</h2>
+<p>Please see <a href="./basic-pagination.html">Work with pagination</a>.<br>
+Please see <a href="./pagination-props.html">available pagination configurations</a>.</p>
+<p>Remember to install <a href="https://www.npmjs.com/package/react-bootstrap-table2-paginator"><code>react-bootstrap-table2-paginator</code></a> firstly.</p>
+<p>No big changes for pagination, but still can't custom the pagination list, button and sizePerPage dropdown.</p>
+<h2><a class="anchor" aria-hidden="true" name="remote"></a><a href="#remote" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Remote</h2>
+<blockquote>
+<p>It's totally different in <code>react-bootstrap-table2</code>. Please <a href="./basic-remote.html">see</a>.</p>
+</blockquote>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="getting-started.html">← Getting Started</a><a class="docs-next button" href="basic-row.html">Work on Row →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>
