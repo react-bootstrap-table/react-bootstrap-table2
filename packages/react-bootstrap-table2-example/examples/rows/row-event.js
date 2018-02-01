@@ -40,7 +40,7 @@ const columns = [{
 }];
 
 const rowEvents = {
-  onClick: (e, rowIndex) => {
+  onClick: (e, row, rowIndex) => {
     alert(\`clicked on row with index: \${rowIndex}\`);
   }
 };
