@@ -36,7 +36,7 @@ class Row extends Component {
 
     const clickFn = () => {
       if (attrs.onClick) {
-        attrs.onClick(e);
+        attrs.onClick(e, row, rowIndex);
       }
       if (selectable) {
         const key = _.get(row, keyField);
@@ -59,11 +59,12 @@ class Row extends Component {
 
   handleSimpleRowClick(e) {
     const {
+      row,
       rowIndex,
       attrs
     } = this.props;
 
-    attrs.onClick(e, rowIndex);
+    attrs.onClick(e, row, rowIndex);
   }
 
   render() {
@@ -99,7 +100,7 @@ class Row extends Component {
     const trAttrs = { ...attrs };
     if (clickToSelect) {
       trAttrs.onClick = this.handleRowClick;
-    } else {
+    } else if (attrs.onClick) {
       trAttrs.onClick = this.handleSimpleRowClick;
     }
 
