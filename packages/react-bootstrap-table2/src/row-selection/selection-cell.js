@@ -13,12 +13,13 @@ export default class SelectionCell extends Component {
     selected: PropTypes.bool,
     onRowSelect: PropTypes.func,
     disabled: PropTypes.bool,
-    rowIndex: PropTypes.number
+    rowIndex: PropTypes.number,
+    clickToSelect: PropTypes.bool
   }
 
   constructor() {
     super();
-    this.handleRowClick = this.handleRowClick.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -27,17 +28,19 @@ export default class SelectionCell extends Component {
     return nextProps.selected !== selected;
   }
 
-  handleRowClick() {
+  handleClick() {
     const {
       mode: inputType,
       rowKey,
       selected,
       onRowSelect,
       disabled,
-      rowIndex
+      rowIndex,
+      clickToSelect
     } = this.props;
 
     if (disabled) return;
+    if (clickToSelect) return;
 
     const checked = inputType === Const.ROW_SELECT_SINGLE
       ? true
@@ -54,7 +57,7 @@ export default class SelectionCell extends Component {
     } = this.props;
 
     return (
-      <td onClick={ this.handleRowClick }>
+      <td onClick={ this.handleClick }>
         <input
           type={ inputType }
           checked={ selected }

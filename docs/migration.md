@@ -83,7 +83,8 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 - [x] Remote Filter
 - [ ] Custom Filter Component
 - [ ] Regex Filter
-- [ ] Select Filter
+- [x] Select Filter
+- [x] Custom Select Filter
 - [ ] Number Filter
 - [ ] Date Filter
 - [ ] Array Filter
