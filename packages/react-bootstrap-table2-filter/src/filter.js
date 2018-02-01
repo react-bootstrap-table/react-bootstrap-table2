@@ -16,7 +16,8 @@ export const filterByText = _ => (
     if (comparator === EQ) {
       return cellStr === filterVal;
     }
-    return cellStr.indexOf(filterVal) > -1;
+    const re = RegExp(filterVal, 'i');
+    return Boolean(cellStr.match(re));
   });
 
 export const filterFactory = _ => (filterType) => {
