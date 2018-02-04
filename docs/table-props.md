@@ -152,7 +152,7 @@ Custom the events on row:
 
 ```js
 const rowEvents = {
-  onClick: (e) => {
+  onClick: (e, row, rowIndex) => {
     ....
   }
 };
