@@ -49,8 +49,11 @@ export default (Base, {
         delete currFilters[dataField];
       } else {
         // select default comparator is EQ, others are LIKE
-        const { comparator = (filterType === FILTER_TYPE.SELECT ? EQ : LIKE) } = filter.props;
-        currFilters[dataField] = { filterVal, filterType, comparator };
+        const {
+          comparator = (filterType === FILTER_TYPE.SELECT ? EQ : LIKE),
+          caseSensitive = false
+        } = filter.props;
+        currFilters[dataField] = { filterVal, filterType, comparator, caseSensitive };
       }
       store.filters = currFilters;
 

@@ -4,7 +4,7 @@ import { LIKE, EQ } from './comparison';
 export const filterByText = _ => (
   data,
   dataField,
-  { filterVal, comparator = LIKE },
+  { filterVal, comparator = LIKE, caseSensitive },
   customFilterValue
 ) =>
   data.filter((row) => {
@@ -16,8 +16,10 @@ export const filterByText = _ => (
     if (comparator === EQ) {
       return cellStr === filterVal;
     }
-    const re = RegExp(filterVal, 'i');
-    return Boolean(cellStr.match(re));
+    if (caseSensitive) {
+      return cellStr.toLocaleUpperCase().includes(filterVal.toLocaleUpperCase());
+    }
+    return cellStr.includes(filterVal);
   });
 
 export const filterFactory = _ => (filterType) => {
