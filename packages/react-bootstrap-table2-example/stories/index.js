@@ -56,6 +56,7 @@ import RowEventTable from 'examples/rows/row-event';
 // table sort
 import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
+import SortEvents from 'examples/sort/sort-events';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
 import HeaderSortingStyleTable from 'examples/sort/header-sorting-style';
@@ -167,6 +168,7 @@ storiesOf('Work on Rows', module)
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Default Sort Table', () => <DefaultSortTable />)
+  .add('Sort Events', () => <SortEvents />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
   .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
   .add('Custom Style on Sorting Header Column', () => <HeaderSortingStyleTable />);
