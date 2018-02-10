@@ -85,7 +85,7 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 - [ ] Regex Filter
 - [x] Select Filter
 - [x] Custom Select Filter
-- [ ] Number Filter
+- [X] Number Filter
 - [ ] Date Filter
 - [ ] Array Filter
 - [ ] Programmatically Filter
