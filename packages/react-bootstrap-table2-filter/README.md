@@ -18,6 +18,7 @@ You can get all types of filters via import and these filters are a factory func
 
 * TextFilter
 * SelectFilter
+* NumberFilter
 * **Coming soon!**
 
 ## Add CSS
@@ -106,6 +107,45 @@ const qualityFilter = selectFilter({
   style: { ... }, // your custom styles on input
   withoutEmptyOption: true  // hide the default select option
 });
+
+// omit...
+```
+
+## Number Filter
+
+```js
+import filterFactory, { numberFilter } from 'react-bootstrap-table2-filter';
+
+const columns = [..., {
+  dataField: 'price',
+  text: 'Product Price',
+  filter: numberFilter()
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+Numner filter is same as other filter, you can custom the number filter via `numberFilter` factory function:
+
+```js
+import filterFactory, { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
+// omit...
+
+const numberFilter = numberFilter({
+  options: [2100, 2103, 2105],  // if options defined, will render number select instead of number input
+  delay: 600,  // how long will trigger filtering after user typing, default is 500 ms
+  placeholder: 'custom placeholder',  // placeholder for number input
+  withoutEmptyComparatorOption: true,  // dont render empty option for comparator
+  withoutEmptyNumberOption: true,  // dont render empty option for numner select if it is defined
+  comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],  // Custom the comparators
+  style: { display: 'inline-grid' },  // custom the style on number filter
+  className: 'custom-numberfilter-class',  // custom the class on number filter
+  comparatorStyle: { backgroundColor: 'antiquewhite' }, // custom the style on comparator select
+  comparatorClassName: 'custom-comparator-class',  // custom the class on comparator select
+  numberStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on number input/select
+  numberClassName: 'custom-number-class',  // custom the class on ber input/select
+  defaultValue: { number: 2103, comparator: Comparator.GT }  // default value
+})
 
 // omit...
 ```
