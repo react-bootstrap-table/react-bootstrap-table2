@@ -13,7 +13,7 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  filter: textFilter()
+  filter: textFilter({ caseSensitive: true })
 }, {
   dataField: 'price',
   text: 'Product Price',
@@ -38,7 +38,7 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  filter: textFilter()
+  filter: textFilter({ caseSensitive: true })
 }, {
   dataField: 'price',
   text: 'Product Price',
