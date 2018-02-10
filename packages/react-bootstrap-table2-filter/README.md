@@ -59,6 +59,7 @@ const priceFilter = textFilter({
   className: 'my-custom-text-filter', // custom classname on input
   defaultValue: 'test', // default filtering value
   comparator: Comparator.EQ, // default is Comparator.LIKE
+  caseSensitive: true, // default is false, and true will only work when comparator is LIKE
   style: { ... }, // your custom styles on input
   delay: 1000 // how long will trigger filtering after user typing, default is 500 ms
 });

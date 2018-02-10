@@ -1,4 +1,3 @@
-/* eslint no-console: 0 */
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
@@ -13,19 +12,10 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  filter: textFilter()
+  filter: textFilter({ caseSensitive: true })
 }, {
   dataField: 'price',
-  text: 'Product Price',
-  filter: textFilter({
-    delay: 1000, // default is 500ms
-    style: {
-      backgroundColor: 'yellow'
-    },
-    className: 'test-classname',
-    placeholder: 'Custom PlaceHolder',
-    onClick: e => console.log(e)
-  })
+  text: 'Product Price'
 }];
 
 const sourceCode = `\
@@ -38,19 +28,10 @@ const columns = [{
 }, {
   dataField: 'name',
   text: 'Product Name',
-  filter: textFilter()
+  filter: textFilter({ caseSensitive: true })
 }, {
   dataField: 'price',
-  text: 'Product Price',
-  filter: textFilter({
-    delay: 1000, // default is 500ms
-    style: {
-      backgroundColor: 'yellow'
-    },
-    className: 'test-classname',
-    placeholder: 'Custom PlaceHolder',
-    onClick: e => console.log(e)
-  })
+  text: 'Product Price'
 }];
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
@@ -58,6 +39,7 @@ const columns = [{
 
 export default () => (
   <div>
+    <h3>Product Name is case sensitive</h3>
     <BootstrapTable
       keyField="id"
       data={ products }
