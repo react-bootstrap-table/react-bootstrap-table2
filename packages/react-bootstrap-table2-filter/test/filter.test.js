@@ -55,6 +55,20 @@ describe('filter', () => {
       });
     });
 
+    describe('when caseSensitive is true', () => {
+      it('should returning correct result', () => {
+        currFilters.name = {
+          filterVal: 'NAME',
+          caseSensitive: true,
+          filterType: FILTER_TYPE.TEXT
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toBeDefined();
+        expect(result).toHaveLength(0);
+      });
+    });
+
     describe(`when default comparator is ${EQ}`, () => {
       it('should returning correct result', () => {
         currFilters.name = {
