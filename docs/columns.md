@@ -12,6 +12,7 @@ Available properties in a column object:
 * [formatExtraData](#formatExtraData)
 * [sort](#sort)
 * [sortFunc](#sortFunc)
+* [onSort](#onSort)
 * [classes](#classes)
 * [style](#style)
 * [title](#title)
@@ -121,6 +122,19 @@ Enable the column sort via a `true` value given.
 }
 ```
 > The possible value of `order` argument is **`asc`** and **`desc`**.
+
+## <a name='sortFunc'>column.onSort - [Function]</a>
+`column.onSort` is an event listener for sort change event:
+
+```js
+{
+  // omit...
+  sort: true,
+  onSort: (field, order) => {
+    // ....
+  }
+}
+```
 
 ## <a name='classes'>column.classes - [String | Function]</a>
 It's availabe to have custom class on table column:

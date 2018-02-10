@@ -131,6 +131,7 @@ HeaderCell.propTypes = {
     attrs: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     sort: PropTypes.bool,
     sortFunc: PropTypes.func,
+    onSort: PropTypes.func,
     editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     editCellStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     editCellClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),

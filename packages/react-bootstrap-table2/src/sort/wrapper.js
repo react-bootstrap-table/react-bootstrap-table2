@@ -25,6 +25,10 @@ export default Base =>
         if (column.length > 0) {
           store.setSort(column[0], order);
 
+          if (column[0].onSort) {
+            column[0].onSort(store.sortField, store.sortOrder);
+          }
+
           if (this.isRemoteSort() || this.isRemotePagination()) {
             this.handleSortChange();
           } else {
@@ -47,6 +51,10 @@ export default Base =>
     handleSort(column) {
       const { store } = this.props;
       store.setSort(column);
+
+      if (column.onSort) {
+        column.onSort(store.sortField, store.sortOrder);
+      }
 
       if (this.isRemoteSort() || this.isRemotePagination()) {
         this.handleSortChange();
