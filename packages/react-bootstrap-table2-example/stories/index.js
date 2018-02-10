@@ -43,6 +43,9 @@ import SelectFilter from 'examples/column-filter/select-filter';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
 import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
+import NumberFilter from 'examples/column-filter/number-filter';
+import NumberFilterWithDefaultValue from 'examples/column-filter/number-filter-default-value';
+import CustomNumberFilter from 'examples/column-filter/custom-number-filter';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -143,12 +146,15 @@ storiesOf('Column Filter', module)
   .add('Text Filter', () => <TextFilter />)
   .add('Text Filter with Default Value', () => <TextFilterWithDefaultValue />)
   .add('Text Filter with Comparator', () => <TextFilterComparator />)
-  .add('Custom Text Filter', () => <CustomTextFilter />)
   // add another filter type example right here.
   .add('Select Filter', () => <SelectFilter />)
   .add('Select Filter with Default Value', () => <SelectFilterWithDefaultValue />)
   .add('Select Filter with Comparator', () => <SelectFilterComparator />)
+  .add('Number Filter', () => <NumberFilter />)
+  .add('Number Filter with Default Value', () => <NumberFilterWithDefaultValue />)
+  .add('Custom Text Filter', () => <CustomTextFilter />)
   .add('Custom Select Filter', () => <CustomSelectFilter />)
+  .add('Custom Number Filter', () => <CustomNumberFilter />)
   .add('Custom Filter Value', () => <CustomFilterValue />);
 
 storiesOf('Work on Rows', module)
