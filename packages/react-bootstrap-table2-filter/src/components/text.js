@@ -76,6 +76,7 @@ class TextFilter extends Component {
       className,
       onFilter,
       caseSensitive,
+      defaultValue,
       ...rest
     } = this.props;
     // stopPropagation for onClick event is try to prevent sort was triggered.
