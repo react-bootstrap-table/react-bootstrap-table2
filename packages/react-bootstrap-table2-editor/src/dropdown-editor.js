@@ -59,7 +59,7 @@ DropDownEditor.propTypes = {
 DropDownEditor.defaultProps = {
   className: null,
   defaultValue: '',
-  updateValue: () => {},
+  updateValue: () => console.warn('update value needs to be implemented'),
   items: [],
   dropDownKey: `key_${Math.random()}`,
   onKeyDown: () => {}
