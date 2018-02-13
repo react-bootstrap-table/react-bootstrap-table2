@@ -64,6 +64,7 @@ import RowLevelEditableTable from 'examples/cell-edit/row-level-editable-table';
 import ColumnLevelEditableTable from 'examples/cell-edit/column-level-editable-table';
 import CellLevelEditable from 'examples/cell-edit/cell-level-editable-table';
 import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
+import CellCustomEditors from 'examples/cell-edit/cell-edit-custom-editors';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
 import CellEditStyleTable from 'examples/cell-edit/cell-edit-style-table';
 import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
@@ -173,7 +174,9 @@ storiesOf('Cell Editing', module)
   .add('Rich Hook Functions', () => <CellEditHooks />)
   .add('Validation', () => <CellEditValidator />)
   .add('Custom Cell Style When Editing', () => <CellEditStyleTable />)
-  .add('Custom Cell Classes When Editing', () => <CellEditClassTable />);
+  .add('Custom Cell Classes When Editing', () => <CellEditClassTable />)
+  .add('Custom Editors for editing', () => <CellCustomEditors />);
+
 
 storiesOf('Row Selection', module)
   .add('Single Selection', () => <SingleSelectionTable />)

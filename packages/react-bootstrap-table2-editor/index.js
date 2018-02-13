@@ -5,6 +5,8 @@ import {
   DBCLICK_TO_CELL_EDIT,
   DELAY_FOR_DBCLICK
 } from './src/const';
+import TextEditor from './src/text-editor';
+import DropDownEditor from './src/dropdown-editor';
 
 export default (options = {}) => ({
   wrapperFactory,
@@ -14,3 +16,8 @@ export default (options = {}) => ({
   DELAY_FOR_DBCLICK,
   options
 });
+
+export {
+  TextEditor,
+  DropDownEditor
+};

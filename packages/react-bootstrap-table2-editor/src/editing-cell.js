@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 
+import EditorWrapper from './editor-wrapper';
 import TextEditor from './text-editor';
 import EditorIndicator from './editor-indicator';
 import { TIME_TO_CLOSE_MESSAGE } from './const';
@@ -89,10 +90,7 @@ export default _ =>
     handleBlur() {
       const { onEscape, blurToSave, row, column } = this.props;
       if (blurToSave) {
-        const value = this.editor.text.value;
-        if (!_.isDefined(value)) {
-          // TODO: for other custom or embed editor
-        }
+        const { value } = this.editorWrapper;
         this.beforeComplete(row, column, value);
       } else {
         onEscape();
@@ -104,10 +102,7 @@ export default _ =>
       if (e.keyCode === 27) { // ESC
         onEscape();
       } else if (e.keyCode === 13) { // ENTER
-        const value = e.currentTarget.value;
-        if (!_.isDefined(value)) {
-          // TODO: for other custom or embed editor
-        }
+        const { value } = this.editorWrapper;
         this.beforeComplete(row, column, value);
       }
     }
@@ -125,6 +120,7 @@ export default _ =>
       const { invalidMessage } = this.state;
       const { row, column, className, style } = this.props;
       const { dataField } = column;
+      let { editor } = column;
 
       const value = _.get(row, dataField);
       const editorAttrs = {
@@ -134,16 +130,19 @@ export default _ =>
 
       const hasError = _.isDefined(invalidMessage);
       const editorClass = hasError ? cs('animated', 'shake') : null;
+      editor = editor || <TextEditor />;
+
       return (
         <td
           className={ cs('react-bootstrap-table-editing-cell', className) }
           style={ style }
           onClick={ this.handleClick }
         >
-          <TextEditor
-            ref={ node => this.editor = node }
+          <EditorWrapper
+            ref={ node => this.editorWrapper = node }
             defaultValue={ value }
             className={ editorClass }
+            editor={ editor }
             { ...editorAttrs }
           />
           { hasError ? <EditorIndicator invalidMessage={ invalidMessage } /> : null }
