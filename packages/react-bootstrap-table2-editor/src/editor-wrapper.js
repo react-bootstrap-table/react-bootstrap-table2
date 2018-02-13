@@ -1,22 +1,21 @@
 /* eslint no-return-assign: 0 */
 import React, { Component } from 'react';
-import cs from 'classnames';
 import PropTypes from 'prop-types';
 
 class EditorWrapper extends Component {
   constructor(props) {
     super(props);
     this.value = props.defaultValue;
-  }  
-  
+  }
+
   render() {
-    const { defaultValue, className, editor, ...rest } = this.props;    
+    const { defaultValue, className, editor, ...rest } = this.props;
     const element = React.cloneElement(
       editor, 
       {
         className: this.props.className,
         defaultValue: this.props.defaultValue,
-        updateValue: (value) => this.value = value,
+        updateValue: value => this.value = value,
         ...rest
       }
     );
@@ -35,7 +34,7 @@ EditorWrapper.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]).isRequired,
-  editor: PropTypes.object.isRequired,
+  editor: PropTypes.element.isRequired
 };
 EditorWrapper.defaultProps = {
   className: null
