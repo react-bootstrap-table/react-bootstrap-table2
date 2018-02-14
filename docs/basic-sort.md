@@ -37,6 +37,20 @@ After table rendered, you can see the Product ID and Product Name will have a ca
 ### Default Sort
 `react-bootstrap-table2` will only apply the default sort at first time rendering, you can achieve the default sorting on table easily via [`defaultSorted`](./table-props.html#defaultsorted-array).
 
+### Sort Event Listener
+Defined [`onSort`](./column-props.html#columnonsort-function) on target column:
+
+```js
+{
+  dataField: 'id',
+  text: 'Product ID',
+  sort: true,
+  onSort: (field, order) => {
+    // ...
+  }
+}
+```
+
 ### Manage Sorting Externally
 
 **Coming Soon!**

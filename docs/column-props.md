@@ -15,6 +15,7 @@ Definition of columns props on BootstrapTable
 * [formatExtraData](#columnformatextradata-any)
 * [sort](#columnsort-bool)
 * [sortFunc](#columnsortfunc-function)
+* [onSort](#columnonsort-function)
 * [classes](#columnclasses-string-function)
 * [style](#columnstyle-object-function)
 * [title](#columntitle-bool-function)
@@ -107,6 +108,19 @@ Enable the column sort via a `true` value given.
 }
 ```
 > The possible value of `order` argument is **`asc`** and **`desc`**.
+
+## column.onSort - [Function]
+`column.onSort` is an event listener for subscribing the event of sort:
+
+```js
+{
+  // omit...
+  sort: true,
+  onSort: (field, order) => {
+    // ....
+  }
+}
+```
 
 ## column.classes - [String | Function]
 It's availabe to have custom class on table column:

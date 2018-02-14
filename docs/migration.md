@@ -66,6 +66,7 @@ Please see [Work with table sort](./basic-sort.html).
 - [x] Default Sort
 - [x] Remote mode
 - [x] Custom the sorting header
+- [x] Sort event listener
 - [ ] Custom the sort caret
 - [ ] Sort management
 - [ ] Multi sort
@@ -91,7 +92,7 @@ Please see [available filter configuration](./filter-props.html).
 - [ ] Regex Filter
 - [x] Select Filter
 - [x] Custom Select Filter
-- [ ] Number Filter
+- [x] Number Filter
 - [ ] Date Filter
 - [ ] Array Filter
 - [ ] Programmatically Filter
