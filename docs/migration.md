@@ -60,6 +60,7 @@ Please see [Work with table sort](https://react-bootstrap-table.github.io/react-
 - [x] Default Sort
 - [x] Remote mode
 - [x] Custom the sorting header
+- [x] Sort event listener
 - [ ] Custom the sort caret
 - [ ] Sort management
 - [ ] Multi sort
@@ -85,7 +86,7 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 - [ ] Regex Filter
 - [x] Select Filter
 - [x] Custom Select Filter
-- [ ] Number Filter
+- [X] Number Filter
 - [ ] Date Filter
 - [ ] Array Filter
 - [ ] Programmatically Filter

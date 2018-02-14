@@ -37,12 +37,16 @@ import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 import TextFilter from 'examples/column-filter/text-filter';
 import TextFilterWithDefaultValue from 'examples/column-filter/text-filter-default-value';
 import TextFilterComparator from 'examples/column-filter/text-filter-eq-comparator';
+import TextFilterCaseSensitive from 'examples/column-filter/text-filter-caseSensitive';
 import CustomTextFilter from 'examples/column-filter/custom-text-filter';
 import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 import SelectFilter from 'examples/column-filter/select-filter';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
 import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
+import NumberFilter from 'examples/column-filter/number-filter';
+import NumberFilterWithDefaultValue from 'examples/column-filter/number-filter-default-value';
+import CustomNumberFilter from 'examples/column-filter/custom-number-filter';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -52,6 +56,7 @@ import RowEventTable from 'examples/rows/row-event';
 // table sort
 import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
+import SortEvents from 'examples/sort/sort-events';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
 import HeaderSortingStyleTable from 'examples/sort/header-sorting-style';
@@ -143,12 +148,16 @@ storiesOf('Column Filter', module)
   .add('Text Filter', () => <TextFilter />)
   .add('Text Filter with Default Value', () => <TextFilterWithDefaultValue />)
   .add('Text Filter with Comparator', () => <TextFilterComparator />)
-  .add('Custom Text Filter', () => <CustomTextFilter />)
+  .add('Text Filter with Case Sensitive', () => <TextFilterCaseSensitive />)
   // add another filter type example right here.
   .add('Select Filter', () => <SelectFilter />)
   .add('Select Filter with Default Value', () => <SelectFilterWithDefaultValue />)
   .add('Select Filter with Comparator', () => <SelectFilterComparator />)
+  .add('Number Filter', () => <NumberFilter />)
+  .add('Number Filter with Default Value', () => <NumberFilterWithDefaultValue />)
+  .add('Custom Text Filter', () => <CustomTextFilter />)
   .add('Custom Select Filter', () => <CustomSelectFilter />)
+  .add('Custom Number Filter', () => <CustomNumberFilter />)
   .add('Custom Filter Value', () => <CustomFilterValue />);
 
 storiesOf('Work on Rows', module)
@@ -159,6 +168,7 @@ storiesOf('Work on Rows', module)
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Default Sort Table', () => <DefaultSortTable />)
+  .add('Sort Events', () => <SortEvents />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
   .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
   .add('Custom Style on Sorting Header Column', () => <HeaderSortingStyleTable />);

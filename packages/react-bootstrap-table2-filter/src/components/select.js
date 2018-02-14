@@ -89,6 +89,7 @@ class SelectFilter extends Component {
       options,
       comparator,
       withoutEmptyOption,
+      caseSensitive,
       ...rest
     } = this.props;
 
@@ -119,14 +120,16 @@ SelectFilter.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   withoutEmptyOption: PropTypes.bool,
-  defaultValue: PropTypes.any
+  defaultValue: PropTypes.any,
+  caseSensitive: PropTypes.bool
 };
 
 SelectFilter.defaultProps = {
   defaultValue: '',
   className: '',
   withoutEmptyOption: false,
-  comparator: EQ
+  comparator: EQ,
+  caseSensitive: true
 };
 
 export default SelectFilter;

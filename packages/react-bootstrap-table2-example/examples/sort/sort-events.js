@@ -1,5 +1,4 @@
-/* eslint no-unused-vars: 0 */
-/* eslint no-alert: 0 */
+/* eslint no-console: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -10,48 +9,50 @@ const products = productsGenerator();
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  sort: true
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  sort: true,
+  onSort: (field, order) => {
+    console.log(`Sort Field: ${field}, Sort Order: ${order}`);
+  }
 }, {
   dataField: 'price',
   text: 'Product Price'
 }];
 
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    alert(`clicked on row with index: ${rowIndex}`);
-  }
-};
+const defaultSorted = [{
+  dataField: 'name',
+  order: 'desc'
+}];
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  sort: true
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  sort: true,
+  onSort: (field, order) => {
+    console.log(....);
+  }
 }, {
   dataField: 'price',
   text: 'Product Price'
 }];
 
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    alert(\`clicked on row with index: \${rowIndex}\`);
-  }
-};
-
-<BootstrapTable keyField='id' data={ products } columns={ columns } rowEvents={ rowEvents } />
+<BootstrapTable keyField='id' data={ products } columns={ columns } />
 `;
 
 export default () => (
   <div>
-    <h3>Try to click on any rows</h3>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } rowEvents={ rowEvents } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } defaultSorted={ defaultSorted } />
     <Code>{ sourceCode }</Code>
   </div>
 );
