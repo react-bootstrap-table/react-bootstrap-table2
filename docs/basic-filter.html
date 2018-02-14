@@ -22,6 +22,7 @@
 <ul>
 <li>TextFilter</li>
 <li>SelectFilter</li>
+<li>NumberFilter</li>
 <li><strong>Coming soon!</strong></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" name="text-filter"></a><a href="#text-filter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Text Filter</h2>
@@ -47,6 +48,7 @@
   className: <span class="hljs-string">'my-custom-text-filter'</span>, <span class="hljs-comment">// custom classname on input</span>
   defaultValue: <span class="hljs-string">'test'</span>, <span class="hljs-comment">// default filtering value</span>
   comparator: Comparator.EQ, <span class="hljs-comment">// default is Comparator.LIKE</span>
+  caseSensitive: <span class="hljs-literal">true</span>, <span class="hljs-comment">// default is false, and true will only work when comparator is LIKE</span>
   style: { ... }, <span class="hljs-comment">// your custom styles on input</span>
   delay: <span class="hljs-number">1000</span> <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
 });
@@ -86,9 +88,43 @@
   className: <span class="hljs-string">'my-custom-text-filter'</span>, <span class="hljs-comment">// custom classname on input</span>
   defaultValue: <span class="hljs-string">'2'</span>, <span class="hljs-comment">// default filtering value</span>
   comparator: Comparator.LIKE, <span class="hljs-comment">// default is Comparator.EQ</span>
+  caseSensitive: <span class="hljs-literal">false</span>, <span class="hljs-comment">// default is true</span>
   style: { ... }, <span class="hljs-comment">// your custom styles on input</span>
   withoutEmptyOption: <span class="hljs-literal">true</span>  <span class="hljs-comment">// hide the default select option</span>
 });
+
+<span class="hljs-comment">// omit...</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="number-filter"></a><a href="#number-filter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Number Filter</h2>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> filterFactory, { numberFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> columns = [..., {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">filter</span>: numberFilter()
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<p>Numner filter is same as other filter, you can custom the number filter via <code>numberFilter</code> factory function:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> filterFactory, { selectFilter, Comparator } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+<span class="hljs-comment">// omit...</span>
+
+<span class="hljs-keyword">const</span> numberFilter = numberFilter({
+  <span class="hljs-attr">options</span>: [<span class="hljs-number">2100</span>, <span class="hljs-number">2103</span>, <span class="hljs-number">2105</span>],  <span class="hljs-comment">// if options defined, will render number select instead of number input</span>
+  delay: <span class="hljs-number">600</span>,  <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
+  placeholder: <span class="hljs-string">'custom placeholder'</span>,  <span class="hljs-comment">// placeholder for number input</span>
+  withoutEmptyComparatorOption: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// dont render empty option for comparator</span>
+  withoutEmptyNumberOption: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// dont render empty option for numner select if it is defined</span>
+  comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],  <span class="hljs-comment">// Custom the comparators</span>
+  style: { <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-grid'</span> },  <span class="hljs-comment">// custom the style on number filter</span>
+  className: <span class="hljs-string">'custom-numberfilter-class'</span>,  <span class="hljs-comment">// custom the class on number filter</span>
+  comparatorStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'antiquewhite'</span> }, <span class="hljs-comment">// custom the style on comparator select</span>
+  comparatorClassName: <span class="hljs-string">'custom-comparator-class'</span>,  <span class="hljs-comment">// custom the class on comparator select</span>
+  numberStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'cadetblue'</span>, <span class="hljs-attr">margin</span>: <span class="hljs-string">'0px'</span> },  <span class="hljs-comment">// custom the style on number input/select</span>
+  numberClassName: <span class="hljs-string">'custom-number-class'</span>,  <span class="hljs-comment">// custom the class on ber input/select</span>
+  defaultValue: { <span class="hljs-attr">number</span>: <span class="hljs-number">2103</span>, <span class="hljs-attr">comparator</span>: Comparator.GT }  <span class="hljs-comment">// default value</span>
+})
 
 <span class="hljs-comment">// omit...</span>
 </code></pre>
