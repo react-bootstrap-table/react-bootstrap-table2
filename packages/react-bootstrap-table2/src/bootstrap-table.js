@@ -70,7 +70,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       allRowsSelected: isSelectedAll(store)
     });
 
-    const tableCaption = caption && <Caption>{ caption }</Caption>
+    const tableCaption = (caption && <Caption>{ caption }</Caption>);
 
     return (
       <div className="react-bootstrap-table">
