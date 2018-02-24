@@ -70,10 +70,12 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       allRowsSelected: isSelectedAll(store)
     });
 
+    const tableCaption = (caption && <Caption>{ caption }</Caption>);
+
     return (
       <div className="react-bootstrap-table">
         <table className={ tableClass }>
-          <Caption>{ caption }</Caption>
+          { tableCaption }
           <Header
             columns={ columns }
             sortField={ store.sortField }
