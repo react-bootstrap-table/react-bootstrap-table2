@@ -32,9 +32,10 @@ TextEditor.propTypes = {
   defaultValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ]).isRequired
+  ])
 };
 TextEditor.defaultProps = {
-  className: null
+  className: null,
+  defaultValue: ''
 };
 export default TextEditor;
