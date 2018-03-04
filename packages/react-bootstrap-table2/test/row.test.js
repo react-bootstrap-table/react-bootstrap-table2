@@ -799,8 +799,10 @@ describe('Row', () => {
             selected
             selectable
           />);
-        wrapper.instance().handleRowClick();
-        wrapper.instance().handleRowClick();
+        // console.log(wrapper.instance());
+        const rowClick = wrapper.instance().createClickEventHandler();
+        rowClick();
+        rowClick();
       });
 
       it('should increase clickNum as 2', () => {
