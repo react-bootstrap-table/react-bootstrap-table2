@@ -219,30 +219,12 @@ describe('SortWrapper', () => {
       nextProps = { columns, store };
       store.sortField = columns[1].dataField;
       store.sortOrder = Const.SORT_DESC;
+      store.sortBy = sinon.stub();
     });
 
-    describe('if nextProps.isDataChanged is true', () => {
-      beforeEach(() => {
-        nextProps.isDataChanged = true;
-        store.sortBy = sinon.stub();
-      });
-
-      it('should sorting again', () => {
-        wrapper.instance().componentWillReceiveProps(nextProps);
-        expect(store.sortBy.calledOnce).toBeTruthy();
-      });
-    });
-
-    describe('if nextProps.isDataChanged is false', () => {
-      beforeEach(() => {
-        nextProps.isDataChanged = false;
-        store.sortBy = sinon.stub();
-      });
-
-      it('should not sorting', () => {
-        wrapper.instance().componentWillReceiveProps(nextProps);
-        expect(store.sortBy.calledOnce).toBeFalsy();
-      });
+    it('should sorting again', () => {
+      wrapper.instance().componentWillReceiveProps(nextProps);
+      expect(store.sortBy.calledOnce).toBeTruthy();
     });
   });
 });
