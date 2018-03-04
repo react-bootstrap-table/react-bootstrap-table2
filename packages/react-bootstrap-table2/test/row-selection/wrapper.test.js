@@ -8,6 +8,7 @@ import wrapperFactory from '../../src/row-selection/wrapper';
 
 describe('RowSelectionWrapper', () => {
   let wrapper;
+  let selectRow;
 
   const columns = [{
     dataField: 'id',
@@ -25,10 +26,6 @@ describe('RowSelectionWrapper', () => {
     name: 'B'
   }];
 
-  const selectRow = {
-    mode: 'radio'
-  };
-
   const rowIndex = 1;
 
   const keyField = 'id';
@@ -38,6 +35,9 @@ describe('RowSelectionWrapper', () => {
   const RowSelectionWrapper = wrapperFactory(BootstrapTable);
 
   beforeEach(() => {
+    selectRow = {
+      mode: 'radio'
+    };
     wrapper = shallow(
       <RowSelectionWrapper
         keyField={ keyField }
@@ -54,6 +54,10 @@ describe('RowSelectionWrapper', () => {
     expect(wrapper.find(BootstrapTable)).toBeDefined();
   });
 
+  it('should have correct store.selected value', () => {
+    expect(store.selected).toEqual([]);
+  });
+
   it('should have correct state', () => {
     expect(wrapper.state().selectedRowKeys).toBeDefined();
     expect(wrapper.state().selectedRowKeys.length).toEqual(0);
@@ -62,6 +66,30 @@ describe('RowSelectionWrapper', () => {
   it('should inject correct props to base component', () => {
     expect(wrapper.props().onRowSelect).toBeDefined();
     expect(wrapper.props().onAllRowsSelect).toBeDefined();
+  });
+
+  describe('when selectRow.selected is defiend', () => {
+    beforeEach(() => {
+      selectRow.mode = 'checkbox';
+      selectRow.selected = [1, 3];
+      wrapper = shallow(
+        <RowSelectionWrapper
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          selectRow={ selectRow }
+          store={ store }
+        />
+      );
+    });
+
+    it('should have correct store.selected value', () => {
+      expect(store.selected).toEqual(selectRow.selected);
+    });
+
+    it('should have correct state', () => {
+      expect(wrapper.state().selectedRowKeys).toEqual(selectRow.selected);
+    });
   });
 
   describe('when selectRow.mode is \'radio\'', () => {
