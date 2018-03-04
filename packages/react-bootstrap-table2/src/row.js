@@ -6,68 +6,10 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 import Cell from './cell';
 import SelectionCell from './row-selection/selection-cell';
+import eventDelegater from './row-event-delegater';
 import Const from './const';
 
-class Row extends Component {
-  constructor(props) {
-    super(props);
-    this.clickNum = 0;
-    this.handleRowClick = this.handleRowClick.bind(this);
-    this.handleSimpleRowClick = this.handleSimpleRowClick.bind(this);
-  }
-
-  handleRowClick(e) {
-    const {
-      row,
-      selected,
-      keyField,
-      selectable,
-      rowIndex,
-      selectRow: {
-        onRowSelect,
-        clickToEdit
-      },
-      cellEdit: {
-        mode,
-        DBCLICK_TO_CELL_EDIT,
-        DELAY_FOR_DBCLICK
-      },
-      attrs
-    } = this.props;
-
-    const clickFn = () => {
-      if (attrs.onClick) {
-        attrs.onClick(e, row, rowIndex);
-      }
-      if (selectable) {
-        const key = _.get(row, keyField);
-        onRowSelect(key, !selected, rowIndex);
-      }
-    };
-
-    if (mode === DBCLICK_TO_CELL_EDIT && clickToEdit) {
-      this.clickNum += 1;
-      _.debounce(() => {
-        if (this.clickNum === 1) {
-          clickFn();
-        }
-        this.clickNum = 0;
-      }, DELAY_FOR_DBCLICK)();
-    } else {
-      clickFn();
-    }
-  }
-
-  handleSimpleRowClick(e) {
-    const {
-      row,
-      rowIndex,
-      attrs
-    } = this.props;
-
-    attrs.onClick(e, row, rowIndex);
-  }
-
+class Row extends eventDelegater(Component) {
   render() {
     const {
       row,
@@ -96,14 +38,8 @@ class Row extends Component {
     } = cellEdit;
 
     const key = _.get(row, keyField);
-    const { clickToSelect, hideSelectColumn } = selectRow;
-
-    const trAttrs = { ...attrs };
-    if (clickToSelect) {
-      trAttrs.onClick = this.handleRowClick;
-    } else if (attrs.onClick) {
-      trAttrs.onClick = this.handleSimpleRowClick;
-    }
+    const { hideSelectColumn } = selectRow;
+    const trAttrs = this.delegate(attrs);
 
     return (
       <tr style={ style } className={ className } { ...trAttrs }>
