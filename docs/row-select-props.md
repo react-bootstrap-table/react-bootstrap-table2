@@ -18,6 +18,7 @@ const selectRow = {
 * [mode (**required**)](#selectrowmode-string)
 
 ## Optional
+* [selected](#selectrowselected-array)
 * [style](#selectrowstyle-object-function)
 * [classes](#selectrowclasses-string-function)
 * [bgColor](#selectrowbgcolor-string-function)
@@ -51,6 +52,16 @@ const selectRow = {
   columns={ columns }
   selectRow={ selectRowProp }
 />
+```
+
+## selectRow.selected - [Array]
+`selectRow.selected` allow you have default selections on table.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selected: [1, 3] // should be a row keys array
+};
 ```
 
 ## selectRow.style - [Object | Function]

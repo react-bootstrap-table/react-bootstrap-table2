@@ -19,7 +19,11 @@ sidebar_label: Work on Row
 
 * [rowEvents](./table-props.html#rowevents-object)
 
-Currently, `react-bootstrap-table2` only wrapped up the `onClick` event to allow its callback to receive `row` and `rowIndex`, for example:
+Currently, `react-bootstrap-table2` only wrapped up the following events to allow its callback to receive `row` and `rowIndex`, for example:
+
+* `onClick`
+* `onMouseEnter`
+* `onMouseLeave`
 
 ```js
 const rowEvents = {
@@ -30,7 +34,7 @@ const rowEvents = {
 <BootstrapTable data={ data } columns={ columns } rowEvents={ rowEvents } />
 ```
 
-Anyway, it's welcome to ask us to add more wrappeds for event callback functions. 
+Anyway, it's welcome to ask us to add more wrapped on events. 
 
 ## Row Attributes
 
