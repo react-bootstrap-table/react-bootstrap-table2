@@ -19,11 +19,12 @@
 This release bump following packages:
 
 * `react-bootstrap-table-next@0.1.4`
+* `react-bootstrap-table-editor@0.1.2`
 
 ## Changelog
 
 ### Bug fixes
-* Fix the sort will not be triggered when data is changed([#232](https://github.com/react-bootstrap-table/react-bootstrap-ta]]></summary>
+* Fix the sort will not be triggered when data is changed([#232](https://github.com/r]]></summary>
         <author>
             <name>Allen Fang</name>
             <uri>https://twitter.com/allenfang_tw</uri>
