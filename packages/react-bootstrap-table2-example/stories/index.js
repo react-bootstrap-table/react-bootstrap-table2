@@ -9,6 +9,7 @@ import BasicTable from 'examples/basic';
 import BorderlessTable from 'examples/basic/borderless-table';
 import StripHoverCondensedTable from 'examples/basic/striped-hover-condensed-table';
 import NoDataTable from 'examples/basic/no-data-table';
+import CustomizedIdClassesTable from 'examples/basic/customized-id-classes';
 import CaptionTable from 'examples/basic/caption-table';
 
 // work on columns
@@ -121,6 +122,7 @@ storiesOf('Basic Table', module)
   .add('striped, hover, condensed table', () => <StripHoverCondensedTable />)
   .add('borderless table', () => <BorderlessTable />)
   .add('Indication For Empty Table', () => <NoDataTable />)
+  .add('Customized id and class table', () => <CustomizedIdClassesTable />)
   .add('Table with caption', () => <CaptionTable />);
 
 storiesOf('Work on Columns', module)
