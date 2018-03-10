@@ -42,6 +42,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       store,
       columns,
       keyField,
+      id,
+      classes,
       striped,
       hover,
       bordered,
@@ -58,7 +60,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-hover': hover,
       'table-bordered': bordered,
       'table-condensed': condensed
-    });
+    }, classes);
 
     const cellSelectionInfo = this.resolveSelectRowProps({
       onRowSelect: this.props.onRowSelect
@@ -74,7 +76,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
     return (
       <div className="react-bootstrap-table">
-        <table className={ tableClass }>
+        <table id={ id } className={ tableClass }>
           { tableCaption }
           <Header
             columns={ columns }
@@ -116,6 +118,8 @@ BootstrapTable.propTypes = {
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
+  id: PropTypes.string,
+  classes: PropTypes.string,
   condensed: PropTypes.bool,
   caption: PropTypes.oneOfType([
     PropTypes.node,
