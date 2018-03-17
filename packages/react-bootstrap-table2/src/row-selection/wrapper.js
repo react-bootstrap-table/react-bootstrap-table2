@@ -22,19 +22,17 @@ export default Base =>
       super(props);
       this.handleRowSelect = this.handleRowSelect.bind(this);
       this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
-      props.store.selected = this.props.selectRow.selected || [];
+
+      props.store.selected = props.selectRow.selected || [];
       this.state = {
         selectedRowKeys: props.store.selected
       };
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.selectRow) {
-        this.store.selected = nextProps.selectRow.selected || [];
-        this.setState(() => ({
-          selectedRowKeys: this.store.selected
-        }));
-      }
+      this.setState(() => ({
+        selectedRowKeys: nextProps.store.selected
+      }));
     }
 
     /**
