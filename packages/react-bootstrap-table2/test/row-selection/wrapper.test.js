@@ -68,7 +68,18 @@ describe('RowSelectionWrapper', () => {
     expect(wrapper.props().onAllRowsSelect).toBeDefined();
   });
 
-  describe('when selectRow.selected is defiend', () => {
+  describe('componentWillReceiveProps', () => {
+    const nextSelected = [0];
+    const nextProps = { store: { selected: nextSelected } };
+
+    it('should update state.selectedRowKeys with next selected rows', () => {
+      wrapper.instance().componentWillReceiveProps(nextProps);
+
+      expect(wrapper.state('selectedRowKeys')).toEqual(nextSelected);
+    });
+  });
+
+  describe('when selectRow.selected is defined', () => {
     beforeEach(() => {
       selectRow.mode = 'checkbox';
       selectRow.selected = [1, 3];
