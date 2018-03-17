@@ -58,10 +58,6 @@ const HeaderCell = (props) => {
     cellStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
   }
 
-  if (hidden) {
-    cellStyle.display = 'none';
-  }
-
   if (sort) {
     const customClick = cellAttrs.onClick;
     cellAttrs.onClick = (e) => {

@@ -80,10 +80,6 @@ class Cell extends Component {
         _.isFunction(align) ? align(content, row, rowIndex, columnIndex) : align;
     }
 
-    if (hidden) {
-      cellStyle.display = 'none';
-    }
-
     if (cellClasses) cellAttrs.className = cellClasses;
 
     if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
