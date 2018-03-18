@@ -46,8 +46,50 @@ describe('BootstrapTable', () => {
       expect(wrapper.state().data).toEqual(store.data);
     });
 
-    it('should have table-bordered class as default', () => {
-      expect(wrapper.find('table.table-bordered').length).toBe(1);
+    it("should only have classes 'table' and 'table-bordered' as default", () => {
+      expect(wrapper.find('table').prop('className')).toBe('table table-bordered');
+    });
+
+    it('should not have customized id as default', () => {
+      expect(wrapper.find('table').prop('id')).toBeUndefined();
+    });
+  });
+
+  describe('when props.classes was defined', () => {
+    const classes = 'foo';
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable
+          keyField="id"
+          columns={ columns }
+          data={ data }
+          store={ store }
+          classes={ classes }
+        />);
+    });
+
+    it('should display customized classes correctly', () => {
+      expect(wrapper.find(`table.${classes}`).length).toBe(1);
+    });
+  });
+
+  describe('when props.id was defined', () => {
+    const id = 'foo';
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable
+          keyField="id"
+          columns={ columns }
+          data={ data }
+          store={ store }
+          id={ id }
+        />);
+    });
+
+    it('should display customized id correctly', () => {
+      expect(wrapper.find(`table#${id}`).length).toBe(1);
     });
   });
 

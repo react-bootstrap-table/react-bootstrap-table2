@@ -15,6 +15,8 @@
 * [bordered](#bordered)
 * [hover](#hover)
 * [condensed](#condensed)
+* [id](#id)
+* [classes](#classes)
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
 * [rowStyle](#rowStyle)
@@ -59,14 +61,14 @@ A special case for remote pagination:
 remote={ { pagination: true, filter: false, sort: false } }
 ```
 
-There is a apecial case for remote pagination, even you only specified the paignation need to handle as remote, `react-bootstrap-table2` will handle all the table changes(filter, sort etc) as remote mode, because `react-bootstrap-table2` only know the data of current page, but filtering, searching or sort need to work on overall datas.
+There is a special case for remote pagination, even you only specified the pagination need to handle as remote, `react-bootstrap-table2` will handle all the table changes(filter, sort etc) as remote mode, because `react-bootstrap-table2` only know the data of current page, but filtering, searching or sort need to work on overall data.
 
 ### <a name='loading'>loading - [Bool]</a>
 Telling if table is loading or not, for example: waiting data loading, filtering etc. It's **only** valid when [`remote`](#remote) is enabled.
 When `loading` is `true`, `react-bootstrap-table2` will attend to render a overlay on table via [`overlay`](#overlay) prop, if [`overlay`](#overlay) prop is not given, `react-bootstrap-table2` will ignore the overlay rendering.
 
 ### <a name='overlay'>overlay - [Function]</a>
-`overlay` accept a factory funtion which should returning a higher order component. By default, `react-bootstrap-table2-overlay` can be a good option for you:
+`overlay` accept a factory function which should returning a higher order component. By default, `react-bootstrap-table2-overlay` can be a good option for you:
 
 ```sh
 $ npm install react-bootstrap-table2-overlay
@@ -100,6 +102,10 @@ Same as bootstrap `.table-hover` class for adding mouse hover effect (grey backg
 ### <a name='condensed'>condensed - [Bool]</a>
 Same as bootstrap `.table-condensed` class for making a table more compact by cutting cell padding in half.
 
+### <a name='id'>id - [String]</a>
+Customize id on `table` element.
+### <a name='classes'>classes - [String]</a>
+Customize class on `table` element.
 ### <a name='cellEdit'>cellEdit - [Object]</a>
 Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for more detail.
 
@@ -163,7 +169,7 @@ const defaultSorted = [{
 ```
 
 ### <a name='pagination'>pagination - [Object]</a>
-`pagination` allow user to render a pagination panel on the bottom of table. But pagination funcitonality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-paginator` additionaly.
+`pagination` allow user to render a pagination panel on the bottom of table. But pagination functionality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-paginator` additionally.
 
 ```sh
 $ npm install react-bootstrap-table2-paginator --save
@@ -205,7 +211,7 @@ paginator({
   prePageTitle: 'Go to previous', // the title of previous page button
   firstPageTitle: 'Go to first', // the title of first page button
   lastPageTitle: 'Go to last', // the title of last page button
-  hideSizePerPage: true, // hide the size per page dorpdown
+  hideSizePerPage: true, // hide the size per page dropdown
   hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
   onPageChange: (page, sizePerPage) => {}, // callback function when page was changing
   onSizePerPageChange: (sizePerPage, page) => {}, // callback function when page size was changing
@@ -213,7 +219,7 @@ paginator({
 ```
 
 ### <a name='filter'>filter - [Object]</a>
-`filter` allow user to filter data by column. However, filter funcitonality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-filter` firstly.
+`filter` allow user to filter data by column. However, filter functionality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-filter` firstly.
 
 ```sh
 $ npm install react-bootstrap-table2-filter --save

@@ -58,46 +58,49 @@ class Row extends eventDelegater(Component) {
         }
         {
           columns.map((column, index) => {
-            const { dataField } = column;
-            const content = _.get(row, dataField);
-            let editable = _.isDefined(column.editable) ? column.editable : true;
-            if (dataField === keyField || !editableRow) editable = false;
-            if (_.isFunction(column.editable)) {
-              editable = column.editable(content, row, rowIndex, index);
-            }
-            if (rowIndex === editingRowIdx && index === editingColIdx) {
-              let editCellstyle = column.editCellStyle || {};
-              let editCellclasses = column.editCellClasses;
-              if (_.isFunction(column.editCellStyle)) {
-                editCellstyle = column.editCellStyle(content, row, rowIndex, index);
+            if (!column.hidden) {
+              const { dataField } = column;
+              const content = _.get(row, dataField);
+              let editable = _.isDefined(column.editable) ? column.editable : true;
+              if (dataField === keyField || !editableRow) editable = false;
+              if (_.isFunction(column.editable)) {
+                editable = column.editable(content, row, rowIndex, index);
               }
-              if (_.isFunction(column.editCellClasses)) {
-                editCellclasses = column.editCellClasses(content, row, rowIndex, index);
+              if (rowIndex === editingRowIdx && index === editingColIdx) {
+                let editCellstyle = column.editCellStyle || {};
+                let editCellclasses = column.editCellClasses;
+                if (_.isFunction(column.editCellStyle)) {
+                  editCellstyle = column.editCellStyle(content, row, rowIndex, index);
+                }
+                if (_.isFunction(column.editCellClasses)) {
+                  editCellclasses = column.editCellClasses(content, row, rowIndex, index);
+                }
+                return (
+                  <EditingCell
+                    key={ `${content}-${index}` }
+                    row={ row }
+                    column={ column }
+                    className={ editCellclasses }
+                    style={ editCellstyle }
+                    { ...rest }
+                  />
+                );
               }
               return (
-                <EditingCell
+                <Cell
                   key={ `${content}-${index}` }
                   row={ row }
+                  rowIndex={ rowIndex }
+                  columnIndex={ index }
                   column={ column }
-                  className={ editCellclasses }
-                  style={ editCellstyle }
-                  { ...rest }
+                  onStart={ onStart }
+                  editable={ editable }
+                  clickToEdit={ mode === CLICK_TO_CELL_EDIT }
+                  dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
                 />
               );
             }
-            return (
-              <Cell
-                key={ `${content}-${index}` }
-                row={ row }
-                rowIndex={ rowIndex }
-                columnIndex={ index }
-                column={ column }
-                onStart={ onStart }
-                editable={ editable }
-                clickToEdit={ mode === CLICK_TO_CELL_EDIT }
-                dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
-              />
-            );
+            return false;
           })
         }
       </tr>

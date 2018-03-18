@@ -101,6 +101,29 @@ describe('Header', () => {
       });
     });
 
+    describe('when column.hidden is true', () => {
+      beforeEach(() => {
+        const newColumns = [{
+          dataField: 'id',
+          text: 'ID',
+          hidden: true
+        }, {
+          dataField: 'name',
+          text: 'Name'
+        }];
+        wrapper = shallow(
+          <Header
+            { ...mockHeaderResolvedProps }
+            columns={ newColumns }
+          />
+        );
+      });
+
+      it('should not render column with hidden value true', () => {
+        expect(wrapper.find(HeaderCell).length).toBe(1);
+      });
+    });
+
     describe('when selectRow.mode is checkbox (multiple selection)', () => {
       beforeEach(() => {
         const selectRow = { mode: 'checkbox' };

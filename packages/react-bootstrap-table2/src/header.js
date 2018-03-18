@@ -27,20 +27,23 @@ const Header = (props) => {
         }
         {
           columns.map((column, i) => {
-            const currSort = column.dataField === sortField;
-            const isLastSorting = column.dataField === sortField;
+            if (!column.hidden) {
+              const currSort = column.dataField === sortField;
+              const isLastSorting = column.dataField === sortField;
 
-            return (
-              <HeaderCell
-                index={ i }
-                key={ column.dataField }
-                column={ column }
-                onSort={ onSort }
-                sorting={ currSort }
-                onFilter={ onFilter }
-                sortOrder={ sortOrder }
-                isLastSorting={ isLastSorting }
-              />);
+              return (
+                <HeaderCell
+                  index={ i }
+                  key={ column.dataField }
+                  column={ column }
+                  onSort={ onSort }
+                  sorting={ currSort }
+                  onFilter={ onFilter }
+                  sortOrder={ sortOrder }
+                  isLastSorting={ isLastSorting }
+                />);
+            }
+            return false;
           })
         }
       </tr>

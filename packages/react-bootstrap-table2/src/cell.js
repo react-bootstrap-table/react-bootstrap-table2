@@ -39,7 +39,6 @@ class Cell extends Component {
     } = this.props;
     const {
       dataField,
-      hidden,
       formatter,
       formatExtraData,
       style,
@@ -78,10 +77,6 @@ class Cell extends Component {
     if (align) {
       cellStyle.textAlign =
         _.isFunction(align) ? align(content, row, rowIndex, columnIndex) : align;
-    }
-
-    if (hidden) {
-      cellStyle.display = 'none';
     }
 
     if (cellClasses) cellAttrs.className = cellClasses;

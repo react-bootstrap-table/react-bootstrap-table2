@@ -502,6 +502,32 @@ describe('Row', () => {
     });
   });
 
+  describe('when cloumn.hidden is true', () => {
+    beforeEach(() => {
+      const newColumns = [{
+        dataField: 'id',
+        text: 'ID',
+        hidden: true
+      }, {
+        dataField: 'name',
+        text: 'Name'
+      }, {
+        dataField: 'price',
+        text: 'Price'
+      }];
+      wrapper = shallow(
+        <Row
+          { ...mockBodyResolvedProps }
+          rowIndex={ rowIndex }
+          columns={ newColumns }
+          row={ row }
+        />);
+    });
+
+    it('should not render column with hidden value true', () => {
+      expect(wrapper.find(Cell).length).toBe(2);
+    });
+  });
 
   describe('selectRow', () => {
     let selectRow;

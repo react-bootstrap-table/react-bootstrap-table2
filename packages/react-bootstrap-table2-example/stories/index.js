@@ -9,6 +9,7 @@ import BasicTable from 'examples/basic';
 import BorderlessTable from 'examples/basic/borderless-table';
 import StripHoverCondensedTable from 'examples/basic/striped-hover-condensed-table';
 import NoDataTable from 'examples/basic/no-data-table';
+import CustomizedIdClassesTable from 'examples/basic/customized-id-classes';
 import CaptionTable from 'examples/basic/caption-table';
 
 // work on columns
@@ -78,6 +79,7 @@ import SingleSelectionTable from 'examples/row-selection/single-selection';
 import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
 import ClickToSelectTable from 'examples/row-selection/click-to-select';
 import DefaultSelectTable from 'examples/row-selection/default-select';
+import SelectionManagement from 'examples/row-selection/selection-management';
 import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-select-with-cell-edit';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
@@ -121,6 +123,7 @@ storiesOf('Basic Table', module)
   .add('striped, hover, condensed table', () => <StripHoverCondensedTable />)
   .add('borderless table', () => <BorderlessTable />)
   .add('Indication For Empty Table', () => <NoDataTable />)
+  .add('Customized id and class table', () => <CustomizedIdClassesTable />)
   .add('Table with caption', () => <CaptionTable />);
 
 storiesOf('Work on Columns', module)
@@ -191,6 +194,7 @@ storiesOf('Row Selection', module)
   .add('Multiple Selection', () => <MultipleSelectionTable />)
   .add('Click to Select', () => <ClickToSelectTable />)
   .add('Default Select', () => <DefaultSelectTable />)
+  .add('Selection Management', () => <SelectionManagement />)
   .add('Click to Select and Edit Cell', () => <ClickToSelectWithCellEditTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)

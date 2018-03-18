@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: 0 */
-/* eslint no-alert: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -10,10 +8,7 @@ const products = productsGenerator();
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID',
-  headerEvents: {
-    onClick: () => alert('Click on Product ID header column')
-  }
+  text: 'Product ID'
 }, {
   dataField: 'name',
   text: 'Product Name'
@@ -27,10 +22,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID',
-  headerEvents: {
-    onClick: () => alert('Click on Product ID header column')
-  }
+  text: 'Product ID'
 }, {
   dataField: 'name',
   text: 'Product Name'
@@ -39,13 +31,18 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } />
+<BootstrapTable id="bar" keyField='id' data={ products } columns={ columns } />
+<BootstrapTable classes="foo" keyField='id' data={ products } columns={ columns } />
 `;
 
 export default () => (
   <div>
-    <h3>Try to Click on Product ID header column</h3>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } />
+    <h4> Customized table ID </h4>
+    <BootstrapTable id="bar" keyField="id" data={ products } columns={ columns } />
+
+    <h4> Customized table className </h4>
+    <BootstrapTable classes="foo" keyField="id" data={ products } columns={ columns } />
+
     <Code>{ sourceCode }</Code>
   </div>
 );

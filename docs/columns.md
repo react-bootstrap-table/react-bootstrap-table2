@@ -137,7 +137,7 @@ Enable the column sort via a `true` value given.
 ```
 
 ## <a name='classes'>column.classes - [String | Function]</a>
-It's availabe to have custom class on table column:
+It's available to have custom class on table column:
 
 ```js
 {
@@ -165,7 +165,7 @@ In addition, `classes` also accept a callback function which have more power to 
 A new `String` will be the result as element class.
 
 ## <a name='headerClasses'>column.headerClasses - [String | Function]</a>
-It's similar to [`column.classes`](#classes), `headerClasses` is availabe to have customized class on table header column:
+It's similar to [`column.classes`](#classes), `headerClasses` is available to have customized class on table header column:
 
 ```js
 {
@@ -190,7 +190,7 @@ Furthermore, it also accept a callback function which takes 2 arguments and a `S
 A new `String` will be the result of element headerClasses.
 
 ## <a name='style'>column.style - [Object | Function]</a>
-It's availabe to have custom style on table column:
+It's available to have custom style on table column:
 
 ```js
 {
@@ -220,7 +220,7 @@ A new `Object` will be the result of element style.
 
 
 ## <a name='headerStyle'>column.headerStyle - [Object | Function]</a>
-It's availabe to have customized inline-style on table header column:
+It's available to have customized inline-style on table header column:
 
 ```js
 {
@@ -278,7 +278,7 @@ A new `String` will be the result of element title.
 }
 ```
 
-It's also availabe to custom via a callback function:
+It's also available to custom via a callback function:
 ```js
 {
   headerTitle: function callback(column, colIndex) { ... }
@@ -401,7 +401,7 @@ A new `Object` will be the result of element HTML attributes.
 
 > Caution:   
 
-> If `column.classes`, `column.style`, `column.title`, `column.hidden` or `column.align` was given at the same time, property `attrs` has lower priorty and it will be overwrited.
+> If `column.classes`, `column.style`, `column.title`, `column.hidden` or `column.align` was given at the same time, property `attrs` has lower priority and it will be overwritten.
 
 ```js
 {
@@ -412,7 +412,7 @@ A new `Object` will be the result of element HTML attributes.
 ```
 
 ## <a name='headerAttrs'>column.headerAttrs - [Object | Function]</a>
-`headerAttrs` is similiar to [`column.attrs`](#attrs) but it works for header column. 
+`headerAttrs` is similar to [`column.attrs`](#attrs) but it works for header column. 
 ```js
 {
   // omit...
@@ -444,7 +444,7 @@ A new `Object` will be the result of element headerAttrs.
 
 > Caution:   
 > Same as [column.attrs](#attrs), it has lower priority and will be
-> overwrited when other props related to HTML attributes were given.
+> overwritten when other props related to HTML attributes were given.
 
 ### <a name='headerSortingClasses'>headerSortingClasses - [String | Function]</a>
 
@@ -467,7 +467,7 @@ const headerSortingClasses = (column, sortOrder, isLastSorting, colIndex) => { .
 
 ### <a name='headerSortingStyle'>headerSortingStyle - [Object | Function]</a>
 
-It's similiar to [headerSortingClasses](#headerSortingClasses). It allows to customize the style of header cell when this column is sorting. A style `Object` and `callback` are acceptable. `callback` takes **4** arguments and an `Object` is expected to return:
+It's similar to [headerSortingClasses](#headerSortingClasses). It allows to customize the style of header cell when this column is sorting. A style `Object` and `callback` are acceptable. `callback` takes **4** arguments and an `Object` is expected to return:
 
 ```js
 const sortingHeaderStyle = {
@@ -502,7 +502,7 @@ If a callback function given, you can control the editable level as cell level:
 }
 ```
 
-The return value can be a bool or an object. If your valiation is pass, return `true` explicitly. If your valiation is invalid, return following object instead:
+The return value can be a bool or an object. If your validation is pass, return `true` explicitly. If your validation is invalid, return following object instead:
 ```js
 {
   valid: false,
@@ -574,7 +574,7 @@ import { textFilter } from 'react-bootstrap-table2-filter';
 For some reason of simple customization, `react-bootstrap-table2` allow you to pass some props to filter factory function. Please check [here](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/master/packages/react-bootstrap-table2-filter/README.md) for more detail tutorial.
 
 ## <a name='filterValue'>column.filterValue - [Function]</a>
-Sometimes, if the cell/column value that you don't want to filter on them, you can define `filterValue` to return a actual value you wanna be filterd:
+Sometimes, if the cell/column value that you don't want to filter on them, you can define `filterValue` to return a actual value you wanna be filtered:
 
 **Parameters**
 * `cell`: The value of current cell. 

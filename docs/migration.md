@@ -1,8 +1,8 @@
 # Migration Guide
 
 * Please see the [CHANGELOG](https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/new-version-0.1.0.html) for `react-bootstrap-table2` first drop.
-* Please see the [Roadmap](https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html)  for `react-bootstrap-table2` in 2018/Q1.
-* Feel free to see the [offical docs](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/about.html), we list all the basic usage here!!
+* Please see the [Road Map](https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html)  for `react-bootstrap-table2` in 2018/Q1.
+* Feel free to see the [official docs](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/about.html), we list all the basic usage here!!
 
 ## Preface
 
@@ -23,11 +23,11 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
   * Overlay/Loading Addons
 
-This can help your application with less bundled size and also help `react-bootstrap-table2` have clean design to avoid handling to much logic in kernal module(SRP). Hence, which means you probably need to install above addons when you need specific features.
+This can help your application with less bundled size and also help `react-bootstrap-table2` have clean design to avoid handling to much logic in kernel module(SRP). Hence, which means you probably need to install above addons when you need specific features.
 
 ## Core Table Migration
 
-There is a big chagne is that there's no `TableHeaderColumn` in the `react-bootstrap-table2`, instead you are supposed to be define the `columns` prop on `BootstrapTable`: 
+There is a big change is that there's no `TableHeaderColumn` in the `react-bootstrap-table2`, instead you are supposed to be define the `columns` prop on `BootstrapTable`: 
 
 ```js
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -48,8 +48,8 @@ const columns = [{
 
 The `text` property is just same as the children for the `TableHeaderColumn`, if you want to custom the header, there's a new property is: [`headerFormatter`](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columnheaderformatter-function).
 
-* [`BootstrapTable` Definitation](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/table-props.html)
-* [Column Definitation](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html)
+* [`BootstrapTable` Definition](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/table-props.html)
+* [Column Definition](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html)
 
 ## Table Sort
 
@@ -65,7 +65,7 @@ Please see [Work with table sort](https://react-bootstrap-table.github.io/react-
 - [ ] Sort management
 - [ ] Multi sort
 
-Due to no `TableHeaderColumn` so that no `dataSort` here, please add [`sort`](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columnsort-bool) property on column definitation.
+Due to no `TableHeaderColumn` so that no `dataSort` here, please add [`sort`](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columnsort-bool) property on column definition.
 
 ## Row Selection
 
@@ -93,7 +93,7 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 
 Remember to install [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter) firstly.   
 
-Due to no `TableHeaderColumn` so that no `filter` here, please add [`filter`](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columnfilter-object) property on column definitation and [`filter`](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/table-props.html#filter-object) prop on `BootstrapTable`.
+Due to no `TableHeaderColumn` so that no `filter` here, please add [`filter`](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columnfilter-object) property on column definition and [`filter`](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/table-props.html#filter-object) prop on `BootstrapTable`.
 
 ## Cell Edit
 
