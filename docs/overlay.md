@@ -4,7 +4,7 @@ title: Remote Loading/Overlay
 sidebar_label: Overlay
 ---
 
-In `react-bootstrap-table2`, you will be easier to custom the loading or lverlay on table no matter if remote enabled or not. In the following, we have two way to do it:
+In `react-bootstrap-table2`, you will be easier to custom the loading or overlay on table no matter if remote enabled or not. In the following, we have two way to do it:
 
 -----
 
