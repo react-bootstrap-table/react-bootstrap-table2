@@ -24,7 +24,6 @@ const HeaderCell = (props) => {
     text,
     sort,
     filter,
-    hidden,
     headerTitle,
     headerAlign,
     headerFormatter,
@@ -56,10 +55,6 @@ const HeaderCell = (props) => {
 
   if (headerAlign) {
     cellStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
-  }
-
-  if (hidden) {
-    cellStyle.display = 'none';
   }
 
   if (sort) {

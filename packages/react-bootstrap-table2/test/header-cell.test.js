@@ -33,24 +33,6 @@ describe('HeaderCell', () => {
     });
   });
 
-  describe('when column.hidden props is true', () => {
-    const column = {
-      dataField: 'id',
-      text: 'ID',
-      hidden: true
-    };
-
-    beforeEach(() => {
-      wrapper = shallow(<HeaderCell column={ column } index={ index } />);
-    });
-
-    it('should have \'none\' value for style.display', () => {
-      const style = wrapper.find('th').prop('style');
-      expect(style).toBeDefined();
-      expect(style.display).toEqual('none');
-    });
-  });
-
   describe('when column.headerTitle prop is defined', () => {
     let column;
     beforeEach(() => {
