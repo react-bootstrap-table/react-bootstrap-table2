@@ -18,8 +18,9 @@ We support the single and multiple selection on table, config the [`selectRow.mo
 By default behavior, user need to click on the selection column or the checkbox/radio to select/unselect a row, for a user experience perspective, we have [`selectoRow.clickToSelect`](./row-select-props.html#selectrowclicktoselect-bool) to allow user to select/unselect row by clicking on the row.
 
 ## Selection Management
-Please check [`selectoRow.selected`](./row-select-props.html#selectrowselected-array), it's used for default selection usually but also can be used as a external selection control.
+Please check [`selectoRow.selected`](./row-select-props.html#selectrowselected-array), it's used for default selection usually but also can be used as a external selection control.   
 
+This is an example for [selection management](../storybook/index.html?selectedKind=Row%20Selection&selectedStory=Selection%20Management)
 ## Customization
 
 ### Style/Class
