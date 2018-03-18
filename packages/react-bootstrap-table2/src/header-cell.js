@@ -24,7 +24,6 @@ const HeaderCell = (props) => {
     text,
     sort,
     filter,
-    hidden,
     headerTitle,
     headerAlign,
     headerFormatter,

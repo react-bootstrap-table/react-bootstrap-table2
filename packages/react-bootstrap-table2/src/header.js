@@ -42,9 +42,8 @@ const Header = (props) => {
                   sortOrder={ sortOrder }
                   isLastSorting={ isLastSorting }
                 />);
-            } else {
-              return false;
             }
+            return false;
           })
         }
       </tr>

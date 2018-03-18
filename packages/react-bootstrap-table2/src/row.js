@@ -99,9 +99,8 @@ class Row extends eventDelegater(Component) {
                   dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
                 />
               );
-            } else {
-              return false;
             }
+            return false;
           })
         }
       </tr>

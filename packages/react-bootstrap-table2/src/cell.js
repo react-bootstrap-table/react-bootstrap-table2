@@ -39,7 +39,6 @@ class Cell extends Component {
     } = this.props;
     const {
       dataField,
-      hidden,
       formatter,
       formatExtraData,
       style,
