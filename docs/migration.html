@@ -7,8 +7,8 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Migration</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="migration-guide"></a><a href="#migration-guide" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Migration Guide</h2>
 <ul>
 <li>Please see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/new-version-0.1.0.html">CHANGELOG</a> for <code>react-bootstrap-table2</code> first drop.</li>
-<li>Please see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html">Roadmap</a>  for <code>react-bootstrap-table2</code> in 2018/Q1.</li>
-<li>Feel free to see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/about.html">offical docs</a>, we list all the basic usage here!!</li>
+<li>Please see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html">Road Map</a>  for <code>react-bootstrap-table2</code> in 2018/Q1.</li>
+<li>Feel free to see the <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/about.html">official docs</a>, we list all the basic usage here!!</li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" name="preface"></a><a href="#preface" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preface</h2>
 <p>Currently, <strong>I still can't implement all the mainly features in legacy <code>react-bootstrap-table</code></strong>, so please watch our github repo or <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/">blog</a> to make sure the legacy features you wanted are already implemented on <code>react-bootstrap-table2</code>. Anyway, ask me by open issue is ok.</p>
@@ -36,9 +36,9 @@
 <li>Overlay/Loading Addons</li>
 </ul></li>
 </ul>
-<p>This can help your application with less bundled size and also help <code>react-bootstrap-table2</code> have clean design to avoid handling to much logic in kernal module(SRP). Hence, which means you probably need to install above addons when you need specific features.</p>
+<p>This can help your application with less bundled size and also help <code>react-bootstrap-table2</code> have clean design to avoid handling to much logic in kernel module(SRP). Hence, which means you probably need to install above addons when you need specific features.</p>
 <h2><a class="anchor" aria-hidden="true" name="core-table-migration"></a><a href="#core-table-migration" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Core Table Migration</h2>
-<p>There is a big chagne is that there's no <code>TableHeaderColumn</code> in the <code>react-bootstrap-table2</code>, instead you are supposed to be define the <code>columns</code> prop on <code>BootstrapTable</code>:</p>
+<p>There is a big change is that there's no <code>TableHeaderColumn</code> in the <code>react-bootstrap-table2</code>, instead you are supposed to be define the <code>columns</code> prop on <code>BootstrapTable</code>:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
 
 <span class="hljs-keyword">const</span> columns = [{
@@ -56,8 +56,8 @@
 </span></code></pre>
 <p>The <code>text</code> property is just same as the children for the <code>TableHeaderColumn</code>, if you want to custom the header, there's a new property is: <a href="./column-props.html#columnheaderformatter-function"><code>headerFormatter</code></a>.</p>
 <ul>
-<li><a href="./table-props.html"><code>BootstrapTable</code> Definitation</a></li>
-<li><a href="./column-props.html">Column Definitation</a></li>
+<li><a href="./table-props.html"><code>BootstrapTable</code> Definition</a></li>
+<li><a href="./column-props.html">Column Definition</a></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" name="table-sort"></a><a href="#table-sort" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Table Sort</h2>
 <p>Please see <a href="./basic-sort.html">Work with table sort</a>.</p>
@@ -72,7 +72,7 @@
 <li>[ ] Sort management</li>
 <li>[ ] Multi sort</li>
 </ul>
-<p>Due to no <code>TableHeaderColumn</code> so that no <code>dataSort</code> here, please add <a href="./column-props.html#columnsort-bool"><code>sort</code></a> property on column definitation.</p>
+<p>Due to no <code>TableHeaderColumn</code> so that no <code>dataSort</code> here, please add <a href="./column-props.html#columnsort-bool"><code>sort</code></a> property on column definition.</p>
 <h2><a class="anchor" aria-hidden="true" name="row-selection"></a><a href="#row-selection" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Row Selection</h2>
 <p>Please see <a href="./basic-row-select.html">Work with selection</a>.<br>
 Please see <a href="./row-select-props.html">available selectRow configurations</a>.</p>
