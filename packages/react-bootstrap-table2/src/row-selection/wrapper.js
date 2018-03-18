@@ -30,8 +30,9 @@ export default Base =>
     }
 
     componentWillReceiveProps(nextProps) {
+      nextProps.store.selected = nextProps.selectRow.selected || [];
       this.setState(() => ({
-        selectedRowKeys: nextProps.store.selected
+        selectedRowKeys: nextProps.selectRow.selected
       }));
     }
 

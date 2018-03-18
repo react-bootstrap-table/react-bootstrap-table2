@@ -70,11 +70,19 @@ describe('RowSelectionWrapper', () => {
 
   describe('componentWillReceiveProps', () => {
     const nextSelected = [0];
-    const nextProps = { store: { selected: nextSelected } };
+    const nextProps = {
+      store: {
+        selected: nextSelected
+      },
+      selectRow: {
+        mode: 'checkbox',
+        selected: nextSelected
+      }
+    };
 
     it('should update state.selectedRowKeys with next selected rows', () => {
       wrapper.instance().componentWillReceiveProps(nextProps);
-
+      expect(nextProps.store.selected).toEqual(nextSelected);
       expect(wrapper.state('selectedRowKeys')).toEqual(nextSelected);
     });
   });
