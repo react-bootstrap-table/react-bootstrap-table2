@@ -15,6 +15,8 @@
 * [bordered](#bordered)
 * [hover](#hover)
 * [condensed](#condensed)
+* [id](#id)
+* [classes](#classes)
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
 * [rowStyle](#rowStyle)
@@ -100,6 +102,10 @@ Same as bootstrap `.table-hover` class for adding mouse hover effect (grey backg
 ### <a name='condensed'>condensed - [Bool]</a>
 Same as bootstrap `.table-condensed` class for making a table more compact by cutting cell padding in half.
 
+### <a name='id'>id - [String]</a>
+Customize id on `table` element.
+### <a name='classes'>classes - [String]</a>
+Customize class on `table` element.
 ### <a name='cellEdit'>cellEdit - [Object]</a>
 Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for more detail.
 
