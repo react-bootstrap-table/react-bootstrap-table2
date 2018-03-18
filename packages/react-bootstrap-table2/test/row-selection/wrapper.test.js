@@ -68,7 +68,26 @@ describe('RowSelectionWrapper', () => {
     expect(wrapper.props().onAllRowsSelect).toBeDefined();
   });
 
-  describe('when selectRow.selected is defiend', () => {
+  describe('componentWillReceiveProps', () => {
+    const nextSelected = [0];
+    const nextProps = {
+      store: {
+        selected: nextSelected
+      },
+      selectRow: {
+        mode: 'checkbox',
+        selected: nextSelected
+      }
+    };
+
+    it('should update state.selectedRowKeys with next selected rows', () => {
+      wrapper.instance().componentWillReceiveProps(nextProps);
+      expect(nextProps.store.selected).toEqual(nextSelected);
+      expect(wrapper.state('selectedRowKeys')).toEqual(nextSelected);
+    });
+  });
+
+  describe('when selectRow.selected is defined', () => {
     beforeEach(() => {
       selectRow.mode = 'checkbox';
       selectRow.selected = [1, 3];
@@ -96,7 +115,7 @@ describe('RowSelectionWrapper', () => {
     const firstSelectedRow = data[0][keyField];
     const secondSelectedRow = data[1][keyField];
 
-    it('call handleRowSelect function should seting correct state.selectedRowKeys', () => {
+    it('call handleRowSelect function should setting correct state.selectedRowKeys', () => {
       wrapper.instance().handleRowSelect(firstSelectedRow, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual([firstSelectedRow]);
 
@@ -122,7 +141,7 @@ describe('RowSelectionWrapper', () => {
       );
     });
 
-    it('call handleRowSelect function should seting correct state.selectedRowKeys', () => {
+    it('call handleRowSelect function should setting correct state.selectedRowKeys', () => {
       wrapper.instance().handleRowSelect(firstSelectedRow, true, rowIndex);
       expect(wrapper.state('selectedRowKeys')).toEqual(expect.arrayContaining([firstSelectedRow]));
 
@@ -136,7 +155,7 @@ describe('RowSelectionWrapper', () => {
       expect(wrapper.state('selectedRowKeys')).toEqual([]);
     });
 
-    it('call handleAllRowsSelect function should seting correct state.selectedRowKeys', () => {
+    it('call handleAllRowsSelect function should setting correct state.selectedRowKeys', () => {
       wrapper.instance().handleAllRowsSelect();
       expect(wrapper.state('selectedRowKeys')).toEqual(expect.arrayContaining([firstSelectedRow, secondSelectedRow]));
 
@@ -144,7 +163,7 @@ describe('RowSelectionWrapper', () => {
       expect(wrapper.state('selectedRowKeys')).toEqual([]);
     });
 
-    it('call handleAllRowsSelect function with a bool args should seting correct state.selectedRowKeys', () => {
+    it('call handleAllRowsSelect function with a bool args should setting correct state.selectedRowKeys', () => {
       wrapper.instance().handleAllRowsSelect(true);
       expect(wrapper.state('selectedRowKeys')).toEqual(expect.arrayContaining([firstSelectedRow, secondSelectedRow]));
 
