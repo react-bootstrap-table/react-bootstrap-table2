@@ -9,8 +9,7 @@ cache:
 
 branches:
   only:
-  # skip master branch when it's under development phase
-  # - master 
+  - master
   - develop
 
 before_install:
