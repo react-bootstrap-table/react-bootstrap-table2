@@ -79,6 +79,7 @@ import SingleSelectionTable from 'examples/row-selection/single-selection';
 import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
 import ClickToSelectTable from 'examples/row-selection/click-to-select';
 import DefaultSelectTable from 'examples/row-selection/default-select';
+import SelectionManagement from 'examples/row-selection/selection-management';
 import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-select-with-cell-edit';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
@@ -193,6 +194,7 @@ storiesOf('Row Selection', module)
   .add('Multiple Selection', () => <MultipleSelectionTable />)
   .add('Click to Select', () => <ClickToSelectTable />)
   .add('Default Select', () => <DefaultSelectTable />)
+  .add('Selection Management', () => <SelectionManagement />)
   .add('Click to Select and Edit Cell', () => <ClickToSelectWithCellEditTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
