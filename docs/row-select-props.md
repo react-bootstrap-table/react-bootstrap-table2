@@ -103,7 +103,7 @@ const selectRow = {
 ```
 
 ## selectRow.bgColor - [String | Function]
-A quick way to specify the backgroud color when row is selected
+A quick way to specify the background color when row is selected
 
 ```js
 const selectRow = {
