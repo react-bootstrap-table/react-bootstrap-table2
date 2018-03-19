@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -21,9 +22,18 @@ export default Base =>
       super(props);
       this.handleRowSelect = this.handleRowSelect.bind(this);
       this.handleAllRowsSelect = this.handleAllRowsSelect.bind(this);
+
+      props.store.selected = props.selectRow.selected || [];
       this.state = {
         selectedRowKeys: props.store.selected
       };
+    }
+
+    componentWillReceiveProps(nextProps) {
+      nextProps.store.selected = nextProps.selectRow.selected || [];
+      this.setState(() => ({
+        selectedRowKeys: nextProps.store.selected
+      }));
     }
 
     /**

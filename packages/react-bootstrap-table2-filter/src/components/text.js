@@ -69,7 +69,16 @@ class TextFilter extends Component {
   }
 
   render() {
-    const { placeholder, column: { text }, style, className, onFilter, ...rest } = this.props;
+    const {
+      placeholder,
+      column: { text },
+      style,
+      className,
+      onFilter,
+      caseSensitive,
+      defaultValue,
+      ...rest
+    } = this.props;
     // stopPropagation for onClick event is try to prevent sort was triggered.
     return (
       <input
@@ -95,12 +104,14 @@ TextFilter.propTypes = {
   delay: PropTypes.number,
   placeholder: PropTypes.string,
   style: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
+  caseSensitive: PropTypes.bool
 };
 
 TextFilter.defaultProps = {
   delay: FILTER_DELAY,
-  defaultValue: ''
+  defaultValue: '',
+  caseSensitive: false
 };
 
 

@@ -40,5 +40,6 @@ TextEditor.defaultProps = {
   className: null,
   defaultValue: '',
   updateValue: () => console.warn('update value needs to be implemented')
+  ])
 };
 export default TextEditor;

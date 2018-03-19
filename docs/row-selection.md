@@ -6,6 +6,7 @@
 * [mode (**required**)](#mode)
 
 ## Optional
+* [selected](#selected)
 * [style](#style)
 * [classes)](#classes)
 * [bgColor](#bgColor)
@@ -52,6 +53,16 @@ const selectRow = {
 />
 ```
 
+### <a name='selected'>selectRow.selected - [Array]</a>
+`selectRow.selected` allow you have default selections on table.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selected: [1, 3] // should be a row keys array
+};
+```
+
 ### <a name='style'>selectRow.style - [Object | Function]</a>
 `selectRow.style` allow you to have custom style on selected rows:
 
@@ -91,7 +102,7 @@ const selectRow = {
 ```
 
 ### <a name='bgColor'>selectRow.bgColor - [String | Function]</a>
-The backgroud color when row is selected
+The background color when row is selected
 
 ```js
 const selectRow = {

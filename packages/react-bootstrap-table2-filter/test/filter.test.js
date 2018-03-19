@@ -4,7 +4,7 @@ import Store from 'react-bootstrap-table-next/src/store';
 
 import { filters } from '../src/filter';
 import { FILTER_TYPE } from '../src/const';
-import { LIKE, EQ } from '../src/comparison';
+import { LIKE, EQ, GT, GE, LT, LE, NE } from '../src/comparison';
 
 const data = [];
 for (let i = 0; i < 20; i += 1) {
@@ -37,7 +37,7 @@ describe('filter', () => {
     }];
   });
 
-  describe('text filter', () => {
+  describe('filterByText', () => {
     beforeEach(() => {
       filterFn = filters(store, columns, _);
     });
@@ -52,6 +52,20 @@ describe('filter', () => {
         const result = filterFn(currFilters);
         expect(result).toBeDefined();
         expect(result).toHaveLength(2);
+      });
+    });
+
+    describe('when caseSensitive is true', () => {
+      it('should returning correct result', () => {
+        currFilters.name = {
+          filterVal: 'NAME',
+          caseSensitive: true,
+          filterType: FILTER_TYPE.TEXT
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toBeDefined();
+        expect(result).toHaveLength(0);
       });
     });
 
@@ -88,6 +102,116 @@ describe('filter', () => {
         calls.forEach((call, i) => {
           expect(call.calledWith(data[i].name, data[i])).toBeTruthy();
         });
+      });
+    });
+  });
+
+  describe('filterByNumber', () => {
+    beforeEach(() => {
+      filterFn = filters(store, columns, _);
+    });
+
+    describe('when currFilters.filterVal.comparator is empty', () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: '', number: '203' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        let result = filterFn(currFilters);
+        expect(result).toHaveLength(data.length);
+
+        currFilters.price.filterVal.comparator = undefined;
+        result = filterFn(currFilters);
+        expect(result).toHaveLength(data.length);
+      });
+    });
+
+    describe('when currFilters.filterVal.number is empty', () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: EQ, number: '' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toHaveLength(data.length);
+      });
+    });
+
+    describe(`when currFilters.filterVal.comparator is ${EQ}`, () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: EQ, number: '203' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        let result = filterFn(currFilters);
+        expect(result).toHaveLength(1);
+
+        currFilters.price.filterVal.number = '0';
+        result = filterFn(currFilters);
+        expect(result).toHaveLength(0);
+      });
+    });
+
+    describe(`when currFilters.filterVal.comparator is ${GT}`, () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: GT, number: '203' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toHaveLength(16);
+      });
+    });
+
+    describe(`when currFilters.filterVal.comparator is ${GE}`, () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: GE, number: '203' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toHaveLength(17);
+      });
+    });
+
+    describe(`when currFilters.filterVal.comparator is ${LT}`, () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: LT, number: '203' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toHaveLength(3);
+      });
+    });
+
+    describe(`when currFilters.filterVal.comparator is ${LE}`, () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: LE, number: '203' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toHaveLength(4);
+      });
+    });
+
+    describe(`when currFilters.filterVal.comparator is ${NE}`, () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: NE, number: '203' },
+          filterType: FILTER_TYPE.NUMBER
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toHaveLength(19);
       });
     });
   });

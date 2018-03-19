@@ -24,7 +24,6 @@ const HeaderCell = (props) => {
     text,
     sort,
     filter,
-    hidden,
     headerTitle,
     headerAlign,
     headerFormatter,
@@ -56,10 +55,6 @@ const HeaderCell = (props) => {
 
   if (headerAlign) {
     cellStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
-  }
-
-  if (hidden) {
-    cellStyle.display = 'none';
   }
 
   if (sort) {
@@ -131,6 +126,7 @@ HeaderCell.propTypes = {
     attrs: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     sort: PropTypes.bool,
     sortFunc: PropTypes.func,
+    onSort: PropTypes.func,
     editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     editCellStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     editCellClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),

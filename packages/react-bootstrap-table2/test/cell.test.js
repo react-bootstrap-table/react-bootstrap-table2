@@ -27,24 +27,6 @@ describe('Cell', () => {
     });
   });
 
-  describe('when column.hidden prop is true', () => {
-    const column = {
-      dataField: 'id',
-      text: 'ID',
-      hidden: true
-    };
-
-    beforeEach(() => {
-      wrapper = shallow(<Cell row={ row } columnIndex={ 1 } rowIndex={ 1 } column={ column } />);
-    });
-
-    it('should have \'none\' value for style.display', () => {
-      const style = wrapper.find('td').prop('style');
-      expect(style).toBeDefined();
-      expect(style.display).toEqual('none');
-    });
-  });
-
   describe('when column.formatter prop is defined', () => {
     const rowIndex = 1;
     const column = {
@@ -387,20 +369,6 @@ describe('Cell', () => {
             <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
 
           expect(wrapper.find('td').prop('style')).toEqual(column.style);
-        });
-      });
-
-      describe('when column.hidden prop is defined', () => {
-        it('attrs.style.hidden should be overwrited', () => {
-          column.hidden = true;
-          column.attrs = { style: { hidden: true } };
-
-          wrapper = shallow(
-            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
-
-          const style = wrapper.find('td').prop('style');
-          expect(style).toBeDefined();
-          expect(style.display).toEqual('none');
         });
       });
 

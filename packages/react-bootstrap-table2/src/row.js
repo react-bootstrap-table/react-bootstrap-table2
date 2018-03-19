@@ -6,57 +6,10 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 import Cell from './cell';
 import SelectionCell from './row-selection/selection-cell';
+import eventDelegater from './row-event-delegater';
 import Const from './const';
 
-class Row extends Component {
-  constructor(props) {
-    super(props);
-    this.clickNum = 0;
-    this.handleRowClick = this.handleRowClick.bind(this);
-  }
-
-  handleRowClick(e) {
-    const {
-      row,
-      selected,
-      keyField,
-      selectable,
-      rowIndex,
-      selectRow: {
-        onRowSelect,
-        clickToEdit
-      },
-      cellEdit: {
-        mode,
-        DBCLICK_TO_CELL_EDIT,
-        DELAY_FOR_DBCLICK
-      },
-      attrs
-    } = this.props;
-
-    const clickFn = () => {
-      if (attrs.onClick) {
-        attrs.onClick(e);
-      }
-      if (selectable) {
-        const key = _.get(row, keyField);
-        onRowSelect(key, !selected, rowIndex);
-      }
-    };
-
-    if (mode === DBCLICK_TO_CELL_EDIT && clickToEdit) {
-      this.clickNum += 1;
-      _.debounce(() => {
-        if (this.clickNum === 1) {
-          clickFn();
-        }
-        this.clickNum = 0;
-      }, DELAY_FOR_DBCLICK)();
-    } else {
-      clickFn();
-    }
-  }
-
+class Row extends eventDelegater(Component) {
   render() {
     const {
       row,
@@ -85,12 +38,8 @@ class Row extends Component {
     } = cellEdit;
 
     const key = _.get(row, keyField);
-    const { clickToSelect, hideSelectColumn } = selectRow;
-
-    const trAttrs = { ...attrs };
-    if (clickToSelect) {
-      trAttrs.onClick = this.handleRowClick;
-    }
+    const { hideSelectColumn } = selectRow;
+    const trAttrs = this.delegate(attrs);
 
     return (
       <tr style={ style } className={ className } { ...trAttrs }>
@@ -109,46 +58,49 @@ class Row extends Component {
         }
         {
           columns.map((column, index) => {
-            const { dataField } = column;
-            const content = _.get(row, dataField);
-            let editable = _.isDefined(column.editable) ? column.editable : true;
-            if (dataField === keyField || !editableRow) editable = false;
-            if (_.isFunction(column.editable)) {
-              editable = column.editable(content, row, rowIndex, index);
-            }
-            if (rowIndex === editingRowIdx && index === editingColIdx) {
-              let editCellstyle = column.editCellStyle || {};
-              let editCellclasses = column.editCellClasses;
-              if (_.isFunction(column.editCellStyle)) {
-                editCellstyle = column.editCellStyle(content, row, rowIndex, index);
+            if (!column.hidden) {
+              const { dataField } = column;
+              const content = _.get(row, dataField);
+              let editable = _.isDefined(column.editable) ? column.editable : true;
+              if (dataField === keyField || !editableRow) editable = false;
+              if (_.isFunction(column.editable)) {
+                editable = column.editable(content, row, rowIndex, index);
               }
-              if (_.isFunction(column.editCellClasses)) {
-                editCellclasses = column.editCellClasses(content, row, rowIndex, index);
+              if (rowIndex === editingRowIdx && index === editingColIdx) {
+                let editCellstyle = column.editCellStyle || {};
+                let editCellclasses = column.editCellClasses;
+                if (_.isFunction(column.editCellStyle)) {
+                  editCellstyle = column.editCellStyle(content, row, rowIndex, index);
+                }
+                if (_.isFunction(column.editCellClasses)) {
+                  editCellclasses = column.editCellClasses(content, row, rowIndex, index);
+                }
+                return (
+                  <EditingCell
+                    key={ `${content}-${index}` }
+                    row={ row }
+                    column={ column }
+                    className={ editCellclasses }
+                    style={ editCellstyle }
+                    { ...rest }
+                  />
+                );
               }
               return (
-                <EditingCell
+                <Cell
                   key={ `${content}-${index}` }
                   row={ row }
+                  rowIndex={ rowIndex }
+                  columnIndex={ index }
                   column={ column }
-                  className={ editCellclasses }
-                  style={ editCellstyle }
-                  { ...rest }
+                  onStart={ onStart }
+                  editable={ editable }
+                  clickToEdit={ mode === CLICK_TO_CELL_EDIT }
+                  dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
                 />
               );
             }
-            return (
-              <Cell
-                key={ `${content}-${index}` }
-                row={ row }
-                rowIndex={ rowIndex }
-                columnIndex={ index }
-                column={ column }
-                onStart={ onStart }
-                editable={ editable }
-                clickToEdit={ mode === CLICK_TO_CELL_EDIT }
-                dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
-              />
-            );
+            return false;
           })
         }
       </tr>

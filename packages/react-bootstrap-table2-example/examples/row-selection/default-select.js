@@ -1,5 +1,3 @@
-/* eslint no-unused-vars: 0 */
-/* eslint no-alert: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -19,10 +17,10 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    alert(`clicked on row with index: ${rowIndex}`);
-  }
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true,
+  selected: [1, 3]
 };
 
 const sourceCode = `\
@@ -39,19 +37,23 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const rowEvents = {
-  onClick: (e, row, rowIndex) => {
-    alert(\`clicked on row with index: \${rowIndex}\`);
-  }
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true,
+  selected: [1, 3]
 };
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } rowEvents={ rowEvents } />
+<BootstrapTable
+  keyField='id'
+  data={ products }
+  columns={ columns }
+  selectRow={ selectRow }
+/>
 `;
 
 export default () => (
   <div>
-    <h3>Try to click on any rows</h3>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } rowEvents={ rowEvents } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } selectRow={ selectRow } />
     <Code>{ sourceCode }</Code>
   </div>
 );

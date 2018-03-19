@@ -10,16 +10,7 @@ import wrapperFactory from '../../src/sort/wrapper';
 
 describe('SortWrapper', () => {
   let wrapper;
-
-  const columns = [{
-    dataField: 'id',
-    text: 'ID',
-    sort: true
-  }, {
-    dataField: 'name',
-    text: 'Name',
-    sort: true
-  }];
+  let columns;
 
   const data = [{
     id: 1,
@@ -37,6 +28,15 @@ describe('SortWrapper', () => {
   const SortWrapper = wrapperFactory(BootstrapTable);
 
   beforeEach(() => {
+    columns = [{
+      dataField: 'id',
+      text: 'ID',
+      sort: true
+    }, {
+      dataField: 'name',
+      text: 'Name',
+      sort: true
+    }];
     wrapper = shallow(
       <SortWrapper
         keyField={ keyField }
@@ -58,9 +58,10 @@ describe('SortWrapper', () => {
 
   describe('call handleSort function', () => {
     let sortBySpy;
-    const sortColumn = columns[0];
+    let sortColumn;
 
     beforeEach(() => {
+      sortColumn = columns[0];
       store = new Store(keyField);
       store.data = data;
       sortBySpy = sinon.spy(store, 'sortBy');
@@ -130,6 +131,32 @@ describe('SortWrapper', () => {
         expect(onTableChangeCB.calledOnce).toBeTruthy();
       });
     });
+
+    describe('when column.onSort prop is defined', () => {
+      const onSortCB = jest.fn();
+
+      beforeEach(() => {
+        columns[0].onSort = onSortCB;
+        wrapper = shallow(
+          <SortWrapper
+            keyField={ keyField }
+            data={ data }
+            columns={ columns }
+            store={ store }
+          />
+        );
+        wrapper.instance().handleSort(sortColumn);
+      });
+
+      it('should calling column.onSort function correctly', () => {
+        expect(onSortCB).toHaveBeenCalledTimes(1);
+        expect(onSortCB).toHaveBeenCalledWith(columns[0].dataField, Const.SORT_DESC);
+
+        wrapper.instance().handleSort(sortColumn);
+        expect(onSortCB).toHaveBeenCalledTimes(2);
+        expect(onSortCB).toHaveBeenCalledWith(columns[0].dataField, Const.SORT_ASC);
+      });
+    });
   });
 
   describe('when defaultSorted prop is defined', () => {
@@ -161,6 +188,28 @@ describe('SortWrapper', () => {
     it('should update store.sortOrder correctly', () => {
       expect(store.sortOrder).toEqual(defaultSorted[0].order);
     });
+
+    describe('when column.onSort prop is defined', () => {
+      const onSortCB = jest.fn();
+
+      beforeEach(() => {
+        columns[1].onSort = onSortCB;
+        wrapper = shallow(
+          <SortWrapper
+            keyField={ keyField }
+            data={ data }
+            columns={ columns }
+            store={ store }
+            defaultSorted={ defaultSorted }
+          />
+        );
+      });
+
+      it('should calling column.onSort function correctly', () => {
+        expect(onSortCB).toHaveBeenCalledTimes(1);
+        expect(onSortCB).toHaveBeenCalledWith(defaultSorted[0].dataField, defaultSorted[0].order);
+      });
+    });
   });
 
   describe('componentWillReceiveProps', () => {
@@ -170,30 +219,12 @@ describe('SortWrapper', () => {
       nextProps = { columns, store };
       store.sortField = columns[1].dataField;
       store.sortOrder = Const.SORT_DESC;
+      store.sortBy = sinon.stub();
     });
 
-    describe('if nextProps.isDataChanged is true', () => {
-      beforeEach(() => {
-        nextProps.isDataChanged = true;
-        store.sortBy = sinon.stub();
-      });
-
-      it('should sorting again', () => {
-        wrapper.instance().componentWillReceiveProps(nextProps);
-        expect(store.sortBy.calledOnce).toBeTruthy();
-      });
-    });
-
-    describe('if nextProps.isDataChanged is false', () => {
-      beforeEach(() => {
-        nextProps.isDataChanged = false;
-        store.sortBy = sinon.stub();
-      });
-
-      it('should not sorting', () => {
-        wrapper.instance().componentWillReceiveProps(nextProps);
-        expect(store.sortBy.calledOnce).toBeFalsy();
-      });
+    it('should sorting again', () => {
+      wrapper.instance().componentWillReceiveProps(nextProps);
+      expect(store.sortBy.calledOnce).toBeTruthy();
     });
   });
 });

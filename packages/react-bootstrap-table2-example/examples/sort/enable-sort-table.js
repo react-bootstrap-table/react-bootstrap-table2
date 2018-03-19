@@ -38,9 +38,28 @@ const columns = [{
 <BootstrapTable keyField='id' data={ products } columns={ columns } />
 `;
 
-export default () => (
-  <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } />
-    <Code>{ sourceCode }</Code>
-  </div>
-);
+export default class Test extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { data: products };
+  }
+
+  handleClick = () => {
+    this.setState(() => {
+      const newProducts = productsGenerator(21);
+      return {
+        data: newProducts
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <button className="btn btn-default" onClick={ this.handleClick }>Change Data</button>
+        <BootstrapTable keyField="id" data={ this.state.data } columns={ columns } />
+        <Code>{ sourceCode }</Code>
+      </div>
+    );
+  }
+}
