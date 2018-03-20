@@ -1,6 +1,11 @@
 export default ExtendBase =>
   class ColumnResolver extends ExtendBase {
-    visibleColumnSize() {
-      return this.props.columns.filter(c => !c.hidden).length;
+    visibleColumnSize(includeSelectColumn = true) {
+      let columnLen = this.props.columns.filter(c => !c.hidden).length;
+      if (!includeSelectColumn) return columnLen;
+      if (this.props.selectRow && !this.props.selectRow.hideSelectColumn) {
+        columnLen + 1;
+      }
+      return columnLen;
     }
   };
