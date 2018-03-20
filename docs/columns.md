@@ -32,6 +32,8 @@ Available properties in a column object:
 * [validator](#validator)
 * [editCellStyle](#editCellStyle)
 * [editCellClasses](#editCellClasses)
+* [editorStyle](#editorStyle)
+* [editorClasses](#editorClasses)
 * [filter](#filter)
 * [filterValue](#filterValue)
 
@@ -551,6 +553,12 @@ Or take a callback function
   }
 }
 ```
+
+## <a name='editorStyle'>column.editorStyle - [Object | Function]</a>
+This is almost same as [`column.editCellStyle`](#editCellStyle), but `column.editorStyle` is custom the style on editor instead of cell(`td`).
+
+## <a name='editorClasses'>column.editorClasses - [Object | Function]</a>
+This is almost same as [`column.editCellClasses`](#editCellClasses), but `column.editorClasses` is custom the class on editor instead of cell(`td`).
 
 ## <a name='filter'>column.filter - [Object]</a>
 Configure `column.filter` will able to setup a column level filter on the header column. Currently, `react-bootstrap-table2` support following filters:
