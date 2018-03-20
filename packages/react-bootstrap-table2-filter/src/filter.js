@@ -21,7 +21,7 @@ export const filterByText = _ => (
     if (caseSensitive) {
       return cellStr.includes(filterVal);
     }
-    return cellStr.toLocaleUpperCase().includes(filterVal.toLocaleUpperCase());
+    return cellStr.toLocaleUpperCase().indexOf(filterVal.toLocaleUpperCase()) !== -1;
   });
 
 export const filterByNumber = _ => (
@@ -106,7 +106,14 @@ export const filters = (store, columns, _) => (currFilters) => {
   Object.keys(currFilters).forEach((dataField) => {
     const filterObj = currFilters[dataField];
     filterFn = factory(filterObj.filterType);
-    const { filterValue } = columns.find(col => col.dataField === dataField);
+    let filterValue;
+    const keys = Object.keys(columns);
+    for (let i = 0; i < keys.length; i += 1) {
+      if (columns[keys[i]].dataField === dataField) {
+        filterValue = columns[keys[i]].filterValue;
+        break;
+      }
+    }
     result = filterFn(result, dataField, filterObj, filterValue);
   });
   return result;
