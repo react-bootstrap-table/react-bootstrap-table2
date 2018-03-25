@@ -79,7 +79,9 @@ class Row extends eventDelegater(Component) {
                   <EditingCell
                     key={ `${content}-${index}` }
                     row={ row }
+                    rowIndex={ rowIndex }
                     column={ column }
+                    columnIndex={ index }
                     className={ editCellclasses }
                     style={ editCellstyle }
                     { ...rest }

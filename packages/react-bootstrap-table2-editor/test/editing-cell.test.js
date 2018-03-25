@@ -28,6 +28,9 @@ describe('EditingCell', () => {
     name: 'A'
   };
 
+  const rowIndex = 1;
+  const columnIndex = 1;
+
   let column = {
     dataField: 'id',
     text: 'ID'
@@ -39,6 +42,8 @@ describe('EditingCell', () => {
     wrapper = shallow(
       <EditingCell
         row={ row }
+        rowIndex={ rowIndex }
+        columnIndex={ columnIndex }
         column={ column }
         onUpdate={ onUpdate }
         onEscape={ onEscape }
@@ -58,7 +63,7 @@ describe('EditingCell', () => {
     expect(textEditor.props().defaultValue).toEqual(row[column.dataField]);
     expect(textEditor.props().onKeyDown).toBeDefined();
     expect(textEditor.props().onBlur).toBeDefined();
-    expect(textEditor.props().className).toBeNull();
+    expect(textEditor.props().className).toEqual('');
   });
 
   it('should not render EditorIndicator due to state.invalidMessage is null', () => {
@@ -92,6 +97,8 @@ describe('EditingCell', () => {
       wrapper = shallow(
         <EditingCell
           row={ row }
+          rowIndex={ rowIndex }
+          columnIndex={ columnIndex }
           column={ column }
           onUpdate={ onUpdate }
           onEscape={ onEscape }
@@ -112,6 +119,8 @@ describe('EditingCell', () => {
       wrapper = shallow(
         <EditingCell
           row={ row }
+          rowIndex={ rowIndex }
+          columnIndex={ columnIndex }
           column={ column }
           onUpdate={ onUpdate }
           onEscape={ onEscape }
@@ -126,12 +135,140 @@ describe('EditingCell', () => {
     });
   });
 
+  describe('if column.editorClasses is defined', () => {
+    let columnWithEditorClasses;
+    const classes = 'test test1';
+
+    describe('and it is a function', () => {
+      beforeEach(() => {
+        columnWithEditorClasses = {
+          ...column,
+          editorClasses: jest.fn(() => classes)
+        };
+        wrapper = shallow(
+          <EditingCell
+            row={ row }
+            rowIndex={ rowIndex }
+            columnIndex={ columnIndex }
+            column={ columnWithEditorClasses }
+            onUpdate={ onUpdate }
+            onEscape={ onEscape }
+          />
+        );
+      });
+
+      it('should render TextEditor with correct props', () => {
+        const textEditor = wrapper.find(TextEditor);
+        expect(textEditor.props().className).toEqual(classes);
+      });
+
+      it('should call column.editorClasses correctly', () => {
+        expect(columnWithEditorClasses.editorClasses).toHaveBeenCalledTimes(1);
+        expect(columnWithEditorClasses.editorClasses).toHaveBeenCalledWith(
+          _.get(row, column.dataField),
+          row,
+          rowIndex,
+          columnIndex
+        );
+      });
+    });
+
+    describe('and it is a string', () => {
+      beforeEach(() => {
+        columnWithEditorClasses = {
+          ...column,
+          editorClasses: classes
+        };
+        wrapper = shallow(
+          <EditingCell
+            row={ row }
+            rowIndex={ rowIndex }
+            columnIndex={ columnIndex }
+            column={ columnWithEditorClasses }
+            onUpdate={ onUpdate }
+            onEscape={ onEscape }
+          />
+        );
+      });
+
+      it('should render TextEditor with correct props', () => {
+        const textEditor = wrapper.find(TextEditor);
+        expect(textEditor.props().className).toEqual(classes);
+      });
+    });
+  });
+
+  describe('if column.editorStyle is defined', () => {
+    let columnWithEditorStyle;
+    const style = { color: 'red' };
+
+    describe('and it is a function', () => {
+      beforeEach(() => {
+        columnWithEditorStyle = {
+          ...column,
+          editorStyle: jest.fn(() => style)
+        };
+        wrapper = shallow(
+          <EditingCell
+            row={ row }
+            rowIndex={ rowIndex }
+            columnIndex={ columnIndex }
+            column={ columnWithEditorStyle }
+            onUpdate={ onUpdate }
+            onEscape={ onEscape }
+          />
+        );
+      });
+
+      it('should render TextEditor with correct props', () => {
+        const textEditor = wrapper.find(TextEditor);
+        expect(textEditor.props().style).toEqual(style);
+      });
+
+      it('should call column.editorStyle correctly', () => {
+        expect(columnWithEditorStyle.editorStyle).toHaveBeenCalledTimes(1);
+        expect(columnWithEditorStyle.editorStyle).toHaveBeenCalledWith(
+          _.get(row, column.dataField),
+          row,
+          rowIndex,
+          columnIndex
+        );
+      });
+    });
+
+    describe('and it is an object', () => {
+      beforeEach(() => {
+        columnWithEditorStyle = {
+          ...column,
+          editorStyle: style
+        };
+        wrapper = shallow(
+          <EditingCell
+            row={ row }
+            rowIndex={ rowIndex }
+            columnIndex={ columnIndex }
+            column={ columnWithEditorStyle }
+            onUpdate={ onUpdate }
+            onEscape={ onEscape }
+          />
+        );
+      });
+
+      it('should render TextEditor with correct props', () => {
+        const textEditor = wrapper.find(TextEditor);
+        expect(textEditor.props().style).toEqual(style);
+      });
+    });
+  });
+
   describe('if blurToSave prop is true', () => {
     beforeEach(() => {
       wrapper = mount(
         <TableRowWrapper>
           <EditingCell
             row={ row }
+            rowIndex={ rowIndex }
+            columnIndex={ columnIndex }
             column={ column }
             onUpdate={ onUpdate }
             onEscape={ onEscape }
@@ -167,6 +304,8 @@ describe('EditingCell', () => {
         wrapper = mount(
           <EditingCell
             row={ row }
+            rowIndex={ rowIndex }
+            columnIndex={ columnIndex }
             column={ column }
             onUpdate={ onUpdate }
             onEscape={ onEscape }
