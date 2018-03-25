@@ -38,7 +38,7 @@ Tells `react-bootstrap-table2` which column is unique.
 Provides data for your table. It accepts a single Array object.
 
 ## columns(**required**) - [Object]
-Accepts a single Array object, please see [columns definition](./columns.md) for more detail.
+Accepts a single Array object, please see [columns definition](./column-props.html) for more detail.
 
 ## remote - [Bool | Object]
 Default is `false`, if enable `remote`, you are supposed to be handle all the table change events, like: pagination, insert, filtering etc.
@@ -114,10 +114,10 @@ Customize id on `table` element.
 ## classes - [String]
 Customize class on `table` element.
 ## cellEdit - [Object]
-Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for more detail.
+Makes table cells editable, please see [cellEdit definition](./cell-edit-props.html) for more detail.
 
 ## selectRow - [Object]
-Makes table rows selectable, please see [selectRow definition](./row-selection.md) for more detail.
+Makes table rows selectable, please see [selectRow definition](./row-select-props.html) for more detail.
 
 ## rowStyle - [Object | Function]
 Custom the style of table rows:

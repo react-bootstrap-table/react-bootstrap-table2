@@ -461,7 +461,7 @@ const sortingHeaderStyle = {
 ```
 
 ## column.editable - [Bool | Function]
-`column.editable` default is true, means every column is editable if you configure [`cellEdit`](./README.md#cellEdit). But you can disable some columns editable via setting `false`.
+`column.editable` default is true, means every column is editable if you configure [`cellEdit`](./cell-edit-props.html). But you can disable some columns editable via setting `false`.
 
 If a callback function given, you can control the editable level as cell level:
 
