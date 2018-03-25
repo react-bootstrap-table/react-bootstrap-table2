@@ -35,6 +35,9 @@ const Body = (props) => {
 
   if (isEmpty) {
     const indication = _.isFunction(noDataIndication) ? noDataIndication() : noDataIndication;
+    if (!indication) {
+      return null;
+    }
     content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
   } else {
     const nonEditableRows = cellEdit.nonEditableRows || [];

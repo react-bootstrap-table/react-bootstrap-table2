@@ -53,12 +53,10 @@ describe('Body', () => {
         />);
     });
 
-    it('should render successfully', () => {
+    it('should not render', () => {
       expect(wrapper.length).toBe(1);
-      expect(wrapper.find('tbody').length).toBe(1);
-      expect(wrapper.find(RowSection).length).toBe(1);
-      expect(wrapper.find(RowSection).prop('colSpan')).toBe(columns.length);
-      expect(wrapper.find(RowSection).prop('content')).toBe(null);
+      expect(wrapper.find('tbody').length).toBe(0);
+      expect(wrapper.find(RowSection).length).toBe(0);
     });
 
     describe('when noDataIndication props is defined', () => {
