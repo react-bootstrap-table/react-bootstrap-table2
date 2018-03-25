@@ -40,10 +40,9 @@ export default Base =>
 
     componentWillReceiveProps(nextProps) {
       let sortedColumn;
-      const keys = Object.keys(nextProps.columns);
-      for (let i = 0; i < keys.length; i += 1) {
-        if (nextProps.columns[keys[i]].dataField === nextProps.store.sortField) {
-          sortedColumn = nextProps.columns[keys[i]];
+      for (let i = 0; i < nextProps.columns.length; i += 1) {
+        if (nextProps.columns[i].dataField === nextProps.store.sortField) {
+          sortedColumn = nextProps.columns[i];
           break;
         }
       }

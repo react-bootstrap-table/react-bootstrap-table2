@@ -107,10 +107,9 @@ export const filters = (store, columns, _) => (currFilters) => {
     const filterObj = currFilters[dataField];
     filterFn = factory(filterObj.filterType);
     let filterValue;
-    const keys = Object.keys(columns);
-    for (let i = 0; i < keys.length; i += 1) {
-      if (columns[keys[i]].dataField === dataField) {
-        filterValue = columns[keys[i]].filterValue;
+    for (let i = 0; i < columns.length; i += 1) {
+      if (columns[i].dataField === dataField) {
+        filterValue = columns[i].filterValue;
         break;
       }
     }
