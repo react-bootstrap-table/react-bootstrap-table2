@@ -56,7 +56,7 @@ describe('TableResolver', () => {
       });
     });
 
-    describe('if no columns are visible', () => {
+    describe('if columns is all unvisible', () => {
       beforeEach(() => {
         const mockElement = React.createElement(BootstrapTableMock, {
           data, keyField, columns: []
@@ -67,7 +67,7 @@ describe('TableResolver', () => {
       it('should throw error', () => {
         expect(() =>
           wrapper.instance().validateProps()
-        ).toThrow(new Error('No visible columns detected'));
+        ).toThrow(new Error('No any visible columns detect'));
       });
     });
   });
