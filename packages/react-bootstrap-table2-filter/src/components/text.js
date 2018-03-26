@@ -17,10 +17,14 @@ class TextFilter extends Component {
       value: props.defaultValue
     };
   }
+
   componentDidMount() {
+    const { onFilter } = this.props;
+
     const defaultValue = this.input.value;
+
     if (defaultValue) {
-      this.props.onFilter(this.props.column, defaultValue, FILTER_TYPE.TEXT);
+      onFilter(this.props.column, FILTER_TYPE.TEXT)(defaultValue);
     }
   }
 
@@ -40,7 +44,7 @@ class TextFilter extends Component {
     const filterValue = e.target.value;
     this.setState(() => ({ value: filterValue }));
     this.timeout = setTimeout(() => {
-      this.props.onFilter(this.props.column, filterValue, FILTER_TYPE.TEXT);
+      this.props.onFilter(this.props.column, FILTER_TYPE.TEXT)(filterValue);
     }, this.props.delay);
   }
 
@@ -53,12 +57,12 @@ class TextFilter extends Component {
   cleanFiltered() {
     const value = this.props.defaultValue;
     this.setState(() => ({ value }));
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.TEXT);
+    this.props.onFilter(this.props.column, value, FILTER_TYPE.TEXT)();
   }
 
   applyFilter(filterText) {
     this.setState(() => ({ value: filterText }));
-    this.props.onFilter(this.props.column, filterText, FILTER_TYPE.TEXT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.TEXT)(filterText);
   }
 
   handleClick(e) {
@@ -79,6 +83,7 @@ class TextFilter extends Component {
       defaultValue,
       ...rest
     } = this.props;
+
     // stopPropagation for onClick event is try to prevent sort was triggered.
     return (
       <input

@@ -27,7 +27,7 @@ class SelectFilter extends Component {
   componentDidMount() {
     const value = this.selectInput.value;
     if (value && value !== '') {
-      this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+      this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
     }
   }
 
@@ -41,7 +41,7 @@ class SelectFilter extends Component {
     if (needFilter) {
       const value = this.selectInput.value;
       if (value) {
-        this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+        this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
       }
     }
   }
@@ -64,19 +64,19 @@ class SelectFilter extends Component {
     const value = (this.props.defaultValue !== undefined) ? this.props.defaultValue : '';
     this.setState(() => ({ isSelected: value !== '' }));
     this.selectInput.value = value;
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
   }
 
   applyFilter(value) {
     this.selectInput.value = value;
     this.setState(() => ({ isSelected: value !== '' }));
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
   }
 
   filter(e) {
     const { value } = e.target;
     this.setState(() => ({ isSelected: value !== '' }));
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
   }
 
   render() {
