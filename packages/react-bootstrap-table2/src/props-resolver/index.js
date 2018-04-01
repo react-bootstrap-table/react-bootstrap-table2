@@ -5,12 +5,12 @@ import _ from '../utils';
 export default ExtendBase =>
   class TableResolver extends ColumnResolver(ExtendBase) {
     validateProps() {
-      const { columns, keyField } = this.props;
+      const { keyField } = this.props;
       if (!keyField) {
         throw new Error('Please specify a field as key via keyField');
       }
-      if (this.visibleColumnSize(columns) <= 0) {
-        throw new Error('No any visible columns detect');
+      if (this.visibleColumnSize(false) <= 0) {
+        throw new Error('No visible columns detected');
       }
     }
 
