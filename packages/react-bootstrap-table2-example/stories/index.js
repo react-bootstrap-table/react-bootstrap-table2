@@ -57,6 +57,7 @@ import RowEventTable from 'examples/rows/row-event';
 // table sort
 import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
+import DefaultSortDirectionTable from 'examples/sort/default-sort-direction';
 import SortEvents from 'examples/sort/sort-events';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
@@ -73,6 +74,8 @@ import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
 import CellEditStyleTable from 'examples/cell-edit/cell-edit-style-table';
 import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
+import EditorStyleTable from 'examples/cell-edit/editor-style-table';
+import EditorClassTable from 'examples/cell-edit/editor-class-table';
 
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
@@ -81,6 +84,7 @@ import ClickToSelectTable from 'examples/row-selection/click-to-select';
 import DefaultSelectTable from 'examples/row-selection/default-select';
 import SelectionManagement from 'examples/row-selection/selection-management';
 import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-select-with-cell-edit';
+import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
@@ -172,6 +176,7 @@ storiesOf('Work on Rows', module)
 storiesOf('Sort Table', module)
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Default Sort Table', () => <DefaultSortTable />)
+  .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
   .add('Sort Events', () => <SortEvents />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
   .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
@@ -186,8 +191,10 @@ storiesOf('Cell Editing', module)
   .add('Cell Level Editable', () => <CellLevelEditable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
   .add('Validation', () => <CellEditValidator />)
-  .add('Custom Cell Style When Editing', () => <CellEditStyleTable />)
-  .add('Custom Cell Classes When Editing', () => <CellEditClassTable />);
+  .add('Custom Cell Style', () => <CellEditStyleTable />)
+  .add('Custom Cell Classes', () => <CellEditClassTable />)
+  .add('Custom Editor Classes', () => <EditorClassTable />)
+  .add('Custom Editor Style', () => <EditorStyleTable />);
 
 storiesOf('Row Selection', module)
   .add('Single Selection', () => <SingleSelectionTable />)
@@ -196,6 +203,7 @@ storiesOf('Row Selection', module)
   .add('Default Select', () => <DefaultSelectTable />)
   .add('Selection Management', () => <SelectionManagement />)
   .add('Click to Select and Edit Cell', () => <ClickToSelectWithCellEditTable />)
+  .add('Selection without Data', () => <SelectionNoDataTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)

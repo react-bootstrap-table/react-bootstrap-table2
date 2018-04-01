@@ -63,6 +63,10 @@ describe('Sort Function', () => {
       expect(nextOrder(store)('name')).toBe(Const.SORT_DESC);
     });
 
+    it('should return correcly order when store.sortField is not eq next sort field and default sort direction is given', () => {
+      expect(nextOrder(store)('name', undefined, Const.SORT_ASC)).toBe(Const.SORT_ASC);
+    });
+
     it('should return correcly order when store.sortField is eq next sort field', () => {
       store.sortField = 'name';
       store.sortOrder = Const.SORT_DESC;

@@ -14,7 +14,9 @@ export default _ =>
   class EditingCell extends Component {
     static propTypes = {
       row: PropTypes.object.isRequired,
+      rowIndex: PropTypes.number.isRequired,
       column: PropTypes.object.isRequired,
+      columnIndex: PropTypes.number.isRequired,
       onUpdate: PropTypes.func.isRequired,
       onEscape: PropTypes.func.isRequired,
       timeToCloseMessage: PropTypes.number,
@@ -123,7 +125,7 @@ export default _ =>
 
     render() {
       const { invalidMessage } = this.state;
-      const { row, column, className, style } = this.props;
+      const { row, column, className, style, rowIndex, columnIndex } = this.props;
       const { dataField } = column;
 
       const value = _.get(row, dataField);
@@ -133,7 +135,21 @@ export default _ =>
       };
 
       const hasError = _.isDefined(invalidMessage);
-      const editorClass = hasError ? cs('animated', 'shake') : null;
+      let customEditorClass = column.editorClasses || '';
+      if (_.isFunction(column.editorClasses)) {
+        customEditorClass = column.editorClasses(value, row, rowIndex, columnIndex);
+      }
+
+      let editorStyle = column.editorStyle || {};
+      if (_.isFunction(column.editorStyle)) {
+        editorStyle = column.editorStyle(value, row, rowIndex, columnIndex);
+      }
+
+      const editorClass = cs({
+        animated: hasError,
+        shake: hasError
+      }, customEditorClass);
+
       return (
         <td
           className={ cs('react-bootstrap-table-editing-cell', className) }
@@ -143,6 +159,7 @@ export default _ =>
           <TextEditor
             ref={ node => this.editor = node }
             defaultValue={ value }
+            style={ editorStyle }
             className={ editorClass }
             { ...editorAttrs }
           />

@@ -149,6 +149,7 @@ BootstrapTable.propTypes = {
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
   })),
+  defaultSortDirection: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
   overlay: PropTypes.func,
   onTableChange: PropTypes.func,
   onSort: PropTypes.func,

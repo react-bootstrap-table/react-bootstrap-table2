@@ -23,6 +23,7 @@
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
 * [defaultSorted](#defaultSorted)
+* [defaultSortDirection](#defaultSortDirection)
 * [pagination](#pagination)
 * [filter](#filter)
 * [onTableChange](#onTableChange)
@@ -167,6 +168,9 @@ const defaultSorted = [{
   order: 'desc' // desc or asc
 }];
 ```
+
+### <a name='defaultSortDirection'>defaultSortDirection - [String]</a>
+Default sort direction when user click on header column at first time, available value is `asc` and `desc`. Default is `desc`.
 
 ### <a name='pagination'>pagination - [Object]</a>
 `pagination` allow user to render a pagination panel on the bottom of table. But pagination functionality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-paginator` additionally.

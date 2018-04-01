@@ -49,12 +49,14 @@ How user save their new editings? We offer two ways:
 * Cell Level (Configure [column.editable](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columneditable-bool-function) as a callback function)
 
 ## Customize Style/Class
-Currently, we only support the editing cell style/class customization, in the future, we will offer more customizations.
-
 ### Editing Cell
 
 * Customize the editing cell style via [column.editCellStyle](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columneditcellstyle-object-function)
 * Customize the editing cell classname via [column.editCellClasses](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columneditcellclasses-string-function)
+
+### Editor
+* Customize the editor style via [column.editorStyle](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columneditorstyle-object-function)
+* Customize the editor classname via [column.editoClasses](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/column-props.html#columneditorclasses-string-function)
 
 ## Validation
 

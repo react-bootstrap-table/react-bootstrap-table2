@@ -15,7 +15,7 @@ export default Base =>
     }
 
     componentWillMount() {
-      const { columns, defaultSorted, store } = this.props;
+      const { columns, defaultSorted, defaultSortDirection, store } = this.props;
       // defaultSorted is an array, it's ready to use as multi / single sort
       // when we start to support multi sort, please update following code to use array.forEach
       if (defaultSorted && defaultSorted.length > 0) {
@@ -23,7 +23,7 @@ export default Base =>
         const order = defaultSorted[0].order;
         const column = columns.filter(col => col.dataField === dataField);
         if (column.length > 0) {
-          store.setSort(column[0], order);
+          store.setSort(column[0], order, defaultSortDirection);
 
           if (column[0].onSort) {
             column[0].onSort(store.sortField, store.sortOrder);
@@ -39,8 +39,13 @@ export default Base =>
     }
 
     componentWillReceiveProps(nextProps) {
-      const sortedColumn = nextProps.columns.find(
-        column => column.dataField === nextProps.store.sortField);
+      let sortedColumn;
+      for (let i = 0; i < nextProps.columns.length; i += 1) {
+        if (nextProps.columns[i].dataField === nextProps.store.sortField) {
+          sortedColumn = nextProps.columns[i];
+          break;
+        }
+      }
       if (sortedColumn && sortedColumn.sort) {
         nextProps.store.sortBy(sortedColumn);
       }
@@ -48,7 +53,7 @@ export default Base =>
 
     handleSort(column) {
       const { store } = this.props;
-      store.setSort(column);
+      store.setSort(column, undefined, this.props.defaultSortDirection);
 
       if (column.onSort) {
         column.onSort(store.sortField, store.sortOrder);
