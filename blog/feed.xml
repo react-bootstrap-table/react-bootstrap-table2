@@ -4,7 +4,7 @@
         <title>react-bootstrap-table2 Blog</title>
         <link>https://react-bootstrap-table.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</description>
-        <lastBuildDate>Mon, 19 Mar 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 01 Apr 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,24 @@
             <link>https://react-bootstrap-table.github.io/blog</link>
         </image>
         <copyright>Copyright © 2018 react-bootstrap-table2</copyright>
+        <item>
+            <title><![CDATA[New Release (2018-04-01)]]></title>
+            <link>https://react-bootstrap-table.github.io/blog/2018/04/01/version-bump.html</link>
+            <guid>https://react-bootstrap-table.github.io/blog/2018/04/01/version-bump.html</guid>
+            <pubDate>Sun, 01 Apr 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[## Changed Packages
+
+This release bump following packages:
+
+* `react-bootstrap-table-next@0.1.6`
+* `react-bootstrap-table-editor@0.1.4`
+* `react-bootstrap-table2-filter@0.1.4`
+
+## Changelog
+
+### Bug fixes
+* Fixed includes and find are not supported i]]></description>
+        </item>
         <item>
             <title><![CDATA[New Release (2018-03-19)]]></title>
             <link>https://react-bootstrap-table.github.io/blog/2018/03/19/version.bump.html</link>

@@ -29,6 +29,7 @@
 <li><a href="#rowclasses-string-function">rowClasses</a></li>
 <li><a href="#rowevents-object">rowEvents</a></li>
 <li><a href="#defaultsorted-array">defaultSorted</a></li>
+<li><a href="#defaultSortDirection-string">defaultSortDirection</a></li>
 <li><a href="#pagination-object">pagination</a></li>
 <li><a href="#filter-object">filter</a></li>
 <li><a href="#ontablechange-function">onTableChange</a></li>
@@ -138,6 +139,8 @@ When <code>loading</code> is <code>true</code>, <code>react-bootstrap-table2</co
   order: <span class="hljs-string">'desc'</span> <span class="hljs-comment">// desc or asc</span>
 }];
 </code></pre>
+<h2><a class="anchor" aria-hidden="true" name="defaultsortdirection-string"></a><a href="#defaultsortdirection-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>defaultSortDirection - [String]</h2>
+<p>Default sort direction when user click on header column at first time, available value is <code>asc</code> and <code>desc</code>. Default is <code>desc</code>.</p>
 <h2><a class="anchor" aria-hidden="true" name="pagination-object"></a><a href="#pagination-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination - [Object]</h2>
 <p><code>pagination</code> allow user to render a pagination panel on the bottom of table. But pagination functionality is separated from core of <code>react-bootstrap-table2</code> so that you are suppose to install <code>react-bootstrap-table2-paginator</code> additionally.</p>
 <pre><code class="hljs css sh">$ npm install react-bootstrap-table2-paginator --save
