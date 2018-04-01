@@ -39,8 +39,13 @@ export default Base =>
     }
 
     componentWillReceiveProps(nextProps) {
-      const sortedColumn = nextProps.columns.find(
-        column => column.dataField === nextProps.store.sortField);
+      let sortedColumn;
+      for (let i = 0; i < nextProps.columns.length; i += 1) {
+        if (nextProps.columns[i].dataField === nextProps.store.sortField) {
+          sortedColumn = nextProps.columns[i];
+          break;
+        }
+      }
       if (sortedColumn && sortedColumn.sort) {
         nextProps.store.sortBy(sortedColumn);
       }
