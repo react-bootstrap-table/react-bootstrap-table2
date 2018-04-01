@@ -9,7 +9,7 @@ authorURL: https://twitter.com/allenfang_tw
 This release bump following packages:
 
 * `react-bootstrap-table-next@0.1.2`
-* `react-bootstrap-table-filter@0.1.2`
+* `react-bootstrap-table2-filter@0.1.2`
 
 ## Changelog
 
