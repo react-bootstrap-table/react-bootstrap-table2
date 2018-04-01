@@ -48,6 +48,9 @@ import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
 import NumberFilter from 'examples/column-filter/number-filter';
 import NumberFilterWithDefaultValue from 'examples/column-filter/number-filter-default-value';
 import CustomNumberFilter from 'examples/column-filter/custom-number-filter';
+import ProgrammaticallyTextFilter from 'examples/column-filter/programmatically-text-filter';
+import ProgrammaticallySelectFilter from 'examples/column-filter/programmatically-select-filter';
+import ProgrammaticallyNumberFilter from 'examples/column-filter/programmatically-number-filter';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -166,7 +169,10 @@ storiesOf('Column Filter', module)
   .add('Custom Text Filter', () => <CustomTextFilter />)
   .add('Custom Select Filter', () => <CustomSelectFilter />)
   .add('Custom Number Filter', () => <CustomNumberFilter />)
-  .add('Custom Filter Value', () => <CustomFilterValue />);
+  .add('Custom Filter Value', () => <CustomFilterValue />)
+  .add('Programmatically Text Filter ', () => <ProgrammaticallyTextFilter />)
+  .add('Programmatically Select Filter ', () => <ProgrammaticallySelectFilter />)
+  .add('Programmatically Number Filter ', () => <ProgrammaticallyNumberFilter />);
 
 storiesOf('Work on Rows', module)
   .add('Customize Row Style', () => <RowStyleTable />)
