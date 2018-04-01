@@ -56,9 +56,14 @@ describe('Store Base', () => {
       expect(store.sortOrder).toEqual(Const.SORT_DESC);
     });
 
-    it('should force assign sortOrder correctly if second argument is passed', () => {
+    it('should force assign sortOrder correctly if second argument is given', () => {
       store.setSort({ dataField }, Const.SORT_DESC);
       expect(store.sortOrder).toEqual(Const.SORT_DESC);
+    });
+
+    it('should force assign sortOrder correctly if third argument is given', () => {
+      store.setSort({ dataField }, undefined, Const.SORT_ASC);
+      expect(store.sortOrder).toEqual(Const.SORT_ASC);
     });
   });
 
