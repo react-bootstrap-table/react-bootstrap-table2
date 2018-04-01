@@ -37,11 +37,11 @@ export const sort = ({ data, sortOrder, sortField }) => (sortFunc) => {
   return _data;
 };
 
-export const nextOrder = store => (field, order) => {
+export const nextOrder = store => (field, order, defaultOrder = Const.SORT_DESC) => {
   if (order) return order;
 
   if (field !== store.sortField) {
-    return Const.SORT_DESC;
+    return defaultOrder;
   }
   return store.sortOrder === Const.SORT_DESC ? Const.SORT_ASC : Const.SORT_DESC;
 };
