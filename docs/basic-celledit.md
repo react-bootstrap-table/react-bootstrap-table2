@@ -51,14 +51,14 @@ How user save their new editings? We offer two ways:
 * Column Level (Configure [column.editable](./column-props.html#columneditable-bool-function) as bool value)
 * Cell Level (Configure [column.editable](./column-props.html#columneditable-bool-function) as a callback function)
 
-## Customize Style/Class
-Currently, we only support the editing cell style/class customization, in the future, we will offer more customizations.
-
 ### Editing Cell
 
 * Customize the editing cell style via [column.editCellStyle](./column-props.html#columneditcellstyle-object-function)
 * Customize the editing cell classname via [column.editCellClasses](./column-props.html#columneditcellclasses-string-function)
 
+### Editor
+* Customize the editor style via [column.editorStyle](./column-props.html#columneditorstyle-object-function)
+* Customize the editor classname via [column.editoClasses](./column-props.html#columneditorclasses-string-function)
 ## Validation
 
 [`column.validator`](./column-props.html#columnvalidator-function) will help you to work on it!
