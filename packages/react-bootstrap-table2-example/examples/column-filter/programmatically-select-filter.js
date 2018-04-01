@@ -6,7 +6,7 @@ import { productsQualityGenerator } from 'utils/common';
 
 const products = productsQualityGenerator(6);
 
-let filterBy;
+let qualityFilter;
 
 const selectOptions = {
   0: 'good',
@@ -26,22 +26,22 @@ const columns = [{
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions,
-    getFilterBy: (filterByFunc) => {
-      // filterBy was assigned to onFilter once the component has mount
-      filterBy = filterByFunc;
+    getFilter: (filter) => {
+      // qualityFilter was assigned once the component has been mounted.
+      qualityFilter = filter;
     }
   })
 }];
 
 const handleClick = () => {
-  filterBy('0');
+  qualityFilter('0');
 };
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 
-let filterBy;
+let qualityFilter;
 
 const selectOptions = {
   0: 'good',
@@ -61,15 +61,15 @@ const columns = [{
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions,
-    getFilterBy: (filterByFunc) => {
-      // filterBy was assigned to onFilter once the component has mount
-      filterBy = filterByFunc;
+    getFilter: (filter) => {
+      // qualityFilter was assigned once the component has been mounted.
+      qualityFilter = filter;
     }
   })
 }];
 
 const handleClick = () => {
-  filterBy('0');
+  qualityFilter('0');
 };
 
 export default () => (

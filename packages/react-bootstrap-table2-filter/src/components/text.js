@@ -19,7 +19,7 @@ class TextFilter extends Component {
   }
 
   componentDidMount() {
-    const { onFilter, getFilterBy, column } = this.props;
+    const { onFilter, getFilter, column } = this.props;
     const defaultValue = this.input.value;
 
     if (defaultValue) {
@@ -27,8 +27,8 @@ class TextFilter extends Component {
     }
 
     // export onFilter function to allow users to access
-    if (getFilterBy) {
-      getFilterBy((filterVal) => {
+    if (getFilter) {
+      getFilter((filterVal) => {
         this.setState(() => ({ value: filterVal }));
         onFilter(column, FILTER_TYPE.TEXT)(filterVal);
       });
@@ -88,7 +88,7 @@ class TextFilter extends Component {
       onFilter,
       caseSensitive,
       defaultValue,
-      getFilterBy,
+      getFilter,
       ...rest
     } = this.props;
 
@@ -119,7 +119,7 @@ TextFilter.propTypes = {
   style: PropTypes.object,
   className: PropTypes.string,
   caseSensitive: PropTypes.bool,
-  getFilterBy: PropTypes.func
+  getFilter: PropTypes.func
 };
 
 TextFilter.defaultProps = {

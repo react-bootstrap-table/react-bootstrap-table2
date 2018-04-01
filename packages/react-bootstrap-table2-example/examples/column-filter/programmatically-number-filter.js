@@ -6,7 +6,7 @@ import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator(8);
 
-let filterBy;
+let priceFilter;
 
 const columns = [{
   dataField: 'id',
@@ -18,14 +18,15 @@ const columns = [{
   dataField: 'price',
   text: 'Product Price',
   filter: numberFilter({
-    getFilterBy: (filterByFunc) => {
-      filterBy = filterByFunc;
+    getFilter: (filter) => {
+      // pricerFilter was assigned once the component has been mounted.
+      priceFilter = filter;
     }
   })
 }];
 
 const handleClick = () => {
-  filterBy({
+  priceFilter({
     number: 2103,
     comparator: Comparator.GT
   });
@@ -35,7 +36,7 @@ const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { numberFilter } from 'react-bootstrap-table2-filter';
 
-let filterBy;
+let priceFilter;
 
 const columns = [{
   dataField: 'id',
@@ -47,24 +48,23 @@ const columns = [{
   dataField: 'price',
   text: 'Product Price',
   filter: numberFilter({
-    getFilterBy: (filterByFunc) => {
-      filterBy = filterByFunc;
+    getFilter: (filter) => {
+      // pricerFilter was assigned once the component has been mounted.
+      priceFilter = filter;
     }
   })
 }];
 
 const handleClick = () => {
-  filterBy({
+  priceFilter({
     number: 2103,
     comparator: Comparator.GT
   });
 };
 
-<button className="btn btn-lg btn-primary" onClick={ handleClick }> filter all columns which is greater than 2103 </button>
-
 export default () => (
   <div>
-  <button className="btn btn-lg btn-primary" onClick={ handleClick }> filter all columns which is greater than 2103 </button>
+    <button className="btn btn-lg btn-primary" onClick={ handleClick }> filter all columns which is greater than 2103 </button>
 
     <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
   </div>

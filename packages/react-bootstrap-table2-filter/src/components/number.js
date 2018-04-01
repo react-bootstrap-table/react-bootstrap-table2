@@ -31,7 +31,7 @@ class NumberFilter extends Component {
   }
 
   componentDidMount() {
-    const { column, onFilter, getFilterBy } = this.props;
+    const { column, onFilter, getFilter } = this.props;
     const comparator = this.numberFilterComparator.value;
     const number = this.numberFilter.value;
     if (comparator && number) {
@@ -39,8 +39,8 @@ class NumberFilter extends Component {
     }
 
     // export onFilter function to allow users to access
-    if (getFilterBy) {
-      getFilterBy((filterVal) => {
+    if (getFilter) {
+      getFilter((filterVal) => {
         this.setState(() => ({ isSelected: (filterVal !== '') }));
         onFilter(column, FILTER_TYPE.NUMBER)({
           number: filterVal.number,
@@ -237,7 +237,7 @@ NumberFilter.propTypes = {
   comparatorClassName: PropTypes.string,
   numberStyle: PropTypes.object,
   numberClassName: PropTypes.string,
-  getFilterBy: PropTypes.func
+  getFilter: PropTypes.func
 };
 
 NumberFilter.defaultProps = {

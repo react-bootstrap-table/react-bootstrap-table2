@@ -6,7 +6,7 @@ import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator(8);
 
-let filterBy;
+let nameFilter;
 
 const columns = [{
   dataField: 'id',
@@ -15,8 +15,9 @@ const columns = [{
   dataField: 'name',
   text: 'Product Name',
   filter: textFilter({
-    getFilterBy: (filterByFunc) => {
-      filterBy = filterByFunc;
+    getFilter: (filter) => {
+      // nameFilter was assigned once the component has been mounted.
+      nameFilter = filter;
     }
   })
 }, {
@@ -26,14 +27,14 @@ const columns = [{
 }];
 
 const handleClick = () => {
-  filterBy('0');
+  nameFilter('0');
 };
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
-let filterBy;
+let nameFilter;
 
 const columns = [{
   dataField: 'id',
@@ -42,9 +43,9 @@ const columns = [{
   dataField: 'name',
   text: 'Product Name',
   filter: textFilter({
-    getFilterBy: (filterByFunc) => {
-      // filterBy was assigned to onFilter once the component has mount
-      filterBy = filterByFunc;
+    getFilter: (filter) => {
+      // nameFilter was assigned once the component has been mounted.
+      nameFilter = filter;
     }
   })
 }, {
@@ -54,7 +55,7 @@ const columns = [{
 }];
 
 const handleClick = () => {
-  filterBy('0');
+  nameFilter('0');
 };
 
 export default () => (
