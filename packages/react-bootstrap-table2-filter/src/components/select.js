@@ -25,9 +25,19 @@ class SelectFilter extends Component {
   }
 
   componentDidMount() {
+    const { column, onFilter, getFilterBy } = this.props;
+
     const value = this.selectInput.value;
     if (value && value !== '') {
-      this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
+      onFilter(column, FILTER_TYPE.SELECT)(value);
+    }
+
+    // export onFilter function to allow users to access
+    if (getFilterBy) {
+      getFilterBy((filterVal) => {
+        this.setState(() => ({ isSelected: filterVal !== '' }));
+        onFilter(column, FILTER_TYPE.SELECT)(filterVal);
+      });
     }
   }
 
@@ -90,6 +100,7 @@ class SelectFilter extends Component {
       comparator,
       withoutEmptyOption,
       caseSensitive,
+      getFilterBy,
       ...rest
     } = this.props;
 
@@ -121,7 +132,8 @@ SelectFilter.propTypes = {
   className: PropTypes.string,
   withoutEmptyOption: PropTypes.bool,
   defaultValue: PropTypes.any,
-  caseSensitive: PropTypes.bool
+  caseSensitive: PropTypes.bool,
+  getFilterBy: PropTypes.func
 };
 
 SelectFilter.defaultProps = {

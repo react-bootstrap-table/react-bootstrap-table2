@@ -1,3 +1,4 @@
+/* eslint react/require-default-props: 0 */
 /* eslint no-return-assign: 0 */
 
 import React, { Component } from 'react';
@@ -30,11 +31,22 @@ class NumberFilter extends Component {
   }
 
   componentDidMount() {
-    const { column, onFilter } = this.props;
+    const { column, onFilter, getFilterBy } = this.props;
     const comparator = this.numberFilterComparator.value;
     const number = this.numberFilter.value;
     if (comparator && number) {
       onFilter(column, FILTER_TYPE.NUMBER)({ number, comparator });
+    }
+
+    // export onFilter function to allow users to access
+    if (getFilterBy) {
+      getFilterBy((filterVal) => {
+        this.setState(() => ({ isSelected: (filterVal !== '') }));
+        onFilter(column, FILTER_TYPE.NUMBER)({
+          number: filterVal.number,
+          comparator: filterVal.comparator
+        });
+      });
     }
   }
 
@@ -224,7 +236,8 @@ NumberFilter.propTypes = {
   comparatorStyle: PropTypes.object,
   comparatorClassName: PropTypes.string,
   numberStyle: PropTypes.object,
-  numberClassName: PropTypes.string
+  numberClassName: PropTypes.string,
+  getFilterBy: PropTypes.func
 };
 
 NumberFilter.defaultProps = {
