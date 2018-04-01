@@ -10,6 +10,7 @@ This release bump following packages:
 
 * `react-bootstrap-table-next@0.1.6`
 * `react-bootstrap-table-editor@0.1.4`
+* `react-bootstrap-table2-filter@0.1.4`
 
 ## Changelog
 
