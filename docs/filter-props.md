@@ -41,14 +41,71 @@ const columns = [{
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-## FilterFactory Props
+## Props of FilterFactory
 **No Any Available Props Yet**
 
-## Filters Props
+## Props of Filters
 
-### Required
-**NONE**
+## (1). textFilter
 
-### Optional
+**Required**: NONE
 
+**Optional**:
+### textFilter.placeholder - [String]
+* custom the input placeholder
 
+### textFilter.className - [String]
+* custom class name on input
+
+### textFilter.defaultValue - [String]
+* default filtering value
+
+### textFilter.comparator - [Comparator]
+* What kind of comparator to compare. Default is Comparator.LIKE
+
+### textFilter.caseSensitive - [Boolean]
+* default is `false`, and `true` will only work when comparator is `LIKE`.
+
+### textFilter.style - [Object]
+* your custom inline styles on `input`
+
+### textFilter.delay - [Number]
+* Debounce time, which means how long will trigger filtering after user typing. Default is `500ms`. 
+### textFilter.getFilter - [Function]
+* export `filter` function to allow users to access. For textFilter, `filter(value)` to filter columns dynamically.
+
+**Examples**
+```js
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID',
+}, {
+  dataField: 'name',
+  text: 'Product Name',
+  filter: textFilter({
+    placeholder: 'My Custom PlaceHolder',  // custom the input placeholder
+    className: 'my-custom-text-filter', // custom classname on input
+    defaultValue: 'test', // default filtering value
+    comparator: Comparator.EQ, // default is Comparator.LIKE
+    caseSensitive: true, // default is false, and true will only work when comparator is LIKE
+    style: { backgroundColor: 'yellow' }, // your custom inline styles on input
+    delay: 1000, // how long will trigger filtering after user typing, default is 500 ms
+    onClick: e => console.log(e),
+    getFilter: (filter) => { // nameFilter was assigned once the component has been mounted.
+      nameFilter = filter;
+    }
+  })
+}, {
+  dataField: 'price',
+  text: 'Product Price',
+  filter: textFilter()
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+### (2). numberFilter
+### (3). selectFilter
