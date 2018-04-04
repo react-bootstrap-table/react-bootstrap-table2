@@ -9,7 +9,11 @@ jest.useFakeTimers();
 describe('Text Filter', () => {
   let wrapper;
   let instance;
+
+  // onFilter(x)(y) = filter result
   const onFilter = sinon.stub();
+  const onFilterFirstReturn = sinon.stub();
+
   const column = {
     dataField: 'price',
     text: 'Price'
@@ -17,6 +21,9 @@ describe('Text Filter', () => {
 
   afterEach(() => {
     onFilter.reset();
+    onFilterFirstReturn.reset();
+
+    onFilter.returns(onFilterFirstReturn);
   });
 
   describe('initialization', () => {
@@ -58,7 +65,9 @@ describe('Text Filter', () => {
 
     it('should calling onFilter on componentDidMount', () => {
       expect(onFilter.calledOnce).toBeTruthy();
-      expect(onFilter.calledWith(column, defaultValue, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(defaultValue)).toBeTruthy();
     });
   });
 
@@ -114,7 +123,9 @@ describe('Text Filter', () => {
 
     it('should calling onFilter correctly when props.defaultValue is changed', () => {
       expect(onFilter.calledOnce).toBeTruthy();
-      expect(onFilter.calledWith(column, nextDefaultValue, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(nextDefaultValue)).toBeTruthy();
     });
   });
 
@@ -133,8 +144,9 @@ describe('Text Filter', () => {
 
     it('should calling onFilter correctly', () => {
       expect(onFilter.calledOnce).toBeTruthy();
-      expect(onFilter.calledWith(
-        column, instance.props.defaultValue, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(instance.props.defaultValue)).toBeTruthy();
     });
   });
 
@@ -154,7 +166,9 @@ describe('Text Filter', () => {
 
     it('should calling onFilter correctly', () => {
       expect(onFilter.calledOnce).toBeTruthy();
-      expect(onFilter.calledWith(column, filterText, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(filterText)).toBeTruthy();
     });
   });
 

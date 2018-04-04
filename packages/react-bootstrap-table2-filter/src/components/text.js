@@ -64,7 +64,7 @@ class TextFilter extends Component {
   cleanFiltered() {
     const value = this.props.defaultValue;
     this.setState(() => ({ value }));
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.TEXT)();
+    this.props.onFilter(this.props.column, FILTER_TYPE.TEXT)(value);
   }
 
   applyFilter(filterText) {

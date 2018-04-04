@@ -9,7 +9,11 @@ import * as Comparator from '../../src/comparison';
 
 describe('Number Filter', () => {
   let wrapper;
+
+  // onFilter(x)(y) = filter result
   const onFilter = sinon.stub();
+  const onFilterFirstReturn = sinon.stub();
+
   const column = {
     dataField: 'price',
     text: 'Product Price'
@@ -17,6 +21,9 @@ describe('Number Filter', () => {
 
   afterEach(() => {
     onFilter.reset();
+    onFilterFirstReturn.reset();
+
+    onFilter.returns(onFilterFirstReturn);
   });
 
   describe('initialization', () => {
@@ -110,8 +117,9 @@ describe('Number Filter', () => {
 
     it('should calling onFilter on componentDidMount', () => {
       expect(onFilter.calledOnce).toBeTruthy();
-      expect(onFilter.calledWith(
-        column, { number: `${number}`, comparator }, FILTER_TYPE.NUMBER)).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.NUMBER)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith({ number: `${number}`, comparator })).toBeTruthy();
     });
   });
 
