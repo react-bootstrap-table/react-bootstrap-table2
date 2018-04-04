@@ -97,6 +97,36 @@ describe('Number Filter', () => {
     });
   });
 
+  describe('when props.getFilter is defined', () => {
+    let programmaticallyFilter;
+
+    const comparator = Comparator.EQ;
+    const number = 123;
+
+    const getFilter = (filter) => {
+      programmaticallyFilter = filter;
+    };
+
+    beforeEach(() => {
+      wrapper = mount(
+        <NumberFilter onFilter={ onFilter } column={ column } getFilter={ getFilter } />
+      );
+
+      programmaticallyFilter({ comparator, number });
+    });
+
+    it('should do onFilter correctly when exported function was executed', () => {
+      expect(onFilter.calledOnce).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.NUMBER)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith({ comparator, number })).toBeTruthy();
+    });
+
+    it('should setState correctly when exported function was executed', () => {
+      expect(wrapper.state().isSelected).toBeTruthy();
+    });
+  });
+
   describe('when defaultValue.number and defaultValue.comparator props is defined', () => {
     const number = 203;
     const comparator = Comparator.EQ;

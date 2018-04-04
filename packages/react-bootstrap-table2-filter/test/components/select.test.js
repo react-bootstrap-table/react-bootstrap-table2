@@ -98,6 +98,41 @@ describe('Select Filter', () => {
     });
   });
 
+  describe('when props.getFilter is defined', () => {
+    let programmaticallyFilter;
+
+    const filterValue = 'foo';
+
+    const getFilter = (filter) => {
+      programmaticallyFilter = filter;
+    };
+
+    beforeEach(() => {
+      wrapper = mount(
+        <SelectFilter
+          onFilter={ onFilter }
+          column={ column }
+          options={ options }
+          getFilter={ getFilter }
+        />
+      );
+      instance = wrapper.instance();
+
+      programmaticallyFilter(filterValue);
+    });
+
+    it('should do onFilter correctly when exported function was executed', () => {
+      expect(onFilter.calledOnce).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(filterValue)).toBeTruthy();
+    });
+
+    it('should setState correctly when exported function was executed', () => {
+      expect(instance.state.isSelected).toBeTruthy();
+    });
+  });
+
   describe('when placeholder is defined', () => {
     const placeholder = 'test';
     beforeEach(() => {

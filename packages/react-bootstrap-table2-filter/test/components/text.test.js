@@ -71,6 +71,36 @@ describe('Text Filter', () => {
     });
   });
 
+  describe('when props.getFilter is defined', () => {
+    let programmaticallyFilter;
+
+    const filterValue = 'foo';
+
+    const getFilter = (filter) => {
+      programmaticallyFilter = filter;
+    };
+
+    beforeEach(() => {
+      wrapper = mount(
+        <TextFilter onFilter={ onFilter } column={ column } getFilter={ getFilter } />
+      );
+      instance = wrapper.instance();
+
+      programmaticallyFilter(filterValue);
+    });
+
+    it('should do onFilter correctly when exported function was executed', () => {
+      expect(onFilter.calledOnce).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(filterValue)).toBeTruthy();
+    });
+
+    it('should setState correctly when exported function was executed', () => {
+      expect(instance.state.value).toEqual(filterValue);
+    });
+  });
+
   describe('when placeholder is defined', () => {
     const placeholder = 'test';
     beforeEach(() => {
