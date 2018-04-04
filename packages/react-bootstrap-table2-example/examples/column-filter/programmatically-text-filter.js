@@ -27,7 +27,7 @@ const columns = [{
 }];
 
 const handleClick = () => {
-  nameFilter('0');
+  nameFilter(0);
 };
 
 const sourceCode = `\
@@ -55,7 +55,7 @@ const columns = [{
 }];
 
 const handleClick = () => {
-  nameFilter('0');
+  nameFilter(0);
 };
 
 export default () => (

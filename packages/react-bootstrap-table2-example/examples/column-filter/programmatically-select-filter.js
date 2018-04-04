@@ -22,7 +22,7 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions,
@@ -34,7 +34,7 @@ const columns = [{
 }];
 
 const handleClick = () => {
-  qualityFilter('0');
+  qualityFilter(0);
 };
 
 const sourceCode = `\
@@ -57,7 +57,7 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions,
@@ -69,7 +69,7 @@ const columns = [{
 }];
 
 const handleClick = () => {
-  qualityFilter('0');
+  qualityFilter(0);
 };
 
 export default () => (

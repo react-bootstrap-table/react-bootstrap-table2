@@ -63,6 +63,7 @@ export default (Base, {
           } = filter.props;
           currFilters[dataField] = { filterVal, filterType, comparator, caseSensitive };
         }
+
         store.filters = currFilters;
 
         if (this.isRemoteFiltering() || this.isRemotePagination()) {

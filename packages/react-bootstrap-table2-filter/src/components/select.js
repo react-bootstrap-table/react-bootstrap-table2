@@ -36,6 +36,8 @@ class SelectFilter extends Component {
     if (getFilter) {
       getFilter((filterVal) => {
         this.setState(() => ({ isSelected: filterVal !== '' }));
+        this.selectInput.value = filterVal;
+
         onFilter(column, FILTER_TYPE.SELECT)(filterVal);
       });
     }

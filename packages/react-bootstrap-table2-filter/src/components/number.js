@@ -42,6 +42,9 @@ class NumberFilter extends Component {
     if (getFilter) {
       getFilter((filterVal) => {
         this.setState(() => ({ isSelected: (filterVal !== '') }));
+        this.numberFilterComparator.value = filterVal.comparator;
+        this.numberFilter.value = filterVal.number;
+
         onFilter(column, FILTER_TYPE.NUMBER)({
           number: filterVal.number,
           comparator: filterVal.comparator

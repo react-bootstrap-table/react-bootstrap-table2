@@ -6,30 +6,37 @@ import { LIKE, EQ, NE, GT, GE, LT, LE } from './comparison';
 export const filterByText = _ => (
   data,
   dataField,
-  { filterVal = '', comparator = LIKE, caseSensitive },
+  { filterVal: userInput = '', comparator = LIKE, caseSensitive },
   customFilterValue
-) =>
-  data.filter((row) => {
-    let cell = _.get(row, dataField);
-    if (customFilterValue) {
-      cell = customFilterValue(cell, row);
-    }
-    const cellStr = _.isDefined(cell) ? cell.toString() : '';
-    if (comparator === EQ) {
-      return cellStr === filterVal;
-    }
-    if (caseSensitive) {
-      return cellStr.includes(filterVal);
-    }
-    return cellStr.toLocaleUpperCase().indexOf(filterVal.toLocaleUpperCase()) !== -1;
-  });
+) => {
+  // make sure filter value to be a string
+  const filterVal = userInput.toString();
+
+  return (
+    data.filter((row) => {
+      let cell = _.get(row, dataField);
+      if (customFilterValue) {
+        cell = customFilterValue(cell, row);
+      }
+      const cellStr = _.isDefined(cell) ? cell.toString() : '';
+      if (comparator === EQ) {
+        return cellStr === filterVal;
+      }
+      if (caseSensitive) {
+        return cellStr.includes(filterVal);
+      }
+
+      return cellStr.toLocaleUpperCase().indexOf(filterVal.toLocaleUpperCase()) !== -1;
+    })
+  );
+};
 
 export const filterByNumber = _ => (
   data,
   dataField,
   { filterVal: { comparator, number } },
   customFilterValue
-) =>
+) => (
   data.filter((row) => {
     if (number === '' || !comparator) return true;
     let valid = true;
@@ -81,7 +88,8 @@ export const filterByNumber = _ => (
       }
     }
     return valid;
-  });
+  })
+);
 
 export const filterFactory = _ => (filterType) => {
   let filterFn;
