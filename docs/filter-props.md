@@ -243,3 +243,16 @@ const columns = [{ ... }, { ... }, {
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
+
+## Comparator
+We support the following ways to do the comparison. Each `filter` has its default comparator. For more information, please take refer to the introduction of props above.
+
+|   | Comparator      | Symbol | description             |
+|---|-----------------|--------|-------------------------|
+| 1 | Comparator.LIKE | N/A    | To include filter value |
+| 2 | Comparator.EQ   | =      |                         |
+| 3 | Comparator.NE   | !=     |                         |
+| 4 | Comparator.GT   | >      |                         |
+| 5 | Comparator.GE   | >=     |                         |
+| 6 | Comparator.LT   | <      |                         |
+| 7 | Comparator.LE   | <=     |                         |
