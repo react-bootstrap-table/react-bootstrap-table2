@@ -61,7 +61,7 @@ const columns = [{
 * default filtering value
 
 ### textFilter.comparator - [Comparator]
-* What kind of comparator to compare. Default is Comparator.LIKE
+* Specify what kind of comparator to compare. Default is Comparator.LIKE
 
 ### textFilter.caseSensitive - [Boolean]
 * default is `false`, and `true` will only work when comparator is `LIKE`.
@@ -124,7 +124,7 @@ const columns = [{
 * default filtering value
 
 ### selectFilter.comparator - [Comparator]
-* What kind of comparator to compare. Default is `Comparator.EQ`
+* Specify what kind of comparator to compare. Default is `Comparator.EQ`
 
 ### selectFilter.style - [Object]
 * your custom inline styles on `input`
@@ -165,3 +165,81 @@ const columns = [
 ```
 
 ## (3). numberFilter
+**Required**: NONE
+
+**Optional**:
+
+### numberFilter.options - [Array]
+* Once the `options` has been defined, it will render number `select` drop down instead of number input field.
+
+### numberFilter.delay - [Number]
+* Debounce time, which means how long will trigger filtering after user typing. Default is `500ms`.
+
+### numberFilter.placeholder - [String]
+* customized placeholder for number input.
+
+### numberFilter.withoutEmptyComparatorOption - [Boolean]
+* When it was set to `true`, the drop down list of `comparator` would hide the default selection.
+
+### numberFilter.withoutEmptyNumberOption - [Boolean]
+* When it was set to `true`, the drop down list of `number` would hide the default selection. Besides, before picking up this prop, please make sure that you've defined the `props.options` correctly.
+
+### numberFilter.defaultValue - [Object]
+* It is the default filtering value. Furthermore, it accepts **2** attributes:
+   * number: filter value
+   * comparator: what kind of comparator to compare
+
+### numberFilter.comparator - [[Comparator]]
+* Specify what kind of comparator to compare. Default is to list `all` of comparators.
+
+### numberFilter.className - [String]
+* custom class name on the `wrapper` of number input and comparator drop down.
+
+### numberFilter.comparatorClassName - [String]
+* custom class name on the `comparator` drop down.
+
+### numberFilter.numberClassName - [String]
+* custom class name on the number `input`.
+
+### numberFilter.style - [Object]
+* custom inline styles on the `wrapper` of number input and comparator drop down.
+
+### numberFilter.comparatorStyle - [Object]
+* custom inline styles on the `comparator` drop down.
+
+### numberFilter.numberStyle - [Object]
+* custom inline styles on the number `input`.
+
+### numberFilter.getFilter - [Function]
+* export `filter` function to allow users to access. For numberFilter,<br>`filter({ number, comparator })` to filter columns dynamically.
+
+**Example**:
+```js
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { numberFilter, Comparator } from 'react-bootstrap-table2-filter';
+
+const columns = [{ ... }, { ... }, {
+  dataField: 'price',
+  text: 'Product Price',
+  filter: numberFilter({
+    options: [2100, 2103, 2105],  // if options defined, will render number select instead of number input
+    delay: 600, // how long will trigger filtering after user typing, default is 500 ms
+    placeholder: 'custom placeholder',  // placeholder for number input
+    withoutEmptyComparatorOption: true,  // dont render empty option for comparator
+    withoutEmptyNumberOption: true,  // dont render empty option for number select if it is defined
+    comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],  // Custom the comparators
+    style: { display: 'inline-grid' }, // custom the style on number filter
+    className: 'custom-numberfilter-class',  // custom the class on number filter
+    comparatorStyle: { backgroundColor: 'antiquewhite' }, // custom the style on comparator select
+    comparatorClassName: 'custom-comparator-class',  // custom the class on comparator select
+    numberStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on number input/select
+    numberClassName: 'custom-number-class',  // custom the class on ber input/select
+    defaultValue: { number: 2103, comparator: Comparator.GT },  // default value
+    getFilter: (filter) => { // priceFilter was assigned once the component has been mounted.
+      priceFilter = filter;
+    }
+  })
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
