@@ -40,12 +40,12 @@
     "Blog": "Blog",
     "Basic Usage": "Basic Usage",
     "Remote Table": "Remote Table",
-    "Table Definitation": "Table Definitation",
-    "Column Definitation": "Column Definitation",
-    "Cell Editing Definitation": "Cell Editing Definitation",
-    "Pagination Definitation": "Pagination Definitation",
-    "Row Select Definitation": "Row Select Definitation",
-    "Column Filter Definitation": "Column Filter Definitation"
+    "Table Definition": "Table Definition",
+    "Column Definition": "Column Definition",
+    "Cell Editing Definition": "Cell Editing Definition",
+    "Pagination Definition": "Pagination Definition",
+    "Row Select Definition": "Row Select Definition",
+    "Column Filter Definition": "Column Filter Definition"
   },
   "pages-strings": {
     "Help Translate|recruit community translators for your project": "Help Translate",
