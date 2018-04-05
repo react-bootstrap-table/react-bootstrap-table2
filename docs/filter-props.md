@@ -6,13 +6,20 @@ title: Column Filter Props
 
 ## Content Table
 
+* [Getting Started](#getting-started)
 * [How to use](#how-to-use)
-* [FilterFactory Props](#filterfactory-props)
-* [Filters](#filters-props)
+* [Props of FilterFactory](#props-of-filterfactory)
+* [Props of Filters](#props-of-filters)
    * [textFilter](#1-textfilter)
    * [selectFilter](#2-selectFilter)
    * [numberFilter](#3-numberFilter)
 * [Comparator](#comparator)
+
+## Getting Started
+```
+$ npm install react-bootstrap-table2-filter --save
+```
+After installing `react-bootstrap-table2-filter`, you can configure `filter` on table as following instruction.
 
 ## How to use
 You should apply following **2** to enable `filter` functionality for `react-bootstrap-table2`.

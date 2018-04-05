@@ -233,11 +233,11 @@ paginationFactory({
 `filter` allows users to filter data by columns. For more information, please navigate to [filter-props](./filter-props.html).
 
 **Getting Started**
-```sh
+```
 $ npm install react-bootstrap-table2-filter --save
 ```
 
-After installation of `react-bootstrap-table2-filter`, you can configure filter on table easily:
+After installing `react-bootstrap-table2-filter`, you could easily enable the functionality of `filter`.
 
 **Example**
 ```js
