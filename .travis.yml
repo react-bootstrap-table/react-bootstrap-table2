@@ -9,9 +9,10 @@ cache:
 
 branches:
   only:
-  # skip master branch when it's under development phase
-  # - master 
+  - master
   - develop
+  except:
+  - gh-pages-src
 
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s
