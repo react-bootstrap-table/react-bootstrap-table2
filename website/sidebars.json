@@ -20,22 +20,22 @@
     ]
   },
   "api": {
-    "Table Definitation": [
+    "Table Definition": [
       "table-props"
     ],
-    "Column Definitation": [
+    "Column Definition": [
       "column-props"
     ],
-    "Cell Editing Definitation": [
+    "Cell Editing Definition": [
       "cell-edit-props"
     ],
-    "Pagination Definitation": [
+    "Pagination Definition": [
       "pagination-props"
     ],
-    "Row Select Definitation": [
+    "Row Select Definition": [
       "row-select-props"
     ],
-    "Column Filter Definitation": [
+    "Column Filter Definition": [
       "filter-props"
     ]
   }

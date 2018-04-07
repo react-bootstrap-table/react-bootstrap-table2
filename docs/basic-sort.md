@@ -11,7 +11,7 @@ sidebar_label: Table Sort
 -----
 
 ## Enable Sort on Column
-Firstly, you need to know what column you allow user to sort and give the [`sort`](./column-props.html#columnsort-bool) as `true` in the column definitation.
+Firstly, you need to know what column you allow user to sort and give the [`sort`](./column-props.html#columnsort-bool) as `true` in the column definition.
 
 ```js
 const columns = [{
@@ -57,7 +57,7 @@ Defined [`onSort`](./column-props.html#columnonsort-function) on target column:
 
 ## Custom the Sorting Algorithm
 
-It's simple!! configure [`sortFunc`](./column-props.html#columnsortfunc-function) on column definitation.
+It's simple!! configure [`sortFunc`](./column-props.html#columnsortfunc-function) on column definition.
 
 ```js
 {

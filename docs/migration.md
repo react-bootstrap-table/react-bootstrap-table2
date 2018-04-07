@@ -99,7 +99,7 @@ Please see [available filter configuration](./filter-props.html).
 
 Remember to install [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter) firstly.   
 
-Due to no `TableHeaderColumn` so that no `filter` here, please add [`filter`](./column-props.html#columnfilter-object) property on column definitation and [`filter`](./table-props.html#filter-object) prop on `BootstrapTable`.
+Due to no `TableHeaderColumn` so that no `filter` here, please add [`filter`](./column-props.html#columnfilter-object) property on column definition and [`filter`](./table-props.html#filter-object) prop on `BootstrapTable`.
 
 ## Cell Edit
 

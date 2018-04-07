@@ -230,30 +230,33 @@ paginationFactory({
 ```
 
 ## filter - [Object]
-`filter` allow user to filter data by column. However, filter functionality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-filter` firstly.
+`filter` allows users to filter data by columns. For more information, please navigate to [filter-props](./filter-props.html).
 
-```sh
+**Getting Started**
+```
 $ npm install react-bootstrap-table2-filter --save
 ```
 
-After installation of `react-bootstrap-table2-filter`, you can configure filter on table easily:
+After installing `react-bootstrap-table2-filter`, you could easily enable the functionality of `filter`.
 
+**Example**
 ```js
+import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
-// omit...
-const columns = [ {
-  dataField: 'id', 
-  text: 'Production ID'
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID'
 }, {
   dataField: 'name',
-  text: 'Production Name',
-  filter: textFilter()  // apply text filter
+  text: 'Product Name'
 }, {
   dataField: 'price',
-  text: 'Production Price'
-} ];
-<BootstrapTable data={ data } columns={ columns } filter={ filterFactory() } />
+  text: 'Product Price',
+  filter: textFilter() // apply text filter
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
 ## onTableChange - [Function]
