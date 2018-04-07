@@ -4,24 +4,24 @@ title: Column Filter Props
 ---
 `react-bootstrap-table2` separate the filter core code base to [react-bootstrap-table2-filter](https://www.npmjs.com/package/react-bootstrap-table2-filter). The following are guideline about how to use and the details of props of [filterFactory](#filterfactory-props) and [filters](#filters-props). For more information, please take refer to the samples as [link](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Column%20Filter&selectedStory=Text%20Filter&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel) here.
 
-## Content Table
+## **Content Table**
 
 * [Getting Started](#getting-started)
 * [How to use](#how-to-use)
 * [Props of FilterFactory](#props-of-filterfactory)
 * [Props of Filters](#props-of-filters)
-   * [textFilter](#1-textfilter)
-   * [selectFilter](#2-selectFilter)
-   * [numberFilter](#3-numberFilter)
+   * [textFilter](#textfilter)
+   * [selectFilter](#selectFilter)
+   * [numberFilter](#numberFilter)
 * [Comparator](#comparator)
 
-## Getting Started
+## **Getting Started**
 ```
 $ npm install react-bootstrap-table2-filter --save
 ```
 After installing `react-bootstrap-table2-filter`, you can configure `filter` on table as following instruction.
 
-## How to use
+## **How to use**
 You should apply following **2** to enable `filter` functionality for `react-bootstrap-table2`.
 * `filterFactory`
 * `filters` (**3** types support)
@@ -48,12 +48,12 @@ const columns = [{
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-## Props of FilterFactory
+## **Props of FilterFactory**
 **No Any Available Props Yet**
 
-## Props of Filters
+## **Props of Filters**
 
-## (1). textFilter
+## textFilter
 
 **Required**: NONE
 
@@ -114,7 +114,7 @@ const columns = [{
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-## (2). selectFilter
+## selectFilter
 **Required**:
 
 ### selectFilter.options - [Object]
@@ -171,7 +171,7 @@ const columns = [
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-## (3). numberFilter
+## numberFilter
 **Required**: NONE
 
 **Optional**:
@@ -251,7 +251,7 @@ const columns = [{ ... }, { ... }, {
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-## Comparator
+## **Comparator**
 We support the following ways to do the comparison. Each `filter` has its default comparator. For more information, please take refer to the introduction of props above.
 
 |   | Comparator      | Symbol | description             |
