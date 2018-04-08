@@ -72,9 +72,15 @@ function styles() {
     .pipe(gulp.dest(PKG_PATH));
 }
 
-function umd() {
-  return gulp.src('./webpack.prod.config.babel.js')
-    .pipe(shell(['webpack --config <%= file.path %>']));
+function umd(done) {
+  gulp.parallel(
+    () => gulp.src('./webpack/next.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
+    () => gulp.src('./webpack/editor.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
+    () => gulp.src('./webpack/filter.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
+    () => gulp.src('./webpack/overlay.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
+    () => gulp.src('./webpack/paginator.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>']))
+  )();
+  done();
 }
 
 const buildJS = gulp.parallel(umd, scripts);
