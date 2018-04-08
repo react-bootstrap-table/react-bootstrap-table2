@@ -1,8 +1,291 @@
-<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Column Filter Props · react-bootstrap-table2</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Column Filter Props · react-bootstrap-table2"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-bootstrap-table.github.io/react-bootstrap-table2/index.html"/><meta property="og:description" content="**No Any Available Props Yet**"/><link rel="shortcut icon" href="/react-bootstrap-table2/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://react-bootstrap-table.github.io/blog/atom.xml" title="react-bootstrap-table2 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://react-bootstrap-table.github.io/blog/feed.xml" title="react-bootstrap-table2 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/react-bootstrap-table2/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-bootstrap-table2/"><h2 class="headerTitle">react-bootstrap-table2</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/react-bootstrap-table2/docs/about.html" target="_self">Docs</a></li><li><a href="/react-bootstrap-table2/docs/table-props.html" target="_self">API</a></li><li><a href="/react-bootstrap-table2/en/help.html" target="_self">Help</a></li><li><a href="/react-bootstrap-table2/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Column Filter Definitation</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Table Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/table-props.html">BootstrapTable Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/column-props.html">Columns Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Cell Editing Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/cell-edit-props.html">Cell Editing Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Pagination Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/pagination-props.html">Pagination Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Row Select Definitation</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/row-select-props.html">Row Selection Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Filter Definitation</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/react-bootstrap-table2/docs/filter-props.html">Column Filter Props</a></li></ul></div></div></section></div><script>
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Column Filter Props · react-bootstrap-table2</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Column Filter Props · react-bootstrap-table2"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-bootstrap-table.github.io/react-bootstrap-table2/index.html"/><meta property="og:description" content="`react-bootstrap-table2` separate the filter core code base to [react-bootstrap-table2-filter](https://www.npmjs.com/package/react-bootstrap-table2-filter). The following are guideline about how to use and the details of props of [filterFactory](#filterfactory-props) and [filters](#filters-props). For more information, please take refer to the samples as [link](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Column%20Filter&amp;selectedStory=Text%20Filter&amp;full=0&amp;addons=1&amp;stories=1&amp;panelRight=0&amp;addonPanel=storybook%2Factions%2Factions-panel) here."/><link rel="shortcut icon" href="/react-bootstrap-table2/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://react-bootstrap-table.github.io/blog/atom.xml" title="react-bootstrap-table2 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://react-bootstrap-table.github.io/blog/feed.xml" title="react-bootstrap-table2 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/react-bootstrap-table2/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-bootstrap-table2/"><h2 class="headerTitle">react-bootstrap-table2</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/react-bootstrap-table2/docs/about.html" target="_self">Docs</a></li><li><a href="/react-bootstrap-table2/docs/table-props.html" target="_self">API</a></li><li><a href="/react-bootstrap-table2/en/help.html" target="_self">Help</a></li><li><a href="/react-bootstrap-table2/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Column Filter Definition</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Table Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/table-props.html">BootstrapTable Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/column-props.html">Columns Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Cell Editing Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/cell-edit-props.html">Cell Editing Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Pagination Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/pagination-props.html">Pagination Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Row Select Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/row-select-props.html">Row Selection Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Filter Definition</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/react-bootstrap-table2/docs/filter-props.html">Column Filter Props</a></li></ul></div></div></section></div><script>
           var toggler = document.getElementById('navToggler');
           var nav = document.getElementById('docsNav');
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Column Filter Props</h1></header><article><div><span><p><strong>No Any Available Props Yet</strong></p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Column Filter Props</h1></header><article><div><span><p><code>react-bootstrap-table2</code> separate the filter core code base to <a href="https://www.npmjs.com/package/react-bootstrap-table2-filter">react-bootstrap-table2-filter</a>. The following are guideline about how to use and the details of props of <a href="#filterfactory-props">filterFactory</a> and <a href="#filters-props">filters</a>. For more information, please take refer to the samples as <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Column%20Filter&amp;selectedStory=Text%20Filter&amp;full=0&amp;addons=1&amp;stories=1&amp;panelRight=0&amp;addonPanel=storybook%2Factions%2Factions-panel">link</a> here.</p>
+<h2><a class="anchor" aria-hidden="true" name="content-table"></a><a href="#content-table" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>Content Table</strong></h2>
+<ul>
+<li><a href="#getting-started">Getting Started</a></li>
+<li><a href="#how-to-use">How to use</a></li>
+<li><a href="#props-of-filterfactory">Props of FilterFactory</a></li>
+<li><a href="#props-of-filters">Props of Filters</a>
+<ul>
+<li><a href="#textfilter">textFilter</a></li>
+<li><a href="#selectFilter">selectFilter</a></li>
+<li><a href="#numberFilter">numberFilter</a></li>
+</ul></li>
+<li><a href="#comparator">Comparator</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="getting-started"></a><a href="#getting-started" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>Getting Started</strong></h2>
+<pre><code class="hljs">$ npm install react-bootstrap-table2-<span class="hljs-built_in">filter</span> <span class="hljs-comment">--save</span>
+</code></pre>
+<p>After installing <code>react-bootstrap-table2-filter</code>, you can configure <code>filter</code> on table as following instruction.</p>
+<h2><a class="anchor" aria-hidden="true" name="how-to-use"></a><a href="#how-to-use" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>How to use</strong></h2>
+<p>You should apply following <strong>2</strong> to enable <code>filter</code> functionality for <code>react-bootstrap-table2</code>.</p>
+<ul>
+<li><code>filterFactory</code></li>
+<li><code>filters</code> (<strong>3</strong> types support)
+<ul>
+<li>textFilter</li>
+<li>selectFilter</li>
+<li>numberFilter</li>
+</ul></li>
+</ul>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
+<span class="hljs-keyword">import</span> filterFactory, { textFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> columns = [{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product ID'</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'name'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Name'</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">filter</span>: textFilter()
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="props-of-filterfactory"></a><a href="#props-of-filterfactory" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>Props of FilterFactory</strong></h2>
+<p><strong>No Any Available Props Yet</strong></p>
+<h2><a class="anchor" aria-hidden="true" name="props-of-filters"></a><a href="#props-of-filters" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>Props of Filters</strong></h2>
+<h2><a class="anchor" aria-hidden="true" name="textfilter"></a><a href="#textfilter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter</h2>
+<p><strong>Required</strong>: NONE</p>
+<p><strong>Optional</strong>:</p>
+<h3><a class="anchor" aria-hidden="true" name="textfilterplaceholder-string"></a><a href="#textfilterplaceholder-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.placeholder - [String]</h3>
+<ul>
+<li>custom the input placeholder</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="textfilterclassname-string"></a><a href="#textfilterclassname-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.className - [String]</h3>
+<ul>
+<li>custom class name on input</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="textfilterdefaultvalue-string"></a><a href="#textfilterdefaultvalue-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.defaultValue - [String]</h3>
+<ul>
+<li>default filtering value</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="textfiltercomparator-comparator"></a><a href="#textfiltercomparator-comparator" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.comparator - [Comparator]</h3>
+<ul>
+<li>Specify what kind of comparator to compare. Default is Comparator.LIKE</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="textfiltercasesensitive-boolean"></a><a href="#textfiltercasesensitive-boolean" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.caseSensitive - [Boolean]</h3>
+<ul>
+<li>default is <code>false</code>, and <code>true</code> will only work when comparator is <code>LIKE</code>.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="textfilterstyle-object"></a><a href="#textfilterstyle-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.style - [Object]</h3>
+<ul>
+<li>your custom inline styles on <code>input</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="textfilterdelay-number"></a><a href="#textfilterdelay-number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.delay - [Number]</h3>
+<ul>
+<li>Debounce time, which means how long will trigger filtering after user typing. Default is <code>500ms</code>.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="textfiltergetfilter-function"></a><a href="#textfiltergetfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.getFilter - [Function]</h3>
+<ul>
+<li>export <code>filter</code> function to allow users to access. For textFilter, <code>filter(value)</code> to filter columns dynamically.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
+<span class="hljs-keyword">import</span> filterFactory, { textFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> columns = [{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product ID'</span>,
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'name'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Name'</span>,
+  <span class="hljs-attr">filter</span>: textFilter({
+    <span class="hljs-attr">placeholder</span>: <span class="hljs-string">'My Custom PlaceHolder'</span>,  <span class="hljs-comment">// custom the input placeholder</span>
+    className: <span class="hljs-string">'my-custom-text-filter'</span>, <span class="hljs-comment">// custom classname on input</span>
+    defaultValue: <span class="hljs-string">'test'</span>, <span class="hljs-comment">// default filtering value</span>
+    comparator: Comparator.EQ, <span class="hljs-comment">// default is Comparator.LIKE</span>
+    caseSensitive: <span class="hljs-literal">true</span>, <span class="hljs-comment">// default is false, and true will only work when comparator is LIKE</span>
+    style: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'yellow'</span> }, <span class="hljs-comment">// your custom inline styles on input</span>
+    delay: <span class="hljs-number">1000</span>, <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
+    onClick: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(e),
+    <span class="hljs-attr">getFilter</span>: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// nameFilter was assigned once the component has been mounted.</span>
+      nameFilter = filter;
+    }
+  })
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">filter</span>: textFilter()
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="selectfilter"></a><a href="#selectfilter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter</h2>
+<p><strong>Required</strong>:</p>
+<h3><a class="anchor" aria-hidden="true" name="selectfilteroptions-object"></a><a href="#selectfilteroptions-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.options - [Object]</h3>
+<ul>
+<li>(Required) the options for the list of drop down.</li>
+</ul>
+<p><strong>Optional</strong>:</p>
+<h3><a class="anchor" aria-hidden="true" name="selectfilterclassname-string"></a><a href="#selectfilterclassname-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.className - [String]</h3>
+<ul>
+<li>custom class name on input</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="selectfilterwithoutemptyoption-boolean"></a><a href="#selectfilterwithoutemptyoption-boolean" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.withoutEmptyOption - [Boolean]</h3>
+<ul>
+<li>When it was set to <code>true</code>, the drop down list would hide the default selection.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="selectfilterdefaultvalue-string"></a><a href="#selectfilterdefaultvalue-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.defaultValue - [String]</h3>
+<ul>
+<li>default filtering value</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="selectfiltercomparator-comparator"></a><a href="#selectfiltercomparator-comparator" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.comparator - [Comparator]</h3>
+<ul>
+<li>Specify what kind of comparator to compare. Default is <code>Comparator.EQ</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="selectfilterstyle-object"></a><a href="#selectfilterstyle-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.style - [Object]</h3>
+<ul>
+<li>your custom inline styles on <code>input</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="selectfiltergetfilter-function"></a><a href="#selectfiltergetfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.getFilter - [Function]</h3>
+<ul>
+<li>export <code>filter</code> function to allow users to access. For selectFilter, <code>filter(value)</code> to filter columns dynamically.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
+<span class="hljs-keyword">import</span> filterFactory, { selectFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> selectOptions = {
+  <span class="hljs-number">0</span>: <span class="hljs-string">'good'</span>,
+  <span class="hljs-number">1</span>: <span class="hljs-string">'Bad'</span>,
+  <span class="hljs-number">2</span>: <span class="hljs-string">'unknown'</span>
+};
+
+<span class="hljs-keyword">const</span> columns = [
+  { ... }, { ... }, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'quality'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Quailty'</span>,
+  <span class="hljs-attr">formatter</span>: <span class="hljs-function"><span class="hljs-params">cell</span> =&gt;</span> selectOptions[cell],
+  <span class="hljs-attr">filter</span>: selectFilter({
+    <span class="hljs-attr">options</span>: selectOptions,
+    <span class="hljs-attr">className</span>: <span class="hljs-string">'test-classname'</span>,
+    <span class="hljs-attr">withoutEmptyOption</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">defaultValue</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">comparator</span>: Comparator.LIKE, <span class="hljs-comment">// default is Comparator.EQ</span>
+    style: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'pink'</span> },
+    <span class="hljs-attr">getFilter</span>: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// qualityFilter was assigned once the component has been mounted.</span>
+      qualityFilter = filter;
+    }
+  })
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="numberfilter"></a><a href="#numberfilter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter</h2>
+<p><strong>Required</strong>: NONE</p>
+<p><strong>Optional</strong>:</p>
+<h3><a class="anchor" aria-hidden="true" name="numberfilteroptions-array"></a><a href="#numberfilteroptions-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.options - [Array]</h3>
+<ul>
+<li>Once the <code>options</code> has been defined, it will render number <code>select</code> drop down instead of number input field.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilterdelay-number"></a><a href="#numberfilterdelay-number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.delay - [Number]</h3>
+<ul>
+<li>Debounce time, which means how long will trigger filtering after user typing. Default is <code>500ms</code>.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilterplaceholder-string"></a><a href="#numberfilterplaceholder-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.placeholder - [String]</h3>
+<ul>
+<li>customized placeholder for number input.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilterwithoutemptycomparatoroption-boolean"></a><a href="#numberfilterwithoutemptycomparatoroption-boolean" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.withoutEmptyComparatorOption - [Boolean]</h3>
+<ul>
+<li>When it was set to <code>true</code>, the drop down list of <code>comparator</code> would hide the default selection.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilterwithoutemptynumberoption-boolean"></a><a href="#numberfilterwithoutemptynumberoption-boolean" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.withoutEmptyNumberOption - [Boolean]</h3>
+<ul>
+<li>When it was set to <code>true</code>, the drop down list of <code>number</code> would hide the default selection. Besides, before picking up this prop, please make sure that you've defined the <code>props.options</code> correctly.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilterdefaultvalue-object"></a><a href="#numberfilterdefaultvalue-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.defaultValue - [Object]</h3>
+<ul>
+<li>It is the default filtering value. Furthermore, it accepts <strong>2</strong> attributes:
+<ul>
+<li>number: filter value</li>
+<li>comparator: what kind of comparator to compare</li>
+</ul></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfiltercomparator-comparator"></a><a href="#numberfiltercomparator-comparator" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.comparator - [[Comparator]]</h3>
+<ul>
+<li>Specify what kind of comparator to compare. Default is to list <code>all</code> of comparators.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilterclassname-string"></a><a href="#numberfilterclassname-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.className - [String]</h3>
+<ul>
+<li>custom class name on the <code>wrapper</code> of number input and comparator drop down.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfiltercomparatorclassname-string"></a><a href="#numberfiltercomparatorclassname-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.comparatorClassName - [String]</h3>
+<ul>
+<li>custom class name on the <code>comparator</code> drop down.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilternumberclassname-string"></a><a href="#numberfilternumberclassname-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.numberClassName - [String]</h3>
+<ul>
+<li>custom class name on the number <code>input</code>.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilterstyle-object"></a><a href="#numberfilterstyle-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.style - [Object]</h3>
+<ul>
+<li>custom inline styles on the <code>wrapper</code> of number input and comparator drop down.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfiltercomparatorstyle-object"></a><a href="#numberfiltercomparatorstyle-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.comparatorStyle - [Object]</h3>
+<ul>
+<li>custom inline styles on the <code>comparator</code> drop down.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilternumberstyle-object"></a><a href="#numberfilternumberstyle-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.numberStyle - [Object]</h3>
+<ul>
+<li>custom inline styles on the number <code>input</code>.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfiltergetfilter-function"></a><a href="#numberfiltergetfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.getFilter - [Function]</h3>
+<ul>
+<li>export <code>filter</code> function to allow users to access. For numberFilter,<br><code>filter({ number, comparator })</code> to filter columns dynamically.</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
+<span class="hljs-keyword">import</span> filterFactory, { numberFilter, Comparator } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> columns = [{ ... }, { ... }, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">filter</span>: numberFilter({
+    <span class="hljs-attr">options</span>: [<span class="hljs-number">2100</span>, <span class="hljs-number">2103</span>, <span class="hljs-number">2105</span>],  <span class="hljs-comment">// if options defined, will render number select instead of number input</span>
+    delay: <span class="hljs-number">600</span>, <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
+    placeholder: <span class="hljs-string">'custom placeholder'</span>,  <span class="hljs-comment">// placeholder for number input</span>
+    withoutEmptyComparatorOption: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// dont render empty option for comparator</span>
+    withoutEmptyNumberOption: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// dont render empty option for number select if it is defined</span>
+    comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],  <span class="hljs-comment">// Custom the comparators</span>
+    style: { <span class="hljs-attr">display</span>: <span class="hljs-string">'inline-grid'</span> }, <span class="hljs-comment">// custom the style on number filter</span>
+    className: <span class="hljs-string">'custom-numberfilter-class'</span>,  <span class="hljs-comment">// custom the class on number filter</span>
+    comparatorStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'antiquewhite'</span> }, <span class="hljs-comment">// custom the style on comparator select</span>
+    comparatorClassName: <span class="hljs-string">'custom-comparator-class'</span>,  <span class="hljs-comment">// custom the class on comparator select</span>
+    numberStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'cadetblue'</span>, <span class="hljs-attr">margin</span>: <span class="hljs-string">'0px'</span> },  <span class="hljs-comment">// custom the style on number input/select</span>
+    numberClassName: <span class="hljs-string">'custom-number-class'</span>,  <span class="hljs-comment">// custom the class on ber input/select</span>
+    defaultValue: { <span class="hljs-attr">number</span>: <span class="hljs-number">2103</span>, <span class="hljs-attr">comparator</span>: Comparator.GT },  <span class="hljs-comment">// default value</span>
+    getFilter: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// priceFilter was assigned once the component has been mounted.</span>
+      priceFilter = filter;
+    }
+  })
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="comparator"></a><a href="#comparator" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><strong>Comparator</strong></h2>
+<p>We support the following ways to do the comparison. Each <code>filter</code> has its default comparator. For more information, please take refer to the introduction of props above.</p>
+<table>
+<thead>
+<tr><th></th><th>Comparator</th><th>Symbol</th><th>description</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Comparator.LIKE</td><td>N/A</td><td>To include filter value</td></tr>
+<tr><td>2</td><td>Comparator.EQ</td><td>=</td><td></td></tr>
+<tr><td>3</td><td>Comparator.NE</td><td>!=</td><td></td></tr>
+<tr><td>4</td><td>Comparator.GT</td><td>&gt;</td><td></td></tr>
+<tr><td>5</td><td>Comparator.GE</td><td>&gt;=</td><td></td></tr>
+<tr><td>6</td><td>Comparator.LT</td><td>&lt;</td><td></td></tr>
+<tr><td>7</td><td>Comparator.LE</td><td>&lt;=</td><td></td></tr>
+</tbody>
+</table>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="row-select-props.html">← Row Selection Props</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>
