@@ -50,7 +50,8 @@
   comparator: Comparator.EQ, <span class="hljs-comment">// default is Comparator.LIKE</span>
   caseSensitive: <span class="hljs-literal">true</span>, <span class="hljs-comment">// default is false, and true will only work when comparator is LIKE</span>
   style: { ... }, <span class="hljs-comment">// your custom styles on input</span>
-  delay: <span class="hljs-number">1000</span> <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
+  delay: <span class="hljs-number">1000</span>, <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
+  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... } <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
 });
 
 <span class="hljs-comment">// omit...</span>
@@ -90,7 +91,8 @@
   comparator: Comparator.LIKE, <span class="hljs-comment">// default is Comparator.EQ</span>
   caseSensitive: <span class="hljs-literal">false</span>, <span class="hljs-comment">// default is true</span>
   style: { ... }, <span class="hljs-comment">// your custom styles on input</span>
-  withoutEmptyOption: <span class="hljs-literal">true</span>  <span class="hljs-comment">// hide the default select option</span>
+  withoutEmptyOption: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// hide the default select option</span>
+  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... } <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
 });
 
 <span class="hljs-comment">// omit...</span>
@@ -123,9 +125,52 @@
   comparatorClassName: <span class="hljs-string">'custom-comparator-class'</span>,  <span class="hljs-comment">// custom the class on comparator select</span>
   numberStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'cadetblue'</span>, <span class="hljs-attr">margin</span>: <span class="hljs-string">'0px'</span> },  <span class="hljs-comment">// custom the style on number input/select</span>
   numberClassName: <span class="hljs-string">'custom-number-class'</span>,  <span class="hljs-comment">// custom the class on ber input/select</span>
-  defaultValue: { <span class="hljs-attr">number</span>: <span class="hljs-number">2103</span>, <span class="hljs-attr">comparator</span>: Comparator.GT }  <span class="hljs-comment">// default value</span>
+  defaultValue: { <span class="hljs-attr">number</span>: <span class="hljs-number">2103</span>, <span class="hljs-attr">comparator</span>: Comparator.GT },  <span class="hljs-comment">// default value</span>
+  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... } <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
 })
 
 <span class="hljs-comment">// omit...</span>
 </code></pre>
+<hr />
+<h2><a class="anchor" aria-hidden="true" name="programmatically-filter"></a><a href="#programmatically-filter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Programmatically Filter</h2>
+<p><code>react-bootstrap-table2</code> allow you to control filter externally, which means user no need to type something on filter!!</p>
+<h3><a class="anchor" aria-hidden="true" name="how"></a><a href="#how" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>How</h3>
+<p>All the filters have a <code>getFilter</code> prop which accept a callback function and pass a filter object to you.</p>
+<pre><code class="hljs css js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Table</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Components</span> </span>{
+  <span class="hljs-keyword">constructor</span>(props) {
+    <span class="hljs-keyword">super</span>(props);
+    <span class="hljs-keyword">this</span>.filterPrice = <span class="hljs-keyword">this</span>.filterPrice.bind(<span class="hljs-keyword">this</span>);
+    <span class="hljs-keyword">const</span> columns = [
+      ..., {
+      <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+      <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+      <span class="hljs-attr">filter</span>: textFilter({
+        <span class="hljs-comment">// preserve filter instance</span>
+        getFilter: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> <span class="hljs-keyword">this</span>.priceFilter = filter;
+      })
+    }];
+  }
+
+  filterPrice() {
+    <span class="hljs-comment">// call it anywhere when you want!!</span>
+    <span class="hljs-keyword">this</span>.priceFilter(<span class="hljs-number">100</span>);
+  }
+
+  render() {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> <span class="hljs-attr">this.filterPrice</span> }&gt;</span>Click to filter<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    );
+  }
+}
+
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" name="examples"></a><a href="#examples" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h3>
+<ul>
+<li><a href="../storybook/index.html?selectedKind=Column%20Filter&amp;selectedStory=Programmatically%20Text%20Filter%20">Example For Programmtically Text Filter</a></li>
+<li><a href="../storybook/index.html?selectedKind=Column%20Filter&amp;selectedStory=Programmatically%20Select%20Filter%20">Example For Programmtically Select Filter</a></li>
+<li><a href="../storybook/index.html?selectedKind=Column%20Filter&amp;selectedStory=Programmatically%20Number%20Filter%20">Example For Programmtically Number Filter</a></li>
+</ul>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="basic-row-select.html">← Row Selection</a><a class="docs-next button" href="basic-celledit.html">Cell Edit →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>
