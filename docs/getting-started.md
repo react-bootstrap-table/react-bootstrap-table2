@@ -60,11 +60,11 @@ export default () =>
 
 ### npm
 
-After install from npm, get UMD module from `dist` folder in the `node_modules/PACKAGE_NAME`:   
+After install from npm, your can get UMD module from the `dist`.
 
 ### unpkg
 
-* Download`react-bootstrap-table-next` from [here](https://unpkg.com/dist/react-bootstrap-table-next.min.js)
+* Download`react-bootstrap-table-next` from [here](https://unpkg.com/react-bootstrap-table-next/dist/react-bootstrap-table-next.min.js)
 * Download `react-bootstrap-table2-editor` from [here](https://unpkg.com/react-bootstrap-table2-editor/dist/react-bootstrap-table2-editor.min.js)
 * Download `react-bootstrap-table2-filter` from [here](https://unpkg.com/react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.js)
 * Download `react-bootstrap-table2-paginator` from [here](https://unpkg.com/react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.js)
