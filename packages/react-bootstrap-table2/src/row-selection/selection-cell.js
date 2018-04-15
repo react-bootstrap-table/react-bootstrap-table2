@@ -28,7 +28,7 @@ export default class SelectionCell extends Component {
     return nextProps.selected !== selected;
   }
 
-  handleClick() {
+  handleClick(e) {
     const {
       mode: inputType,
       rowKey,
@@ -46,7 +46,7 @@ export default class SelectionCell extends Component {
       ? true
       : !selected;
 
-    onRowSelect(rowKey, checked, rowIndex);
+    onRowSelect(rowKey, checked, rowIndex, e);
   }
 
   render() {

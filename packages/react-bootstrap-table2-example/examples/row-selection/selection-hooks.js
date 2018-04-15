@@ -22,14 +22,16 @@ const columns = [{
 const selectRow = {
   mode: 'checkbox',
   clickToSelect: true,
-  onSelect: (row, isSelect, rowIndex) => {
+  onSelect: (row, isSelect, rowIndex, e) => {
     console.log(row.id);
     console.log(isSelect);
     console.log(rowIndex);
+    console.log(e);
   },
-  onSelectAll: (isSelect, rows) => {
+  onSelectAll: (isSelect, rows, e) => {
     console.log(isSelect);
     console.log(rows);
+    console.log(e);
   }
 };
 
@@ -49,7 +51,18 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
-  clickToSelect: true
+  clickToSelect: true,
+  onSelect: (row, isSelect, rowIndex, e) => {
+    console.log(row.id);
+    console.log(isSelect);
+    console.log(rowIndex);
+    console.log(e);
+  },
+  onSelectAll: (isSelect, rows, e) => {
+    console.log(isSelect);
+    console.log(rows);
+    console.log(e);
+  }
 };
 
 <BootstrapTable
