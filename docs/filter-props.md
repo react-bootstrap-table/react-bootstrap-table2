@@ -16,15 +16,12 @@ title: Column Filter Props
 * [Comparator](#comparator)
 
 ## **Getting Started**
-```
-$ npm install react-bootstrap-table2-filter --save
-```
-After installing `react-bootstrap-table2-filter`, you can configure `filter` on table as following instruction.
+Please check [Getting Started Guide](./basic-filter.html)
 
 ## **How to use**
-You should apply following **2** to enable `filter` functionality for `react-bootstrap-table2`.
+You should apply following two props to enable filter functionality:
 * `filterFactory`
-* `filters` (**3** types support)
+* `filters` (Available filters)
    * textFilter
    * selectFilter
    * numberFilter

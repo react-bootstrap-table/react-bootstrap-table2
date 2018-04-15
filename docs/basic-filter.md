@@ -64,7 +64,8 @@ const priceFilter = textFilter({
   comparator: Comparator.EQ, // default is Comparator.LIKE
   caseSensitive: true, // default is false, and true will only work when comparator is LIKE
   style: { ... }, // your custom styles on input
-  delay: 1000 // how long will trigger filtering after user typing, default is 500 ms
+  delay: 1000, // how long will trigger filtering after user typing, default is 500 ms
+  getFilter: (f) => { ... } // accept callback function and you can call it for filter programmtically
 });
 
 // omit...
@@ -110,7 +111,8 @@ const qualityFilter = selectFilter({
   comparator: Comparator.LIKE, // default is Comparator.EQ
   caseSensitive: false, // default is true
   style: { ... }, // your custom styles on input
-  withoutEmptyOption: true  // hide the default select option
+  withoutEmptyOption: true,  // hide the default select option
+  getFilter: (f) => { ... } // accept callback function and you can call it for filter programmtically
 });
 
 // omit...
@@ -149,8 +151,56 @@ const numberFilter = numberFilter({
   comparatorClassName: 'custom-comparator-class',  // custom the class on comparator select
   numberStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on number input/select
   numberClassName: 'custom-number-class',  // custom the class on ber input/select
-  defaultValue: { number: 2103, comparator: Comparator.GT }  // default value
+  defaultValue: { number: 2103, comparator: Comparator.GT },  // default value
+  getFilter: (f) => { ... } // accept callback function and you can call it for filter programmtically
 })
 
 // omit...
 ```
+
+<hr />
+
+## Programmatically Filter
+
+`react-bootstrap-table2` allow you to control filter externally, which means user no need to type something on filter!!
+
+### How
+All the filters have a `getFilter` prop which accept a callback function and pass a filter object to you.
+
+```js
+class Table extends Components {
+  constructor(props) {
+    super(props);
+    this.filterPrice = this.filterPrice.bind(this);
+    const columns = [
+      ..., {
+      dataField: 'price',
+      text: 'Product Price',
+      filter: textFilter({
+        // preserve filter instance
+        getFilter: (filter) => this.priceFilter = filter;
+      })
+    }];
+  }
+
+  filterPrice() {
+    // call it anywhere when you want!!
+    this.priceFilter(100);
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={ this.filterPrice }>Click to filter</button>
+        <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+      </div>
+    );
+  }
+}
+
+```
+
+### Examples
+* [Example For Programmtically Text Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%20Text%20Filter%20)
+* [Example For Programmtically Select Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%20Select%20Filter%20)  
+* [Example For Programmtically Number Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%20Number%20Filter%20)
