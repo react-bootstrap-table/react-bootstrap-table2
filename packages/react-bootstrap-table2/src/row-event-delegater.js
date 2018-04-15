@@ -47,7 +47,7 @@ export default ExtendBase =>
           }
           if (selectable) {
             const key = _.get(row, keyField);
-            onRowSelect(key, !selected, rowIndex);
+            onRowSelect(key, !selected, rowIndex, e);
           }
         };
 

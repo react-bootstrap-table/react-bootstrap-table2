@@ -158,12 +158,12 @@ const selectRow = {
 
 ### <a name='onSelect'>selectRow.onSelect - [Function]</a>
 This callback function will be called when a row is select/unselect and pass following three arguments:
-`row`, `isSelect` and `rowIndex`.
+`row`, `isSelect`, `rowIndex` and `e`.
 
 ```js
 const selectRow = {
   mode: 'checkbox',
-  onSelect: (row, isSelect, rowIndex) => {
+  onSelect: (row, isSelect, rowIndex, e) => {
     // ...
   }
 };
@@ -175,7 +175,7 @@ This callback function will be called when select/unselect all and it only work 
 ```js
 const selectRow = {
   mode: 'checkbox',
-  onSelectAll: (isSelect, results) => {
+  onSelectAll: (isSelect, results, e) => {
     // ...
   }
 };

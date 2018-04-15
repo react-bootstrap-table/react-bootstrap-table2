@@ -162,14 +162,6 @@ describe('RowSelectionWrapper', () => {
       wrapper.instance().handleAllRowsSelect();
       expect(wrapper.state('selectedRowKeys')).toEqual([]);
     });
-
-    it('call handleAllRowsSelect function with a bool args should setting correct state.selectedRowKeys', () => {
-      wrapper.instance().handleAllRowsSelect(true);
-      expect(wrapper.state('selectedRowKeys')).toEqual(expect.arrayContaining([firstSelectedRow, secondSelectedRow]));
-
-      wrapper.instance().handleAllRowsSelect(false);
-      expect(wrapper.state('selectedRowKeys')).toEqual([]);
-    });
   });
 
   describe('when selectRow.onSelect is defined', () => {
@@ -219,13 +211,14 @@ describe('RowSelectionWrapper', () => {
     });
 
     it('selectRow.onSelect callback should be called correctly when calling handleRowSelect function', () => {
-      wrapper.instance().handleAllRowsSelect();
+      const e = {};
+      wrapper.instance().handleAllRowsSelect(e);
       expect(onSelectAllCallBack.callCount).toEqual(1);
-      expect(onSelectAllCallBack.calledWith(true, data)).toBeTruthy();
+      expect(onSelectAllCallBack.calledWith(true, data, e)).toBeTruthy();
 
-      wrapper.instance().handleAllRowsSelect();
+      wrapper.instance().handleAllRowsSelect(e);
       expect(onSelectAllCallBack.callCount).toEqual(2);
-      expect(onSelectAllCallBack.calledWith(false, [])).toBeTruthy();
+      expect(onSelectAllCallBack.calledWith(false, [], e)).toBeTruthy();
     });
   });
 });
