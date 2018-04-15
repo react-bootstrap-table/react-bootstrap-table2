@@ -9,10 +9,7 @@ authorURL: https://twitter.com/allenfang_tw
 This release bump following packages:
 
 * `react-bootstrap-table-next@0.1.8`
-* `react-bootstrap-table2-editor@0.1.6`
 * `react-bootstrap-table2-filter@0.1.6`
-* `react-bootstrap-table2-paginator@0.1.2`
-* `react-bootstrap-table2-overlay@0.1.2`
 
 ## Changelog
 
