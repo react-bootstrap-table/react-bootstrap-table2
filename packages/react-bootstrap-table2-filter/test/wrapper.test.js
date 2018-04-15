@@ -167,14 +167,14 @@ describe('Wrapper', () => {
 
       it('should setting store object correctly', () => {
         filterVals.forEach((filterVal) => {
-          instance.onFilter(props.columns[1], filterVal, FILTER_TYPE.TEXT);
+          instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)(filterVal);
           expect(props.store.filtering).toBeFalsy();
         });
       });
 
       it('should setting state correctly', () => {
         filterVals.forEach((filterVal) => {
-          instance.onFilter(props.columns[1], filterVal, FILTER_TYPE.TEXT);
+          instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)(filterVal);
           expect(instance.state.isDataChanged).toBeTruthy();
           expect(Object.keys(instance.state.currFilters)).toHaveLength(0);
         });
@@ -185,12 +185,12 @@ describe('Wrapper', () => {
       const filterVal = '3';
 
       it('should setting store object correctly', () => {
-        instance.onFilter(props.columns[1], filterVal, FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)(filterVal);
         expect(props.store.filters).toEqual(instance.state.currFilters);
       });
 
       it('should setting state correctly', () => {
-        instance.onFilter(props.columns[1], filterVal, FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)(filterVal);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(1);
       });
@@ -203,7 +203,7 @@ describe('Wrapper', () => {
         props = createTableProps();
         props.remote = { filter: true };
         createFilterWrapper(props);
-        instance.onFilter(props.columns[1], filterVal, FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)(filterVal);
       });
 
       it('should not setting store object correctly', () => {
@@ -222,27 +222,27 @@ describe('Wrapper', () => {
 
     describe('combination', () => {
       it('should setting store object correctly', () => {
-        instance.onFilter(props.columns[1], '3', FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)('3');
         expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(1);
 
-        instance.onFilter(props.columns[1], '2', FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)('2');
         expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(1);
 
-        instance.onFilter(props.columns[2], '2', FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[2], FILTER_TYPE.TEXT)('2');
         expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(2);
 
-        instance.onFilter(props.columns[2], '', FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[2], FILTER_TYPE.TEXT)('');
         expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(1);
 
-        instance.onFilter(props.columns[1], '', FILTER_TYPE.TEXT);
+        instance.onFilter(props.columns[1], FILTER_TYPE.TEXT)('');
         expect(props.store.filters).toEqual(instance.state.currFilters);
         expect(instance.state.isDataChanged).toBeTruthy();
         expect(Object.keys(instance.state.currFilters)).toHaveLength(0);

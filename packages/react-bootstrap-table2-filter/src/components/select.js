@@ -25,9 +25,21 @@ class SelectFilter extends Component {
   }
 
   componentDidMount() {
+    const { column, onFilter, getFilter } = this.props;
+
     const value = this.selectInput.value;
     if (value && value !== '') {
-      this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+      onFilter(column, FILTER_TYPE.SELECT)(value);
+    }
+
+    // export onFilter function to allow users to access
+    if (getFilter) {
+      getFilter((filterVal) => {
+        this.setState(() => ({ isSelected: filterVal !== '' }));
+        this.selectInput.value = filterVal;
+
+        onFilter(column, FILTER_TYPE.SELECT)(filterVal);
+      });
     }
   }
 
@@ -41,7 +53,7 @@ class SelectFilter extends Component {
     if (needFilter) {
       const value = this.selectInput.value;
       if (value) {
-        this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+        this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
       }
     }
   }
@@ -64,19 +76,19 @@ class SelectFilter extends Component {
     const value = (this.props.defaultValue !== undefined) ? this.props.defaultValue : '';
     this.setState(() => ({ isSelected: value !== '' }));
     this.selectInput.value = value;
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
   }
 
   applyFilter(value) {
     this.selectInput.value = value;
     this.setState(() => ({ isSelected: value !== '' }));
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
   }
 
   filter(e) {
     const { value } = e.target;
     this.setState(() => ({ isSelected: value !== '' }));
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.SELECT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
   }
 
   render() {
@@ -90,6 +102,7 @@ class SelectFilter extends Component {
       comparator,
       withoutEmptyOption,
       caseSensitive,
+      getFilter,
       ...rest
     } = this.props;
 
@@ -121,7 +134,8 @@ SelectFilter.propTypes = {
   className: PropTypes.string,
   withoutEmptyOption: PropTypes.bool,
   defaultValue: PropTypes.any,
-  caseSensitive: PropTypes.bool
+  caseSensitive: PropTypes.bool,
+  getFilter: PropTypes.func
 };
 
 SelectFilter.defaultProps = {

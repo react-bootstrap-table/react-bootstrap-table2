@@ -41,7 +41,7 @@ export default Base =>
      * @param {String} rowKey - row key of what was selected.
      * @param {Boolean} checked - next checked status of input button.
      */
-    handleRowSelect(rowKey, checked, rowIndex) {
+    handleRowSelect(rowKey, checked, rowIndex, e) {
       const { selectRow: { mode, onSelect }, store } = this.props;
       const { ROW_SELECT_SINGLE } = Const;
 
@@ -59,7 +59,7 @@ export default Base =>
 
       if (onSelect) {
         const row = getRowByRowId(store)(rowKey);
-        onSelect(row, checked, rowIndex);
+        onSelect(row, checked, rowIndex, e);
       }
 
       this.setState(() => ({
@@ -68,18 +68,16 @@ export default Base =>
     }
 
     /**
-     * handle all rows selection on header cell by store.selected or given specific result.
-     * @param {Boolean} option - customized result for all rows selection
+     * handle all rows selection on header cell by store.selected
      */
-    handleAllRowsSelect(option) {
+    handleAllRowsSelect(e) {
       const { store, selectRow: {
         onSelectAll,
         nonSelectable
       } } = this.props;
       const selected = isAnySelectedRow(store)(nonSelectable);
 
-      // set next status of all row selected by store.selected or customizing by user.
-      const result = option || !selected;
+      const result = !selected;
 
       const currSelected = result ?
         selectableKeys(store)(nonSelectable) :
@@ -89,7 +87,7 @@ export default Base =>
       store.selected = currSelected;
 
       if (onSelectAll) {
-        onSelectAll(result, getSelectedRows(store));
+        onSelectAll(result, getSelectedRows(store), e);
       }
 
       this.setState(() => ({

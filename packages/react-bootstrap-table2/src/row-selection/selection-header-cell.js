@@ -44,10 +44,10 @@ export default class SelectionHeaderCell extends Component {
     return nextProps.checkedStatus !== checkedStatus;
   }
 
-  handleCheckBoxClick() {
+  handleCheckBoxClick(e) {
     const { onAllRowsSelect } = this.props;
 
-    onAllRowsSelect();
+    onAllRowsSelect(e);
   }
 
   render() {

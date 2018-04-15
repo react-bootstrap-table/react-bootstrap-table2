@@ -17,10 +17,21 @@ class TextFilter extends Component {
       value: props.defaultValue
     };
   }
+
   componentDidMount() {
+    const { onFilter, getFilter, column } = this.props;
     const defaultValue = this.input.value;
+
     if (defaultValue) {
-      this.props.onFilter(this.props.column, defaultValue, FILTER_TYPE.TEXT);
+      onFilter(this.props.column, FILTER_TYPE.TEXT)(defaultValue);
+    }
+
+    // export onFilter function to allow users to access
+    if (getFilter) {
+      getFilter((filterVal) => {
+        this.setState(() => ({ value: filterVal }));
+        onFilter(column, FILTER_TYPE.TEXT)(filterVal);
+      });
     }
   }
 
@@ -40,7 +51,7 @@ class TextFilter extends Component {
     const filterValue = e.target.value;
     this.setState(() => ({ value: filterValue }));
     this.timeout = setTimeout(() => {
-      this.props.onFilter(this.props.column, filterValue, FILTER_TYPE.TEXT);
+      this.props.onFilter(this.props.column, FILTER_TYPE.TEXT)(filterValue);
     }, this.props.delay);
   }
 
@@ -53,12 +64,12 @@ class TextFilter extends Component {
   cleanFiltered() {
     const value = this.props.defaultValue;
     this.setState(() => ({ value }));
-    this.props.onFilter(this.props.column, value, FILTER_TYPE.TEXT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.TEXT)(value);
   }
 
   applyFilter(filterText) {
     this.setState(() => ({ value: filterText }));
-    this.props.onFilter(this.props.column, filterText, FILTER_TYPE.TEXT);
+    this.props.onFilter(this.props.column, FILTER_TYPE.TEXT)(filterText);
   }
 
   handleClick(e) {
@@ -77,8 +88,10 @@ class TextFilter extends Component {
       onFilter,
       caseSensitive,
       defaultValue,
+      getFilter,
       ...rest
     } = this.props;
+
     // stopPropagation for onClick event is try to prevent sort was triggered.
     return (
       <input
@@ -105,7 +118,8 @@ TextFilter.propTypes = {
   placeholder: PropTypes.string,
   style: PropTypes.object,
   className: PropTypes.string,
-  caseSensitive: PropTypes.bool
+  caseSensitive: PropTypes.bool,
+  getFilter: PropTypes.func
 };
 
 TextFilter.defaultProps = {

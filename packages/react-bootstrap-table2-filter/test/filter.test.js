@@ -42,6 +42,19 @@ describe('filter', () => {
       filterFn = filters(store, columns, _);
     });
 
+    describe('when filter value is not a String', () => {
+      it('should transform to string and do the filter', () => {
+        currFilters.name = {
+          filterVal: 3,
+          filterType: FILTER_TYPE.TEXT
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toBeDefined();
+        expect(result).toHaveLength(2);
+      });
+    });
+
     describe(`when default comparator is ${LIKE}`, () => {
       it('should returning correct result', () => {
         currFilters.name = {
