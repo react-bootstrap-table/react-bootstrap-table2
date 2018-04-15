@@ -9,19 +9,27 @@ import { FILTER_TYPE } from '../../src/const';
 describe('Select Filter', () => {
   let wrapper;
   let instance;
+
+  // onFilter(x)(y) = filter result
   const onFilter = sinon.stub();
+  const onFilterFirstReturn = sinon.stub();
+
   const column = {
     dataField: 'quality',
     text: 'Product Quality'
   };
+
   const options = {
     0: 'Bad',
     1: 'Good',
-    2: 'Unknow'
+    2: 'Unknown'
   };
 
   afterEach(() => {
     onFilter.reset();
+    onFilterFirstReturn.reset();
+
+    onFilter.returns(onFilterFirstReturn);
   });
 
   describe('initialization', () => {
@@ -83,8 +91,45 @@ describe('Select Filter', () => {
 
       it('should calling onFilter on componentDidMount', () => {
         expect(onFilter.calledOnce).toBeTruthy();
-        expect(onFilter.calledWith(column, defaultValue, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+        expect(onFilterFirstReturn.calledWith(defaultValue)).toBeTruthy();
       });
+    });
+  });
+
+  describe('when props.getFilter is defined', () => {
+    let programmaticallyFilter;
+
+    const filterValue = 'foo';
+
+    const getFilter = (filter) => {
+      programmaticallyFilter = filter;
+    };
+
+    beforeEach(() => {
+      wrapper = mount(
+        <SelectFilter
+          onFilter={ onFilter }
+          column={ column }
+          options={ options }
+          getFilter={ getFilter }
+        />
+      );
+      instance = wrapper.instance();
+
+      programmaticallyFilter(filterValue);
+    });
+
+    it('should do onFilter correctly when exported function was executed', () => {
+      expect(onFilter.calledOnce).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(filterValue)).toBeTruthy();
+    });
+
+    it('should setState correctly when exported function was executed', () => {
+      expect(instance.state.isSelected).toBeTruthy();
     });
   });
 
@@ -170,8 +215,9 @@ describe('Select Filter', () => {
 
       it('should update', () => {
         expect(onFilter.callCount).toBe(2);
-        expect(onFilter.calledWith(
-          column, instance.props.defaultValue, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilterFirstReturn.callCount).toBe(2);
+        expect(onFilterFirstReturn.calledWith(instance.props.defaultValue)).toBeTruthy();
       });
     });
 
@@ -198,8 +244,9 @@ describe('Select Filter', () => {
 
       it('should update', () => {
         expect(onFilter.callCount).toBe(2);
-        expect(onFilter.calledWith(
-          column, instance.props.defaultValue, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilterFirstReturn.callCount).toBe(2);
+        expect(onFilterFirstReturn.calledWith(instance.props.defaultValue)).toBeTruthy();
       });
     });
   });
@@ -226,7 +273,9 @@ describe('Select Filter', () => {
 
       it('should calling onFilter correctly', () => {
         expect(onFilter.callCount).toBe(2);
-        expect(onFilter.calledWith(column, defaultValue, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilterFirstReturn.callCount).toBe(2);
+        expect(onFilterFirstReturn.calledWith(defaultValue)).toBeTruthy();
       });
     });
 
@@ -249,6 +298,7 @@ describe('Select Filter', () => {
 
       it('should calling onFilter correctly', () => {
         expect(onFilter.callCount).toBe(1);
+        expect(onFilterFirstReturn.callCount).toBe(1);
       });
     });
   });
@@ -268,8 +318,10 @@ describe('Select Filter', () => {
     });
 
     it('should calling onFilter correctly', () => {
-      expect(onFilter.callCount).toBe(1);
-      expect(onFilter.calledWith(column, value, FILTER_TYPE.SELECT)).toBeTruthy();
+      expect(onFilter.calledOnce).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(value)).toBeTruthy();
     });
   });
 
@@ -289,8 +341,10 @@ describe('Select Filter', () => {
     });
 
     it('should calling onFilter correctly', () => {
-      expect(onFilter.callCount).toBe(1);
-      expect(onFilter.calledWith(column, event.target.value, FILTER_TYPE.SELECT)).toBeTruthy();
+      expect(onFilter.calledOnce).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+      expect(onFilterFirstReturn.calledOnce).toBeTruthy();
+      expect(onFilterFirstReturn.calledWith(event.target.value)).toBeTruthy();
     });
   });
 });

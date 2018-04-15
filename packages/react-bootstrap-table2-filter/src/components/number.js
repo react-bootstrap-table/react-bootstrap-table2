@@ -1,3 +1,4 @@
+/* eslint react/require-default-props: 0 */
 /* eslint no-return-assign: 0 */
 
 import React, { Component } from 'react';
@@ -30,11 +31,25 @@ class NumberFilter extends Component {
   }
 
   componentDidMount() {
-    const { column, onFilter } = this.props;
+    const { column, onFilter, getFilter } = this.props;
     const comparator = this.numberFilterComparator.value;
     const number = this.numberFilter.value;
     if (comparator && number) {
-      onFilter(column, { number, comparator }, FILTER_TYPE.NUMBER);
+      onFilter(column, FILTER_TYPE.NUMBER)({ number, comparator });
+    }
+
+    // export onFilter function to allow users to access
+    if (getFilter) {
+      getFilter((filterVal) => {
+        this.setState(() => ({ isSelected: (filterVal !== '') }));
+        this.numberFilterComparator.value = filterVal.comparator;
+        this.numberFilter.value = filterVal.number;
+
+        onFilter(column, FILTER_TYPE.NUMBER)({
+          number: filterVal.number,
+          comparator: filterVal.comparator
+        });
+      });
     }
   }
 
@@ -53,7 +68,7 @@ class NumberFilter extends Component {
     }
     const filterValue = e.target.value;
     this.timeout = setTimeout(() => {
-      onFilter(column, { number: filterValue, comparator }, FILTER_TYPE.NUMBER);
+      onFilter(column, FILTER_TYPE.NUMBER)({ number: filterValue, comparator });
     }, delay);
   }
 
@@ -65,7 +80,7 @@ class NumberFilter extends Component {
     // if (comparator === '') {
     //   return;
     // }
-    onFilter(column, { number: value, comparator }, FILTER_TYPE.NUMBER);
+    onFilter(column, FILTER_TYPE.NUMBER)({ number: value, comparator });
   }
 
   onChangeComparator(e) {
@@ -75,7 +90,7 @@ class NumberFilter extends Component {
     // if (value === '') {
     //   return;
     // }
-    onFilter(column, { number: value, comparator }, FILTER_TYPE.NUMBER);
+    onFilter(column, FILTER_TYPE.NUMBER)({ number: value, comparator });
   }
 
   getComparatorOptions() {
@@ -116,7 +131,7 @@ class NumberFilter extends Component {
     this.setState(() => ({ isSelected: (number !== '') }));
     this.numberFilterComparator.value = comparator;
     this.numberFilter.value = number;
-    onFilter(column, { number, comparator }, FILTER_TYPE.NUMBER);
+    onFilter(column, FILTER_TYPE.NUMBER)({ number, comparator });
   }
 
   cleanFiltered() {
@@ -126,7 +141,7 @@ class NumberFilter extends Component {
     this.setState(() => ({ isSelected: (value !== '') }));
     this.numberFilterComparator.value = comparator;
     this.numberFilter.value = value;
-    onFilter(column, { number: value, comparator }, FILTER_TYPE.NUMBER);
+    onFilter(column, FILTER_TYPE.NUMBER)({ number: value, comparator });
   }
 
   render() {
@@ -224,7 +239,8 @@ NumberFilter.propTypes = {
   comparatorStyle: PropTypes.object,
   comparatorClassName: PropTypes.string,
   numberStyle: PropTypes.object,
-  numberClassName: PropTypes.string
+  numberClassName: PropTypes.string,
+  getFilter: PropTypes.func
 };
 
 NumberFilter.defaultProps = {
