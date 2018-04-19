@@ -6,13 +6,11 @@ import Const from './const';
 import Pagination from './pagination';
 import { getByCurrPage } from './page';
 
-export default (Base, {
-  remoteResolver
-}) =>
+export default (Base, { remoteResolver }) =>
   class PaginationWrapper extends remoteResolver(Component) {
     static propTypes = {
       store: PropTypes.object.isRequired
-    }
+    };
 
     constructor(props) {
       super(props);
@@ -129,9 +127,10 @@ export default (Base, {
         this.props.data :
         getByCurrPage(store, pageStartIndex);
 
-      return [
+      const renderComponent = [
         <Base key="table" { ...this.props } data={ data } />,
         <Pagination
+          style={ options.style || Const.STYLE }
           key="pagination"
           dataSize={ options.totalSize || store.data.length }
           currPage={ currPage }
@@ -155,5 +154,12 @@ export default (Base, {
           lastPageTitle={ options.lastPageTitle || Const.LAST_PAGE_TITLE }
         />
       ];
+
+      if (options.showOnTop) {
+        return (renderComponent.reverse());
+      }
+      else {
+        return renderComponent;
+      }
     }
   };
