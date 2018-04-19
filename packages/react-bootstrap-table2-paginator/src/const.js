@@ -1,4 +1,5 @@
 export default {
+  STYLE: {},
   PAGINATION_SIZE: 5,
   PAGE_START_INDEX: 1,
   With_FIRST_AND_LAST: true,
