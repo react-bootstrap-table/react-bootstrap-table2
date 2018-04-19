@@ -109,18 +109,18 @@ class Pagination extends pageResolver(Component) {
             sizePerPageList.length > 1 && !hideSizePerPage ?
               (
                 <SizePerPageDropDown
-                  currSizePerPage={`${currSizePerPage}`}
-                  options={this.calculateSizePerPageStatus()}
-                  onSizePerPageChange={this.handleChangeSizePerPage}
-                  onClick={this.toggleDropDown}
-                  onBlur={this.closeDropDown}
-                  open={open}
+                  currSizePerPage={ `${currSizePerPage}` }
+                  options={ this.calculateSizePerPageStatus() }
+                  onSizePerPageChange={ this.handleChangeSizePerPage }
+                  onClick={ this.toggleDropDown }
+                  onBlur={ this.closeDropDown }
+                  open={ open }
                 />
               ) : null
           }
         </div>
-        <div className={pageListClass}>
-          <PaginationList pages={pages} onPageChange={this.handleChangePage}/>
+        <div className={ pageListClass }>
+          <PaginationList pages={ pages } onPageChange={ this.handleChangePage } />
         </div>
       </div>
     );
