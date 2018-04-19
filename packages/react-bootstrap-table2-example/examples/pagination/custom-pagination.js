@@ -31,6 +31,7 @@ const options = {
   // withFirstAndLast: false, // Hide the going to First and Last page button
   // hideSizePerPage: true, // Hide the sizePerPage dropdown always
   // hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
+  showOnTop: true,
   firstPageText: 'First',
   prePageText: 'Back',
   nextPageText: 'Next',
@@ -57,6 +58,7 @@ const options = {
   // withFirstAndLast: false // Hide the going to First and Last page button
   // hideSizePerPage: true, // Hide the sizePerPage dropdown always
   // hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
+  showOnTop: true,
   firstPageText: 'First',
   prePageText: 'Back',
   nextPageText: 'Next',
