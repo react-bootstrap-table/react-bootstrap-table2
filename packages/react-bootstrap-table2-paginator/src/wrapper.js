@@ -158,8 +158,6 @@ export default (Base, { remoteResolver }) =>
       if (options.showOnTop) {
         return (renderComponent.reverse());
       }
-      else {
-        return renderComponent;
-      }
+      return renderComponent;
     }
   };
