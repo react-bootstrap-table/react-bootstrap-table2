@@ -55,7 +55,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowClasses,
       rowEvents
     } = this.props;
-    
+
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
 
     const tableClass = cs('table', {
