@@ -43,6 +43,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       columns,
       keyField,
       id,
+      wrapperClasses,
       classes,
       striped,
       hover,
@@ -54,6 +55,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowClasses,
       rowEvents
     } = this.props;
+    
+    const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
 
     const tableClass = cs('table', {
       'table-striped': striped,
@@ -75,7 +78,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
 
     return (
-      <div className="react-bootstrap-table">
+      <div className={ tableWrapperClass }>
         <table id={ id } className={ tableClass }>
           { tableCaption }
           <Header
@@ -120,6 +123,7 @@ BootstrapTable.propTypes = {
   hover: PropTypes.bool,
   id: PropTypes.string,
   classes: PropTypes.string,
+  wrapperClasses: PropTypes.string,
   condensed: PropTypes.bool,
   caption: PropTypes.oneOfType([
     PropTypes.node,
