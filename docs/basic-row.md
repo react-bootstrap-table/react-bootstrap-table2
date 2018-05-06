@@ -22,6 +22,7 @@ sidebar_label: Work on Row
 Currently, `react-bootstrap-table2` only wrapped up the following events to allow its callback to receive `row` and `rowIndex`, for example:
 
 * `onClick`
+* `onDoubleClick`
 * `onMouseEnter`
 * `onMouseLeave`
 

@@ -40,6 +40,7 @@ const pagination = paginationFactory({
 * [hidePageListOnlyOnePage](#paginationhidepagelistonlyonepage-bool)
 * [onPageChange](#paginationonpagechange-function)
 * [onSizePerPageChange](#paginationonsizeperpagechange-function)
+* [showTotal](#paginationshowtotal-bool)
 -----
 
 ## pagination.page - [Number]
@@ -105,10 +106,13 @@ A quick way to specify the title on the next page button.
 A quick way to specify the title on the last page button.
 
 ## pagination.hideSizePerPage - [Bool]
-You can hide it :)
+You can hide the size per page dropdown.
 
 ## pagination.hidePageListOnlyOnePage - [Bool]
 You can hide the pagination when there's only one page in table. Default is `false`.
+
+## pagination.showTotal - [Bool]
+Default is `false`, if enable will display a text to indicate the row range of current page.
 
 ## pagination.onPageChange - [Function]
 Accept a callback function and will be called when page changed. This callback function get below arguments:
