@@ -2,6 +2,7 @@ import _ from './utils';
 
 const events = [
   'onClick',
+  'onDoubleClick',
   'onMouseEnter',
   'onMouseLeave'
 ];

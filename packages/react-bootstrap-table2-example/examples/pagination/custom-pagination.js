@@ -65,6 +65,7 @@ const options = {
   prePageTitle: 'Pre page',
   firstPageTitle: 'Next page',
   lastPageTitle: 'Last page',
+  showTotal: true,
   sizePerPageList: [{
     text: '5', value: 5
   }, {

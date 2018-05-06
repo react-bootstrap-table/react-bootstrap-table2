@@ -6,7 +6,12 @@ import { shallow, mount } from 'enzyme';
 
 import _ from 'react-bootstrap-table-next/src/utils';
 import editingCellFactory from '../src/editing-cell';
+import * as constants from '../src/const';
 import TextEditor from '../src/text-editor';
+import DateEditor from '../src/date-editor';
+import DropDownEditor from '../src/dropdown-editor';
+import TextAreaEditor from '../src/textarea-editor';
+import CheckBoxEditor from '../src/checkbox-editor';
 import EditorIndicator from '../src/editor-indicator';
 
 const EditingCell = editingCellFactory(_);
@@ -39,7 +44,7 @@ describe('EditingCell', () => {
   beforeEach(() => {
     onEscape = sinon.stub();
     onUpdate = sinon.stub();
-    wrapper = shallow(
+    wrapper = mount(
       <EditingCell
         row={ row }
         rowIndex={ rowIndex }
@@ -74,7 +79,8 @@ describe('EditingCell', () => {
   it('when press ENTER on TextEditor should call onUpdate correctly', () => {
     const newValue = 'test';
     const textEditor = wrapper.find(TextEditor);
-    textEditor.simulate('keyDown', { keyCode: 13, currentTarget: { value: newValue } });
+    sinon.stub(textEditor.instance(), 'getValue').returns(newValue);
+    textEditor.simulate('keyDown', { keyCode: 13 });
     expect(onUpdate.callCount).toBe(1);
     expect(onUpdate.calledWith(row, column, newValue)).toBe(true);
   });
@@ -311,7 +317,7 @@ describe('EditingCell', () => {
             onEscape={ onEscape }
           />
         );
-        wrapper.instance().beforeComplete(row, column, newValue);
+        wrapper.instance().beforeComplete(newValue);
       });
 
       it('should call column.validator successfully', () => {
@@ -357,7 +363,17 @@ describe('EditingCell', () => {
           text: 'ID',
           validator: validatorCallBack
         };
-        wrapper.instance().beforeComplete(row, column, newValue);
+        wrapper = mount(
+          <EditingCell
+            row={ row }
+            rowIndex={ rowIndex }
+            columnIndex={ columnIndex }
+            column={ column }
+            onUpdate={ onUpdate }
+            onEscape={ onEscape }
+          />
+        );
+        wrapper.instance().beforeComplete(newValue);
       });
 
       it('should call column.validator successfully', () => {
@@ -368,6 +384,158 @@ describe('EditingCell', () => {
       it('should call onUpdate', () => {
         expect(onUpdate.callCount).toBe(1);
       });
+    });
+  });
+
+  describe('if column.editorRenderer is defined', () => {
+    const TestEditor = () => <input type="text" />;
+
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        editorRenderer: sinon.stub().returns(<TestEditor />)
+      };
+
+      wrapper = mount(
+        <EditingCell
+          row={ row }
+          rowIndex={ rowIndex }
+          columnIndex={ columnIndex }
+          column={ column }
+          onUpdate={ onUpdate }
+          onEscape={ onEscape }
+        />
+      );
+    });
+
+    it('should call column.editorRenderer correctly', () => {
+      expect(column.editorRenderer.callCount).toBe(1);
+    });
+
+    it('should render correctly', () => {
+      expect(wrapper.find(TestEditor)).toHaveLength(1);
+    });
+  });
+
+  describe('if column.editor is select', () => {
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        editor: {
+          type: constants.EDITTYPE.SELECT,
+          options: [{
+            value: 1,
+            label: 'A'
+          }]
+        }
+      };
+
+      wrapper = mount(
+        <EditingCell
+          row={ row }
+          rowIndex={ rowIndex }
+          columnIndex={ columnIndex }
+          column={ column }
+          onUpdate={ onUpdate }
+          onEscape={ onEscape }
+        />
+      );
+    });
+
+    it('should render dropdown editor successfully', () => {
+      const editor = wrapper.find(DropDownEditor);
+      expect(wrapper.length).toBe(1);
+      expect(editor.length).toBe(1);
+      expect(editor.props().options).toEqual(column.editor.options);
+    });
+  });
+
+  describe('if column.editor is textarea', () => {
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        editor: {
+          type: constants.EDITTYPE.TEXTAREA
+        }
+      };
+
+      wrapper = mount(
+        <EditingCell
+          row={ row }
+          rowIndex={ rowIndex }
+          columnIndex={ columnIndex }
+          column={ column }
+          onUpdate={ onUpdate }
+          onEscape={ onEscape }
+        />
+      );
+    });
+
+    it('should render textarea editor successfully', () => {
+      const editor = wrapper.find(TextAreaEditor);
+      expect(wrapper.length).toBe(1);
+      expect(editor.length).toBe(1);
+    });
+  });
+
+  describe('if column.editor is checkbox', () => {
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        editor: {
+          type: constants.EDITTYPE.CHECKBOX
+        }
+      };
+
+      wrapper = mount(
+        <EditingCell
+          row={ row }
+          rowIndex={ rowIndex }
+          columnIndex={ columnIndex }
+          column={ column }
+          onUpdate={ onUpdate }
+          onEscape={ onEscape }
+        />
+      );
+    });
+
+    it('should render checkbox editor successfully', () => {
+      const editor = wrapper.find(CheckBoxEditor);
+      expect(wrapper.length).toBe(1);
+      expect(editor.length).toBe(1);
+    });
+  });
+
+  describe('if column.editor is date', () => {
+    beforeEach(() => {
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        editor: {
+          type: constants.EDITTYPE.DATE
+        }
+      };
+
+      wrapper = mount(
+        <EditingCell
+          row={ row }
+          rowIndex={ rowIndex }
+          columnIndex={ columnIndex }
+          column={ column }
+          onUpdate={ onUpdate }
+          onEscape={ onEscape }
+        />
+      );
+    });
+
+    it('should render date editor successfully', () => {
+      const editor = wrapper.find(DateEditor);
+      expect(wrapper.length).toBe(1);
+      expect(editor.length).toBe(1);
     });
   });
 });
