@@ -3,24 +3,24 @@ import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 
-class TextEditor extends Component {
+class DateEditor extends Component {
   componentDidMount() {
     const { defaultValue } = this.props;
-    this.text.value = defaultValue;
-    this.text.focus();
+    this.date.valueAsDate = new Date(defaultValue);
+    this.date.focus();
   }
 
   getValue() {
-    return this.text.value;
+    return this.date.value;
   }
 
   render() {
     const { defaultValue, className, ...rest } = this.props;
-    const editorClass = cs('form-control editor edit-text', className);
+    const editorClass = cs('form-control editor edit-date', className);
     return (
       <input
-        ref={ node => this.text = node }
-        type="text"
+        ref={ node => this.date = node }
+        type="date"
         className={ editorClass }
         { ...rest }
       />
@@ -28,18 +28,15 @@ class TextEditor extends Component {
   }
 }
 
-TextEditor.propTypes = {
+DateEditor.propTypes = {
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
   ]),
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ])
+  defaultValue: PropTypes.string
 };
-TextEditor.defaultProps = {
-  className: null,
+DateEditor.defaultProps = {
+  className: '',
   defaultValue: ''
 };
-export default TextEditor;
+export default DateEditor;

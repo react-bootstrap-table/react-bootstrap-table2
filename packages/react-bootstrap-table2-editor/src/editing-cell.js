@@ -6,9 +6,13 @@ import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 
+import DropdownEditor from './dropdown-editor';
+import TextAreaEditor from './textarea-editor';
+import CheckBoxEditor from './checkbox-editor';
+import DateEditor from './date-editor';
 import TextEditor from './text-editor';
 import EditorIndicator from './editor-indicator';
-import { TIME_TO_CLOSE_MESSAGE } from './const';
+import { TIME_TO_CLOSE_MESSAGE, EDITTYPE } from './const';
 
 export default _ =>
   class EditingCell extends Component {
@@ -73,8 +77,8 @@ export default _ =>
       }, timeToCloseMessage);
     }
 
-    beforeComplete(row, column, newValue) {
-      const { onUpdate } = this.props;
+    beforeComplete(newValue) {
+      const { onUpdate, row, column } = this.props;
       if (_.isFunction(column.validator)) {
         const validateForm = column.validator(newValue, row, column);
         if (_.isObject(validateForm) && !validateForm.valid) {
@@ -89,28 +93,20 @@ export default _ =>
     }
 
     handleBlur() {
-      const { onEscape, blurToSave, row, column } = this.props;
+      const { onEscape, blurToSave } = this.props;
       if (blurToSave) {
-        const value = this.editor.text.value;
-        if (!_.isDefined(value)) {
-          // TODO: for other custom or embed editor
-        }
-        this.beforeComplete(row, column, value);
+        this.beforeComplete(this.editor.getValue());
       } else {
         onEscape();
       }
     }
 
     handleKeyDown(e) {
-      const { onEscape, row, column } = this.props;
+      const { onEscape } = this.props;
       if (e.keyCode === 27) { // ESC
         onEscape();
       } else if (e.keyCode === 13) { // ENTER
-        const value = e.currentTarget.value;
-        if (!_.isDefined(value)) {
-          // TODO: for other custom or embed editor
-        }
-        this.beforeComplete(row, column, value);
+        this.beforeComplete(this.editor.getValue());
       }
     }
 
@@ -124,17 +120,13 @@ export default _ =>
     }
 
     render() {
-      const { invalidMessage } = this.state;
+      let editor;
       const { row, column, className, style, rowIndex, columnIndex } = this.props;
       const { dataField } = column;
 
       const value = _.get(row, dataField);
-      const editorAttrs = {
-        onKeyDown: this.handleKeyDown,
-        onBlur: this.handleBlur
-      };
+      const hasError = _.isDefined(this.state.invalidMessage);
 
-      const hasError = _.isDefined(invalidMessage);
       let customEditorClass = column.editorClasses || '';
       if (_.isFunction(column.editorClasses)) {
         customEditorClass = column.editorClasses(value, row, rowIndex, columnIndex);
@@ -150,20 +142,51 @@ export default _ =>
         shake: hasError
       }, customEditorClass);
 
+      let editorProps = {
+        ref: node => this.editor = node,
+        defaultValue: value,
+        style: editorStyle,
+        className: editorClass,
+        onKeyDown: this.handleKeyDown,
+        onBlur: this.handleBlur
+      };
+
+      const isDefaultEditorDefined = _.isObject(column.editor);
+
+      if (isDefaultEditorDefined) {
+        editorProps = {
+          ...editorProps,
+          ...column.editor
+        };
+      } else if (_.isFunction(column.editorRenderer)) {
+        editorProps = {
+          ...editorProps,
+          onUpdate: this.beforeComplete
+        };
+      }
+
+      if (_.isFunction(column.editorRenderer)) {
+        editor = column.editorRenderer(editorProps, value, row, column, rowIndex, columnIndex);
+      } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.SELECT) {
+        editor = <DropdownEditor { ...editorProps } />;
+      } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.TEXTAREA) {
+        editor = <TextAreaEditor { ...editorProps } />;
+      } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.CHECKBOX) {
+        editor = <CheckBoxEditor { ...editorProps } />;
+      } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.DATE) {
+        editor = <DateEditor { ...editorProps } />;
+      } else {
+        editor = <TextEditor { ...editorProps } />;
+      }
+
       return (
         <td
           className={ cs('react-bootstrap-table-editing-cell', className) }
           style={ style }
           onClick={ this.handleClick }
         >
-          <TextEditor
-            ref={ node => this.editor = node }
-            defaultValue={ value }
-            style={ editorStyle }
-            className={ editorClass }
-            { ...editorAttrs }
-          />
-          { hasError ? <EditorIndicator invalidMessage={ invalidMessage } /> : null }
+          { editor }
+          { hasError ? <EditorIndicator invalidMessage={ this.state.invalidMessage } /> : null }
         </td>
       );
     }

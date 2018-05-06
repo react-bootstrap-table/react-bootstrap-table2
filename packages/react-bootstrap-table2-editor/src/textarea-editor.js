@@ -3,7 +3,12 @@ import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
 
-class TextEditor extends Component {
+class TextAreaEditor extends Component {
+  constructor(props) {
+    super(props);
+    this.handleKeyDown = this.handleKeyDown.bind(this);
+  }
+
   componentDidMount() {
     const { defaultValue } = this.props;
     this.text.value = defaultValue;
@@ -14,21 +19,29 @@ class TextEditor extends Component {
     return this.text.value;
   }
 
+  handleKeyDown(e) {
+    if (e.keyCode === 13 && !e.shiftKey) return;
+    if (this.props.onKeyDown) {
+      this.props.onKeyDown(e);
+    }
+  }
+
   render() {
     const { defaultValue, className, ...rest } = this.props;
-    const editorClass = cs('form-control editor edit-text', className);
+    const editorClass = cs('form-control editor edit-textarea', className);
     return (
-      <input
+      <textarea
         ref={ node => this.text = node }
-        type="text"
+        type="textarea"
         className={ editorClass }
         { ...rest }
+        onKeyDown={ this.handleKeyDown }
       />
     );
   }
 }
 
-TextEditor.propTypes = {
+TextAreaEditor.propTypes = {
   className: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object
@@ -36,10 +49,12 @@ TextEditor.propTypes = {
   defaultValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
-  ])
+  ]),
+  onKeyDown: PropTypes.func
 };
-TextEditor.defaultProps = {
-  className: null,
-  defaultValue: ''
+TextAreaEditor.defaultProps = {
+  className: '',
+  defaultValue: '',
+  onKeyDown: undefined
 };
-export default TextEditor;
+export default TextAreaEditor;

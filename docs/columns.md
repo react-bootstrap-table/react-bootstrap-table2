@@ -34,6 +34,8 @@ Available properties in a column object:
 * [editCellClasses](#editCellClasses)
 * [editorStyle](#editorStyle)
 * [editorClasses](#editorClasses)
+* [editor](#editor)
+* [editorRenderer](#editorRenderer)
 * [filter](#filter)
 * [filterValue](#filterValue)
 
@@ -559,6 +561,87 @@ This is almost same as [`column.editCellStyle`](#editCellStyle), but `column.edi
 
 ## <a name='editorClasses'>column.editorClasses - [Object | Function]</a>
 This is almost same as [`column.editCellClasses`](#editCellClasses), but `column.editorClasses` is custom the class on editor instead of cell(`td`).
+
+## <a name='editor'>column.editor - [Object]</a>
+`column.editor` allow you to custom the type of cell editor by following predefined type:
+
+* Text(Default)
+* Dropdown
+* Date
+* Textarea
+* Checkbox
+
+Following is a quite example: 
+
+```js
+import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
+
+const columns = [
+  //...
+  , {
+    dataField: 'done',
+    text: 'Done',
+    editor: {
+      type: Type.CHECKBOX,
+      value: 'Y:N'
+    }
+  }
+];
+```
+
+If you want more information, please check [here](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/master/packages/react-bootstrap-table2-editor).
+
+## <a name='editorRenderer'>column.editorRenderer - [Function]</a>
+If you feel above predefined editors are not satisfied to your requirement, you can totally custom the editor via `column.editorRenderer`:
+
+```js
+import cellEditFactory, { Type } from 'react-bootstrap-table2-editor';
+
+// Custom Editor
+class QualityRanger extends React.Component {
+  static propTypes = {
+    value: PropTypes.number,
+    onUpdate: PropTypes.func.isRequired
+  }
+  static defaultProps = {
+    value: 0
+  }
+  getValue() {
+    return parseInt(this.range.value, 10);
+  }
+  render() {
+    const { value, onUpdate, ...rest } = this.props;
+    return [
+      <input
+        { ...rest }
+        key="range"
+        ref={ node => this.range = node }
+        type="range"
+        min="0"
+        max="100"
+      />,
+      <button
+        key="submit"
+        className="btn btn-default"
+        onClick={ () => onUpdate(this.getValue()) }
+      >
+        done
+      </button>
+    ];
+  }
+}
+
+
+const columns = [
+  //...
+  , {
+    dataField: 'done',
+    text: 'Done',
+    editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) =>
+      <QualityRanger { ...editorProps } value={ value } />;
+  }
+];
+```
 
 ## <a name='filter'>column.filter - [Object]</a>
 Configure `column.filter` will able to setup a column level filter on the header column. Currently, `react-bootstrap-table2` support following filters:

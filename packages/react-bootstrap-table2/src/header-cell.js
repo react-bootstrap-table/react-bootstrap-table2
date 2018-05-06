@@ -127,11 +127,13 @@ HeaderCell.propTypes = {
     sort: PropTypes.bool,
     sortFunc: PropTypes.func,
     onSort: PropTypes.func,
+    editor: PropTypes.object,
     editable: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     editCellStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     editCellClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     editorStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     editorClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    editorRenderer: PropTypes.func,
     validator: PropTypes.func,
     filter: PropTypes.object,
     filterValue: PropTypes.func
