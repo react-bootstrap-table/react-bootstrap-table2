@@ -1,4 +1,6 @@
 /* eslint no-mixed-operators: 0 */
+import Const from './const';
+
 export default ExtendBase =>
   class PageResolver extends ExtendBase {
     backToPrevPage() {
@@ -25,6 +27,23 @@ export default ExtendBase =>
     calculateLastPage(totalPages) {
       const { pageStartIndex } = this.props;
       return pageStartIndex + totalPages - 1;
+    }
+
+    calculateFromTo() {
+      const {
+        dataSize,
+        currPage,
+        currSizePerPage,
+        pageStartIndex
+      } = this.props;
+      const offset = Math.abs(Const.PAGE_START_INDEX - pageStartIndex);
+
+      let from = ((currPage - pageStartIndex) * currSizePerPage);
+      from = dataSize === 0 ? 0 : from + 1;
+      let to = Math.min((currSizePerPage * (currPage + offset) - 1), dataSize);
+      if (to >= dataSize) to -= 1;
+
+      return [from, to];
     }
 
     calculatePages(

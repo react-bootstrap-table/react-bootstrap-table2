@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import pageResolver from './page-resolver';
 import SizePerPageDropDown from './size-per-page-dropdown';
 import PaginationList from './pagination-list';
+import PaginationTotal from './pagination-total';
 import Const from './const';
 
 class Pagination extends pageResolver(Component) {
@@ -89,13 +90,14 @@ class Pagination extends pageResolver(Component) {
   render() {
     const { totalPages, lastPage, dropdownOpen: open } = this.state;
     const {
+      showTotal,
       sizePerPageList,
       currSizePerPage,
       hideSizePerPage,
       hidePageListOnlyOnePage
     } = this.props;
     const pages = this.calculatePageStatus(this.calculatePages(totalPages), lastPage);
-
+    const [from, to] = this.calculateFromTo();
     const pageListClass = cs(
       'react-bootstrap-table-pagination-list',
       'col-md-6 col-xs-6 col-sm-6 col-lg-6', {
@@ -116,6 +118,14 @@ class Pagination extends pageResolver(Component) {
                   open={ open }
                 />
               ) : null
+          }
+          {
+            showTotal ?
+              <PaginationTotal
+                from={ from }
+                to={ to }
+                dataSize={ this.props.dataSize }
+              /> : null
           }
         </div>
         <div className={ pageListClass }>
