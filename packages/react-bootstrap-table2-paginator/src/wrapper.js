@@ -145,6 +145,7 @@ export default (Base, {
           alwaysShowAllBtns={ alwaysShowAllBtns }
           hideSizePerPage={ hideSizePerPage }
           hidePageListOnlyOnePage={ hidePageListOnlyOnePage }
+          showTotal={ options.showTotal }
           firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
           prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
           nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }

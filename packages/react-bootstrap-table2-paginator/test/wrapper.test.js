@@ -111,6 +111,7 @@ describe('Wrapper', () => {
       expect(pagination.prop('nextPageTitle')).toEqual(Const.NEXT_PAGE_TITLE);
       expect(pagination.prop('lastPageTitle')).toEqual(Const.LAST_PAGE_TITLE);
       expect(pagination.prop('hideSizePerPage')).toEqual(Const.HIDE_SIZE_PER_PAGE);
+      expect(pagination.prop('showTotal')).toEqual(undefined);
     });
 
     describe('componentWillReceiveProps', () => {
@@ -244,6 +245,20 @@ describe('Wrapper', () => {
       expect(wrapper.length).toBe(1);
       expect(pagination.length).toBe(1);
       expect(pagination.prop('dataSize')).toEqual(totalSize);
+    });
+  });
+
+  describe('when options.showTotal is defined', () => {
+    const props = createTableProps({ options: { showTotal: true } });
+    beforeEach(() => {
+      createPaginationWrapper(props);
+    });
+
+    it('should rendering Pagination correctly', () => {
+      const pagination = wrapper.find(Pagination);
+      expect(wrapper.length).toBe(1);
+      expect(pagination.length).toBe(1);
+      expect(pagination.prop('showTotal')).toBeTruthy();
     });
   });
 

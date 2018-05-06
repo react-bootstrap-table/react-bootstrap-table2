@@ -110,6 +110,19 @@ describe('PageResolver', () => {
     });
   });
 
+  describe('calculateFromTo', () => {
+    const props = createMockProps();
+    beforeEach(() => {
+      const mockElement = React.createElement(MockComponent, props, null);
+      wrapper = shallow(mockElement);
+    });
+
+    it('should return correct array with from and to value', () => {
+      const instance = wrapper.instance();
+      expect(instance.calculateFromTo()).toEqual([1, props.currSizePerPage - 1]);
+    });
+  });
+
   describe('calculateTotalPage', () => {
     const props = createMockProps();
 
