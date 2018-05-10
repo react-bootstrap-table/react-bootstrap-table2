@@ -30,13 +30,11 @@ export default (Base, {
         // I think this condition only isRemoteFilter is enough
         store.filteredData = store.getAllData();
         this.setState(() => ({ isDataChanged: true, currFilters: store.filters }));
-      } else if (isDataChanged) {
-        if (!isRemoteFilter && Object.keys(this.state.currFilters).length > 0) {
+      } else {
+        if (Object.keys(this.state.currFilters).length > 0) {
           store.filteredData = filters(store, columns, _)(this.state.currFilters);
         }
         this.setState(() => ({ isDataChanged }));
-      } else {
-        this.setState(() => ({ isDataChanged: false }));
       }
     }
 
