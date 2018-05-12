@@ -74,6 +74,25 @@ describe('BootstrapTable', () => {
     });
   });
 
+  describe('when props.wrapperClasses was defined', () => {
+    const classes = 'foo';
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable
+          keyField="id"
+          columns={ columns }
+          data={ data }
+          store={ store }
+          wrapperClasses={ classes }
+        />);
+    });
+
+    it('should display customized classes correctly', () => {
+      expect(wrapper.find(`.${classes}`).length).toBe(1);
+    });
+  });
+
   describe('when props.id was defined', () => {
     const id = 'foo';
 

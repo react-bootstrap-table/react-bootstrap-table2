@@ -17,6 +17,7 @@
 * [condensed](#condensed)
 * [id](#id)
 * [classes](#classes)
+* [wrapperClasses](#wrapperClasses)
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
 * [rowStyle](#rowStyle)
@@ -107,6 +108,9 @@ Same as bootstrap `.table-condensed` class for making a table more compact by cu
 Customize id on `table` element.
 ### <a name='classes'>classes - [String]</a>
 Customize class on `table` element.
+
+### <a name='wrapperClasses'>wrapperClasses - [String]</a>
+Customize class on the outer element which wrap up the `table` element. 
 ### <a name='cellEdit'>cellEdit - [Object]</a>
 Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for more detail.
 

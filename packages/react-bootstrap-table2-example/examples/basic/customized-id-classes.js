@@ -33,6 +33,7 @@ const columns = [{
 
 <BootstrapTable id="bar" keyField='id' data={ products } columns={ columns } />
 <BootstrapTable classes="foo" keyField='id' data={ products } columns={ columns } />
+<BootstrapTable wrapperClasses="boo" keyField="id" data={ products } columns={ columns } />
 `;
 
 export default () => (
@@ -42,6 +43,9 @@ export default () => (
 
     <h4> Customized table className </h4>
     <BootstrapTable classes="foo" keyField="id" data={ products } columns={ columns } />
+
+    <h4> Customized wrapper className </h4>
+    <BootstrapTable wrapperClasses="boo" keyField="id" data={ products } columns={ columns } />
 
     <Code>{ sourceCode }</Code>
   </div>
