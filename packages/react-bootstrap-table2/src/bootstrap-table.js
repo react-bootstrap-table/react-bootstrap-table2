@@ -42,7 +42,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
   renderTable() {
     const {
-      store,
       columns,
       keyField,
       id,
@@ -74,8 +73,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
     const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
       onAllRowsSelect: this.props.onAllRowsSelect,
-      selected: store.selected,
-      allRowsSelected: isSelectedAll(store)
+      selected: this.props.selected,
+      allRowsSelected: isSelectedAll(this.state.data, this.props.selected)
     });
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
@@ -87,8 +86,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
-            sortField={ store.sortField }
-            sortOrder={ store.sortOrder }
+            sortField={ this.props.sortField }
+            sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
             onFilter={ this.props.onFilter }
             onExternalFilter={ this.props.onExternalFilter }
@@ -103,7 +102,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             noDataIndication={ noDataIndication }
             cellEdit={ this.props.cellEdit || {} }
             selectRow={ cellSelectionInfo }
-            selectedRowKeys={ store.selected }
+            selectedRowKeys={ this.props.selected }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
@@ -121,7 +120,6 @@ BootstrapTable.propTypes = {
   remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
     pagination: PropTypes.bool
   })]),
-  store: PropTypes.object,
   noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
