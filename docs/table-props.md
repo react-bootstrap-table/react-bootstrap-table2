@@ -19,6 +19,7 @@ title: BootstrapTable Props
 * [condensed](#condensed-bool)
 * [id](#id-string)
 * [classes](#classes-string)
+* [wrapperClasses](#wrapperClasses-string)
 * [cellEdit](#celledit-object)
 * [selectRow](#selectrow-object)
 * [rowStyle](#rowstyle-object-function)
@@ -114,6 +115,10 @@ Same as bootstrap `.table-condensed` class for making a table more compact by cu
 Customize id on `table` element.
 ## classes - [String]
 Customize class on `table` element.
+
+## wrapperClasses - [String]
+Customize class on the outer element which wrap up the `table` element.
+
 ## cellEdit - [Object]
 Makes table cells editable, please see [cellEdit definition](./cell-edit-props.html) for more detail.
 
