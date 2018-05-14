@@ -48,7 +48,8 @@ export default (Base, {
     onFilter(column, filterType) {
       return (filterVal) => {
         const { store, columns } = this.props;
-        const currFilters = Object.assign({}, this.state.currFilters);
+        // watch out here if migration to context API, #334
+        const currFilters = Object.assign({}, store.filters);
         const { dataField, filter } = column;
 
         if (!_.isDefined(filterVal) || filterVal === '') {
