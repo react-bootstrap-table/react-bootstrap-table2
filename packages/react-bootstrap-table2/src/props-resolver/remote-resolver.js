@@ -3,7 +3,7 @@ import _ from '../utils';
 export default ExtendBase =>
   class RemoteResolver extends ExtendBase {
     /* eslint class-methods-use-this: 0 */
-    getNewestState(state = {}) {
+    getNewestState = (state = {}) => {
       // const store = this.store || this.props.store;
       // return {
       //   page: store.page,
@@ -14,7 +14,14 @@ export default ExtendBase =>
       //   data: store.getAllData(),
       //   ...state
       // };
-      return { ...state, data: this.props.data };
+      return {
+        sortOrder: this.sortContext.state.sortOrder,
+        sortField: this.sortContext.state.sortColumn ?
+          this.sortContext.state.sortColumn.dataField :
+          null,
+        ...state,
+        data: this.props.data
+      };
     }
 
     isRemotePagination() {
@@ -32,7 +39,7 @@ export default ExtendBase =>
       return remote === true || (_.isObject(remote) && remote.sort) || this.isRemotePagination();
     }
 
-    isRemoteCellEdit() {
+    isRemoteCellEdit = () => {
       const { remote } = this.props;
       return remote === true || (_.isObject(remote) && remote.cellEdit);
     }
@@ -54,7 +61,7 @@ export default ExtendBase =>
       this.props.onTableChange('sort', this.getNewestState({ sortField, sortOrder }));
     }
 
-    handleCellChange(rowId, dataField, newValue) {
+    handleCellChange = (rowId, dataField, newValue) => {
       const cellEdit = { rowId, dataField, newValue };
       this.props.onTableChange('cellEdit', this.getNewestState({ cellEdit }));
     }

@@ -1,16 +1,21 @@
 /* eslint react/prop-types: 0 */
-import React, { Component } from 'react';
+/* eslint react/require-default-props: 0 */
+import React from 'react';
 import PropTypes from 'prop-types';
-
 import { CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT } from './const';
 
 export default (
-  Base,
-  { _, remoteResolver }
+  _,
+  dataOperator,
+  isRemoteCellEdit,
+  handleCellChange
 ) => {
   let EditingCell;
-  return class CellEditWrapper extends remoteResolver(Component) {
+  const CellEditContext = React.createContext();
+
+  class CellEditProvider extends React.Component {
     static propTypes = {
+      data: PropTypes.array.isRequired,
       options: PropTypes.shape({
         mode: PropTypes.oneOf([CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT]).isRequired,
         onErrorMessageDisappear: PropTypes.func,
@@ -19,7 +24,7 @@ export default (
         afterSaveCell: PropTypes.func,
         nonEditableRows: PropTypes.func,
         timeToCloseMessage: PropTypes.number,
-        errorMessage: PropTypes.string
+        errorMessage: PropTypes.any
       })
     }
 
@@ -33,41 +38,32 @@ export default (
       this.state = {
         ridx: null,
         cidx: null,
-        message: null,
-        isDataChanged: false
+        message: null
       };
     }
 
     componentWillReceiveProps(nextProps) {
-      if (nextProps.cellEdit && this.isRemoteCellEdit()) {
+      if (nextProps.cellEdit && isRemoteCellEdit()) {
         if (nextProps.cellEdit.options.errorMessage) {
           this.setState(() => ({
-            isDataChanged: false,
             message: nextProps.cellEdit.options.errorMessage
           }));
         } else {
-          this.setState(() => ({
-            isDataChanged: true
-          }));
           this.escapeEditing();
         }
-      } else {
-        this.setState(() => ({
-          isDataChanged: false
-        }));
       }
     }
 
     handleCellUpdate(row, column, newValue) {
-      const { keyField, cellEdit, store } = this.props;
+      const { keyField, cellEdit, data } = this.props;
       const { beforeSaveCell, afterSaveCell } = cellEdit.options;
       const oldValue = _.get(row, column.dataField);
       const rowId = _.get(row, keyField);
       if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
-      if (this.isRemoteCellEdit()) {
-        this.handleCellChange(rowId, column.dataField, newValue);
+      if (isRemoteCellEdit()) {
+        handleCellChange(rowId, column.dataField, newValue);
       } else {
-        store.edit(rowId, column.dataField, newValue);
+        dataOperator.editCell(data, keyField, rowId, column.dataField, newValue);
         if (_.isFunction(afterSaveCell)) afterSaveCell(oldValue, newValue, row, column);
         this.completeEditing();
       }
@@ -77,8 +73,7 @@ export default (
       this.setState(() => ({
         ridx: null,
         cidx: null,
-        message: null,
-        isDataChanged: true
+        message: null
       }));
     }
 
@@ -86,8 +81,7 @@ export default (
       const editing = () => {
         this.setState(() => ({
           ridx,
-          cidx,
-          isDataChanged: false
+          cidx
         }));
       };
 
@@ -103,7 +97,6 @@ export default (
     }
 
     render() {
-      const { isDataChanged, ...stateRest } = this.state;
       const {
         cellEdit: {
           options: { nonEditableRows, errorMessage, ...optionsRest },
@@ -111,10 +104,11 @@ export default (
           ...cellEditRest
         }
       } = this.props;
+
       const newCellEdit = {
         ...optionsRest,
         ...cellEditRest,
-        ...stateRest,
+        ...this.state,
         EditingCell,
         nonEditableRows: _.isDefined(nonEditableRows) ? nonEditableRows() : [],
         onStart: this.startEditing,
@@ -123,13 +117,16 @@ export default (
       };
 
       return (
-        <Base
-          { ...this.props }
-          data={ this.props.store.data }
-          isDataChanged={ isDataChanged }
-          cellEdit={ newCellEdit }
-        />
+        <CellEditContext.Provider
+          value={ { cellEdit: newCellEdit } }
+        >
+          { this.props.children }
+        </CellEditContext.Provider>
       );
     }
+  }
+  return {
+    Provider: CellEditProvider,
+    Consumer: CellEditContext.Consumer
   };
 };
