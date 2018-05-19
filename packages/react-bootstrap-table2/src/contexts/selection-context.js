@@ -2,11 +2,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
-import { getRowByRowId } from '../store/rows';
-// Consider make selectionHandler become a part of Provider
-import * as selectionHandler from '../store/selection';
 
-export default () => {
+export default (
+  dataOperator
+) => {
   const SelectionContext = React.createContext();
 
   class SelectionProvider extends React.Component {
@@ -41,7 +40,7 @@ export default () => {
       }
 
       if (onSelect) {
-        const row = getRowByRowId(data, keyField, rowKey);
+        const row = dataOperator.getRowByRowId(data, keyField, rowKey);
         onSelect(row, checked, rowIndex, e);
       }
 
@@ -58,16 +57,16 @@ export default () => {
         }
       } = this.props;
       const { selected } = this.state;
-      const anySelected = selectionHandler.isAnySelectedRow(selected, nonSelectable);
+      const anySelected = dataOperator.isAnySelectedRow(selected, nonSelectable);
 
       const result = !anySelected;
 
       const currSelected = result ?
-        selectionHandler.selectableKeys(data, keyField, nonSelectable) :
-        selectionHandler.unSelectableKeys(selected, nonSelectable);
+        dataOperator.selectableKeys(data, keyField, nonSelectable) :
+        dataOperator.unSelectableKeys(selected, nonSelectable);
 
       if (onSelectAll) {
-        onSelectAll(result, selectionHandler.getSelectedRows(data, keyField, currSelected), e);
+        onSelectAll(result, dataOperator.getSelectedRows(data, keyField, currSelected), e);
       }
 
       this.setState(() => ({ selected: currSelected }));

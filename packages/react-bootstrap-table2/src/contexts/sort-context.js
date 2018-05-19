@@ -2,9 +2,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
-import { sort, nextOrder } from '../store/sort';
 
 export default (
+  dataOperator,
   isRemoteSort,
   handleSortChange
 ) => {
@@ -48,7 +48,7 @@ export default (
     }
 
     handleSort = (column) => {
-      const sortOrder = nextOrder(column, this.state, this.props.defaultSortDirection);
+      const sortOrder = dataOperator.nextOrder(column, this.state, this.props.defaultSortDirection);
 
       if (column.onSort) {
         column.onSort(column.dataField, sortOrder);
@@ -67,7 +67,7 @@ export default (
       let { data } = this.props;
       const { sortOrder, sortColumn } = this.state;
       if (!isRemoteSort() && sortColumn) {
-        data = sort(data, sortOrder, sortColumn);
+        data = dataOperator.sort(data, sortOrder, sortColumn);
       }
 
       return (
