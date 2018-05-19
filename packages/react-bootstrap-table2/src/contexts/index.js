@@ -1,15 +1,9 @@
 /* eslint no-return-assign: 0 */
-/* eslint react/prop-types: 0 */
 import React, { Component } from 'react';
-// import Store from './store';
-// import withSort from './sort/wrapper';
-// import withSelection from './row-selection/wrapper';
 import createDataContext from './data-context';
 import createSortContext from './sort-context';
 import createSelectionContext from './selection-context';
-
 import remoteResolver from '../props-resolver/remote-resolver';
-
 
 const withContext = (Base) => {
   let DataContext;
@@ -21,40 +15,44 @@ const withContext = (Base) => {
       super(props);
       DataContext = createDataContext(this.props.data);
       SelectionContext = createSelectionContext();
-      SortContext = createSortContext();
+      SortContext = createSortContext(this.isRemoteSort, this.handleSortChange);
     }
 
     render() {
-      const { keyField, columns, remote } = this.props;
-      const baseProps = { keyField, columns, remote };
+      const { keyField, columns } = this.props;
+      const baseProps = { keyField, columns };
 
       return (
-        <DataContext.Provider data={ this.props.data }>
+        <DataContext.Provider
+          { ...baseProps }
+          data={ this.props.data }
+        >
           <DataContext.Consumer>
             {
-              dataProps => (
+              rootProps => (
                 <SelectionContext.Provider
                   { ...baseProps }
                   selectRow={ this.props.selectRow }
-                  data={ dataProps }
+                  data={ rootProps.data }
                 >
                   <SelectionContext.Consumer>
                     {
                       selectionProps => (
                         <SortContext.Provider
+                          ref={ n => this.sortProvider = n }
                           { ...baseProps }
                           defaultSorted={ this.props.defaultSorted }
                           defaultSortDirection={ this.props.defaultSortDirection }
-                          data={ dataProps }
+                          data={ rootProps.data }
                         >
                           <SortContext.Consumer>
                             {
                               sortProps => (
                                 <Base
                                   { ...this.props }
-                                  { ...dataProps }
                                   { ...selectionProps }
                                   { ...sortProps }
+                                  data={ sortProps.data }
                                 />
                               )
                             }

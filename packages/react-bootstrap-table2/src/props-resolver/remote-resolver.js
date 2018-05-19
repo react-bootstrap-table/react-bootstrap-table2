@@ -2,17 +2,19 @@ import _ from '../utils';
 
 export default ExtendBase =>
   class RemoteResolver extends ExtendBase {
+    /* eslint class-methods-use-this: 0 */
     getNewestState(state = {}) {
-      const store = this.store || this.props.store;
-      return {
-        page: store.page,
-        sizePerPage: store.sizePerPage,
-        filters: store.filters,
-        sortField: store.sortField,
-        sortOrder: store.sortOrder,
-        data: store.getAllData(),
-        ...state
-      };
+      // const store = this.store || this.props.store;
+      // return {
+      //   page: store.page,
+      //   sizePerPage: store.sizePerPage,
+      //   filters: store.filters,
+      //   sortField: store.sortField,
+      //   sortOrder: store.sortOrder,
+      //   data: store.getAllData(),
+      //   ...state
+      // };
+      return { ...state, data: this.props.data };
     }
 
     isRemotePagination() {
@@ -25,9 +27,9 @@ export default ExtendBase =>
       return remote === true || (_.isObject(remote) && remote.filter);
     }
 
-    isRemoteSort() {
+    isRemoteSort = () => {
       const { remote } = this.props;
-      return remote === true || (_.isObject(remote) && remote.sort);
+      return remote === true || (_.isObject(remote) && remote.sort) || this.isRemotePagination();
     }
 
     isRemoteCellEdit() {
@@ -48,8 +50,8 @@ export default ExtendBase =>
       this.props.onTableChange('filter', this.getNewestState(newState));
     }
 
-    handleSortChange() {
-      this.props.onTableChange('sort', this.getNewestState());
+    handleSortChange = (sortField, sortOrder) => {
+      this.props.onTableChange('sort', this.getNewestState({ sortField, sortOrder }));
     }
 
     handleCellChange(rowId, dataField, newValue) {

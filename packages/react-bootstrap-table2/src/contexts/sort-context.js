@@ -1,16 +1,20 @@
-
+/* eslint react/require-default-props: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
 import { sort, nextOrder } from '../store/sort';
-import remoteResolver from '../props-resolver/remote-resolver';
 
-export default () => {
+export default (
+  isRemoteSort,
+  handleSortChange
+) => {
   const SortContext = React.createContext();
 
-  class SortProvider extends remoteResolver(React.Component) {
+  class SortProvider extends React.Component {
     static propTypes = {
+      data: PropTypes.array.isRequired,
       columns: PropTypes.array.isRequired,
+      children: PropTypes.node.isRequired,
       defaultSorted: PropTypes.arrayOf(PropTypes.shape({
         dataField: PropTypes.string.isRequired,
         order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
@@ -35,8 +39,8 @@ export default () => {
             sortColumn.onSort(sortField, sortOrder);
           }
 
-          if (this.isRemoteSort() || this.isRemotePagination()) {
-            this.handleSortChange();
+          if (isRemoteSort()) {
+            handleSortChange(sortField, sortOrder);
           }
         }
       }
@@ -50,20 +54,19 @@ export default () => {
         column.onSort(column.dataField, sortOrder);
       }
 
-      if (this.isRemoteSort() || this.isRemotePagination()) {
-        this.handleSortChange();
-      } else {
-        this.setState(() => ({
-          sortOrder,
-          sortColumn: column
-        }));
+      if (isRemoteSort()) {
+        handleSortChange(column.dataField, sortOrder);
       }
+      this.setState(() => ({
+        sortOrder,
+        sortColumn: column
+      }));
     }
 
     render() {
       let { data } = this.props;
       const { sortOrder, sortColumn } = this.state;
-      if (!this.isRemoteSort() && !this.isRemotePagination() && sortColumn) {
+      if (!isRemoteSort() && sortColumn) {
         data = sort(data, sortOrder, sortColumn);
       }
 
