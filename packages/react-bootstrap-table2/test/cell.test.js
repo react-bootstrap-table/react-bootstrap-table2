@@ -27,6 +27,25 @@ describe('Cell', () => {
     });
   });
 
+  describe('when content is bool value', () => {
+    const column = {
+      dataField: 'col1',
+      text: 'column 1'
+    };
+    const aRowWithBoolValue = { col1: true };
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <Cell row={ aRowWithBoolValue } columnIndex={ 1 } rowIndex={ 1 } column={ column } />
+      );
+    });
+
+    it('should render successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.text()).toEqual(aRowWithBoolValue[column.dataField].toString());
+    });
+  });
+
   describe('when column.formatter prop is defined', () => {
     const rowIndex = 1;
     const column = {

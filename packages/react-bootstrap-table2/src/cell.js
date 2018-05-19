@@ -88,7 +88,9 @@ class Cell extends Component {
       cellAttrs.onDoubleClick = this.handleEditingCell;
     }
     return (
-      <td { ...cellAttrs }>{ content }</td>
+      <td { ...cellAttrs }>
+        { typeof content === 'boolean' ? `${content}` : content }
+      </td>
     );
   }
 }
