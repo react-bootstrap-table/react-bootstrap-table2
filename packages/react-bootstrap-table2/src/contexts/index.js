@@ -16,7 +16,7 @@ const withContext = Base =>
 
       if (props.columns.filter(col => col.sort).length > 0) {
         this.SortContext = createSortContext(
-          dataOperator, this.isRemoteSort, this.handleSortChange);
+          dataOperator, this.isRemoteSort, this.handleRemoteSortChange);
       }
 
       if (props.selectRow) {
@@ -25,7 +25,7 @@ const withContext = Base =>
 
       if (props.cellEdit && props.cellEdit.createContext) {
         this.CellEditContext = props.cellEdit.createContext(
-          _, dataOperator, this.isRemoteCellEdit, this.handleCellChange);
+          _, dataOperator, this.isRemoteCellEdit, this.handleRemoteCellChange);
       }
 
       if (props.filter) {
@@ -146,7 +146,7 @@ const withContext = Base =>
     renderWithFilterCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditprops
+        cellEditProps
       ) => (
         <this.FilterContext.Provider
           { ...baseProps }
@@ -157,7 +157,7 @@ const withContext = Base =>
             {
               filterProps => base(
                 rootProps,
-                cellEditprops,
+                cellEditProps,
                 filterProps
               )
             }
@@ -175,7 +175,7 @@ const withContext = Base =>
         >
           <this.CellEditContext.Consumer>
             {
-              cellEditprops => base(rootProps, cellEditprops)
+              cellEditProps => base(rootProps, cellEditProps)
             }
           </this.CellEditContext.Consumer>
         </this.CellEditContext.Provider>

@@ -69,11 +69,11 @@ export default ExtendBase =>
       this.props.onTableChange('filter', this.getNewestState(newState));
     }
 
-    handleSortChange = (sortField, sortOrder) => {
+    handleRemoteSortChange = (sortField, sortOrder) => {
       this.props.onTableChange('sort', this.getNewestState({ sortField, sortOrder }));
     }
 
-    handleCellChange = (rowId, dataField, newValue) => {
+    handleRemoteCellChange = (rowId, dataField, newValue) => {
       const cellEdit = { rowId, dataField, newValue };
       this.props.onTableChange('cellEdit', this.getNewestState({ cellEdit }));
     }
