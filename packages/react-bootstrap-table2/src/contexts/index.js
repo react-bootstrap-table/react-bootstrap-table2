@@ -1,4 +1,5 @@
 /* eslint no-return-assign: 0 */
+/* eslint class-methods-use-this: 0 */
 import React, { Component } from 'react';
 import _ from '../utils';
 import createDataContext from './data-context';
@@ -12,6 +13,7 @@ const withContext = (Base) => {
   let SelectionContext;
   let CellEditContext;
   let SortContext;
+  let FilterContext;
 
   return class BootstrapTableContainer extends remoteResolver(Component) {
     constructor(props) {
@@ -23,6 +25,10 @@ const withContext = (Base) => {
         CellEditContext = props.cellEdit.createContext(
           _, dataOperator, this.isRemoteCellEdit, this.handleCellChange);
       }
+      if (props.filter) {
+        FilterContext = props.filter.createContext(
+          _, this.isRemoteFiltering, this.handleRemoteFilterChange);
+      }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -32,13 +38,13 @@ const withContext = (Base) => {
     }
 
     renderBase(baseProps) {
-      return (rootProps, cellEditProps) => (
+      return (rootProps, cellEditProps, filterProps) => (
         <SortContext.Provider
           { ...baseProps }
           ref={ n => this.sortContext = n }
           defaultSorted={ this.props.defaultSorted }
           defaultSortDirection={ this.props.defaultSortDirection }
-          data={ rootProps.data }
+          data={ filterProps ? filterProps.data : rootProps.data }
         >
           <SortContext.Consumer>
             {
@@ -56,6 +62,7 @@ const withContext = (Base) => {
                           { ...selectionProps }
                           { ...sortProps }
                           { ...cellEditProps }
+                          { ...filterProps }
                           data={ sortProps.data }
                         />
                       )
@@ -66,6 +73,22 @@ const withContext = (Base) => {
             }
           </SortContext.Consumer>
         </SortContext.Provider>
+      );
+    }
+
+    renderWithFilter(base, baseProps) {
+      return (rootProps, cellEditprops) => (
+        <FilterContext.Provider
+          { ...baseProps }
+          ref={ n => this.filterContext = n }
+          data={ rootProps.data }
+        >
+          <FilterContext.Consumer>
+            {
+              filterProps => base(rootProps, cellEditprops, filterProps)
+            }
+          </FilterContext.Consumer>
+        </FilterContext.Provider>
       );
     }
 
@@ -90,6 +113,10 @@ const withContext = (Base) => {
       const baseProps = { keyField, columns };
 
       let base = this.renderBase(baseProps);
+
+      if (FilterContext) {
+        base = this.renderWithFilter(base, baseProps);
+      }
 
       if (CellEditContext) {
         base = this.renderWithCellEdit(base, baseProps);

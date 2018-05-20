@@ -19,6 +19,7 @@ export default ExtendBase =>
         sortField: this.sortContext.state.sortColumn ?
           this.sortContext.state.sortColumn.dataField :
           null,
+        filters: this.filterContext ? this.filterContext.currFilters : {},
         ...state,
         data: this.props.data
       };
@@ -29,9 +30,9 @@ export default ExtendBase =>
       return remote === true || (_.isObject(remote) && remote.pagination);
     }
 
-    isRemoteFiltering() {
+    isRemoteFiltering = () => {
       const { remote } = this.props;
-      return remote === true || (_.isObject(remote) && remote.filter);
+      return remote === true || (_.isObject(remote) && remote.filter) || this.isRemotePagination();
     }
 
     isRemoteSort = () => {
@@ -48,8 +49,8 @@ export default ExtendBase =>
       this.props.onTableChange('pagination', this.getNewestState());
     }
 
-    handleRemoteFilterChange() {
-      const newState = {};
+    handleRemoteFilterChange = (filters) => {
+      const newState = { filters };
       if (this.isRemotePagination()) {
         const options = this.props.pagination.options || {};
         newState.page = _.isDefined(options.pageStartIndex) ? options.pageStartIndex : 1;
