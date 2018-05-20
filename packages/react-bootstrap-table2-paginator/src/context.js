@@ -1,17 +1,21 @@
 /* eslint react/prop-types: 0 */
-import React, { Component } from 'react';
+/* eslint react/require-default-props: 0 */
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import Const from './const';
 import Pagination from './pagination';
 import { getByCurrPage, alignPage } from './page';
 
-export default (Base, {
-  remoteResolver
-}) =>
-  class PaginationWrapper extends remoteResolver(Component) {
+export default (
+  isRemotePagination,
+  handleRemotePageChange
+) => {
+  const PaginationContext = React.createContext();
+
+  class PaginationProvider extends React.Component {
     static propTypes = {
-      store: PropTypes.object.isRequired
+      data: PropTypes.array.isRequired
     }
 
     constructor(props) {
@@ -42,13 +46,13 @@ export default (Base, {
         currSizePerPage = sizePerPageList[0];
       }
 
-      this.state = { currPage, currSizePerPage };
-      this.saveToStore(currPage, currSizePerPage);
+      this.currPage = currPage;
+      this.currSizePerPage = currSizePerPage;
     }
 
     componentWillReceiveProps(nextProps) {
       let needNewState = false;
-      let { currPage, currSizePerPage } = this.state;
+      let { currPage, currSizePerPage } = this;
       const { page, sizePerPage, onPageChange } = nextProps.pagination.options;
 
       const pageStartIndex = typeof nextProps.pagination.options.pageStartIndex !== 'undefined' ?
@@ -57,70 +61,64 @@ export default (Base, {
       if (typeof page !== 'undefined' && currPage !== page) { // user defined page
         currPage = page;
         needNewState = true;
-      } else if (nextProps.isDataChanged) {
-        currPage = alignPage(this.props.store, pageStartIndex, currSizePerPage);
+      } else {
+        currPage = alignPage(nextProps.data, currPage, currSizePerPage, pageStartIndex);
         needNewState = true;
       }
 
-      if (typeof currPage === 'undefined') {
-        currPage = pageStartIndex;
-      }
-
-      if (typeof sizePerPage !== 'undefined') {
+      if (typeof sizePerPage !== 'undefined' && currSizePerPage !== sizePerPage) {
         currSizePerPage = sizePerPage;
         needNewState = true;
       }
-
-      this.saveToStore(currPage, currSizePerPage);
 
       if (needNewState) {
         if (onPageChange) {
           onPageChange(currPage, currSizePerPage);
         }
-        this.setState(() => ({ currPage, currSizePerPage }));
+
+        this.currPage = currPage;
+        this.currSizePerPage = currSizePerPage;
       }
     }
 
-    saveToStore(page, sizePerPage) {
-      this.props.store.page = page;
-      this.props.store.sizePerPage = sizePerPage;
-    }
-
     handleChangePage(currPage) {
-      const { currSizePerPage } = this.state;
+      const { currSizePerPage } = this;
       const { pagination: { options } } = this.props;
-      this.saveToStore(currPage, currSizePerPage);
 
       if (options.onPageChange) {
         options.onPageChange(currPage, currSizePerPage);
       }
-      if (this.isRemotePagination()) {
-        this.handleRemotePageChange();
+
+      this.currPage = currPage;
+
+      if (isRemotePagination()) {
+        handleRemotePageChange(currPage, currSizePerPage);
         return;
       }
-      this.setState(() => ({ currPage }));
+      this.forceUpdate();
     }
 
     handleChangeSizePerPage(currSizePerPage, currPage) {
       const { pagination: { options } } = this.props;
-      this.saveToStore(currPage, currSizePerPage);
 
       if (options.onSizePerPageChange) {
         options.onSizePerPageChange(currSizePerPage, currPage);
       }
-      if (this.isRemotePagination()) {
-        this.handleRemotePageChange();
+
+      this.currPage = currPage;
+      this.currSizePerPage = currSizePerPage;
+
+      if (isRemotePagination()) {
+        handleRemotePageChange(currPage, currSizePerPage);
         return;
       }
-      this.setState(() => ({
-        currPage,
-        currSizePerPage
-      }));
+      this.forceUpdate();
     }
 
     render() {
-      const { pagination: { options }, store } = this.props;
-      const { currPage, currSizePerPage } = this.state;
+      let { data } = this.props;
+      const { pagination: { options } } = this.props;
+      const { currPage, currSizePerPage } = this;
       const withFirstAndLast = typeof options.withFirstAndLast === 'undefined' ?
         Const.With_FIRST_AND_LAST : options.withFirstAndLast;
       const alwaysShowAllBtns = typeof options.alwaysShowAllBtns === 'undefined' ?
@@ -132,37 +130,50 @@ export default (Base, {
       const pageStartIndex = typeof options.pageStartIndex === 'undefined' ?
         Const.PAGE_START_INDEX : options.pageStartIndex;
 
-      const data = this.isRemotePagination() ?
-        this.props.data :
-        getByCurrPage(store, pageStartIndex);
+      data = isRemotePagination() ?
+        data :
+        getByCurrPage(
+          data,
+          currPage,
+          currSizePerPage,
+          pageStartIndex
+        );
 
-      return [
-        <Base key="table" { ...this.props } data={ data } />,
-        <Pagination
-          key="pagination"
-          dataSize={ options.totalSize || store.data.length }
-          currPage={ currPage }
-          currSizePerPage={ currSizePerPage }
-          onPageChange={ this.handleChangePage }
-          onSizePerPageChange={ this.handleChangeSizePerPage }
-          sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
-          paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
-          pageStartIndex={ pageStartIndex }
-          withFirstAndLast={ withFirstAndLast }
-          alwaysShowAllBtns={ alwaysShowAllBtns }
-          hideSizePerPage={ hideSizePerPage }
-          hidePageListOnlyOnePage={ hidePageListOnlyOnePage }
-          showTotal={ options.showTotal }
-          paginationTotalRenderer={ options.paginationTotalRenderer }
-          firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
-          prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
-          nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }
-          lastPageText={ options.lastPageText || Const.LAST_PAGE_TEXT }
-          prePageTitle={ options.prePageTitle || Const.PRE_PAGE_TITLE }
-          nextPageTitle={ options.nextPageTitle || Const.NEXT_PAGE_TITLE }
-          firstPageTitle={ options.firstPageTitle || Const.FIRST_PAGE_TITLE }
-          lastPageTitle={ options.lastPageTitle || Const.LAST_PAGE_TITLE }
-        />
-      ];
+      return (
+        <PaginationContext.Provider value={ { data } }>
+          { this.props.children }
+          <Pagination
+            key="pagination"
+            dataSize={ options.totalSize || this.props.data.length }
+            currPage={ currPage }
+            currSizePerPage={ currSizePerPage }
+            onPageChange={ this.handleChangePage }
+            onSizePerPageChange={ this.handleChangeSizePerPage }
+            sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
+            paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
+            pageStartIndex={ pageStartIndex }
+            withFirstAndLast={ withFirstAndLast }
+            alwaysShowAllBtns={ alwaysShowAllBtns }
+            hideSizePerPage={ hideSizePerPage }
+            hidePageListOnlyOnePage={ hidePageListOnlyOnePage }
+            showTotal={ options.showTotal }
+            paginationTotalRenderer={ options.paginationTotalRenderer }
+            firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
+            prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
+            nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }
+            lastPageText={ options.lastPageText || Const.LAST_PAGE_TEXT }
+            prePageTitle={ options.prePageTitle || Const.PRE_PAGE_TITLE }
+            nextPageTitle={ options.nextPageTitle || Const.NEXT_PAGE_TITLE }
+            firstPageTitle={ options.firstPageTitle || Const.FIRST_PAGE_TITLE }
+            lastPageTitle={ options.lastPageTitle || Const.LAST_PAGE_TITLE }
+          />
+        </PaginationContext.Provider>
+      );
     }
+  }
+
+  return {
+    Provider: PaginationProvider,
+    Consumer: PaginationContext.Consumer
   };
+};

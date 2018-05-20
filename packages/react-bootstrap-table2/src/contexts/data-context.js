@@ -16,8 +16,9 @@ export default () => {
       this.setState(() => ({ data: nextProps.data }));
     }
 
-    getData = (filterProps, sortProps) => {
-      if (sortProps) return sortProps.data;
+    getData = (filterProps, sortProps, paginationProps) => {
+      if (paginationProps) return paginationProps.data;
+      else if (sortProps) return sortProps.data;
       else if (filterProps) return filterProps.data;
       return this.props.data;
     }

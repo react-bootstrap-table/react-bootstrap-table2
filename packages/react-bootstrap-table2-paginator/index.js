@@ -1,6 +1,6 @@
-import wrapperFactory from './src/wrapper';
+import createContext from './src/context';
 
 export default (options = {}) => ({
-  wrapperFactory,
+  createContext,
   options
 });

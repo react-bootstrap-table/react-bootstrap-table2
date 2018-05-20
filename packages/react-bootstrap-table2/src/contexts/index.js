@@ -14,6 +14,7 @@ const withContext = (Base) => {
   let CellEditContext;
   let SortContext;
   let FilterContext;
+  let PaginationContext;
 
   return class BootstrapTableContainer extends remoteResolver(Component) {
     constructor(props) {
@@ -37,6 +38,11 @@ const withContext = (Base) => {
         FilterContext = props.filter.createContext(
           _, this.isRemoteFiltering, this.handleRemoteFilterChange);
       }
+
+      if (props.pagination) {
+        PaginationContext = props.pagination.createContext(
+          this.isRemotePagination, this.handleRemotePageChange);
+      }
     }
 
     componentWillReceiveProps(nextProps) {
@@ -51,6 +57,7 @@ const withContext = (Base) => {
         cellEditProps,
         filterProps,
         sortProps,
+        paginationProps,
         selectionProps
       ) => (
         <Base
@@ -59,7 +66,8 @@ const withContext = (Base) => {
           { ...sortProps }
           { ...cellEditProps }
           { ...filterProps }
-          data={ rootProps.getData(filterProps, sortProps) }
+          { ...paginationProps }
+          data={ rootProps.getData(filterProps, sortProps, paginationProps) }
         />
       );
     }
@@ -69,12 +77,13 @@ const withContext = (Base) => {
         rootProps,
         cellEditProps,
         filterProps,
-        sortProps
+        sortProps,
+        paginationProps
       ) => (
         <SelectionContext.Provider
           { ...baseProps }
           selectRow={ this.props.selectRow }
-          data={ rootProps.getData(filterProps, sortProps) }
+          data={ rootProps.getData(filterProps, sortProps, paginationProps) }
         >
           <SelectionContext.Consumer>
             {
@@ -83,11 +92,39 @@ const withContext = (Base) => {
                 cellEditProps,
                 filterProps,
                 sortProps,
+                paginationProps,
                 selectionProps
               )
             }
           </SelectionContext.Consumer>
         </SelectionContext.Provider>
+      );
+    }
+
+    renderWithPaginationCtx(base) {
+      return (
+        rootProps,
+        cellEditProps,
+        filterProps,
+        sortProps
+      ) => (
+        <PaginationContext.Provider
+          ref={ n => this.paginationContext = n }
+          pagination={ this.props.pagination }
+          data={ rootProps.getData(filterProps, sortProps) }
+        >
+          <PaginationContext.Consumer>
+            {
+              paginationProps => base(
+                rootProps,
+                cellEditProps,
+                filterProps,
+                sortProps,
+                paginationProps
+              )
+            }
+          </PaginationContext.Consumer>
+        </PaginationContext.Provider>
       );
     }
 
@@ -165,6 +202,10 @@ const withContext = (Base) => {
 
       if (SelectionContext) {
         base = this.renderWithSelectionCtx(base, baseProps);
+      }
+
+      if (PaginationContext) {
+        base = this.renderWithPaginationCtx(base, baseProps);
       }
 
       if (SortContext) {
