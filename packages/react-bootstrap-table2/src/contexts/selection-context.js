@@ -47,7 +47,7 @@ export default (
       this.setState(() => ({ selected: currSelected }));
     }
 
-    handleAllRowsSelect = (e) => {
+    handleAllRowsSelect = (e, isUnSelect) => {
       const {
         data,
         keyField,
@@ -57,16 +57,17 @@ export default (
         }
       } = this.props;
       const { selected } = this.state;
-      const anySelected = dataOperator.isAnySelectedRow(selected, nonSelectable);
 
-      const result = !anySelected;
+      let currSelected;
 
-      const currSelected = result ?
-        dataOperator.selectableKeys(data, keyField, nonSelectable) :
-        dataOperator.unSelectableKeys(selected, nonSelectable);
+      if (!isUnSelect) {
+        currSelected = selected.concat(dataOperator.selectableKeys(data, keyField, nonSelectable));
+      } else {
+        currSelected = selected.filter(s => typeof data.find(d => d[keyField] === s) === 'undefined');
+      }
 
       if (onSelectAll) {
-        onSelectAll(result, dataOperator.getSelectedRows(data, keyField, currSelected), e);
+        onSelectAll(!isUnSelect, dataOperator.getSelectedRows(data, keyField, currSelected), e);
       }
 
       this.setState(() => ({ selected: currSelected }));

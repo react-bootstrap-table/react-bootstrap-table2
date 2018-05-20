@@ -46,9 +46,12 @@ export default class SelectionHeaderCell extends Component {
   }
 
   handleCheckBoxClick(e) {
-    const { onAllRowsSelect } = this.props;
+    const { onAllRowsSelect, checkedStatus } = this.props;
+    const isUnSelect =
+      checkedStatus === Const.CHECKBOX_STATUS_CHECKED ||
+      checkedStatus === Const.CHECKBOX_STATUS_INDETERMINATE;
 
-    onAllRowsSelect(e);
+    onAllRowsSelect(e, isUnSelect);
   }
 
   render() {

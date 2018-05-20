@@ -1,13 +1,27 @@
 import _ from '../utils';
 import { getRowByRowId } from './rows';
 
-export const isSelectedAll = (data, selected = []) => data.length === selected.length;
+export const getSelectionSummary = (
+  data,
+  keyField,
+  selected = []
+) => {
+  let allRowsSelected = true;
+  let allRowsNotSelected = true;
 
-export const isAnySelectedRow = (selected, skips = []) => {
-  if (skips.length === 0) {
-    return selected.length > 0;
+  const rowKeys = data.map(d => d[keyField]);
+  for (let i = 0; i < rowKeys.length; i += 1) {
+    const curr = rowKeys[i];
+    if (typeof selected.find(x => x === curr) === 'undefined') {
+      allRowsSelected = false;
+    } else {
+      allRowsNotSelected = false;
+    }
   }
-  return selected.filter(x => !skips.includes(x)).length;
+  return {
+    allRowsSelected,
+    allRowsNotSelected
+  };
 };
 
 export const selectableKeys = (data, keyField, skips = []) => {

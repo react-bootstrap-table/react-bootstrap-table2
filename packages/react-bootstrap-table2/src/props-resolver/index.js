@@ -51,7 +51,7 @@ export default ExtendBase =>
      */
     resolveSelectRowPropsForHeader(options = {}) {
       const { selectRow } = this.props;
-      const { allRowsSelected, selected = [], ...rest } = options;
+      const { allRowsSelected, allRowsNotSelected, ...rest } = options;
       const {
         ROW_SELECT_DISABLED, CHECKBOX_STATUS_CHECKED,
         CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_UNCHECKED
@@ -62,7 +62,7 @@ export default ExtendBase =>
 
         // checkbox status depending on selected rows counts
         if (allRowsSelected) checkedStatus = CHECKBOX_STATUS_CHECKED;
-        else if (selected.length === 0) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
+        else if (allRowsNotSelected) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
         else checkedStatus = CHECKBOX_STATUS_INDETERMINATE;
 
         return {

@@ -9,7 +9,7 @@ import Caption from './caption';
 import Body from './body';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
-import { isSelectedAll } from './store/selection';
+import { getSelectionSummary } from './store/selection';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
@@ -46,7 +46,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowStyle,
       rowClasses,
       wrapperClasses,
-      rowEvents
+      rowEvents,
+      selected
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -62,10 +63,12 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       onRowSelect: this.props.onRowSelect
     });
 
+    const { allRowsSelected, allRowsNotSelected } = getSelectionSummary(data, keyField, selected);
     const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
       onAllRowsSelect: this.props.onAllRowsSelect,
-      selected: this.props.selected,
-      allRowsSelected: isSelectedAll(data, this.props.selected)
+      selected,
+      allRowsSelected,
+      allRowsNotSelected
     });
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
@@ -93,7 +96,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             noDataIndication={ noDataIndication }
             cellEdit={ this.props.cellEdit || {} }
             selectRow={ cellSelectionInfo }
-            selectedRowKeys={ this.props.selected }
+            selectedRowKeys={ selected }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
