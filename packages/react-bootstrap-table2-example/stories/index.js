@@ -62,6 +62,7 @@ import ProgrammaticallyDateFilter from 'examples/column-filter/programmatically-
 import ProgrammaticallyMultiSelectFilter from 'examples/column-filter/programmatically-multi-select-filter';
 import CustomFilter from 'examples/column-filter/custom-filter';
 import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
+import ClearAllFilters from 'examples/column-filter/clear-all-filters';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -200,7 +201,8 @@ storiesOf('Column Filter', module)
   .add('Programmatically Date Filter', () => <ProgrammaticallyDateFilter />)
   .add('Programmatically Multi Select Filter', () => <ProgrammaticallyMultiSelectFilter />)
   .add('Custom Filter', () => <CustomFilter />)
-  .add('Advance Custom Filter', () => <AdvanceCustomFilter />);
+  .add('Advance Custom Filter', () => <AdvanceCustomFilter />)
+  .add('Clear All Filters', () => <ClearAllFilters />);
 
 storiesOf('Work on Rows', module)
   .add('Customize Row Style', () => <RowStyleTable />)
