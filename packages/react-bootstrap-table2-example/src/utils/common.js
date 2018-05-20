@@ -41,6 +41,14 @@ export const jobsGenerator = (quantity = 5) =>
     type: jobType[Math.floor((Math.random() * 4) + 1)]
   }));
 
+export const jobsGenerator1 = (quantity = 5) =>
+  Array.from({ length: quantity }, (value, index) => ({
+    id: index,
+    name: `Job name ${index}`,
+    owner: Math.floor((Math.random() * 2) + 1),
+    type: Math.floor((Math.random() * 4) + 1)
+  }));
+
 export const todosGenerator = (quantity = 5) =>
   Array.from({ length: quantity }, (value, index) => ({
     id: index,
