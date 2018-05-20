@@ -16,11 +16,18 @@ export default () => {
       this.setState(() => ({ data: nextProps.data }));
     }
 
+    getData = (filterProps, sortProps) => {
+      if (sortProps) return sortProps.data;
+      else if (filterProps) return filterProps.data;
+      return this.props.data;
+    }
+
     render() {
       return (
         <DataContext.Provider
           value={ {
-            data: this.state.data
+            data: this.state.data,
+            getData: this.getData
           } }
         >
           { this.props.children }

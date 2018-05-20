@@ -19,12 +19,20 @@ const withContext = (Base) => {
     constructor(props) {
       super(props);
       DataContext = createDataContext(props.data);
-      SelectionContext = createSelectionContext(dataOperator);
-      SortContext = createSortContext(dataOperator, this.isRemoteSort, this.handleSortChange);
+
+      if (props.columns.filter(col => col.sort).length > 0) {
+        SortContext = createSortContext(dataOperator, this.isRemoteSort, this.handleSortChange);
+      }
+
+      if (props.selectRow) {
+        SelectionContext = createSelectionContext(dataOperator);
+      }
+
       if (props.cellEdit && props.cellEdit.createContext) {
         CellEditContext = props.cellEdit.createContext(
           _, dataOperator, this.isRemoteCellEdit, this.handleCellChange);
       }
+
       if (props.filter) {
         FilterContext = props.filter.createContext(
           _, this.isRemoteFiltering, this.handleRemoteFilterChange);
@@ -37,38 +45,72 @@ const withContext = (Base) => {
       }
     }
 
-    renderBase(baseProps) {
-      return (rootProps, cellEditProps, filterProps) => (
+    renderBase() {
+      return (
+        rootProps,
+        cellEditProps,
+        filterProps,
+        sortProps,
+        selectionProps
+      ) => (
+        <Base
+          { ...this.props }
+          { ...selectionProps }
+          { ...sortProps }
+          { ...cellEditProps }
+          { ...filterProps }
+          data={ rootProps.getData(filterProps, sortProps) }
+        />
+      );
+    }
+
+    renderWithSelectionCtx(base, baseProps) {
+      return (
+        rootProps,
+        cellEditProps,
+        filterProps,
+        sortProps
+      ) => (
+        <SelectionContext.Provider
+          { ...baseProps }
+          selectRow={ this.props.selectRow }
+          data={ rootProps.getData(filterProps, sortProps) }
+        >
+          <SelectionContext.Consumer>
+            {
+              selectionProps => base(
+                rootProps,
+                cellEditProps,
+                filterProps,
+                sortProps,
+                selectionProps
+              )
+            }
+          </SelectionContext.Consumer>
+        </SelectionContext.Provider>
+      );
+    }
+
+    renderWithSortCtx(base, baseProps) {
+      return (
+        rootProps,
+        cellEditProps,
+        filterProps
+      ) => (
         <SortContext.Provider
           { ...baseProps }
           ref={ n => this.sortContext = n }
           defaultSorted={ this.props.defaultSorted }
           defaultSortDirection={ this.props.defaultSortDirection }
-          data={ filterProps ? filterProps.data : rootProps.data }
+          data={ rootProps.getData(filterProps) }
         >
           <SortContext.Consumer>
             {
-              sortProps => (
-                <SelectionContext.Provider
-                  { ...baseProps }
-                  selectRow={ this.props.selectRow }
-                  data={ sortProps.data }
-                >
-                  <SelectionContext.Consumer>
-                    {
-                      selectionProps => (
-                        <Base
-                          { ...this.props }
-                          { ...selectionProps }
-                          { ...sortProps }
-                          { ...cellEditProps }
-                          { ...filterProps }
-                          data={ sortProps.data }
-                        />
-                      )
-                    }
-                  </SelectionContext.Consumer>
-                </SelectionContext.Provider>
+              sortProps => base(
+                rootProps,
+                cellEditProps,
+                filterProps,
+                sortProps
               )
             }
           </SortContext.Consumer>
@@ -76,28 +118,35 @@ const withContext = (Base) => {
       );
     }
 
-    renderWithFilter(base, baseProps) {
-      return (rootProps, cellEditprops) => (
+    renderWithFilterCtx(base, baseProps) {
+      return (
+        rootProps,
+        cellEditprops
+      ) => (
         <FilterContext.Provider
           { ...baseProps }
           ref={ n => this.filterContext = n }
-          data={ rootProps.data }
+          data={ rootProps.getData() }
         >
           <FilterContext.Consumer>
             {
-              filterProps => base(rootProps, cellEditprops, filterProps)
+              filterProps => base(
+                rootProps,
+                cellEditprops,
+                filterProps
+              )
             }
           </FilterContext.Consumer>
         </FilterContext.Provider>
       );
     }
 
-    renderWithCellEdit(base, baseProps) {
+    renderWithCellEditCtx(base, baseProps) {
       return rootProps => (
         <CellEditContext.Provider
           { ...baseProps }
           cellEdit={ this.props.cellEdit }
-          data={ rootProps.data }
+          data={ rootProps.getData() }
         >
           <CellEditContext.Consumer>
             {
@@ -112,14 +161,22 @@ const withContext = (Base) => {
       const { keyField, columns } = this.props;
       const baseProps = { keyField, columns };
 
-      let base = this.renderBase(baseProps);
+      let base = this.renderBase();
+
+      if (SelectionContext) {
+        base = this.renderWithSelectionCtx(base, baseProps);
+      }
+
+      if (SortContext) {
+        base = this.renderWithSortCtx(base, baseProps);
+      }
 
       if (FilterContext) {
-        base = this.renderWithFilter(base, baseProps);
+        base = this.renderWithFilterCtx(base, baseProps);
       }
 
       if (CellEditContext) {
-        base = this.renderWithCellEdit(base, baseProps);
+        base = this.renderWithCellEditCtx(base, baseProps);
       }
 
       return (

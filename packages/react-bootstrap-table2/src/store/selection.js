@@ -1,7 +1,7 @@
 import _ from '../utils';
 import { getRowByRowId } from './rows';
 
-export const isSelectedAll = (data, selected) => data.length === selected.length;
+export const isSelectedAll = (data, selected = []) => data.length === selected.length;
 
 export const isAnySelectedRow = (selected, skips = []) => {
   if (skips.length === 0) {
