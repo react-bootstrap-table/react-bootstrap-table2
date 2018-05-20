@@ -8,46 +8,34 @@ import createSelectionContext from './selection-context';
 import remoteResolver from '../props-resolver/remote-resolver';
 import dataOperator from '../store/operators';
 
-const withContext = (Base) => {
-  let DataContext;
-  let SelectionContext;
-  let CellEditContext;
-  let SortContext;
-  let FilterContext;
-  let PaginationContext;
-
-  return class BootstrapTableContainer extends remoteResolver(Component) {
+const withContext = Base =>
+  class BootstrapTableContainer extends remoteResolver(Component) {
     constructor(props) {
       super(props);
-      DataContext = createDataContext(props.data);
+      this.DataContext = createDataContext(props.data);
 
       if (props.columns.filter(col => col.sort).length > 0) {
-        SortContext = createSortContext(dataOperator, this.isRemoteSort, this.handleSortChange);
+        this.SortContext = createSortContext(
+          dataOperator, this.isRemoteSort, this.handleSortChange);
       }
 
       if (props.selectRow) {
-        SelectionContext = createSelectionContext(dataOperator);
+        this.SelectionContext = createSelectionContext(dataOperator);
       }
 
       if (props.cellEdit && props.cellEdit.createContext) {
-        CellEditContext = props.cellEdit.createContext(
+        this.CellEditContext = props.cellEdit.createContext(
           _, dataOperator, this.isRemoteCellEdit, this.handleCellChange);
       }
 
       if (props.filter) {
-        FilterContext = props.filter.createContext(
+        this.FilterContext = props.filter.createContext(
           _, this.isRemoteFiltering, this.handleRemoteFilterChange);
       }
 
       if (props.pagination) {
-        PaginationContext = props.pagination.createContext(
+        this.PaginationContext = props.pagination.createContext(
           this.isRemotePagination, this.handleRemotePageChange);
-      }
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (!nextProps.cellEdit) {
-        CellEditContext = null;
       }
     }
 
@@ -80,12 +68,12 @@ const withContext = (Base) => {
         sortProps,
         paginationProps
       ) => (
-        <SelectionContext.Provider
+        <this.SelectionContext.Provider
           { ...baseProps }
           selectRow={ this.props.selectRow }
           data={ rootProps.getData(filterProps, sortProps, paginationProps) }
         >
-          <SelectionContext.Consumer>
+          <this.SelectionContext.Consumer>
             {
               selectionProps => base(
                 rootProps,
@@ -96,8 +84,8 @@ const withContext = (Base) => {
                 selectionProps
               )
             }
-          </SelectionContext.Consumer>
-        </SelectionContext.Provider>
+          </this.SelectionContext.Consumer>
+        </this.SelectionContext.Provider>
       );
     }
 
@@ -108,12 +96,12 @@ const withContext = (Base) => {
         filterProps,
         sortProps
       ) => (
-        <PaginationContext.Provider
+        <this.PaginationContext.Provider
           ref={ n => this.paginationContext = n }
           pagination={ this.props.pagination }
           data={ rootProps.getData(filterProps, sortProps) }
         >
-          <PaginationContext.Consumer>
+          <this.PaginationContext.Consumer>
             {
               paginationProps => base(
                 rootProps,
@@ -123,8 +111,8 @@ const withContext = (Base) => {
                 paginationProps
               )
             }
-          </PaginationContext.Consumer>
-        </PaginationContext.Provider>
+          </this.PaginationContext.Consumer>
+        </this.PaginationContext.Provider>
       );
     }
 
@@ -134,14 +122,14 @@ const withContext = (Base) => {
         cellEditProps,
         filterProps
       ) => (
-        <SortContext.Provider
+        <this.SortContext.Provider
           { ...baseProps }
           ref={ n => this.sortContext = n }
           defaultSorted={ this.props.defaultSorted }
           defaultSortDirection={ this.props.defaultSortDirection }
           data={ rootProps.getData(filterProps) }
         >
-          <SortContext.Consumer>
+          <this.SortContext.Consumer>
             {
               sortProps => base(
                 rootProps,
@@ -150,8 +138,8 @@ const withContext = (Base) => {
                 sortProps
               )
             }
-          </SortContext.Consumer>
-        </SortContext.Provider>
+          </this.SortContext.Consumer>
+        </this.SortContext.Provider>
       );
     }
 
@@ -160,12 +148,12 @@ const withContext = (Base) => {
         rootProps,
         cellEditprops
       ) => (
-        <FilterContext.Provider
+        <this.FilterContext.Provider
           { ...baseProps }
           ref={ n => this.filterContext = n }
           data={ rootProps.getData() }
         >
-          <FilterContext.Consumer>
+          <this.FilterContext.Consumer>
             {
               filterProps => base(
                 rootProps,
@@ -173,24 +161,24 @@ const withContext = (Base) => {
                 filterProps
               )
             }
-          </FilterContext.Consumer>
-        </FilterContext.Provider>
+          </this.FilterContext.Consumer>
+        </this.FilterContext.Provider>
       );
     }
 
     renderWithCellEditCtx(base, baseProps) {
       return rootProps => (
-        <CellEditContext.Provider
+        <this.CellEditContext.Provider
           { ...baseProps }
           cellEdit={ this.props.cellEdit }
           data={ rootProps.getData() }
         >
-          <CellEditContext.Consumer>
+          <this.CellEditContext.Consumer>
             {
               cellEditprops => base(rootProps, cellEditprops)
             }
-          </CellEditContext.Consumer>
-        </CellEditContext.Provider>
+          </this.CellEditContext.Consumer>
+        </this.CellEditContext.Provider>
       );
     }
 
@@ -200,40 +188,39 @@ const withContext = (Base) => {
 
       let base = this.renderBase();
 
-      if (SelectionContext) {
+      if (this.SelectionContext) {
         base = this.renderWithSelectionCtx(base, baseProps);
       }
 
-      if (PaginationContext) {
+      if (this.PaginationContext) {
         base = this.renderWithPaginationCtx(base, baseProps);
       }
 
-      if (SortContext) {
+      if (this.SortContext) {
         base = this.renderWithSortCtx(base, baseProps);
       }
 
-      if (FilterContext) {
+      if (this.FilterContext) {
         base = this.renderWithFilterCtx(base, baseProps);
       }
 
-      if (CellEditContext) {
+      if (this.CellEditContext) {
         base = this.renderWithCellEditCtx(base, baseProps);
       }
 
       return (
-        <DataContext.Provider
+        <this.DataContext.Provider
           { ...baseProps }
           data={ this.props.data }
         >
-          <DataContext.Consumer>
+          <this.DataContext.Consumer>
             {
               base
             }
-          </DataContext.Consumer>
-        </DataContext.Provider>
+          </this.DataContext.Consumer>
+        </this.DataContext.Provider>
       );
     }
   };
-};
 
 export default withContext;
