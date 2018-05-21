@@ -23,7 +23,8 @@ class Row extends eventDelegater(Component) {
       selected,
       selectRow,
       selectable,
-      editable: editableRow
+      editable: editableRow,
+      cellFormat
     } = this.props;
 
     const {
@@ -61,6 +62,7 @@ class Row extends eventDelegater(Component) {
             if (!column.hidden) {
               const { dataField } = column;
               const content = _.get(row, dataField);
+              const cellKey = `${content}-${index}`;
               let editable = _.isDefined(column.editable) ? column.editable : true;
               if (dataField === keyField || !editableRow) editable = false;
               if (_.isFunction(column.editable)) {
@@ -77,7 +79,7 @@ class Row extends eventDelegater(Component) {
                 }
                 return (
                   <EditingCell
-                    key={ `${content}-${index}` }
+                    key={ cellKey }
                     row={ row }
                     rowIndex={ rowIndex }
                     column={ column }
@@ -90,7 +92,7 @@ class Row extends eventDelegater(Component) {
               }
               return (
                 <Cell
-                  key={ `${content}-${index}` }
+                  key={ cellKey }
                   row={ row }
                   rowIndex={ rowIndex }
                   columnIndex={ index }
@@ -99,6 +101,7 @@ class Row extends eventDelegater(Component) {
                   editable={ editable }
                   clickToEdit={ mode === CLICK_TO_CELL_EDIT }
                   dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
+                  cellFormat={ cellFormat }
                 />
               );
             }
