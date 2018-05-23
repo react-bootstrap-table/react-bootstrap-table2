@@ -53,7 +53,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowStyle,
       rowClasses,
       wrapperClasses,
-      rowEvents
+      rowEvents,
+      cellFormat
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -102,6 +103,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
+            cellFormat={ cellFormat }
           />
         </table>
       </div>

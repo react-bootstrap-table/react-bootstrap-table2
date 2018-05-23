@@ -35,7 +35,8 @@ class Cell extends Component {
       columnIndex,
       editable,
       clickToEdit,
-      dbclickToEdit
+      dbclickToEdit,
+      cellFormat
     } = this.props;
     const {
       dataField,
@@ -87,6 +88,14 @@ class Cell extends Component {
     } else if (dbclickToEdit && editable) {
       cellAttrs.onDoubleClick = this.handleEditingCell;
     }
+
+    if (cellFormat) {
+      const FormatedCell = () => cellFormat(cellAttrs, content, row, rowIndex, column, columnIndex);
+      return (
+        <FormatedCell />
+      )
+    }
+
     return (
       <td { ...cellAttrs }>
         { typeof content === 'boolean' ? `${content}` : content }

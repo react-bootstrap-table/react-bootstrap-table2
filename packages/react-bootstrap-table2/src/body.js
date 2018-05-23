@@ -23,7 +23,8 @@ const Body = (props) => {
     selectedRowKeys,
     rowStyle,
     rowClasses,
-    rowEvents
+    rowEvents,
+    cellFormat
   } = props;
 
   const {
@@ -90,6 +91,7 @@ const Body = (props) => {
           style={ style }
           className={ classes }
           attrs={ attrs }
+          cellFormat={ cellFormat }
         />
       );
     });
