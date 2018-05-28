@@ -1,5 +1,4 @@
-import Store from '../../src/store';
-import { getRowByRowId } from '../../src/store/rows';
+import { getRowByRowId, matchRow } from '../../src/store/rows';
 
 describe('Rows Function', () => {
   const data = [
@@ -9,22 +8,28 @@ describe('Rows Function', () => {
     { id: 1, name: '!@#' }
   ];
   const keyField = 'id';
-  let store;
-  let fn;
-
-  beforeEach(() => {
-    store = new Store(keyField);
-    store.data = data;
-    fn = getRowByRowId(store);
-  });
 
   describe('getRowByRowId', () => {
     it('should returning correct row', () => {
-      expect(fn(2)).toEqual(data[1]);
+      expect(getRowByRowId(data, keyField, 2)).toEqual(data[1]);
     });
 
     it('should returning undefined if not existing', () => {
-      expect(fn(20)).not.toBeDefined();
+      expect(getRowByRowId(data, keyField, 20)).not.toBeDefined();
+    });
+  });
+
+  describe('matchRow', () => {
+    it('should return true if keyField and id is match', () => {
+      const row = data[0];
+      const fn = matchRow(keyField, row[keyField]);
+      expect(fn(row)).toBeTruthy();
+    });
+
+    it('should return false if keyField and id is not match', () => {
+      const row = data[0];
+      const fn = matchRow(keyField, 0);
+      expect(fn(row)).toBeFalsy();
     });
   });
 });

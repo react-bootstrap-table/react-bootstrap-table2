@@ -3,7 +3,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Container from '../../';
+import Container from '../../index';
 // import remoteResolver from '../../src/props-resolver/remote-resolver';
 
 describe('remoteResolver', () => {
@@ -100,6 +100,16 @@ describe('remoteResolver', () => {
         expect(wrapper.instance().isRemoteFiltering()).toBeTruthy();
       });
     });
+
+    describe('when this.isRemotePagination return true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: { pagination: true } });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteFiltering()).toBeTruthy();
+      });
+    });
   });
 
   describe('isRemoteSort', () => {
@@ -126,6 +136,16 @@ describe('remoteResolver', () => {
     describe('when remote.sort is true', () => {
       beforeEach(() => {
         shallowContainer({ remote: { sort: true } });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteSort()).toBeTruthy();
+      });
+    });
+
+    describe('when this.isRemotePagination return true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: { pagination: true } });
       });
 
       it('should return true', () => {
@@ -166,7 +186,7 @@ describe('remoteResolver', () => {
     });
   });
 
-  describe('handleCellChange', () => {
+  describe('handleRemoteCellChange', () => {
     const onTableChangeCB = sinon.stub();
     const rowId = 1;
     const dataField = 'name';
@@ -175,7 +195,7 @@ describe('remoteResolver', () => {
     beforeEach(() => {
       onTableChangeCB.reset();
       shallowContainer({ onTableChange: onTableChangeCB });
-      wrapper.instance().handleCellChange(rowId, dataField, newValue);
+      wrapper.instance().handleRemoteCellChange(rowId, dataField, newValue);
     });
 
     it('should calling props.onTableChange correctly', () => {
@@ -188,35 +208,45 @@ describe('remoteResolver', () => {
 
   describe('handleSortChange', () => {
     const onTableChangeCB = sinon.stub();
+    const newSortFiled = 'name';
+    const newSortOrder = 'asc';
     beforeEach(() => {
       onTableChangeCB.reset();
       shallowContainer({ onTableChange: onTableChangeCB });
-      wrapper.instance().handleSortChange();
+      wrapper.instance().handleRemoteSortChange(newSortFiled, newSortOrder);
     });
 
     it('should calling props.onTableChange correctly', () => {
       expect(onTableChangeCB.calledOnce).toBeTruthy();
-      expect(onTableChangeCB.calledWith('sort', wrapper.instance().getNewestState())).toBeTruthy();
+      expect(onTableChangeCB.calledWith('sort', wrapper.instance().getNewestState({
+        sortField: newSortFiled,
+        sortOrder: newSortOrder
+      }))).toBeTruthy();
     });
   });
 
   describe('handleRemotePageChange', () => {
     const onTableChangeCB = sinon.stub();
+    const newPage = 2;
+    const newSizePerPage = 10;
     beforeEach(() => {
       onTableChangeCB.reset();
       shallowContainer({ onTableChange: onTableChangeCB });
-      wrapper.instance().handleRemotePageChange();
+      wrapper.instance().handleRemotePageChange(newPage, newSizePerPage);
     });
 
     it('should calling props.onTableChange correctly', () => {
       expect(onTableChangeCB.calledOnce).toBeTruthy();
-      expect(onTableChangeCB.calledWith('pagination', wrapper.instance().getNewestState())).toBeTruthy();
+      expect(onTableChangeCB.calledWith('pagination', wrapper.instance().getNewestState({
+        page: newPage,
+        sizePerPage: newSizePerPage
+      }))).toBeTruthy();
     });
   });
 
   describe('handleRemoteFilterChange', () => {
     const onTableChangeCB = sinon.stub();
-
+    const filters = { price: { filterVal: 20, filterType: 'TEXT' } };
     beforeEach(() => {
       onTableChangeCB.reset();
       shallowContainer({ onTableChange: onTableChangeCB });
@@ -224,16 +254,16 @@ describe('remoteResolver', () => {
 
     describe('when remote pagination is disabled', () => {
       it('should calling props.onTableChange correctly', () => {
-        wrapper.instance().handleRemoteFilterChange();
+        wrapper.instance().handleRemoteFilterChange(filters);
         expect(onTableChangeCB.calledOnce).toBeTruthy();
-        expect(onTableChangeCB.calledWith('filter', wrapper.instance().getNewestState())).toBeTruthy();
+        expect(onTableChangeCB.calledWith('filter', wrapper.instance().getNewestState({
+          filters
+        }))).toBeTruthy();
       });
     });
 
     describe('when remote pagination is enabled', () => {
-      const wrapperFactory = Base => class FilterWrapper extends React.Component {
-        render() { return <Base { ...this.props } />; }
-      };
+      const createContext = () => {};
 
       describe('and pagination.options.pageStartIndex is defined', () => {
         const options = { pageStartIndex: 0 };
@@ -241,16 +271,16 @@ describe('remoteResolver', () => {
           shallowContainer({
             remote: true,
             onTableChange: onTableChangeCB,
-            pagination: { options, wrapperFactory }
+            pagination: { options, createContext }
           });
-          wrapper.instance().store.page = 1;
-          wrapper.instance().store.sizePerPage = 10;
-          wrapper.instance().handleRemoteFilterChange();
+          wrapper.instance().handleRemoteFilterChange(filters);
         });
 
-        it('should calling onTableChange correctly', () => {
+        it('should calling onTableChange with page property by pageStartIndex', () => {
           expect(onTableChangeCB.calledOnce).toBeTruthy();
-          const newState = wrapper.instance().getNewestState();
+          const newState = wrapper.instance().getNewestState({
+            filters
+          });
           newState.page = options.pageStartIndex;
           expect(onTableChangeCB.calledWith('filter', newState)).toBeTruthy();
         });
@@ -261,14 +291,14 @@ describe('remoteResolver', () => {
           shallowContainer({
             remote: true,
             onTableChange: onTableChangeCB,
-            pagination: { wrapperFactory }
+            pagination: { createContext }
           });
-          wrapper.instance().handleRemoteFilterChange();
+          wrapper.instance().handleRemoteFilterChange(filters);
         });
 
-        it('should calling onTableChange correctly', () => {
+        it('should calling onTableChange with page property by default 1', () => {
           expect(onTableChangeCB.calledOnce).toBeTruthy();
-          const newState = wrapper.instance().getNewestState();
+          const newState = wrapper.instance().getNewestState({ filters });
           newState.page = 1;
           expect(onTableChangeCB.calledWith('filter', newState)).toBeTruthy();
         });
