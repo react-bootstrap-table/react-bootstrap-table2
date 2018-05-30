@@ -16,6 +16,7 @@ export default (
   class CellEditProvider extends React.Component {
     static propTypes = {
       data: PropTypes.array.isRequired,
+      selectRow: PropTypes.object,
       options: PropTypes.shape({
         mode: PropTypes.oneOf([CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT]).isRequired,
         onErrorMessageDisappear: PropTypes.func,
@@ -101,6 +102,7 @@ export default (
         cellEdit: {
           options: { nonEditableRows, errorMessage, ...optionsRest },
           editingCellFactory,
+          createContext,
           ...cellEditRest
         }
       } = this.props;

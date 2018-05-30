@@ -170,6 +170,7 @@ const withContext = Base =>
       return rootProps => (
         <this.CellEditContext.Provider
           { ...baseProps }
+          selectRow={ this.props.selectRow }
           cellEdit={ this.props.cellEdit }
           data={ rootProps.getData() }
         >
