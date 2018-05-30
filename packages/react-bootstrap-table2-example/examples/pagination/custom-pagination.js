@@ -33,8 +33,8 @@ const customTotal = (from, to, size) => (
 const options = {
   paginationSize: 4,
   pageStartIndex: 0,
-  // alwaysShowAllBtns: true // Always show next and previous button
-  // withFirstAndLast: false // Hide the going to First and Last page button
+  // alwaysShowAllBtns: true, // Always show next and previous button
+  // withFirstAndLast: false, // Hide the going to First and Last page button
   // hideSizePerPage: true, // Hide the sizePerPage dropdown always
   // hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
   firstPageText: 'First',
@@ -68,8 +68,8 @@ const customTotal = (from, to, size) => (
 const options = {
   paginationSize: 4,
   pageStartIndex: 0,
-  // alwaysShowAllBtns: true // Always show next and previous button
-  // withFirstAndLast: false // Hide the going to First and Last page button
+  // alwaysShowAllBtns: true, // Always show next and previous button
+  // withFirstAndLast: false, // Hide the going to First and Last page button
   // hideSizePerPage: true, // Hide the sizePerPage dropdown always
   // hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
   firstPageText: 'First',
