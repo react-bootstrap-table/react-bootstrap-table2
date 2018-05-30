@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const PaginationTotal = props => (
-  <span>
+  <span className="react-bootstrap-table-pagination-total">
     &nbsp;Showing rows { props.from } to&nbsp;{ props.to + 1 } of&nbsp;{ props.dataSize }
   </span>
 );
