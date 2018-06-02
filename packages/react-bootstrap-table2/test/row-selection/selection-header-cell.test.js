@@ -126,6 +126,36 @@ describe('<SelectionHeaderCell />', () => {
         expect(wrapper.find(CheckBox).get(0).props.indeterminate).toBe(indeterminate);
       });
     });
+
+    describe('when props.selectionHeaderRenderer is defined', () => {
+      const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
+      const DummySelection = () => <div className="dummy" />;
+      const selectionHeaderRenderer = jest.fn().mockReturnValue(<DummySelection />);
+
+      beforeEach(() => {
+        selectionHeaderRenderer.mockClear();
+        wrapper = shallow(
+          <SelectionHeaderCell
+            mode="checkbox"
+            checkedStatus={ checkedStatus }
+            selectionHeaderRenderer={ selectionHeaderRenderer }
+          />
+        );
+      });
+
+      it('should render correctly', () => {
+        expect(wrapper.find(DummySelection)).toHaveLength(1);
+      });
+
+      it('should call props.selectionHeaderRenderer correctly', () => {
+        expect(selectionHeaderRenderer).toHaveBeenCalledTimes(1);
+        expect(selectionHeaderRenderer).toHaveBeenCalledWith({
+          mode: 'checkbox',
+          checked: checkedStatus === Const.CHECKBOX_STATUS_CHECKED,
+          indeterminate: checkedStatus === Const.CHECKBOX_STATUS_INDETERMINATE
+        });
+      });
+    });
   });
 });
 
