@@ -16,6 +16,8 @@
 * [onSelect](#onSelect)
 * [onSelectAll](#onSelectAll)
 * [hideSelectColumn](#hideSelectColumn)
+* [selectionRenderer](#selectionRenderer)
+* [selectionHeaderRenderer](#selectionHeaderRenderer)
 
 ### <a name="mode">selectRow.mode - [String]</a>
 
@@ -155,6 +157,34 @@ const selectRow = {
   clickToEdit: true
 };
 ```
+
+### <a name='selectionRenderer'>selectRow.selectionRenderer - [Bool]</a>
+Provide a callback function which allow you to custom the checkbox/radio box. This callback only have one argument which is an object and contain following properties:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectionRenderer: ({ mode, checked, disabled }) => (
+    // ....
+  )
+};
+```
+
+> By default, `react-bootstrap-table2` will help you to handle the click event, it's not necessary to handle again by developer.
+
+### <a name='selectionHeaderRenderer'>selectRow.selectionHeaderRenderer - [Bool]</a>
+Provide a callback function which allow you to custom the checkbox/radio box in the selection header column. This callback only have one argument which is an object and contain following properties:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectionHeaderRenderer: ({ mode, checked, indeterminate }) => (
+    // ....
+  )
+};
+```
+
+> By default, `react-bootstrap-table2` will help you to handle the click event, it's not necessary to handle again by developer.
 
 ### <a name='onSelect'>selectRow.onSelect - [Function]</a>
 This callback function will be called when a row is select/unselect and pass following three arguments:
