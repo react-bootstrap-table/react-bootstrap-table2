@@ -108,7 +108,7 @@ class Pagination extends pageResolver(Component) {
     const {
       showTotal,
       dataSize,
-      paginationTotal,
+      paginationTotalRenderer,
       sizePerPageList,
       currSizePerPage,
       hideSizePerPage,
@@ -143,7 +143,7 @@ class Pagination extends pageResolver(Component) {
                 from,
                 to,
                 dataSize,
-                paginationTotal
+                paginationTotalRenderer
               ) : null
           }
         </div>
@@ -165,7 +165,7 @@ Pagination.propTypes = {
   pageStartIndex: PropTypes.number,
   paginationSize: PropTypes.number,
   showTotal: PropTypes.bool,
-  paginationTotal: PropTypes.func,
+  paginationTotalRenderer: PropTypes.func,
   firstPageText: PropTypes.string,
   prePageText: PropTypes.string,
   nextPageText: PropTypes.string,
@@ -186,7 +186,7 @@ Pagination.defaultProps = {
   withFirstAndLast: Const.With_FIRST_AND_LAST,
   alwaysShowAllBtns: Const.SHOW_ALL_PAGE_BTNS,
   showTotal: Const.SHOW_TOTAL,
-  paginationTotal: Const.PAGINATION_TOTAL,
+  paginationTotalRenderer: Const.PAGINATION_TOTAL,
   firstPageText: Const.FIRST_PAGE_TEXT,
   prePageText: Const.PRE_PAGE_TEXT,
   nextPageText: Const.NEXT_PAGE_TEXT,
