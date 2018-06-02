@@ -22,7 +22,8 @@ export default class SelectionHeaderCell extends Component {
   static propTypes = {
     mode: PropTypes.string.isRequired,
     checkedStatus: PropTypes.string,
-    onAllRowsSelect: PropTypes.func
+    onAllRowsSelect: PropTypes.func,
+    selectionHeaderRenderer: PropTypes.func
   }
 
   constructor() {
@@ -52,25 +53,37 @@ export default class SelectionHeaderCell extends Component {
 
   render() {
     const {
-      CHECKBOX_STATUS_CHECKED, CHECKBOX_STATUS_INDETERMINATE, ROW_SELECT_SINGLE
+      CHECKBOX_STATUS_CHECKED, CHECKBOX_STATUS_INDETERMINATE, ROW_SELECT_MULTIPLE
     } = Const;
 
-    const { mode, checkedStatus } = this.props;
+    const { mode, checkedStatus, selectionHeaderRenderer } = this.props;
 
     const checked = checkedStatus === CHECKBOX_STATUS_CHECKED;
 
     const indeterminate = checkedStatus === CHECKBOX_STATUS_INDETERMINATE;
 
-    return mode === ROW_SELECT_SINGLE
-      ? <th data-row-selection />
-      : (
-        <th data-row-selection onClick={ this.handleCheckBoxClick }>
-          <CheckBox
-            { ...this.props }
-            checked={ checked }
-            indeterminate={ indeterminate }
-          />
-        </th>
+    const attrs = {};
+    let content;
+    if (selectionHeaderRenderer) {
+      content = selectionHeaderRenderer({
+        mode,
+        checked,
+        indeterminate
+      });
+      attrs.onClick = this.handleCheckBoxClick;
+    } else if (mode === ROW_SELECT_MULTIPLE) {
+      content = (
+        <CheckBox
+          { ...this.props }
+          checked={ checked }
+          indeterminate={ indeterminate }
+        />
       );
+      attrs.onClick = this.handleCheckBoxClick;
+    }
+
+    return (
+      <th data-row-selection { ...attrs }>{ content }</th>
+    );
   }
 }
