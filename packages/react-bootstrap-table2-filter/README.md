@@ -168,7 +168,7 @@ const columns = [..., {
 
 > **Notes:** date filter accept a Javascript Date object in your raw data.
 
-Date filter is same as other filter, you can custom the number filter via `dateFilter` factory function:
+Date filter is same as other filter, you can custom the date filter via `dateFilter` factory function:
 
 ```js
 import filterFactory, { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
