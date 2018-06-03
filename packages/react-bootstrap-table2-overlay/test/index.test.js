@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow, render } from 'enzyme';
+import { shallow } from 'enzyme';
 import LoadingOverlay from 'react-loading-overlay';
 
 import overlayFactory from '..';
@@ -27,8 +27,8 @@ describe('overlayFactory', () => {
   describe('when loading is false', () => {
     beforeEach(() => {
       const tableElm = createTable();
-      const Overlay = overlayFactory()(tableElm, false);
-      wrapper = shallow(<Overlay />);
+      const Overlay = overlayFactory()(false);
+      wrapper = shallow(<Overlay>{ tableElm }</Overlay>);
     });
 
     it('should rendering Overlay component correctly', () => {
@@ -42,14 +42,14 @@ describe('overlayFactory', () => {
   describe('when loading is true', () => {
     beforeEach(() => {
       const tableElm = createTable();
-      const Overlay = overlayFactory()(tableElm, true);
-      wrapper = render(<Overlay />);
+      const Overlay = overlayFactory()(true);
+      wrapper = shallow(<Overlay>{ tableElm }</Overlay>);
     });
 
     it('should rendering Overlay component correctly', () => {
       const overlay = wrapper.find(LoadingOverlay);
       expect(wrapper.length).toBe(1);
-      expect(overlay.length).toBe(0);
+      expect(overlay.length).toBe(1);
     });
   });
 
@@ -60,8 +60,8 @@ describe('overlayFactory', () => {
     };
     beforeEach(() => {
       const tableElm = createTable();
-      const Overlay = overlayFactory(options)(tableElm, false);
-      wrapper = shallow(<Overlay />);
+      const Overlay = overlayFactory(options)(false);
+      wrapper = shallow(<Overlay>{ tableElm }</Overlay>);
     });
 
     it('should rendering Overlay component with options correctly', () => {
