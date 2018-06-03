@@ -1,12 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render, shallow } from 'enzyme';
 import LoadingOverlay from 'react-loading-overlay';
 
-import overlayFactory from '..';
+import overlayFactory from '../index.js';
 
 describe('overlayFactory', () => {
   let wrapper;
-  // let instance;
 
   const createTable = () => (
     <table>
@@ -43,13 +42,11 @@ describe('overlayFactory', () => {
     beforeEach(() => {
       const tableElm = createTable();
       const Overlay = overlayFactory()(true);
-      wrapper = shallow(<Overlay>{ tableElm }</Overlay>);
+      wrapper = render(<Overlay>{ tableElm }</Overlay>);
     });
 
     it('should rendering Overlay component correctly', () => {
-      const overlay = wrapper.find(LoadingOverlay);
       expect(wrapper.length).toBe(1);
-      expect(overlay.length).toBe(1);
     });
   });
 
