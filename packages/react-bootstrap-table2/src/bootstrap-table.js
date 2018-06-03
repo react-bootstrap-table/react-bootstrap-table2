@@ -29,12 +29,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
   render() {
     const { loading, overlay } = this.props;
-    const table = this.renderTable();
-    if (loading && overlay) {
-      const LoadingOverlay = overlay(table, loading);
-      return <LoadingOverlay />;
+    if (overlay) {
+      const LoadingOverlay = overlay(loading);
+      return (
+        <LoadingOverlay>
+          { this.renderTable() }
+        </LoadingOverlay>
+      );
     }
-    return table;
+    return this.renderTable();
   }
 
   renderTable() {

@@ -1,9 +1,13 @@
 /* eslint no-return-assign: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import LoadingOverlay from 'react-loading-overlay';
 
-export default options => (element, loading) =>
+export default options => loading =>
   class TableLoadingOverlayWrapper extends React.Component {
+    static propTypes = {
+      children: PropTypes.element.isRequired
+    }
     componentDidMount() {
       if (loading) {
         const { wrapper } = this.overlay;
@@ -31,7 +35,7 @@ export default options => (element, loading) =>
           { ...options }
           active={ loading }
         >
-          { element }
+          { this.props.children }
         </LoadingOverlay>
       );
     }
