@@ -24,6 +24,12 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 // ...
 
+const customTotal = (from, to, size) => (
+  <span className="react-bootstrap-table-pagination-total">
+    Showing { from } to { to } of { size } Results
+  </span>
+);
+
 const options = {
   paginationSize: 4,
   pageStartIndex: 0,
@@ -39,6 +45,8 @@ const options = {
   prePageTitle: 'Pre page',
   firstPageTitle: 'Next page',
   lastPageTitle: 'Last page',
+  showTotal: true,
+  paginationTotalRenderer: customTotal,
   sizePerPageList: [{
     text: '5', value: 5
   }, {
@@ -50,11 +58,18 @@ const options = {
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } pagination={ paginationFactory(options) } />
 `;
+
+const customTotal = (from, to, size) => (
+  <span className="react-bootstrap-table-pagination-total">
+    Showing { from } to { to } of { size } Results
+  </span>
+);
+
 const options = {
   paginationSize: 4,
   pageStartIndex: 0,
-  // alwaysShowAllBtns: true // Always show next and previous button
-  // withFirstAndLast: false // Hide the going to First and Last page button
+  // alwaysShowAllBtns: true, // Always show next and previous button
+  // withFirstAndLast: false, // Hide the going to First and Last page button
   // hideSizePerPage: true, // Hide the sizePerPage dropdown always
   // hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
   firstPageText: 'First',
@@ -66,6 +81,7 @@ const options = {
   firstPageTitle: 'Next page',
   lastPageTitle: 'Last page',
   showTotal: true,
+  paginationTotalRenderer: customTotal,
   sizePerPageList: [{
     text: '5', value: 5
   }, {

@@ -3,6 +3,8 @@ export default {
   PAGE_START_INDEX: 1,
   With_FIRST_AND_LAST: true,
   SHOW_ALL_PAGE_BTNS: false,
+  SHOW_TOTAL: false,
+  PAGINATION_TOTAL: null,
   FIRST_PAGE_TEXT: '<<',
   PRE_PAGE_TEXT: '<',
   NEXT_PAGE_TEXT: '>',
