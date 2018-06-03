@@ -202,6 +202,7 @@ paginator({
   totalSize, // Total data size. It's necessary when remote is enabled
   pageStartIndex: 0, // first page will be 0, default is 1
   paginationSize: 3,  // the pagination bar size, default is 5
+  showTotal: true, // display pagination information
   sizePerPageList: [ {
     text: '5', value: 5
   }, {
@@ -223,6 +224,7 @@ paginator({
   hidePageListOnlyOnePage: true, // hide pagination bar when only one page, default is false
   onPageChange: (page, sizePerPage) => {}, // callback function when page was changing
   onSizePerPageChange: (sizePerPage, page) => {}, // callback function when page size was changing
+  paginationTotalRenderer: (from, to, size) => { ... }  // custom the pagination total
 })
 ```
 
