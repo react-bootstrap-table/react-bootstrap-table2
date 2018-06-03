@@ -49,7 +49,6 @@ For flexibility reason, you can control what functionality should be handled on 
 <pre><code class="hljs css js">remote={ {
   <span class="hljs-attr">filter</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">pagination</span>: <span class="hljs-literal">true</span>,
-  <span class="hljs-attr">filter</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">sort</span>: <span class="hljs-literal">true</span>,
   <span class="hljs-attr">cellEdit</span>: <span class="hljs-literal">true</span>
 } }
@@ -162,6 +161,7 @@ When <code>loading</code> is <code>true</code>, <code>react-bootstrap-table2</co
   totalSize, <span class="hljs-comment">// Total data size. It's necessary when remote is enabled</span>
   pageStartIndex: <span class="hljs-number">0</span>, <span class="hljs-comment">// first page will be 0, default is 1</span>
   paginationSize: <span class="hljs-number">3</span>,  <span class="hljs-comment">// the pagination bar size, default is 5</span>
+  showTotal: <span class="hljs-literal">true</span>, <span class="hljs-comment">// display pagination information</span>
   sizePerPageList: [ {
     <span class="hljs-attr">text</span>: <span class="hljs-string">'5'</span>, <span class="hljs-attr">value</span>: <span class="hljs-number">5</span>
   }, {
@@ -183,6 +183,7 @@ When <code>loading</code> is <code>true</code>, <code>react-bootstrap-table2</co
   hidePageListOnlyOnePage: <span class="hljs-literal">true</span>, <span class="hljs-comment">// hide pagination bar when only one page, default is false</span>
   onPageChange: <span class="hljs-function">(<span class="hljs-params">page, sizePerPage</span>) =&gt;</span> {}, <span class="hljs-comment">// callback function when page was changing</span>
   onSizePerPageChange: <span class="hljs-function">(<span class="hljs-params">sizePerPage, page</span>) =&gt;</span> {}, <span class="hljs-comment">// callback function when page size was changing</span>
+  paginationTotalRenderer: <span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">from</span>, to, size</span>) =&gt;</span> { ... }  <span class="hljs-comment">// custom the pagination total</span>
 })
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="filter-object"></a><a href="#filter-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>filter - [Object]</h2>
