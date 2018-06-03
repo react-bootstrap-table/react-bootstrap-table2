@@ -41,6 +41,7 @@ const pagination = paginationFactory({
 * [onPageChange](#paginationonpagechange-function)
 * [onSizePerPageChange](#paginationonsizeperpagechange-function)
 * [showTotal](#paginationshowtotal-bool)
+* [paginationTotalRenderer](#paginationpaginationtotalrenderer-function)
 -----
 
 ## pagination.page - [Number]
@@ -113,6 +114,18 @@ You can hide the pagination when there's only one page in table. Default is `fal
 
 ## pagination.showTotal - [Bool]
 Default is `false`, if enable will display a text to indicate the row range of current page.
+
+## pagination.paginationTotalRenderer - [Function]
+Custom the total information, this callbacok function have three arguments: `from`, `to` and `size`. Following is an example:
+
+```js
+const customTotal = (from, to, size) => (
+  <span className="react-bootstrap-table-pagination-total">
+    Showing { from } to { to } of { size } Results
+  </span>
+);
+```
+
 
 ## pagination.onPageChange - [Function]
 Accept a callback function and will be called when page changed. This callback function get below arguments:

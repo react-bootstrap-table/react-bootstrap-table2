@@ -633,6 +633,9 @@ Please check [here](./basic-celledit.html#customize-editor) for more detail.
 Configure `column.filter` will able to setup a column level filter on the header column. Currently, `react-bootstrap-table2` support following filters:
 
 * Text Filter
+* Select Filter
+* Number Filter
+* Date Filter
 
 We have a quick example to show you how to use `column.filter`:
 

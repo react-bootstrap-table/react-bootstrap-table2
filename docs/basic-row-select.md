@@ -31,8 +31,11 @@ Like column, we support to custom the style, class on the selecting row easily v
 * [`selectRow.classes`](./row-select-props.html#selectrowclasses-string-function)
 
 ### Selection Column
-`react-bootstrap-table2` offer a [`selectRow.hideSelectColumn`](./row-select-props.html#selectrowhideselectcolumn-bool) to let you hide the selection column. But for the customization on selection column or checkbox/radio button, we will support it ine next couple release.
-**Coming Soon!**
+
+* For header cell: [`selectRow.selectionRenderer`](row-select-props.html#selectrowselectionrenderer-function)
+* For normal cell: [`selectRow.selectionHeaderRenderer`](./row-select-props.html#selectrowselectionheaderrenderer-function)
+
+In addition, `react-bootstrap-table2` offer a [`selectRow.hideSelectColumn`](./row-select-props.html#selectrowhideselectcolumn-bool) to let you hide the selection column.
 
 ## Event Listening
 

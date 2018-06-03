@@ -28,6 +28,8 @@ const selectRow = {
 * [onSelect](#selectrowonselect-function)
 * [onSelectAll](#selectrowonselectall-function)
 * [hideSelectColumn](#selectrowhideselectcolumn-bool)
+* [selectionRenderer](#selectrowselectionrenderer-function)
+* [selectionHeaderRenderer](#selectrowselectionheaderrenderer-function)
 
 -----
 
@@ -190,5 +192,29 @@ const selectRow = {
   hideSelectColumn: true,
   clickToSelect: true,
   bgColor: 'red'
+};
+```
+
+## selectRow.selectionRenderer - [Function]
+Provide a callback function which allow you to custom the checkbox/radio box. This callback only have one argument which is an object and contain following properties:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectionRenderer: ({ mode, checked, disabled }) => (
+    // ....
+  )
+};
+```
+
+## selectRow.selectionHeaderRenderer - [Function]
+Provide a callback function which allow you to custom the checkbox/radio box in the selection header column. This callback only have one argument which is an object and contain following properties:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectionHeaderRenderer: ({ mode, checked, indeterminate }) => (
+    // ....
+  )
 };
 ```

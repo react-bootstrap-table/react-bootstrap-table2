@@ -13,6 +13,7 @@ title: Column Filter Props
    * [textFilter](#textfilter)
    * [selectFilter](#selectFilter)
    * [numberFilter](#numberFilter)
+   * [dateFilter](#dateFilter)
 * [Comparator](#comparator)
 
 ## **Getting Started**
@@ -243,6 +244,75 @@ const columns = [{ ... }, { ... }, {
       priceFilter = filter;
     }
   })
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+## dateFilter
+**Required**: NONE
+
+**Optional**:
+
+### dateFilter.delay - [Number]
+* Debounce time, which means how long will trigger filtering after user typing. Default is 0.
+
+### dateFilter.placeholder - [String]
+* customized placeholder for date input.
+
+### dateFilter.withoutEmptyComparatorOption - [Boolean]
+* When it was set to `true`, the drop down list of `comparator` would hide the default selection.
+
+### dateFilter.defaultValue - [Object]
+* It is the default filtering value. Furthermore, it accepts **2** attributes:
+   * date: a date object which need to be filtered
+   * comparator: what kind of comparator to compare
+
+### dateFilter.comparator - [[Comparator]]
+* Specify what kind of comparator to compare. Default is to list `all` of comparators.
+
+### dateFilter.className - [String]
+* custom class name on the `wrapper` of date input and comparator drop down.
+
+### dateFilter.comparatorClassName - [String]
+* custom class name on the `comparator` drop down.
+
+### dateFilter.dateClassName - [String]
+* custom class name on the date `input`.
+
+### dateFilter.style - [Object]
+* custom inline styles on the `wrapper` of date input and comparator drop down.
+
+### dateFilter.comparatorStyle - [Object]
+* custom inline styles on the `comparator` drop down.
+
+### dateFilter.dateStyle - [Object]
+* custom inline styles on the date `input`.
+
+### dateFilter.getFilter - [Function]
+* export `filter` function to allow users to access. For dateFilter,<br>`filter({ date, comparator })` to filter columns dynamically.
+
+**Example**:
+```js
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { dateFilter, Comparator } from 'react-bootstrap-table2-filter';
+
+const columns = [{ ... }, { ... }, {
+  dataField: 'price',
+  text: 'Product Price',
+  filter: dateFilter({
+    delay: 600,  // how long will trigger filtering after user typing, default is 500 ms
+    placeholder: 'custom placeholder',  // placeholder for date input
+    withoutEmptyComparatorOption: true,  // dont render empty option for comparator
+    comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],  // Custom the comparators
+    style: { display: 'inline-grid' },  // custom the style on date filter
+    className: 'custom-dateFilter-class',  // custom the class on date filter
+    comparatorStyle: { backgroundColor: 'antiquewhite' }, // custom the style on comparator select
+    comparatorClassName: 'custom-comparator-class',  // custom the class on comparator select
+    dateStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on date input
+    dateClassName: 'custom-date-class',  // custom the class on date input
+    defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT }  // default value
+  });
 }];
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
