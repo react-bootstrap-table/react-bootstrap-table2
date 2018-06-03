@@ -10,7 +10,16 @@ export default options => (element, loading) =>
         const masker = wrapper.firstChild;
         const headerDOM = wrapper.parentElement.querySelector('thead');
         const bodyDOM = wrapper.parentElement.querySelector('tbody');
-        masker.style.marginTop = window.getComputedStyle(headerDOM).height;
+        const captionDOM = wrapper.parentElement.querySelector('caption');
+
+        let marginTop = window.getComputedStyle(headerDOM).height;
+        if (captionDOM) {
+          marginTop = parseFloat(marginTop.replace('px', ''));
+          marginTop += parseFloat(window.getComputedStyle(captionDOM).height.replace('px', ''));
+          marginTop = `${marginTop}px`;
+        }
+
+        masker.style.marginTop = marginTop;
         masker.style.height = window.getComputedStyle(bodyDOM).height;
       }
     }
