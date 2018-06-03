@@ -5,7 +5,8 @@
 .react-bootstrap-table > table > thead > tr > th .select-filter option[value=''],
 .react-bootstrap-table > table > thead > tr > th .select-filter.placeholder-selected,
 .react-bootstrap-table > table > thead > tr > th .filter::-webkit-input-placeholder,
-.react-bootstrap-table > table > thead > tr > th .number-filter-input::-webkit-input-placeholder {
+.react-bootstrap-table > table > thead > tr > th .number-filter-input::-webkit-input-placeholder,
+.react-bootstrap-table > table > thead > tr > th .date-filter-input::-webkit-input-placeholder {
   color: lightgrey;
   font-style: italic;
 }
@@ -15,17 +16,20 @@
   font-style: initial;
 }
 
-.react-bootstrap-table > table > thead > tr > th .number-filter {
+.react-bootstrap-table > table > thead > tr > th .number-filter,
+.react-bootstrap-table > table > thead > tr > th .date-filter {
   display: flex;
 }
 
-.react-bootstrap-table > table > thead > tr > th .number-filter-input {
+.react-bootstrap-table > table > thead > tr > th .number-filter-input,
+.react-bootstrap-table > table > thead > tr > th .date-filter-input {
   margin-left: 5px;
   float: left;
   width: calc(100% - 67px - 5px);
 }
 
-.react-bootstrap-table > table > thead > tr > th .number-filter-comparator {
+.react-bootstrap-table > table > thead > tr > th .number-filter-comparator,
+.react-bootstrap-table > table > thead > tr > th .date-filter-comparator {
   width: 67px;
   float: left;
 }

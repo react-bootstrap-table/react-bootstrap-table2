@@ -91,6 +91,102 @@ export const filterByNumber = _ => (
   })
 );
 
+export const filterByDate = _ => (
+  data,
+  dataField,
+  { filterVal: { comparator, date } },
+  customFilterValue
+) => {
+  if (!date || !comparator) return data;
+  const filterDate = date.getDate();
+  const filterMonth = date.getMonth();
+  const filterYear = date.getFullYear();
+
+  return data.filter((row) => {
+    let valid = true;
+    let cell = _.get(row, dataField);
+
+    if (customFilterValue) {
+      cell = customFilterValue(cell, row);
+    }
+
+    if (typeof cell !== 'object') {
+      cell = new Date(cell);
+    }
+
+    const targetDate = cell.getDate();
+    const targetMonth = cell.getMonth();
+    const targetYear = cell.getFullYear();
+
+
+    switch (comparator) {
+      case EQ: {
+        if (
+          filterDate !== targetDate ||
+          filterMonth !== targetMonth ||
+          filterYear !== targetYear
+        ) {
+          valid = false;
+        }
+        break;
+      }
+      case GT: {
+        if (cell <= date) {
+          valid = false;
+        }
+        break;
+      }
+      case GE: {
+        if (targetYear < filterYear) {
+          valid = false;
+        } else if (targetYear === filterYear &&
+          targetMonth < filterMonth) {
+          valid = false;
+        } else if (targetYear === filterYear &&
+          targetMonth === filterMonth &&
+          targetDate < filterDate) {
+          valid = false;
+        }
+        break;
+      }
+      case LT: {
+        if (cell >= date) {
+          valid = false;
+        }
+        break;
+      }
+      case LE: {
+        if (targetYear > filterYear) {
+          valid = false;
+        } else if (targetYear === filterYear &&
+          targetMonth > filterMonth) {
+          valid = false;
+        } else if (targetYear === filterYear &&
+          targetMonth === filterMonth &&
+          targetDate > filterDate) {
+          valid = false;
+        }
+        break;
+      }
+      case NE: {
+        if (
+          filterDate === targetDate &&
+          filterMonth === targetMonth &&
+          filterYear === targetYear
+        ) {
+          valid = false;
+        }
+        break;
+      }
+      default: {
+        console.error('Date comparator provided is not supported');
+        break;
+      }
+    }
+    return valid;
+  });
+};
+
 export const filterFactory = _ => (filterType) => {
   let filterFn;
   switch (filterType) {
@@ -100,6 +196,9 @@ export const filterFactory = _ => (filterType) => {
       break;
     case FILTER_TYPE.NUMBER:
       filterFn = filterByNumber(_);
+      break;
+    case FILTER_TYPE.DATE:
+      filterFn = filterByDate(_);
       break;
     default:
       filterFn = filterByText(_);
