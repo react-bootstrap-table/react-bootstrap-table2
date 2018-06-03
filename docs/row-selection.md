@@ -158,7 +158,7 @@ const selectRow = {
 };
 ```
 
-### <a name='selectionRenderer'>selectRow.selectionRenderer - [Bool]</a>
+### <a name='selectionRenderer'>selectRow.selectionRenderer - [Function]</a>
 Provide a callback function which allow you to custom the checkbox/radio box. This callback only have one argument which is an object and contain following properties:
 
 ```js
@@ -172,7 +172,7 @@ const selectRow = {
 
 > By default, `react-bootstrap-table2` will help you to handle the click event, it's not necessary to handle again by developer.
 
-### <a name='selectionHeaderRenderer'>selectRow.selectionHeaderRenderer - [Bool]</a>
+### <a name='selectionHeaderRenderer'>selectRow.selectionHeaderRenderer - [Function]</a>
 Provide a callback function which allow you to custom the checkbox/radio box in the selection header column. This callback only have one argument which is an object and contain following properties:
 
 ```js
