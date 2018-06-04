@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-table2-filter",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "description": "it's a column filter addon for react-bootstrap-table2",
   "main": "./lib/index.js",
   "repository": {
