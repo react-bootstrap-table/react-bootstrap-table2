@@ -193,5 +193,36 @@ describe('<SelectionCell />', () => {
         expect(wrapper.find('input').get(0).props.disabled).toBeTruthy();
       });
     });
+
+    describe('when selectionRenderer prop is defined', () => {
+      const DummySelection = () => <div className="dummy" />;
+      const selectionRenderer = jest.fn().mockReturnValue(<DummySelection />);
+
+      beforeEach(() => {
+        selectionRenderer.mockClear();
+        wrapper = shallow(
+          <SelectionCell
+            rowKey={ 1 }
+            mode={ mode }
+            rowIndex={ rowIndex }
+            selected={ selected }
+            selectionRenderer={ selectionRenderer }
+          />
+        );
+      });
+
+      it('should render component correctly', () => {
+        expect(wrapper.find(DummySelection)).toHaveLength(1);
+      });
+
+      it('should call props.selectionRenderer correctly', () => {
+        expect(selectionRenderer).toHaveBeenCalledTimes(1);
+        expect(selectionRenderer).toHaveBeenCalledWith({
+          mode,
+          checked: selected,
+          disabled: wrapper.prop('disabled')
+        });
+      });
+    });
   });
 });

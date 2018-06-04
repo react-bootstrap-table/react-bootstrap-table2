@@ -648,6 +648,8 @@ Configure `column.filter` will able to setup a column level filter on the header
 
 * Text(`textFilter`)
 * Select(`selectFilter`)
+* Number(`numberFilter`)
+* Date(`dateFilter`)
 
 We have a quick example to show you how to use `column.filter`:
 

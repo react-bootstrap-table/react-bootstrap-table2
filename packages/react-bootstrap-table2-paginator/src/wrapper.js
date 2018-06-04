@@ -146,6 +146,7 @@ export default (Base, {
           hideSizePerPage={ hideSizePerPage }
           hidePageListOnlyOnePage={ hidePageListOnlyOnePage }
           showTotal={ options.showTotal }
+          paginationTotalRenderer={ options.paginationTotalRenderer }
           firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
           prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
           nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }

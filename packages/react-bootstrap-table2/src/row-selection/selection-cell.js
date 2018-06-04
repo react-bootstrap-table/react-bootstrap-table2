@@ -14,7 +14,8 @@ export default class SelectionCell extends Component {
     onRowSelect: PropTypes.func,
     disabled: PropTypes.bool,
     rowIndex: PropTypes.number,
-    clickToSelect: PropTypes.bool
+    clickToSelect: PropTypes.bool,
+    selectionRenderer: PropTypes.func
   }
 
   constructor() {
@@ -53,16 +54,25 @@ export default class SelectionCell extends Component {
     const {
       mode: inputType,
       selected,
-      disabled
+      disabled,
+      selectionRenderer
     } = this.props;
 
     return (
       <td onClick={ this.handleClick }>
-        <input
-          type={ inputType }
-          checked={ selected }
-          disabled={ disabled }
-        />
+        {
+          selectionRenderer ? selectionRenderer({
+            mode: inputType,
+            checked: selected,
+            disabled
+          }) : (
+            <input
+              type={ inputType }
+              checked={ selected }
+              disabled={ disabled }
+            />
+          )
+        }
       </td>
     );
   }

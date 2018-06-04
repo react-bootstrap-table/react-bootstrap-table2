@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import _ from 'react-bootstrap-table-next/src/utils';
 import Store from 'react-bootstrap-table-next/src/store';
 
@@ -11,7 +10,8 @@ for (let i = 0; i < 20; i += 1) {
   data.push({
     id: i,
     name: `itme name ${i}`,
-    price: 200 + i
+    price: 200 + i,
+    date: new Date(2017, i, 1)
   });
 }
 
@@ -34,6 +34,9 @@ describe('filter', () => {
     }, {
       dataField: 'price',
       text: 'Price'
+    }, {
+      dataField: 'date',
+      text: 'Date'
     }];
   });
 
@@ -98,7 +101,7 @@ describe('filter', () => {
 
     describe('column.filterValue is defined', () => {
       beforeEach(() => {
-        columns[1].filterValue = sinon.stub();
+        columns[1].filterValue = jest.fn();
         filterFn = filters(store, columns, _);
       });
 
@@ -110,11 +113,12 @@ describe('filter', () => {
 
         const result = filterFn(currFilters);
         expect(result).toBeDefined();
-        expect(columns[1].filterValue.callCount).toBe(data.length);
-        const calls = columns[1].filterValue.getCalls();
-        calls.forEach((call, i) => {
-          expect(call.calledWith(data[i].name, data[i])).toBeTruthy();
-        });
+        expect(columns[1].filterValue).toHaveBeenCalledTimes(data.length);
+        // const calls = columns[1].filterValue.mock.calls;
+        // calls.forEach((call, i) => {
+        //   expect(call).toEqual([data[i].name, data[i]]);
+        //   expect(call.calledWith(data[i].name, data[i])).toBeTruthy();
+        // });
       });
     });
   });
@@ -227,5 +231,41 @@ describe('filter', () => {
         expect(result).toHaveLength(19);
       });
     });
+  });
+
+  describe('filterByDate', () => {
+    beforeEach(() => {
+      filterFn = filters(store, columns, _);
+    });
+
+    describe('when currFilters.filterVal.comparator is empty', () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: '', date: new Date() },
+          filterType: FILTER_TYPE.DATE
+        };
+
+        let result = filterFn(currFilters);
+        expect(result).toHaveLength(data.length);
+
+        currFilters.price.filterVal.comparator = undefined;
+        result = filterFn(currFilters);
+        expect(result).toHaveLength(data.length);
+      });
+    });
+
+    describe('when currFilters.filterVal.date is empty', () => {
+      it('should returning correct result', () => {
+        currFilters.price = {
+          filterVal: { comparator: EQ, date: '' },
+          filterType: FILTER_TYPE.DATE
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toHaveLength(data.length);
+      });
+    });
+
+    // TODO....
   });
 });

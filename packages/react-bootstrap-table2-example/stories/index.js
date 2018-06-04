@@ -48,9 +48,13 @@ import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
 import NumberFilter from 'examples/column-filter/number-filter';
 import NumberFilterWithDefaultValue from 'examples/column-filter/number-filter-default-value';
 import CustomNumberFilter from 'examples/column-filter/custom-number-filter';
+import DateFilter from 'examples/column-filter/date-filter';
+import DateFilterWithDefaultValue from 'examples/column-filter/date-filter-default-value';
+import CustomDateFilter from 'examples/column-filter/custom-date-filter';
 import ProgrammaticallyTextFilter from 'examples/column-filter/programmatically-text-filter';
 import ProgrammaticallySelectFilter from 'examples/column-filter/programmatically-select-filter';
 import ProgrammaticallyNumberFilter from 'examples/column-filter/programmatically-number-filter';
+import ProgrammaticallyDateFilter from 'examples/column-filter/programmatically-date-filter';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -95,6 +99,7 @@ import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-sele
 import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
+import CustomSelectionTable from 'examples/row-selection/custom-selection';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
@@ -171,13 +176,17 @@ storiesOf('Column Filter', module)
   .add('Select Filter with Comparator', () => <SelectFilterComparator />)
   .add('Number Filter', () => <NumberFilter />)
   .add('Number Filter with Default Value', () => <NumberFilterWithDefaultValue />)
+  .add('Date Filter', () => <DateFilter />)
+  .add('Date Filter with Default Value', () => <DateFilterWithDefaultValue />)
   .add('Custom Text Filter', () => <CustomTextFilter />)
   .add('Custom Select Filter', () => <CustomSelectFilter />)
   .add('Custom Number Filter', () => <CustomNumberFilter />)
+  .add('Custom Date Filter', () => <CustomDateFilter />)
   .add('Custom Filter Value', () => <CustomFilterValue />)
-  .add('Programmatically Text Filter ', () => <ProgrammaticallyTextFilter />)
-  .add('Programmatically Select Filter ', () => <ProgrammaticallySelectFilter />)
-  .add('Programmatically Number Filter ', () => <ProgrammaticallyNumberFilter />);
+  .add('Programmatically Text Filter', () => <ProgrammaticallyTextFilter />)
+  .add('Programmatically Select Filter', () => <ProgrammaticallySelectFilter />)
+  .add('Programmatically Number Filter', () => <ProgrammaticallyNumberFilter />)
+  .add('Programmatically Date Filter', () => <ProgrammaticallyDateFilter />);
 
 storiesOf('Work on Rows', module)
   .add('Customize Row Style', () => <RowStyleTable />)
@@ -222,6 +231,7 @@ storiesOf('Row Selection', module)
   .add('Selection without Data', () => <SelectionNoDataTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
+  .add('Custom Selection', () => <CustomSelectionTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
   .add('Selection Hooks', () => <SelectionHooks />)

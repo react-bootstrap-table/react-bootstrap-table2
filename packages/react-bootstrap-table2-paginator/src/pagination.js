@@ -87,10 +87,28 @@ class Pagination extends pageResolver(Component) {
     }
   }
 
+  defaultTotal = (from, to, size) => (
+    <PaginationTotal
+      from={ from }
+      to={ to }
+      dataSize={ size }
+    />
+  );
+
+  setTotal = (from, to, size, total) => {
+    if (total && (typeof total === 'function')) {
+      return total(from, to, size);
+    }
+
+    return this.defaultTotal(from, to, size);
+  };
+
   render() {
     const { totalPages, lastPage, dropdownOpen: open } = this.state;
     const {
       showTotal,
+      dataSize,
+      paginationTotalRenderer,
       sizePerPageList,
       currSizePerPage,
       hideSizePerPage,
@@ -121,11 +139,12 @@ class Pagination extends pageResolver(Component) {
           }
           {
             showTotal ?
-              <PaginationTotal
-                from={ from }
-                to={ to }
-                dataSize={ this.props.dataSize }
-              /> : null
+              this.setTotal(
+                from,
+                to,
+                dataSize,
+                paginationTotalRenderer
+              ) : null
           }
         </div>
         <div className={ pageListClass }>
@@ -145,6 +164,8 @@ Pagination.propTypes = {
   onSizePerPageChange: PropTypes.func.isRequired,
   pageStartIndex: PropTypes.number,
   paginationSize: PropTypes.number,
+  showTotal: PropTypes.bool,
+  paginationTotalRenderer: PropTypes.func,
   firstPageText: PropTypes.string,
   prePageText: PropTypes.string,
   nextPageText: PropTypes.string,
@@ -164,6 +185,8 @@ Pagination.defaultProps = {
   paginationSize: Const.PAGINATION_SIZE,
   withFirstAndLast: Const.With_FIRST_AND_LAST,
   alwaysShowAllBtns: Const.SHOW_ALL_PAGE_BTNS,
+  showTotal: Const.SHOW_TOTAL,
+  paginationTotalRenderer: Const.PAGINATION_TOTAL,
   firstPageText: Const.FIRST_PAGE_TEXT,
   prePageText: Const.PRE_PAGE_TEXT,
   nextPageText: Const.NEXT_PAGE_TEXT,

@@ -72,7 +72,7 @@ Due to no `TableHeaderColumn` so that no `dataSort` here, please add [`sort`](ht
 Please see [Work with selection](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/basic-row-select.html).   
 Please see [available selectRow configurations](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/row-select-props.html).   
 
-No huge change for row selection, but can not custom the selection column currently. Coming soon!!!
+No huge change for row selection.
 
 ## Column Filter
 
@@ -87,9 +87,9 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 - [x] Select Filter
 - [x] Custom Select Filter
 - [X] Number Filter
-- [ ] Date Filter
+- [X] Date Filter
 - [ ] Array Filter
-- [ ] Programmatically Filter
+- [X] Programmatically Filter
 
 Remember to install [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter) firstly.   
 

@@ -29,12 +29,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
   render() {
     const { loading, overlay } = this.props;
-    const table = this.renderTable();
-    if (loading && overlay) {
-      const LoadingOverlay = overlay(table, loading);
-      return <LoadingOverlay />;
+    if (overlay) {
+      const LoadingOverlay = overlay(loading);
+      return (
+        <LoadingOverlay>
+          { this.renderTable() }
+        </LoadingOverlay>
+      );
     }
-    return table;
+    return this.renderTable();
   }
 
   renderTable() {
@@ -142,7 +145,9 @@ BootstrapTable.propTypes = {
     classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     nonSelectable: PropTypes.array,
     bgColor: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    hideSelectColumn: PropTypes.bool
+    hideSelectColumn: PropTypes.bool,
+    selectionRenderer: PropTypes.func,
+    selectionHeaderRenderer: PropTypes.func
   }),
   onRowSelect: PropTypes.func,
   onAllRowsSelect: PropTypes.func,

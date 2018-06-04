@@ -15,7 +15,7 @@ const data = [];
 for (let i = 0; i < 100; i += 1) {
   data.push({
     id: i,
-    name: `itme name ${i}`
+    name: `item name ${i}`
   });
 }
 
@@ -67,29 +67,29 @@ describe('Wrapper', () => {
       createPaginationWrapper(props);
     });
 
-    it('should rendering correctly', () => {
+    it('should render correctly', () => {
       expect(wrapper.length).toBe(1);
     });
 
-    it('should initializing state correctly', () => {
+    it('should initialize state correctly', () => {
       expect(instance.state.currPage).toBeDefined();
       expect(instance.state.currPage).toEqual(Const.PAGE_START_INDEX);
       expect(instance.state.currSizePerPage).toBeDefined();
       expect(instance.state.currSizePerPage).toEqual(Const.SIZE_PER_PAGE_LIST[0]);
     });
 
-    it('should saving page and sizePerPage to store correctly', () => {
+    it('should save page and sizePerPage to the store correctly', () => {
       expect(props.store.page).toBe(instance.state.currPage);
       expect(props.store.sizePerPage).toBe(instance.state.currSizePerPage);
     });
 
-    it('should rendering BootstraTable correctly', () => {
+    it('should render BootstrapTable correctly', () => {
       const table = wrapper.find(BootstrapTable);
       expect(table.length).toBe(1);
       expect(table.prop('data').length).toEqual(instance.state.currSizePerPage);
     });
 
-    it('should rendering Pagination correctly', () => {
+    it('should render Pagination correctly', () => {
       const pagination = wrapper.find(Pagination);
       expect(pagination.length).toBe(1);
       expect(pagination.prop('dataSize')).toEqual(props.store.data.length);
@@ -111,7 +111,7 @@ describe('Wrapper', () => {
       expect(pagination.prop('nextPageTitle')).toEqual(Const.NEXT_PAGE_TITLE);
       expect(pagination.prop('lastPageTitle')).toEqual(Const.LAST_PAGE_TITLE);
       expect(pagination.prop('hideSizePerPage')).toEqual(Const.HIDE_SIZE_PER_PAGE);
-      expect(pagination.prop('showTotal')).toEqual(undefined);
+      expect(pagination.prop('showTotal')).toBeFalsy();
     });
 
     describe('componentWillReceiveProps', () => {
@@ -254,7 +254,7 @@ describe('Wrapper', () => {
       createPaginationWrapper(props);
     });
 
-    it('should rendering Pagination correctly', () => {
+    it('should render Pagination correctly', () => {
       const pagination = wrapper.find(Pagination);
       expect(wrapper.length).toBe(1);
       expect(pagination.length).toBe(1);

@@ -19,6 +19,7 @@ You can get all types of filters via import and these filters are a factory func
 * TextFilter
 * SelectFilter
 * NumberFilter
+* DateFilter
 * **Coming soon!**
 
 ## Add CSS
@@ -146,6 +147,45 @@ const numberFilter = numberFilter({
   numberStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on number input/select
   numberClassName: 'custom-number-class',  // custom the class on ber input/select
   defaultValue: { number: 2103, comparator: Comparator.GT }  // default value
+})
+
+// omit...
+```
+
+## Date Filter
+
+```js
+import filterFactory, { dateFilter } from 'react-bootstrap-table2-filter';
+
+const columns = [..., {
+  dataField: 'date',
+  text: 'Product date',
+  filter: dateFilter()
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+> **Notes:** date filter accept a Javascript Date object in your raw data.
+
+Date filter is same as other filter, you can custom the date filter via `dateFilter` factory function:
+
+```js
+import filterFactory, { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
+// omit...
+
+const dateFilter = dateFilter({
+  delay: 600,  // how long will trigger filtering after user typing, default is 500 ms
+  placeholder: 'custom placeholder',  // placeholder for date input
+  withoutEmptyComparatorOption: true,  // dont render empty option for comparator
+  comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],  // Custom the comparators
+  style: { display: 'inline-grid' },  // custom the style on date filter
+  className: 'custom-dateFilter-class',  // custom the class on date filter
+  comparatorStyle: { backgroundColor: 'antiquewhite' }, // custom the style on comparator select
+  comparatorClassName: 'custom-comparator-class',  // custom the class on comparator select
+  dateStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on date input
+  dateClassName: 'custom-date-class',  // custom the class on date input
+  defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT }  // default value
 })
 
 // omit...
