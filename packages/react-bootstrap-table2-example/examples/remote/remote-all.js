@@ -12,15 +12,20 @@ const products = productsGenerator(87);
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  sort: true
 }, {
   dataField: 'name',
   text: 'Product Name',
-  filter: textFilter()
+  filter: textFilter({
+    defaultValue: '8'
+  }),
+  sort: true
 }, {
   dataField: 'price',
   text: 'Product Price',
-  filter: textFilter()
+  filter: textFilter(),
+  sort: true
 }];
 
 const sourceCode = `\
@@ -31,15 +36,25 @@ import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-fi
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  sort: true
 }, {
   dataField: 'name',
   text: 'Product Name',
-  filter: textFilter()
+  filter: textFilter({
+    defaultValue: '8'
+  }),
+  sort: true
 }, {
   dataField: 'price',
   text: 'Product Price',
-  filter: textFilter()
+  filter: textFilter(),
+  sort: true
+}];
+
+const defaultSorted = [{
+  dataField: 'name',
+  order: 'desc'
 }];
 
 const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
@@ -49,6 +64,7 @@ const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
       keyField="id"
       data={ data }
       columns={ columns }
+      defaultSorted={ defaultSorted }
       filter={ filterFactory() }
       pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
@@ -77,10 +93,11 @@ class Container extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  handleTableChange = (type, { page, sizePerPage, filters }) => {
+  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
-      const result = products.filter((row) => {
+      // Handle column filters
+      let result = products.filter((row) => {
         let valid = true;
         for (const dataField in filters) {
           const { filterVal, filterType, comparator } = filters[dataField];
@@ -96,6 +113,26 @@ class Container extends React.Component {
         }
         return valid;
       });
+      // Handle column sort
+      if (sortOrder === 'asc') {
+        result = result.sort((a, b) => {
+          if (a[sortField] > b[sortField]) {
+            return 1;
+          } else if (b[sortField] > a[sortField]) {
+            return -1;
+          }
+          return 0;
+        });
+      } else {
+        result = result.sort((a, b) => {
+          if (a[sortField] > b[sortField]) {
+            return -1;
+          } else if (b[sortField] > a[sortField]) {
+            return 1;
+          }
+          return 0;
+        });
+      }
       this.setState(() => ({
         page,
         data: result.slice(currentIndex, currentIndex + sizePerPage),
@@ -120,6 +157,11 @@ class Container extends React.Component {
 }
 `;
 
+const defaultSorted = [{
+  dataField: 'name',
+  order: 'desc'
+}];
+
 const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
   <div>
     <h3>When <code>remote.pagination</code> is enabled, the filtering,
@@ -129,6 +171,7 @@ const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
       keyField="id"
       data={ data }
       columns={ columns }
+      defaultSorted={ defaultSorted }
       filter={ filterFactory() }
       pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
@@ -157,10 +200,11 @@ class Container extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  handleTableChange = (type, { page, sizePerPage, filters }) => {
+  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
-      const result = products.filter((row) => {
+      // Handle column filters
+      let result = products.filter((row) => {
         let valid = true;
         for (const dataField in filters) {
           const { filterVal, filterType, comparator } = filters[dataField];
@@ -176,6 +220,26 @@ class Container extends React.Component {
         }
         return valid;
       });
+      // Handle column sort
+      if (sortOrder === 'asc') {
+        result = result.sort((a, b) => {
+          if (a[sortField] > b[sortField]) {
+            return 1;
+          } else if (b[sortField] > a[sortField]) {
+            return -1;
+          }
+          return 0;
+        });
+      } else {
+        result = result.sort((a, b) => {
+          if (a[sortField] > b[sortField]) {
+            return -1;
+          } else if (b[sortField] > a[sortField]) {
+            return 1;
+          }
+          return 0;
+        });
+      }
       this.setState(() => ({
         page,
         data: result.slice(currentIndex, currentIndex + sizePerPage),
