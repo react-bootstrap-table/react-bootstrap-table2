@@ -23,7 +23,7 @@ class TextFilter extends Component {
     const defaultValue = this.input.value;
 
     if (defaultValue) {
-      onFilter(this.props.column, FILTER_TYPE.TEXT)(defaultValue);
+      onFilter(this.props.column, FILTER_TYPE.TEXT, true)(defaultValue);
     }
 
     // export onFilter function to allow users to access

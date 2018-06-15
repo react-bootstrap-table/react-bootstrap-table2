@@ -36,7 +36,7 @@ class NumberFilter extends Component {
     const comparator = this.numberFilterComparator.value;
     const number = this.numberFilter.value;
     if (comparator && number) {
-      onFilter(column, FILTER_TYPE.NUMBER)({ number, comparator });
+      onFilter(column, FILTER_TYPE.NUMBER, true)({ number, comparator });
     }
 
     // export onFilter function to allow users to access

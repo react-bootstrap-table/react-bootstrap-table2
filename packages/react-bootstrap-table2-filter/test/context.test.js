@@ -12,7 +12,6 @@ import { textFilter } from '../index';
 
 describe('FilterContext', () => {
   let wrapper;
-  // let filter;
   let FilterContext;
 
   const data = [{
@@ -33,8 +32,6 @@ describe('FilterContext', () => {
     filter: textFilter()
   }];
 
-  // const defaultFilter = {};
-
   const mockBase = jest.fn((props => (
     <BootstrapTable
       keyField="id"
@@ -47,7 +44,6 @@ describe('FilterContext', () => {
   const handleFilterChange = jest.fn();
 
   function shallowContext(
-    // customFilter = defaultFilter,
     enableRemote = false
   ) {
     mockBase.mockReset();
@@ -115,6 +111,45 @@ describe('FilterContext', () => {
     });
   });
 
+  describe('componentDidMount', () => {
+    describe('when remote filter is disabled', () => {
+      beforeEach(() => {
+        wrapper = shallow(shallowContext());
+        wrapper.render();
+        wrapper.instance().componentDidMount();
+      });
+
+      it('should not call handleFilterChange', () => {
+        expect(handleFilterChange).toHaveBeenCalledTimes(0);
+      });
+    });
+
+    describe('when remote filter is enable but currFilters is empty', () => {
+      beforeEach(() => {
+        wrapper = shallow(shallowContext(true));
+        wrapper.render();
+        wrapper.instance().componentDidMount();
+      });
+
+      it('should not call handleFilterChange', () => {
+        expect(handleFilterChange).toHaveBeenCalledTimes(0);
+      });
+    });
+
+    describe('when remote filter is enable and currFilters is not empty', () => {
+      beforeEach(() => {
+        wrapper = shallow(shallowContext(true));
+        wrapper.instance().currFilters.price = { filterVal: 40, filterType: FILTER_TYPE.TEXT };
+      });
+
+      it('should not call handleFilterChange', () => {
+        wrapper.instance().componentDidMount();
+        expect(handleFilterChange).toHaveBeenCalledTimes(1);
+        expect(handleFilterChange).toHaveBeenCalledWith(wrapper.instance().currFilters);
+      });
+    });
+  });
+
   describe('onFilter', () => {
     let instance;
     describe('when filterVal is empty or undefined', () => {
@@ -166,6 +201,25 @@ describe('FilterContext', () => {
       it('should calling handleFilterChange correctly', () => {
         expect(handleFilterChange).toHaveBeenCalledTimes(1);
         expect(handleFilterChange).toHaveBeenCalledWith(instance.currFilters);
+      });
+    });
+
+    describe('when remote filter is enabled but initialize argument is true', () => {
+      const filterVal = '3';
+
+      beforeEach(() => {
+        wrapper = shallow(shallowContext(true));
+        wrapper.render();
+        instance = wrapper.instance();
+        instance.onFilter(columns[1], FILTER_TYPE.TEXT, true)(filterVal);
+      });
+
+      it('should correct currFilters', () => {
+        expect(Object.keys(instance.currFilters)).toHaveLength(1);
+      });
+
+      it('should not call handleFilterChange correctly', () => {
+        expect(handleFilterChange).toHaveBeenCalledTimes(0);
       });
     });
 

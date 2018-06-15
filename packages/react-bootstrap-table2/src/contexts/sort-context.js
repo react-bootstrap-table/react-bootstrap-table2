@@ -38,13 +38,16 @@ export default (
           if (sortColumn.onSort) {
             sortColumn.onSort(sortField, sortOrder);
           }
-
-          if (isRemoteSort()) {
-            handleSortChange(sortField, sortOrder);
-          }
         }
       }
       this.state = { sortOrder, sortColumn };
+    }
+
+    componentDidMount() {
+      const { sortOrder, sortColumn } = this.state;
+      if (isRemoteSort() && sortOrder && sortColumn) {
+        handleSortChange(sortColumn.dataField, sortOrder);
+      }
     }
 
     handleSort = (column) => {

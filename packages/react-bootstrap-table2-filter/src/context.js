@@ -27,7 +27,13 @@ export default (
       this.onExternalFilter = this.onExternalFilter.bind(this);
     }
 
-    onFilter(column, filterType) {
+    componentDidMount() {
+      if (isRemoteFiltering() && Object.keys(this.currFilters).length > 0) {
+        handleFilterChange(this.currFilters);
+      }
+    }
+
+    onFilter(column, filterType, initialize = false) {
       return (filterVal) => {
         // watch out here if migration to context API, #334
         const currFilters = Object.assign({}, this.currFilters);
@@ -52,10 +58,9 @@ export default (
         this.currFilters = currFilters;
 
         if (isRemoteFiltering()) {
-          handleFilterChange(currFilters);
-          // when remote filtering is enable, dont set currFilters state
-          // in the componentWillReceiveProps,
-          // it's the key point that we can know the filter is changed
+          if (!initialize) {
+            handleFilterChange(this.currFilters);
+          }
           return;
         }
 

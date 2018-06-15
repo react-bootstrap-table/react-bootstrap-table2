@@ -91,7 +91,7 @@ describe('Select Filter', () => {
 
       it('should calling onFilter on componentDidMount', () => {
         expect(onFilter.calledOnce).toBeTruthy();
-        expect(onFilter.calledWith(column, FILTER_TYPE.SELECT)).toBeTruthy();
+        expect(onFilter.calledWith(column, FILTER_TYPE.SELECT, true)).toBeTruthy();
         expect(onFilterFirstReturn.calledOnce).toBeTruthy();
         expect(onFilterFirstReturn.calledWith(defaultValue)).toBeTruthy();
       });
