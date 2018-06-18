@@ -7,6 +7,7 @@ export default ExtendBase =>
       let sortField;
       let page;
       let sizePerPage;
+      let searchText;
       let filters = {};
 
       if (this.sortContext) {
@@ -25,15 +26,25 @@ export default ExtendBase =>
         sizePerPage = this.paginationContext.currSizePerPage;
       }
 
+      if (this.searchContext) {
+        searchText = this.searchContext.props.searchText;
+      }
+
       return {
         sortOrder,
         sortField,
         filters,
         page,
         sizePerPage,
+        searchText,
         ...state,
         data: this.props.data
       };
+    }
+
+    isRemoteSearch = () => {
+      const { remote } = this.props;
+      return remote === true || (_.isObject(remote) && remote.search);
     }
 
     isRemotePagination = () => {
@@ -76,5 +87,9 @@ export default ExtendBase =>
     handleRemoteCellChange = (rowId, dataField, newValue) => {
       const cellEdit = { rowId, dataField, newValue };
       this.props.onTableChange('cellEdit', this.getNewestState({ cellEdit }));
+    }
+
+    handleRemoteSearchChange = (searchText) => {
+      this.props.onTableChange('search', this.getNewestState({ searchText }));
     }
   };

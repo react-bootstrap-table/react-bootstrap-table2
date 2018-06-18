@@ -37,6 +37,11 @@ const withContext = Base =>
         this.PaginationContext = props.pagination.createContext(
           this.isRemotePagination, this.handleRemotePageChange);
       }
+
+      if (props.search) {
+        this.SearchContext = props.search.createContext(
+          _, this.isRemoteSearch, this.handleRemoteSearchChange);
+      }
     }
 
     renderBase() {
@@ -44,6 +49,7 @@ const withContext = Base =>
         rootProps,
         cellEditProps,
         filterProps,
+        searchProps,
         sortProps,
         paginationProps,
         selectionProps
@@ -54,8 +60,9 @@ const withContext = Base =>
           { ...sortProps }
           { ...cellEditProps }
           { ...filterProps }
+          { ...searchProps }
           { ...paginationProps }
-          data={ rootProps.getData(filterProps, sortProps, paginationProps) }
+          data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         />
       );
     }
@@ -65,13 +72,14 @@ const withContext = Base =>
         rootProps,
         cellEditProps,
         filterProps,
+        searchProps,
         sortProps,
         paginationProps
       ) => (
         <this.SelectionContext.Provider
           { ...baseProps }
           selectRow={ this.props.selectRow }
-          data={ rootProps.getData(filterProps, sortProps, paginationProps) }
+          data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         >
           <this.SelectionContext.Consumer>
             {
@@ -79,6 +87,7 @@ const withContext = Base =>
                 rootProps,
                 cellEditProps,
                 filterProps,
+                searchProps,
                 sortProps,
                 paginationProps,
                 selectionProps
@@ -94,12 +103,13 @@ const withContext = Base =>
         rootProps,
         cellEditProps,
         filterProps,
+        searchProps,
         sortProps
       ) => (
         <this.PaginationContext.Provider
           ref={ n => this.paginationContext = n }
           pagination={ this.props.pagination }
-          data={ rootProps.getData(filterProps, sortProps) }
+          data={ rootProps.getData(filterProps, searchProps, sortProps) }
         >
           <this.PaginationContext.Consumer>
             {
@@ -107,6 +117,7 @@ const withContext = Base =>
                 rootProps,
                 cellEditProps,
                 filterProps,
+                searchProps,
                 sortProps,
                 paginationProps
               )
@@ -120,14 +131,15 @@ const withContext = Base =>
       return (
         rootProps,
         cellEditProps,
-        filterProps
+        filterProps,
+        searchProps
       ) => (
         <this.SortContext.Provider
           { ...baseProps }
           ref={ n => this.sortContext = n }
           defaultSorted={ this.props.defaultSorted }
           defaultSortDirection={ this.props.defaultSortDirection }
-          data={ rootProps.getData(filterProps) }
+          data={ rootProps.getData(filterProps, searchProps) }
         >
           <this.SortContext.Consumer>
             {
@@ -135,11 +147,38 @@ const withContext = Base =>
                 rootProps,
                 cellEditProps,
                 filterProps,
-                sortProps
+                searchProps,
+                sortProps,
               )
             }
           </this.SortContext.Consumer>
         </this.SortContext.Provider>
+      );
+    }
+
+    renderWithSearchCtx(base, baseProps) {
+      return (
+        rootProps,
+        cellEditProps,
+        filterProps
+      ) => (
+        <this.SearchContext.Provider
+          { ...baseProps }
+          ref={ n => this.searchContext = n }
+          data={ rootProps.getData(filterProps) }
+          searchText={ this.props.search.searchText }
+        >
+          <this.SearchContext.Consumer>
+            {
+              searchProps => base(
+                rootProps,
+                cellEditProps,
+                filterProps,
+                searchProps
+              )
+            }
+          </this.SearchContext.Consumer>
+        </this.SearchContext.Provider>
       );
     }
 
@@ -199,6 +238,10 @@ const withContext = Base =>
 
       if (this.SortContext) {
         base = this.renderWithSortCtx(base, baseProps);
+      }
+
+      if (this.SearchContext) {
+        base = this.renderWithSearchCtx(base, baseProps);
       }
 
       if (this.FilterContext) {
