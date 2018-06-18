@@ -118,6 +118,13 @@ import PaginationTable from 'examples/pagination';
 import PaginationHooksTable from 'examples/pagination/pagination-hooks';
 import CustomPaginationTable from 'examples/pagination/custom-pagination';
 
+// search
+import SearchTable from 'examples/search';
+import DefaultCustomSearch from 'examples/search/default-custom-search';
+import FullyCustomSearch from 'examples/search/fully-custom-search';
+import SearchFormattedData from 'examples/search/search-formatted';
+import CustomSearchValue from 'examples/search/custom-search-value';
+
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
 import TableOverlay from 'examples/loading-overlay/table-overlay';
@@ -126,6 +133,7 @@ import TableOverlay from 'examples/loading-overlay/table-overlay';
 import RemoteSort from 'examples/remote/remote-sort';
 import RemoteFilter from 'examples/remote/remote-filter';
 import RemotePaginationTable from 'examples/remote/remote-pagination';
+import RemoteSearch from 'examples/remote/remote-search';
 import RemoteCellEdit from 'examples/remote/remote-celledit';
 import RemoteAll from 'examples/remote/remote-all';
 
@@ -258,6 +266,13 @@ storiesOf('Pagination', module)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
   .add('Custom Pagination', () => <CustomPaginationTable />);
 
+storiesOf('Table Search', module)
+  .add('Basic Search Table', () => <SearchTable />)
+  .add('Default Custom Search', () => <DefaultCustomSearch />)
+  .add('Fully Custom Search', () => <FullyCustomSearch />)
+  .add('Search Fromatted Value', () => <SearchFormattedData />)
+  .add('Custom Search Value', () => <CustomSearchValue />);
+
 storiesOf('EmptyTableOverlay', module)
   .add('Empty Table Overlay', () => <EmptyTableOverlay />)
   .add('Table Overlay', () => <TableOverlay />);
@@ -266,5 +281,6 @@ storiesOf('Remote', module)
   .add('Remote Sort', () => <RemoteSort />)
   .add('Remote Filter', () => <RemoteFilter />)
   .add('Remote Pagination', () => <RemotePaginationTable />)
+  .add('Remote Search', () => <RemoteSearch />)
   .add('Remote Cell Editing', () => <RemoteCellEdit />)
   .add('Remote All', () => <RemoteAll />);
