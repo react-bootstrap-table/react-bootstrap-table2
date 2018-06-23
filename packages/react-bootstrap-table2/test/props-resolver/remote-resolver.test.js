@@ -186,6 +186,48 @@ describe('remoteResolver', () => {
     });
   });
 
+  describe('isRemoteSearch', () => {
+    describe('when remote is false', () => {
+      beforeEach(() => {
+        shallowContainer();
+      });
+
+      it('should return false', () => {
+        expect(wrapper.instance().isRemoteSearch()).toBeFalsy();
+      });
+    });
+
+    describe('when remote is true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: true });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteSearch()).toBeTruthy();
+      });
+    });
+
+    describe('when remote.search is true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: { search: true } });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteSearch()).toBeTruthy();
+      });
+    });
+
+    describe('when this.isRemotePagination return true', () => {
+      beforeEach(() => {
+        shallowContainer({ remote: { pagination: true } });
+      });
+
+      it('should return true', () => {
+        expect(wrapper.instance().isRemoteSearch()).toBeTruthy();
+      });
+    });
+  });
+
   describe('handleRemoteCellChange', () => {
     const onTableChangeCB = sinon.stub();
     const rowId = 1;
@@ -240,6 +282,26 @@ describe('remoteResolver', () => {
       expect(onTableChangeCB.calledWith('pagination', wrapper.instance().getNewestState({
         page: newPage,
         sizePerPage: newSizePerPage
+      }))).toBeTruthy();
+    });
+  });
+
+  describe('handleRemoteSearchChange', () => {
+    const onTableChangeCB = sinon.stub();
+    const searchText = 'abc';
+
+    beforeEach(() => {
+      onTableChangeCB.reset();
+      shallowContainer({
+        onTableChange: onTableChangeCB
+      });
+      wrapper.instance().handleRemoteSearchChange(searchText);
+    });
+
+    it('should calling props.onTableChange correctly', () => {
+      expect(onTableChangeCB.calledOnce).toBeTruthy();
+      expect(onTableChangeCB.calledWith('search', wrapper.instance().getNewestState({
+        searchText
       }))).toBeTruthy();
     });
   });

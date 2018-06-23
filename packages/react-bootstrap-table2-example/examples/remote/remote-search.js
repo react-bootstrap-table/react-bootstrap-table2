@@ -134,7 +134,6 @@ class Container extends React.Component {
   }
 
   handleTableChange = (type, { searchText }) => {
-    console.log('table change');
     setTimeout(() => {
       const result = products.filter((row) => {
         for (let cidx = 0; cidx < columns.length; cidx += 1) {

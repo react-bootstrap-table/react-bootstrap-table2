@@ -44,7 +44,7 @@ export default ExtendBase =>
 
     isRemoteSearch = () => {
       const { remote } = this.props;
-      return remote === true || (_.isObject(remote) && remote.search);
+      return remote === true || (_.isObject(remote) && remote.search) || this.isRemotePagination();
     }
 
     isRemotePagination = () => {

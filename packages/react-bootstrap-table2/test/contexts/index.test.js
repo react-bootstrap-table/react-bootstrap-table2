@@ -134,6 +134,38 @@ describe('Context', () => {
     });
   });
 
+  describe('if search is enable', () => {
+    beforeEach(() => {
+      const SearchContext = React.createContext();
+      const search = {
+        createContext: jest.fn().mockReturnValue({
+          Provider: SearchContext.Provider,
+          Consumer: SearchContext.Consumer
+        }),
+        searchText: ''
+      };
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          search={ search }
+        />
+      );
+      wrapper.render();
+    });
+
+    it('should create contexts correctly', () => {
+      expect(wrapper.instance().DataContext).toBeDefined();
+      expect(wrapper.instance().SearchContext).toBeDefined();
+      expect(wrapper.instance().SortContext).not.toBeDefined();
+      expect(wrapper.instance().SelectionContext).not.toBeDefined();
+      expect(wrapper.instance().CellEditContext).not.toBeDefined();
+      expect(wrapper.instance().FilterContext).not.toBeDefined();
+      expect(wrapper.instance().PaginationContext).not.toBeDefined();
+    });
+  });
+
   describe('if column filter is enable', () => {
     beforeEach(() => {
       const FilterContext = React.createContext();
