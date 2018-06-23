@@ -28,6 +28,7 @@
 * [defaultSortDirection](#defaultSortDirection)
 * [pagination](#pagination)
 * [filter](#filter)
+* [search](#search)
 * [onTableChange](#onTableChange)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
@@ -258,6 +259,46 @@ const columns = [ {
   text: 'Production Price'
 } ];
 <BootstrapTable data={ data } columns={ columns } filter={ filterFactory() } />
+```
+
+### <a name='search'>search - [Object]</a>
+Enable the search functionality.
+
+`search` allow user to searhc all the table data. However, search functionality is separated from core of `react-bootstrap-table2` so that you are suppose to install `react-bootstrap-table2-toolkit` firstly.
+
+```sh
+$ npm install react-bootstrap-table2-toolkit --save
+```
+
+After installation of `react-bootstrap-table2-toolkit`, you can render search field easily:
+
+```js
+import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+
+const { SearchBar, searchFactory } = Search;
+//...
+
+<ToolkitContext.Provider>
+  <ToolkitContext.Consumer>
+    {
+      props => (
+        <div>
+          <h3>Input something at below input field:</h3>
+          <SearchBar { ...props.searchProps } />
+          <hr />
+          <BootstrapTable
+            keyField="id"
+            data={ products }
+            columns={ columns }
+            search={ searchFactory({
+              ...props.searchProps
+            }) }
+          />
+        </div>
+      )
+    }
+  </ToolkitContext.Consumer>
+</ToolkitContext.Provider>
 ```
 
 ### <a name='onTableChange'>onTableChange - [Function]</a>
