@@ -1,3 +1,4 @@
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
 /* eslint react/require-default-props: 0 */
 /* eslint no-return-assign: 0 */
 
@@ -167,7 +168,11 @@ class NumberFilter extends Component {
     `;
 
     return (
-      <div className={ `filter number-filter ${className}` } style={ style }>
+      <div
+        onClick={ e => e.stopPropagation() }
+        className={ `filter number-filter ${className}` }
+        style={ style }
+      >
         <select
           ref={ n => this.numberFilterComparator = n }
           style={ comparatorStyle }
