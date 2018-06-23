@@ -4,11 +4,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
-const products = productsGenerator(87);
+let products = productsGenerator(87);
 
 const columns = [{
   dataField: 'id',
@@ -31,6 +32,7 @@ const columns = [{
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+import cellEditFactory from 'react-bootstrap-table2-editor';
 import filterFactory, { textFilter, Comparator } from 'react-bootstrap-table2-filter';
 // ...
 
@@ -57,16 +59,21 @@ const defaultSorted = [{
   order: 'desc'
 }];
 
+const cellEditProps = {
+  mode: 'click'
+};
+
 const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
   <div>
     <BootstrapTable
-      remote={ { pagination: true } }
+      remote
       keyField="id"
       data={ data }
       columns={ columns }
       defaultSorted={ defaultSorted }
       filter={ filterFactory() }
       pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
+      cellEdit={ cellEditFactory(cellEditProps) }
       onTableChange={ onTableChange }
     />
     <Code>{ sourceCode }</Code>
@@ -93,11 +100,25 @@ class Container extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder }) => {
+  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder, cellEdit }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
+      // Handle cell editing
+      if (type === 'cellEdit') {
+        const { rowId, dataField, newValue } = cellEdit;
+        products = products.map((row) => {
+          if (row.id === rowId) {
+            const newRow = { ...row };
+            newRow[dataField] = newValue;
+            return newRow;
+          }
+          return row;
+        });
+      }
+      let result = products;
+
       // Handle column filters
-      let result = products.filter((row) => {
+      result = result.filter((row) => {
         let valid = true;
         for (const dataField in filters) {
           const { filterVal, filterType, comparator } = filters[dataField];
@@ -162,12 +183,16 @@ const defaultSorted = [{
   order: 'desc'
 }];
 
+const cellEditProps = {
+  mode: 'click'
+};
+
 const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
   <div>
     <h3>When <code>remote.pagination</code> is enabled, the filtering,
       sorting and searching will also change to remote mode automatically</h3>
     <BootstrapTable
-      remote={ { pagination: true } }
+      remote
       keyField="id"
       data={ data }
       columns={ columns }
@@ -175,6 +200,7 @@ const RemoteAll = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
       filter={ filterFactory() }
       pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
+      cellEdit={ cellEditFactory(cellEditProps) }
     />
     <Code>{ sourceCode }</Code>
   </div>
@@ -200,11 +226,24 @@ class Container extends React.Component {
     this.handleTableChange = this.handleTableChange.bind(this);
   }
 
-  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder }) => {
+  handleTableChange = (type, { page, sizePerPage, filters, sortField, sortOrder, cellEdit }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
+      // Handle cell editing
+      if (type === 'cellEdit') {
+        const { rowId, dataField, newValue } = cellEdit;
+        products = products.map((row) => {
+          if (row.id === rowId) {
+            const newRow = { ...row };
+            newRow[dataField] = newValue;
+            return newRow;
+          }
+          return row;
+        });
+      }
+      let result = products;
       // Handle column filters
-      let result = products.filter((row) => {
+      result = result.filter((row) => {
         let valid = true;
         for (const dataField in filters) {
           const { filterVal, filterType, comparator } = filters[dataField];
