@@ -54,9 +54,12 @@ export default (Base, {
       if (typeof page !== 'undefined' && currPage !== page) { // user defined page
         currPage = page;
         needNewState = true;
-      } else if (nextProps.isDataChanged) { // user didn't defined page but data change
-        currPage = typeof pageStartIndex !== 'undefined' ? pageStartIndex : Const.PAGE_START_INDEX;
+      } else if (nextProps.isDataChanged) {
         needNewState = true;
+      }
+
+      if (typeof currPage === 'undefined') {
+        currPage = typeof pageStartIndex !== 'undefined' ? pageStartIndex : Const.PAGE_START_INDEX;
       }
 
       if (typeof sizePerPage !== 'undefined') {
