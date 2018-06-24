@@ -88,7 +88,7 @@ Please see [available filter configuration](./filter-props.html).
 - [x] Text Filter
 - [x] Custom Text Filter
 - [x] Remote Filter
-- [ ] Custom Filter Component
+- [x] Custom Filter Component
 - [ ] Regex Filter
 - [x] Select Filter
 - [x] Custom Select Filter

@@ -14,18 +14,24 @@ title: Column Filter Props
    * [selectFilter](#selectFilter)
    * [numberFilter](#numberFilter)
    * [dateFilter](#dateFilter)
+   * [customFilter](#customFilter)
 * [Comparator](#comparator)
+* [FILTER_TYPES](#filter-types)
 
 ## **Getting Started**
 Please check [Getting Started Guide](./basic-filter.html)
 
 ## **How to use**
 You should apply following two props to enable filter functionality:
-* `filterFactory`
-* `filters` (Available filters)
+* Give `filter` prop on `BootstrapTable` which value is the return value from calling `filterFactory` function
+* Add `filter` property on `column` object:
    * textFilter
    * selectFilter
    * numberFilter
+   * dateFilter
+   * customFilter
+
+For example:
 
 ```js
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -318,6 +324,19 @@ const columns = [{ ... }, { ... }, {
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
+## customFilter
+**Required**: NONE
+
+**Optional**:
+### customFilter.type - [String]
+* Assign the filter mode when `react-bootstrap-table` filering your data, please check [FILTER_TYPES](#filter-types) for available values.
+### customFilter.comparator - [Comparator]
+* Specify what kind of comparator to compare. Default is `Comparator.LIKE`. But if `customFilter.type` is `FILTER_TYPES.SELECT`, this default value will be `Comparator.EQ`
+
+### customFilter.caseSensitive - [Boolean]
+* default is `false`, and `true` will only work when comparator is `LIKE`.
+
+
 ## **Comparator**
 We support the following ways to do the comparison. Each `filter` has its default comparator. For more information, please take refer to the introduction of props above.
 
@@ -330,3 +349,13 @@ We support the following ways to do the comparison. Each `filter` has its defaul
 | 5 | Comparator.GE   | >=     |                         |
 | 6 | Comparator.LT   | <      |                         |
 | 7 | Comparator.LE   | <=     |                         |
+
+## **FILTER_TYPES**
+
+Following properties is valid in `FILTER_TYPES`:
+* TEXT
+* SELECT
+* NUMBER
+* DATE
+
+You will only need the `FILTER_TYPES` when you are customize the filter component and you want to assign a specify filter mode.
