@@ -55,6 +55,8 @@ import ProgrammaticallyTextFilter from 'examples/column-filter/programmatically-
 import ProgrammaticallySelectFilter from 'examples/column-filter/programmatically-select-filter';
 import ProgrammaticallyNumberFilter from 'examples/column-filter/programmatically-number-filter';
 import ProgrammaticallyDateFilter from 'examples/column-filter/programmatically-date-filter';
+import CustomFilter from 'examples/column-filter/custom-filter';
+import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -186,7 +188,9 @@ storiesOf('Column Filter', module)
   .add('Programmatically Text Filter', () => <ProgrammaticallyTextFilter />)
   .add('Programmatically Select Filter', () => <ProgrammaticallySelectFilter />)
   .add('Programmatically Number Filter', () => <ProgrammaticallyNumberFilter />)
-  .add('Programmatically Date Filter', () => <ProgrammaticallyDateFilter />);
+  .add('Programmatically Date Filter', () => <ProgrammaticallyDateFilter />)
+  .add('Custom Filter', () => <CustomFilter />)
+  .add('Advance Custom Filter', () => <AdvanceCustomFilter />);
 
 storiesOf('Work on Rows', module)
   .add('Customize Row Style', () => <RowStyleTable />)

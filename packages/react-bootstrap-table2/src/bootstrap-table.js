@@ -90,6 +90,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortOrder={ store.sortOrder }
             onSort={ this.props.onSort }
             onFilter={ this.props.onFilter }
+            onExternalFilter={ this.props.onExternalFilter }
             selectRow={ headerCellSelectionInfo }
           />
           <Body
@@ -162,7 +163,8 @@ BootstrapTable.propTypes = {
   overlay: PropTypes.func,
   onTableChange: PropTypes.func,
   onSort: PropTypes.func,
-  onFilter: PropTypes.func
+  onFilter: PropTypes.func,
+  onExternalFilter: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {

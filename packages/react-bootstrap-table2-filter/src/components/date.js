@@ -1,4 +1,5 @@
 /* eslint react/require-default-props: 0 */
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
 /* eslint no-return-assign: 0 */
 /* eslint prefer-template: 0 */
 import React, { Component } from 'react';
@@ -121,7 +122,11 @@ class DateFilter extends Component {
     } = this.props;
 
     return (
-      <div className={ `filter date-filter ${className}` } style={ style }>
+      <div
+        onClick={ e => e.stopPropagation() }
+        className={ `filter date-filter ${className}` }
+        style={ style }
+      >
         <select
           ref={ n => this.dateFilterComparator = n }
           style={ comparatorStyle }

@@ -116,6 +116,7 @@ class SelectFilter extends Component {
         style={ style }
         className={ selectClass }
         onChange={ this.filter }
+        onClick={ e => e.stopPropagation() }
         defaultValue={ defaultValue !== undefined ? defaultValue : '' }
       >
         { this.getOptions() }
