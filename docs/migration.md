@@ -82,7 +82,7 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 - [x] Text Filter
 - [x] Custom Text Filter
 - [x] Remote Filter
-- [ ] Custom Filter Component
+- [x] Custom Filter Component
 - [ ] Regex Filter
 - [x] Select Filter
 - [x] Custom Select Filter
