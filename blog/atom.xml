@@ -2,12 +2,35 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://react-bootstrap-table.github.io/blog</id>
     <title>react-bootstrap-table2 Blog</title>
-    <updated>2018-06-04T06:00:00Z</updated>
+    <updated>2018-06-24T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://react-bootstrap-table.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</subtitle>
     <logo>https://react-bootstrap-table.github.ioundefined</logo>
     <rights>Copyright © 2018 react-bootstrap-table2</rights>
+    <entry>
+        <title type="html"><![CDATA[New Release (2018-06-24)]]></title>
+        <id>https://react-bootstrap-table.github.io/blog/2018/06/24/version-bump.html</id>
+        <link href="https://react-bootstrap-table.github.io/blog/2018/06/24/version-bump.html">
+        </link>
+        <updated>2018-06-24T06:00:00Z</updated>
+        <summary type="html"><![CDATA[## Changed Packages
+
+This release bump following packages:
+
+* `react-bootstrap-table-next@0.1.14`
+* `react-bootstrap-table2-paginator@0.1.5`
+* `react-bootstrap-table2-filter@0.3.0`
+
+## Changelog
+
+### Bug fixes
+* Fix table will jump to first page afte]]></summary>
+        <author>
+            <name>Allen Fang</name>
+            <uri>https://twitter.com/allenfang_tw</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[New Release (2018-06-04)]]></title>
         <id>https://react-bootstrap-table.github.io/blog/2018/06/04/version-bump.html</id>

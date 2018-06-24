@@ -24,6 +24,7 @@
 <li>SelectFilter</li>
 <li>NumberFilter</li>
 <li>DateFilter</li>
+<li>CustomFilter</li>
 <li><strong>Coming soon!</strong></li>
 </ul>
 <h2><a class="anchor" aria-hidden="true" name="text-filter"></a><a href="#text-filter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Text Filter</h2>
@@ -165,6 +166,40 @@
 });
 
 <span class="hljs-comment">// omit...</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="custom-filter"></a><a href="#custom-filter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Custom Filter</h2>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> filterFactory, { customFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> columns = [..., {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'date'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Name'</span>,
+  <span class="hljs-attr">filter</span>: customFilter(),
+  <span class="hljs-attr">filterRenderer</span>: <span class="hljs-function">(<span class="hljs-params">onFilter, column</span>) =&gt;</span> .....
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<p>In custom filter case, you are suppose to finish following two steps:</p>
+<ol>
+<li>Call <code>customFilter</code> and pass to <code>column.filter</code></li>
+<li>Give <code>column.filterRenderer</code> as a callback function and return your custom filter element.</li>
+</ol>
+<h3><a class="anchor" aria-hidden="true" name="columnfilterrenderer"></a><a href="#columnfilterrenderer" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.filterRenderer</h3>
+<p>This function will pass two argument to you:</p>
+<ol>
+<li><code>onFilter</code>: call it to trigger filter when you need.</li>
+<li><code>column</code>: Just the column object!</li>
+</ol>
+<p>In the end, please remember to return your custom filter element!</p>
+<h3><a class="anchor" aria-hidden="true" name="customfilter"></a><a href="#customfilter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>customFilter</h3>
+<p><code>customFilter</code> function just same as <code>textFilter</code>, <code>selectFilter</code> etc, it is for customization reason. However, in the custom filter case, there're only few props are valid:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> filterFactory, { FILTER_TYPES, Comparator } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> customFilter = customFilter({
+  <span class="hljs-attr">type</span>: FILTER_TYPES.NUMBER,  <span class="hljs-comment">// default is FILTER_TYPES.TEXT</span>
+  comparator: Comparator.EQ, <span class="hljs-comment">// only work if type is FILTER_TYPES.SELECT</span>
+  caseSensitive: <span class="hljs-literal">false</span>, <span class="hljs-comment">// default is true</span>
+})
 </code></pre>
 <hr />
 <h2><a class="anchor" aria-hidden="true" name="programmatically-filter"></a><a href="#programmatically-filter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Programmatically Filter</h2>
