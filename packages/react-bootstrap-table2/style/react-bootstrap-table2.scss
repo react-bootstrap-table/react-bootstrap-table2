@@ -30,6 +30,10 @@
     text-align: center;
   }
 
+  tr.expanding-row {
+    padding: 5px;
+  }
+
   td.react-bootstrap-table-editing-cell {
     .animated {
       animation-fill-mode: both;

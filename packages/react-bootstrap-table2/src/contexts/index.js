@@ -5,6 +5,7 @@ import _ from '../utils';
 import createDataContext from './data-context';
 import createSortContext from './sort-context';
 import createSelectionContext from './selection-context';
+import createRowExpandContext from './row-expand-context';
 import remoteResolver from '../props-resolver/remote-resolver';
 import dataOperator from '../store/operators';
 
@@ -21,6 +22,10 @@ const withContext = Base =>
 
       if (props.selectRow) {
         this.SelectionContext = createSelectionContext(dataOperator);
+      }
+
+      if (props.expandRow) {
+        this.RowExpandContext = createRowExpandContext(dataOperator);
       }
 
       if (props.cellEdit && props.cellEdit.createContext) {
@@ -52,6 +57,7 @@ const withContext = Base =>
         searchProps,
         sortProps,
         paginationProps,
+        expandProps,
         selectionProps
       ) => (
         <Base
@@ -62,6 +68,7 @@ const withContext = Base =>
           { ...filterProps }
           { ...searchProps }
           { ...paginationProps }
+          { ...expandProps }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         />
       );
@@ -74,7 +81,8 @@ const withContext = Base =>
         filterProps,
         searchProps,
         sortProps,
-        paginationProps
+        paginationProps,
+        expandProps
       ) => (
         <this.SelectionContext.Provider
           { ...baseProps }
@@ -90,11 +98,43 @@ const withContext = Base =>
                 searchProps,
                 sortProps,
                 paginationProps,
+                expandProps,
                 selectionProps
               )
             }
           </this.SelectionContext.Consumer>
         </this.SelectionContext.Provider>
+      );
+    }
+
+    renderWithRowExpandCtx(base, baseProps) {
+      return (
+        rootProps,
+        cellEditProps,
+        filterProps,
+        searchProps,
+        sortProps,
+        paginationProps
+      ) => (
+        <this.RowExpandContext.Provider
+          { ...baseProps }
+          expandRow={ this.props.expandRow }
+          data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
+        >
+          <this.RowExpandContext.Consumer>
+            {
+              expandProps => base(
+                rootProps,
+                cellEditProps,
+                filterProps,
+                searchProps,
+                sortProps,
+                paginationProps,
+                expandProps
+              )
+            }
+          </this.RowExpandContext.Consumer>
+        </this.RowExpandContext.Provider>
       );
     }
 
@@ -230,6 +270,10 @@ const withContext = Base =>
 
       if (this.SelectionContext) {
         base = this.renderWithSelectionCtx(base, baseProps);
+      }
+
+      if (this.RowExpandContext) {
+        base = this.renderWithRowExpandCtx(base, baseProps);
       }
 
       if (this.PaginationContext) {

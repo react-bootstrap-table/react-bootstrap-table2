@@ -1,9 +1,11 @@
 import ColumnResolver from './column-resolver';
+import ExpandRowResolver from './expand-row-resolver';
 import Const from '../const';
 import _ from '../utils';
 
 export default ExtendBase =>
-  class TableResolver extends ColumnResolver(ExtendBase) {
+  class TableResolver extends
+    ExpandRowResolver(ColumnResolver(ExtendBase)) {
     validateProps() {
       const { keyField } = this.props;
       if (!keyField) {

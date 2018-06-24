@@ -97,6 +97,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             cellEdit={ this.props.cellEdit || {} }
             selectRow={ cellSelectionInfo }
             selectedRowKeys={ selected }
+            expandRow={ this.resolveExpandRowProps() }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
@@ -145,6 +146,14 @@ BootstrapTable.propTypes = {
   }),
   onRowSelect: PropTypes.func,
   onAllRowsSelect: PropTypes.func,
+  expandRow: PropTypes.shape({
+    renderer: PropTypes.func.isRequired,
+    expanded: PropTypes.array,
+    nonExpandable: PropTypes.array,
+    showExpandColumn: PropTypes.bool,
+    expandColumnRenderer: PropTypes.func
+  }),
+  onRowExpand: PropTypes.func,
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
