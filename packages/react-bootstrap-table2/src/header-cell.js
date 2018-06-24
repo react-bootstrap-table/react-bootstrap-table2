@@ -17,13 +17,15 @@ const HeaderCell = (props) => {
     sorting,
     sortOrder,
     isLastSorting,
-    onFilter
+    onFilter,
+    onExternalFilter
   } = props;
 
   const {
     text,
     sort,
     filter,
+    filterRenderer,
     headerTitle,
     headerAlign,
     headerFormatter,
@@ -89,7 +91,11 @@ const HeaderCell = (props) => {
 
   if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
   if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
-  if (filter) {
+
+  if (filterRenderer) {
+    const onCustomFilter = onExternalFilter(column, filter.props.type);
+    filterElm = filterRenderer(onCustomFilter, column);
+  } else if (filter) {
     filterElm = <filter.Filter { ...filter.props } onFilter={ onFilter } column={ column } />;
   }
 
@@ -136,6 +142,7 @@ HeaderCell.propTypes = {
     editorRenderer: PropTypes.func,
     validator: PropTypes.func,
     filter: PropTypes.object,
+    filterRenderer: PropTypes.func,
     filterValue: PropTypes.func
   }).isRequired,
   index: PropTypes.number.isRequired,
@@ -143,7 +150,8 @@ HeaderCell.propTypes = {
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
   isLastSorting: PropTypes.bool,
-  onFilter: PropTypes.func
+  onFilter: PropTypes.func,
+  onExternalFilter: PropTypes.func
 };
 
 export default HeaderCell;

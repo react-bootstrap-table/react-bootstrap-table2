@@ -20,6 +20,7 @@ export default (Base, {
       super(props);
       this.state = { currFilters: {}, isDataChanged: props.isDataChanged || false };
       this.onFilter = this.onFilter.bind(this);
+      this.onExternalFilter = this.onExternalFilter.bind(this);
     }
 
     componentWillReceiveProps({ isDataChanged, store, columns }) {
@@ -78,12 +79,19 @@ export default (Base, {
       };
     }
 
+    onExternalFilter(column, filterType) {
+      return (value) => {
+        this.onFilter(column, filterType)(value);
+      };
+    }
+
     render() {
       return (
         <Base
           { ...this.props }
           data={ this.props.store.data }
           onFilter={ this.onFilter }
+          onExternalFilter={ this.onExternalFilter }
           isDataChanged={ this.state.isDataChanged }
         />
       );

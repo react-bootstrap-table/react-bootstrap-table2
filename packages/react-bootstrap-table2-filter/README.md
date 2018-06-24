@@ -20,6 +20,7 @@ You can get all types of filters via import and these filters are a factory func
 * SelectFilter
 * NumberFilter
 * DateFilter
+* CustomFilter
 * **Coming soon!**
 
 ## Add CSS
@@ -190,3 +191,53 @@ const dateFilter = dateFilter({
 
 // omit...
 ```
+
+## Custom Filter
+
+```js
+import filterFactory, { customFilter } from 'react-bootstrap-table2-filter';
+
+const columns = [..., {
+  dataField: 'date',
+  text: 'Product Name',
+  filter: customFilter(),
+  filterRenderer: (onFilter, column) => .....
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+In custom filter case, you are suppose to finish following two steps:
+1. Call `customFilter` and pass to `column.filter`
+2. Give `column.filterRenderer` as a callback function and return your custom filter element.
+
+### column.filterRenderer
+
+This function will pass two argument to you:
+1. `onFilter`: call it to trigger filter when you need.
+2. `column`: Just the column object!
+
+In the end, please remember to return your custom filter element!
+
+### customFilter
+
+`customFilter` function just same as `textFilter`, `selectFilter` etc, it is for customization reason. However, in the custom filter case, there's only one props is valid: `type`
+
+
+```js
+import filterFactory, { FILTER_TYPES } from 'react-bootstrap-table2-filter';
+
+const customFilter = customFilter({
+  type: FILTER_TYPES.NUMBER,  // default is FILTER_TYPES.TEXT
+})
+```
+
+`type` is a way to ask `react-bootstrap-table` to filter you data as number, select, date or normal text.
+
+### FILTER_TYPES
+
+Following properties is valid in `FILTER_TYPES`:
+* TEXT
+* SELECT
+* NUMBER
+* DATE

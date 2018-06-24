@@ -669,4 +669,74 @@ describe('HeaderCell', () => {
       });
     });
   });
+
+  describe('when column.filter is defined', () => {
+    const onFilter = jest.fn();
+    const filterProps = { a: 123 };
+    const Filter = () => <div>test</div>;
+    let column;
+
+    beforeEach(() => {
+      onFilter.mockClear();
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        filter: {
+          props: filterProps,
+          Filter
+        }
+      };
+      wrapper = shallow(<HeaderCell column={ column } index={ index } onFilter={ onFilter } />);
+    });
+
+    it('should render successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('th').length).toBe(1);
+    });
+
+    it('should render filter correctly', () => {
+      expect(wrapper.find(Filter).length).toBe(1);
+      expect(wrapper.find(Filter).props()).toEqual({
+        column,
+        onFilter,
+        ...filterProps
+      });
+    });
+  });
+
+  describe('when column.filter and column.filterRenderer is defined', () => {
+    const onExternalFilter = jest.fn();
+    const filterProps = { a: 123 };
+    const Filter = () => <div>test</div>;
+    const filterRenderer = jest.fn().mockReturnValue(<Filter />);
+    let column;
+
+    beforeEach(() => {
+      onExternalFilter.mockClear();
+      filterRenderer.mockClear();
+      column = {
+        dataField: 'id',
+        text: 'ID',
+        filter: {
+          props: filterProps
+        },
+        filterRenderer
+      };
+      wrapper = shallow(
+        <HeaderCell column={ column } index={ index } onExternalFilter={ onExternalFilter } />);
+    });
+
+    it('should render successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('th').length).toBe(1);
+    });
+
+    it('should render filter correctly', () => {
+      expect(wrapper.find(Filter).length).toBe(1);
+    });
+
+    it('should call filterRenderer function correctly', () => {
+      expect(filterRenderer).toHaveBeenCalledTimes(1);
+    });
+  });
 });
