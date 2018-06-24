@@ -4,11 +4,14 @@ import NumberFilter from './src/components/number';
 import DateFilter from './src/components/date';
 import wrapperFactory from './src/wrapper';
 import * as Comparison from './src/comparison';
+import { FILTER_TYPE } from './src/const';
 
 export default (options = {}) => ({
   wrapperFactory,
   options
 });
+
+export const FILTER_TYPES = FILTER_TYPE;
 
 export const Comparator = Comparison;
 
@@ -29,5 +32,9 @@ export const numberFilter = (props = {}) => ({
 
 export const dateFilter = (props = {}) => ({
   Filter: DateFilter,
+  props
+});
+
+export const customFilter = (props = {}) => ({
   props
 });
