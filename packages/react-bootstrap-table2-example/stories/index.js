@@ -113,6 +113,11 @@ import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
 import HideSelectionColumnTable from 'examples/row-selection/hide-selection-column';
 
+// work on row expand
+import BasicRowExpand from 'examples/row-expand';
+import RowExpandManagement from 'examples/row-expand/expand-management';
+import NonExpandableRows from 'examples/row-expand/non-expandable-rows';
+
 // pagination
 import PaginationTable from 'examples/pagination';
 import PaginationHooksTable from 'examples/pagination/pagination-hooks';
@@ -260,6 +265,11 @@ storiesOf('Row Selection', module)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
   .add('Selection Hooks', () => <SelectionHooks />)
   .add('Hide Selection Column', () => <HideSelectionColumnTable />);
+
+storiesOf('Row Expand', module)
+  .add('Basic Row Expand', () => <BasicRowExpand />)
+  .add('Expand Management', () => <RowExpandManagement />)
+  .add('Non Expandabled Rows', () => <NonExpandableRows />);
 
 storiesOf('Pagination', module)
   .add('Basic Pagination Table', () => <PaginationTable />)
