@@ -1,5 +1,5 @@
 /* eslint react/require-default-props: 0 */
-/* jsx-a11y/no-static-element-interactions: 0 */
+/* eslint jsx-a11y/no-static-element-interactions: 0 */
 /* eslint no-return-assign: 0 */
 /* eslint prefer-template: 0 */
 import React, { Component } from 'react';
