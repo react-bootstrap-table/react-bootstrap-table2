@@ -90,7 +90,8 @@ describe('FilterContext', () => {
       expect(wrapper.length).toBe(1);
       expect(mockBase).toHaveBeenCalledWith({
         data,
-        onFilter: wrapper.instance().onFilter
+        onFilter: wrapper.instance().onFilter,
+        onExternalFilter: wrapper.instance().onExternalFilter
       });
     });
   });
@@ -106,7 +107,8 @@ describe('FilterContext', () => {
       expect(wrapper.length).toBe(1);
       expect(mockBase).toHaveBeenCalledWith({
         data,
-        onFilter: wrapper.instance().onFilter
+        onFilter: wrapper.instance().onFilter,
+        onExternalFilter: wrapper.instance().onExternalFilter
       });
     });
   });
