@@ -21,6 +21,7 @@
 * [headerClasses](#headerClasses)
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
+* [expandRow](#expandRow)
 * [rowStyle](#rowStyle)
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
@@ -122,6 +123,9 @@ Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for
 
 ### <a name='selectRow'>selectRow - [Object]</a>
 Makes table rows selectable, please see [selectRow definition](./row-selection.md) for more detail.
+
+### <a name='expandRow'>expandRow - [Object]</a>
+Makes table rows expandable, please see [expandRow definition](./row-expand.md) for more detail.
 
 ### <a name='rowStyle'>rowStyle = [Object | Function]</a>
 Custom the style of table rows:

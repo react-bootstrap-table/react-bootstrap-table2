@@ -114,7 +114,7 @@ Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/p
 No big changes for pagination, but still can't custom the pagination list, button and sizePerPage dropdown.
 
 ## Table Search
-the usage of search functionality is a little bit different from legacy search. The mainly different thing is developer have to render the search input field, we do believe it will be very flexible for all the developers who want to custom the search position or search field itself.
+Ｔhe usage of search functionality is a little bit different from legacy search. The mainly different thing is developer have to render the search input field, we do believe it will be very flexible for all the developers who want to custom the search position or search field itself.
 
 - [x] Custom search component and position
 - [x] Custom search value
@@ -122,15 +122,21 @@ the usage of search functionality is a little bit different from legacy search. 
 - [ ] Multiple search
 - [ ] Strict search
 
+## Row Expand
+- [x] Expand Row Events
+- [x] Expand Row Indicator
+- [x] Expand Row Management
+- [x] Custom Expand Row Indicators
+- [ ] Compatiable with Row Selection
+- [ ] Expand Column position
+- [ ] Expand Column Style/Class
+
 ## Remote
 
 > It's totally different in `react-bootstrap-table2`. Please [see](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/basic-remote.html).
 
 
 ## Row insert/Delete
-Not support yet
-
-## Expand row
 Not support yet
 
 ## Keyboard Navigation
