@@ -42,12 +42,41 @@ export default (
       this.setState(() => ({ expanded: currExpanded }));
     }
 
+    handleAllRowExpand = (e, expandAll) => {
+      const {
+        data,
+        keyField,
+        expandRow: {
+          onExpandAll,
+          nonExpandable
+        }
+      } = this.props;
+      const { expanded } = this.state;
+
+      let currExpanded;
+
+      if (expandAll) {
+        currExpanded = expanded.concat(dataOperator.expandableKeys(data, keyField, nonExpandable));
+      } else {
+        currExpanded = expanded.filter(s => typeof data.find(d => d[keyField] === s) === 'undefined');
+      }
+
+      if (onExpandAll) {
+        onExpandAll(expandAll, dataOperator.getExpandedRows(data, keyField, currExpanded), e);
+      }
+
+      this.setState(() => ({ expanded: currExpanded }));
+    }
+
     render() {
+      const { data, keyField } = this.props;
       return (
         <RowExpandContext.Provider
           value={ {
+            isAnyExpands: dataOperator.isAnyExpands(data, keyField, this.state.expanded),
             expanded: this.state.expanded,
-            onRowExpand: this.handleRowExpand
+            onRowExpand: this.handleRowExpand,
+            onAllRowExpand: this.handleAllRowExpand
           } }
         >
           { this.props.children }

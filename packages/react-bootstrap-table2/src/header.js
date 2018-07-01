@@ -5,6 +5,7 @@ import Const from './const';
 
 import HeaderCell from './header-cell';
 import SelectionHeaderCell from './row-selection/selection-header-cell';
+import ExpandHeaderCell from './row-expand/expand-header-cell';
 
 const Header = (props) => {
   const { ROW_SELECT_DISABLED } = Const;
@@ -17,12 +18,21 @@ const Header = (props) => {
     sortField,
     sortOrder,
     selectRow,
-    onExternalFilter
+    onExternalFilter,
+    expandRow
   } = props;
 
   return (
     <thead>
       <tr className={ className }>
+        {
+          (expandRow && expandRow.showExpandColumn)
+            ? <ExpandHeaderCell
+              onAllRowExpand={ expandRow.onAllRowExpand }
+              anyExpands={ expandRow.isAnyExpands }
+              renderer={ expandRow.expandHeaderColumnRenderer }
+            /> : null
+        }
         {
           (selectRow.mode !== ROW_SELECT_DISABLED && !selectRow.hideSelectColumn)
             ? <SelectionHeaderCell { ...selectRow } /> : null
@@ -62,7 +72,8 @@ Header.propTypes = {
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
   onExternalFilter: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  expandRow: PropTypes.object
 };
 
 export default Header;
