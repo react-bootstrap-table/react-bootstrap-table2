@@ -117,6 +117,9 @@ import HideSelectionColumnTable from 'examples/row-selection/hide-selection-colu
 import BasicRowExpand from 'examples/row-expand';
 import RowExpandManagement from 'examples/row-expand/expand-management';
 import NonExpandableRows from 'examples/row-expand/non-expandable-rows';
+import ExpandColumn from 'examples/row-expand/expand-column';
+import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
+import ExpandHooks from 'examples/row-expand/expand-hooks';
 
 // pagination
 import PaginationTable from 'examples/pagination';
@@ -269,7 +272,10 @@ storiesOf('Row Selection', module)
 storiesOf('Row Expand', module)
   .add('Basic Row Expand', () => <BasicRowExpand />)
   .add('Expand Management', () => <RowExpandManagement />)
-  .add('Non Expandabled Rows', () => <NonExpandableRows />);
+  .add('Non Expandabled Rows', () => <NonExpandableRows />)
+  .add('Expand Indicator', () => <ExpandColumn />)
+  .add('Custom Expand Indicator', () => <CustomExpandColumn />)
+  .add('Expand Hooks', () => <ExpandHooks />);
 
 storiesOf('Pagination', module)
   .add('Basic Pagination Table', () => <PaginationTable />)
