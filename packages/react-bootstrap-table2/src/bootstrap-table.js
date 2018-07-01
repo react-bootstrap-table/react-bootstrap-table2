@@ -151,6 +151,8 @@ BootstrapTable.propTypes = {
   expandRow: PropTypes.shape({
     renderer: PropTypes.func.isRequired,
     expanded: PropTypes.array,
+    onExpand: PropTypes.func,
+    onExpandAll: PropTypes.func,
     nonExpandable: PropTypes.array,
     showExpandColumn: PropTypes.bool,
     expandColumnRenderer: PropTypes.func,
