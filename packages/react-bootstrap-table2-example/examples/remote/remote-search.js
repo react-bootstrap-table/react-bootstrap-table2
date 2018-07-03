@@ -40,15 +40,27 @@ const columns = [{
 
 const RemoteFilter = props => (
   <div>
-    <BootstrapTable
-      remote={ { filter: true } }
+    <ToolkitContext.Provider
       keyField="id"
       data={ props.data }
       columns={ columns }
-      filter={ filterFactory() }
-      onTableChange={ props.onTableChange }
-    />
-    <Code>{ sourceCode }</Code>
+    >
+      <ToolkitContext.Consumer>
+        {
+          toolkitprops => [
+            <SearchBar { ...toolkitprops.searchProps } />,
+            <BootstrapTable
+              { ...toolkitprops.baseProps }
+              remote={ { search: true } }
+              onTableChange={ props.onTableChange }
+              search={ searchFactory({
+                ...toolkitprops.searchProps
+              }) }
+            />
+          ]
+        }
+      </ToolkitContext.Consumer>
+    </ToolkitContext.Provider>
   </div>
 );
 
@@ -97,16 +109,18 @@ class Container extends React.Component {
 
 const RemoteFilter = props => (
   <div>
-    <ToolkitContext.Provider>
+    <ToolkitContext.Provider
+      keyField="id"
+      data={ props.data }
+      columns={ columns }
+    >
       <ToolkitContext.Consumer>
         {
           toolkitprops => [
             <SearchBar { ...toolkitprops.searchProps } />,
             <BootstrapTable
+              { ...toolkitprops.baseProps }
               remote={ { search: true } }
-              keyField="id"
-              data={ props.data }
-              columns={ columns }
               onTableChange={ props.onTableChange }
               search={ searchFactory({
                 ...toolkitprops.searchProps

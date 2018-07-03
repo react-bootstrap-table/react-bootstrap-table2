@@ -36,7 +36,11 @@ const columns = [{
   text: 'Product Price'
 }];
 
-<ToolkitContext.Provider>
+<ToolkitContext.Provider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+>
   <ToolkitContext.Consumer>
     {
       props => (
@@ -51,9 +55,7 @@ const columns = [{
           />
           <hr />
           <BootstrapTable
-            keyField="id"
-            data={ products }
-            columns={ columns }
+            { ...props.baseProps }
             search={ searchFactory({
               ...props.searchProps
             }) }
@@ -67,7 +69,11 @@ const columns = [{
 
 export default () => (
   <div>
-    <ToolkitContext.Provider>
+    <ToolkitContext.Provider
+      keyField="id"
+      data={ products }
+      columns={ columns }
+    >
       <ToolkitContext.Consumer>
         {
           props => (
@@ -82,9 +88,7 @@ export default () => (
               />
               <hr />
               <BootstrapTable
-                keyField="id"
-                data={ products }
-                columns={ columns }
+                { ...props.baseProps }
                 search={ searchFactory({
                   ...props.searchProps
                 }) }

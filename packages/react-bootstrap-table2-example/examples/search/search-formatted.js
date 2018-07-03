@@ -38,21 +38,23 @@ const columns = [{
   formatter: cell => \`USD \${cell}\`  // we will search the data after formatted
 }];
 
-<ToolkitContext.Provider>
+<ToolkitContext.Provider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+>
   <ToolkitContext.Consumer>
     {
       props => (
         <div>
-          <h3>Input something at below input field:</h3>
+          <h3>Try to Search USD at below input field:</h3>
           <SearchBar { ...props.searchProps } />
           <hr />
           <BootstrapTable
-            keyField="id"
-            data={ products }
-            columns={ columns }
+            { ...props.baseProps }
             search={ searchFactory({
               ...props.searchProps,
-              searchFormatted: true  // enable searchFormatted
+              searchFormatted: true
             }) }
           />
         </div>
@@ -64,7 +66,11 @@ const columns = [{
 
 export default () => (
   <div>
-    <ToolkitContext.Provider>
+    <ToolkitContext.Provider
+      keyField="id"
+      data={ products }
+      columns={ columns }
+    >
       <ToolkitContext.Consumer>
         {
           props => (
@@ -73,9 +79,7 @@ export default () => (
               <SearchBar { ...props.searchProps } />
               <hr />
               <BootstrapTable
-                keyField="id"
-                data={ products }
-                columns={ columns }
+                { ...props.baseProps }
                 search={ searchFactory({
                   ...props.searchProps,
                   searchFormatted: true

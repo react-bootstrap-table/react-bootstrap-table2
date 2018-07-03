@@ -55,20 +55,23 @@ const MySearch = (props) => {
   );
 };
 
-<ToolkitContext.Provider>
+<ToolkitContext.Provider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+>
   <ToolkitContext.Consumer>
     {
       props => (
         <div>
           <BootstrapTable
-            keyField="id"
-            data={ products }
-            columns={ columns }
+            { ...props.baseProps }
             search={ searchFactory({
               ...props.searchProps
             }) }
           />
           <MySearch { ...props.searchProps } />
+          <br />
         </div>
       )
     }
@@ -96,15 +99,17 @@ const MySearch = (props) => {
 
 export default () => (
   <div>
-    <ToolkitContext.Provider>
+    <ToolkitContext.Provider
+      keyField="id"
+      data={ products }
+      columns={ columns }
+    >
       <ToolkitContext.Consumer>
         {
           props => (
             <div>
               <BootstrapTable
-                keyField="id"
-                data={ products }
-                columns={ columns }
+                { ...props.baseProps }
                 search={ searchFactory({
                   ...props.searchProps
                 }) }

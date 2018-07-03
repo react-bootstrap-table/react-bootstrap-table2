@@ -55,18 +55,20 @@ const columns = [{
   filterValue: (cell, row) => types[cell] // we will search the value after filterValue called
 }];
 
-<ToolkitContext.Provider>
+<ToolkitContext.Provider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+>
   <ToolkitContext.Consumer>
     {
       props => (
         <div>
-          <h3>Input something at below input field:</h3>
+          <h3>Try to Search Bob, Cat or Allen instead of 0, 1 or 2</h3>
           <SearchBar { ...props.searchProps } />
           <hr />
           <BootstrapTable
-            keyField="id"
-            data={ products }
-            columns={ columns }
+            { ...props.baseProps }
             search={ searchFactory({
               ...props.searchProps
             }) }
@@ -80,7 +82,11 @@ const columns = [{
 
 export default () => (
   <div>
-    <ToolkitContext.Provider>
+    <ToolkitContext.Provider
+      keyField="id"
+      data={ products }
+      columns={ columns }
+    >
       <ToolkitContext.Consumer>
         {
           props => (
@@ -89,9 +95,7 @@ export default () => (
               <SearchBar { ...props.searchProps } />
               <hr />
               <BootstrapTable
-                keyField="id"
-                data={ products }
-                columns={ columns }
+                { ...props.baseProps }
                 search={ searchFactory({
                   ...props.searchProps
                 }) }

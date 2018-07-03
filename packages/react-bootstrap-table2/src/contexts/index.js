@@ -13,7 +13,7 @@ const withContext = Base =>
   class BootstrapTableContainer extends remoteResolver(Component) {
     constructor(props) {
       super(props);
-      this.DataContext = createDataContext(props.data);
+      this.DataContext = createDataContext();
 
       if (props.columns.filter(col => col.sort).length > 0) {
         this.SortContext = createSortContext(

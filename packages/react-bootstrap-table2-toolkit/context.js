@@ -1,10 +1,18 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ToolkitContext = React.createContext();
 
 class ToolkitProvider extends React.Component {
+  static propTypes = {
+    keyField: PropTypes.string.isRequired,
+    data: PropTypes.array.isRequired,
+    columns: PropTypes.array.isRequired,
+    children: PropTypes.node.isRequired
+  }
+
   constructor(props) {
     super(props);
     this.test = false;
@@ -23,9 +31,11 @@ class ToolkitProvider extends React.Component {
   }
 
   render() {
+    const { keyField, columns, data } = this.props;
     return (
       <ToolkitContext.Provider value={ {
-        searchProps: this.searchProps
+        searchProps: this.searchProps,
+        baseProps: { keyField, columns, data }
       } }
       >
         { this.props.children }
