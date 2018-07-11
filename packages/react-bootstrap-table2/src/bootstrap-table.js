@@ -12,18 +12,46 @@ import Const from './const';
 import { isSelectedAll } from './store/selection';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
+  empty = {
+    cellEdit: {}
+  };
+
   constructor(props) {
     super(props);
     this.validateProps();
 
+    const cellSelectionInfo = this.getCellSelectionInfo(null, {}, props);
+
     this.state = {
-      data: props.data
+      data: props.data,
+      cellSelectionInfo
     };
   }
 
+  getCellSelectionInfo(old, props, nextProps) {
+    let cellSelectionInfo = old;
+    if (props.selectRow !== nextProps.selectRow
+      || props.onRowSelect !== nextProps.onRowSelect
+      || old === null
+    ) {
+      cellSelectionInfo = this.constructor.resolveSelectRowProps(nextProps.selectRow, {
+        onRowSelect: nextProps.onRowSelect
+      });
+    }
+
+    return cellSelectionInfo;
+  }
+
   componentWillReceiveProps(nextProps) {
+    const cellSelectionInfo = this.getCellSelectionInfo(
+      this.state.cellSelectionInfo,
+      this.props,
+      nextProps
+    );
+
     this.setState({
-      data: nextProps.data
+      data: nextProps.data,
+      cellSelectionInfo
     });
   }
 
@@ -68,10 +96,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-condensed': condensed
     }, classes);
 
-    const cellSelectionInfo = this.resolveSelectRowProps({
-      onRowSelect: this.props.onRowSelect
-    });
-
     const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
       onAllRowsSelect: this.props.onAllRowsSelect,
       selected: store.selected,
@@ -100,8 +124,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             isEmpty={ this.isEmpty() }
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
-            cellEdit={ this.props.cellEdit || {} }
-            selectRow={ cellSelectionInfo }
+            cellEdit={ this.props.cellEdit || this.empty.cellEdit }
+            selectRow={ this.state.cellSelectionInfo }
             selectedRowKeys={ store.selected }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
