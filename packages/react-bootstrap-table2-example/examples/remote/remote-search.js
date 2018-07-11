@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -23,6 +23,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 const columns = [{
@@ -40,27 +41,25 @@ const columns = [{
 
 const RemoteFilter = props => (
   <div>
-    <ToolkitContext.Provider
+    <ToolkitProvider
       keyField="id"
       data={ props.data }
       columns={ columns }
     >
-      <ToolkitContext.Consumer>
-        {
-          toolkitprops => [
-            <SearchBar { ...toolkitprops.searchProps } />,
-            <BootstrapTable
-              { ...toolkitprops.baseProps }
-              remote={ { search: true } }
-              onTableChange={ props.onTableChange }
-              search={ searchFactory({
-                ...toolkitprops.searchProps
-              }) }
-            />
-          ]
-        }
-      </ToolkitContext.Consumer>
-    </ToolkitContext.Provider>
+      {
+        toolkitprops => [
+          <SearchBar { ...toolkitprops.searchProps } />,
+          <BootstrapTable
+            { ...toolkitprops.baseProps }
+            remote={ { search: true } }
+            onTableChange={ props.onTableChange }
+            search={ searchFactory({
+              ...toolkitprops.searchProps
+            }) }
+          />
+        ]
+      }
+    </ToolkitProvider>
   </div>
 );
 
@@ -109,27 +108,25 @@ class Container extends React.Component {
 
 const RemoteFilter = props => (
   <div>
-    <ToolkitContext.Provider
+    <ToolkitProvider
       keyField="id"
       data={ props.data }
       columns={ columns }
     >
-      <ToolkitContext.Consumer>
-        {
-          toolkitprops => [
-            <SearchBar { ...toolkitprops.searchProps } />,
-            <BootstrapTable
-              { ...toolkitprops.baseProps }
-              remote={ { search: true } }
-              onTableChange={ props.onTableChange }
-              search={ searchFactory({
-                ...toolkitprops.searchProps
-              }) }
-            />
-          ]
-        }
-      </ToolkitContext.Consumer>
-    </ToolkitContext.Provider>
+      {
+        toolkitprops => [
+          <SearchBar { ...toolkitprops.searchProps } />,
+          <BootstrapTable
+            { ...toolkitprops.baseProps }
+            remote={ { search: true } }
+            onTableChange={ props.onTableChange }
+            search={ searchFactory({
+              ...toolkitprops.searchProps
+            }) }
+          />
+        ]
+      }
+    </ToolkitProvider>
     <Code>{ sourceCode }</Code>
   </div>
 );

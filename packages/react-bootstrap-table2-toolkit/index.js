@@ -1,4 +1,6 @@
-import ToolkitContext from './context';
+import Context from './context';
+import ToolkitProvider from './provider';
 
-export default ToolkitContext;
+export default ToolkitProvider;
+export const ToolkitContext = Context;
 export { default as Search } from './src/search';

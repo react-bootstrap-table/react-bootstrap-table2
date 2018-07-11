@@ -277,32 +277,30 @@ $ npm install react-bootstrap-table2-toolkit --save
 After installation of `react-bootstrap-table2-toolkit`, you can render search field easily:
 
 ```js
-import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 const { SearchBar, searchFactory } = Search;
 //...
 
-<ToolkitContext.Provider>
-  <ToolkitContext.Consumer>
-    {
-      props => (
-        <div>
-          <h3>Input something at below input field:</h3>
-          <SearchBar { ...props.searchProps } />
-          <hr />
-          <BootstrapTable
-            keyField="id"
-            data={ products }
-            columns={ columns }
-            search={ searchFactory({
-              ...props.searchProps
-            }) }
-          />
-        </div>
-      )
-    }
-  </ToolkitContext.Consumer>
-</ToolkitContext.Provider>
+<ToolkitProvider>
+  {
+    props => (
+      <div>
+      <h3>Input something at below input field:</h3>
+        <SearchBar { ...props.searchProps } />
+        <hr />
+        <BootstrapTable
+          keyField="id"
+          data={ products }
+          columns={ columns }
+          search={ searchFactory({
+            ...props.searchProps
+          }) }
+        />
+      </div>
+    )
+  }
+</ToolkitProvider>
 ```
 
 ### <a name='onTableChange'>onTableChange - [Function]</a>

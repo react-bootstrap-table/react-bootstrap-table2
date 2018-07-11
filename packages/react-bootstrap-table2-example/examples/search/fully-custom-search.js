@@ -3,7 +3,7 @@
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
@@ -23,7 +23,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 const { searchFactory } = Search;
 const columns = [{
@@ -55,28 +55,26 @@ const MySearch = (props) => {
   );
 };
 
-<ToolkitContext.Provider
+<ToolkitProvider
   keyField="id"
   data={ products }
   columns={ columns }
 >
-  <ToolkitContext.Consumer>
-    {
-      props => (
-        <div>
-          <BootstrapTable
-            { ...props.baseProps }
-            search={ searchFactory({
-              ...props.searchProps
-            }) }
-          />
-          <MySearch { ...props.searchProps } />
-          <br />
-        </div>
-      )
-    }
-  </ToolkitContext.Consumer>
-</ToolkitContext.Provider>
+  {
+    props => (
+      <div>
+        <BootstrapTable
+          { ...props.baseProps }
+          search={ searchFactory({
+            ...props.searchProps
+          }) }
+        />
+        <MySearch { ...props.searchProps } />
+        <br />
+      </div>
+    )
+  }
+</ToolkitProvider>
 `;
 
 const MySearch = (props) => {
@@ -99,28 +97,26 @@ const MySearch = (props) => {
 
 export default () => (
   <div>
-    <ToolkitContext.Provider
+    <ToolkitProvider
       keyField="id"
       data={ products }
       columns={ columns }
     >
-      <ToolkitContext.Consumer>
-        {
-          props => (
-            <div>
-              <BootstrapTable
-                { ...props.baseProps }
-                search={ searchFactory({
-                  ...props.searchProps
-                }) }
-              />
-              <MySearch { ...props.searchProps } />
-              <br />
-            </div>
-          )
-        }
-      </ToolkitContext.Consumer>
-    </ToolkitContext.Provider>
+      {
+        props => (
+          <div>
+            <BootstrapTable
+              { ...props.baseProps }
+              search={ searchFactory({
+                ...props.searchProps
+              }) }
+            />
+            <MySearch { ...props.searchProps } />
+            <br />
+          </div>
+        )
+      }
+    </ToolkitProvider>
     <Code>{ sourceCode }</Code>
   </div>
 );

@@ -3,7 +3,7 @@
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { jobsGenerator1 } from 'utils/common';
 
@@ -32,7 +32,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 const { SearchBar, searchFactory } = Search;
 const owners = ['Allen', 'Bob', 'Cat'];
@@ -55,56 +55,52 @@ const columns = [{
   filterValue: (cell, row) => types[cell] // we will search the value after filterValue called
 }];
 
-<ToolkitContext.Provider
+<ToolkitProvider
   keyField="id"
   data={ products }
   columns={ columns }
 >
-  <ToolkitContext.Consumer>
-    {
-      props => (
-        <div>
-          <h3>Try to Search Bob, Cat or Allen instead of 0, 1 or 2</h3>
-          <SearchBar { ...props.searchProps } />
-          <hr />
-          <BootstrapTable
-            { ...props.baseProps }
-            search={ searchFactory({
-              ...props.searchProps
-            }) }
-          />
-        </div>
-      )
-    }
-  </ToolkitContext.Consumer>
-</ToolkitContext.Provider>
+  {
+    props => (
+      <div>
+        <h3>Try to Search Bob, Cat or Allen instead of 0, 1 or 2</h3>
+        <SearchBar { ...props.searchProps } />
+        <hr />
+        <BootstrapTable
+          { ...props.baseProps }
+          search={ searchFactory({
+            ...props.searchProps
+          }) }
+        />
+      </div>
+    )
+  }
+</ToolkitProvider>
 `;
 
 export default () => (
   <div>
-    <ToolkitContext.Provider
+    <ToolkitProvider
       keyField="id"
       data={ products }
       columns={ columns }
     >
-      <ToolkitContext.Consumer>
-        {
-          props => (
-            <div>
-              <h3>Try to Search Bob, Cat or Allen instead of 0, 1 or 2</h3>
-              <SearchBar { ...props.searchProps } />
-              <hr />
-              <BootstrapTable
-                { ...props.baseProps }
-                search={ searchFactory({
-                  ...props.searchProps
-                }) }
-              />
-            </div>
-          )
-        }
-      </ToolkitContext.Consumer>
-    </ToolkitContext.Provider>
+      {
+        props => (
+          <div>
+            <h3>Try to Search Bob, Cat or Allen instead of 0, 1 or 2</h3>
+            <SearchBar { ...props.searchProps } />
+            <hr />
+            <BootstrapTable
+              { ...props.baseProps }
+              search={ searchFactory({
+                ...props.searchProps
+              }) }
+            />
+          </div>
+        )
+      }
+    </ToolkitProvider>
     <Code>{ sourceCode }</Code>
   </div>
 );

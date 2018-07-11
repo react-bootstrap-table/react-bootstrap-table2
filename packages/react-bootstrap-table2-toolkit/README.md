@@ -19,13 +19,12 @@ $ npm install react-bootstrap-table2-toolkit --save
 ## Table Search
 
 ```js
-import ToolkitContext, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 const { SearchBar, searchFactory } = Search;
 //...
 
-<ToolkitContext.Provider>
-  <ToolkitContext.Consumer>
+  <ToolkitProvider>
     {
       props => (
         <div>
@@ -43,13 +42,12 @@ const { SearchBar, searchFactory } = Search;
         </div>
       )
     }
-  </ToolkitContext.Consumer>
-</ToolkitContext.Provider>
+  </ToolkitProvider>
 ```
 
-1. You need to enable the search functionality via `search` prop on `BootstrapTable` and pass the result of calling `searchFactory` with custom option and default `searchProps` provided by `ToolkitContext.Provider`
+1. You need to enable the search functionality via `search` prop on `BootstrapTable` and pass the result of calling `searchFactory` with custom option and default `searchProps` provided by `ToolkitProvider`
 
-2. `ToolkitContext` is a react context, you are supposed to wrap the `BootstrapTable` and `SearchBar` as the child of `ToolkitContext.Consumer`
+2. `ToolkitProvider` is a wrapper of react context, you are supposed to wrap the `BootstrapTable` and `SearchBar` as the child of `ToolkitProvider`
 
 3. You should render `SearchBar` with `searchProps` as well.
 
