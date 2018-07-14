@@ -179,7 +179,8 @@ BootstrapTable.propTypes = {
   search: PropTypes.shape({
     searchText: PropTypes.string,
     searchContext: PropTypes.func
-  })
+  }),
+  setDependencyModules: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {

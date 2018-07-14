@@ -40,18 +40,33 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
     this.state = {
       searchText: ''
     };
+    this._ = null;
     this.onSearch = this.onSearch.bind(this);
+    this.setDependencyModules = this.setDependencyModules.bind(this);
   }
 
   onSearch(searchText) {
     this.setState({ searchText });
   }
 
+  /**
+   * 
+   * @param {*} _ 
+   * this function will be called only one time when table render
+   * react-bootstrap-table-next/src/context/index.js will call this cb for passing the _ module
+   * Please consider to extract a common module to handle _ module.
+   * this is just a quick fix
+   */
+  setDependencyModules(_) {
+    this._ = _;
+  }
+
   render() {
     const baseProps = {
       keyField: this.props.keyField,
       columns: this.props.columns,
-      data: this.props.data
+      data: this.props.data,
+      setDependencyModules: this.setDependencyModules
     };
     if (this.props.search) {
       baseProps.search = {

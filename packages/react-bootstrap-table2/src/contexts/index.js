@@ -47,6 +47,10 @@ const withContext = Base =>
         this.SearchContext = props.search.searchContext(
           _, this.isRemoteSearch, this.handleRemoteSearchChange);
       }
+
+      if (props.setDependencyModules) {
+        props.setDependencyModules(_);
+      }
     }
 
     renderBase() {

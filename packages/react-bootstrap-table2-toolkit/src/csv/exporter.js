@@ -19,6 +19,7 @@ export const getMetaInfo = columns =>
 export const transform = (
   data,
   meta,
+  getValue,
   {
     separator,
     ignoreHeader
@@ -36,7 +37,7 @@ export const transform = (
   content += data
     .map((row, rowIndex) =>
       visibleColumns.map((m) => {
-        let cellContent = row[m.field];
+        let cellContent = getValue(row, m.field);
         if (m.formatter) {
           cellContent = m.formatter(cellContent, row, rowIndex, m.formatExtraData);
         }

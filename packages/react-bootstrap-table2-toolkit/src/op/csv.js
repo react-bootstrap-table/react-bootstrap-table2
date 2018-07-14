@@ -18,7 +18,7 @@ export default Base =>
           ...csvDefaultOptions,
           ...exportCSV
         };
-      const content = transform(data, meta, options);
+      const content = transform(data, meta, this._.get, options);
       save(content, options);
     }
   };
