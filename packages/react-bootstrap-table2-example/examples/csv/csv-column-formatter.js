@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 
+/* eslint no-unused-vars: 0 */
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
@@ -17,7 +18,8 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Product Price',
+  csvFormatter: (cell, row, rowIndex) => `$ ${cell}NTD`
 }];
 
 const sourceCode = `\
@@ -33,7 +35,8 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Product Price',
+  csvFormatter: (cell, row, rowIndex) => \`$ \${cell}NTD\`
 }];
 
 <ToolkitProvider

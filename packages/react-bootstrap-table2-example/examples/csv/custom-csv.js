@@ -60,7 +60,12 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
-      exportCSV
+      exportCSV={ {
+        fileName: 'custom.csv',
+        separator: '|',
+        ignoreHeader: true,
+        noAutoBOM: false
+      } }
     >
       {
         props => (

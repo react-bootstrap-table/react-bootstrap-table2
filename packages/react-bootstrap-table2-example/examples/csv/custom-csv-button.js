@@ -2,11 +2,10 @@
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
-const { ExportCSVButton } = CSVExport;
 const products = productsGenerator();
 
 const columns = [{
@@ -22,9 +21,8 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 
-const { ExportCSVButton } = CSVExport;
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -36,6 +34,17 @@ const columns = [{
   text: 'Product Price'
 }];
 
+const MyExportCSV = (props) => {
+  const handleClick = () => {
+    props.onExport();
+  };
+  return (
+    <div>
+      <button className="btn btn-success" onClick={ handleClick }>Export to CSV</button>
+    </div>
+  );
+};
+
 <ToolkitProvider
   keyField="id"
   data={ products }
@@ -45,14 +54,25 @@ const columns = [{
   {
     props => (
       <div>
-        <ExportCSVButton { ...props.csvProps }>Export CSV!!</ExportCSVButton>
-        <hr />
         <BootstrapTable { ...props.baseProps } />
+        <hr />
+        <MyExportCSV { ...props.csvProps } />
       </div>
     )
   }
 </ToolkitProvider>
 `;
+
+const MyExportCSV = (props) => {
+  const handleClick = () => {
+    props.onExport();
+  };
+  return (
+    <div>
+      <button className="btn btn-success" onClick={ handleClick }>Export to CSV</button>
+    </div>
+  );
+};
 
 export default () => (
   <div>
@@ -65,9 +85,9 @@ export default () => (
       {
         props => (
           <div>
-            <ExportCSVButton { ...props.csvProps }>Export CSV!!</ExportCSVButton>
-            <hr />
             <BootstrapTable { ...props.baseProps } />
+            <hr />
+            <MyExportCSV { ...props.csvProps } />
           </div>
         )
       }

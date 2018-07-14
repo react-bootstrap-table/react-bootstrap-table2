@@ -17,7 +17,8 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Product Price',
+  csvType: Number
 }];
 
 const sourceCode = `\
@@ -33,7 +34,8 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Product Price',
+  csvType: Number
 }];
 
 <ToolkitProvider

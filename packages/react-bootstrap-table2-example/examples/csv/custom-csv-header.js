@@ -11,13 +11,16 @@ const products = productsGenerator();
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  csvText: 'CSV Product ID'
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  csvText: 'CSV Product Name'
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Product Price',
+  csvText: 'CSV Product price'
 }];
 
 const sourceCode = `\
@@ -27,13 +30,16 @@ import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
 const { ExportCSVButton } = CSVExport;
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  csvText: 'CSV Product ID'
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  csvText: 'CSV Product Name'
 }, {
   dataField: 'price',
-  text: 'Product Price'
+  text: 'Product Price',
+  csvText: 'CSV Product price'
 }];
 
 <ToolkitProvider

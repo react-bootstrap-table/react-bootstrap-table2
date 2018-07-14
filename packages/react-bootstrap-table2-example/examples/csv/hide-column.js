@@ -14,7 +14,8 @@ const columns = [{
   text: 'Product ID'
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  csvExport: false
 }, {
   dataField: 'price',
   text: 'Product Price'
@@ -30,7 +31,8 @@ const columns = [{
   text: 'Product ID'
 }, {
   dataField: 'name',
-  text: 'Product Name'
+  text: 'Product Name',
+  csvExport: false
 }, {
   dataField: 'price',
   text: 'Product Price'

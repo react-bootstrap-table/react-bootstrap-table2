@@ -135,6 +135,12 @@ import CustomSearchValue from 'examples/search/custom-search-value';
 
 // CSV
 import ExportCSV from 'examples/csv';
+import CSVFormatter from 'examples/csv/csv-column-formatter';
+import CustomCSVHeader from 'examples/csv/custom-csv-header';
+import HideCSVColumn from 'examples/csv/hide-column';
+import CSVColumnType from 'examples/csv/csv-column-type';
+import CustomCSVButton from 'examples/csv/custom-csv-button';
+import CustomCSV from 'examples/csv/custom-csv';
 
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
@@ -293,7 +299,13 @@ storiesOf('Table Search', module)
   .add('Custom Search Value', () => <CustomSearchValue />);
 
 storiesOf('Export CSV', module)
-  .add('Basic Export CSV', () => <ExportCSV />);
+  .add('Basic Export CSV', () => <ExportCSV />)
+  .add('Format CSV Column', () => <CSVFormatter />)
+  .add('Custom CSV Header', () => <CustomCSVHeader />)
+  .add('Hide CSV Column', () => <HideCSVColumn />)
+  .add('CSV Column Type', () => <CSVColumnType />)
+  .add('Custom CSV Button', () => <CustomCSVButton />)
+  .add('Custom CSV', () => <CustomCSV />);
 
 storiesOf('EmptyTableOverlay', module)
   .add('Empty Table Overlay', () => <EmptyTableOverlay />)
