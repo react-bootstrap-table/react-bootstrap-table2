@@ -22,6 +22,8 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
   * Pagination Addons
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
   * Overlay/Loading Addons
+* [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
+  * Table Toolkits, like search, csv etc.
 
 This can help your application with less bundled size and also help `react-bootstrap-table2` have clean design to avoid handling to much logic in kernel module(SRP). Hence, which means you probably need to install above addons when you need specific features.
 
@@ -131,6 +133,9 @@ No big changes for pagination, but still can't custom the pagination list, butto
 - [ ] Expand Column position
 - [ ] Expand Column Style/Class
 
+## Export CSV
+Export CSV functionality is like search, which is one of functionality in the `react-bootstrap-table2-toolkit`. But all the legacy function we already implemented.
+
 ## Remote
 
 > It's totally different in `react-bootstrap-table2`. Please [see](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/basic-remote.html).
@@ -140,7 +145,4 @@ No big changes for pagination, but still can't custom the pagination list, butto
 Not support yet
 
 ## Keyboard Navigation
-Not support yet
-
-## Export CSV
 Not support yet
