@@ -6,7 +6,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
-const { SearchBar, searchFactory } = Search;
+const { SearchBar } = Search;
 const products = productsGenerator();
 
 const columns = [{
@@ -25,7 +25,7 @@ const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
-const { SearchBar, searchFactory } = Search;
+const { SearchBar } = Search;
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -42,6 +42,7 @@ const columns = [{
   keyField="id"
   data={ products }
   columns={ columns }
+  search={ { searchFormatted: true } }
 >
   {
     props => (
@@ -51,10 +52,6 @@ const columns = [{
         <hr />
         <BootstrapTable
           { ...props.baseProps }
-          search={ searchFactory({
-            ...props.searchProps,
-            searchFormatted: true
-          }) }
         />
       </div>
     )
@@ -68,6 +65,7 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
+      search={ { searchFormatted: true } }
     >
       {
         props => (
@@ -77,10 +75,6 @@ export default () => (
             <hr />
             <BootstrapTable
               { ...props.baseProps }
-              search={ searchFactory({
-                ...props.searchProps,
-                searchFormatted: true
-              }) }
             />
           </div>
         )

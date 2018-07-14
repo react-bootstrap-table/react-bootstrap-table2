@@ -7,7 +7,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
-const { SearchBar, searchFactory } = Search;
+const { SearchBar } = Search;
 const products = productsGenerator(17);
 
 const columns = [{
@@ -45,6 +45,7 @@ const RemoteFilter = props => (
       keyField="id"
       data={ props.data }
       columns={ columns }
+      search
     >
       {
         toolkitprops => [
@@ -53,13 +54,11 @@ const RemoteFilter = props => (
             { ...toolkitprops.baseProps }
             remote={ { search: true } }
             onTableChange={ props.onTableChange }
-            search={ searchFactory({
-              ...toolkitprops.searchProps
-            }) }
           />
         ]
       }
     </ToolkitProvider>
+    <Code>{ sourceCode }</Code>
   </div>
 );
 
@@ -112,6 +111,7 @@ const RemoteFilter = props => (
       keyField="id"
       data={ props.data }
       columns={ columns }
+      search
     >
       {
         toolkitprops => [
@@ -120,9 +120,6 @@ const RemoteFilter = props => (
             { ...toolkitprops.baseProps }
             remote={ { search: true } }
             onTableChange={ props.onTableChange }
-            search={ searchFactory({
-              ...toolkitprops.searchProps
-            }) }
           />
         ]
       }

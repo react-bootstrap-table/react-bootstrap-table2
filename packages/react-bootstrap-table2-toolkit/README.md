@@ -21,10 +21,15 @@ $ npm install react-bootstrap-table2-toolkit --save
 ```js
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
-const { SearchBar, searchFactory } = Search;
+const { SearchBar } = Search;
 //...
 
-  <ToolkitProvider>
+  <ToolkitProvider
+    keyField="id"
+    data={ products }
+    columns={ columns }
+    search
+  >
     {
       props => (
         <div>
@@ -32,12 +37,7 @@ const { SearchBar, searchFactory } = Search;
           <SearchBar { ...props.searchProps } />
           <hr />
           <BootstrapTable
-            keyField="id"
-            data={ products }
-            columns={ columns }
-            search={ searchFactory({
-              ...props.searchProps
-            }) }
+            { ...props.baseProps }
           />
         </div>
       )
@@ -45,25 +45,26 @@ const { SearchBar, searchFactory } = Search;
   </ToolkitProvider>
 ```
 
-1. You need to enable the search functionality via `search` prop on `BootstrapTable` and pass the result of calling `searchFactory` with custom option and default `searchProps` provided by `ToolkitProvider`
+1. You have to enable the search functionality via `search` prop on `ToolkitProvider`.
 
 2. `ToolkitProvider` is a wrapper of react context, you are supposed to wrap the `BootstrapTable` and `SearchBar` as the child of `ToolkitProvider`
 
-3. You should render `SearchBar` with `searchProps` as well.
+3. You should render `SearchBar` with `searchProps` as well. The position of `SearchBar` is depends on you.
 
-### Options
+### search pptions
 
 # searchFormatted - [bool]
-If you want to search on the formatted data, you are supposed to enable it. `react-bootstrap-table2` will check if you define the `column.formatter` when doing search.
+If you want to search on the formatted data, you are supposed to enable this props. `react-bootstrap-table2` will check if you define the `column.formatter` when doing search.
 
 ```js
-<BootstrapTable
+<ToolkitProvider
   keyField="id"
   data={ products }
   columns={ columns }
-  search={ searchFactory({
-    ...props.searchProps,
+  search={ {
     searchFormatted: true
-  }) }
-/>
+  } }
+>
+  // ...
+</ToolkitProvider>
 ```

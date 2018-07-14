@@ -174,7 +174,12 @@ BootstrapTable.propTypes = {
   onTableChange: PropTypes.func,
   onSort: PropTypes.func,
   onFilter: PropTypes.func,
-  onExternalFilter: PropTypes.func
+  onExternalFilter: PropTypes.func,
+  // Inject from toolkit
+  search: PropTypes.shape({
+    searchText: PropTypes.string,
+    searchContext: PropTypes.func
+  })
 };
 
 BootstrapTable.defaultProps = {

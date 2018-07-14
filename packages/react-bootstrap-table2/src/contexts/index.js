@@ -43,8 +43,8 @@ const withContext = Base =>
           this.isRemotePagination, this.handleRemotePageChange);
       }
 
-      if (props.search) {
-        this.SearchContext = props.search.createContext(
+      if (props.search && props.search.searchContext) {
+        this.SearchContext = props.search.searchContext(
           _, this.isRemoteSearch, this.handleRemoteSearchChange);
       }
     }

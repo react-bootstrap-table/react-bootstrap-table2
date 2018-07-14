@@ -138,10 +138,7 @@ describe('Context', () => {
     beforeEach(() => {
       const SearchContext = React.createContext();
       const search = {
-        createContext: jest.fn().mockReturnValue({
-          Provider: SearchContext.Provider,
-          Consumer: SearchContext.Consumer
-        }),
+        searchContext: jest.fn().mockReturnValue(SearchContext),
         searchText: ''
       };
       wrapper = shallow(

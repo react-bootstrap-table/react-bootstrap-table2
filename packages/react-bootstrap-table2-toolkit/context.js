@@ -1,7 +1,8 @@
-/* eslint react/prop-types: 0 */
-/* eslint react/require-default-props: 0 */
+
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import createContext from './src/search/context';
 
 const ToolkitContext = React.createContext();
 
@@ -10,32 +11,49 @@ class ToolkitProvider extends React.Component {
     keyField: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
     columns: PropTypes.array.isRequired,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    search: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.shape({
+        searchFormatted: PropTypes.bool
+      })
+    ])
+  }
+
+  static defaultProps = {
+    search: null
   }
 
   constructor(props) {
     super(props);
-    this.test = false;
-    this.searchProps = {
-      onSearch: this.onSearch.bind(this),
+    this.state = {
       searchText: ''
     };
+    this.onSearch = this.onSearch.bind(this);
   }
 
   onSearch(searchText) {
-    this.searchProps = {
-      ...this.searchProps,
-      searchText
-    };
-    this.forceUpdate();
+    this.setState({ searchText });
   }
 
   render() {
-    const { keyField, columns, data } = this.props;
+    const baseProps = {
+      keyField: this.props.keyField,
+      columns: this.props.columns,
+      data: this.props.data
+    };
+    if (this.props.search) {
+      baseProps.search = {
+        searchContext: createContext(this.props.search),
+        searchText: this.state.searchText
+      };
+    }
     return (
       <ToolkitContext.Provider value={ {
-        searchProps: this.searchProps,
-        baseProps: { keyField, columns, data }
+        searchProps: {
+          onSearch: this.onSearch
+        },
+        baseProps
       } }
       >
         { this.props.children }

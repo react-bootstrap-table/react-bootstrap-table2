@@ -27,7 +27,7 @@ export default ExtendBase =>
       }
 
       if (this.searchContext) {
-        searchText = this.searchContext.props.searchText;
+        searchText = this.props.search.searchText;
       }
 
       return {

@@ -7,7 +7,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { jobsGenerator1 } from 'utils/common';
 
-const { SearchBar, searchFactory } = Search;
+const { SearchBar } = Search;
 const products = jobsGenerator1(5);
 
 const owners = ['Allen', 'Bob', 'Cat'];
@@ -34,7 +34,7 @@ const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
-const { SearchBar, searchFactory } = Search;
+const { SearchBar } = Search;
 const owners = ['Allen', 'Bob', 'Cat'];
 const types = ['Cloud Service', 'Message Service', 'Add Service', 'Edit Service', 'Money'];
 
@@ -59,6 +59,7 @@ const columns = [{
   keyField="id"
   data={ products }
   columns={ columns }
+  search
 >
   {
     props => (
@@ -68,9 +69,6 @@ const columns = [{
         <hr />
         <BootstrapTable
           { ...props.baseProps }
-          search={ searchFactory({
-            ...props.searchProps
-          }) }
         />
       </div>
     )
@@ -84,6 +82,7 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
+      search
     >
       {
         props => (
@@ -93,9 +92,6 @@ export default () => (
             <hr />
             <BootstrapTable
               { ...props.baseProps }
-              search={ searchFactory({
-                ...props.searchProps
-              }) }
             />
           </div>
         )

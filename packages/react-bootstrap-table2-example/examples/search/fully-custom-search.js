@@ -3,12 +3,11 @@
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
-const { searchFactory } = Search;
 
 const columns = [{
   dataField: 'id',
@@ -23,9 +22,8 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import ToolkitProvider from 'react-bootstrap-table2-toolkit';
 
-const { searchFactory } = Search;
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
@@ -59,15 +57,13 @@ const MySearch = (props) => {
   keyField="id"
   data={ products }
   columns={ columns }
+  search
 >
   {
     props => (
       <div>
         <BootstrapTable
           { ...props.baseProps }
-          search={ searchFactory({
-            ...props.searchProps
-          }) }
         />
         <MySearch { ...props.searchProps } />
         <br />
@@ -101,15 +97,13 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
+      search
     >
       {
         props => (
           <div>
             <BootstrapTable
               { ...props.baseProps }
-              search={ searchFactory({
-                ...props.searchProps
-              }) }
             />
             <MySearch { ...props.searchProps } />
             <br />
