@@ -1,12 +1,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import statelessDrcorator from './statelessOp';
 
 import createContext from './src/search/context';
 
 const ToolkitContext = React.createContext();
 
-class ToolkitProvider extends React.Component {
+class ToolkitProvider extends statelessDrcorator(React.Component) {
   static propTypes = {
     keyField: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
@@ -17,11 +18,21 @@ class ToolkitProvider extends React.Component {
       PropTypes.shape({
         searchFormatted: PropTypes.bool
       })
+    ]),
+    exportCSV: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.shape({
+        fileName: PropTypes.string,
+        separator: PropTypes.string,
+        ignoreHeader: PropTypes.bool,
+        noAutoBOM: PropTypes.bool
+      })
     ])
   }
 
   static defaultProps = {
-    search: null
+    search: false,
+    exportCSV: false
   }
 
   constructor(props) {
@@ -52,6 +63,9 @@ class ToolkitProvider extends React.Component {
       <ToolkitContext.Provider value={ {
         searchProps: {
           onSearch: this.onSearch
+        },
+        csvProps: {
+          onExport: this.handleExportCSV
         },
         baseProps
       } }

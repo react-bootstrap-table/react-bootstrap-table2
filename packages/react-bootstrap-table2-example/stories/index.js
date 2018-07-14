@@ -133,6 +133,9 @@ import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
 import CustomSearchValue from 'examples/search/custom-search-value';
 
+// CSV
+import ExportCSV from 'examples/csv';
+
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
 import TableOverlay from 'examples/loading-overlay/table-overlay';
@@ -288,6 +291,9 @@ storiesOf('Table Search', module)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Fromatted Value', () => <SearchFormattedData />)
   .add('Custom Search Value', () => <CustomSearchValue />);
+
+storiesOf('Export CSV', module)
+  .add('Basic Export CSV', () => <ExportCSV />);
 
 storiesOf('EmptyTableOverlay', module)
   .add('Empty Table Overlay', () => <EmptyTableOverlay />)
