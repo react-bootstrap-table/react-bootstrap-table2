@@ -1,5 +1,5 @@
 import Store from 'react-bootstrap-table-next/src/store';
-import { getByCurrPage } from '../src/page';
+import { getByCurrPage, alignPage } from '../src/page';
 
 describe('Page Functions', () => {
   let data;
@@ -45,6 +45,42 @@ describe('Page Functions', () => {
         store.sizePerPage = sizePerPage;
         const rows = getByCurrPage(store, pageStartIndex);
         expect(rows).toHaveLength(0);
+      });
+    });
+  });
+
+  describe('alignPage', () => {
+    const pageStartIndex = 1;
+    const sizePerPage = 10;
+    describe('if the length of store.data is less than the end page index', () => {
+      beforeEach(() => {
+        data = [];
+        for (let i = 0; i < 15; i += 1) {
+          data.push({ id: i, name: `test_name${i}` });
+        }
+        store = new Store('id');
+        store.data = data;
+        store.page = 2;
+      });
+
+      it('should return pageStartIndex argument', () => {
+        expect(alignPage(store, pageStartIndex, sizePerPage)).toEqual(pageStartIndex);
+      });
+    });
+
+    describe('if the length of store.data is large than the end page index', () => {
+      beforeEach(() => {
+        data = [];
+        for (let i = 0; i < 30; i += 1) {
+          data.push({ id: i, name: `test_name${i}` });
+        }
+        store = new Store('id');
+        store.data = data;
+        store.page = 2;
+      });
+
+      it('should return current page', () => {
+        expect(alignPage(store, pageStartIndex, sizePerPage)).toEqual(store.page);
       });
     });
   });
