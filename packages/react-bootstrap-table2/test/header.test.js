@@ -29,6 +29,25 @@ describe('Header', () => {
     });
   });
 
+  describe('className prop is exists', () => {
+    const className = 'test-class';
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <Header
+          { ...mockHeaderResolvedProps }
+          columns={ columns }
+          className={ className }
+        />
+      );
+    });
+
+    it('should render successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find(`.${className}`).length).toBe(1);
+    });
+  });
+
   describe('header with columns enable sort', () => {
     const sortField = columns[1].dataField;
 

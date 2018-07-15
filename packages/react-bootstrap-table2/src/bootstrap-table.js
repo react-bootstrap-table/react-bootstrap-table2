@@ -86,6 +86,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           { tableCaption }
           <Header
             columns={ columns }
+            className={ this.props.headerClasses }
             sortField={ store.sortField }
             sortOrder={ store.sortOrder }
             onSort={ this.props.onSort }
@@ -155,6 +156,7 @@ BootstrapTable.propTypes = {
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  headerClasses: PropTypes.string,
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
