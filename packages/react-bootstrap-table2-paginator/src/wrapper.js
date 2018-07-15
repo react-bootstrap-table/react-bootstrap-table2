@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import Const from './const';
 import Pagination from './pagination';
-import { getByCurrPage } from './page';
+import { getByCurrPage, alignPage } from './page';
 
 export default (Base, {
   remoteResolver
@@ -49,17 +49,21 @@ export default (Base, {
     componentWillReceiveProps(nextProps) {
       let needNewState = false;
       let { currPage, currSizePerPage } = this.state;
-      const { page, sizePerPage, pageStartIndex, onPageChange } = nextProps.pagination.options;
+      const { page, sizePerPage, onPageChange } = nextProps.pagination.options;
+
+      const pageStartIndex = typeof nextProps.pagination.options.pageStartIndex !== 'undefined' ?
+        nextProps.pagination.options.pageStartIndex : Const.PAGE_START_INDEX;
 
       if (typeof page !== 'undefined' && currPage !== page) { // user defined page
         currPage = page;
         needNewState = true;
       } else if (nextProps.isDataChanged) {
+        currPage = alignPage(this.props.store, pageStartIndex, currSizePerPage);
         needNewState = true;
       }
 
       if (typeof currPage === 'undefined') {
-        currPage = typeof pageStartIndex !== 'undefined' ? pageStartIndex : Const.PAGE_START_INDEX;
+        currPage = pageStartIndex;
       }
 
       if (typeof sizePerPage !== 'undefined') {
