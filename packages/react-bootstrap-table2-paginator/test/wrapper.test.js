@@ -176,23 +176,6 @@ describe('Wrapper', () => {
           expect(props.store.page).toEqual(instance.state.currPage);
         });
       });
-
-      describe('when nextProps.isDataChanged is true, currPage is undefined and options.pageStartIndex exists', () => {
-        beforeEach(() => {
-          nextProps.isDataChanged = true;
-          nextProps.pagination.options.pageStartIndex = 0;
-          instance.state.currPage = undefined;
-          instance.componentWillReceiveProps(nextProps);
-        });
-
-        it('should setting currPage state correctly', () => {
-          expect(instance.state.currPage).toBe(nextProps.pagination.options.pageStartIndex);
-        });
-
-        it('should saving store.page correctly', () => {
-          expect(props.store.page).toEqual(instance.state.currPage);
-        });
-      });
     });
   });
 
