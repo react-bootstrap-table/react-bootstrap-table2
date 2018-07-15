@@ -138,6 +138,7 @@ describe('PaginationContext', () => {
           instance = wrapper.instance();
           wrapper.render();
           nextProps = {
+            data,
             pagination: {
               options: {
                 page: 2,
@@ -167,6 +168,7 @@ describe('PaginationContext', () => {
           instance = wrapper.instance();
           wrapper.render();
           nextProps = {
+            data,
             pagination: {
               options: {
                 page: 1,
@@ -178,7 +180,7 @@ describe('PaginationContext', () => {
         });
 
         it('shouldn\'t call options.onPageChange', () => {
-          expect(onPageChange).not.toHaveBeenCalled();
+          expect(onPageChange).toHaveBeenCalledTimes(0);
         });
 
         it('should have correct currPage', () => {
@@ -195,7 +197,7 @@ describe('PaginationContext', () => {
         }));
         instance = wrapper.instance();
         wrapper.render();
-        nextProps = { pagination: defaultPagination };
+        nextProps = { data, pagination: defaultPagination };
         instance.componentWillReceiveProps(nextProps);
       });
 
@@ -216,6 +218,7 @@ describe('PaginationContext', () => {
           instance = wrapper.instance();
           wrapper.render();
           nextProps = {
+            data,
             pagination: {
               options: {
                 sizePerPage: Const.SIZE_PER_PAGE_LIST[2],
@@ -245,6 +248,7 @@ describe('PaginationContext', () => {
           instance = wrapper.instance();
           wrapper.render();
           nextProps = {
+            data,
             pagination: {
               options: {
                 sizePerPage: Const.SIZE_PER_PAGE_LIST[0],
@@ -255,8 +259,8 @@ describe('PaginationContext', () => {
           instance.componentWillReceiveProps(nextProps);
         });
 
-        it('shouldn\'t call options.onPageChange', () => {
-          expect(onPageChange).not.toHaveBeenCalled();
+        it('shouldn\'t  call options.onPageChange', () => {
+          expect(onPageChange).toHaveBeenCalledTimes(0);
         });
 
         it('should have correct currSizePerPage', () => {
@@ -273,7 +277,7 @@ describe('PaginationContext', () => {
         }));
         instance = wrapper.instance();
         wrapper.render();
-        nextProps = { pagination: defaultPagination };
+        nextProps = { data, pagination: defaultPagination };
         instance.componentWillReceiveProps(nextProps);
       });
 

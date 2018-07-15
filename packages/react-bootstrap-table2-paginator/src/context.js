@@ -1,5 +1,6 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
+/* eslint no-lonely-if: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -62,8 +63,14 @@ export default (
         currPage = page;
         needNewState = true;
       } else {
-        currPage = alignPage(nextProps.data, currPage, currSizePerPage, pageStartIndex);
-        needNewState = true;
+        // user should align the page when the page is not fit to the data size when remote enable
+        if (!isRemotePagination()) {
+          const newPage = alignPage(nextProps.data, currPage, currSizePerPage, pageStartIndex);
+          if (currPage !== newPage) {
+            currPage = newPage;
+            needNewState = true;
+          }
+        }
       }
 
       if (typeof sizePerPage !== 'undefined' && currSizePerPage !== sizePerPage) {
@@ -75,7 +82,6 @@ export default (
         if (onPageChange) {
           onPageChange(currPage, currSizePerPage);
         }
-
         this.currPage = currPage;
         this.currSizePerPage = currSizePerPage;
       }
