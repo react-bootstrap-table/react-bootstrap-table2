@@ -72,6 +72,7 @@ import SortEvents from 'examples/sort/sort-events';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
 import HeaderSortingStyleTable from 'examples/sort/header-sorting-style';
+import CustomSortCaret from 'examples/sort/custom-sort-caret';
 
 // cell editing
 import ClickToEditTable from 'examples/cell-edit/click-to-edit-table';
@@ -205,6 +206,7 @@ storiesOf('Sort Table', module)
   .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
   .add('Sort Events', () => <SortEvents />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
+  .add('Custom sort caret', () => <CustomSortCaret />)
   .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
   .add('Custom Style on Sorting Header Column', () => <HeaderSortingStyleTable />);
 

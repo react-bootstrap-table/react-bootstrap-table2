@@ -420,6 +420,26 @@ describe('HeaderCell', () => {
         });
       });
 
+      describe('when sortCaret is user defined', () => {
+        const customSortCaret = sortOrder => (<i id="customSortCaret" className={ `fa ${sortOrder}` } />);
+        [Const.SORT_ASC, undefined].forEach((order) => {
+          beforeEach(() => {
+            wrapper = shallow(
+              <HeaderCell
+                column={ column }
+                index={ index }
+                sorting
+                sortCaretRenderer={ customSortCaret }
+                sortOrder={ order }
+              />);
+          });
+          it('should render custom sort caret correctly', () => {
+            expect(wrapper.find('#customSortCaret').length).toBe(1);
+            expect(wrapper.find('#customSortCaret').hasClass(order), true);
+          });
+        });
+      });
+
       describe('when headerSortingClasses is defined ', () => {
         const classes = 'foo';
         const order = Const.SORT_DESC;
