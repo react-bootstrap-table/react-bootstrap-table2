@@ -10,6 +10,7 @@ const Header = (props) => {
   const { ROW_SELECT_DISABLED } = Const;
 
   const {
+    className,
     columns,
     onSort,
     onFilter,
@@ -21,7 +22,7 @@ const Header = (props) => {
 
   return (
     <thead>
-      <tr>
+      <tr className={ className }>
         {
           (selectRow.mode !== ROW_SELECT_DISABLED && !selectRow.hideSelectColumn)
             ? <SelectionHeaderCell { ...selectRow } /> : null
@@ -60,7 +61,8 @@ Header.propTypes = {
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
-  onExternalFilter: PropTypes.func
+  onExternalFilter: PropTypes.func,
+  className: PropTypes.string
 };
 
 export default Header;

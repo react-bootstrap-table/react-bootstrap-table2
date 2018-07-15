@@ -18,6 +18,7 @@
 * [id](#id)
 * [classes](#classes)
 * [wrapperClasses](#wrapperClasses)
+* [headerClasses](#headerClasses)
 * [cellEdit](#cellEdit)
 * [selectRow](#selectRow)
 * [rowStyle](#rowStyle)
@@ -111,6 +112,10 @@ Customize class on `table` element.
 
 ### <a name='wrapperClasses'>wrapperClasses - [String]</a>
 Customize class on the outer element which wrap up the `table` element. 
+
+### <a name='headerClasses'>headerClasses - [String]</a>
+Customize class on the header row(`tr`). 
+
 ### <a name='cellEdit'>cellEdit - [Object]</a>
 Makes table cells editable, please see [cellEdit definition](./cell-edit.md) for more detail.
 

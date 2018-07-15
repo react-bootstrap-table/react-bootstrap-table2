@@ -33,6 +33,7 @@ import HeaderColumnEventTable from 'examples/header-columns/column-event-table';
 import HeaderColumnClassTable from 'examples/header-columns/column-class-table';
 import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
 import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
+import HeaderClassTable from 'examples/header-columns/header-class-table';
 
 // column filter
 import TextFilter from 'examples/column-filter/text-filter';
@@ -165,7 +166,8 @@ storiesOf('Work on Header Columns', module)
   .add('Column Event', () => <HeaderColumnEventTable />)
   .add('Customize Column Class', () => <HeaderColumnClassTable />)
   .add('Customize Column Style', () => <HeaderColumnStyleTable />)
-  .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />);
+  .add('Customize Column HTML attribute', () => <HeaderColumnAttrsTable />)
+  .add('Header Class', () => <HeaderClassTable />);
 
 storiesOf('Column Filter', module)
   .add('Text Filter', () => <TextFilter />)
