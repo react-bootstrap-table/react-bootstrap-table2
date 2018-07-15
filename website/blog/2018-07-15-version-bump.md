@@ -9,6 +9,7 @@ authorURL: https://twitter.com/allenfang_tw
 This release bump following packages:
 
 * `react-bootstrap-table-next@0.1.15`
+* `react-bootstrap-table2-paginator@0.1.6`
 
 ## Changelog
 
