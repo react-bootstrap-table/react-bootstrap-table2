@@ -57,7 +57,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowClasses,
       wrapperClasses,
       rowEvents,
-      sortCaret
+      sortCaretRenderer
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -93,7 +93,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             onFilter={ this.props.onFilter }
             onExternalFilter={ this.props.onExternalFilter }
             selectRow={ headerCellSelectionInfo }
-            sortCaret={ sortCaret }
+            sortCaretRenderer={ sortCaretRenderer }
           />
           <Body
             data={ this.state.data }
@@ -167,7 +167,7 @@ BootstrapTable.propTypes = {
   onSort: PropTypes.func,
   onFilter: PropTypes.func,
   onExternalFilter: PropTypes.func,
-  sortCaret: PropTypes.func
+  sortCaretRenderer: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {

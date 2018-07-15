@@ -51,7 +51,7 @@ const columns = [{
   text: 'Product Price'
 }];
 
-const sortCaret = (sortOrder) => {
+const sortCaret = (sortOrder, column) => {
   if (sortOrder === 'asc') {
     return <span className="glyphicon glyphicon-arrow-up" aria-hidden="true" />;
   } else if (sortOrder === 'desc') {
@@ -60,7 +60,7 @@ const sortCaret = (sortOrder) => {
   return <span />;
 };
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } sortCaret={ sortCaret }/>
+<BootstrapTable keyField='id' data={ products } columns={ columns } sortCaretRenderer={ sortCaret }/>
 `;
 
 const sortCaret = (sortOrder) => {
@@ -75,7 +75,7 @@ const sortCaret = (sortOrder) => {
 export default () => (
   <div>
     <h3>Product ID sorting is reverted</h3>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } sortCaret={ sortCaret } />
+    <BootstrapTable keyField="id" data={ products } columns={ columns } sortCaretRenderer={ sortCaret } />
     <Code>{ sourceCode }</Code>
   </div>
 );

@@ -15,7 +15,7 @@ const Header = (props) => {
     onFilter,
     sortField,
     sortOrder,
-    sortCaret,
+    sortCaretRenderer,
     selectRow,
     onExternalFilter
   } = props;
@@ -40,7 +40,7 @@ const Header = (props) => {
                   column={ column }
                   onSort={ onSort }
                   sorting={ currSort }
-                  sortCaret={ sortCaret }
+                  sortCaret={ sortCaretRenderer }
                   onFilter={ onFilter }
                   onExternalFilter={ onExternalFilter }
                   sortOrder={ sortOrder }
@@ -61,7 +61,7 @@ Header.propTypes = {
   onFilter: PropTypes.func,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
-  sortCaret: PropTypes.func,
+  sortCaretRenderer: PropTypes.func,
   selectRow: PropTypes.object,
   onExternalFilter: PropTypes.func
 };

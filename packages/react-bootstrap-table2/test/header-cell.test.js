@@ -429,7 +429,7 @@ describe('HeaderCell', () => {
                 column={ column }
                 index={ index }
                 sorting
-                sortCaret={ customSortCaret }
+                sortCaretRenderer={ customSortCaret }
                 sortOrder={ order }
               />);
           });
