@@ -77,6 +77,7 @@ export default class SelectionHeaderCell extends Component {
           { ...this.props }
           checked={ checked }
           indeterminate={ indeterminate }
+          onChange={ this.handleCheckBoxClick }
         />
       );
       attrs.onClick = this.handleCheckBoxClick;
