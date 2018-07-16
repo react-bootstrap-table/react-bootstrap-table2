@@ -131,7 +131,7 @@ const columns = [..., {
 Numner filter is same as other filter, you can custom the number filter via `numberFilter` factory function:
 
 ```js
-import filterFactory, { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
+import filterFactory, { selectFilter, Comparator, numberFilter } from 'react-bootstrap-table2-filter';
 // omit...
 
 const numberFilter = numberFilter({
