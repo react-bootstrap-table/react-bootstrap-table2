@@ -121,8 +121,9 @@ class Pagination extends pageResolver(Component) {
       'col-md-6 col-xs-6 col-sm-6 col-lg-6', {
         'react-bootstrap-table-pagination-list-hidden': (hidePageListOnlyOnePage && totalPages === 1)
       });
+    const style = this.props.style ? this.props.style : {};
     return (
-      <div className="row react-bootstrap-table-pagination">
+      <div style={ style } className="row react-bootstrap-table-pagination">
         <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
           {
             sizePerPageList.length > 1 && !hideSizePerPage ?
@@ -156,6 +157,7 @@ class Pagination extends pageResolver(Component) {
 }
 
 Pagination.propTypes = {
+  style: PropTypes.object,
   dataSize: PropTypes.number.isRequired,
   sizePerPageList: PropTypes.array.isRequired,
   currPage: PropTypes.number.isRequired,
