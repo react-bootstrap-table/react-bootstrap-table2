@@ -1,6 +1,6 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/no-array-index-key: 0 */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
 import _ from './utils';
@@ -9,7 +9,7 @@ import SelectionCell from './row-selection/selection-cell';
 import eventDelegater from './row-event-delegater';
 import Const from './const';
 
-class Row extends eventDelegater(Component) {
+class Row extends eventDelegater(PureComponent) {
   render() {
     const {
       row,

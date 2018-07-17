@@ -10,6 +10,12 @@ import Row from './row';
 import RowSection from './row-section';
 import Const from './const';
 
+const empty = {
+  cellEdit: [],
+  attrs: {},
+  style: {}
+};
+
 const Body = (props) => {
   const {
     columns,
@@ -40,7 +46,7 @@ const Body = (props) => {
     }
     content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
   } else {
-    const nonEditableRows = cellEdit.nonEditableRows || [];
+    const nonEditableRows = cellEdit.nonEditableRows || empty.cellEdit;
     content = data.map((row, index) => {
       const key = _.get(row, keyField);
       const editable = !(nonEditableRows.length > 0 && nonEditableRows.indexOf(key) > -1);
@@ -49,7 +55,7 @@ const Body = (props) => {
         ? selectedRowKeys.includes(key)
         : null;
 
-      const attrs = rowEvents || {};
+      const attrs = rowEvents || empty.attrs;
       let style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
       let classes = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
       if (selected) {
@@ -68,7 +74,7 @@ const Body = (props) => {
         classes = cs(classes, selectedClasses);
 
         if (bgColor) {
-          style = style || {};
+          style = style || empty.style;
           style.backgroundColor = _.isFunction(bgColor) ? bgColor(row, index) : bgColor;
         }
       }

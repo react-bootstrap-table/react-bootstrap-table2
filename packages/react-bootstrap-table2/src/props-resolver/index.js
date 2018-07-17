@@ -20,13 +20,13 @@ export default ExtendBase =>
 
     /**
      * props resolver for cell selection
+     * @param {Object} selectRow
      * @param {Object} options - addtional options like callback which are about to merge into props
      *
      * @returns {Object} result - props for cell selections
      * @returns {String} result.mode - input type of row selection or disabled.
      */
-    resolveSelectRowProps(options) {
-      const { selectRow } = this.props;
+    static resolveSelectRowProps(selectRow, options) {
       const { ROW_SELECT_DISABLED } = Const;
 
       if (_.isDefined(selectRow)) {

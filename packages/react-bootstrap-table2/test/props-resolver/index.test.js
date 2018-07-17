@@ -82,7 +82,8 @@ describe('TableResolver', () => {
           data, keyField, columns
         }, null);
         wrapper = shallow(mockElement);
-        cellSelectionInfo = wrapper.instance().resolveSelectRowProps();
+        const instance = wrapper.instance();
+        cellSelectionInfo = instance.constructor.resolveSelectRowProps(instance.props.selectRow);
       });
 
       it('should return object', () => {
@@ -103,7 +104,8 @@ describe('TableResolver', () => {
             data, keyField, columns, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          cellSelectionInfo = wrapper.instance().resolveSelectRowProps();
+          const instance = wrapper.instance();
+          cellSelectionInfo = instance.constructor.resolveSelectRowProps(instance.props.selectRow);
 
           expect(cellSelectionInfo).toBeDefined();
           expect(cellSelectionInfo.constructor).toEqual(Object);
@@ -116,7 +118,8 @@ describe('TableResolver', () => {
             data, keyField, columns, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          cellSelectionInfo = wrapper.instance().resolveSelectRowProps();
+          const instance = wrapper.instance();
+          cellSelectionInfo = instance.constructor.resolveSelectRowProps(instance.props.selectRow);
 
           expect(cellSelectionInfo).toBeDefined();
           expect(cellSelectionInfo.constructor).toEqual(Object);
@@ -135,7 +138,11 @@ describe('TableResolver', () => {
             data, keyField, columns, selectRow
           }, null);
           wrapper = shallow(mockElement);
-          cellSelectionInfo = wrapper.instance().resolveSelectRowProps(mockOptions);
+          const instance = wrapper.instance();
+          cellSelectionInfo = instance.constructor.resolveSelectRowProps(
+            instance.props.selectRow,
+            mockOptions
+          );
         });
 
         it('should return object which contain options', () => {
