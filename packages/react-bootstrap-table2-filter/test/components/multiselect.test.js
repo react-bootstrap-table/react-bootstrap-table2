@@ -329,7 +329,7 @@ describe('Multi Select Filter', () => {
   });
 
   describe('filter', () => {
-    const event = { target: { selectedOptions: [{ value: 'tester'}] } };
+    const event = { target: { selectedOptions: [{ value: 'tester' }] } };
 
     beforeEach(() => {
       wrapper = mount(
