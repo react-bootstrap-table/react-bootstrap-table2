@@ -13,6 +13,7 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
     data: PropTypes.array.isRequired,
     columns: PropTypes.array.isRequired,
     children: PropTypes.node.isRequired,
+    bootstrap4: PropTypes.bool,
     search: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.shape({
@@ -32,7 +33,8 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
 
   static defaultProps = {
     search: false,
-    exportCSV: false
+    exportCSV: false,
+    bootstrap4: false
   }
 
   constructor(props) {
@@ -66,6 +68,7 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
       keyField: this.props.keyField,
       columns: this.props.columns,
       data: this.props.data,
+      bootstrap4: this.props.bootstrap4,
       setDependencyModules: this.setDependencyModules
     };
     if (this.props.search) {

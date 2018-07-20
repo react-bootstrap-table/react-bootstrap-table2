@@ -7,6 +7,7 @@ import createSortContext from './sort-context';
 import createSelectionContext from './selection-context';
 import createRowExpandContext from './row-expand-context';
 import remoteResolver from '../props-resolver/remote-resolver';
+import { BootstrapContext } from './bootstrap';
 import dataOperator from '../store/operators';
 
 const withContext = Base =>
@@ -267,7 +268,7 @@ const withContext = Base =>
     }
 
     render() {
-      const { keyField, columns } = this.props;
+      const { keyField, columns, bootstrap4 } = this.props;
       const baseProps = { keyField, columns };
 
       let base = this.renderBase();
@@ -301,16 +302,18 @@ const withContext = Base =>
       }
 
       return (
-        <this.DataContext.Provider
-          { ...baseProps }
-          data={ this.props.data }
-        >
-          <this.DataContext.Consumer>
-            {
-              base
-            }
-          </this.DataContext.Consumer>
-        </this.DataContext.Provider>
+        <BootstrapContext.Provider value={ { bootstrap4 } }>
+          <this.DataContext.Provider
+            { ...baseProps }
+            data={ this.props.data }
+          >
+            <this.DataContext.Consumer>
+              {
+                base
+              }
+            </this.DataContext.Consumer>
+          </this.DataContext.Provider>
+        </BootstrapContext.Provider>
       );
     }
   };

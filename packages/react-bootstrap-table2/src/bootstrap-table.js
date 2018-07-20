@@ -114,6 +114,7 @@ BootstrapTable.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  bootstrap4: PropTypes.bool,
   remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
     pagination: PropTypes.bool
   })]),
@@ -184,6 +185,7 @@ BootstrapTable.propTypes = {
 };
 
 BootstrapTable.defaultProps = {
+  bootstrap4: false,
   remote: false,
   striped: false,
   bordered: true,
