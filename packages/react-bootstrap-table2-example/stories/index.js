@@ -45,6 +45,8 @@ import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 import SelectFilter from 'examples/column-filter/select-filter';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
+import MultiSelectFilter from 'examples/column-filter/multi-select-filter';
+import MultiSelectFilterDefaultValue from 'examples/column-filter/multi-select-filter-default-value';
 import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
 import NumberFilter from 'examples/column-filter/number-filter';
 import NumberFilterWithDefaultValue from 'examples/column-filter/number-filter-default-value';
@@ -178,6 +180,8 @@ storiesOf('Column Filter', module)
   .add('Select Filter', () => <SelectFilter />)
   .add('Select Filter with Default Value', () => <SelectFilterWithDefaultValue />)
   .add('Select Filter with Comparator', () => <SelectFilterComparator />)
+  .add('MultiSelect Filter', () => <MultiSelectFilter />)
+  .add('MultiSelect Filter with Default Value', () => <MultiSelectFilterDefaultValue />)
   .add('Number Filter', () => <NumberFilter />)
   .add('Number Filter with Default Value', () => <NumberFilterWithDefaultValue />)
   .add('Date Filter', () => <DateFilter />)
