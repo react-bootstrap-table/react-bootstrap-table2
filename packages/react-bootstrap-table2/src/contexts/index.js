@@ -155,6 +155,7 @@ const withContext = Base =>
           ref={ n => this.paginationContext = n }
           pagination={ this.props.pagination }
           data={ rootProps.getData(filterProps, searchProps, sortProps) }
+          bootstrap4={ this.props.bootstrap4 }
         >
           <this.PaginationContext.Consumer>
             {

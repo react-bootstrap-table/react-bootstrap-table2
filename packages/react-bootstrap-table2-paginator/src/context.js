@@ -5,6 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Const from './const';
+import { BootstrapContext } from './bootstrap';
 import Pagination from './pagination';
 import { getByCurrPage, alignPage } from './page';
 
@@ -123,7 +124,7 @@ export default (
 
     render() {
       let { data } = this.props;
-      const { pagination: { options } } = this.props;
+      const { pagination: { options }, bootstrap4 } = this.props;
       const { currPage, currSizePerPage } = this;
       const withFirstAndLast = typeof options.withFirstAndLast === 'undefined' ?
         Const.With_FIRST_AND_LAST : options.withFirstAndLast;
@@ -148,31 +149,33 @@ export default (
       return (
         <PaginationContext.Provider value={ { data } }>
           { this.props.children }
-          <Pagination
-            key="pagination"
-            dataSize={ options.totalSize || this.props.data.length }
-            currPage={ currPage }
-            currSizePerPage={ currSizePerPage }
-            onPageChange={ this.handleChangePage }
-            onSizePerPageChange={ this.handleChangeSizePerPage }
-            sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
-            paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
-            pageStartIndex={ pageStartIndex }
-            withFirstAndLast={ withFirstAndLast }
-            alwaysShowAllBtns={ alwaysShowAllBtns }
-            hideSizePerPage={ hideSizePerPage }
-            hidePageListOnlyOnePage={ hidePageListOnlyOnePage }
-            showTotal={ options.showTotal }
-            paginationTotalRenderer={ options.paginationTotalRenderer }
-            firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
-            prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
-            nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }
-            lastPageText={ options.lastPageText || Const.LAST_PAGE_TEXT }
-            prePageTitle={ options.prePageTitle || Const.PRE_PAGE_TITLE }
-            nextPageTitle={ options.nextPageTitle || Const.NEXT_PAGE_TITLE }
-            firstPageTitle={ options.firstPageTitle || Const.FIRST_PAGE_TITLE }
-            lastPageTitle={ options.lastPageTitle || Const.LAST_PAGE_TITLE }
-          />
+          <BootstrapContext.Provider value={ { bootstrap4 } }>
+            <Pagination
+              key="pagination"
+              dataSize={ options.totalSize || this.props.data.length }
+              currPage={ currPage }
+              currSizePerPage={ currSizePerPage }
+              onPageChange={ this.handleChangePage }
+              onSizePerPageChange={ this.handleChangeSizePerPage }
+              sizePerPageList={ options.sizePerPageList || Const.SIZE_PER_PAGE_LIST }
+              paginationSize={ options.paginationSize || Const.PAGINATION_SIZE }
+              pageStartIndex={ pageStartIndex }
+              withFirstAndLast={ withFirstAndLast }
+              alwaysShowAllBtns={ alwaysShowAllBtns }
+              hideSizePerPage={ hideSizePerPage }
+              hidePageListOnlyOnePage={ hidePageListOnlyOnePage }
+              showTotal={ options.showTotal }
+              paginationTotalRenderer={ options.paginationTotalRenderer }
+              firstPageText={ options.firstPageText || Const.FIRST_PAGE_TEXT }
+              prePageText={ options.prePageText || Const.PRE_PAGE_TEXT }
+              nextPageText={ options.nextPageText || Const.NEXT_PAGE_TEXT }
+              lastPageText={ options.lastPageText || Const.LAST_PAGE_TEXT }
+              prePageTitle={ options.prePageTitle || Const.PRE_PAGE_TITLE }
+              nextPageTitle={ options.nextPageTitle || Const.NEXT_PAGE_TITLE }
+              firstPageTitle={ options.firstPageTitle || Const.FIRST_PAGE_TITLE }
+              lastPageTitle={ options.lastPageTitle || Const.LAST_PAGE_TITLE }
+            />
+          </BootstrapContext.Provider>
         </PaginationContext.Provider>
       );
     }
