@@ -1,14 +1,12 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 
+import { shallowWithContext } from '../test-helpers/new-context';
 import SortSymbol from '../../src/sort/symbol';
 
 describe('SortSymbol', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallow(<SortSymbol />);
-    const Children = wrapper.props().children({ bootstrap4: false });
-    wrapper = shallow(Children);
+    wrapper = shallowWithContext(<SortSymbol />, { bootstrap4: false });
   });
   it('should render sort symbol correctly', () => {
     expect(wrapper.length).toBe(1);
@@ -20,9 +18,7 @@ describe('SortSymbol', () => {
 
   describe('if bootstrap4 prop is true', () => {
     beforeEach(() => {
-      wrapper = shallow(<SortSymbol />);
-      const Children = wrapper.props().children({ bootstrap4: true });
-      wrapper = shallow(Children);
+      wrapper = shallowWithContext(<SortSymbol />, { bootstrap4: true });
     });
     it('should render sort symbol correctly', () => {
       expect(wrapper.length).toBe(1);

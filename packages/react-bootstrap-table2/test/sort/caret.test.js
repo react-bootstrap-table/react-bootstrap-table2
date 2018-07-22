@@ -1,8 +1,8 @@
 import React from 'react';
-import { shallow } from 'enzyme';
 
 import Const from '../../src/const';
 import SortCaret from '../../src/sort/caret';
+import { shallowWithContext } from '../test-helpers/new-context';
 
 describe('SortCaret', () => {
   let wrapper;
@@ -10,9 +10,10 @@ describe('SortCaret', () => {
   describe('when bootstrap4 context is false', () => {
     describe(`when order prop is ${Const.SORT_ASC}`, () => {
       beforeEach(() => {
-        wrapper = shallow(<SortCaret order={ Const.SORT_ASC } />);
-        const Children = wrapper.props().children({ bootstrap4: false });
-        wrapper = shallow(Children);
+        wrapper = shallowWithContext(
+          <SortCaret order={ Const.SORT_ASC } />,
+          { bootstrap4: false }
+        );
       });
 
       it('should render caret correctly', () => {
@@ -25,9 +26,10 @@ describe('SortCaret', () => {
 
     describe(`when order prop is ${Const.SORT_DESC}`, () => {
       beforeEach(() => {
-        wrapper = shallow(<SortCaret order={ Const.SORT_DESC } />);
-        const Children = wrapper.props().children({ bootstrap4: false });
-        wrapper = shallow(Children);
+        wrapper = shallowWithContext(
+          <SortCaret order={ Const.SORT_DESC } />,
+          { bootstrap4: false }
+        );
       });
 
       it('should render caret correctly', () => {
@@ -42,9 +44,7 @@ describe('SortCaret', () => {
   describe('when bootstrap4 context is true', () => {
     describe(`when order prop is ${Const.SORT_ASC}`, () => {
       beforeEach(() => {
-        wrapper = shallow(<SortCaret order={ Const.SORT_ASC } />);
-        const Children = wrapper.props().children({ bootstrap4: true });
-        wrapper = shallow(Children);
+        wrapper = shallowWithContext(<SortCaret order={ Const.SORT_ASC } />, { bootstrap4: true });
       });
 
       it('should render caret correctly', () => {
@@ -55,9 +55,7 @@ describe('SortCaret', () => {
 
     describe(`when order prop is ${Const.SORT_DESC}`, () => {
       beforeEach(() => {
-        wrapper = shallow(<SortCaret order={ Const.SORT_DESC } />);
-        const Children = wrapper.props().children({ bootstrap4: true });
-        wrapper = shallow(Children);
+        wrapper = shallowWithContext(<SortCaret order={ Const.SORT_DESC } />, { bootstrap4: true });
       });
 
       it('should render caret correctly', () => {
