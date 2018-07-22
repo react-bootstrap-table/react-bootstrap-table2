@@ -2,11 +2,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
+import { BootstrapContext } from '../contexts/bootstrap';
 
-export const CheckBox = ({ checked, indeterminate }) => (
+export const CheckBox = ({ className, checked, indeterminate }) => (
   <input
     type="checkbox"
     checked={ checked }
+    className={ className }
     ref={ (input) => {
       if (input) input.indeterminate = indeterminate; // eslint-disable-line no-param-reassign
     } }
@@ -15,7 +17,8 @@ export const CheckBox = ({ checked, indeterminate }) => (
 
 CheckBox.propTypes = {
   checked: PropTypes.bool.isRequired,
-  indeterminate: PropTypes.bool.isRequired
+  indeterminate: PropTypes.bool.isRequired,
+  className: PropTypes.string
 };
 
 export default class SelectionHeaderCell extends Component {
@@ -67,26 +70,36 @@ export default class SelectionHeaderCell extends Component {
 
     const attrs = {};
     let content;
-    if (selectionHeaderRenderer) {
-      content = selectionHeaderRenderer({
-        mode,
-        checked,
-        indeterminate
-      });
-      attrs.onClick = this.handleCheckBoxClick;
-    } else if (mode === ROW_SELECT_MULTIPLE) {
-      content = (
-        <CheckBox
-          { ...this.props }
-          checked={ checked }
-          indeterminate={ indeterminate }
-        />
-      );
+    if (selectionHeaderRenderer || mode === ROW_SELECT_MULTIPLE) {
       attrs.onClick = this.handleCheckBoxClick;
     }
 
     return (
-      <th data-row-selection { ...attrs }>{ content }</th>
+      <BootstrapContext.Consumer>
+        {
+          ({ bootstrap4 }) => {
+            if (selectionHeaderRenderer) {
+              content = selectionHeaderRenderer({
+                mode,
+                checked,
+                indeterminate
+              });
+            } else if (mode === ROW_SELECT_MULTIPLE) {
+              content = (
+                <CheckBox
+                  { ...this.props }
+                  checked={ checked }
+                  className={ bootstrap4 ? 'selection-input-4' : '' }
+                  indeterminate={ indeterminate }
+                />
+              );
+            }
+            return (
+              <th data-row-selection { ...attrs }>{ content }</th>
+            );
+          }
+        }
+      </BootstrapContext.Consumer>
     );
   }
 }

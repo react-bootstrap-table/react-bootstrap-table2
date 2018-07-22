@@ -59,6 +59,11 @@
     width: 30px;
   }
 
+  th > .selection-input-4,
+  td > .selection-input-4 {
+    margin: -4px;
+  }
+
   td.react-bs-table-no-data {
     text-align: center;
   }
