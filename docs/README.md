@@ -9,6 +9,7 @@
 
 #### Optional
 * [remote](#remote)
+* [bootstrap4](#bootstrap4)
 * [loading](#loading)
 * [caption](#caption)
 * [striped](#striped)
@@ -66,6 +67,9 @@ remote={ { pagination: true, filter: false, sort: false } }
 ```
 
 There is a special case for remote pagination, even you only specified the pagination need to handle as remote, `react-bootstrap-table2` will handle all the table changes(filter, sort etc) as remote mode, because `react-bootstrap-table2` only know the data of current page, but filtering, searching or sort need to work on overall data.
+
+### <a name='bootstrap4'>bootstrap4 - [Bool]</a>
+`true` to indicate your bootstrap version is 4. Default version is 3.
 
 ### <a name='loading'>loading - [Bool]</a>
 Telling if table is loading or not, for example: waiting data loading, filtering etc. It's **only** valid when [`remote`](#remote) is enabled.

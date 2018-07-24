@@ -134,7 +134,7 @@ No big changes for pagination, but still can't custom the pagination list, butto
 - [ ] Expand Column Style/Class
 
 ## Export CSV
-Export CSV functionality is like search, which is one of functionality in the `react-bootstrap-table2-toolkit`. But all the legacy function we already implemented.
+Export CSV functionality is like search, which is one of functionality in the `react-bootstrap-table2-toolkit`. All of the legacy functions we already implemented.
 
 ## Remote
 

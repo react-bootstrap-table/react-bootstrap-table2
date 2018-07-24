@@ -2,7 +2,7 @@
 
 `react-bootstrap-table2` support some additional features in [`react-bootstrap-table2-toolkit`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/develop/packages/react-bootstrap-table2-toolkit).
 
-In the future, this toolkit will support other feature like row delete, insert and export csv etc. Right now we only support Table Search and CSV export.   
+In the future, this toolkit will support other feature like row delete, insert etc. Right now we only support Table Search and CSV export.   
 
 **[Live Demo For Table Search](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Table%20Search)**
 
