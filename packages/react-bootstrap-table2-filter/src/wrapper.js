@@ -54,7 +54,7 @@ export default (Base, {
         const { dataField, filter } = column;
 
         const needClearFilters = !_.isDefined(filterVal) || filterVal === '' ||
-          filterVal.length === 0; // || (filterVal.length === 1 && filterVal[0] === '');
+          filterVal.length === 0 || (filterVal.length === 1 && filterVal[0] === '');
 
         if (needClearFilters) {
           delete currFilters[dataField];
