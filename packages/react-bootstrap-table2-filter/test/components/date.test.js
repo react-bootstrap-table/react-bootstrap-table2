@@ -124,7 +124,7 @@ describe('Date Filter', () => {
 
     it('should do onFilter correctly when exported function was executed', () => {
       expect(onFilter).toHaveBeenCalledTimes(1);
-      expect(onFilter).toHaveBeenCalledWith(column, FILTER_TYPE.DATE, false);
+      expect(onFilter).toHaveBeenCalledWith(column, FILTER_TYPE.DATE, undefined);
       expect(onFilterFirstReturn).toHaveBeenCalledTimes(1);
       expect(onFilterFirstReturn).toHaveBeenCalledWith({ comparator, date });
     });

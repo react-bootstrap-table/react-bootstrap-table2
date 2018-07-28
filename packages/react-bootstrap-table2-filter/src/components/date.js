@@ -92,7 +92,7 @@ class DateFilter extends Component {
     return defaultDate;
   }
 
-  applyFilter(value, comparator) {
+  applyFilter(value, comparator, isInitial) {
     // if (!comparator || !value) {
     //  return;
     // }
@@ -103,7 +103,7 @@ class DateFilter extends Component {
       // instead of parsing an invalid Date. The filter function will interpret
       // null as an empty date field
       const date = value === '' ? null : new Date(value);
-      onFilter(column, FILTER_TYPE.DATE, )({ date, comparator });
+      onFilter(column, FILTER_TYPE.DATE, isInitial)({ date, comparator });
     };
     if (delay) {
       this.timeout = setTimeout(() => { execute(); }, delay);
