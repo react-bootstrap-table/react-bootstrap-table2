@@ -16,6 +16,16 @@ In the future, this toolkit will support other feature like row delete, insert e
 $ npm install react-bootstrap-table2-toolkit --save
 ```
 
+## Add CSS
+
+```js
+// es5 
+require('react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css');
+
+// es6
+import 'react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.css';
+```
+
 ## Table Search
 
 ```js

@@ -26,7 +26,8 @@ const JS_SKIPS = `+(${TEST}|${LIB}|${DIST}|${NODE_MODULES})`;
 const STYLE_PKGS = [
   'react-bootstrap-table2',
   'react-bootstrap-table2-filter',
-  'react-bootstrap-table2-paginator'
+  'react-bootstrap-table2-paginator',
+  'react-bootstrap-table2-toolkit',
 ].reduce((pkg, curr) => `${curr}|${pkg}`, '');
 
 const STYLE_SKIPS = `+(${NODE_MODULES})`;
