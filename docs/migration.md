@@ -7,7 +7,6 @@ sidebar_label: Migration
 ## Migration Guide
 
 * Please see the [CHANGELOG](https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/new-version-0.1.0.html) for `react-bootstrap-table2` first drop.
-* Please see the [Road Map](https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html)  for `react-bootstrap-table2` in 2018/Q1.
 * Feel free to see the [official docs](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/about.html), we list all the basic usage here!!
 
 ## Preface
@@ -26,6 +25,9 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
   * Cell Editing Addons
 * [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator)
   * Pagination Addons
+* [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
+  * Table Search
+  * CSV Export
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
   * Overlay/Loading Addons
 
@@ -119,6 +121,44 @@ Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/p
 
 No big changes for pagination, but still can't custom the pagination list, button and sizePerPage dropdown.
 
+
+## Table Search
+Please see [Work with table search](./basic-search.html).   
+Please see [Search configurations](./search-props.html).   
+
+The usage of search functionality is a little bit different from legacy search. The mainly different thing is developer have to render the search input field, we do believe it will be very flexible for all the developers who want to custom the search position or search field itself.
+
+- [x] Custom search component and position
+- [x] Custom search value
+- [ ] Clear search
+- [ ] Multiple search
+- [ ] Strict search
+
+## Row Expand
+Please see [Work with expandable row](./basic-row-expand.html).   
+Please see [Row expand configurations](./row-expand-props.html).   
+
+- [x] Expand Row Events
+- [x] Expand Row Indicator
+- [x] Expand Row Management
+- [x] Custom Expand Row Indicators
+- [ ] Compatiable with Row Selection
+- [ ] Expand Column position
+- [ ] Expand Column Style/Class
+
+## Export CSV
+Please see [Work with export to CSV](./basic-export-csv.html).   
+Please see [Export CSV configurations](./export-csv-props.html).   
+
+Export CSV functionality is like search, which is one of functionality in the `react-bootstrap-table2-toolkit`. All of the legacy functions we already implemented.
+
 ## Remote
 
 > It's totally different in `react-bootstrap-table2`. Please [see](./basic-remote.html).
+
+
+## Row insert/Delete
+Not support yet
+
+## Keyboard Navigation
+Not support yet

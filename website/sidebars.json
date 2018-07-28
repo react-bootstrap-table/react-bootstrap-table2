@@ -3,6 +3,7 @@
     "Getting Started": [
       "about",
       "getting-started",
+      "bootstrap4",
       "migration"
     ],
     "Basic Usage": [
@@ -12,11 +13,17 @@
       "basic-row-select",
       "basic-filter",
       "basic-celledit",
-      "basic-pagination"
+      "basic-pagination",
+      "basic-row-expand"
     ],
     "Remote Table": [
       "basic-remote",
       "overlay"
+    ],
+    "Table Toolkits": [
+      "toolkits-getting-started",
+      "basic-search",
+      "basic-export-csv"
     ]
   },
   "api": {
@@ -35,8 +42,17 @@
     "Row Select Definition": [
       "row-select-props"
     ],
+    "Row Expand Definition": [
+      "row-expand-props"
+    ],
     "Column Filter Definition": [
       "filter-props"
+    ],
+    "Search Definition": [
+      "search-props"
+    ],
+    "Export to CSV Definition": [
+      "export-csv-props"
     ]
   }
 }

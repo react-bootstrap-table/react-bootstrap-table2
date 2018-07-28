@@ -41,6 +41,10 @@ Definition of columns props on BootstrapTable
 * [editorRenderer](#columneditorrenderer-function)
 * [filter](#columnfilter-object)
 * [filterValue](#columnfiltervalue-function)
+* [csvType](#columncsvType-object)
+* [csvFormatter](#columncsvFormatter-function)
+* [csvText](#columncsvText-string)
+* [csvExport](#columncsvExport-bool)
 
 -----
 
@@ -672,3 +676,18 @@ A final `String` value you want to be filtered.
   filterValue: (cell, row) => owners[cell]
 }
 ```
+
+
+## column.csvType - [Object]
+Default is `String`. Currently, the available value is `String` and `Number`. If `Number` assigned, the cell value will not wrapped with double quote.
+
+## column.csvFormatter - [Function]
+
+This is same as [`column.formatter`](#columnformatter-function). But `csvFormatter` only for CSV export and called when export CSV.
+
+## column.csvText - [String]
+Custom the CSV header cell, Default is [`column.text`](#columntext-required-string).
+
+## column.csvExport - [Bool]
+Default is `true`, `false` will hide this column when export CSV.
+

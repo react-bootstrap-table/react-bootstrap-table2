@@ -14,7 +14,7 @@ $ npm install react-bootstrap-table-next --save
 
 ## Add CSS
 
-> `react-bootstrap-table2` need you to add bootstrap css in your application firstly. About bootstrap css, we only compatible with bootstrap 3 but will start to compatible for bootstrap 4 on **v0.2.0**
+> `react-bootstrap-table2` need you to add bootstrap css in your application firstly. After **v1.0.0**, we start to suport `bootstrap@4`.
 
 Finish above step, let's add the `react-bootstrap-table2` styles: 
 
@@ -57,6 +57,7 @@ export default () =>
 * The namespace of `react-bootstrap-table2-filter` is `ReactBootstrapTable2Filter`
 * The namespace of `react-bootstrap-table2-paginator` is `ReactBootstrapTable2Paginator`
 * The namespace of `react-bootstrap-table2-overlay` is `ReactBootstrapTable2Overlay`
+* The namespace of `react-bootstrap-table2-toolkit` is `ReactBootstrapTable2Toolkit`
 
 ### npm
 
@@ -69,3 +70,4 @@ After install from npm, your can get UMD module from the `dist`.
 * Download `react-bootstrap-table2-filter` from [here](https://unpkg.com/react-bootstrap-table2-filter/dist/react-bootstrap-table2-filter.min.js)
 * Download `react-bootstrap-table2-paginator` from [here](https://unpkg.com/react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.js)
 * Download `react-bootstrap-table2-overlay` from [here](https://unpkg.com/react-bootstrap-table2-overlay/dist/react-bootstrap-table2-overlay.min.js)
+* Download `react-bootstrap-table2-toolkit` from [here](https://unpkg.com/react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit.min.js)
