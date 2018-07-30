@@ -93,12 +93,16 @@ class DateFilter extends Component {
   }
 
   applyFilter(value, comparator) {
-    if (!comparator || !value) {
-      return;
-    }
+    // if (!comparator || !value) {
+    //  return;
+    // }
     const { column, onFilter, delay } = this.props;
     const execute = () => {
-      const date = typeof value !== 'object' ? new Date(value) : value;
+      // Incoming value should always be a string, and the defaultDate
+      // above is implemented as an empty string, so we can just check for that.
+      // instead of parsing an invalid Date. The filter function will interpret
+      // null as an empty date field
+      const date = value === '' ? null : new Date(value);
       onFilter(column, FILTER_TYPE.DATE)({ date, comparator });
     };
     if (delay) {
