@@ -1,5 +1,6 @@
 /* eslint react/require-default-props: 0 */
 /* eslint no-return-assign: 0 */
+/* eslint no-param-reassign: 0 */
 /* eslint react/no-unused-prop-types: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
@@ -24,25 +25,24 @@ class MultiSelectFilter extends Component {
   constructor(props) {
     super(props);
     this.filter = this.filter.bind(this);
+    this.applyFilter = this.applyFilter.bind(this);
     const isSelected = props.defaultValue.map(item => props.options[item]).length > 0;
     this.state = { isSelected };
   }
 
   componentDidMount() {
-    const { column, onFilter, getFilter } = this.props;
+    const { getFilter } = this.props;
 
     const value = getSelections(this.selectInput);
     if (value && value.length > 0) {
-      onFilter(column, FILTER_TYPE.MULTISELECT)(value);
+      this.applyFilter(value);
     }
 
     // export onFilter function to allow users to access
     if (getFilter) {
       getFilter((filterVal) => {
-        this.setState(() => ({ isSelected: filterVal.length > 0 }));
         this.selectInput.value = filterVal;
-
-        onFilter(column, FILTER_TYPE.MULTISELECT)(filterVal);
+        this.applyFilter(filterVal);
       });
     }
   }
@@ -55,10 +55,7 @@ class MultiSelectFilter extends Component {
       needFilter = true;
     }
     if (needFilter) {
-      const value = this.selectInput.value;
-      if (value) {
-        this.props.onFilter(this.props.column, FILTER_TYPE.MULTISELECT)(value);
-      }
+      this.applyFilter(this.selectInput.value);
     }
   }
 
@@ -78,21 +75,21 @@ class MultiSelectFilter extends Component {
 
   cleanFiltered() {
     const value = (this.props.defaultValue !== undefined) ? this.props.defaultValue : [];
-    this.setState(() => ({ isSelected: value.length > 0 }));
     this.selectInput.value = value;
-    this.props.onFilter(this.props.column, FILTER_TYPE.MULTISELECT)(value);
+    this.applyFilter(value);
   }
 
   applyFilter(value) {
-    this.selectInput.value = value;
+    if (value.length === 1 && value[0] === '') {
+      value = [];
+    }
     this.setState(() => ({ isSelected: value.length > 0 }));
     this.props.onFilter(this.props.column, FILTER_TYPE.MULTISELECT)(value);
   }
 
   filter(e) {
     const value = getSelections(e.target);
-    this.setState(() => ({ isSelected: value.length > 0 }));
-    this.props.onFilter(this.props.column, FILTER_TYPE.MULTISELECT)(value);
+    this.applyFilter(value);
   }
 
   render() {

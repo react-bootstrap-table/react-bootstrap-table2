@@ -163,7 +163,7 @@ describe('Wrapper', () => {
     });
 
     describe('when filterVal is empty or undefined', () => {
-      const filterVals = ['', undefined];
+      const filterVals = ['', undefined, []];
 
       it('should setting store object correctly', () => {
         filterVals.forEach((filterVal) => {
