@@ -123,6 +123,55 @@ describe('filter', () => {
     });
   });
 
+  describe('filterByArray', () => {
+    beforeEach(() => {
+      filterFn = filters(store, columns, _);
+    });
+
+    describe('when filter value is empty array', () => {
+      it('should return original data', () => {
+        currFilters.name = {
+          filterVal: [],
+          filterType: FILTER_TYPE.MULTISELECT
+        };
+
+        const result = filterFn(currFilters);
+        expect(result).toBeDefined();
+        expect(result).toHaveLength(store.data.length);
+      });
+    });
+
+    describe('when filter value is not an empty array', () => {
+      describe(`and comparator is ${EQ}`, () => {
+        it('should return data correctly', () => {
+          currFilters.price = {
+            filterVal: [201, 203],
+            filterType: FILTER_TYPE.MULTISELECT,
+            comparator: EQ
+          };
+
+          const result = filterFn(currFilters);
+          expect(result).toBeDefined();
+          expect(result).toHaveLength(2);
+        });
+      });
+
+      describe(`and comparator is ${LIKE}`, () => {
+        it('should return data correctly', () => {
+          currFilters.name = {
+            filterVal: ['name 3', '5'],
+            filterType: FILTER_TYPE.MULTISELECT,
+            comparator: LIKE
+          };
+
+          const result = filterFn(currFilters);
+          expect(result).toBeDefined();
+          expect(result).toHaveLength(3);
+        });
+      });
+    });
+  });
+
   describe('filterByNumber', () => {
     beforeEach(() => {
       filterFn = filters(store, columns, _);

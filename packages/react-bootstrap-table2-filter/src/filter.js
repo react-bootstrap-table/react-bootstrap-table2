@@ -191,17 +191,21 @@ export const filterByArray = _ => (
   data,
   dataField,
   { filterVal, comparator }
-) => (
-  data.filter((row) => {
+) => {
+  if (filterVal.length === 0) return data;
+  const refinedFilterVal = filterVal
+    .filter(x => _.isDefined(x))
+    .map(x => x.toString());
+  return data.filter((row) => {
     const cell = _.get(row, dataField);
     let cellStr = _.isDefined(cell) ? cell.toString() : '';
     if (comparator === EQ) {
-      return filterVal.indexOf(cellStr) !== -1;
+      return refinedFilterVal.indexOf(cellStr) !== -1;
     }
     cellStr = cellStr.toLocaleUpperCase();
-    return filterVal.some(item => cellStr.indexOf(item.toLocaleUpperCase()) !== -1);
-  })
-);
+    return refinedFilterVal.some(item => cellStr.indexOf(item.toLocaleUpperCase()) !== -1);
+  });
+};
 
 export const filterFactory = _ => (filterType) => {
   let filterFn;

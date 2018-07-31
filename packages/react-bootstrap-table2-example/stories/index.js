@@ -45,9 +45,10 @@ import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 import SelectFilter from 'examples/column-filter/select-filter';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
+import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
 import MultiSelectFilter from 'examples/column-filter/multi-select-filter';
 import MultiSelectFilterDefaultValue from 'examples/column-filter/multi-select-filter-default-value';
-import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
+import CustomMultiSelectFilter from 'examples/column-filter/custom-multi-select-filter';
 import NumberFilter from 'examples/column-filter/number-filter';
 import NumberFilterWithDefaultValue from 'examples/column-filter/number-filter-default-value';
 import CustomNumberFilter from 'examples/column-filter/custom-number-filter';
@@ -58,6 +59,7 @@ import ProgrammaticallyTextFilter from 'examples/column-filter/programmatically-
 import ProgrammaticallySelectFilter from 'examples/column-filter/programmatically-select-filter';
 import ProgrammaticallyNumberFilter from 'examples/column-filter/programmatically-number-filter';
 import ProgrammaticallyDateFilter from 'examples/column-filter/programmatically-date-filter';
+import ProgrammaticallyMultiSelectFilter from 'examples/column-filter/programmatically-multi-select-filter';
 import CustomFilter from 'examples/column-filter/custom-filter';
 import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
 
@@ -190,11 +192,13 @@ storiesOf('Column Filter', module)
   .add('Custom Select Filter', () => <CustomSelectFilter />)
   .add('Custom Number Filter', () => <CustomNumberFilter />)
   .add('Custom Date Filter', () => <CustomDateFilter />)
+  .add('Custom MultiSelect Filter', () => <CustomMultiSelectFilter />)
   .add('Custom Filter Value', () => <CustomFilterValue />)
   .add('Programmatically Text Filter', () => <ProgrammaticallyTextFilter />)
   .add('Programmatically Select Filter', () => <ProgrammaticallySelectFilter />)
   .add('Programmatically Number Filter', () => <ProgrammaticallyNumberFilter />)
   .add('Programmatically Date Filter', () => <ProgrammaticallyDateFilter />)
+  .add('Programmatically Multi Select Filter', () => <ProgrammaticallyMultiSelectFilter />)
   .add('Custom Filter', () => <CustomFilter />)
   .add('Advance Custom Filter', () => <AdvanceCustomFilter />);
 

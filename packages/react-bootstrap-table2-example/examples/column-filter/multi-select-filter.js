@@ -29,7 +29,7 @@ const columns = [{
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { multiSelectFilter } from 'react-bootstrap-table2-filter';
 
 const selectOptions = {
   0: 'good',
@@ -47,7 +47,7 @@ const columns = [{
   dataField: 'quality',
   text: 'Product Quailty',
   formatter: cell => selectOptions[cell],
-  filter: selectFilter({
+  filter: multiSelectFilter({
     options: selectOptions
   })
 }];

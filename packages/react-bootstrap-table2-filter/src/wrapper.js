@@ -53,8 +53,10 @@ export default (Base, {
         const currFilters = Object.assign({}, store.filters);
         const { dataField, filter } = column;
 
-        const needClearFilters = !_.isDefined(filterVal) || filterVal === '' ||
-          filterVal.length === 0 || (filterVal.length === 1 && filterVal[0] === '');
+        const needClearFilters =
+          !_.isDefined(filterVal) ||
+          filterVal === '' ||
+          filterVal.length === 0;
 
         if (needClearFilters) {
           delete currFilters[dataField];
