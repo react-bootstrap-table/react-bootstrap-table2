@@ -24,7 +24,12 @@ const columns = [{
   formatter: cell => selectOptions[cell],
   filter: multiSelectFilter({
     options: selectOptions,
-    defaultValue: [0, 2]
+    withoutEmptyOption: true,
+    style: {
+      backgroundColor: 'pink'
+    },
+    className: 'test-classname',
+    datamycustomattr: 'datamycustomattr'
   })
 }];
 
@@ -50,12 +55,18 @@ const columns = [{
   formatter: cell => selectOptions[cell],
   filter: multiSelectFilter({
     options: selectOptions,
-    defaultValue: [0, 2]
+    withoutEmptyOption: true,
+    style: {
+      backgroundColor: 'pink'
+    },
+    className: 'test-classname',
+    datamycustomattr: 'datamycustomattr'
   })
 }];
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 `;
+
 export default () => (
   <div>
     <BootstrapTable
