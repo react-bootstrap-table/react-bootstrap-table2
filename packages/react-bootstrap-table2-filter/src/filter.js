@@ -187,12 +187,31 @@ export const filterByDate = _ => (
   });
 };
 
+export const filterByArray = _ => (
+  data,
+  dataField,
+  { filterVal, comparator }
+) => (
+  data.filter((row) => {
+    const cell = _.get(row, dataField);
+    let cellStr = _.isDefined(cell) ? cell.toString() : '';
+    if (comparator === EQ) {
+      return filterVal.indexOf(cellStr) !== -1;
+    }
+    cellStr = cellStr.toLocaleUpperCase();
+    return filterVal.some(item => cellStr.indexOf(item.toLocaleUpperCase()) !== -1);
+  })
+);
+
 export const filterFactory = _ => (filterType) => {
   let filterFn;
   switch (filterType) {
     case FILTER_TYPE.TEXT:
     case FILTER_TYPE.SELECT:
       filterFn = filterByText(_);
+      break;
+    case FILTER_TYPE.MULTISELECT:
+      filterFn = filterByArray(_);
       break;
     case FILTER_TYPE.NUMBER:
       filterFn = filterByNumber(_);

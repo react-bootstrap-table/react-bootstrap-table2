@@ -1,5 +1,6 @@
 import TextFilter from './src/components/text';
 import SelectFilter from './src/components/select';
+import MultiSelectFilter from './src/components/multiselect';
 import NumberFilter from './src/components/number';
 import DateFilter from './src/components/date';
 import wrapperFactory from './src/wrapper';
@@ -22,6 +23,11 @@ export const textFilter = (props = {}) => ({
 
 export const selectFilter = (props = {}) => ({
   Filter: SelectFilter,
+  props
+});
+
+export const multiSelectFilter = (props = {}) => ({
+  Filter: MultiSelectFilter,
   props
 });
 

@@ -53,12 +53,18 @@ export default (Base, {
         const currFilters = Object.assign({}, store.filters);
         const { dataField, filter } = column;
 
-        if (!_.isDefined(filterVal) || filterVal === '') {
+        const needClearFilters = !_.isDefined(filterVal) || filterVal === '' ||
+          filterVal.length === 0 || (filterVal.length === 1 && filterVal[0] === '');
+
+        if (needClearFilters) {
           delete currFilters[dataField];
         } else {
           // select default comparator is EQ, others are LIKE
           const {
-            comparator = (filterType === FILTER_TYPE.SELECT ? EQ : LIKE),
+            comparator = (
+              (filterType === FILTER_TYPE.SELECT) || (
+                filterType === FILTER_TYPE.MULTISELECT) ? EQ : LIKE
+            ),
             caseSensitive = false
           } = filter.props;
           currFilters[dataField] = { filterVal, filterType, comparator, caseSensitive };
