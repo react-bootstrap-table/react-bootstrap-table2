@@ -88,7 +88,7 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 - [x] Custom Select Filter
 - [X] Number Filter
 - [X] Date Filter
-- [ ] Array Filter
+- [X] Array Filter
 - [X] Programmatically Filter
 
 Remember to install [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter) firstly.   
