@@ -31,6 +31,7 @@ You can get all types of filters via import and these filters are a factory func
 
 * TextFilter
 * SelectFilter
+* MultiSelectFilter
 * NumberFilter
 * DateFilter
 * CustomFilter
@@ -115,6 +116,52 @@ const qualityFilter = selectFilter({
   style: { ... }, // your custom styles on input
   withoutEmptyOption: true,  // hide the default select option
   getFilter: (f) => { ... } // accept callback function and you can call it for filter programmtically
+});
+
+// omit...
+```
+
+## MultiSelect Filter
+
+Multi-select filter is almost same as regular select filterfilter : 
+
+```js
+import filterFactory, { multiSelectFilter } from 'react-bootstrap-table2-filter';
+
+// omit...
+const selectOptions = {
+  0: 'good',
+  1: 'Bad',
+  2: 'unknown'
+};
+
+const columns = [
+  ..., {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions[cell],
+  filter: multiSelectFilter({
+    options: selectOptions
+  })
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+Following is an example for custom multi-select filter:
+
+```js
+import filterFactory, { multiSelectFilter, Comparator } from 'react-bootstrap-table2-filter';
+// omit...
+
+const qualityFilter = multiSelectFilter({
+  options: selectOptions,
+  placeholder: 'My Custom PlaceHolder',  // custom the input placeholder
+  className: 'my-custom-text-filter', // custom classname on input
+  defaultValue: '2', // default filtering value
+  comparator: Comparator.LIKE, // default is Comparator.EQ
+  style: { ... }, // your custom styles on input
+  withoutEmptyOption: true  // hide the default select option
 });
 
 // omit...
@@ -286,5 +333,6 @@ class Table extends Components {
 ### Examples
 * [Example For Programmtically Text Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%20Text%20Filter%20)
 * [Example For Programmtically Select Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%20Select%20Filter%20)  
+* [Example For Programmtically MultiSelect Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%20Multi%20Select%20Filter)  
 * [Example For Programmtically Number Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%20Number%20Filter%20)
 * [Example For Programmtically Date Filter](../storybook/index.html?selectedKind=Column%20Filter&selectedStory=Programmatically%Date%20Filter%20)

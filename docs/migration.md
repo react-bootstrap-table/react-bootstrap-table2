@@ -94,7 +94,7 @@ Please see [available filter configuration](./filter-props.html).
 - [x] Custom Select Filter
 - [x] Number Filter
 - [X] Date Filter
-- [ ] Array Filter
+- [x] Array Filter
 - [X] Programmatically Filter
 
 Remember to install [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter) firstly.   

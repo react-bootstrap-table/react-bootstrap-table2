@@ -12,6 +12,7 @@ title: Column Filter Props
 * [Props of Filters](#props-of-filters)
    * [textFilter](#textfilter)
    * [selectFilter](#selectFilter)
+   * [multiSelectFilter](#multiSelectFilter)
    * [numberFilter](#numberFilter)
    * [dateFilter](#dateFilter)
    * [customFilter](#customFilter)
@@ -27,6 +28,7 @@ You should apply following two props to enable filter functionality:
 * Add `filter` property on `column` object:
    * textFilter
    * selectFilter
+   * multiSelectFilter
    * numberFilter
    * dateFilter
    * customFilter
@@ -164,6 +166,64 @@ const columns = [
     className: 'test-classname',
     withoutEmptyOption: true,
     defaultValue: 2,
+    comparator: Comparator.LIKE, // default is Comparator.EQ
+    style: { backgroundColor: 'pink' },
+    getFilter: (filter) => { // qualityFilter was assigned once the component has been mounted.
+      qualityFilter = filter;
+    }
+  })
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+## multiSelectFilter
+**Required**:
+
+### multiSelectFilter.options - [Object]
+* (Required) the options for the list of drop down.
+
+**Optional**:
+
+### multiSelectFilter.className - [String]
+* custom class name on input
+
+### multiSelectFilter.withoutEmptyOption - [Boolean]
+* When it was set to `true`, the drop down list would hide the default selection.
+
+### multiSelectFilter.defaultValue - [Array]
+* default filtering value
+
+### multiSelectFilter.comparator - [Comparator]
+* Specify what kind of comparator to compare. Default is `Comparator.EQ`
+
+### multiSelectFilter.style - [Object]
+* your custom inline styles on `input`
+
+### multiSelectFilter.getFilter - [Function]
+* export `filter` function to allow users to access. For multiSelectFilter, `filter(value)` to filter columns dynamically.
+
+**Example**
+```js
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { multiSelectFilter } from 'react-bootstrap-table2-filter';
+
+const selectOptions = {
+  0: 'good',
+  1: 'Bad',
+  2: 'unknown'
+};
+
+const columns = [
+  { ... }, { ... }, {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions[cell],
+  filter: multiSelectFilter({
+    options: selectOptions,
+    className: 'test-classname',
+    withoutEmptyOption: true,
+    defaultValue: [0, 2],
     comparator: Comparator.LIKE, // default is Comparator.EQ
     style: { backgroundColor: 'pink' },
     getFilter: (filter) => { // qualityFilter was assigned once the component has been mounted.
@@ -355,6 +415,7 @@ We support the following ways to do the comparison. Each `filter` has its defaul
 Following properties is valid in `FILTER_TYPES`:
 * TEXT
 * SELECT
+* MULTISELECT
 * NUMBER
 * DATE
 
