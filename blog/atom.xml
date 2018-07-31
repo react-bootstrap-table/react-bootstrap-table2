@@ -2,12 +2,36 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://react-bootstrap-table.github.io/blog</id>
     <title>react-bootstrap-table2 Blog</title>
-    <updated>2018-07-28T06:00:00Z</updated>
+    <updated>2018-08-01T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://react-bootstrap-table.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</subtitle>
     <logo>https://react-bootstrap-table.github.ioundefined</logo>
     <rights>Copyright © 2018 react-bootstrap-table2</rights>
+    <entry>
+        <title type="html"><![CDATA[New Release (2018-08-01)]]></title>
+        <id>https://react-bootstrap-table.github.io/blog/2018/08/01/version-bump.html</id>
+        <link href="https://react-bootstrap-table.github.io/blog/2018/08/01/version-bump.html">
+        </link>
+        <updated>2018-08-01T06:00:00Z</updated>
+        <summary type="html"><![CDATA[## Changed Packages
+
+This release bump following packages:
+
+* `react-bootstrap-table2-filter@0.4.0`
+
+## Changelog
+
+### Bug fixes
+N/A
+
+### Features
+* Support MultiSelect Filter([e26065](https://github.com/react-bootstrap-table/react-bootstrap-table2/c]]></summary>
+        <author>
+            <name>Allen Fang</name>
+            <uri>https://twitter.com/allenfang_tw</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[New Release (2018-07-30)]]></title>
         <id>https://react-bootstrap-table.github.io/blog/2018/07/28/version-bump.html</id>

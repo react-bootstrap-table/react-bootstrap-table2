@@ -14,6 +14,7 @@
 <ul>
 <li><a href="#textfilter">textFilter</a></li>
 <li><a href="#selectFilter">selectFilter</a></li>
+<li><a href="#multiSelectFilter">multiSelectFilter</a></li>
 <li><a href="#numberFilter">numberFilter</a></li>
 <li><a href="#dateFilter">dateFilter</a></li>
 <li><a href="#customFilter">customFilter</a></li>
@@ -31,6 +32,7 @@
 <ul>
 <li>textFilter</li>
 <li>selectFilter</li>
+<li>multiSelectFilter</li>
 <li>numberFilter</li>
 <li>dateFilter</li>
 <li>customFilter</li>
@@ -174,6 +176,67 @@
     <span class="hljs-attr">className</span>: <span class="hljs-string">'test-classname'</span>,
     <span class="hljs-attr">withoutEmptyOption</span>: <span class="hljs-literal">true</span>,
     <span class="hljs-attr">defaultValue</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-attr">comparator</span>: Comparator.LIKE, <span class="hljs-comment">// default is Comparator.EQ</span>
+    style: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'pink'</span> },
+    <span class="hljs-attr">getFilter</span>: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// qualityFilter was assigned once the component has been mounted.</span>
+      qualityFilter = filter;
+    }
+  })
+}];
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="multiselectfilter"></a><a href="#multiselectfilter" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter</h2>
+<p><strong>Required</strong>:</p>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfilteroptions-object"></a><a href="#multiselectfilteroptions-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.options - [Object]</h3>
+<ul>
+<li>(Required) the options for the list of drop down.</li>
+</ul>
+<p><strong>Optional</strong>:</p>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfilterclassname-string"></a><a href="#multiselectfilterclassname-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.className - [String]</h3>
+<ul>
+<li>custom class name on input</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfilterwithoutemptyoption-boolean"></a><a href="#multiselectfilterwithoutemptyoption-boolean" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.withoutEmptyOption - [Boolean]</h3>
+<ul>
+<li>When it was set to <code>true</code>, the drop down list would hide the default selection.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfilterdefaultvalue-array"></a><a href="#multiselectfilterdefaultvalue-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.defaultValue - [Array]</h3>
+<ul>
+<li>default filtering value</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfiltercomparator-comparator"></a><a href="#multiselectfiltercomparator-comparator" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.comparator - [Comparator]</h3>
+<ul>
+<li>Specify what kind of comparator to compare. Default is <code>Comparator.EQ</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfilterstyle-object"></a><a href="#multiselectfilterstyle-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.style - [Object]</h3>
+<ul>
+<li>your custom inline styles on <code>input</code></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfiltergetfilter-function"></a><a href="#multiselectfiltergetfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.getFilter - [Function]</h3>
+<ul>
+<li>export <code>filter</code> function to allow users to access. For multiSelectFilter, <code>filter(value)</code> to filter columns dynamically.</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
+<span class="hljs-keyword">import</span> filterFactory, { multiSelectFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
+
+<span class="hljs-keyword">const</span> selectOptions = {
+  <span class="hljs-number">0</span>: <span class="hljs-string">'good'</span>,
+  <span class="hljs-number">1</span>: <span class="hljs-string">'Bad'</span>,
+  <span class="hljs-number">2</span>: <span class="hljs-string">'unknown'</span>
+};
+
+<span class="hljs-keyword">const</span> columns = [
+  { ... }, { ... }, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'quality'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Quailty'</span>,
+  <span class="hljs-attr">formatter</span>: <span class="hljs-function"><span class="hljs-params">cell</span> =&gt;</span> selectOptions[cell],
+  <span class="hljs-attr">filter</span>: multiSelectFilter({
+    <span class="hljs-attr">options</span>: selectOptions,
+    <span class="hljs-attr">className</span>: <span class="hljs-string">'test-classname'</span>,
+    <span class="hljs-attr">withoutEmptyOption</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">defaultValue</span>: [<span class="hljs-number">0</span>, <span class="hljs-number">2</span>],
     <span class="hljs-attr">comparator</span>: Comparator.LIKE, <span class="hljs-comment">// default is Comparator.EQ</span>
     style: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'pink'</span> },
     <span class="hljs-attr">getFilter</span>: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// qualityFilter was assigned once the component has been mounted.</span>
@@ -391,6 +454,7 @@
 <ul>
 <li>TEXT</li>
 <li>SELECT</li>
+<li>MULTISELECT</li>
 <li>NUMBER</li>
 <li>DATE</li>
 </ul>
