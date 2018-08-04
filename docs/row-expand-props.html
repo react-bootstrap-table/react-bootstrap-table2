@@ -1,0 +1,106 @@
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Row Expand Props · react-bootstrap-table2</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Row Expand Props · react-bootstrap-table2"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-bootstrap-table.github.io/react-bootstrap-table2/index.html"/><meta property="og:description" content="`react-bootstrap-table2` supports the row expand feature. By passing prop `expandRow` to enable this functionality. "/><link rel="shortcut icon" href="/react-bootstrap-table2/undefined"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://react-bootstrap-table.github.io/blog/atom.xml" title="react-bootstrap-table2 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://react-bootstrap-table.github.io/blog/feed.xml" title="react-bootstrap-table2 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/react-bootstrap-table2/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-bootstrap-table2/"><h2 class="headerTitle">react-bootstrap-table2</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/react-bootstrap-table2/docs/about.html" target="_self">Docs</a></li><li><a href="/react-bootstrap-table2/docs/table-props.html" target="_self">API</a></li><li><a href="/react-bootstrap-table2/en/help.html" target="_self">Help</a></li><li><a href="/react-bootstrap-table2/blog" target="_self">Blog</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Row Expand Definition</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Table Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/table-props.html">BootstrapTable Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/column-props.html">Columns Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Cell Editing Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/cell-edit-props.html">Cell Editing Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Pagination Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/pagination-props.html">Pagination Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Row Select Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/row-select-props.html">Row Selection Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Row Expand Definition</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/react-bootstrap-table2/docs/row-expand-props.html">Row Expand Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Column Filter Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/filter-props.html">Column Filter Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Search Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/search-props.html">Search Props</a></li></ul></div><div class="navGroup navGroupActive"><h3>Export to CSV Definition</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/export-csv-props.html">Export CSV Props</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Row Expand Props</h1></header><article><div><span><p><code>react-bootstrap-table2</code> supports the row expand feature. By passing prop <code>expandRow</code> to enable this functionality.</p>
+<blockquote>
+<p>Default is click to expand/collapse a row. In addition, we don't support any way to chagne this mechanism!</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" name="required"></a><a href="#required" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Required</h2>
+<ul>
+<li><a href="#expandrowrenderer-function">renderer (<strong>required</strong>)</a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="optional"></a><a href="#optional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional</h2>
+<ul>
+<li><a href="#expandrowexpanded-array">expanded</a></li>
+<li><a href="#expandrownonexpandable-array">nonExpandable</a></li>
+<li><a href="#expandrowonexpand-function">onExpand</a></li>
+<li><a href="#expandrowonexpandall-function">onExpandAll</a></li>
+<li><a href="#expandrowshowexpandcolumn-bool">showExpandColumn</a></li>
+<li><a href="#expandrowexpandcolumnrenderer-function">expandColumnRenderer</a></li>
+<li><a href="#expandrowexpandheadercolumnrenderer-function">expandHeaderColumnRenderer</a></li>
+</ul>
+<hr>
+<h2><a class="anchor" aria-hidden="true" name="expandrowrenderer-function"></a><a href="#expandrowrenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.renderer - [Function]</h2>
+<p>Specify the content of expand row, <code>react-bootstrap-table2</code> will pass the currnet row object as argument and expect this function to return a react element.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function"><span class="hljs-params">row</span> =&gt;</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>{ `This Expand row is belong to rowKey ${row.id}` }<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>You can render anything here, also you can add additional data on every row object<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>expandRow.renderer callback will pass the origin row object to you<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  )
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span>
+  <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span>
+  <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> }
+  <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> }
+  <span class="hljs-attr">expandRow</span>=<span class="hljs-string">{</span> <span class="hljs-attr">expandRow</span> }
+/&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="expandrowexpanded-array"></a><a href="#expandrowexpanded-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.expanded - [Array]</h2>
+<p><code>expandRow.expanded</code> is useful to manage the row expand on table, for example: you can use it to perform the default expands.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span> ...
+  expanded: [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>] <span class="hljs-comment">// should be a row keys array</span>
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="expandrownonexpandable-array"></a><a href="#expandrownonexpandable-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.nonExpandable - [Array]</h2>
+<p>This prop allow you to restrict some rows which can not be expanded by user. <code>expandRow.nonExpandable</code> accept an rowkeys array.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span> ...
+  nonExpandable: [<span class="hljs-number">1</span>, <span class="hljs-number">3</span> ,<span class="hljs-number">5</span>]
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="expandrowonexpand-function"></a><a href="#expandrowonexpand-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.onExpand - [Function]</h2>
+<p>This prop accept a callback function which will be called when a row is expand/collapse and pass following four arguments:
+<code>row</code>, <code>isExpand</code>, <code>rowIndex</code> and <code>e</code>.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span> ...
+  onExpand: <span class="hljs-function">(<span class="hljs-params">row, isExpand, rowIndex, e</span>) =&gt;</span> {
+    <span class="hljs-comment">// ...</span>
+  }
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="expandrowonexpandall-function"></a><a href="#expandrowonexpandall-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.onExpandAll - [Function]</h2>
+<p>This prop accept a callback function which will be called when expand/collapse all. It only work when you configure <a href="#expandrowshowexpandcolumn-bool"><code>expandRow.showExpandColumn</code></a> as <code>true</code>.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span> ...,
+  <span class="hljs-attr">showExpandColumn</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">onExpandAll</span>: <span class="hljs-function">(<span class="hljs-params">isExpandAll, results, e</span>) =&gt;</span> {
+    <span class="hljs-comment">// ...</span>
+  }
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="expandrowshowexpandcolumn-bool"></a><a href="#expandrowshowexpandcolumn-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.showExpandColumn - [Bool]</h2>
+<p>Default is <code>false</code>, if you want to have a expand indicator, give this prop as <code>true</code>.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span> ...
+  showExpandColumn: <span class="hljs-literal">true</span>
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="expandrowexpandcolumnrenderer-function"></a><a href="#expandrowexpandcolumnrenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.expandColumnRenderer - [Function]</h2>
+<p>Provide a callback function which allow you to custom the expand indicator. This callback only have one argument which is an object and contain one property <code>expanded</code> to indicate if current row is expanded</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span> ...,
+  <span class="hljs-attr">showExpandColumn</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">expandColumnRenderer</span>: <span class="hljs-function">(<span class="hljs-params">{ expanded }</span>) =&gt;</span> (
+    <span class="hljs-comment">// ....</span>
+  )
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="expandrowexpandheadercolumnrenderer-function"></a><a href="#expandrowexpandheadercolumnrenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>expandRow.expandHeaderColumnRenderer - [Function]</h2>
+<p>Provide a callback function which allow you to custom the expand indicator in the expand header column. This callback only have one argument which is an object and contain one property <code>isAnyExpands</code> to indicate if there are any expanded rows:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> expandRow = {
+  <span class="hljs-attr">renderer</span>: <span class="hljs-function">(<span class="hljs-params">row</span>) =&gt;</span> ...,
+  <span class="hljs-attr">showExpandColumn</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">expandHeaderColumnRenderer</span>: <span class="hljs-function">(<span class="hljs-params">{ isAnyExpands }</span>) =&gt;</span> (
+    <span class="hljs-comment">// ....</span>
+  )
+};
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="row-select-props.html">← Row Selection Props</a><a class="docs-next button" href="filter-props.html">Column Filter Props →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>
