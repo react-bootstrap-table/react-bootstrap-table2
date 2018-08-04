@@ -1,5 +1,5 @@
 ---
-title: New Release (2018-xx-xx)
+title: New Release (2018-08-04)
 author: Allen Fang
 authorURL: https://twitter.com/allenfang_tw
 ---
