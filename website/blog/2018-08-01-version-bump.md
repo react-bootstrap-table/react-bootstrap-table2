@@ -8,7 +8,7 @@ authorURL: https://twitter.com/allenfang_tw
 
 This release bump following packages:
 
-* `react-bootstrap-table2-filter@0.4.0`
+* `react-bootstrap-table2-filter@0.3.2`
 
 ## Changelog
 

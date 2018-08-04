@@ -9,6 +9,7 @@ title: BootstrapTable Props
 
 ## Optional
 * [remote](#remote-bool-object)
+* [bootstrap4](#bootstrap4-bool)
 * [noDataIndication](#nodataindication-function)
 * [loading](#loading-bool)
 * [overlay](#overlay-function)
@@ -68,6 +69,9 @@ remote={ { pagination: true, filter: false, sort: false } }
 ```
 
 There is a special case for remote pagination, even you only specified the pagination need to handle as remote, `react-bootstrap-table2` will handle all the table changes(filter, sort etc) as remote mode, because `react-bootstrap-table2` only know the data of current page, but filtering, searching or sort need to work on overall data.
+
+## bootstrap4 - [Bool]
+`true` to indicate your bootstrap version is 4. Default version is 3.
 
 ## noDataIndication - [Function]
 `noDataIndication` should be a callback function which return anything that will be showed in the table when data is **empty**.
