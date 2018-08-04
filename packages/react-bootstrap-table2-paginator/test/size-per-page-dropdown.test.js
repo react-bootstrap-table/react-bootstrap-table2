@@ -5,6 +5,12 @@ import { shallow } from 'enzyme';
 import SizePerPageOption from '../src/size-per-page-option';
 import SizePerPageDropDown from '../src/size-per-page-dropdown';
 
+const shallowWithContext = (elem, context = {}) => {
+  const wrapper = shallow(elem);
+  const Children = wrapper.props().children(context);
+  return shallow(Children);
+};
+
 describe('SizePerPageDropDown', () => {
   let wrapper;
   const currSizePerPage = '25';
@@ -28,8 +34,9 @@ describe('SizePerPageDropDown', () => {
 
   describe('default SizePerPageDropDown component', () => {
     beforeEach(() => {
-      wrapper = shallow(
-        <SizePerPageDropDown { ...props } />
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } />,
+        { bootstrap4: false }
       );
     });
 
@@ -47,6 +54,7 @@ describe('SizePerPageDropDown', () => {
         const option = options[i];
         expect(sizePerPage.prop('text')).toEqual(option.text);
         expect(sizePerPage.prop('page')).toEqual(option.page);
+        expect(sizePerPage.prop('bootstrap4')).toBeFalsy();
         expect(sizePerPage.prop('onSizePerPageChange')).toEqual(onSizePerPageChange);
       });
     });
@@ -61,10 +69,52 @@ describe('SizePerPageDropDown', () => {
     });
   });
 
+  describe('when bootstrap4 context is true', () => {
+    beforeEach(() => {
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } />,
+        { bootstrap4: true }
+      );
+    });
+
+    it('should rendering SizePerPageDropDown correctly', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('button').length).toBe(1);
+      expect(wrapper.find('button').text()).toEqual(`${currSizePerPage} `);
+    });
+
+    it('should rendering SizePerPageOption successfully', () => {
+      expect(wrapper.find('ul.dropdown-menu').length).toBe(1);
+      const sizePerPageOptions = wrapper.find(SizePerPageOption);
+      expect(sizePerPageOptions.length).toBe(options.length);
+      sizePerPageOptions.forEach((sizePerPage, i) => {
+        const option = options[i];
+        expect(sizePerPage.prop('text')).toEqual(option.text);
+        expect(sizePerPage.prop('page')).toEqual(option.page);
+        expect(sizePerPage.prop('bootstrap4')).toBeTruthy();
+        expect(sizePerPage.prop('onSizePerPageChange')).toEqual(onSizePerPageChange);
+      });
+    });
+
+    it('no need to render caret', () => {
+      expect(wrapper.find('.caret')).toHaveLength(0);
+    });
+
+    it('default variation is dropdown', () => {
+      expect(wrapper.hasClass('dropdown')).toBeTruthy();
+    });
+
+    it('default dropdown is not open', () => {
+      expect(wrapper.hasClass('open show')).toBeFalsy();
+      expect(wrapper.find('[aria-expanded=false]').length).toBe(1);
+    });
+  });
+
   describe('when open prop is true', () => {
     beforeEach(() => {
-      wrapper = shallow(
-        <SizePerPageDropDown { ...props } open />
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } open />,
+        { bootstrap4: false }
       );
     });
 
@@ -76,8 +126,9 @@ describe('SizePerPageDropDown', () => {
 
   describe('when hidden prop is true', () => {
     beforeEach(() => {
-      wrapper = shallow(
-        <SizePerPageDropDown { ...props } hidden />
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } hidden />,
+        { bootstrap4: false }
       );
     });
 
@@ -89,8 +140,9 @@ describe('SizePerPageDropDown', () => {
   describe('when btnContextual prop is defined', () => {
     const contextual = 'btn-warning';
     beforeEach(() => {
-      wrapper = shallow(
-        <SizePerPageDropDown { ...props } btnContextual={ contextual } />
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } btnContextual={ contextual } />,
+        { bootstrap4: false }
       );
     });
 
@@ -102,8 +154,9 @@ describe('SizePerPageDropDown', () => {
   describe('when variation prop is defined', () => {
     const variation = 'dropup';
     beforeEach(() => {
-      wrapper = shallow(
-        <SizePerPageDropDown { ...props } variation={ variation } />
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } variation={ variation } />,
+        { bootstrap4: false }
       );
     });
 
@@ -115,8 +168,9 @@ describe('SizePerPageDropDown', () => {
   describe('when className prop is defined', () => {
     const className = 'custom-class';
     beforeEach(() => {
-      wrapper = shallow(
-        <SizePerPageDropDown { ...props } className={ className } />
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } className={ className } />,
+        { bootstrap4: false }
       );
     });
 

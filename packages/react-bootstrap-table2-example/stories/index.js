@@ -62,6 +62,7 @@ import ProgrammaticallyDateFilter from 'examples/column-filter/programmatically-
 import ProgrammaticallyMultiSelectFilter from 'examples/column-filter/programmatically-multi-select-filter';
 import CustomFilter from 'examples/column-filter/custom-filter';
 import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
+import ClearAllFilters from 'examples/column-filter/clear-all-filters';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -112,10 +113,34 @@ import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
 import HideSelectionColumnTable from 'examples/row-selection/hide-selection-column';
 
+// work on row expand
+import BasicRowExpand from 'examples/row-expand';
+import RowExpandManagement from 'examples/row-expand/expand-management';
+import NonExpandableRows from 'examples/row-expand/non-expandable-rows';
+import ExpandColumn from 'examples/row-expand/expand-column';
+import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
+import ExpandHooks from 'examples/row-expand/expand-hooks';
+
 // pagination
 import PaginationTable from 'examples/pagination';
 import PaginationHooksTable from 'examples/pagination/pagination-hooks';
 import CustomPaginationTable from 'examples/pagination/custom-pagination';
+
+// search
+import SearchTable from 'examples/search';
+import DefaultCustomSearch from 'examples/search/default-custom-search';
+import FullyCustomSearch from 'examples/search/fully-custom-search';
+import SearchFormattedData from 'examples/search/search-formatted';
+import CustomSearchValue from 'examples/search/custom-search-value';
+
+// CSV
+import ExportCSV from 'examples/csv';
+import CSVFormatter from 'examples/csv/csv-column-formatter';
+import CustomCSVHeader from 'examples/csv/custom-csv-header';
+import HideCSVColumn from 'examples/csv/hide-column';
+import CSVColumnType from 'examples/csv/csv-column-type';
+import CustomCSVButton from 'examples/csv/custom-csv-button';
+import CustomCSV from 'examples/csv/custom-csv';
 
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
@@ -125,6 +150,7 @@ import TableOverlay from 'examples/loading-overlay/table-overlay';
 import RemoteSort from 'examples/remote/remote-sort';
 import RemoteFilter from 'examples/remote/remote-filter';
 import RemotePaginationTable from 'examples/remote/remote-pagination';
+import RemoteSearch from 'examples/remote/remote-search';
 import RemoteCellEdit from 'examples/remote/remote-celledit';
 import RemoteAll from 'examples/remote/remote-all';
 
@@ -200,7 +226,8 @@ storiesOf('Column Filter', module)
   .add('Programmatically Date Filter', () => <ProgrammaticallyDateFilter />)
   .add('Programmatically Multi Select Filter', () => <ProgrammaticallyMultiSelectFilter />)
   .add('Custom Filter', () => <CustomFilter />)
-  .add('Advance Custom Filter', () => <AdvanceCustomFilter />);
+  .add('Advance Custom Filter', () => <AdvanceCustomFilter />)
+  .add('Clear All Filters', () => <ClearAllFilters />);
 
 storiesOf('Work on Rows', module)
   .add('Customize Row Style', () => <RowStyleTable />)
@@ -251,10 +278,34 @@ storiesOf('Row Selection', module)
   .add('Selection Hooks', () => <SelectionHooks />)
   .add('Hide Selection Column', () => <HideSelectionColumnTable />);
 
+storiesOf('Row Expand', module)
+  .add('Basic Row Expand', () => <BasicRowExpand />)
+  .add('Expand Management', () => <RowExpandManagement />)
+  .add('Non Expandabled Rows', () => <NonExpandableRows />)
+  .add('Expand Indicator', () => <ExpandColumn />)
+  .add('Custom Expand Indicator', () => <CustomExpandColumn />)
+  .add('Expand Hooks', () => <ExpandHooks />);
+
 storiesOf('Pagination', module)
   .add('Basic Pagination Table', () => <PaginationTable />)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
   .add('Custom Pagination', () => <CustomPaginationTable />);
+
+storiesOf('Table Search', module)
+  .add('Basic Search Table', () => <SearchTable />)
+  .add('Default Custom Search', () => <DefaultCustomSearch />)
+  .add('Fully Custom Search', () => <FullyCustomSearch />)
+  .add('Search Fromatted Value', () => <SearchFormattedData />)
+  .add('Custom Search Value', () => <CustomSearchValue />);
+
+storiesOf('Export CSV', module)
+  .add('Basic Export CSV', () => <ExportCSV />)
+  .add('Format CSV Column', () => <CSVFormatter />)
+  .add('Custom CSV Header', () => <CustomCSVHeader />)
+  .add('Hide CSV Column', () => <HideCSVColumn />)
+  .add('CSV Column Type', () => <CSVColumnType />)
+  .add('Custom CSV Button', () => <CustomCSVButton />)
+  .add('Custom CSV', () => <CustomCSV />);
 
 storiesOf('EmptyTableOverlay', module)
   .add('Empty Table Overlay', () => <EmptyTableOverlay />)
@@ -264,5 +315,6 @@ storiesOf('Remote', module)
   .add('Remote Sort', () => <RemoteSort />)
   .add('Remote Filter', () => <RemoteFilter />)
   .add('Remote Pagination', () => <RemotePaginationTable />)
+  .add('Remote Search', () => <RemoteSearch />)
   .add('Remote Cell Editing', () => <RemoteCellEdit />)
   .add('Remote All', () => <RemoteAll />);

@@ -1,4 +1,4 @@
-import wrapperFactory from './src/wrapper';
+import createContext from './src/context';
 import editingCellFactory from './src/editing-cell';
 import {
   EDITTYPE,
@@ -8,7 +8,7 @@ import {
 } from './src/const';
 
 export default (options = {}) => ({
-  wrapperFactory,
+  createContext,
   editingCellFactory,
   CLICK_TO_CELL_EDIT,
   DBCLICK_TO_CELL_EDIT,

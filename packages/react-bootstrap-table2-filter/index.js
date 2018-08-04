@@ -3,12 +3,12 @@ import SelectFilter from './src/components/select';
 import MultiSelectFilter from './src/components/multiselect';
 import NumberFilter from './src/components/number';
 import DateFilter from './src/components/date';
-import wrapperFactory from './src/wrapper';
+import createContext from './src/context';
 import * as Comparison from './src/comparison';
 import { FILTER_TYPE } from './src/const';
 
 export default (options = {}) => ({
-  wrapperFactory,
+  createContext,
   options
 });
 

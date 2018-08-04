@@ -147,7 +147,7 @@ describe('Number Filter', () => {
 
     it('should calling onFilter on componentDidMount', () => {
       expect(onFilter.calledOnce).toBeTruthy();
-      expect(onFilter.calledWith(column, FILTER_TYPE.NUMBER)).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.NUMBER, true)).toBeTruthy();
       expect(onFilterFirstReturn.calledOnce).toBeTruthy();
       expect(onFilterFirstReturn.calledWith({ number: `${number}`, comparator })).toBeTruthy();
     });

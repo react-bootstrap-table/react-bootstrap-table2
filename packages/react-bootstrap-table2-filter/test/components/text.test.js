@@ -65,7 +65,7 @@ describe('Text Filter', () => {
 
     it('should calling onFilter on componentDidMount', () => {
       expect(onFilter.calledOnce).toBeTruthy();
-      expect(onFilter.calledWith(column, FILTER_TYPE.TEXT)).toBeTruthy();
+      expect(onFilter.calledWith(column, FILTER_TYPE.TEXT, true)).toBeTruthy();
       expect(onFilterFirstReturn.calledOnce).toBeTruthy();
       expect(onFilterFirstReturn.calledWith(defaultValue)).toBeTruthy();
     });

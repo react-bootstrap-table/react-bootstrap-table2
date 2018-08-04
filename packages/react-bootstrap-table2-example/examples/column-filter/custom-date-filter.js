@@ -15,6 +15,7 @@ const columns = [{
 }, {
   dataField: 'inStockDate',
   text: 'InStock Date',
+  formatter: cell => cell.toString(),
   filter: dateFilter({
     delay: 400,
     placeholder: 'custom placeholder',

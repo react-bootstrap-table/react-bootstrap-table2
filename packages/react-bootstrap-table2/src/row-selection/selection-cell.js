@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
+import { BootstrapContext } from '../contexts/bootstrap';
 
 export default class SelectionCell extends Component {
   static propTypes = {
@@ -59,21 +60,28 @@ export default class SelectionCell extends Component {
     } = this.props;
 
     return (
-      <td onClick={ this.handleClick }>
+      <BootstrapContext.Consumer>
         {
-          selectionRenderer ? selectionRenderer({
-            mode: inputType,
-            checked: selected,
-            disabled
-          }) : (
-            <input
-              type={ inputType }
-              checked={ selected }
-              disabled={ disabled }
-            />
+          ({ bootstrap4 }) => (
+            <td onClick={ this.handleClick }>
+              {
+                selectionRenderer ? selectionRenderer({
+                  mode: inputType,
+                  checked: selected,
+                  disabled
+                }) : (
+                  <input
+                    type={ inputType }
+                    checked={ selected }
+                    disabled={ disabled }
+                    className={ bootstrap4 ? 'selection-input-4' : '' }
+                  />
+                )
+              }
+            </td>
           )
         }
-      </td>
+      </BootstrapContext.Consumer>
     );
   }
 }

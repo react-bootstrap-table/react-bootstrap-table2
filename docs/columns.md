@@ -38,6 +38,10 @@ Available properties in a column object:
 * [editorRenderer](#editorRenderer)
 * [filter](#filter)
 * [filterValue](#filterValue)
+* [csvType](#csvType)
+* [csvFormatter](#csvFormatter)
+* [csvText](#csvText)
+* [csvExport](#csvExport)
 
 Following is a most simplest and basic usage:
 
@@ -686,3 +690,16 @@ A final `String` value you want to be filtered.
   filterValue: (cell, row) => owners[cell]
 }
 ```
+
+## <a name='csvType'>column.csvType - [Object]</a>
+Default is `String`. Currently, the available value is `String` and `Number`. If `Number` assigned, the cell value will not wrapped with double quote.
+
+## <a name='csvFormatter'>column.csvFormatter - [Function]</a>
+
+This is same as [`column.formatter`](#formatter). But `csvFormatter` only for CSV export and called when export CSV.
+
+## <a name='csvText'>column.csvText - [String]</a>
+Custom the CSV header cell, Default is [`column.text`](#text).
+
+## <a name='csvExport'>column.csvExport - [Bool]</a>
+Default is `true`, `false` will hide this column when export CSV.
