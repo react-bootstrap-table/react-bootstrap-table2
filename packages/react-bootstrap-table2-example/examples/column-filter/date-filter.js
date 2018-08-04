@@ -15,6 +15,7 @@ const columns = [{
 }, {
   dataField: 'inStockDate',
   text: 'InStock Date',
+  formatter: cell => cell.toString(),
   filter: dateFilter()
 }];
 

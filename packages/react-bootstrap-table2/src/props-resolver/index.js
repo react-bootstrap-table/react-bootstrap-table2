@@ -1,9 +1,11 @@
 import ColumnResolver from './column-resolver';
+import ExpandRowResolver from './expand-row-resolver';
 import Const from '../const';
 import _ from '../utils';
 
 export default ExtendBase =>
-  class TableResolver extends ColumnResolver(ExtendBase) {
+  class TableResolver extends
+    ExpandRowResolver(ColumnResolver(ExtendBase)) {
     validateProps() {
       const { keyField } = this.props;
       if (!keyField) {
@@ -51,7 +53,7 @@ export default ExtendBase =>
      */
     resolveSelectRowPropsForHeader(options = {}) {
       const { selectRow } = this.props;
-      const { allRowsSelected, selected = [], ...rest } = options;
+      const { allRowsSelected, allRowsNotSelected, ...rest } = options;
       const {
         ROW_SELECT_DISABLED, CHECKBOX_STATUS_CHECKED,
         CHECKBOX_STATUS_INDETERMINATE, CHECKBOX_STATUS_UNCHECKED
@@ -62,7 +64,7 @@ export default ExtendBase =>
 
         // checkbox status depending on selected rows counts
         if (allRowsSelected) checkedStatus = CHECKBOX_STATUS_CHECKED;
-        else if (selected.length === 0) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
+        else if (allRowsNotSelected) checkedStatus = CHECKBOX_STATUS_UNCHECKED;
         else checkedStatus = CHECKBOX_STATUS_INDETERMINATE;
 
         return {

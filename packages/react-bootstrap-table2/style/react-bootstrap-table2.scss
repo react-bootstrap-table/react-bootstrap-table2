@@ -8,6 +8,7 @@
     cursor: pointer;
   }
 
+  // bootstrap 3 sort
   th .order > .dropdown > .caret {
     margin: 10px 0 10px 5px;
     color: #cccccc;
@@ -22,12 +23,53 @@
     margin: 10px 6.5px;
   }
 
+  // bootstrap 4 sort
+  th .order-4:before {
+    margin-left: 3.5px;
+    content: "\2191";
+    opacity: 0.4;
+  }
+
+  th .order-4:after {
+    content: "\2193";
+    opacity: 0.4;
+  }
+
+  th .caret-4-asc:before {
+    margin-left: 3.5px;
+    content: "\2191";
+  }
+
+  th .caret-4-asc:after {
+    content: "\2193";
+    opacity: 0.4;
+  }
+
+  th .caret-4-desc:before {
+    margin-left: 3.5px;
+    content: "\2191";
+    opacity: 0.4;
+  }
+
+  th .caret-4-desc:after {
+    content: "\2193";
+  }
+
   th[data-row-selection] {
     width: 30px;
   }
 
+  th > .selection-input-4,
+  td > .selection-input-4 {
+    margin: -4px;
+  }
+
   td.react-bs-table-no-data {
     text-align: center;
+  }
+
+  tr.expanding-row {
+    padding: 5px;
   }
 
   td.react-bootstrap-table-editing-cell {

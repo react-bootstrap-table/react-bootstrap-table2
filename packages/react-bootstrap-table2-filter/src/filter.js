@@ -229,9 +229,9 @@ export const filterFactory = _ => (filterType) => {
   return filterFn;
 };
 
-export const filters = (store, columns, _) => (currFilters) => {
+export const filters = (data, columns, _) => (currFilters) => {
   const factory = filterFactory(_);
-  let result = store.getAllData();
+  let result = data;
   let filterFn;
   Object.keys(currFilters).forEach((dataField) => {
     const filterObj = currFilters[dataField];

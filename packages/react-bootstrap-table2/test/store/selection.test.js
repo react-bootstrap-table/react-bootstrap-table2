@@ -1,10 +1,8 @@
-import Store from '../../src/store';
 import {
-  isSelectedAll,
-  isAnySelectedRow,
   selectableKeys,
   unSelectableKeys,
-  getSelectedRows
+  getSelectedRows,
+  getSelectionSummary
 } from '../../src/store/selection';
 
 describe('Selection Function', () => {
@@ -15,90 +13,73 @@ describe('Selection Function', () => {
     { id: 1, name: '!@#' }
   ];
   const keyField = 'id';
-  let store;
   let skip;
-  let fn;
-
-  beforeEach(() => {
-    store = new Store(keyField);
-    store.data = data;
-  });
-
-  describe('isSelectedAll', () => {
-    it('should returning false when store.selected is not cover all rows', () => {
-      expect(isSelectedAll(store)).toBeFalsy();
-      store.selected = [data[0][keyField]];
-      expect(isSelectedAll(store)).toBeFalsy();
-    });
-
-    it('should returning true when store.selected is cover all rows', () => {
-      store.selected = data.map(d => d[keyField]);
-      expect(isSelectedAll(store)).toBeTruthy();
-    });
-  });
-
-  describe('isAnySelectedRow', () => {
-    it('should returning false if any store.selected is empty', () => {
-      fn = isAnySelectedRow(store);
-      expect(fn()).toBeFalsy();
-    });
-
-    it('should returning false if store.selected is have same key as skips', () => {
-      fn = isAnySelectedRow(store);
-      skip = [data[0][keyField]];
-      store.selected = [data[0][keyField]];
-      expect(fn(skip)).toBeFalsy();
-    });
-
-    it('should returning true if store.selected is not empty', () => {
-      store.selected = [data[0][keyField]];
-      fn = isAnySelectedRow(store);
-      expect(fn()).toBeTruthy();
-    });
-
-    it('should returning true if length of store.selected is bigger than skips', () => {
-      store.selected = [data[0][keyField], data[2][keyField]];
-      skip = [data[0][keyField]];
-      fn = isAnySelectedRow(store);
-      expect(fn(skip)).toBeTruthy();
-    });
-  });
 
   describe('selectableKeys', () => {
-    beforeEach(() => {
-      fn = selectableKeys(store);
-    });
-
     it('should returning all row keys if skip is empty', () => {
-      expect(fn()).toEqual(data.map(d => d[keyField]));
+      expect(selectableKeys(data, keyField)).toEqual(data.map(d => d[keyField]));
     });
 
     it('should returngin row keys expect the skip', () => {
       skip = [data[1][keyField]];
-      expect(fn(skip)).toHaveLength(data.length - skip.length);
+      expect(selectableKeys(data, keyField, skip)).toHaveLength(data.length - skip.length);
     });
   });
 
   describe('unSelectableKeys', () => {
     it('should returning empty array if skip is empty', () => {
-      fn = unSelectableKeys(store);
-      expect(fn()).toHaveLength(0);
+      expect(unSelectableKeys()).toHaveLength(0);
     });
 
     it('should returning array which must contain skip', () => {
       skip = [data[1][keyField]];
-      store.selected = data.map(d => d[keyField]);
-      fn = unSelectableKeys(store);
-      expect(fn(skip)).toHaveLength(skip.length);
+      const selected = data.map(d => d[keyField]);
+      expect(unSelectableKeys(selected, skip)).toHaveLength(skip.length);
     });
   });
 
   describe('getSelectedRows', () => {
     it('should returning rows object correctly', () => {
-      store.selected = data.map(d => d[keyField]);
-      const result = getSelectedRows(store);
-      expect(result).toHaveLength(store.selected.length);
-      expect(result).toEqual(store.data);
+      const selected = data.map(d => d[keyField]);
+      const result = getSelectedRows(data, keyField, selected);
+      expect(result).toHaveLength(selected.length);
+      expect(result).toEqual(data);
+    });
+  });
+
+  describe('getSelectionSummary', () => {
+    let result;
+
+    describe('if selected argument is able to cover all the data argument', () => {
+      it('should return an obj which allRowsSelected is true and allRowsNotSelected is false', () => {
+        const selected = data.map(d => d[keyField]);
+        result = getSelectionSummary(data, keyField, selected);
+        expect(result).toEqual({
+          allRowsSelected: true,
+          allRowsNotSelected: false
+        });
+      });
+    });
+
+    describe('if selected argument empty', () => {
+      it('should return an obj which allRowsSelected is false but allRowsNotSelected is true', () => {
+        result = getSelectionSummary(data, keyField);
+        expect(result).toEqual({
+          allRowsSelected: false,
+          allRowsNotSelected: true
+        });
+      });
+    });
+
+    describe('if selected argument is only cover partial data', () => {
+      it('should return an obj which allRowsSelected and allRowsNotSelected both are false', () => {
+        const selected = [1, 2];
+        result = getSelectionSummary(data, keyField, selected);
+        expect(result).toEqual({
+          allRowsSelected: false,
+          allRowsNotSelected: false
+        });
+      });
     });
   });
 });

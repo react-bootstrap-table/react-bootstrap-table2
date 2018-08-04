@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
+import { shallowWithContext } from '../test-helpers/new-context';
 import Const from '../../src/const';
 import SelectionHeaderCell, { CheckBox } from '../../src/row-selection/selection-header-cell';
 
@@ -11,7 +12,7 @@ describe('<SelectionHeaderCell />', () => {
   describe('shouldComponentUpdate', () => {
     describe('when props.mode is radio', () => {
       it('should not update component', () => {
-        wrapper = shallow(<SelectionHeaderCell mode="radio" />);
+        wrapper = shallow(<SelectionHeaderCell mode="radio" />, { bootstrap4: false });
 
         expect(wrapper.instance().shouldComponentUpdate({})).toBe(false);
       });
@@ -24,7 +25,9 @@ describe('<SelectionHeaderCell />', () => {
           const nextProps = { checkedStatus };
 
           wrapper = shallow(
-            <SelectionHeaderCell mode="checkbox" checkedStatus={ checkedStatus } />);
+            <SelectionHeaderCell mode="checkbox" checkedStatus={ checkedStatus } />,
+            { bootstrap4: false }
+          );
 
           expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(false);
         });
@@ -37,7 +40,9 @@ describe('<SelectionHeaderCell />', () => {
           const nextProps = { checkedStatus };
 
           wrapper = shallow(
-            <SelectionHeaderCell mode="checkbox" checkedStatus={ CHECKBOX_STATUS_INDETERMINATE } />);
+            <SelectionHeaderCell mode="checkbox" checkedStatus={ CHECKBOX_STATUS_INDETERMINATE } />,
+            { bootstrap4: false }
+          );
 
           expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
         });
@@ -57,12 +62,14 @@ describe('<SelectionHeaderCell />', () => {
 
       describe('if props.mode is radio', () => {
         beforeEach(() => {
-          wrapper = shallow(
+          wrapper = shallowWithContext(
             <SelectionHeaderCell
               mode="radio"
               checkedStatus={ Const.CHECKBOX_STATUS_CHECKED }
               onAllRowsSelect={ mockOnAllRowsSelect }
-            />);
+            />,
+            { bootstrap4: false }
+          );
         });
 
         it('should do nothing', () => {
@@ -75,12 +82,14 @@ describe('<SelectionHeaderCell />', () => {
 
       describe('if props.mode is checkbox', () => {
         beforeEach(() => {
-          wrapper = shallow(
+          wrapper = shallowWithContext(
             <SelectionHeaderCell
               mode="checkbox"
               checkedStatus={ Const.CHECKBOX_STATUS_CHECKED }
               onAllRowsSelect={ mockOnAllRowsSelect }
-            />);
+            />,
+            { bootstrap4: false }
+          );
         });
 
         it('should call handleCheckBoxClick', () => {
@@ -98,7 +107,10 @@ describe('<SelectionHeaderCell />', () => {
       beforeEach(() => {
         const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
 
-        wrapper = shallow(<SelectionHeaderCell mode="radio" checkedStatus={ checkedStatus } />);
+        wrapper = shallowWithContext(
+          <SelectionHeaderCell mode="radio" checkedStatus={ checkedStatus } />,
+          { bootstrap4: false }
+        );
       });
 
       it('should not render checkbox', () => {
@@ -112,7 +124,10 @@ describe('<SelectionHeaderCell />', () => {
       const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
 
       beforeEach(() => {
-        wrapper = shallow(<SelectionHeaderCell mode="checkbox" checkedStatus={ checkedStatus } />);
+        wrapper = shallowWithContext(
+          <SelectionHeaderCell mode="checkbox" checkedStatus={ checkedStatus } />,
+          { bootstrap4: false }
+        );
       });
 
       it('should render checkbox', () => {
@@ -134,12 +149,13 @@ describe('<SelectionHeaderCell />', () => {
 
       beforeEach(() => {
         selectionHeaderRenderer.mockClear();
-        wrapper = shallow(
+        wrapper = shallowWithContext(
           <SelectionHeaderCell
             mode="checkbox"
             checkedStatus={ checkedStatus }
             selectionHeaderRenderer={ selectionHeaderRenderer }
-          />
+          />,
+          { bootstrap4: false }
         );
       });
 
@@ -154,6 +170,22 @@ describe('<SelectionHeaderCell />', () => {
           checked: checkedStatus === Const.CHECKBOX_STATUS_CHECKED,
           indeterminate: checkedStatus === Const.CHECKBOX_STATUS_INDETERMINATE
         });
+      });
+    });
+
+    describe('when bootstrap4 context is true', () => {
+      beforeEach(() => {
+        const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
+
+        wrapper = shallowWithContext(
+          <SelectionHeaderCell mode="checkbox" checkedStatus={ checkedStatus } />,
+          { bootstrap4: true }
+        );
+      });
+
+      it('should not render checkbox', () => {
+        expect(wrapper.find('th').length).toBe(1);
+        expect(wrapper.find('.selection-input-4').length).toBe(1);
       });
     });
   });

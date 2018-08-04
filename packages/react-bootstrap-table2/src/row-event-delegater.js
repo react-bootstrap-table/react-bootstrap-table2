@@ -1,4 +1,5 @@
 import _ from './utils';
+import Const from './const';
 
 const events = [
   'onClick',
@@ -30,11 +31,11 @@ export default ExtendBase =>
           selected,
           keyField,
           selectable,
+          expandable,
           rowIndex,
-          selectRow: {
-            onRowSelect,
-            clickToEdit
-          },
+          expanded,
+          expandRow,
+          selectRow,
           cellEdit: {
             mode,
             DBCLICK_TO_CELL_EDIT,
@@ -46,13 +47,16 @@ export default ExtendBase =>
           if (cb) {
             cb(e, row, rowIndex);
           }
-          if (selectable) {
-            const key = _.get(row, keyField);
-            onRowSelect(key, !selected, rowIndex, e);
+          const key = _.get(row, keyField);
+          if (expandRow && expandable) {
+            expandRow.onRowExpand(key, !expanded, rowIndex, e);
+          }
+          if (selectRow.mode !== Const.ROW_SELECT_DISABLED && selectable) {
+            selectRow.onRowSelect(key, !selected, rowIndex, e);
           }
         };
 
-        if (mode === DBCLICK_TO_CELL_EDIT && clickToEdit) {
+        if (mode === DBCLICK_TO_CELL_EDIT && selectRow.clickToEdit) {
           this.clickNum += 1;
           _.debounce(() => {
             if (this.clickNum === 1) {
@@ -68,7 +72,8 @@ export default ExtendBase =>
 
     delegate(attrs = {}) {
       const newAttrs = {};
-      if (this.props.selectRow && this.props.selectRow.clickToSelect) {
+      const { expandRow, selectRow } = this.props;
+      if (expandRow || (selectRow && selectRow.clickToSelect)) {
         newAttrs.onClick = this.createClickEventHandler(attrs.onClick);
       }
       Object.keys(attrs).forEach((attr) => {

@@ -1,5 +1,4 @@
 import BootstrapTable from './src/bootstrap-table';
-import withDataStore from './src/container';
+import withContext from './src/contexts';
 
-export default withDataStore(BootstrapTable);
-
+export default withContext(BootstrapTable);

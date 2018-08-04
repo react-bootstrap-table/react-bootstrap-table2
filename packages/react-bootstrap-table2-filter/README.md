@@ -214,7 +214,7 @@ const columns = [..., {
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-> **Notes:** date filter accept a Javascript Date object in your raw data.
+> **Notes:** date filter accept a Javascript Date object in your raw data and you have to use `column.formatter` to make it as your prefer string result
 
 Date filter is same as other filter, you can custom the date filter via `dateFilter` factory function:
 

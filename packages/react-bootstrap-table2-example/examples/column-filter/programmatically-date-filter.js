@@ -17,6 +17,7 @@ const columns = [{
 }, {
   dataField: 'inStockDate',
   text: 'InStock Date',
+  formatter: cell => cell.toString(),
   filter: dateFilter({
     getFilter: (filter) => {
       // inStockDateFilter was assigned once the component has been mounted.

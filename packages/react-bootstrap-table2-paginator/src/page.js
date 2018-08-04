@@ -1,5 +1,3 @@
-/* eslint no-param-reassign: 0 */
-
 const getNormalizedPage = (
   page,
   pageStartIndex
@@ -19,25 +17,36 @@ const startIndex = (
   sizePerPage,
 ) => end - (sizePerPage - 1);
 
-export const alignPage = (store, pageStartIndex, sizePerPage) => {
-  const end = endIndex(store.page, sizePerPage, pageStartIndex);
-  const dataSize = store.data.length;
+export const alignPage = (
+  data,
+  page,
+  sizePerPage,
+  pageStartIndex
+) => {
+  const end = endIndex(page, sizePerPage, pageStartIndex);
+  const dataSize = data.length;
 
   if (end - 1 > dataSize) {
     return pageStartIndex;
   }
-  return store.page;
+  return page;
 };
 
-export const getByCurrPage = (store, pageStartIndex) => {
-  const dataSize = store.data.length;
+export const getByCurrPage = (
+  data,
+  page,
+  sizePerPage,
+  pageStartIndex
+) => {
+  const dataSize = data.length;
   if (!dataSize) return [];
-  const end = endIndex(store.page, store.sizePerPage, pageStartIndex);
-  const start = startIndex(end, store.sizePerPage);
+
+  const end = endIndex(page, sizePerPage, pageStartIndex);
+  const start = startIndex(end, sizePerPage);
 
   const result = [];
   for (let i = start; i <= end; i += 1) {
-    result.push(store.data[i]);
+    result.push(data[i]);
     if (i + 1 === dataSize) break;
   }
   return result;

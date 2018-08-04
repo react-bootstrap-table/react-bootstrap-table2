@@ -11,6 +11,7 @@ Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-tab
 * [`react-bootstrap-table2-editor`](https://www.npmjs.com/package/react-bootstrap-table2-editor)
 * [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator)
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
+* [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
 
 This can help your application with less bundled size and also help us have clean design to avoid handling to much logic in kernal module(SRP).
 

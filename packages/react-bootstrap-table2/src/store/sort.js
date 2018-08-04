@@ -14,17 +14,17 @@ function comparator(a, b) {
   return result;
 }
 
-export const sort = ({ data, sortOrder, sortField }) => (sortFunc) => {
+export const sort = (data, sortOrder, { dataField, sortFunc }) => {
   const _data = [...data];
   _data.sort((a, b) => {
     let result;
-    let valueA = _.get(a, sortField);
-    let valueB = _.get(b, sortField);
+    let valueA = _.get(a, dataField);
+    let valueB = _.get(b, dataField);
     valueA = _.isDefined(valueA) ? valueA : '';
     valueB = _.isDefined(valueB) ? valueB : '';
 
     if (sortFunc) {
-      result = sortFunc(valueA, valueB, sortOrder, sortField);
+      result = sortFunc(valueA, valueB, sortOrder, dataField);
     } else {
       if (sortOrder === Const.SORT_DESC) {
         result = comparator(valueA, valueB);
@@ -37,11 +37,11 @@ export const sort = ({ data, sortOrder, sortField }) => (sortFunc) => {
   return _data;
 };
 
-export const nextOrder = store => (field, order, defaultOrder = Const.SORT_DESC) => {
-  if (order) return order;
-
-  if (field !== store.sortField) {
-    return defaultOrder;
-  }
-  return store.sortOrder === Const.SORT_DESC ? Const.SORT_ASC : Const.SORT_DESC;
+export const nextOrder = (
+  currentSortColumn,
+  { sortOrder, sortColumn },
+  defaultOrder = Const.SORT_DESC
+) => {
+  if (!sortColumn || currentSortColumn.dataField !== sortColumn.dataField) return defaultOrder;
+  return sortOrder === Const.SORT_DESC ? Const.SORT_ASC : Const.SORT_DESC;
 };
