@@ -11,6 +11,7 @@ import StripHoverCondensedTable from 'examples/basic/striped-hover-condensed-tab
 import NoDataTable from 'examples/basic/no-data-table';
 import CustomizedIdClassesTable from 'examples/basic/customized-id-classes';
 import CaptionTable from 'examples/basic/caption-table';
+import LargeTable from 'examples/basic/large-table';
 
 // work on columns
 import NestedDataTable from 'examples/columns/nested-data-table';
@@ -174,7 +175,8 @@ storiesOf('Basic Table', module)
   .add('borderless table', () => <BorderlessTable />)
   .add('Indication For Empty Table', () => <NoDataTable />)
   .add('Customized id and class table', () => <CustomizedIdClassesTable />)
-  .add('Table with caption', () => <CaptionTable />);
+  .add('Table with caption', () => <CaptionTable />)
+  .add('Large Table', () => <LargeTable />);
 
 storiesOf('Work on Columns', module)
   .add('Display Nested Data', () => <NestedDataTable />)
