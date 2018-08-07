@@ -93,9 +93,9 @@ class DateFilter extends Component {
   }
 
   applyFilter(value, comparator, isInitial) {
-    // if (!comparator || !value) {
-    //  return;
-    // }
+    if ((!comparator && value) || (!value && comparator)) {
+      return;
+    }
     const { column, onFilter, delay } = this.props;
     const execute = () => {
       // Incoming value should always be a string, and the defaultDate
