@@ -23,10 +23,9 @@ export const alignPage = (
   sizePerPage,
   pageStartIndex
 ) => {
-  const end = endIndex(page, sizePerPage, pageStartIndex);
   const dataSize = data.length;
 
-  if (end - 1 > dataSize) {
+  if (page < pageStartIndex || page > Math.ceil(dataSize / sizePerPage)) {
     return pageStartIndex;
   }
   return page;
