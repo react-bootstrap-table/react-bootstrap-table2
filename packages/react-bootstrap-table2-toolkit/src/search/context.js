@@ -20,24 +20,9 @@ export default (options = {
       searchText: PropTypes.string
     }
 
-    constructor(props) {
-      super(props);
-      this.needToSearch = true;
-    }
-
-    componentWillReceiveProps(nextProps) {
-      if (nextProps.searchText !== this.props.searchText) {
-        this.needToSearch = true;
-      } else {
-        this.needToSearch = false;
-      }
-    }
-
     search() {
       const { data, columns } = this.props;
       let { searchText } = this.props;
-
-      if (!this.needToSearch) return data;
 
       if (isRemoteSearch()) {
         handleRemoteSearchChange(searchText);
