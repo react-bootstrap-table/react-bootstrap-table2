@@ -69,7 +69,8 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
       columns: this.props.columns,
       data: this.props.data,
       bootstrap4: this.props.bootstrap4,
-      setDependencyModules: this.setDependencyModules
+      setDependencyModules: this.setDependencyModules,
+      registerExposedAPI: this.registerExposedAPI
     };
     if (this.props.search) {
       baseProps.search = {

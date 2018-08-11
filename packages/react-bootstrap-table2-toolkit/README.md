@@ -121,3 +121,6 @@ Default is `false`. Give true to avoid to attach the csv header.
 
 #### noAutoBOM - [bool]
 Default is `true`.
+
+#### exportAll - [bool]
+Default is `true`. `false` will only export current data which display on table.
