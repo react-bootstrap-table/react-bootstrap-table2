@@ -48,7 +48,9 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
   }
 
   onSearch(searchText) {
-    this.setState({ searchText });
+    if (searchText !== this.state.searchText) {
+      this.setState({ searchText });
+    }
   }
 
   /**
