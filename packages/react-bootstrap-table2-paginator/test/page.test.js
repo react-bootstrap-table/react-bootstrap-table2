@@ -45,8 +45,8 @@ describe('Page Functions', () => {
   describe('alignPage', () => {
     const pageStartIndex = 1;
     const sizePerPage = 10;
-    const page = 2;
-    describe('if the length of store.data is less than the end page index', () => {
+    const page = 3;
+    describe('if the page parameter does not fit in the page count calculated from the store.data', () => {
       beforeEach(() => {
         data = [];
         for (let i = 0; i < 15; i += 1) {
