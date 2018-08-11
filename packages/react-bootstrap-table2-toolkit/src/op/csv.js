@@ -4,13 +4,14 @@ const csvDefaultOptions = {
   fileName: 'spreadsheet.csv',
   separator: ',',
   ignoreHeader: false,
-  noAutoBOM: true
+  noAutoBOM: true,
+  exportAll: true
 };
 
 export default Base =>
   class CSVOperation extends Base {
     handleExportCSV = () => {
-      const { columns, data, exportCSV } = this.props;
+      const { columns, exportCSV } = this.props;
       const meta = getMetaInfo(columns);
       const options = exportCSV === true ?
         csvDefaultOptions :
@@ -18,6 +19,8 @@ export default Base =>
           ...csvDefaultOptions,
           ...exportCSV
         };
+
+      const data = options.exportAll ? this.props.data : this.getData();
       const content = transform(data, meta, this._.get, options);
       save(content, options);
     }

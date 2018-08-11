@@ -15,6 +15,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
+    if (props.registerExposedAPI) {
+      const getData = () => this.getData();
+      props.registerExposedAPI(getData);
+    }
+  }
+
+  // Exposed APIs
+  getData = () => {
+    return this.props.data;
   }
 
   render() {

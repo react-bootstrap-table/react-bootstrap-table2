@@ -46,6 +46,40 @@ describe('BootstrapTable', () => {
     });
   });
 
+  describe('getData', () => {
+    let instance;
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable keyField="id" columns={ columns } data={ data } />);
+      instance = wrapper.instance();
+    });
+
+    it('should return props.data', () => {
+      expect(instance.getData()).toEqual(data);
+    });
+  });
+
+  describe('when props.registerExposedAPI is defined', () => {
+    const registerExposedAPI = jest.fn();
+    beforeEach(() => {
+      registerExposedAPI.mockClear();
+      wrapper = shallow(
+        <BootstrapTable
+          keyField="id"
+          columns={ columns }
+          data={ data }
+          registerExposedAPI={ registerExposedAPI }
+        />
+      );
+    });
+
+    it('should call props.registerExposedAPI correctly', () => {
+      expect(registerExposedAPI).toHaveBeenCalledTimes(1);
+      expect(registerExposedAPI.mock.calls[0][0].name).toEqual('getData');
+    });
+  });
+
   describe('when props.classes was defined', () => {
     const classes = 'foo';
 
