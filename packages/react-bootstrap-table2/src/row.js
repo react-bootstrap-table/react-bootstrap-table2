@@ -102,6 +102,45 @@ class Row extends eventDelegater(Component) {
                   />
                 );
               }
+              // render cell
+              let cellTitle;
+              let cellStyle = {};
+              const cellAttrs = {
+                ..._.isFunction(column.attrs)
+                  ? column.attrs(content, row, rowIndex, index)
+                  : column.attrs,
+                ...column.events
+              };
+
+              const cellClasses = _.isFunction(column.classes)
+                ? column.classes(content, row, rowIndex, index)
+                : column.classes;
+
+              if (column.style) {
+                cellStyle = _.isFunction(column.style)
+                  ? column.style(content, row, rowIndex, index)
+                  : column.style;
+                cellStyle = cellStyle || {};
+              }
+
+
+              if (column.title) {
+                cellTitle = _.isFunction(column.title)
+                  ? column.title(content, row, rowIndex, index)
+                  : content;
+                cellAttrs.title = cellTitle;
+              }
+
+              if (column.align) {
+                cellStyle.textAlign =
+                  _.isFunction(column.align)
+                    ? column.align(content, row, rowIndex, index)
+                    : column.align;
+              }
+
+              if (cellClasses) cellAttrs.className = cellClasses;
+              if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
+
               return (
                 <Cell
                   key={ `${content}-${index}` }
@@ -113,6 +152,7 @@ class Row extends eventDelegater(Component) {
                   editable={ editable }
                   clickToEdit={ mode === CLICK_TO_CELL_EDIT }
                   dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
+                  { ...cellAttrs }
                 />
               );
             }
