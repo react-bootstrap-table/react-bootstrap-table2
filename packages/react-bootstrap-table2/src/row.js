@@ -120,7 +120,7 @@ class Row extends eventDelegater(Component) {
                 cellStyle = _.isFunction(column.style)
                   ? column.style(content, row, rowIndex, index)
                   : column.style;
-                cellStyle = cellStyle || {};
+                cellStyle = Object.assign({}, cellStyle) || {};
               }
 
 
