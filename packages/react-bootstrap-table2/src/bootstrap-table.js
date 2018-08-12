@@ -170,7 +170,7 @@ BootstrapTable.propTypes = {
   }),
   onRowExpand: PropTypes.func,
   onAllRowExpand: PropTypes.func,
-  isAnyExpands: PropTypes.func,
+  isAnyExpands: PropTypes.bool,
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
