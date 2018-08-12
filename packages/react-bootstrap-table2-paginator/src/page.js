@@ -25,7 +25,7 @@ export const alignPage = (
 ) => {
   const dataSize = data.length;
 
-  if (page < pageStartIndex || page > Math.ceil(dataSize / sizePerPage)) {
+  if (page < pageStartIndex || page > (Math.floor(dataSize / sizePerPage) + pageStartIndex)) {
     return pageStartIndex;
   }
   return page;
