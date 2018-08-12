@@ -13,6 +13,7 @@ Export CSV in one of features supported by `react-bootstrap-table2-toolkit`. By 
 * [separator](#exportCSVseparator-string)
 * [ignoreHeader](#exportCSVignoreheader-bool)
 * [noAutoBOM](#exportCSVnoautobom-bool)
+* [exportAll](#exportCSVexportall-bool)
 
 ## Example
 
@@ -45,3 +46,6 @@ Default is `false`. Give true to avoid to attach the csv header.
 
 ## exportCSV.noAutoBOM - [bool]
 Default is `true`.
+
+## exportCSV.exportAll - [bool]
+Default is `true`. `false` will only export current display data on table.
