@@ -95,6 +95,10 @@ dataField: 'address.city'
 * `rowIndex`
 * [`formatExtraData`](#formatExtraData)
 
+> Attention:
+> Don't use any state data or any external data in formatter function, please pass them via [`formatExtraData`](#formatExtraData).
+> In addition, please make formatter function as pure function as possible as you can.
+
 ## <a name='headerFormatter'>column.headerFormatter - [Function]</a>
 `headerFormatter` allow you to customize the header column and only accept a callback function which take three arguments and a JSX/String are expected for return.
 

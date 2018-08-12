@@ -119,7 +119,34 @@ describe('PageResolver', () => {
 
     it('should return correct array with from and to value', () => {
       const instance = wrapper.instance();
-      expect(instance.calculateFromTo()).toEqual([1, props.currSizePerPage - 1]);
+      expect(instance.calculateFromTo()).toEqual([1, props.currSizePerPage]);
+    });
+
+    describe('if data is empty', () => {
+      beforeEach(() => {
+        props.dataSize = 87;
+        props.currPage = 9;
+        const mockElement = React.createElement(MockComponent, props, null);
+        wrapper = shallow(mockElement);
+      });
+
+      it('should return correct array with from and to value', () => {
+        const instance = wrapper.instance();
+        expect(instance.calculateFromTo()).toEqual([81, props.dataSize]);
+      });
+    });
+
+    describe('if current page is last page', () => {
+      beforeEach(() => {
+        props.dataSize = 0;
+        const mockElement = React.createElement(MockComponent, props, null);
+        wrapper = shallow(mockElement);
+      });
+
+      it('should return correct array with from and to value', () => {
+        const instance = wrapper.instance();
+        expect(instance.calculateFromTo()).toEqual([0, 0]);
+      });
     });
   });
 

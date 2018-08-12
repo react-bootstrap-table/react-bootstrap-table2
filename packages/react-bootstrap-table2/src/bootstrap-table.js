@@ -15,6 +15,15 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
+    if (props.registerExposedAPI) {
+      const getData = () => this.getData();
+      props.registerExposedAPI(getData);
+    }
+  }
+
+  // Exposed APIs
+  getData = () => {
+    return this.props.data;
   }
 
   render() {
@@ -161,7 +170,7 @@ BootstrapTable.propTypes = {
   }),
   onRowExpand: PropTypes.func,
   onAllRowExpand: PropTypes.func,
-  isAnyExpands: PropTypes.func,
+  isAnyExpands: PropTypes.bool,
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),

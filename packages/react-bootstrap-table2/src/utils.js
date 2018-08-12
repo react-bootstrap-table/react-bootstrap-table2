@@ -1,6 +1,7 @@
 /* eslint no-empty: 0 */
 /* eslint no-param-reassign: 0 */
 /* eslint prefer-rest-params: 0 */
+import _ from 'underscore';
 
 function splitNested(str) {
   return [str]
@@ -38,22 +39,8 @@ function set(target, field, value, safe = false) {
   }, target);
 }
 
-function isFunction(obj) {
-  return obj && (typeof obj === 'function');
-}
-
-/**
- * Checks if `value` is the Object. the `Object` except `Function` and `Array.`
- *
- * @param {*} obj - The value gonna check
- */
-function isObject(obj) {
-  const type = typeof obj;
-  return obj !== null && type === 'object' && obj.constructor === Object;
-}
-
 function isEmptyObject(obj) {
-  if (!isObject(obj)) return false;
+  if (!_.isObject(obj)) return false;
 
   const hasOwnProperty = Object.prototype.hasOwnProperty;
   const keys = Object.keys(obj);
@@ -91,18 +78,9 @@ function debounce(func, wait, immediate) {
     timeout = setTimeout(later, wait || 0);
 
     if (callNow) {
-      func.appy(this, arguments);
+      func.apply(this, arguments);
     }
   };
 }
 
-export default {
-  get,
-  set,
-  isFunction,
-  isObject,
-  isEmptyObject,
-  isDefined,
-  sleep,
-  debounce
-};
+export default Object.assign(_, { get, set, isDefined, isEmptyObject, sleep, debounce });
