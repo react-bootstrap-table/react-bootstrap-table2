@@ -38,6 +38,10 @@ Available properties in a column object:
 * [editorRenderer](#editorRenderer)
 * [filter](#filter)
 * [filterValue](#filterValue)
+* [csvType](#csvType)
+* [csvFormatter](#csvFormatter)
+* [csvText](#csvText)
+* [csvExport](#csvExport)
 
 Following is a most simplest and basic usage:
 
@@ -90,6 +94,10 @@ dataField: 'address.city'
 * `row`
 * `rowIndex`
 * [`formatExtraData`](#formatExtraData)
+
+> Attention:
+> Don't use any state data or any external data in formatter function, please pass them via [`formatExtraData`](#formatExtraData).
+> In addition, please make formatter function as pure function as possible as you can.
 
 ## <a name='headerFormatter'>column.headerFormatter - [Function]</a>
 `headerFormatter` allow you to customize the header column and only accept a callback function which take three arguments and a JSX/String are expected for return.
@@ -686,3 +694,16 @@ A final `String` value you want to be filtered.
   filterValue: (cell, row) => owners[cell]
 }
 ```
+
+## <a name='csvType'>column.csvType - [Object]</a>
+Default is `String`. Currently, the available value is `String` and `Number`. If `Number` assigned, the cell value will not wrapped with double quote.
+
+## <a name='csvFormatter'>column.csvFormatter - [Function]</a>
+
+This is same as [`column.formatter`](#formatter). But `csvFormatter` only for CSV export and called when export CSV.
+
+## <a name='csvText'>column.csvText - [String]</a>
+Custom the CSV header cell, Default is [`column.text`](#text).
+
+## <a name='csvExport'>column.csvExport - [Bool]</a>
+Default is `true`, `false` will hide this column when export CSV.

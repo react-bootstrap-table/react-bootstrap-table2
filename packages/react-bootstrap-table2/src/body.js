@@ -7,6 +7,7 @@ import cs from 'classnames';
 
 import _ from './utils';
 import Row from './row';
+import ExpandRow from './row-expand/expand-row';
 import RowSection from './row-section';
 import Const from './const';
 
@@ -23,7 +24,8 @@ const Body = (props) => {
     selectedRowKeys,
     rowStyle,
     rowClasses,
-    rowEvents
+    rowEvents,
+    expandRow
   } = props;
 
   const {
@@ -74,8 +76,10 @@ const Body = (props) => {
       }
 
       const selectable = !nonSelectable || !nonSelectable.includes(key);
+      const expandable = expandRow && !expandRow.nonExpandable.includes(key);
+      const expanded = expandRow && expandRow.expanded.includes(key);
 
-      return (
+      const result = [
         <Row
           key={ key }
           row={ row }
@@ -85,13 +89,29 @@ const Body = (props) => {
           cellEdit={ cellEdit }
           editable={ editable }
           selectable={ selectable }
+          expandable={ expandable }
           selected={ selected }
+          expanded={ expanded }
           selectRow={ selectRow }
+          expandRow={ expandRow }
           style={ style }
           className={ classes }
           attrs={ attrs }
         />
-      );
+      ];
+
+      if (expanded) {
+        result.push((
+          <ExpandRow
+            key={ `${key}-expanding` }
+            colSpan={ visibleColumnSize }
+          >
+            { expandRow.renderer(row) }
+          </ExpandRow>
+        ));
+      }
+
+      return result;
     });
   }
 

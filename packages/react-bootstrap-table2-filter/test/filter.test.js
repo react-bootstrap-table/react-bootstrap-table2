@@ -1,5 +1,4 @@
 import _ from 'react-bootstrap-table-next/src/utils';
-import Store from 'react-bootstrap-table-next/src/store';
 
 import { filters } from '../src/filter';
 import { FILTER_TYPE } from '../src/const';
@@ -16,14 +15,10 @@ for (let i = 0; i < 20; i += 1) {
 }
 
 describe('filter', () => {
-  let store;
-  let filterFn;
   let currFilters;
   let columns;
 
   beforeEach(() => {
-    store = new Store('id');
-    store.data = data;
     currFilters = {};
     columns = [{
       dataField: 'id',
@@ -41,10 +36,6 @@ describe('filter', () => {
   });
 
   describe('filterByText', () => {
-    beforeEach(() => {
-      filterFn = filters(store, columns, _);
-    });
-
     describe('when filter value is not a String', () => {
       it('should transform to string and do the filter', () => {
         currFilters.name = {
@@ -52,7 +43,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.TEXT
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toBeDefined();
         expect(result).toHaveLength(2);
       });
@@ -65,7 +56,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.TEXT
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toBeDefined();
         expect(result).toHaveLength(2);
       });
@@ -79,7 +70,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.TEXT
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toBeDefined();
         expect(result).toHaveLength(0);
       });
@@ -93,7 +84,7 @@ describe('filter', () => {
           comparator: EQ
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toBeDefined();
         expect(result).toHaveLength(1);
       });
@@ -102,7 +93,6 @@ describe('filter', () => {
     describe('column.filterValue is defined', () => {
       beforeEach(() => {
         columns[1].filterValue = jest.fn();
-        filterFn = filters(store, columns, _);
       });
 
       it('should calling custom filterValue callback correctly', () => {
@@ -111,7 +101,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.TEXT
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toBeDefined();
         expect(columns[1].filterValue).toHaveBeenCalledTimes(data.length);
         // const calls = columns[1].filterValue.mock.calls;
@@ -123,11 +113,52 @@ describe('filter', () => {
     });
   });
 
-  describe('filterByNumber', () => {
-    beforeEach(() => {
-      filterFn = filters(store, columns, _);
+  describe('filterByArray', () => {
+    describe('when filter value is empty array', () => {
+      it('should return original data', () => {
+        currFilters.name = {
+          filterVal: [],
+          filterType: FILTER_TYPE.MULTISELECT
+        };
+
+        const result = filters(data, columns, _)(currFilters);
+        expect(result).toBeDefined();
+        expect(result).toHaveLength(data.length);
+      });
     });
 
+    describe('when filter value is not an empty array', () => {
+      describe(`and comparator is ${EQ}`, () => {
+        it('should return data correctly', () => {
+          currFilters.price = {
+            filterVal: [201, 203],
+            filterType: FILTER_TYPE.MULTISELECT,
+            comparator: EQ
+          };
+
+          const result = filters(data, columns, _)(currFilters);
+          expect(result).toBeDefined();
+          expect(result).toHaveLength(2);
+        });
+      });
+
+      describe(`and comparator is ${LIKE}`, () => {
+        it('should return data correctly', () => {
+          currFilters.name = {
+            filterVal: ['name 3', '5'],
+            filterType: FILTER_TYPE.MULTISELECT,
+            comparator: LIKE
+          };
+
+          const result = filters(data, columns, _)(currFilters);
+          expect(result).toBeDefined();
+          expect(result).toHaveLength(3);
+        });
+      });
+    });
+  });
+
+  describe('filterByNumber', () => {
     describe('when currFilters.filterVal.comparator is empty', () => {
       it('should returning correct result', () => {
         currFilters.price = {
@@ -135,11 +166,11 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        let result = filterFn(currFilters);
+        let result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(data.length);
 
         currFilters.price.filterVal.comparator = undefined;
-        result = filterFn(currFilters);
+        result = filters(result, columns, _)(currFilters);
         expect(result).toHaveLength(data.length);
       });
     });
@@ -151,7 +182,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(data.length);
       });
     });
@@ -163,11 +194,11 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        let result = filterFn(currFilters);
+        let result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(1);
 
         currFilters.price.filterVal.number = '0';
-        result = filterFn(currFilters);
+        result = filters(result, columns, _)(currFilters);
         expect(result).toHaveLength(0);
       });
     });
@@ -179,7 +210,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(16);
       });
     });
@@ -191,7 +222,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(17);
       });
     });
@@ -203,7 +234,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(3);
       });
     });
@@ -215,7 +246,7 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(4);
       });
     });
@@ -227,15 +258,16 @@ describe('filter', () => {
           filterType: FILTER_TYPE.NUMBER
         };
 
-        const result = filterFn(currFilters);
+        const result = filters(data, columns, _)(currFilters);
         expect(result).toHaveLength(19);
       });
     });
   });
 
   describe('filterByDate', () => {
+    let filterFn;
     beforeEach(() => {
-      filterFn = filters(store, columns, _);
+      filterFn = filters(data, columns, _);
     });
 
     describe('when currFilters.filterVal.comparator is empty', () => {

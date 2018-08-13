@@ -15,6 +15,7 @@ const columns = [{
 }, {
   dataField: 'inStockDate',
   text: 'InStock Date',
+  formatter: cell => cell.toString(),
   filter: dateFilter({
     defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT }
   })

@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-table2-example",
-  "version": "0.1.11",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "private": true,
@@ -14,8 +14,8 @@
   "license": "ISC",
   "peerDependencies": {
     "prop-types": "^15.0.0",
-    "react": "^15.0.0",
-    "react-dom": "^15.0.0"
+    "react": "^16.3.0",
+    "react-dom": "^116.3.0"
   },
   "dependencies": {
     "bootstrap": "^3.3.7"

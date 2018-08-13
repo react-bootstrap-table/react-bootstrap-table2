@@ -18,6 +18,7 @@ You can get all types of filters via import and these filters are a factory func
 
 * TextFilter
 * SelectFilter
+* MultiSelectFilter
 * NumberFilter
 * DateFilter
 * CustomFilter
@@ -114,6 +115,52 @@ const qualityFilter = selectFilter({
 // omit...
 ```
 
+## MultiSelect Filter
+
+A quick example: 
+
+```js
+import filterFactory, { multiSelectFilter } from 'react-bootstrap-table2-filter';
+
+// omit...
+const selectOptions = {
+  0: 'good',
+  1: 'Bad',
+  2: 'unknown'
+};
+
+const columns = [
+  ..., {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions[cell],
+  filter: multiSelectFilter({
+    options: selectOptions
+  })
+}];
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+```
+
+Following is an example for custom select filter:
+
+```js
+import filterFactory, { multiSelectFilter, Comparator } from 'react-bootstrap-table2-filter';
+// omit...
+
+const qualityFilter = multiSelectFilter({
+  options: selectOptions,
+  placeholder: 'My Custom PlaceHolder',  // custom the input placeholder
+  className: 'my-custom-text-filter', // custom classname on input
+  defaultValue: '2', // default filtering value
+  comparator: Comparator.LIKE, // default is Comparator.EQ
+  style: { ... }, // your custom styles on input
+  withoutEmptyOption: true  // hide the default select option
+});
+
+// omit...
+```
+
 ## Number Filter
 
 ```js
@@ -131,7 +178,7 @@ const columns = [..., {
 Numner filter is same as other filter, you can custom the number filter via `numberFilter` factory function:
 
 ```js
-import filterFactory, { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
+import filterFactory, { selectFilter, Comparator, numberFilter } from 'react-bootstrap-table2-filter';
 // omit...
 
 const numberFilter = numberFilter({
@@ -167,7 +214,7 @@ const columns = [..., {
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-> **Notes:** date filter accept a Javascript Date object in your raw data.
+> **Notes:** date filter accept a Javascript Date object in your raw data and you have to use `column.formatter` to make it as your prefer string result
 
 Date filter is same as other filter, you can custom the date filter via `dateFilter` factory function:
 

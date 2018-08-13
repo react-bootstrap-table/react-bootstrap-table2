@@ -22,6 +22,8 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
   * Pagination Addons
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
   * Overlay/Loading Addons
+* [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
+  * Table Toolkits, like search, csv etc.
 
 This can help your application with less bundled size and also help `react-bootstrap-table2` have clean design to avoid handling to much logic in kernel module(SRP). Hence, which means you probably need to install above addons when you need specific features.
 
@@ -88,7 +90,7 @@ Please see [available filter configuration](https://react-bootstrap-table.github
 - [x] Custom Select Filter
 - [X] Number Filter
 - [X] Date Filter
-- [ ] Array Filter
+- [X] Array Filter
 - [X] Programmatically Filter
 
 Remember to install [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter) firstly.   
@@ -113,6 +115,34 @@ Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/p
 
 No big changes for pagination, but still can't custom the pagination list, button and sizePerPage dropdown.
 
+## Table Search
+Ｔhe usage of search functionality is a little bit different from legacy search. The mainly different thing is developer have to render the search input field, we do believe it will be very flexible for all the developers who want to custom the search position or search field itself.
+
+- [x] Custom search component and position
+- [x] Custom search value
+- [ ] Clear search
+- [ ] Multiple search
+- [ ] Strict search
+
+## Row Expand
+- [x] Expand Row Events
+- [x] Expand Row Indicator
+- [x] Expand Row Management
+- [x] Custom Expand Row Indicators
+- [ ] Compatiable with Row Selection
+- [ ] Expand Column position
+- [ ] Expand Column Style/Class
+
+## Export CSV
+Export CSV functionality is like search, which is one of functionality in the `react-bootstrap-table2-toolkit`. All of the legacy functions we already implemented.
+
 ## Remote
 
 > It's totally different in `react-bootstrap-table2`. Please [see](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/basic-remote.html).
+
+
+## Row insert/Delete
+Not support yet
+
+## Keyboard Navigation
+Not support yet

@@ -9,22 +9,21 @@ import Caption from './caption';
 import Body from './body';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
-import { isSelectedAll } from './store/selection';
+import { getSelectionSummary } from './store/selection';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
-
-    this.state = {
-      data: props.data
-    };
+    if (props.registerExposedAPI) {
+      const getData = () => this.getData();
+      props.registerExposedAPI(getData);
+    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      data: nextProps.data
-    });
+  // Exposed APIs
+  getData = () => {
+    return this.props.data;
   }
 
   render() {
@@ -42,7 +41,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
   renderTable() {
     const {
-      store,
+      data,
       columns,
       keyField,
       id,
@@ -56,7 +55,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowStyle,
       rowClasses,
       wrapperClasses,
-      rowEvents
+      rowEvents,
+      selected
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -72,13 +72,16 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       onRowSelect: this.props.onRowSelect
     });
 
+    const { allRowsSelected, allRowsNotSelected } = getSelectionSummary(data, keyField, selected);
     const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
       onAllRowsSelect: this.props.onAllRowsSelect,
-      selected: store.selected,
-      allRowsSelected: isSelectedAll(store)
+      selected,
+      allRowsSelected,
+      allRowsNotSelected
     });
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
+    const expandRow = this.resolveExpandRowProps();
 
     return (
       <div className={ tableWrapperClass }>
@@ -87,15 +90,16 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
-            sortField={ store.sortField }
-            sortOrder={ store.sortOrder }
+            sortField={ this.props.sortField }
+            sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
             onFilter={ this.props.onFilter }
             onExternalFilter={ this.props.onExternalFilter }
             selectRow={ headerCellSelectionInfo }
+            expandRow={ expandRow }
           />
           <Body
-            data={ this.state.data }
+            data={ data }
             keyField={ keyField }
             columns={ columns }
             isEmpty={ this.isEmpty() }
@@ -103,7 +107,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             noDataIndication={ noDataIndication }
             cellEdit={ this.props.cellEdit || {} }
             selectRow={ cellSelectionInfo }
-            selectedRowKeys={ store.selected }
+            selectedRowKeys={ selected }
+            expandRow={ expandRow }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
@@ -118,10 +123,10 @@ BootstrapTable.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
+  bootstrap4: PropTypes.bool,
   remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
     pagination: PropTypes.bool
   })]),
-  store: PropTypes.object,
   noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
@@ -153,6 +158,19 @@ BootstrapTable.propTypes = {
   }),
   onRowSelect: PropTypes.func,
   onAllRowsSelect: PropTypes.func,
+  expandRow: PropTypes.shape({
+    renderer: PropTypes.func.isRequired,
+    expanded: PropTypes.array,
+    onExpand: PropTypes.func,
+    onExpandAll: PropTypes.func,
+    nonExpandable: PropTypes.array,
+    showExpandColumn: PropTypes.bool,
+    expandColumnRenderer: PropTypes.func,
+    expandHeaderColumnRenderer: PropTypes.func
+  }),
+  onRowExpand: PropTypes.func,
+  onAllRowExpand: PropTypes.func,
+  isAnyExpands: PropTypes.bool,
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -166,10 +184,17 @@ BootstrapTable.propTypes = {
   onTableChange: PropTypes.func,
   onSort: PropTypes.func,
   onFilter: PropTypes.func,
-  onExternalFilter: PropTypes.func
+  onExternalFilter: PropTypes.func,
+  // Inject from toolkit
+  search: PropTypes.shape({
+    searchText: PropTypes.string,
+    searchContext: PropTypes.func
+  }),
+  setDependencyModules: PropTypes.func
 };
 
 BootstrapTable.defaultProps = {
+  bootstrap4: false,
   remote: false,
   striped: false,
   bordered: true,

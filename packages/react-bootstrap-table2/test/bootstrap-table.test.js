@@ -2,7 +2,6 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Caption from '../src/caption';
-import Store from '../src/store';
 import Header from '../src/header';
 import Body from '../src/body';
 import BootstrapTable from '../src/bootstrap-table';
@@ -25,13 +24,10 @@ describe('BootstrapTable', () => {
     name: 'B'
   }];
 
-  const store = new Store('id');
-  store.data = data;
-
   describe('simplest table', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } />);
+        <BootstrapTable keyField="id" columns={ columns } data={ data } />);
     });
 
     it('should render successfully', () => {
@@ -41,17 +37,46 @@ describe('BootstrapTable', () => {
       expect(wrapper.find(Body).length).toBe(1);
     });
 
-    it('should have correct default state', () => {
-      expect(wrapper.state().data).toBeDefined();
-      expect(wrapper.state().data).toEqual(store.data);
-    });
-
     it("should only have classes 'table' and 'table-bordered' as default", () => {
       expect(wrapper.find('table').prop('className')).toBe('table table-bordered');
     });
 
     it('should not have customized id as default', () => {
       expect(wrapper.find('table').prop('id')).toBeUndefined();
+    });
+  });
+
+  describe('getData', () => {
+    let instance;
+
+    beforeEach(() => {
+      wrapper = shallow(
+        <BootstrapTable keyField="id" columns={ columns } data={ data } />);
+      instance = wrapper.instance();
+    });
+
+    it('should return props.data', () => {
+      expect(instance.getData()).toEqual(data);
+    });
+  });
+
+  describe('when props.registerExposedAPI is defined', () => {
+    const registerExposedAPI = jest.fn();
+    beforeEach(() => {
+      registerExposedAPI.mockClear();
+      wrapper = shallow(
+        <BootstrapTable
+          keyField="id"
+          columns={ columns }
+          data={ data }
+          registerExposedAPI={ registerExposedAPI }
+        />
+      );
+    });
+
+    it('should call props.registerExposedAPI correctly', () => {
+      expect(registerExposedAPI).toHaveBeenCalledTimes(1);
+      expect(registerExposedAPI.mock.calls[0][0].name).toEqual('getData');
     });
   });
 
@@ -64,7 +89,6 @@ describe('BootstrapTable', () => {
           keyField="id"
           columns={ columns }
           data={ data }
-          store={ store }
           classes={ classes }
         />);
     });
@@ -83,7 +107,6 @@ describe('BootstrapTable', () => {
           keyField="id"
           columns={ columns }
           data={ data }
-          store={ store }
           wrapperClasses={ classes }
         />);
     });
@@ -102,7 +125,6 @@ describe('BootstrapTable', () => {
           keyField="id"
           columns={ columns }
           data={ data }
-          store={ store }
           id={ id }
         />);
     });
@@ -115,7 +137,7 @@ describe('BootstrapTable', () => {
   describe('when hover props is true', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } hover />);
+        <BootstrapTable keyField="id" columns={ columns } data={ data } hover />);
     });
 
     it('should have table-hover class on table', () => {
@@ -126,7 +148,7 @@ describe('BootstrapTable', () => {
   describe('when striped props is true', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } striped />);
+        <BootstrapTable keyField="id" columns={ columns } data={ data } striped />);
     });
 
     it('should have table-striped class on table', () => {
@@ -137,7 +159,7 @@ describe('BootstrapTable', () => {
   describe('when condensed props is true', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } condensed />);
+        <BootstrapTable keyField="id" columns={ columns } data={ data } condensed />);
     });
 
     it('should have table-condensed class on table', () => {
@@ -148,7 +170,7 @@ describe('BootstrapTable', () => {
   describe('when bordered props is false', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <BootstrapTable keyField="id" columns={ columns } data={ data } store={ store } bordered={ false } />);
+        <BootstrapTable keyField="id" columns={ columns } data={ data } bordered={ false } />);
     });
 
     it('should not have table-condensed class on table', () => {
@@ -160,7 +182,6 @@ describe('BootstrapTable', () => {
     beforeEach(() => {
       wrapper = shallow(
         <BootstrapTable
-          store={ store }
           caption={ <span className="table-caption">test</span> }
           keyField="id"
           columns={ columns }

@@ -40,8 +40,8 @@ export default ExtendBase =>
 
       let from = ((currPage - pageStartIndex) * currSizePerPage);
       from = dataSize === 0 ? 0 : from + 1;
-      let to = Math.min((currSizePerPage * (currPage + offset) - 1), dataSize);
-      if (to >= dataSize) to -= 1;
+      let to = Math.min(currSizePerPage * (currPage + offset), dataSize);
+      if (to > dataSize) to = dataSize;
 
       return [from, to];
     }

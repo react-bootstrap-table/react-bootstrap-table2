@@ -225,17 +225,9 @@ describe('TableResolver', () => {
             bar: expect.any(Function)
           }));
         });
-
-        it('should return object which can not contain allRowsSelected option', () => {
-          expect(headerCellSelectionInfo.allRowsSelected).not.toBeDefined();
-        });
-
-        it('should return object which can not contain allRowsSelected option', () => {
-          expect(headerCellSelectionInfo.selected).not.toBeDefined();
-        });
       });
 
-      describe('if all rows were selected', () => {
+      describe('if options.allRowsSelected is true', () => {
         beforeEach(() => {
           selectRow = {};
           const selectedRowKeys = [1, 2];
@@ -258,7 +250,7 @@ describe('TableResolver', () => {
         });
       });
 
-      describe('if part of rows were selected', () => {
+      describe('if options.allRowsSelected and options.allRowsNotSelected both are false', () => {
         beforeEach(() => {
           selectRow = {};
           const selectedRowKeys = [1];
@@ -269,6 +261,7 @@ describe('TableResolver', () => {
           wrapper = shallow(mockElement);
           headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader({
             allRowsSelected: false,
+            allRowsNotSelected: false,
             selected: selectedRowKeys
           });
         });
@@ -280,7 +273,7 @@ describe('TableResolver', () => {
         });
       });
 
-      describe('if none of row was selected', () => {
+      describe('if options.allRowsNotSelected is true', () => {
         beforeEach(() => {
           selectRow = {};
           const selectedRowKeys = [];
@@ -292,6 +285,7 @@ describe('TableResolver', () => {
 
           headerCellSelectionInfo = wrapper.instance().resolveSelectRowPropsForHeader({
             allRowsSelected: false,
+            allRowsNotSelected: true,
             selected: selectedRowKeys
           });
         });

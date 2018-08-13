@@ -29,7 +29,7 @@ class SelectFilter extends Component {
 
     const value = this.selectInput.value;
     if (value && value !== '') {
-      onFilter(column, FILTER_TYPE.SELECT)(value);
+      onFilter(column, FILTER_TYPE.SELECT, true)(value);
     }
 
     // export onFilter function to allow users to access

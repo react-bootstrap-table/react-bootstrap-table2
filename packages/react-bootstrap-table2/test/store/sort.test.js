@@ -1,6 +1,5 @@
 import sinon from 'sinon';
 
-import Store from '../../src/store';
 import { sort, nextOrder } from '../../src/store/sort';
 import Const from '../../src/const';
 
@@ -12,18 +11,17 @@ describe('Sort Function', () => {
     { id: 1, name: '!@#' }
   ];
 
-  let store;
-
   describe('sort', () => {
-    beforeEach(() => {
-      store = new Store('id');
-      store.data = data;
-    });
+    const sortColumn = {
+      dataField: 'id',
+      text: 'ID'
+    };
+    let sortOrder;
+    let result;
 
     it('should sort array with ASC order correctly', () => {
-      store.sortField = 'id';
-      store.sortOrder = Const.SORT_ASC;
-      const result = sort(store)();
+      sortOrder = Const.SORT_ASC;
+      result = sort(data, sortOrder, sortColumn);
       expect(result.length).toEqual(data.length);
 
       const sortedArray = data.map(e => e.id).sort((a, b) => a - b);
@@ -33,9 +31,8 @@ describe('Sort Function', () => {
     });
 
     it('should sort array with DESC order correctly', () => {
-      store.sortField = 'id';
-      store.sortOrder = Const.SORT_DESC;
-      const result = sort(store)();
+      sortOrder = Const.SORT_DESC;
+      result = sort(data, sortOrder, sortColumn);
       expect(result.length).toEqual(data.length);
 
       const sortedArray = data.map(e => e.id).sort((a, b) => b - a);
@@ -46,35 +43,49 @@ describe('Sort Function', () => {
 
     it('should call custom sort function when sortFunc given', () => {
       const sortFunc = sinon.stub().returns(1);
-      store.sortField = 'id';
-      store.sortOrder = Const.SORT_DESC;
-      sort(store)(sortFunc);
+      sortOrder = Const.SORT_DESC;
+      sort(data, sortOrder, { ...sortColumn, sortFunc });
       expect(sortFunc.callCount).toBe(6);
     });
   });
 
   describe('nextOrder', () => {
-    beforeEach(() => {
-      store = new Store('id');
-      store.data = data;
+    const currentSortColumn = {
+      dataField: 'name',
+      text: 'Product Name'
+    };
+    it('should return correcly order when current sortField is not eq next sort field', () => {
+      const nextSort = {
+        sortColumn: {
+          dataField: 'id',
+          text: 'ID'
+        },
+        sortOrder: Const.SORT_DESC
+      };
+      expect(nextOrder(currentSortColumn, nextSort)).toBe(Const.SORT_DESC);
     });
 
-    it('should return correcly order when store.sortField is not eq next sort field', () => {
-      expect(nextOrder(store)('name')).toBe(Const.SORT_DESC);
+    it('should return correcly order if even next sort column is undefined', () => {
+      expect(nextOrder(currentSortColumn, {})).toBe(Const.SORT_DESC);
     });
 
-    it('should return correcly order when store.sortField is not eq next sort field and default sort direction is given', () => {
-      expect(nextOrder(store)('name', undefined, Const.SORT_ASC)).toBe(Const.SORT_ASC);
+    it('should return correcly order when current sortField is not eq next sort field and default sort direction is given', () => {
+      const nextSort = {
+        sortColumn: {
+          dataField: 'id',
+          text: 'ID'
+        },
+        sortOrder: Const.SORT_DESC
+      };
+      expect(nextOrder(currentSortColumn, nextSort, Const.SORT_ASC)).toBe(Const.SORT_ASC);
     });
 
-    it('should return correcly order when store.sortField is eq next sort field', () => {
-      store.sortField = 'name';
-      store.sortOrder = Const.SORT_DESC;
-      expect(nextOrder(store)('name')).toBe(Const.SORT_ASC);
-    });
-
-    it('should return correcly order when order is specified', () => {
-      expect(nextOrder(store)('name', Const.SORT_ASC)).toBe(Const.SORT_ASC);
+    it('should return correcly order when current sortField is eq next sort field', () => {
+      const nextSort = {
+        sortColumn: currentSortColumn,
+        sortOrder: Const.SORT_ASC
+      };
+      expect(nextOrder(currentSortColumn, nextSort)).toBe(Const.SORT_DESC);
     });
   });
 });

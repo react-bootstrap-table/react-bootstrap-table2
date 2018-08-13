@@ -41,6 +41,14 @@ export const jobsGenerator = (quantity = 5) =>
     type: jobType[Math.floor((Math.random() * 4) + 1)]
   }));
 
+export const jobsGenerator1 = (quantity = 5) =>
+  Array.from({ length: quantity }, (value, index) => ({
+    id: index,
+    name: `Job name ${index}`,
+    owner: Math.floor((Math.random() * 2) + 1),
+    type: Math.floor((Math.random() * 4) + 1)
+  }));
+
 export const todosGenerator = (quantity = 5) =>
   Array.from({ length: quantity }, (value, index) => ({
     id: index,
@@ -60,3 +68,17 @@ export const stockGenerator = (quantity = 5) =>
   }));
 
 export const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+export const productsExpandRowsGenerator = (quantity = 5, callback) => {
+  if (callback) return Array.from({ length: quantity }, callback);
+
+  // if no given callback, retrun default product format.
+  return (
+    Array.from({ length: quantity }, (value, index) => ({
+      id: index,
+      name: `Item name ${index}`,
+      price: 2100 + index,
+      expand: productsQualityGenerator(index)
+    }))
+  );
+};

@@ -11,7 +11,7 @@
     "pretest": "yarn lint --cache",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --coverage --watch",
     "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook",
     "gh-pages:clean": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:clean",
     "gh-pages:build": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:build",
@@ -50,8 +50,9 @@
     "babel-preset-stage-0": "6.24.1",
     "babel-register": "6.24.1",
     "css-loader": "0.28.1",
-    "enzyme": "3.1.1",
-    "enzyme-adapter-react-16": "1.0.4",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "enzyme-to-json": "^3.3.4",
     "eslint": "4.5.0",
     "eslint-config-airbnb": "15.1.0",
     "eslint-loader": "1.9.0",
@@ -81,12 +82,13 @@
   "dependencies": {
     "classnames": "2.2.5",
     "prop-types": "15.5.10",
-    "react": "16.0.0",
-    "react-dom": "16.0.0"
+    "react": "16.3.2",
+    "react-dom": "16.3.2",
+    "underscore": "1.9.1"
   },
   "jest": {
     "collectCoverageFrom": [
-      "packages/*/src/*.js",
+      "packages/*/src/**/*.js",
       "packages/*/index.js"
     ],
     "roots": [

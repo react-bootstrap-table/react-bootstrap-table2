@@ -79,362 +79,6 @@ describe('Cell', () => {
     });
   });
 
-  describe('when column.style prop is defined', () => {
-    let column;
-    const columnIndex = 1;
-    const rowIndex = 1;
-
-    beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
-    });
-
-    describe('when style is an object', () => {
-      beforeEach(() => {
-        column.style = { backgroundColor: 'red' };
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      it('should render successfully', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('style')).toEqual(column.style);
-      });
-    });
-
-    describe('when style is a function', () => {
-      const returnStyle = { backgroundColor: 'red' };
-      let styleCallBack;
-
-      beforeEach(() => {
-        styleCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
-          .returns(returnStyle);
-        column.style = styleCallBack;
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      afterEach(() => { styleCallBack.reset(); });
-
-      it('should render successfully', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('style')).toEqual(returnStyle);
-      });
-
-      it('should call custom style function correctly', () => {
-        expect(styleCallBack.callCount).toBe(1);
-        expect(
-          styleCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
-      });
-    });
-  });
-
-  describe('when column.classes prop is defined', () => {
-    let column;
-    const columnIndex = 1;
-    const rowIndex = 1;
-
-    beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
-    });
-
-    describe('when classes is an object', () => {
-      beforeEach(() => {
-        column.classes = 'td-test-class';
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      it('should render successfully', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.hasClass(column.classes)).toBe(true);
-      });
-    });
-
-    describe('when classes is a function', () => {
-      const returnClasses = 'td-test-class';
-      let classesCallBack;
-
-      beforeEach(() => {
-        classesCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
-          .returns(returnClasses);
-        column.classes = classesCallBack;
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      afterEach(() => { classesCallBack.reset(); });
-
-      it('should render successfully', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.hasClass(returnClasses)).toBe(true);
-      });
-
-      it('should call custom classes function correctly', () => {
-        expect(classesCallBack.callCount).toBe(1);
-        expect(
-          classesCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
-      });
-    });
-  });
-
-  describe('when column.title prop is defined', () => {
-    let column;
-    const columnIndex = 1;
-    const rowIndex = 1;
-
-    beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
-    });
-
-    describe('when title is boolean', () => {
-      beforeEach(() => {
-        column.title = true;
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      it('should render title as cell value as default', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('title')).toEqual(row[column.dataField]);
-      });
-    });
-
-    describe('when title is custom function', () => {
-      const customTitle = 'test_title';
-      let titleCallBack;
-
-      beforeEach(() => {
-        titleCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
-          .returns(customTitle);
-        column.title = titleCallBack;
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      it('should render title correctly by custom title function', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('title')).toBe(customTitle);
-      });
-
-      it('should call custom title function correctly', () => {
-        expect(titleCallBack.callCount).toBe(1);
-        expect(
-          titleCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
-      });
-    });
-  });
-
-  describe('when column.events prop is defined', () => {
-    let column;
-    const columnIndex = 1;
-    const rowIndex = 1;
-
-    beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID',
-        events: {
-          onClick: sinon.stub()
-        }
-      };
-
-      wrapper = shallow(
-        <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-    });
-
-    it('should attachs DOM event successfully', () => {
-      expect(wrapper.length).toBe(1);
-      expect(wrapper.find('td').prop('onClick')).toBeDefined();
-    });
-
-    it('event hook should be called when triggering', () => {
-      wrapper.find('td').simulate('click');
-      expect(column.events.onClick.callCount).toBe(1);
-    });
-  });
-
-  describe('when column.align prop is defined', () => {
-    let column;
-    const columnIndex = 1;
-    const rowIndex = 1;
-
-    beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
-    });
-
-    describe('when align is string', () => {
-      beforeEach(() => {
-        column.align = 'center';
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      it('should render style.textAlign correctly', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('style').textAlign).toEqual(column.align);
-      });
-    });
-
-    describe('when align is custom function', () => {
-      const customAlign = 'center';
-      let alignCallBack;
-
-      beforeEach(() => {
-        alignCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
-          .returns(customAlign);
-        column.align = alignCallBack;
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      it('should render style.textAlign correctly', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('style').textAlign).toEqual(customAlign);
-      });
-
-      it('should call custom headerAlign function correctly', () => {
-        expect(alignCallBack.callCount).toBe(1);
-        expect(
-          alignCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
-      });
-    });
-  });
-
-  describe('when column.attrs prop is defined', () => {
-    let column;
-    const columnIndex = 1;
-    const rowIndex = 1;
-
-    beforeEach(() => {
-      column = {
-        dataField: 'id',
-        text: 'ID'
-      };
-    });
-
-    describe('when attrs is an object', () => {
-      it('should render column.attrs correctly', () => {
-        column.attrs = {
-          'data-test': 'test',
-          title: 'title',
-          className: 'attrs-class',
-          style: {
-            backgroundColor: 'attrs-style-test',
-            display: 'none',
-            textAlign: 'right'
-          }
-        };
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
-
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('data-test')).toEqual(column.attrs['data-test']);
-        expect(wrapper.find('td').prop('title')).toEqual(column.attrs.title);
-        expect(wrapper.hasClass(column.attrs.className)).toBe(true);
-        expect(wrapper.find('td').prop('style')).toEqual(column.attrs.style);
-        expect(wrapper.find('td').prop('style').textAlign).toEqual(column.attrs.style.textAlign);
-      });
-
-      describe('when column.title prop is defined', () => {
-        it('attrs.title should be overwrited', () => {
-          column.title = true;
-          column.attrs = { title: 'title' };
-
-          wrapper = shallow(
-            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
-
-          expect(wrapper.find('td').prop('title')).toEqual(row[column.dataField]);
-        });
-      });
-
-      describe('when column.classes prop is defined', () => {
-        it('attrs.class should be overwrited', () => {
-          column.classes = 'td-test-class';
-          column.attrs = { className: 'attrs-class' };
-
-          wrapper = shallow(
-            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
-
-          expect(wrapper.hasClass(column.classes)).toBe(true);
-        });
-      });
-
-      describe('when column.style prop is defined', () => {
-        it('attrs.style should be overwrited', () => {
-          column.style = { backgroundColor: 'red' };
-          column.attrs = { style: { backgroundColor: 'attrs-style-test' } };
-
-          wrapper = shallow(
-            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
-
-          expect(wrapper.find('td').prop('style')).toEqual(column.style);
-        });
-      });
-
-      describe('when column.align prop is defined', () => {
-        it('attrs.style.textAlign should be overwrited', () => {
-          column.align = 'center';
-          column.attrs = { style: { textAlign: 'right' } };
-
-          wrapper = shallow(
-            <Cell row={ row } columnIndex={ columnIndex } rowIndex={ 1 } column={ column } />);
-
-          expect(wrapper.find('td').prop('style').textAlign).toEqual(column.align);
-        });
-      });
-    });
-
-    describe('when attrs is custom function', () => {
-      let attrsCallBack;
-      const customAttrs = {
-        title: 'title',
-        'data-test': 'test'
-      };
-
-      beforeEach(() => {
-        attrsCallBack = sinon.stub()
-          .withArgs(row[column.dataField], row, rowIndex, columnIndex)
-          .returns(customAttrs);
-        column.attrs = attrsCallBack;
-        wrapper = shallow(
-          <Cell row={ row } columnIndex={ columnIndex } rowIndex={ rowIndex } column={ column } />);
-      });
-
-      it('should render style.attrs correctly', () => {
-        expect(wrapper.length).toBe(1);
-        expect(wrapper.find('td').prop('data-test')).toEqual(customAttrs['data-test']);
-        expect(wrapper.find('td').prop('title')).toEqual(customAttrs.title);
-      });
-
-      it('should call custom attrs function correctly', () => {
-        expect(attrsCallBack.callCount).toBe(1);
-        expect(
-          attrsCallBack.calledWith(row[column.dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
-      });
-    });
-  });
-
   describe('when editable prop is true', () => {
     let onStartCallBack;
     const rowIndex = 1;
@@ -525,6 +169,261 @@ describe('Cell', () => {
           expect(onStartCallBack.callCount).toBe(1);
           expect(column.events.onDoubleClick.callCount).toBe(1);
         });
+      });
+    });
+  });
+
+  describe('shouldComponentUpdate', () => {
+    let props;
+    let nextProps;
+
+    describe('when content is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, row: { id: 1, name: 'CDE' } };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when column.hidden is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, column: { ...column, hidden: true } };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.rowIndex is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, rowIndex: 2 };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.columnIndex is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, columnIndex: 2 };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.className is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column,
+          className: 'test'
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, className: null };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.title is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column,
+          title: 'test'
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, title: '123' };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.title is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, editable: true };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.clickToEdit is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, clickToEdit: true };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.dbclickToEdit is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, dbclickToEdit: true };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when props.style is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column,
+          style: {}
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, style: { color: 'red' } };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when column.formatExtraData is change', () => {
+      const column = { dataField: 'name', text: 'Product Name', formatExtraData: { a: 1 } };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, column: { ...column, formatExtraData: { b: 2 } } };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when column.events is change', () => {
+      const column = { dataField: 'name', text: 'Product Name', events: { a: jest.fn() } };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, column: { ...column, events: { b: jest.fn() } } };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when column.attrs is change', () => {
+      const column = { dataField: 'name', text: 'Product Name', attrs: { 'data-att': 1 } };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, column: { ...column, attrs: null } };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
       });
     });
   });

@@ -36,7 +36,7 @@ class DateFilter extends Component {
     const comparator = this.dateFilterComparator.value;
     const date = this.inputDate.value;
     if (comparator && date) {
-      this.applyFilter(date, comparator);
+      this.applyFilter(date, comparator, true);
     }
 
     // export onFilter function to allow users to access
@@ -92,14 +92,18 @@ class DateFilter extends Component {
     return defaultDate;
   }
 
-  applyFilter(value, comparator) {
-    if (!comparator || !value) {
-      return;
-    }
+  applyFilter(value, comparator, isInitial) {
+    // if (!comparator || !value) {
+    //  return;
+    // }
     const { column, onFilter, delay } = this.props;
     const execute = () => {
-      const date = typeof value !== 'object' ? new Date(value) : value;
-      onFilter(column, FILTER_TYPE.DATE)({ date, comparator });
+      // Incoming value should always be a string, and the defaultDate
+      // above is implemented as an empty string, so we can just check for that.
+      // instead of parsing an invalid Date. The filter function will interpret
+      // null as an empty date field
+      const date = value === '' ? null : new Date(value);
+      onFilter(column, FILTER_TYPE.DATE, isInitial)({ date, comparator });
     };
     if (delay) {
       this.timeout = setTimeout(() => { execute(); }, delay);

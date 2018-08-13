@@ -58,32 +58,6 @@ describe('Utils', () => {
     });
   });
 
-  describe('isObject', () => {
-    describe('when given Object', () => {
-      it('should return true', () => {
-        expect(_.isObject({})).toBe(true);
-      });
-    });
-
-    describe('when given Function', () => {
-      it('should return false', () => {
-        expect(_.isObject(() => 'test')).toBe(false);
-      });
-    });
-
-    describe('when given Array', () => {
-      it('should return false', () => {
-        expect(_.isObject([])).toBe(false);
-      });
-    });
-
-    describe('when given null', () => {
-      it('should return false', () => {
-        expect(_.isObject(null)).toBe(false);
-      });
-    });
-  });
-
   describe('isEmptyObject', () => {
     describe('when given empty Object', () => {
       it('should return true', () => {
@@ -98,14 +72,14 @@ describe('Utils', () => {
     });
 
     describe('when given Function', () => {
-      it('should return false', () => {
-        expect(_.isEmptyObject(() => 'test')).toBe(false);
+      it('should return true', () => {
+        expect(_.isEmptyObject(() => 'test')).toBe(true);
       });
     });
 
     describe('when given Array', () => {
-      it('should return false', () => {
-        expect(_.isEmptyObject([])).toBe(false);
+      it('should return true', () => {
+        expect(_.isEmptyObject([])).toBe(true);
       });
     });
 

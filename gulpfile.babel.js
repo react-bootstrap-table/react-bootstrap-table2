@@ -17,7 +17,8 @@ const JS_PKGS = [
   'react-bootstrap-table2-editor',
   'react-bootstrap-table2-filter',
   'react-bootstrap-table2-overlay',
-  'react-bootstrap-table2-paginator'
+  'react-bootstrap-table2-paginator',
+  'react-bootstrap-table2-toolkit'
 ].reduce((pkg, curr) => `${curr}|${pkg}`, '');
 
 const JS_SKIPS = `+(${TEST}|${LIB}|${DIST}|${NODE_MODULES})`;
@@ -25,7 +26,8 @@ const JS_SKIPS = `+(${TEST}|${LIB}|${DIST}|${NODE_MODULES})`;
 const STYLE_PKGS = [
   'react-bootstrap-table2',
   'react-bootstrap-table2-filter',
-  'react-bootstrap-table2-paginator'
+  'react-bootstrap-table2-paginator',
+  'react-bootstrap-table2-toolkit',
 ].reduce((pkg, curr) => `${curr}|${pkg}`, '');
 
 const STYLE_SKIPS = `+(${NODE_MODULES})`;
@@ -78,7 +80,8 @@ function umd(done) {
     () => gulp.src('./webpack/editor.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
     () => gulp.src('./webpack/filter.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
     () => gulp.src('./webpack/overlay.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
-    () => gulp.src('./webpack/paginator.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>']))
+    () => gulp.src('./webpack/paginator.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
+    () => gulp.src('./webpack/toolkit.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>']))
   )();
   done();
 }

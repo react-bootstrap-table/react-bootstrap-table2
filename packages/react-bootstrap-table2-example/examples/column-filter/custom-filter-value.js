@@ -3,9 +3,9 @@ import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
-import { jobsGenerator } from 'utils/common';
+import { jobsGenerator1 } from 'utils/common';
 
-const jobs = jobsGenerator(5);
+const jobs = jobsGenerator1(5);
 
 const owners = ['Allen', 'Bob', 'Cat'];
 const types = ['Cloud Service', 'Message Service', 'Add Service', 'Edit Service', 'Money'];

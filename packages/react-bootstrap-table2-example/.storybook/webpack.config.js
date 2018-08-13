@@ -8,6 +8,7 @@ const editorSourcePath = path.join(__dirname, '../../react-bootstrap-table2-edit
 const sourceStylePath = path.join(__dirname, '../../react-bootstrap-table2/style');
 const paginationStylePath = path.join(__dirname, '../../react-bootstrap-table2-paginator/style');
 const filterStylePath = path.join(__dirname, '../../react-bootstrap-table2-filter/style');
+const toolkitSourcePath = path.join(__dirname, '../../react-bootstrap-table2-toolkit/index.js');
 const storyPath = path.join(__dirname, '../stories');
 const examplesPath = path.join(__dirname, '../examples');
 const srcPath = path.join(__dirname, '../src');
@@ -23,6 +24,7 @@ const aliasPath = {
   'react-bootstrap-table2-filter': filterSourcePath,
   'react-bootstrap-table2-overlay': overlaySourcePath,
   'react-bootstrap-table2-paginator': paginationSourcePath,
+  'react-bootstrap-table2-toolkit': toolkitSourcePath
 };
 
 const loaders = [{

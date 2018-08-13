@@ -10,6 +10,25 @@ class Cell extends Component {
     this.handleEditingCell = this.handleEditingCell.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate =
+      _.get(this.props.row, this.props.column.dataField)
+        !== _.get(nextProps.row, nextProps.column.dataField) ||
+      this.props.column.hidden !== nextProps.column.hidden ||
+      this.props.rowIndex !== nextProps.rowIndex ||
+      this.props.columnIndex !== nextProps.columnIndex ||
+      this.props.className !== nextProps.className ||
+      this.props.title !== nextProps.title ||
+      this.props.editable !== nextProps.editable ||
+      this.props.clickToEdit !== nextProps.clickToEdit ||
+      this.props.dbclickToEdit !== nextProps.dbclickToEdit ||
+      !_.isEqual(this.props.style, nextProps.style) ||
+      !_.isEqual(this.props.column.formatExtraData, nextProps.column.formatExtraData) ||
+      !_.isEqual(this.props.column.events, nextProps.column.events) ||
+      !_.isEqual(this.props.column.attrs, nextProps.column.attrs);
+    return shouldUpdate;
+  }
+
   handleEditingCell(e) {
     const { column, onStart, rowIndex, columnIndex, clickToEdit, dbclickToEdit } = this.props;
     const { events } = column;
@@ -33,62 +52,32 @@ class Cell extends Component {
       rowIndex,
       column,
       columnIndex,
+      onStart,
       editable,
       clickToEdit,
-      dbclickToEdit
+      dbclickToEdit,
+      ...rest
     } = this.props;
     const {
       dataField,
       formatter,
-      formatExtraData,
-      style,
-      classes,
-      title,
-      events,
-      align,
-      attrs
+      formatExtraData
     } = column;
-    let cellTitle;
-    let cellStyle = {};
+    const attrs = { ...rest };
     let content = _.get(row, dataField);
-
-    const cellAttrs = {
-      ..._.isFunction(attrs) ? attrs(content, row, rowIndex, columnIndex) : attrs,
-      ...events
-    };
-
-    const cellClasses = _.isFunction(classes)
-      ? classes(content, row, rowIndex, columnIndex)
-      : classes;
-
-    if (style) {
-      cellStyle = _.isFunction(style) ? style(content, row, rowIndex, columnIndex) : style;
-    }
-
-    if (title) {
-      cellTitle = _.isFunction(title) ? title(content, row, rowIndex, columnIndex) : content;
-      cellAttrs.title = cellTitle;
-    }
 
     if (formatter) {
       content = column.formatter(content, row, rowIndex, formatExtraData);
     }
 
-    if (align) {
-      cellStyle.textAlign =
-        _.isFunction(align) ? align(content, row, rowIndex, columnIndex) : align;
-    }
-
-    if (cellClasses) cellAttrs.className = cellClasses;
-
-    if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
     if (clickToEdit && editable) {
-      cellAttrs.onClick = this.handleEditingCell;
+      attrs.onClick = this.handleEditingCell;
     } else if (dbclickToEdit && editable) {
-      cellAttrs.onDoubleClick = this.handleEditingCell;
+      attrs.onDoubleClick = this.handleEditingCell;
     }
+
     return (
-      <td { ...cellAttrs }>
+      <td { ...attrs }>
         { typeof content === 'boolean' ? `${content}` : content }
       </td>
     );

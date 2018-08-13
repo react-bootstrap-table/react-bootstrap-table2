@@ -187,12 +187,35 @@ export const filterByDate = _ => (
   });
 };
 
+export const filterByArray = _ => (
+  data,
+  dataField,
+  { filterVal, comparator }
+) => {
+  if (filterVal.length === 0) return data;
+  const refinedFilterVal = filterVal
+    .filter(x => _.isDefined(x))
+    .map(x => x.toString());
+  return data.filter((row) => {
+    const cell = _.get(row, dataField);
+    let cellStr = _.isDefined(cell) ? cell.toString() : '';
+    if (comparator === EQ) {
+      return refinedFilterVal.indexOf(cellStr) !== -1;
+    }
+    cellStr = cellStr.toLocaleUpperCase();
+    return refinedFilterVal.some(item => cellStr.indexOf(item.toLocaleUpperCase()) !== -1);
+  });
+};
+
 export const filterFactory = _ => (filterType) => {
   let filterFn;
   switch (filterType) {
     case FILTER_TYPE.TEXT:
     case FILTER_TYPE.SELECT:
       filterFn = filterByText(_);
+      break;
+    case FILTER_TYPE.MULTISELECT:
+      filterFn = filterByArray(_);
       break;
     case FILTER_TYPE.NUMBER:
       filterFn = filterByNumber(_);
@@ -206,9 +229,9 @@ export const filterFactory = _ => (filterType) => {
   return filterFn;
 };
 
-export const filters = (store, columns, _) => (currFilters) => {
+export const filters = (data, columns, _) => (currFilters) => {
   const factory = filterFactory(_);
-  let result = store.getAllData();
+  let result = data;
   let filterFn;
   Object.keys(currFilters).forEach((dataField) => {
     const filterObj = currFilters[dataField];
