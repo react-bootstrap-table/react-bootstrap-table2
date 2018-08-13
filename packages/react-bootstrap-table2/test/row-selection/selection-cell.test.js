@@ -170,7 +170,13 @@ describe('<SelectionCell />', () => {
     describe('when disabled prop give as true', () => {
       beforeEach(() => {
         wrapper = shallowWithContext(
-          <SelectionCell rowKey={ 1 } mode={ mode } rowIndex={ rowIndex } selected={ selected } disabled />,
+          <SelectionCell
+            rowKey={ 1 }
+            mode={ mode }
+            rowIndex={ rowIndex }
+            selected={ selected }
+            disabled
+          />,
           { bootstrap4: false }
         );
       });
