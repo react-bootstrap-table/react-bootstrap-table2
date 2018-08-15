@@ -5,10 +5,7 @@ import PropTypes from 'prop-types';
 
 import _ from './utils';
 import Cell from './cell';
-import SelectionCell from './row-selection/selection-cell';
-import ExpandCell from './row-expand/expand-cell';
 import eventDelegater from './row-event-delegater';
-import Const from './const';
 
 class Row extends eventDelegater(Component) {
   render() {
@@ -21,11 +18,6 @@ class Row extends eventDelegater(Component) {
       style,
       attrs,
       cellEdit,
-      selected,
-      selectRow,
-      expanded,
-      expandRow,
-      selectable,
       editable: editableRow
     } = this.props;
 
@@ -39,37 +31,11 @@ class Row extends eventDelegater(Component) {
       DBCLICK_TO_CELL_EDIT,
       ...rest
     } = cellEdit;
-
-    const key = _.get(row, keyField);
-    const { hideSelectColumn } = selectRow;
-    const { showExpandColumn } = expandRow || {};
     const trAttrs = this.delegate(attrs);
 
     return (
       <tr style={ style } className={ className } { ...trAttrs }>
-        {
-          showExpandColumn ? (
-            <ExpandCell
-              { ...expandRow }
-              rowKey={ key }
-              rowIndex={ rowIndex }
-              expanded={ expanded }
-            />
-          ) : null
-        }
-        {
-          (selectRow.mode !== Const.ROW_SELECT_DISABLED && !hideSelectColumn)
-            ? (
-              <SelectionCell
-                { ...selectRow }
-                rowKey={ key }
-                rowIndex={ rowIndex }
-                selected={ selected }
-                disabled={ !selectable }
-              />
-            )
-            : null
-        }
+        { this.props.children }
         {
           columns.map((column, index) => {
             if (!column.hidden) {
