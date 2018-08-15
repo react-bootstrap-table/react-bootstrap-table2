@@ -20,11 +20,26 @@ export default (options = {
       searchText: PropTypes.string
     }
 
+    constructor(props) {
+      super(props);
+      this.performRemoteSearch = props.searchText !== '';
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (isRemoteSearch()) {
+        if (nextProps.searchText !== this.props.searchText) {
+          this.performRemoteSearch = true;
+        } else {
+          this.performRemoteSearch = false;
+        }
+      }
+    }
+
     search() {
       const { data, columns } = this.props;
       let { searchText } = this.props;
 
-      if (isRemoteSearch()) {
+      if (isRemoteSearch() && this.performRemoteSearch) {
         handleRemoteSearchChange(searchText);
         return data;
       }
