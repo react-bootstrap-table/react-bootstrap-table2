@@ -6,6 +6,7 @@ import Const from './const';
 import HeaderCell from './header-cell';
 import SelectionHeaderCell from './row-selection/selection-header-cell';
 import ExpandHeaderCell from './row-expand/expand-header-cell';
+import bindSelection from './row-selection/selection-header-cell-binder';
 
 const Header = (props) => {
   const { ROW_SELECT_DISABLED } = Const;
@@ -23,6 +24,12 @@ const Header = (props) => {
     bootstrap4
   } = props;
 
+  let SelectionHeaderCellComp = () => {};
+
+  if (selectRow) {
+    SelectionHeaderCellComp = bindSelection(SelectionHeaderCell);
+  }
+
   return (
     <thead>
       <tr className={ className }>
@@ -35,8 +42,8 @@ const Header = (props) => {
             /> : null
         }
         {
-          (selectRow.mode !== ROW_SELECT_DISABLED && !selectRow.hideSelectColumn)
-            ? <SelectionHeaderCell { ...selectRow } /> : null
+          (selectRow.mode !== ROW_SELECT_DISABLED && !selectRow.hideSelectColumn) ?
+            <SelectionHeaderCellComp /> : null
         }
         {
           columns.map((column, i) => {

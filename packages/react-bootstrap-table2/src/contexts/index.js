@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import _ from '../utils';
 import createDataContext from './data-context';
 import createSortContext from './sort-context';
-import createSelectionContext from './selection-context';
+import SelectionContext from './selection-context';
 import createRowExpandContext from './row-expand-context';
 import remoteResolver from '../props-resolver/remote-resolver';
 import { BootstrapContext } from './bootstrap';
@@ -22,7 +22,7 @@ const withContext = Base =>
       }
 
       if (props.selectRow) {
-        this.SelectionContext = createSelectionContext(dataOperator);
+        this.SelectionContext = SelectionContext;
       }
 
       if (props.expandRow) {
@@ -62,13 +62,11 @@ const withContext = Base =>
         searchProps,
         sortProps,
         paginationProps,
-        expandProps,
-        selectionProps
+        expandProps
       ) => (
         <Base
           ref={ n => this.table = n }
           { ...this.props }
-          { ...selectionProps }
           { ...sortProps }
           { ...cellEditProps }
           { ...filterProps }
@@ -96,20 +94,17 @@ const withContext = Base =>
           selectRow={ this.props.selectRow }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         >
-          <this.SelectionContext.Consumer>
-            {
-              selectionProps => base(
-                rootProps,
-                cellEditProps,
-                filterProps,
-                searchProps,
-                sortProps,
-                paginationProps,
-                expandProps,
-                selectionProps
-              )
-            }
-          </this.SelectionContext.Consumer>
+          {
+            base(
+              rootProps,
+              cellEditProps,
+              filterProps,
+              searchProps,
+              sortProps,
+              paginationProps,
+              expandProps
+            )
+          }
         </this.SelectionContext.Provider>
       );
     }

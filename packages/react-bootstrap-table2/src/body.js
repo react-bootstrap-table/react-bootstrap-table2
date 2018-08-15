@@ -3,13 +3,14 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import cs from 'classnames';
 
 import _ from './utils';
 import Row from './row';
+import RowAggregator from './row-aggregator';
 import ExpandRow from './row-expand/expand-row';
 import RowSection from './row-section';
 import Const from './const';
+import bindSelection from './row-selection/row-binder';
 
 const Body = (props) => {
   const {
@@ -21,17 +22,11 @@ const Body = (props) => {
     visibleColumnSize,
     cellEdit,
     selectRow,
-    selectedRowKeys,
     rowStyle,
     rowClasses,
     rowEvents,
     expandRow
   } = props;
-
-  const {
-    bgColor,
-    nonSelectable
-  } = selectRow;
 
   let content;
 
@@ -42,62 +37,54 @@ const Body = (props) => {
     }
     content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
   } else {
+    let RowComponent = Row;
     const nonEditableRows = cellEdit.nonEditableRows || [];
+    const selectRowEnabled = selectRow.mode !== Const.ROW_SELECT_DISABLED;
+    const expandRowEnabled = !!expandRow;
+
+    if (selectRowEnabled) {
+      RowComponent = bindSelection(RowAggregator);
+    }
+
     content = data.map((row, index) => {
       const key = _.get(row, keyField);
       const editable = !(nonEditableRows.length > 0 && nonEditableRows.indexOf(key) > -1);
 
-      const selected = selectRow.mode !== Const.ROW_SELECT_DISABLED
-        ? selectedRowKeys.includes(key)
-        : null;
-
       const attrs = rowEvents || {};
-      let style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
-      let classes = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
-      if (selected) {
-        const selectedStyle = _.isFunction(selectRow.style)
-          ? selectRow.style(row, index)
-          : selectRow.style;
+      const style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
+      const classes = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
 
-        const selectedClasses = _.isFunction(selectRow.classes)
-          ? selectRow.classes(row, index)
-          : selectRow.classes;
+      // refine later
+      const expanded = expandRowEnabled && expandRow.expanded.includes(key);
 
-        style = {
-          ...style,
-          ...selectedStyle
-        };
-        classes = cs(classes, selectedClasses);
-
-        if (bgColor) {
-          style = style || {};
-          style.backgroundColor = _.isFunction(bgColor) ? bgColor(row, index) : bgColor;
-        }
-      }
-
-      const selectable = !nonSelectable || !nonSelectable.includes(key);
-      const expandable = expandRow && !expandRow.nonExpandable.includes(key);
-      const expanded = expandRow && expandRow.expanded.includes(key);
-
+      // refine later
       const result = [
-        <Row
-          key={ key }
-          row={ row }
-          keyField={ keyField }
-          rowIndex={ index }
-          columns={ columns }
-          cellEdit={ cellEdit }
-          editable={ editable }
-          selectable={ selectable }
-          expandable={ expandable }
-          selected={ selected }
-          expanded={ expanded }
-          selectRow={ selectRow }
-          expandRow={ expandRow }
-          style={ style }
-          className={ classes }
-          attrs={ attrs }
-        />
+        selectRowEnabled || expandRowEnabled ?
+          <RowComponent
+            key={ key }
+            row={ row }
+            keyField={ keyField }
+            rowIndex={ index }
+            columns={ columns }
+            style={ style }
+            className={ classes }
+            attrs={ attrs }
+            cellEdit={ cellEdit }
+            selectRowEnabled={ selectRowEnabled }
+            expandRowEnabled={ expandRowEnabled }
+          /> :
+          <RowComponent
+            key={ key }
+            row={ row }
+            keyField={ keyField }
+            rowIndex={ index }
+            columns={ columns }
+            cellEdit={ cellEdit }
+            editable={ editable }
+            style={ style }
+            className={ classes }
+            attrs={ attrs }
+          />
       ];
 
       if (expanded) {
@@ -124,8 +111,7 @@ Body.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  selectRow: PropTypes.object,
-  selectedRowKeys: PropTypes.array
+  selectRow: PropTypes.object
 };
 
 export default Body;
