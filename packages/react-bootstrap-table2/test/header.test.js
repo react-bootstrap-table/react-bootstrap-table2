@@ -1,8 +1,10 @@
+import 'jsdom-global/register';
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import HeaderCell from '../src/header-cell';
-import SelectionHeaderCell from '../src//row-selection/selection-header-cell';
+import SelectionHeaderCell from '../src/row-selection/selection-header-cell';
+import SelectionContext from '../src/contexts/selection-context';
 import Header from '../src/header';
 import Const from '../src/const';
 import mockHeaderResolvedProps from './test-helpers/mock/header-resolved-props';
@@ -16,6 +18,16 @@ describe('Header', () => {
     dataField: 'name',
     text: 'Name'
   }];
+
+  const data = [{
+    id: 1,
+    name: 'A'
+  }, {
+    id: 2,
+    name: 'B'
+  }];
+
+  const keyField = 'id';
 
   describe('simplest header', () => {
     beforeEach(() => {
@@ -89,12 +101,18 @@ describe('Header', () => {
     describe('when selectRow.mode is radio (single selection)', () => {
       beforeEach(() => {
         const selectRow = { mode: 'radio' };
-        wrapper = shallow(
-          <Header
-            { ...mockHeaderResolvedProps }
-            columns={ columns }
+        wrapper = mount(
+          <SelectionContext.Provider
+            data={ data }
+            keyField={ keyField }
             selectRow={ selectRow }
-          />
+          >
+            <Header
+              { ...mockHeaderResolvedProps }
+              columns={ columns }
+              selectRow={ selectRow }
+            />
+          </SelectionContext.Provider>
         );
       });
 
@@ -105,12 +123,18 @@ describe('Header', () => {
       describe('when selectRow.hideSelectColumn is true', () => {
         beforeEach(() => {
           const selectRow = { mode: 'radio', hideSelectColumn: true };
-          wrapper = shallow(
-            <Header
-              { ...mockHeaderResolvedProps }
-              columns={ columns }
+          wrapper = mount(
+            <SelectionContext.Provider
+              data={ data }
+              keyField={ keyField }
               selectRow={ selectRow }
-            />
+            >
+              <Header
+                { ...mockHeaderResolvedProps }
+                columns={ columns }
+                selectRow={ selectRow }
+              />
+            </SelectionContext.Provider>
           );
         });
 
@@ -146,12 +170,17 @@ describe('Header', () => {
     describe('when selectRow.mode is checkbox (multiple selection)', () => {
       beforeEach(() => {
         const selectRow = { mode: 'checkbox' };
-        wrapper = shallow(
-          <Header
-            { ...mockHeaderResolvedProps }
-            columns={ columns }
+        wrapper = mount(
+          <SelectionContext.Provider
+            data={ data }
+            keyField={ keyField }
             selectRow={ selectRow }
-          />
+          >
+            <Header
+              columns={ columns }
+              selectRow={ selectRow }
+            />
+          </SelectionContext.Provider>
         );
       });
 
@@ -162,12 +191,17 @@ describe('Header', () => {
       describe('when selectRow.hideSelectColumn is true', () => {
         beforeEach(() => {
           const selectRow = { mode: 'checkbox', hideSelectColumn: true };
-          wrapper = shallow(
-            <Header
-              { ...mockHeaderResolvedProps }
-              columns={ columns }
+          wrapper = mount(
+            <SelectionContext.Provider
+              data={ data }
+              keyField={ keyField }
               selectRow={ selectRow }
-            />
+            >
+              <Header
+                columns={ columns }
+                selectRow={ selectRow }
+              />
+            </SelectionContext.Provider>
           );
         });
 
