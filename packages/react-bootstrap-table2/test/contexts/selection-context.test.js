@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 import dataOperator from '../../src/store/operators';
 import BootstrapTable from '../../src/bootstrap-table';
-import createSelectionContext from '../../src/contexts/selection-context';
+import SelectionContext from '../../src/contexts/selection-context';
 
 describe('DataContext', () => {
   let wrapper;
@@ -42,7 +42,6 @@ describe('DataContext', () => {
   const defaultSelectRow = {
     mode: 'checkbox'
   };
-  const SelectionContext = createSelectionContext(dataOperator);
 
   function shallowContext(selectRow = defaultSelectRow) {
     return (
@@ -81,9 +80,13 @@ describe('DataContext', () => {
     it('should pass correct sort props to children element', () => {
       expect(wrapper.length).toBe(1);
       expect(mockBase).toHaveBeenCalledWith({
+        ...defaultSelectRow,
         selected: wrapper.state().selected,
         onRowSelect: wrapper.instance().handleRowSelect,
-        onAllRowsSelect: wrapper.instance().handleAllRowsSelect
+        onAllRowsSelect: wrapper.instance().handleAllRowsSelect,
+        allRowsNotSelected: true,
+        allRowsSelected: false,
+        checkedStatus: 'unchecked'
       });
     });
   });

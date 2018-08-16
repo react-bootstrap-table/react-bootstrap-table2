@@ -1,11 +1,14 @@
+import 'jsdom-global/register';
 import React from 'react';
 import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 import Body from '../src/body';
 import Row from '../src/row';
+import RowAggregator from '../src/row-aggregator';
 import Const from '../src/const';
 import RowSection from '../src/row-section';
+import SelectionContext from '../src/contexts/selection-context';
 import mockBodyResolvedProps from './test-helpers/mock/body-resolved-props';
 
 describe('Body', () => {
@@ -169,92 +172,6 @@ describe('Body', () => {
         });
       });
     });
-
-    describe('when selectRow.style is defined', () => {
-      const selectedRowKey = data[0][keyField];
-      const selectedRowKeys = [selectedRowKey];
-      const selectedStyle = { backgroundColor: 'green', fontWeight: 'bold' };
-      const selectRow = { mode: 'radio', style: selectedStyle };
-
-      beforeEach(() => {
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            keyField="id"
-            columns={ columns }
-            data={ data }
-            rowStyle={ rowStyle }
-            selectRow={ selectRow }
-            selectedRowKeys={ selectedRowKeys }
-          />);
-      });
-
-      it('should rendering selected Row component with mixing selectRow.style correctly', () => {
-        const selectedRow = wrapper.find(Row).get(0);
-        expect(JSON.stringify(selectedRow.props.style)).toBe(JSON.stringify({
-          ...rowStyle,
-          ...selectedStyle
-        }));
-      });
-
-      describe('and selectRow.bgColor is also defined', () => {
-        beforeEach(() => {
-          selectRow.bgColor = 'gray';
-          wrapper = shallow(
-            <Body
-              { ...mockBodyResolvedProps }
-              keyField="id"
-              columns={ columns }
-              data={ data }
-              rowStyle={ rowStyle }
-              selectRow={ selectRow }
-              selectedRowKeys={ selectedRowKeys }
-            />);
-        });
-
-        it('should rendering selected Row component with mixing selectRow.style correctly', () => {
-          const selectedRow = wrapper.find(Row).get(0);
-          expect(JSON.stringify(selectedRow.props.style)).toBe(JSON.stringify({
-            ...rowStyle,
-            ...selectedStyle,
-            backgroundColor: selectRow.bgColor
-          }));
-        });
-
-        it('should render selected Row component with correct style.backgroundColor', () => {
-          const selectedRow = wrapper.find(Row).get(0);
-          expect(selectedRow.props.style.backgroundColor).toEqual(selectRow.bgColor);
-        });
-      });
-    });
-
-    describe('when selectRow.bgColor is defined', () => {
-      const selectedRowKey = data[0][keyField];
-      const selectedRowKeys = [selectedRowKey];
-      const selectRow = { mode: 'radio', bgColor: 'gray' };
-
-      beforeEach(() => {
-        selectRow.bgColor = 'gray';
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            keyField="id"
-            columns={ columns }
-            data={ data }
-            rowStyle={ rowStyle }
-            selectRow={ selectRow }
-            selectedRowKeys={ selectedRowKeys }
-          />);
-      });
-
-      it('should rendering selected Row component with correct style', () => {
-        const selectedRow = wrapper.find(Row).get(0);
-        expect(JSON.stringify(selectedRow.props.style)).toBe(JSON.stringify({
-          ...rowStyle,
-          backgroundColor: selectRow.bgColor
-        }));
-      });
-    });
   });
 
   describe('when rowClasses prop is defined', () => {
@@ -308,31 +225,6 @@ describe('Body', () => {
         rows.forEach((row) => {
           expect(row.props().className).toEqual(rowClasses);
         });
-      });
-    });
-
-    describe('when selectRow.classes is defined', () => {
-      const selectedRowKey = data[0][keyField];
-      const selectedRowKeys = [selectedRowKey];
-      const selectedClasses = 'selected-classes';
-      const selectRow = { mode: 'radio', classes: selectedClasses };
-
-      beforeEach(() => {
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            keyField="id"
-            columns={ columns }
-            data={ data }
-            rowClasses={ rowClasses }
-            selectRow={ selectRow }
-            selectedRowKeys={ selectedRowKeys }
-          />);
-      });
-
-      it('should rendering selected Row component with mixing selectRow.classes correctly', () => {
-        const selectedRow = wrapper.find(Row).get(0);
-        expect(selectedRow.props.className).toBe(`${rowClasses} ${selectedClasses}`);
       });
     });
   });
@@ -392,231 +284,6 @@ describe('Body', () => {
     });
   });
 
-  describe('when selectRow.mode is checkbox or radio (row was selectable)', () => {
-    const selectRow = { mode: 'checkbox' };
-    const selectedRowKey = data[0][keyField];
-    const selectedRowKeys = [selectedRowKey];
-
-    beforeEach(() => {
-      wrapper = shallow(
-        <Body
-          { ...mockBodyResolvedProps }
-          data={ data }
-          columns={ columns }
-          keyField={ keyField }
-          selectedRowKeys={ selectedRowKeys }
-          selectRow={ selectRow }
-        />
-      );
-    });
-
-    it('should render Row component with correct selected prop', () => {
-      const rows = wrapper.find(Row);
-      for (let i = 0; i < rows.length; i += 1) {
-        const row = rows.get(i);
-        expect(row.props.selected).toBe(selectedRowKeys.indexOf(row.props.row[keyField]) > -1);
-      }
-    });
-
-    describe('if selectRow.style is defined as an object', () => {
-      const style = { backgroundColor: 'red' };
-
-      beforeEach(() => {
-        selectRow.style = style;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should render Row component with correct style prop', () => {
-        expect(JSON.stringify(wrapper.find(Row).get(0).props.style)).toBe(JSON.stringify(style));
-      });
-    });
-
-    describe('if selectRow.style is defined as a function', () => {
-      const style = { backgroundColor: 'red' };
-      const styleCallBack = sinon.stub().returns(style);
-
-      beforeEach(() => {
-        selectRow.style = styleCallBack;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should calling style callback correctly', () => {
-        expect(styleCallBack.callCount).toBe(1);
-        expect(styleCallBack.calledWith(data[0]), 1);
-      });
-
-      it('should render Row component with correct style prop', () => {
-        expect(JSON.stringify(wrapper.find(Row).get(0).props.style)).toBe(JSON.stringify(style));
-      });
-    });
-
-    describe('if selectRow.classes is defined as a string', () => {
-      const className = 'custom-class';
-
-      beforeEach(() => {
-        selectRow.classes = className;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should render Row component with correct className prop', () => {
-        expect(wrapper.find(Row).get(0).props.className).toEqual(className);
-      });
-    });
-
-    describe('if selectRow.classes is defined as a function', () => {
-      const className = 'custom-class';
-      const classesCallBack = sinon.stub().returns(className);
-
-      beforeEach(() => {
-        selectRow.classes = classesCallBack;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should calling style callback correctly', () => {
-        expect(classesCallBack.callCount).toBe(1);
-        expect(classesCallBack.calledWith(data[0]), 1);
-      });
-
-      it('should render Row component with correct style prop', () => {
-        expect(wrapper.find(Row).get(0).props.className).toEqual(className);
-      });
-    });
-
-    describe('if selectRow.bgColor is defined as a string', () => {
-      const bgColor = 'red';
-
-      beforeEach(() => {
-        selectRow.bgColor = bgColor;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should render Row component with correct style.backgroundColor prop', () => {
-        expect(wrapper.find(Row).get(0).props.style).toEqual({ backgroundColor: bgColor });
-      });
-    });
-
-    describe('if selectRow.bgColor is defined as a string', () => {
-      const bgColor = 'red';
-      const bgColorCallBack = sinon.stub().returns(bgColor);
-
-      beforeEach(() => {
-        selectRow.bgColor = bgColorCallBack;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should calling selectRow.bgColor callback correctly', () => {
-        expect(bgColorCallBack.calledOnce).toBeTruthy();
-        expect(bgColorCallBack.calledWith(data[0]), 1).toBeTruthy();
-      });
-
-      it('should render Row component with correct style.backgroundColor prop', () => {
-        expect(wrapper.find(Row).get(0).props.style).toEqual({ backgroundColor: bgColor });
-      });
-    });
-
-    describe('if selectRow.bgColor defined and selectRow.style.backgroundColor defined', () => {
-      const bgColor = 'yellow';
-      const style = { backgroundColor: 'red' };
-
-      beforeEach(() => {
-        selectRow.style = style;
-        selectRow.bgColor = bgColor;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should take selectRow.bgColor as higher priority', () => {
-        expect(wrapper.find(Row).get(0).props.style.backgroundColor).toBe(bgColor);
-      });
-    });
-
-    describe('if selectRow.nonSelectable is defined', () => {
-      const nonSelectableRowIndex = 1;
-      const nonSelectable = [data[nonSelectableRowIndex][keyField]];
-
-      beforeEach(() => {
-        selectRow.nonSelectable = nonSelectable;
-        wrapper = shallow(
-          <Body
-            { ...mockBodyResolvedProps }
-            data={ data }
-            columns={ columns }
-            keyField={ keyField }
-            selectedRowKeys={ selectedRowKeys }
-            selectRow={ selectRow }
-          />
-        );
-      });
-
-      it('should render Row component with correct selectable prop', () => {
-        expect(wrapper.find(Row).get(0).props.selectable).toBeTruthy();
-        expect(wrapper.find(Row).get(nonSelectableRowIndex).props.selectable).toBeFalsy();
-      });
-    });
-  });
-
   describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
     beforeEach(() => {
       wrapper = shallow(
@@ -625,13 +292,34 @@ describe('Body', () => {
           data={ data }
           columns={ columns }
           keyField={ keyField }
-          selectedRowKeys={ [] }
         />
       );
     });
 
-    it('prop selected should be null', () => {
-      expect(wrapper.find(Row).get(0).props.selected).toBeNull();
+    it('prop selectRowEnabled on Row Component should be undefined', () => {
+      expect(wrapper.find(Row).get(0).props.selectRowEnabled).not.toBeDefined();
+    });
+  });
+
+  describe('when selectRow.mode is defined correctly', () => {
+    const selectRow = { mode: 'checkbox' };
+
+    beforeEach(() => {
+      wrapper = mount(
+        <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
+          <Body
+            { ...mockBodyResolvedProps }
+            data={ data }
+            columns={ columns }
+            keyField={ keyField }
+            selectRow={ selectRow }
+          />
+        </SelectionContext.Provider>
+      );
+    });
+
+    it('prop selectRowEnabled on RowAggregator Component should be defined', () => {
+      expect(wrapper.find(RowAggregator).get(0).props.selectRowEnabled).toBeTruthy();
     });
   });
 });
