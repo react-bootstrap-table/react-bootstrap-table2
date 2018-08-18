@@ -4,7 +4,9 @@ import { shallow, mount } from 'enzyme';
 
 import HeaderCell from '../src/header-cell';
 import SelectionHeaderCell from '../src/row-selection/selection-header-cell';
+import ExpandHeaderCell from '../src/row-expand/expand-header-cell';
 import SelectionContext from '../src/contexts/selection-context';
+import ExpansionContext from '../src/contexts/row-expand-context';
 import Header from '../src/header';
 import Const from '../src/const';
 import mockHeaderResolvedProps from './test-helpers/mock/header-resolved-props';
@@ -177,6 +179,7 @@ describe('Header', () => {
             selectRow={ selectRow }
           >
             <Header
+              { ...mockHeaderResolvedProps }
               columns={ columns }
               selectRow={ selectRow }
             />
@@ -198,6 +201,7 @@ describe('Header', () => {
               selectRow={ selectRow }
             >
               <Header
+                { ...mockHeaderResolvedProps }
                 columns={ columns }
                 selectRow={ selectRow }
               />
@@ -208,6 +212,46 @@ describe('Header', () => {
         it('should not render <SelectionHeaderCell />', () => {
           expect(wrapper.find(SelectionHeaderCell).length).toBe(0);
         });
+      });
+    });
+  });
+
+  describe('expandRow', () => {
+    describe('when expandRow.showExpandColumn is false', () => {
+      beforeEach(() => {
+        wrapper = shallow(
+          <Header
+            { ...mockHeaderResolvedProps }
+            columns={ columns }
+          />
+        );
+      });
+
+      it('should not render <ExpandHeaderCell />', () => {
+        expect(wrapper.find(ExpandHeaderCell).length).toBe(0);
+      });
+    });
+
+    describe('when expandRow.showExpandColumn is true', () => {
+      beforeEach(() => {
+        const expandRow = { renderer: jest.fn(), expanded: [], showExpandColumn: true };
+        wrapper = mount(
+          <ExpansionContext.Provider
+            data={ data }
+            keyField={ keyField }
+            expandRow={ expandRow }
+          >
+            <Header
+              { ...mockHeaderResolvedProps }
+              columns={ columns }
+              expandRow={ expandRow }
+            />
+          </ExpansionContext.Provider>
+        );
+      });
+
+      it('should render <ExpandHeaderCell /> correctly', () => {
+        expect(wrapper.find(ExpandHeaderCell).length).toBe(1);
       });
     });
   });

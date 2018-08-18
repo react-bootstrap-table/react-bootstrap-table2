@@ -9,6 +9,7 @@ import RowAggregator from '../src/row-aggregator';
 import Const from '../src/const';
 import RowSection from '../src/row-section';
 import SelectionContext from '../src/contexts/selection-context';
+import ExpansionContext from '../src/contexts/row-expand-context';
 import mockBodyResolvedProps from './test-helpers/mock/body-resolved-props';
 
 describe('Body', () => {
@@ -284,7 +285,7 @@ describe('Body', () => {
     });
   });
 
-  describe('when selectRow.mode is ROW_SELECT_DISABLED (row was un-selectable)', () => {
+  describe('when selectRow.mode is ROW_SELECT_DISABLED or expandRow.renderer is undefined', () => {
     beforeEach(() => {
       wrapper = shallow(
         <Body
@@ -296,8 +297,8 @@ describe('Body', () => {
       );
     });
 
-    it('prop selectRowEnabled on Row Component should be undefined', () => {
-      expect(wrapper.find(Row).get(0).props.selectRowEnabled).not.toBeDefined();
+    it('shouldn\'t render RowAggregator component', () => {
+      expect(wrapper.find(RowAggregator)).toHaveLength(0);
     });
   });
 
@@ -318,8 +319,38 @@ describe('Body', () => {
       );
     });
 
-    it('prop selectRowEnabled on RowAggregator Component should be defined', () => {
-      expect(wrapper.find(RowAggregator).get(0).props.selectRowEnabled).toBeTruthy();
+    it('should render RowAggregator component correctly', () => {
+      const rowAggregator = wrapper.find(RowAggregator);
+
+      expect(rowAggregator.get(0).props.selectRow.mode)
+        .not.toEqual(Const.ROW_SELECT_DISABLED);
+      expect(rowAggregator.get(0).props.selected).toBeDefined();
+      expect(rowAggregator.get(0).props.selectable).toBeDefined();
+    });
+  });
+
+  describe('when expandRow.renderer is defined correctly', () => {
+    const expandRow = { renderer: jest.fn() };
+
+    beforeEach(() => {
+      wrapper = mount(
+        <ExpansionContext.Provider data={ data } keyField={ keyField } expandRow={ expandRow }>
+          <Body
+            { ...mockBodyResolvedProps }
+            data={ data }
+            columns={ columns }
+            keyField={ keyField }
+            expandRow={ expandRow }
+          />
+        </ExpansionContext.Provider>
+      );
+    });
+
+    it('should render RowAggregator component correctly', () => {
+      const rowAggregator = wrapper.find(RowAggregator);
+      expect(rowAggregator.get(0).props.expandRow.renderer).toEqual(expandRow.renderer);
+      expect(rowAggregator.get(0).props.expanded).toBeDefined();
+      expect(rowAggregator.get(0).props.expandable).toBeDefined();
     });
   });
 });
