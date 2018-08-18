@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 
 // welcome
 import Welcome from 'examples/welcome';
+
 // basic
 import BasicTable from 'examples/basic';
 import BorderlessTable from 'examples/basic/borderless-table';
@@ -12,6 +13,11 @@ import NoDataTable from 'examples/basic/no-data-table';
 import CustomizedIdClassesTable from 'examples/basic/customized-id-classes';
 import CaptionTable from 'examples/basic/caption-table';
 import LargeTable from 'examples/basic/large-table';
+
+// bootstrap 4
+import Bootstrap4DefaultSortTable from 'examples/bootstrap4/sort';
+import Bootstrap4RowSelectionTable from 'examples/bootstrap4/row-selection';
+import Bootstrap4PaginationTable from 'examples/bootstrap4/pagination';
 
 // work on columns
 import NestedDataTable from 'examples/columns/nested-data-table';
@@ -180,8 +186,9 @@ storiesOf('Basic Table', module)
 
 storiesOf('Bootstrap 4', module)
   .addDecorator(bootstrapStyle(BOOTSTRAP_VERSION.FOUR))
-  .add('Basic Table', () => <BasicTable />)
-  .add('Basic Pagination Table', () => <PaginationTable />);
+  .add('Sort table with bootstrap 4', () => <Bootstrap4DefaultSortTable />)
+  .add('Row selection table with bootstrap 4', () => <Bootstrap4RowSelectionTable />)
+  .add('Pagination table with bootstrap 4', () => <Bootstrap4PaginationTable />);
 
 storiesOf('Work on Columns', module)
   .addDecorator(bootstrapStyle())
