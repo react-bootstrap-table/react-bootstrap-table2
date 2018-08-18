@@ -48,7 +48,7 @@ export default class RowAggregator extends React.Component {
         if (expandRow && expandable) {
           expandRow.onRowExpand(key, !expanded, rowIndex, e);
         }
-        if (selectable) {
+        if (selectRow.clickToSelect && selectable) {
           selectRow.onRowSelect(key, !selected, rowIndex, e);
         }
       };
@@ -79,22 +79,20 @@ export default class RowAggregator extends React.Component {
       cellEdit,
       selectRow,
       expandRow,
+      expanded,
       selected,
-      selectable,
-      expandRowEnabled
+      selectable
     } = this.props;
 
     const key = _.get(row, keyField);
-    const { hideSelectColumn } = selectRow;
-    const { showExpandColumn } = expandRow || {};
+    const { hideSelectColumn, clickToSelect } = selectRow;
+    const { showExpandColumn } = expandRow;
 
     const nonEditableRows = cellEdit.nonEditableRows || [];
     const editable = !(nonEditableRows.length > 0 && nonEditableRows.indexOf(key) > -1);
-    // const expandable = expandRowEnabled && !expandRow.nonExpandable.includes(key);
-    const expanded = expandRowEnabled && expandRow.expanded.includes(key);
 
     const newAttrs = { ...attrs };
-    if (selectRow.clickToSelect || expandRowEnabled) {
+    if (clickToSelect || !!expandRow.renderer) {
       newAttrs.onClick = this.createClickEventHandler(attrs.onClick);
     }
 
