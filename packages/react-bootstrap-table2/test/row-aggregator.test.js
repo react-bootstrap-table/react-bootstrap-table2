@@ -1,8 +1,12 @@
 import 'jsdom-global/register';
 import React from 'react';
 import { mount } from 'enzyme';
+import mockBodyResolvedProps from './test-helpers/mock/body-resolved-props';
 import SelectionContext from '../src/contexts/selection-context';
+import ExpansionContext from '../src/contexts/row-expand-context';
 import bindSelection from '../src/row-selection/row-binder';
+import bindExpansion from '../src/row-expand/row-binder';
+import ExpandCell from '../src/row-expand/expand-cell';
 import SelectionCell from '../src/row-selection/selection-cell';
 import RowAggregator from '../src/row-aggregator';
 import Row from '../src/row';
@@ -11,6 +15,7 @@ describe('Row Aggregator', () => {
   let wrapper;
   let rowAggregator;
   const RowAggregatorWithSelection = bindSelection(RowAggregator);
+  const RowAggregatorWithExpansion = bindExpansion(RowAggregator);
 
   const data = [{
     id: 1,
@@ -37,16 +42,17 @@ describe('Row Aggregator', () => {
     row,
     columns,
     keyField,
-    rowIndex
+    rowIndex,
+    ...mockBodyResolvedProps
   });
 
-  describe('when props.selectRow is defeind', () => {
+  describe('when selectRow is enable', () => {
     describe('if props.selectRow.hideSelectColumn is false', () => {
       beforeEach(() => {
         const selectRow = { mode: 'radio' };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <RowAggregatorWithSelection { ...getBaseProps() } cellEdit={ {} } />
+            <RowAggregatorWithSelection { ...getBaseProps() } />
           </SelectionContext.Provider>
         );
       });
@@ -69,7 +75,7 @@ describe('Row Aggregator', () => {
         const selectRow = { mode: 'radio', hideSelectColumn: true };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <RowAggregatorWithSelection { ...getBaseProps() } cellEdit={ {} } />
+            <RowAggregatorWithSelection { ...getBaseProps() } />
           </SelectionContext.Provider>
         );
       });
@@ -90,7 +96,7 @@ describe('Row Aggregator', () => {
         const selectRow = { mode: 'radio', clickToSelect: true };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <RowAggregatorWithSelection { ...getBaseProps() } cellEdit={ {} } />
+            <RowAggregatorWithSelection { ...getBaseProps() } />
           </SelectionContext.Provider>
         );
       });
@@ -108,6 +114,51 @@ describe('Row Aggregator', () => {
     });
   });
 
+  describe('when expandRow is enable', () => {
+    describe('if props.expandRow.showExpandColumn is false', () => {
+      beforeEach(() => {
+        const expandRow = { renderer: jest.fn() };
+        wrapper = mount(
+          <ExpansionContext.Provider data={ data } keyField={ keyField } expandRow={ expandRow }>
+            <RowAggregatorWithExpansion { ...getBaseProps() } />
+          </ExpansionContext.Provider>
+        );
+      });
+
+      it('should render RowAggregator correctly', () => {
+        rowAggregator = wrapper.find(RowAggregator);
+        expect(rowAggregator).toHaveLength(1);
+      });
+
+      it('should not render expansion column', () => {
+        const expandCell = wrapper.find(ExpandCell);
+        expect(expandCell).toHaveLength(0);
+      });
+    });
+
+    describe('if props.expandRow.showExpandColumn is true', () => {
+      beforeEach(() => {
+        const expandRow = { renderer: jest.fn(), showExpandColumn: true };
+        wrapper = mount(
+          <ExpansionContext.Provider data={ data } keyField={ keyField } expandRow={ expandRow }>
+            <RowAggregatorWithExpansion { ...getBaseProps() } />
+          </ExpansionContext.Provider>
+        );
+      });
+
+      it('should render RowAggregator correctly', () => {
+        rowAggregator = wrapper.find(RowAggregator);
+        expect(rowAggregator).toHaveLength(1);
+      });
+
+      it('should render expansion column correctly', () => {
+        const expandCell = wrapper.find(ExpandCell);
+        expect(expandCell).toHaveLength(1);
+        expect(expandCell.props().expanded).toEqual(rowAggregator.props().expanded);
+      });
+    });
+  });
+
   describe('createClickEventHandler', () => {
     describe('if props.attrs.onClick is defined', () => {
       const attrs = { onClick: jest.fn() };
@@ -116,31 +167,108 @@ describe('Row Aggregator', () => {
         const selectRow = { mode: 'radio' };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <RowAggregatorWithSelection { ...getBaseProps() } cellEdit={ {} } attrs={ attrs } />
+            <RowAggregatorWithSelection { ...getBaseProps() } attrs={ attrs } />
           </SelectionContext.Provider>
         );
         wrapper.find('tr').simulate('click');
       });
 
-      it('should add onClick prop to Row Component', () => {
+      it('should call attrs.onClick correctly', () => {
         expect(attrs.onClick).toHaveBeenCalledTimes(1);
       });
     });
 
-    describe('if props.selectRow.clickToSelect is defined', () => {
+    describe('if props.selectRow.clickToSelect is true', () => {
       const selectRow = { mode: 'radio', clickToSelect: true };
       beforeEach(() => {
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <RowAggregatorWithSelection { ...getBaseProps() } cellEdit={ {} } />
+            <RowAggregatorWithSelection { ...getBaseProps() } />
           </SelectionContext.Provider>
         );
         wrapper.find(RowAggregator).props().selectRow.onRowSelect = jest.fn();
         wrapper.find('tr').simulate('click');
       });
 
-      it('should add onClick prop to Row Component', () => {
+      it('should call selectRow.onRowSelect correctly', () => {
         expect(wrapper.find(RowAggregator).props().selectRow.onRowSelect).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('if props.selectRow.clickToSelect is true', () => {
+      describe('but selectable props is false', () => {
+        const selectRow = { mode: 'radio', clickToSelect: true, nonSelectable: [row[keyField]] };
+        beforeEach(() => {
+          wrapper = mount(
+            <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
+              <RowAggregatorWithSelection { ...getBaseProps() } />
+            </SelectionContext.Provider>
+          );
+          wrapper.find(RowAggregator).props().selectRow.onRowSelect = jest.fn();
+          wrapper.find('tr').simulate('click');
+        });
+
+        it('should call selectRow.onRowSelect correctly', () => {
+          expect(wrapper.find(RowAggregator).props().selectRow.onRowSelect)
+            .toHaveBeenCalledTimes(0);
+        });
+      });
+    });
+
+    describe('if props.expandRow.renderer is defined', () => {
+      describe('but expandable props is false', () => {
+        const expandRow = { renderer: jest.fn(), nonExpandable: [row[keyField]] };
+        beforeEach(() => {
+          wrapper = mount(
+            <ExpansionContext.Provider data={ data } keyField={ keyField } expandRow={ expandRow }>
+              <RowAggregatorWithExpansion { ...getBaseProps() } />
+            </ExpansionContext.Provider>
+          );
+          wrapper.find(RowAggregator).props().expandRow.onRowExpand = jest.fn();
+          wrapper.find('tr').simulate('click');
+        });
+
+        it('should call expandRow.onRowExpand correctly', () => {
+          expect(wrapper.find(RowAggregator).props().expandRow.onRowExpand)
+            .toHaveBeenCalledTimes(0);
+        });
+      });
+    });
+
+    describe('if props.expandRow.renderer is defined', () => {
+      const expandRow = { renderer: jest.fn() };
+      beforeEach(() => {
+        wrapper = mount(
+          <ExpansionContext.Provider data={ data } keyField={ keyField } expandRow={ expandRow }>
+            <RowAggregatorWithExpansion { ...getBaseProps() } />
+          </ExpansionContext.Provider>
+        );
+        wrapper.find(RowAggregator).props().expandRow.onRowExpand = jest.fn();
+        wrapper.find('tr').simulate('click');
+      });
+
+      it('should call expandRow.onRowExpand correctly', () => {
+        expect(wrapper.find(RowAggregator).props().expandRow.onRowExpand).toHaveBeenCalledTimes(1);
+      });
+    });
+
+    describe('if props.attrs.onClick and props.expandRow.renderer both are defined', () => {
+      const attrs = { onClick: jest.fn() };
+      const expandRow = { renderer: jest.fn() };
+
+      beforeEach(() => {
+        wrapper = mount(
+          <ExpansionContext.Provider data={ data } keyField={ keyField } expandRow={ expandRow }>
+            <RowAggregatorWithExpansion { ...getBaseProps() } attrs={ attrs } />
+          </ExpansionContext.Provider>
+        );
+        wrapper.find(RowAggregator).props().expandRow.onRowExpand = jest.fn();
+        wrapper.find('tr').simulate('click');
+      });
+
+      it('should call attrs.onClick and expandRow.onRowExpand correctly', () => {
+        expect(attrs.onClick).toHaveBeenCalledTimes(1);
+        expect(wrapper.find(RowAggregator).props().expandRow.onRowExpand).toHaveBeenCalledTimes(1);
       });
     });
 
@@ -151,14 +279,14 @@ describe('Row Aggregator', () => {
       beforeEach(() => {
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <RowAggregatorWithSelection { ...getBaseProps() } cellEdit={ {} } attrs={ attrs } />
+            <RowAggregatorWithSelection { ...getBaseProps() } attrs={ attrs } />
           </SelectionContext.Provider>
         );
         wrapper.find(RowAggregator).props().selectRow.onRowSelect = jest.fn();
         wrapper.find('tr').simulate('click');
       });
 
-      it('should add onClick prop to Row Component', () => {
+      it('should call attrs.onClick and selectRow.onRowSelect correctly', () => {
         expect(attrs.onClick).toHaveBeenCalledTimes(1);
         expect(wrapper.find(RowAggregator).props().selectRow.onRowSelect).toHaveBeenCalledTimes(1);
       });
