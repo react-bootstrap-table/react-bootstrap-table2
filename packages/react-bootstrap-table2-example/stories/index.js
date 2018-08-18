@@ -156,20 +156,20 @@ import RemoteCellEdit from 'examples/remote/remote-celledit';
 import RemoteAll from 'examples/remote/remote-all';
 
 // css style
-import 'bootstrap/dist/css/bootstrap.min.css';
 import 'stories/stylesheet/tomorrow.min.css';
 import 'stories/stylesheet/storybook.scss';
 import '../../react-bootstrap-table2/style/react-bootstrap-table2.scss';
 import '../../react-bootstrap-table2-paginator/style/react-bootstrap-table2-paginator.scss';
 import '../../react-bootstrap-table2-filter/style/react-bootstrap-table2-filter.scss';
 
-// import { action } from '@storybook/addon-actions';
+// import bootstrap style by given version
+import bootstrapStyle, { BOOTSTRAP_VERSION } from './bootstrap-style';
 
-// action('hello');
 storiesOf('Welcome', module)
   .add('react bootstrap table 2 ', () => <Welcome />);
 
 storiesOf('Basic Table', module)
+  .addDecorator(bootstrapStyle())
   .add('basic table', () => <BasicTable />)
   .add('striped, hover, condensed table', () => <StripHoverCondensedTable />)
   .add('borderless table', () => <BorderlessTable />)
@@ -178,7 +178,13 @@ storiesOf('Basic Table', module)
   .add('Table with caption', () => <CaptionTable />)
   .add('Large Table', () => <LargeTable />);
 
+storiesOf('Bootstrap 4', module)
+  .addDecorator(bootstrapStyle(BOOTSTRAP_VERSION.FOUR))
+  .add('Basic Table', () => <BasicTable />)
+  .add('Basic Pagination Table', () => <PaginationTable />);
+
 storiesOf('Work on Columns', module)
+  .addDecorator(bootstrapStyle())
   .add('Display Nested Data', () => <NestedDataTable />)
   .add('Column Formatter', () => <ColumnFormatTable />)
   .add('Column Formatter with Custom Data', () => <ColumnFormatExtraDataTable />)
@@ -191,6 +197,7 @@ storiesOf('Work on Columns', module)
   .add('Customize Column HTML attribute', () => <ColumnAttrsTable />);
 
 storiesOf('Work on Header Columns', module)
+  .addDecorator(bootstrapStyle())
   .add('Column Formatter', () => <HeaderColumnFormatTable />)
   .add('Column Format with Filter and Sort', () => <HeaderColumnFormatWithSortFilterTable />)
   .add('Column Align', () => <HeaderColumnAlignTable />)
@@ -202,6 +209,7 @@ storiesOf('Work on Header Columns', module)
   .add('Header Class', () => <HeaderClassTable />);
 
 storiesOf('Column Filter', module)
+  .addDecorator(bootstrapStyle())
   .add('Text Filter', () => <TextFilter />)
   .add('Text Filter with Default Value', () => <TextFilterWithDefaultValue />)
   .add('Text Filter with Comparator', () => <TextFilterComparator />)
@@ -232,11 +240,13 @@ storiesOf('Column Filter', module)
   .add('Clear All Filters', () => <ClearAllFilters />);
 
 storiesOf('Work on Rows', module)
+  .addDecorator(bootstrapStyle())
   .add('Customize Row Style', () => <RowStyleTable />)
   .add('Customize Row Class', () => <RowClassTable />)
   .add('Row Event', () => <RowEventTable />);
 
 storiesOf('Sort Table', module)
+  .addDecorator(bootstrapStyle())
   .add('Enable Sort', () => <EnableSortTable />)
   .add('Default Sort Table', () => <DefaultSortTable />)
   .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
@@ -246,6 +256,7 @@ storiesOf('Sort Table', module)
   .add('Custom Style on Sorting Header Column', () => <HeaderSortingStyleTable />);
 
 storiesOf('Cell Editing', module)
+  .addDecorator(bootstrapStyle())
   .add('Click to Edit', () => <ClickToEditTable />)
   .add('DoubleClick to Edit', () => <DoubleClickToEditTable />)
   .add('Blur to Save Cell', () => <BlurToSaveTable />)
@@ -265,6 +276,7 @@ storiesOf('Cell Editing', module)
   .add('Custom Editor', () => <CustomEditorTable />);
 
 storiesOf('Row Selection', module)
+  .addDecorator(bootstrapStyle())
   .add('Single Selection', () => <SingleSelectionTable />)
   .add('Multiple Selection', () => <MultipleSelectionTable />)
   .add('Click to Select', () => <ClickToSelectTable />)
@@ -281,6 +293,7 @@ storiesOf('Row Selection', module)
   .add('Hide Selection Column', () => <HideSelectionColumnTable />);
 
 storiesOf('Row Expand', module)
+  .addDecorator(bootstrapStyle())
   .add('Basic Row Expand', () => <BasicRowExpand />)
   .add('Expand Management', () => <RowExpandManagement />)
   .add('Non Expandabled Rows', () => <NonExpandableRows />)
@@ -289,11 +302,13 @@ storiesOf('Row Expand', module)
   .add('Expand Hooks', () => <ExpandHooks />);
 
 storiesOf('Pagination', module)
+  .addDecorator(bootstrapStyle())
   .add('Basic Pagination Table', () => <PaginationTable />)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
   .add('Custom Pagination', () => <CustomPaginationTable />);
 
 storiesOf('Table Search', module)
+  .addDecorator(bootstrapStyle())
   .add('Basic Search Table', () => <SearchTable />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
@@ -301,6 +316,7 @@ storiesOf('Table Search', module)
   .add('Custom Search Value', () => <CustomSearchValue />);
 
 storiesOf('Export CSV', module)
+  .addDecorator(bootstrapStyle())
   .add('Basic Export CSV', () => <ExportCSV />)
   .add('Format CSV Column', () => <CSVFormatter />)
   .add('Custom CSV Header', () => <CustomCSVHeader />)
@@ -310,10 +326,12 @@ storiesOf('Export CSV', module)
   .add('Custom CSV', () => <CustomCSV />);
 
 storiesOf('EmptyTableOverlay', module)
+  .addDecorator(bootstrapStyle())
   .add('Empty Table Overlay', () => <EmptyTableOverlay />)
   .add('Table Overlay', () => <TableOverlay />);
 
 storiesOf('Remote', module)
+  .addDecorator(bootstrapStyle())
   .add('Remote Sort', () => <RemoteSort />)
   .add('Remote Filter', () => <RemoteFilter />)
   .add('Remote Pagination', () => <RemotePaginationTable />)
