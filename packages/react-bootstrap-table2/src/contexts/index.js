@@ -5,7 +5,7 @@ import _ from '../utils';
 import createDataContext from './data-context';
 import createSortContext from './sort-context';
 import SelectionContext from './selection-context';
-import createRowExpandContext from './row-expand-context';
+import RowExpandContext from './row-expand-context';
 import remoteResolver from '../props-resolver/remote-resolver';
 import { BootstrapContext } from './bootstrap';
 import dataOperator from '../store/operators';
@@ -26,7 +26,7 @@ const withContext = Base =>
       }
 
       if (props.expandRow) {
-        this.RowExpandContext = createRowExpandContext(dataOperator);
+        this.RowExpandContext = RowExpandContext;
       }
 
       if (props.cellEdit && props.cellEdit.createContext) {
@@ -62,7 +62,6 @@ const withContext = Base =>
         searchProps,
         sortProps,
         paginationProps,
-        expandProps
       ) => (
         <Base
           { ...this.props }
@@ -71,7 +70,6 @@ const withContext = Base =>
           { ...filterProps }
           { ...searchProps }
           { ...paginationProps }
-          { ...expandProps }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         />
       );
@@ -84,8 +82,7 @@ const withContext = Base =>
         filterProps,
         searchProps,
         sortProps,
-        paginationProps,
-        expandProps
+        paginationProps
       ) => (
         <this.SelectionContext.Provider
           { ...baseProps }
@@ -99,8 +96,7 @@ const withContext = Base =>
               filterProps,
               searchProps,
               sortProps,
-              paginationProps,
-              expandProps
+              paginationProps
             )
           }
         </this.SelectionContext.Provider>
@@ -121,19 +117,16 @@ const withContext = Base =>
           expandRow={ this.props.expandRow }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         >
-          <this.RowExpandContext.Consumer>
-            {
-              expandProps => base(
-                rootProps,
-                cellEditProps,
-                filterProps,
-                searchProps,
-                sortProps,
-                paginationProps,
-                expandProps
-              )
-            }
-          </this.RowExpandContext.Consumer>
+          {
+            base(
+              rootProps,
+              cellEditProps,
+              filterProps,
+              searchProps,
+              sortProps,
+              paginationProps
+            )
+          }
         </this.RowExpandContext.Provider>
       );
     }

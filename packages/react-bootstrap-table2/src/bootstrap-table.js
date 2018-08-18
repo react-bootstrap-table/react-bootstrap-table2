@@ -147,7 +147,7 @@ BootstrapTable.propTypes = {
     selectionHeaderRenderer: PropTypes.func
   }),
   expandRow: PropTypes.shape({
-    renderer: PropTypes.func.isRequired,
+    renderer: PropTypes.func,
     expanded: PropTypes.array,
     onExpand: PropTypes.func,
     onExpandAll: PropTypes.func,
@@ -156,9 +156,6 @@ BootstrapTable.propTypes = {
     expandColumnRenderer: PropTypes.func,
     expandHeaderColumnRenderer: PropTypes.func
   }),
-  onRowExpand: PropTypes.func,
-  onAllRowExpand: PropTypes.func,
-  isAnyExpands: PropTypes.bool,
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -191,7 +188,12 @@ BootstrapTable.defaultProps = {
   noDataIndication: null,
   selectRow: {
     mode: Const.ROW_SELECT_DISABLED,
-    selected: []
+    selected: [],
+    hideSelectColumn: true
+  },
+  expandRow: {
+    renderer: undefined,
+    expanded: []
   }
 };
 

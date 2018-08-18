@@ -3,11 +3,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-export default class SelectionHeaderCell extends Component {
+export default class ExpansionHeaderCell extends Component {
   static propTypes = {
-    anyExpands: PropTypes.bool.isRequired,
+    isAnyExpands: PropTypes.bool.isRequired,
     onAllRowExpand: PropTypes.func.isRequired,
-    renderer: PropTypes.func
+    expandHeaderColumnRenderer: PropTypes.func
   }
 
   constructor() {
@@ -16,13 +16,13 @@ export default class SelectionHeaderCell extends Component {
   }
 
   handleCheckBoxClick(e) {
-    const { anyExpands, onAllRowExpand } = this.props;
+    const { isAnyExpands, onAllRowExpand } = this.props;
 
-    onAllRowExpand(e, !anyExpands);
+    onAllRowExpand(e, !isAnyExpands);
   }
 
   render() {
-    const { anyExpands, renderer } = this.props;
+    const { isAnyExpands, expandHeaderColumnRenderer } = this.props;
     const attrs = {
       onClick: this.handleCheckBoxClick
     };
@@ -30,9 +30,9 @@ export default class SelectionHeaderCell extends Component {
     return (
       <th data-row-selection { ...attrs }>
         {
-          renderer ?
-            renderer({ isAnyExpands: anyExpands }) :
-            (anyExpands ? '(-)' : '(+)')
+          expandHeaderColumnRenderer ?
+            expandHeaderColumnRenderer({ isAnyExpands }) :
+            (isAnyExpands ? '(-)' : '(+)')
         }
       </th>
     );

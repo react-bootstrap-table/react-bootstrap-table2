@@ -7,10 +7,10 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 import Row from './row';
 import RowAggregator from './row-aggregator';
-import ExpandRow from './row-expand/expand-row';
 import RowSection from './row-section';
 import Const from './const';
 import bindSelection from './row-selection/row-binder';
+import bindExpansion from './row-expand/row-binder';
 
 const Body = (props) => {
   const {
@@ -40,10 +40,13 @@ const Body = (props) => {
     let RowComponent = Row;
     const nonEditableRows = cellEdit.nonEditableRows || [];
     const selectRowEnabled = selectRow.mode !== Const.ROW_SELECT_DISABLED;
-    const expandRowEnabled = !!expandRow;
+    const expandRowEnabled = !!expandRow.renderer;
 
+    if (expandRowEnabled) {
+      RowComponent = bindExpansion(RowAggregator, visibleColumnSize);
+    }
     if (selectRowEnabled) {
-      RowComponent = bindSelection(RowAggregator);
+      RowComponent = bindSelection(expandRowEnabled ? RowComponent : RowAggregator);
     }
 
     content = data.map((row, index) => {
@@ -55,12 +58,9 @@ const Body = (props) => {
       const classes = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
 
       // refine later
-      const expanded = expandRowEnabled && expandRow.expanded.includes(key);
-
-      // refine later
-      const result = [
+      const result =
         selectRowEnabled || expandRowEnabled ?
-          <RowComponent
+          (<RowComponent
             key={ key }
             row={ row }
             keyField={ keyField }
@@ -70,10 +70,10 @@ const Body = (props) => {
             className={ classes }
             attrs={ attrs }
             cellEdit={ cellEdit }
-            selectRowEnabled={ selectRowEnabled }
-            expandRowEnabled={ expandRowEnabled }
-          /> :
-          <RowComponent
+            selectRow={ selectRow }
+            expandRow={ expandRow }
+          />) :
+          (<RowComponent
             key={ key }
             row={ row }
             keyField={ keyField }
@@ -84,19 +84,7 @@ const Body = (props) => {
             style={ style }
             className={ classes }
             attrs={ attrs }
-          />
-      ];
-
-      if (expanded) {
-        result.push((
-          <ExpandRow
-            key={ `${key}-expanding` }
-            colSpan={ visibleColumnSize }
-          >
-            { expandRow.renderer(row) }
-          </ExpandRow>
-        ));
-      }
+          />);
 
       return result;
     });
