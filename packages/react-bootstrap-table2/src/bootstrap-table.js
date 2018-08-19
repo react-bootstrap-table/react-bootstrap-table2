@@ -55,7 +55,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowClasses,
       wrapperClasses,
       rowEvents,
-      selectRow
+      selectRow,
+      expandRow
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -68,7 +69,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     }, classes);
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
-    const expandRow = this.resolveExpandRowProps();
 
     return (
       <div className={ tableWrapperClass }>
@@ -195,7 +195,8 @@ BootstrapTable.defaultProps = {
   },
   expandRow: {
     renderer: undefined,
-    expanded: []
+    expanded: [],
+    nonExpandable: []
   }
 };
 
