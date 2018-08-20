@@ -22,8 +22,19 @@ const columns = [{
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory from 'react-bootstrap-table2-paginator';
+
 // ...
-const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
+const NoDataIndication = () => (
+  <div className="spinner">
+    <div className="rect1" />
+    <div className="rect2" />
+    <div className="rect3" />
+    <div className="rect4" />
+    <div className="rect5" />
+  </div>
+);
+
+const Table = ({ data, page, sizePerPage, onTableChange, totalSize }) => (
   <div>
     <BootstrapTable
       remote
@@ -32,12 +43,13 @@ const RemotePagination = ({ data, page, sizePerPage, onTableChange, totalSize })
       columns={ columns }
       pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
+      noDataIndication={ () => <NoDataIndication /> }
     />
     <Code>{ sourceCode }</Code>
   </div>
 );
 
-class Container extends React.Component {
+class EmptyTableOverlay extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +59,7 @@ class Container extends React.Component {
     };
   }
 
-  handleTableChange = ({ page, sizePerPage }) => {
+  handleTableChange = (type, { page, sizePerPage }) => {
     const currentIndex = (page - 1) * sizePerPage;
     setTimeout(() => {
       this.setState(() => ({
@@ -55,13 +67,14 @@ class Container extends React.Component {
         data: products.slice(currentIndex, currentIndex + sizePerPage),
         sizePerPage
       }));
-    }, 2000);
+    }, 3000);
+    this.setState(() => ({ data: [] }));
   }
 
   render() {
     const { data, sizePerPage, page } = this.state;
     return (
-      <RemotePagination
+      <Table
         data={ data }
         page={ page }
         sizePerPage={ sizePerPage }
