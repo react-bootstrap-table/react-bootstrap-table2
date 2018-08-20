@@ -56,7 +56,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       wrapperClasses,
       rowEvents,
       selectRow,
-      expandRow
+      expandRow,
+      cellEdit
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -92,7 +93,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             isEmpty={ this.isEmpty() }
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
-            cellEdit={ this.props.cellEdit || {} }
+            cellEdit={ cellEdit }
             selectRow={ selectRow }
             expandRow={ expandRow }
             rowStyle={ rowStyle }
@@ -195,6 +196,10 @@ BootstrapTable.defaultProps = {
     renderer: undefined,
     expanded: [],
     nonExpandable: []
+  },
+  cellEdit: {
+    mode: null,
+    nonEditableRows: []
   }
 };
 

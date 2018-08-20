@@ -12,25 +12,15 @@ class Row extends eventDelegater(Component) {
     const {
       row,
       columns,
-      keyField,
       rowIndex,
       className,
       style,
       attrs,
-      cellEdit,
-      editable: editableRow
+      editable,
+      editingRowIdx,
+      editingColIdx
     } = this.props;
-
-    const {
-      mode,
-      onStart,
-      EditingCell,
-      ridx: editingRowIdx,
-      cidx: editingColIdx,
-      CLICK_TO_CELL_EDIT,
-      DBCLICK_TO_CELL_EDIT,
-      ...rest
-    } = cellEdit;
+    const CellComponent = this.props.CellComponent || Cell;
     const trAttrs = this.delegate(attrs);
 
     return (
@@ -41,20 +31,8 @@ class Row extends eventDelegater(Component) {
             if (!column.hidden) {
               const { dataField } = column;
               const content = _.get(row, dataField);
-              let editable = _.isDefined(column.editable) ? column.editable : true;
-              if (dataField === keyField || !editableRow) editable = false;
-              if (_.isFunction(column.editable)) {
-                editable = column.editable(content, row, rowIndex, index);
-              }
               if (rowIndex === editingRowIdx && index === editingColIdx) {
-                let editCellstyle = column.editCellStyle || {};
-                let editCellclasses = column.editCellClasses;
-                if (_.isFunction(column.editCellStyle)) {
-                  editCellstyle = column.editCellStyle(content, row, rowIndex, index);
-                }
-                if (_.isFunction(column.editCellClasses)) {
-                  editCellclasses = column.editCellClasses(content, row, rowIndex, index);
-                }
+                const EditingCell = this.props.EditingCellComponent;
                 return (
                   <EditingCell
                     key={ `${content}-${index}` }
@@ -62,9 +40,6 @@ class Row extends eventDelegater(Component) {
                     rowIndex={ rowIndex }
                     column={ column }
                     columnIndex={ index }
-                    className={ editCellclasses }
-                    style={ editCellstyle }
-                    { ...rest }
                   />
                 );
               }
@@ -108,16 +83,13 @@ class Row extends eventDelegater(Component) {
               if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
               return (
-                <Cell
+                <CellComponent
                   key={ `${content}-${index}` }
                   row={ row }
+                  editable={ editable }
                   rowIndex={ rowIndex }
                   columnIndex={ index }
                   column={ column }
-                  onStart={ onStart }
-                  editable={ editable }
-                  clickToEdit={ mode === CLICK_TO_CELL_EDIT }
-                  dbclickToEdit={ mode === DBCLICK_TO_CELL_EDIT }
                   { ...cellAttrs }
                 />
               );

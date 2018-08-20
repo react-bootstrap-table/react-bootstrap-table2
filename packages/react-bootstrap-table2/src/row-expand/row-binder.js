@@ -1,12 +1,11 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
-import _ from '../utils';
 import ExpandRow from './expand-row';
 import ExpansionContext from '../contexts/row-expand-context';
 
 export default (Component, visibleColumnSize) => {
   const renderWithExpansion = (props, expandRow) => {
-    const key = _.get(props.row, props.keyField);
+    const key = props.value;
 
     const expanded = expandRow.expanded.includes(key);
     const expandable = !expandRow.nonExpandable || !expandRow.nonExpandable.includes(key);
