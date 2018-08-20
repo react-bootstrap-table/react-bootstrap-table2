@@ -1,5 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import sinon from 'sinon';
 
 import { shallowWithContext } from '../test-helpers/new-context';
@@ -201,6 +202,7 @@ describe('<CheckBox />', () => {
       expect(wrapper.find('input').length).toBe(1);
       expect(wrapper.find('input').prop('checked')).toBe(checked);
       expect(wrapper.find('input').prop('type')).toBe('checkbox');
+      expect(toJson(wrapper)).toMatchSnapshot();
     });
   });
 });

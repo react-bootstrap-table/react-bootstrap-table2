@@ -1,6 +1,7 @@
 import 'jsdom-global/register';
 import React from 'react';
 import { shallow } from 'enzyme';
+import toJson from 'enzyme-to-json';
 import sinon from 'sinon';
 
 import { shallowWithContext } from '../test-helpers/new-context';
@@ -61,7 +62,8 @@ describe('<SelectionCell />', () => {
               mode={ mode }
               rowIndex={ rowIndex }
               onRowSelect={ mockOnRowSelect }
-            />, { bootstrap4: false }
+            />,
+            { bootstrap4: false }
           );
           wrapper.find('td').simulate('click');
         });
@@ -72,9 +74,7 @@ describe('<SelectionCell />', () => {
 
         it('should calling onRowSelect callback correctly', () => {
           expect(mockOnRowSelect.calledOnce).toBe(true);
-          expect(
-            mockOnRowSelect.calledWith(rowKey, !selected, rowIndex)
-          ).toBe(true);
+          expect(mockOnRowSelect.calledWith(rowKey, !selected, rowIndex)).toBe(true);
         });
       });
 
@@ -88,7 +88,8 @@ describe('<SelectionCell />', () => {
               rowIndex={ rowIndex }
               onRowSelect={ mockOnRowSelect }
               disabled
-            />, { bootstrap4: false }
+            />,
+            { bootstrap4: false }
           );
           wrapper.find('td').simulate('click');
         });
@@ -111,7 +112,8 @@ describe('<SelectionCell />', () => {
               mode="radio"
               rowIndex={ rowIndex }
               onRowSelect={ mockOnRowSelect }
-            />, { bootstrap4: false }
+            />,
+            { bootstrap4: false }
           );
         });
 
@@ -132,11 +134,12 @@ describe('<SelectionCell />', () => {
               rowIndex={ rowIndex }
               selected
               onRowSelect={ mockOnRowSelect }
-            />, { bootstrap4: false }
+            />,
+            { bootstrap4: false }
           );
         });
 
-        it('should be called with correct paramters', () => {
+        it('should be called with correct parameters', () => {
           // first click
           wrapper.find('td').simulate('click');
           expect(mockOnRowSelect.callCount).toBe(1);
@@ -151,12 +154,8 @@ describe('<SelectionCell />', () => {
 
     beforeEach(() => {
       wrapper = shallowWithContext(
-        <SelectionCell
-          rowKey={ 1 }
-          mode={ mode }
-          rowIndex={ rowIndex }
-          selected={ selected }
-        />, { bootstrap4: false }
+        <SelectionCell rowKey={ 1 } mode={ mode } rowIndex={ rowIndex } selected={ selected } />,
+        { bootstrap4: false }
       );
     });
 
@@ -165,6 +164,7 @@ describe('<SelectionCell />', () => {
       expect(wrapper.find('input')).toHaveLength(1);
       expect(wrapper.find('input').get(0).props.type).toBe(mode);
       expect(wrapper.find('input').get(0).props.checked).toBe(selected);
+      expect(toJson(wrapper)).toMatchSnapshot();
     });
 
     describe('when disabled prop give as true', () => {
@@ -176,7 +176,8 @@ describe('<SelectionCell />', () => {
             rowIndex={ rowIndex }
             selected={ selected }
             disabled
-          />, { bootstrap4: false }
+          />,
+          { bootstrap4: false }
         );
       });
 
@@ -198,7 +199,8 @@ describe('<SelectionCell />', () => {
             rowIndex={ rowIndex }
             selected={ selected }
             selectionRenderer={ selectionRenderer }
-          />, { bootstrap4: false }
+          />,
+          { bootstrap4: false }
         );
       });
 
@@ -219,12 +221,8 @@ describe('<SelectionCell />', () => {
     describe('when bootstrap4 context is true', () => {
       beforeEach(() => {
         wrapper = shallowWithContext(
-          <SelectionCell
-            rowKey={ 1 }
-            mode={ mode }
-            rowIndex={ rowIndex }
-            selected={ selected }
-          />, { bootstrap4: true }
+          <SelectionCell rowKey={ 1 } mode={ mode } rowIndex={ rowIndex } selected={ selected } />,
+          { bootstrap4: true }
         );
       });
 
