@@ -24,13 +24,19 @@ describe('Selection Row Binder', () => {
   const rowIndex = 1;
   const row = data[rowIndex];
   const keyField = 'id';
+  const value = row[keyField];
 
   describe('if current row is selected', () => {
     beforeEach(() => {
       selectRow = { mode: 'checkbox', selected: [data[rowIndex][keyField]] };
       wrapper = mount(
         <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-          <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+          <WithSelectionComponent
+            row={ row }
+            value={ value }
+            keyField={ keyField }
+            rowIndex={ rowIndex }
+          />
         </SelectionContext.Provider>
       );
     });
@@ -46,7 +52,12 @@ describe('Selection Row Binder', () => {
       selectRow = { mode: 'checkbox', selected: [] };
       wrapper = mount(
         <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-          <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+          <WithSelectionComponent
+            row={ row }
+            value={ value }
+            keyField={ keyField }
+            rowIndex={ rowIndex }
+          />
         </SelectionContext.Provider>
       );
     });
@@ -62,7 +73,12 @@ describe('Selection Row Binder', () => {
       selectRow = { mode: 'checkbox', nonSelectable: [] };
       wrapper = mount(
         <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-          <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+          <WithSelectionComponent
+            row={ row }
+            value={ value }
+            keyField={ keyField }
+            rowIndex={ rowIndex }
+          />
         </SelectionContext.Provider>
       );
     });
@@ -78,7 +94,12 @@ describe('Selection Row Binder', () => {
       selectRow = { mode: 'checkbox', nonSelectable: [data[rowIndex][keyField]] };
       wrapper = mount(
         <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-          <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+          <WithSelectionComponent
+            row={ row }
+            value={ value }
+            keyField={ keyField }
+            rowIndex={ rowIndex }
+          />
         </SelectionContext.Provider>
       );
     });
@@ -96,7 +117,12 @@ describe('Selection Row Binder', () => {
         selectRow = { mode: 'checkbox', selected: [data[rowIndex][keyField]], style: selectedStyle };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+            <WithSelectionComponent
+              row={ row }
+              value={ value }
+              keyField={ keyField }
+              rowIndex={ rowIndex }
+            />
           </SelectionContext.Provider>
         );
       });
@@ -113,6 +139,7 @@ describe('Selection Row Binder', () => {
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
               <WithSelectionComponent
                 row={ row }
+                value={ value }
                 keyField={ keyField }
                 rowIndex={ rowIndex }
                 style={ componentStype }
@@ -135,7 +162,12 @@ describe('Selection Row Binder', () => {
           selectRow.bgColor = 'gray';
           wrapper = mount(
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-              <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+              <WithSelectionComponent
+                row={ row }
+                value={ value }
+                keyField={ keyField }
+                rowIndex={ rowIndex }
+              />
             </SelectionContext.Provider>
           );
         });
@@ -155,7 +187,12 @@ describe('Selection Row Binder', () => {
           selectRow.bgColor = jest.fn().mockReturnValue(color);
           wrapper = mount(
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-              <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+              <WithSelectionComponent
+                row={ row }
+                value={ value }
+                keyField={ keyField }
+                rowIndex={ rowIndex }
+              />
             </SelectionContext.Provider>
           );
         });
@@ -180,7 +217,12 @@ describe('Selection Row Binder', () => {
         selectRow = { mode: 'checkbox', selected: [data[rowIndex][keyField]], style: jest.fn().mockReturnValue(selectedStyle) };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+            <WithSelectionComponent
+              row={ row }
+              value={ value }
+              keyField={ keyField }
+              rowIndex={ rowIndex }
+            />
           </SelectionContext.Provider>
         );
       });
@@ -202,6 +244,7 @@ describe('Selection Row Binder', () => {
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
               <WithSelectionComponent
                 row={ row }
+                value={ value }
                 keyField={ keyField }
                 rowIndex={ rowIndex }
                 style={ componentStype }
@@ -224,7 +267,12 @@ describe('Selection Row Binder', () => {
           selectRow.bgColor = 'gray';
           wrapper = mount(
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-              <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+              <WithSelectionComponent
+                row={ row }
+                value={ value }
+                keyField={ keyField }
+                rowIndex={ rowIndex }
+              />
             </SelectionContext.Provider>
           );
         });
@@ -244,7 +292,12 @@ describe('Selection Row Binder', () => {
           selectRow.bgColor = jest.fn().mockReturnValue(color);
           wrapper = mount(
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-              <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+              <WithSelectionComponent
+                row={ row }
+                value={ value }
+                keyField={ keyField }
+                rowIndex={ rowIndex }
+              />
             </SelectionContext.Provider>
           );
         });
@@ -272,7 +325,12 @@ describe('Selection Row Binder', () => {
         selectRow = { mode: 'checkbox', selected: [data[rowIndex][keyField]], classes: selectedClassName };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+            <WithSelectionComponent
+              row={ row }
+              value={ value }
+              keyField={ keyField }
+              rowIndex={ rowIndex }
+            />
           </SelectionContext.Provider>
         );
       });
@@ -289,6 +347,7 @@ describe('Selection Row Binder', () => {
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
               <WithSelectionComponent
                 row={ row }
+                value={ value }
                 keyField={ keyField }
                 rowIndex={ rowIndex }
                 className={ componentClassName }
@@ -309,7 +368,12 @@ describe('Selection Row Binder', () => {
         selectRow = { mode: 'checkbox', selected: [data[rowIndex][keyField]], classes: jest.fn().mockReturnValue(selectedClassName) };
         wrapper = mount(
           <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
-            <WithSelectionComponent row={ row } keyField={ keyField } rowIndex={ rowIndex } />
+            <WithSelectionComponent
+              row={ row }
+              value={ value }
+              keyField={ keyField }
+              rowIndex={ rowIndex }
+            />
           </SelectionContext.Provider>
         );
       });
@@ -331,6 +395,7 @@ describe('Selection Row Binder', () => {
             <SelectionContext.Provider data={ data } keyField={ keyField } selectRow={ selectRow }>
               <WithSelectionComponent
                 row={ row }
+                value={ value }
                 keyField={ keyField }
                 rowIndex={ rowIndex }
                 className={ componentClassName }
