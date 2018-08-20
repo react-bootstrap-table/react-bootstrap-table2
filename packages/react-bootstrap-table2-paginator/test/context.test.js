@@ -126,69 +126,6 @@ describe('PaginationContext', () => {
     let instance;
     let nextProps;
 
-    describe('when nextProps.pagination.options.page is existing', () => {
-      const onPageChange = jest.fn();
-      afterEach(() => {
-        onPageChange.mockReset();
-      });
-
-      describe('and if it is different with currPage', () => {
-        beforeEach(() => {
-          wrapper = shallow(shallowContext());
-          instance = wrapper.instance();
-          wrapper.render();
-          nextProps = {
-            data,
-            pagination: {
-              options: {
-                page: 2,
-                onPageChange
-              }
-            }
-          };
-          instance.componentWillReceiveProps(nextProps);
-        });
-
-        it('should call options.onPageChange', () => {
-          expect(onPageChange).toHaveBeenCalledTimes(1);
-          expect(onPageChange).toHaveBeenCalledWith(
-            instance.currPage,
-            instance.currSizePerPage
-          );
-        });
-
-        it('should set correct currPage', () => {
-          expect(instance.currPage).toEqual(nextProps.pagination.options.page);
-        });
-      });
-
-      describe('and if it is same as currPage', () => {
-        beforeEach(() => {
-          wrapper = shallow(shallowContext());
-          instance = wrapper.instance();
-          wrapper.render();
-          nextProps = {
-            data,
-            pagination: {
-              options: {
-                page: 1,
-                onPageChange
-              }
-            }
-          };
-          instance.componentWillReceiveProps(nextProps);
-        });
-
-        it('shouldn\'t call options.onPageChange', () => {
-          expect(onPageChange).toHaveBeenCalledTimes(0);
-        });
-
-        it('should have correct currPage', () => {
-          expect(instance.currPage).toEqual(nextProps.pagination.options.page);
-        });
-      });
-    });
-
     describe('when nextProps.pagination.options.page is not existing', () => {
       beforeEach(() => {
         wrapper = shallow(shallowContext({
@@ -206,69 +143,6 @@ describe('PaginationContext', () => {
       });
     });
 
-    describe('when nextProps.pagination.options.sizePerPage is existing', () => {
-      const onPageChange = jest.fn();
-      afterEach(() => {
-        onPageChange.mockReset();
-      });
-
-      describe('and if it is different with currSizePerPage', () => {
-        beforeEach(() => {
-          wrapper = shallow(shallowContext());
-          instance = wrapper.instance();
-          wrapper.render();
-          nextProps = {
-            data,
-            pagination: {
-              options: {
-                sizePerPage: Const.SIZE_PER_PAGE_LIST[2],
-                onPageChange
-              }
-            }
-          };
-          instance.componentWillReceiveProps(nextProps);
-        });
-
-        it('should call options.onPageChange', () => {
-          expect(onPageChange).toHaveBeenCalledTimes(1);
-          expect(onPageChange).toHaveBeenCalledWith(
-            instance.currPage,
-            instance.currSizePerPage
-          );
-        });
-
-        it('should set correct currSizePerPage', () => {
-          expect(instance.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
-        });
-      });
-
-      describe('and if it is same as currSizePerPage', () => {
-        beforeEach(() => {
-          wrapper = shallow(shallowContext());
-          instance = wrapper.instance();
-          wrapper.render();
-          nextProps = {
-            data,
-            pagination: {
-              options: {
-                sizePerPage: Const.SIZE_PER_PAGE_LIST[0],
-                onPageChange
-              }
-            }
-          };
-          instance.componentWillReceiveProps(nextProps);
-        });
-
-        it('shouldn\'t  call options.onPageChange', () => {
-          expect(onPageChange).toHaveBeenCalledTimes(0);
-        });
-
-        it('should have correct currSizePerPage', () => {
-          expect(instance.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
-        });
-      });
-    });
-
     describe('when nextProps.pagination.options.sizePerPage is not existing', () => {
       beforeEach(() => {
         wrapper = shallow(shallowContext({
@@ -281,8 +155,51 @@ describe('PaginationContext', () => {
         instance.componentWillReceiveProps(nextProps);
       });
 
-      it('should not set currPage', () => {
+      it('should not set currSizePerPage', () => {
         expect(instance.currSizePerPage).toEqual(Const.SIZE_PER_PAGE_LIST[2]);
+      });
+    });
+
+    describe('when page is not align', () => {
+      beforeEach(() => {
+        wrapper = shallow(shallowContext({
+          ...defaultPagination,
+          page: 2
+        }));
+        instance = wrapper.instance();
+        wrapper.render();
+        nextProps = {
+          data: [],
+          pagination: { ...defaultPagination }
+        };
+        instance.componentWillReceiveProps(nextProps);
+      });
+
+      it('should reset currPage to first page', () => {
+        expect(instance.currPage).toEqual(1);
+      });
+
+      describe('if options.onPageChange is defined', () => {
+        const onPageChange = jest.fn();
+        beforeEach(() => {
+          onPageChange.mockClear();
+          wrapper = shallow(shallowContext({
+            ...defaultPagination,
+            page: 2
+          }));
+          instance = wrapper.instance();
+          wrapper.render();
+          nextProps = {
+            data: [],
+            pagination: { ...defaultPagination, options: { onPageChange } }
+          };
+          instance.componentWillReceiveProps(nextProps);
+        });
+
+        it('should call options.onPageChange correctly', () => {
+          expect(onPageChange).toHaveBeenCalledTimes(1);
+          expect(onPageChange).toHaveBeenCalledWith(instance.currPage, instance.currSizePerPage);
+        });
       });
     });
   });
