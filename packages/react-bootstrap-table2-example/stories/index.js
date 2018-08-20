@@ -102,6 +102,7 @@ import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
 import AutoSelectTextInput from 'examples/cell-edit/auto-select-text-input-table';
 import EditorStyleTable from 'examples/cell-edit/editor-style-table';
 import EditorClassTable from 'examples/cell-edit/editor-class-table';
+import DBClickEditWithSelection from 'examples/cell-edit/dbclick-to-edit-with-selection-table';
 import DropdownEditorTable from 'examples/cell-edit/dropdown-editor-table';
 import TextareaEditorTable from 'examples/cell-edit/textarea-editor-table';
 import CheckboxEditorTable from 'examples/cell-edit/checkbox-editor-table';
@@ -290,6 +291,7 @@ storiesOf('Cell Editing', module)
   .add('Custom Cell Classes', () => <CellEditClassTable />)
   .add('Custom Editor Classes', () => <EditorClassTable />)
   .add('Custom Editor Style', () => <EditorStyleTable />)
+  .add('DoubleClick to Edit with Selection', () => <DBClickEditWithSelection />)
   .add('Dropdown Editor', () => <DropdownEditorTable />)
   .add('Textarea Editor', () => <TextareaEditorTable />)
   .add('Checkbox Editor', () => <CheckboxEditorTable />)
