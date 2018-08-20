@@ -40,6 +40,7 @@ describe('Row Aggregator', () => {
 
   const getBaseProps = () => ({
     row,
+    value: row[keyField],
     columns,
     keyField,
     rowIndex,

@@ -254,11 +254,15 @@ describe('Body', () => {
     });
   });
 
-  describe('when cellEdit.nonEditableRows props is defined', () => {
-    const nonEditableRows = [data[1].id];
+  describe('when cellEdit.createContext props is defined', () => {
+    const CellComponent = () => null;
+    const EditingCellComponent = () => null;
+    const RowComponent = props => <Row { ...props } />;
     const cellEdit = {
-      mode: Const.CLICK_TO_CELL_EDIT,
-      nonEditableRows
+      createContext: jest.fn(),
+      bindCellLevelCellEdit: jest.fn().mockReturnValue(CellComponent),
+      createEditingCell: jest.fn().mockReturnValue(EditingCellComponent),
+      bindRowLevelCellEdit: jest.fn().mockReturnValue(RowComponent)
     };
     beforeEach(() => {
       wrapper = shallow(
@@ -272,16 +276,15 @@ describe('Body', () => {
       );
     });
 
-    it('should render Row component with correct editable prop', () => {
+    it('should render Row Component correctly', () => {
       expect(wrapper.length).toBe(1);
-      const rows = wrapper.find(Row);
-      for (let i = 0; i < rows.length; i += 1) {
-        if (nonEditableRows.indexOf(rows.get(i).props.row[keyField]) > -1) {
-          expect(rows.get(i).props.editable).toBeFalsy();
-        } else {
-          expect(rows.get(i).props.editable).toBeTruthy();
-        }
-      }
+      expect(cellEdit.bindCellLevelCellEdit).toHaveBeenCalledTimes(1);
+      expect(cellEdit.createEditingCell).toHaveBeenCalledTimes(1);
+      expect(cellEdit.bindRowLevelCellEdit).toHaveBeenCalledTimes(1);
+      expect(wrapper.find(RowComponent)).toHaveLength(2);
+      const aRowElement = wrapper.find(RowComponent).get(0);
+      expect(aRowElement.props.CellComponent).toBeDefined();
+      expect(aRowElement.props.EditingCellComponent).toBeDefined();
     });
   });
 
