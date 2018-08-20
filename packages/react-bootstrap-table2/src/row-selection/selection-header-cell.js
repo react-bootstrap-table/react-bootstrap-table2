@@ -12,6 +12,7 @@ export const CheckBox = ({ className, checked, indeterminate }) => (
     ref={ (input) => {
       if (input) input.indeterminate = indeterminate; // eslint-disable-line no-param-reassign
     } }
+    onChange={ () => {} }
   />
 );
 
