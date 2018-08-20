@@ -33,11 +33,7 @@ export default class RowAggregator extends React.Component {
         expanded,
         expandRow,
         selectRow,
-        cellEdit: {
-          mode,
-          DBCLICK_TO_CELL_EDIT,
-          DELAY_FOR_DBCLICK
-        }
+        DELAY_FOR_DBCLICK
       } = this.props;
 
       const clickFn = () => {
@@ -53,7 +49,7 @@ export default class RowAggregator extends React.Component {
         }
       };
 
-      if (mode === DBCLICK_TO_CELL_EDIT && selectRow.clickToEdit) {
+      if (DELAY_FOR_DBCLICK) {
         this.clickNum += 1;
         _.debounce(() => {
           if (this.clickNum === 1) {
@@ -76,20 +72,17 @@ export default class RowAggregator extends React.Component {
       style,
       className,
       attrs,
-      cellEdit,
       selectRow,
       expandRow,
       expanded,
       selected,
-      selectable
+      selectable,
+      ...rest
     } = this.props;
 
     const key = _.get(row, keyField);
     const { hideSelectColumn, clickToSelect } = selectRow;
     const { showExpandColumn } = expandRow;
-
-    const nonEditableRows = cellEdit.nonEditableRows || [];
-    const editable = !(nonEditableRows.length > 0 && nonEditableRows.indexOf(key) > -1);
 
     const newAttrs = { ...attrs };
     if (clickToSelect || !!expandRow.renderer) {
@@ -103,11 +96,10 @@ export default class RowAggregator extends React.Component {
         keyField={ keyField }
         rowIndex={ rowIndex }
         columns={ columns }
-        cellEdit={ cellEdit }
-        editable={ editable }
         style={ style }
         className={ className }
         attrs={ newAttrs }
+        { ...rest }
       >
         {
           showExpandColumn ? (

@@ -57,7 +57,6 @@ const withContext = Base =>
     renderBase() {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps,
@@ -67,7 +66,6 @@ const withContext = Base =>
           ref={ n => this.table = n }
           { ...this.props }
           { ...sortProps }
-          { ...cellEditProps }
           { ...filterProps }
           { ...searchProps }
           { ...paginationProps }
@@ -79,7 +77,6 @@ const withContext = Base =>
     renderWithSelectionCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps,
@@ -94,7 +91,6 @@ const withContext = Base =>
           {
             base(
               rootProps,
-              cellEditProps,
               filterProps,
               searchProps,
               sortProps,
@@ -108,7 +104,6 @@ const withContext = Base =>
     renderWithRowExpandCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps,
@@ -123,7 +118,6 @@ const withContext = Base =>
           {
             base(
               rootProps,
-              cellEditProps,
               filterProps,
               searchProps,
               sortProps,
@@ -137,7 +131,6 @@ const withContext = Base =>
     renderWithPaginationCtx(base) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps
@@ -152,7 +145,6 @@ const withContext = Base =>
             {
               paginationProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps,
                 searchProps,
                 sortProps,
@@ -167,7 +159,6 @@ const withContext = Base =>
     renderWithSortCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps
       ) => (
@@ -182,7 +173,6 @@ const withContext = Base =>
             {
               sortProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps,
                 searchProps,
                 sortProps,
@@ -196,7 +186,6 @@ const withContext = Base =>
     renderWithSearchCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps
       ) => (
         <this.SearchContext.Provider
@@ -209,7 +198,6 @@ const withContext = Base =>
             {
               searchProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps,
                 searchProps
               )
@@ -220,10 +208,7 @@ const withContext = Base =>
     }
 
     renderWithFilterCtx(base, baseProps) {
-      return (
-        rootProps,
-        cellEditProps
-      ) => (
+      return rootProps => (
         <this.FilterContext.Provider
           { ...baseProps }
           ref={ n => this.filterContext = n }
@@ -233,7 +218,6 @@ const withContext = Base =>
             {
               filterProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps
               )
             }
@@ -250,11 +234,7 @@ const withContext = Base =>
           cellEdit={ this.props.cellEdit }
           data={ rootProps.getData() }
         >
-          <this.CellEditContext.Consumer>
-            {
-              cellEditProps => base(rootProps, cellEditProps)
-            }
-          </this.CellEditContext.Consumer>
+          { base(rootProps) }
         </this.CellEditContext.Provider>
       );
     }
