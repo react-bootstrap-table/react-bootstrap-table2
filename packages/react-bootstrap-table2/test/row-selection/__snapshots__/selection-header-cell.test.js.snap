@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CheckBox /> render should render component correctly 1`] = `
+<input
+  checked={true}
+  onChange={[Function]}
+  type="checkbox"
+/>
+`;

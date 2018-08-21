@@ -75,6 +75,7 @@ export default class SelectionCell extends Component {
                     checked={ selected }
                     disabled={ disabled }
                     className={ bootstrap4 ? 'selection-input-4' : '' }
+                    onChange={ () => {} }
                   />
                 )
               }

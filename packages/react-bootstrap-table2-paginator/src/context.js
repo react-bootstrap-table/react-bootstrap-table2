@@ -54,29 +54,20 @@ export default (
 
     componentWillReceiveProps(nextProps) {
       let needNewState = false;
-      let { currPage, currSizePerPage } = this;
-      const { page, sizePerPage, onPageChange } = nextProps.pagination.options;
+      let { currPage } = this;
+      const { currSizePerPage } = this;
+      const { onPageChange } = nextProps.pagination.options;
 
       const pageStartIndex = typeof nextProps.pagination.options.pageStartIndex !== 'undefined' ?
         nextProps.pagination.options.pageStartIndex : Const.PAGE_START_INDEX;
 
-      if (typeof page !== 'undefined' && currPage !== page) { // user defined page
-        currPage = page;
-        needNewState = true;
-      } else {
-        // user should align the page when the page is not fit to the data size when remote enable
-        if (!isRemotePagination()) {
-          const newPage = alignPage(nextProps.data, currPage, currSizePerPage, pageStartIndex);
-          if (currPage !== newPage) {
-            currPage = newPage;
-            needNewState = true;
-          }
+      // user should align the page when the page is not fit to the data size when remote enable
+      if (!isRemotePagination()) {
+        const newPage = alignPage(nextProps.data, currPage, currSizePerPage, pageStartIndex);
+        if (currPage !== newPage) {
+          currPage = newPage;
+          needNewState = true;
         }
-      }
-
-      if (typeof sizePerPage !== 'undefined' && currSizePerPage !== sizePerPage) {
-        currSizePerPage = sizePerPage;
-        needNewState = true;
       }
 
       if (needNewState) {
