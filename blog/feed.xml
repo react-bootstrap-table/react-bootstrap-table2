@@ -4,7 +4,7 @@
         <title>react-bootstrap-table2 Blog</title>
         <link>https://react-bootstrap-table.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</description>
-        <lastBuildDate>Sun, 12 Aug 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Tue, 21 Aug 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,24 @@
             <link>https://react-bootstrap-table.github.io/blog</link>
         </image>
         <copyright>Copyright © 2018 react-bootstrap-table2</copyright>
+        <item>
+            <title><![CDATA[New Release (2018-08-21)]]></title>
+            <link>https://react-bootstrap-table.github.io/blog/2018/08/21/version-bump.html</link>
+            <guid>https://react-bootstrap-table.github.io/blog/2018/08/21/version-bump.html</guid>
+            <pubDate>Tue, 21 Aug 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[## Changed Packages
+
+This release bump following packages:
+
+* `react-bootstrap-table-next@1.1.2`
+* `react-bootstrap-table-toolkit@1.0.2`
+* `react-bootstrap-table2-paginator@1.0.2`
+
+## Changelog
+
+### Bug fixes
+* Fixed missing onChange prop for selecti]]></description>
+        </item>
         <item>
             <title><![CDATA[New Release (2018-08-12)]]></title>
             <link>https://react-bootstrap-table.github.io/blog/2018/08/12/version-bump.html</link>
