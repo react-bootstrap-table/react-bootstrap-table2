@@ -41,5 +41,5 @@ export const unSelectableKeys = (selected, skips = []) => {
 };
 
 export const getSelectedRows = (data, keyField, selected) =>
-  selected.map(k => getRowByRowId(data, keyField, k));
+  selected.map(k => getRowByRowId(data, keyField, k)).filter(x => !!x);
 
