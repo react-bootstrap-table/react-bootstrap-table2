@@ -45,6 +45,14 @@ describe('Selection Function', () => {
       expect(result).toHaveLength(selected.length);
       expect(result).toEqual(data);
     });
+
+    describe('if can not find the row', () => {
+      describe('should just skip it', () => {
+        const selected = [1, 4, 6, 7];
+        const result = getSelectedRows(data, keyField, selected);
+        expect(result).toHaveLength(2);
+      });
+    });
   });
 
   describe('getSelectionSummary', () => {
