@@ -121,15 +121,15 @@ It's only used for [`column.formatter`](#formatter), you can define any value fo
 Enable the column sort via a `true` value given.
 
 ## <a name='sortFunc'>column.sortFunc - [Function]</a>
-`column.sortFunc` only work when `column.sort` is enable. `sortFunc` allow you to define your sorting algorithm. This callback function accept four arguments:
+`column.sortFunc` only work when `column.sort` is enable. `sortFunc` allow you to define your sorting algorithm. This callback function accept six arguments:
 
 ```js
 {
   // omit...
   sort: true,
-  sortFunc: (a, b, order, dataField) => {
-    if (order === 'asc') return a - b;
-    else return b - a;
+  sortFunc: (valueA, valueB, order, dataField, rowA, rowB) => {
+    if (order === 'asc') return valueA - valueB;
+    else return valueB - valueA;
   }
 }
 ```

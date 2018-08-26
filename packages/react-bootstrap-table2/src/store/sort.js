@@ -24,7 +24,7 @@ export const sort = (data, sortOrder, { dataField, sortFunc }) => {
     valueB = _.isDefined(valueB) ? valueB : '';
 
     if (sortFunc) {
-      result = sortFunc(valueA, valueB, sortOrder, dataField);
+      result = sortFunc(valueA, valueB, sortOrder, dataField, a, b);
     } else {
       if (sortOrder === Const.SORT_DESC) {
         result = comparator(valueA, valueB);
