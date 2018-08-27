@@ -107,13 +107,13 @@ It's only used for [`column.formatter`](#columnformatter-function), you can defi
 Enable the column sort via a `true` value given.
 
 ## column.sortFunc - [Function]
-`column.sortFunc` only work when `column.sort` is enable. `sortFunc` allow you to define your sorting algorithm. This callback function accept four arguments:
+`column.sortFunc` only work when `column.sort` is enable. `sortFunc` allow you to define your sorting algorithm. This callback function accept six arguments:
 
 ```js
 {
   // omit...
   sort: true,
-  sortFunc: (a, b, order, dataField) => {
+  sortFunc: (a, b, order, dataField, rowA, rowB) => {
     if (order === 'asc') return a - b;
     else return b - a;
   }

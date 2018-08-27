@@ -65,7 +65,7 @@ It's simple!! configure [`sortFunc`](./column-props.html#columnsortfunc-function
   text: 'Product ID',
   sort: true
   // Perform a reverse sorting here
-  sortFunc: (a, b, order, dataField) => {
+  sortFunc: (a, b, order, dataField, rowA, rowB) => {
     if (order === 'asc') {
       return b - a;
     }
