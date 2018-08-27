@@ -40,6 +40,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 let nameFilter;
+let priceFilter;
 
 const columns = [{
   dataField: 'id',
@@ -49,25 +50,33 @@ const columns = [{
   text: 'Product Name',
   filter: textFilter({
     getFilter: (filter) => {
-      // nameFilter was assigned once the component has been mounted.
       nameFilter = filter;
     }
   })
 }, {
   dataField: 'price',
   text: 'Product Price',
-  filter: textFilter()
+  filter: textFilter({
+    getFilter: (filter) => {
+      priceFilter = filter;
+    }
+  })
 }];
 
 const handleClick = () => {
-  nameFilter(0);
+  nameFilter('');
+  priceFilter('');
 };
 
 export default () => (
   <div>
-    <button className="btn btn-lg btn-primary" onClick={ handleClick }> filter columns by 0 </button>
-
-    <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+    <button className="btn btn-lg btn-primary" onClick={ handleClick }> Clear all filters </button>
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      filter={ filterFactory() }
+    />
   </div>
 );
 `;
