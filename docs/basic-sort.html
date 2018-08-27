@@ -49,7 +49,7 @@
   <span class="hljs-attr">text</span>: <span class="hljs-string">'Product ID'</span>,
   <span class="hljs-attr">sort</span>: <span class="hljs-literal">true</span>
   <span class="hljs-comment">// Perform a reverse sorting here</span>
-  sortFunc: <span class="hljs-function">(<span class="hljs-params">a, b, order, dataField</span>) =&gt;</span> {
+  sortFunc: <span class="hljs-function">(<span class="hljs-params">a, b, order, dataField, rowA, rowB</span>) =&gt;</span> {
     <span class="hljs-keyword">if</span> (order === <span class="hljs-string">'asc'</span>) {
       <span class="hljs-keyword">return</span> b - a;
     }
