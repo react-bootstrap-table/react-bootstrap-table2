@@ -114,6 +114,7 @@ HeaderCell.propTypes = {
   column: PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    isDummyField: PropTypes.bool,
     hidden: PropTypes.bool,
     headerFormatter: PropTypes.func,
     formatter: PropTypes.func,
