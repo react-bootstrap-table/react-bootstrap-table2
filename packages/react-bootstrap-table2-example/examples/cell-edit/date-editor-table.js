@@ -65,7 +65,7 @@ const columns = [{
 
 export default () => (
   <div>
-    <h3>Dropdown Editor</h3>
+    <h3>Date Editor</h3>
     <BootstrapTable
       keyField="id"
       data={ stocks }
