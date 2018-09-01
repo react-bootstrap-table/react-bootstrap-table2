@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 class DropDownEditor extends Component {
   componentDidMount() {
-    const { defaultValue } = this.props;
+    const { defaultValue, didMount } = this.props;
     this.select.value = defaultValue;
     this.select.focus();
+    if (didMount) didMount();
   }
 
   getValue() {
@@ -15,7 +16,7 @@ class DropDownEditor extends Component {
   }
 
   render() {
-    const { defaultValue, className, options, ...rest } = this.props;
+    const { defaultValue, didMount, className, options, ...rest } = this.props;
     const editorClass = cs('form-control editor edit-select', className);
 
     const attr = {
@@ -51,11 +52,13 @@ DropDownEditor.propTypes = {
       label: PropTypes.string,
       value: PropTypes.any
     }))
-  ]).isRequired
+  ]).isRequired,
+  didMount: PropTypes.func
 };
 DropDownEditor.defaultProps = {
   className: '',
   defaultValue: '',
-  style: {}
+  style: {},
+  didMount: undefined
 };
 export default DropDownEditor;

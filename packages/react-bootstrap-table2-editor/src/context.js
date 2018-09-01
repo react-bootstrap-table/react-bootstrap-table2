@@ -23,6 +23,7 @@ export default (
         blurToSave: PropTypes.bool,
         beforeSaveCell: PropTypes.func,
         afterSaveCell: PropTypes.func,
+        onStartEdit: PropTypes.func,
         nonEditableRows: PropTypes.func,
         timeToCloseMessage: PropTypes.number,
         errorMessage: PropTypes.any
@@ -31,7 +32,7 @@ export default (
 
     constructor(props) {
       super(props);
-      EditingCell = props.cellEdit.editingCellFactory(_);
+      EditingCell = props.cellEdit.editingCellFactory(_, props.cellEdit.options.onStartEdit);
       this.startEditing = this.startEditing.bind(this);
       this.escapeEditing = this.escapeEditing.bind(this);
       this.completeEditing = this.completeEditing.bind(this);

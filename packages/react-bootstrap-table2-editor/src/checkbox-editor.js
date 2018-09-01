@@ -13,7 +13,9 @@ class CheckBoxEditor extends Component {
   }
 
   componentDidMount() {
+    const { didMount } = this.props;
     this.checkbox.focus();
+    if (didMount) didMount();
   }
 
   getValue() {
@@ -28,7 +30,7 @@ class CheckBoxEditor extends Component {
   }
 
   render() {
-    const { defaultValue, className, ...rest } = this.props;
+    const { defaultValue, didMount, className, ...rest } = this.props;
     const editorClass = cs('editor edit-chseckbox checkbox', className);
     return (
       <input
@@ -50,12 +52,14 @@ CheckBoxEditor.propTypes = {
   ]),
   value: PropTypes.string,
   defaultValue: PropTypes.any,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  didMount: PropTypes.func
 };
 CheckBoxEditor.defaultProps = {
   className: '',
   value: 'on:off',
   defaultValue: false,
-  onChange: undefined
+  onChange: undefined,
+  didMount: undefined
 };
 export default CheckBoxEditor;
