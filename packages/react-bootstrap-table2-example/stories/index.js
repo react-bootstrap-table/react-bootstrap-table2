@@ -30,6 +30,7 @@ import ColumnTitleTable from 'examples/columns/column-title-table';
 import ColumnEventTable from 'examples/columns/column-event-table';
 import ColumnHiddenTable from 'examples/columns/column-hidden-table';
 import ColumnAttrsTable from 'examples/columns/column-attrs-table';
+import DummyColumnTable from 'examples/columns/dummy-column-table';
 
 // work on header columns
 import HeaderColumnFormatTable from 'examples/header-columns/column-format-table';
@@ -201,7 +202,8 @@ storiesOf('Work on Columns', module)
   .add('Column Event', () => <ColumnEventTable />)
   .add('Customize Column Class', () => <ColumnClassTable />)
   .add('Customize Column Style', () => <ColumnStyleTable />)
-  .add('Customize Column HTML attribute', () => <ColumnAttrsTable />);
+  .add('Customize Column HTML attribute', () => <ColumnAttrsTable />)
+  .add('Dummy Column', () => <DummyColumnTable />);
 
 storiesOf('Work on Header Columns', module)
   .addDecorator(bootstrapStyle())
