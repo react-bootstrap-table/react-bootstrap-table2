@@ -11,7 +11,7 @@ const ExportCSVButton = (props) => {
   return (
     <button
       type="button"
-      onClick={ onExport }
+      onClick={ () => onExport() }
       { ...rest }
     >
       { children }

@@ -5,13 +5,14 @@ const csvDefaultOptions = {
   separator: ',',
   ignoreHeader: false,
   noAutoBOM: true,
-  exportAll: true
+  exportAll: true,
+  onlyExportSelection: false
 };
 
 export default Base =>
   class CSVOperation extends Base {
-    handleExportCSV = () => {
-      const { columns, exportCSV } = this.props;
+    handleExportCSV = (source) => {
+      const { columns, exportCSV, keyField } = this.props;
       const meta = getMetaInfo(columns);
       const options = exportCSV === true ?
         csvDefaultOptions :
@@ -20,7 +21,19 @@ export default Base =>
           ...exportCSV
         };
 
-      const data = options.exportAll ? this.props.data : this.getData();
+      // get data for csv export
+      let data;
+      if (typeof source !== 'undefined') {
+        data = source;
+      } else {
+        data = options.exportAll ? this.props.data : this.getData();
+      }
+
+      // filter data
+      if (options.onlyExportSelection) {
+        const selections = this.getSelected();
+        data = data.filter(row => !!selections.find(sel => row[keyField] === sel));
+      }
       const content = transform(data, meta, this._.get, options);
       save(content, options);
     }
