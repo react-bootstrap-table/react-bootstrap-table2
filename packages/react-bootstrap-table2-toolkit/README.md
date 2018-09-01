@@ -124,3 +124,6 @@ Default is `true`.
 
 #### exportAll - [bool]
 Default is `true`. `false` will only export current data which display on table.
+
+#### onlyExportSelection - [bool]
+Default is `false`. `true` will only export the data which is selected.
