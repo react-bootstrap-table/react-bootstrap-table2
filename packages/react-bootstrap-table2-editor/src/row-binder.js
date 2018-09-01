@@ -1,6 +1,6 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
-import { DELAY_FOR_DBCLICK, DBCLICK_TO_CELL_EDIT } from './const';
+import { DELAY_FOR_DBCLICK, DBCLICK_TO_CELL_EDIT, CLICK_TO_CELL_EDIT } from './const';
 import { Consumer } from './context';
 
 export default (Component, selectRowEnabled) => {
@@ -24,6 +24,9 @@ export default (Component, selectRowEnabled) => {
         editingRowIdx={ cellEdit.ridx }
         editingColIdx={ cellEdit.cidx }
         editable={ editableRow }
+        onStart={ cellEdit.onStart }
+        clickToEdit={ cellEdit.mode === CLICK_TO_CELL_EDIT }
+        dbclickToEdit={ cellEdit.mode === DBCLICK_TO_CELL_EDIT }
       />
     );
   };

@@ -4,6 +4,7 @@ import { Consumer } from './context';
 import createEditingCell from './editing-cell';
 
 export default (_) => {
+  const EditingCell = createEditingCell(_);
   const renderWithEditingCell = (props, cellEdit) => {
     const content = _.get(props.row, props.column.dataField);
     let editCellstyle = props.column.editCellStyle || {};
@@ -24,7 +25,7 @@ export default (_) => {
         props.columnIndex)
       ;
     }
-    const EditingCell = createEditingCell(_);
+
     return (
       <EditingCell
         { ...props }

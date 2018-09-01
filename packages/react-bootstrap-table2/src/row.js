@@ -6,11 +6,23 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 import Cell from './cell';
 import eventDelegater from './row-event-delegater';
+import shouldRowUpdater from './row-should-updater';
 
-class Row extends eventDelegater(Component) {
+class Row extends shouldRowUpdater(eventDelegater(Component)) {
+  shouldComponentUpdate(nextProps) {
+    console.log('lol');
+    const shouldUpdate =
+      nextProps.shouldUpdate ||
+      this.shouldUpdateByWhenEditing(nextProps) ||
+      this.shouldUpdatedByNormalProps(nextProps);
+
+    return shouldUpdate;
+  }
+
   render() {
     const {
       row,
+      keyField,
       columns,
       rowIndex,
       className,
@@ -18,9 +30,11 @@ class Row extends eventDelegater(Component) {
       attrs,
       editable,
       editingRowIdx,
-      editingColIdx
+      editingColIdx,
+      onStart,
+      clickToEdit,
+      dbclickToEdit
     } = this.props;
-    const CellComponent = this.props.CellComponent || Cell;
     const trAttrs = this.delegate(attrs);
 
     return (
@@ -35,7 +49,7 @@ class Row extends eventDelegater(Component) {
                 const EditingCell = this.props.EditingCellComponent;
                 return (
                   <EditingCell
-                    key={ `${content}-${index}` }
+                    key={ `${content}-${index}-editing` }
                     row={ row }
                     rowIndex={ rowIndex }
                     column={ column }
@@ -82,14 +96,23 @@ class Row extends eventDelegater(Component) {
               if (cellClasses) cellAttrs.className = cellClasses;
               if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
+              let editableCell = _.isDefined(column.editable) ? column.editable : true;
+              if (column.dataField === keyField || !editable) editableCell = false;
+              if (_.isFunction(column.editable)) {
+                editableCell = column.editable(content, row, rowIndex, index);
+              }
+
               return (
-                <CellComponent
+                <Cell
                   key={ `${content}-${index}` }
                   row={ row }
-                  editable={ editable }
+                  editable={ editableCell }
                   rowIndex={ rowIndex }
                   columnIndex={ index }
                   column={ column }
+                  onStart={ onStart }
+                  clickToEdit={ clickToEdit }
+                  dbclickToEdit={ dbclickToEdit }
                   { ...cellAttrs }
                 />
               );
@@ -108,14 +131,16 @@ Row.propTypes = {
   columns: PropTypes.array.isRequired,
   style: PropTypes.object,
   className: PropTypes.string,
-  attrs: PropTypes.object
+  attrs: PropTypes.object,
+  shouldUpdate: PropTypes.bool
 };
 
 Row.defaultProps = {
   editable: true,
   style: {},
   className: null,
-  attrs: {}
+  attrs: {},
+  shouldUpdate: false
 };
 
 export default Row;

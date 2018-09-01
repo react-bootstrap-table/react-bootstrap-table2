@@ -100,7 +100,6 @@ export default (
       const {
         cellEdit: {
           options: { nonEditableRows, errorMessage, ...optionsRest },
-          createContext,
           ...cellEditRest
         }
       } = this.props;
