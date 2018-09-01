@@ -6,8 +6,9 @@ import _ from './utils';
 import Row from './row';
 import ExpandCell from './row-expand/expand-cell';
 import SelectionCell from './row-selection/selection-cell';
+import shouldRowUpdater from './row-should-updater';
 
-export default class RowAggregator extends React.Component {
+export default class RowAggregator extends shouldRowUpdater(React.Component) {
   static propTypes = {
     attrs: PropTypes.object
   }
@@ -19,6 +20,17 @@ export default class RowAggregator extends React.Component {
     super(props);
     this.clickNum = 0;
     this.createClickEventHandler = this.createClickEventHandler.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate =
+      this.props.selected !== nextProps.selected ||
+      this.props.expanded !== nextProps.expanded ||
+      this.props.selectable !== nextProps.selectable ||
+      this.shouldUpdateByWhenEditing(nextProps) ||
+      this.shouldUpdatedByNormalProps(nextProps);
+
+    return shouldUpdate;
   }
 
   createClickEventHandler(cb) {
@@ -91,6 +103,7 @@ export default class RowAggregator extends React.Component {
 
     return (
       <Row
+        shouldUpdate
         key={ key }
         row={ row }
         keyField={ keyField }

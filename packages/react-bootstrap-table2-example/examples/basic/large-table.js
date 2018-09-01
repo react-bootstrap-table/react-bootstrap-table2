@@ -4,7 +4,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import cellEditFactory from 'react-bootstrap-table2-editor';
 import { productsGenerator } from 'utils/common';
 
-const products = productsGenerator(5000);
+const products = productsGenerator(5);
 
 const columns = [{
   dataField: 'id',
@@ -23,7 +23,6 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
-      selectRow={ { mode: 'checkbox' } }
       cellEdit={ cellEditFactory({
         mode: 'click'
       }) }

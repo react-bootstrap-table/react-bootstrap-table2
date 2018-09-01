@@ -28,7 +28,7 @@ export default (Component) => {
         ...style,
         ...selectedStyle
       };
-      className = cs(className, selectedClasses);
+      className = cs(className, selectedClasses) || undefined;
 
       if (selectRow.bgColor) {
         style = style || {};
