@@ -25,6 +25,7 @@ const cellEdit = cellEditFactory({
 * [timeToCloseMessage](#celledittimetoclosemessage-function)
 * [beforeSaveCell](#celleditbeforesavecell-function)
 * [afterSaveCell](#celleditaftersavecell-function)
+* [onStartEdit](#celleditonstartedit-function)
 * [errorMessage](#cellediterrormessage-string)
 * [onErrorMessageDisappear](#celleditonerrormessagedisappear-function)
 
@@ -59,6 +60,16 @@ This callback function will be called after updating cell.
 const cellEdit = {
   // omit...
   afterSaveCell: (oldValue, newValue, row, column) => { ... }
+};
+```
+
+## cellEdit.onStartEdit - [Function]
+This callback function will be called after editor component mounted
+
+```js
+const cellEdit = {
+  // omit...
+  onStartEdit: (row, column, rowIndex, columnIndex) => { ... }
 };
 ```
 

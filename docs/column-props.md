@@ -10,6 +10,7 @@ Definition of columns props on BootstrapTable
 * [text (**required**)](#columntext-required-string)
 
 ## Optional
+* [isDummyField](#columnisdummyfield-bool)
 * [hidden](#columnhidden-bool)
 * [formatter](#columnformatter-function)
 * [formatExtraData](#columnformatextradata-any)
@@ -69,6 +70,12 @@ dataField: 'address.city'
 
 ## column.text (**required**) - [String]
 `text` will be the column text in header column by default, if your header is not only text or you want to customize the header column, please check [`column.headerFormatter`](#columnheaderformatter-function)
+
+## column.isDummyField - [Bool]
+Sometime, you just want to have a column which is not perform any data but just some action components. In this situation, we suggest you to use `isDummyField`. If column is dummy, the [`column.dataField`](#dataField) can be any string value, cause of it's meaningless. However, please keep `dataField` as unique as possible.
+
+There's only one different for dummy column than normal column, which is dummy column will compare the whole row value instead of cell value when call `shouldComponentUpdate`.
+
 
 ## column.hidden - [Bool]
 `hidden` allow you to hide column when `true` given.
