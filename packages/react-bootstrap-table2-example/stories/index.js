@@ -30,6 +30,7 @@ import ColumnTitleTable from 'examples/columns/column-title-table';
 import ColumnEventTable from 'examples/columns/column-event-table';
 import ColumnHiddenTable from 'examples/columns/column-hidden-table';
 import ColumnAttrsTable from 'examples/columns/column-attrs-table';
+import DummyColumnTable from 'examples/columns/dummy-column-table';
 
 // work on header columns
 import HeaderColumnFormatTable from 'examples/header-columns/column-format-table';
@@ -145,8 +146,10 @@ import ExportCSV from 'examples/csv';
 import CSVFormatter from 'examples/csv/csv-column-formatter';
 import CustomCSVHeader from 'examples/csv/custom-csv-header';
 import HideCSVColumn from 'examples/csv/hide-column';
+import ExportOnlySelected from 'examples/csv/export-only-selected';
 import CSVColumnType from 'examples/csv/csv-column-type';
 import CustomCSVButton from 'examples/csv/custom-csv-button';
+import ExportCustomData from 'examples/csv/export-custom-data';
 import CustomCSV from 'examples/csv/custom-csv';
 
 // loading overlay
@@ -201,7 +204,8 @@ storiesOf('Work on Columns', module)
   .add('Column Event', () => <ColumnEventTable />)
   .add('Customize Column Class', () => <ColumnClassTable />)
   .add('Customize Column Style', () => <ColumnStyleTable />)
-  .add('Customize Column HTML attribute', () => <ColumnAttrsTable />);
+  .add('Customize Column HTML attribute', () => <ColumnAttrsTable />)
+  .add('Dummy Column', () => <DummyColumnTable />);
 
 storiesOf('Work on Header Columns', module)
   .addDecorator(bootstrapStyle())
@@ -328,8 +332,10 @@ storiesOf('Export CSV', module)
   .add('Format CSV Column', () => <CSVFormatter />)
   .add('Custom CSV Header', () => <CustomCSVHeader />)
   .add('Hide CSV Column', () => <HideCSVColumn />)
+  .add('Only Export Selected Rows', () => <ExportOnlySelected />)
   .add('CSV Column Type', () => <CSVColumnType />)
   .add('Custom CSV Button', () => <CustomCSVButton />)
+  .add('Export Custom Data', () => <ExportCustomData />)
   .add('Custom CSV', () => <CustomCSV />);
 
 storiesOf('EmptyTableOverlay', module)

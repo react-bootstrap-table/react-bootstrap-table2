@@ -41,6 +41,7 @@ const columns = [{
   columns={ columns }
   cellEdit={ cellEditFactory({
     mode: 'click',
+    onStartEdit: (row, column, rowIndex, columnIndex) => { console.log('start to edit!!!'); },
     beforeSaveCell: (oldValue, newValue, row, column) => { console.log('Before Saving Cell!!'); },
     afterSaveCell: (oldValue, newValue, row, column) => { console.log('After Saving Cell!!'); }
   }) }
@@ -55,6 +56,7 @@ export default () => (
       columns={ columns }
       cellEdit={ cellEditFactory({
         mode: 'click',
+        onStartEdit: (row, column, rowIndex, columnIndex) => { console.log('Start to edit!!!'); },
         beforeSaveCell: (oldValue, newValue, row, column) => { console.log('Before Saving Cell!!'); },
         afterSaveCell: (oldValue, newValue, row, column) => { console.log('After Saving Cell!!'); }
       }) }

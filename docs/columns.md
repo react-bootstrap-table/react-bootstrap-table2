@@ -7,6 +7,7 @@ Available properties in a column object:
 * [text (**required**)](#text)
 
 #### Optional
+* [isDummyField](#isDummyField)
 * [hidden](#hidden)
 * [formatter](#formatter)
 * [formatExtraData](#formatExtraData)
@@ -83,6 +84,11 @@ dataField: 'address.city'
 
 ## <a name='text'>column.text (**required**) - [String]</a>
 `text` will be the column text in header column by default, if your header is not only text or you want to customize the header column, please check [`column.headerFormatter`](#headerFormatter)
+
+## <a name='isDummyField'>column.isDummyField - [Bool]</a>
+Sometime, you just want to have a column which is not perform any data but just some action components. In this situation, we suggest you to use `isDummyField`. If column is dummy, the [`column.dataField`](#dataField) can be any string value, cause of it's meaningless.
+
+There's only one different for dummy column than normal column, which is dummy column will compare the whole row value instead of cell value when call `shouldComponentUpdate`.
 
 ## <a name='hidden'>column.hidden - [Bool]</a>
 `hidden` allow you to hide column when `true` given.

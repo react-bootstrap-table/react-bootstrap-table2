@@ -177,22 +177,45 @@ describe('Cell', () => {
     let props;
     let nextProps;
 
-    describe('when content is change', () => {
-      const column = { dataField: 'name', text: 'Product Name' };
-      beforeEach(() => {
-        props = {
-          row,
-          columnIndex: 1,
-          rowIndex: 1,
-          column
-        };
-        wrapper = shallow(
-          <Cell { ...props } />);
-      });
+    describe('if column.isDummyField is false', () => {
+      describe('when content is change', () => {
+        const column = { dataField: 'name', text: 'Product Name' };
+        beforeEach(() => {
+          props = {
+            row,
+            columnIndex: 1,
+            rowIndex: 1,
+            column
+          };
+          wrapper = shallow(
+            <Cell { ...props } />);
+        });
 
-      it('should return true', () => {
-        nextProps = { ...props, row: { id: 1, name: 'CDE' } };
-        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+        it('should return true', () => {
+          nextProps = { ...props, row: { id: 1, name: 'CDE' } };
+          expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+        });
+      });
+    });
+
+    describe('if column.isDummyField is true', () => {
+      describe('when content is change', () => {
+        const column = { dataField: '', text: 'Product Name', isDummyField: true };
+        beforeEach(() => {
+          props = {
+            row,
+            columnIndex: 1,
+            rowIndex: 1,
+            column
+          };
+          wrapper = shallow(
+            <Cell { ...props } />);
+        });
+
+        it('should return true', () => {
+          nextProps = { ...props, row: { id: 1, name: 'CDE', test: 'This is new Field' } };
+          expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+        });
       });
     });
 

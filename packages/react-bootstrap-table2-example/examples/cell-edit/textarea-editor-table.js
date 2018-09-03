@@ -56,7 +56,7 @@ const columns = [{
 
 export default () => (
   <div>
-    <h3>Dropdown Editor</h3>
+    <h3>Textarea Editor</h3>
     <BootstrapTable
       keyField="id"
       data={ jobs }

@@ -14,7 +14,7 @@ import TextEditor from './text-editor';
 import EditorIndicator from './editor-indicator';
 import { TIME_TO_CLOSE_MESSAGE, EDITTYPE } from './const';
 
-export default _ =>
+export default (_, onStartEdit) =>
   class EditingCell extends Component {
     static propTypes = {
       row: PropTypes.object.isRequired,
@@ -150,6 +150,10 @@ export default _ =>
         onKeyDown: this.handleKeyDown,
         onBlur: this.handleBlur
       };
+
+      if (onStartEdit) {
+        editorProps.didMount = () => onStartEdit(row, column, rowIndex, columnIndex);
+      }
 
       const isDefaultEditorDefined = _.isObject(column.editor);
 

@@ -269,8 +269,9 @@ const withContext = Base =>
     }
 
     render() {
-      const { keyField, columns, bootstrap4 } = this.props;
+      const { keyField, columns, bootstrap4, registerExposedAPI } = this.props;
       const baseProps = { keyField, columns };
+      if (registerExposedAPI) baseProps.registerExposedAPI = registerExposedAPI;
 
       let base = this.renderBase();
 

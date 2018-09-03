@@ -10,9 +10,10 @@ class TextAreaEditor extends Component {
   }
 
   componentDidMount() {
-    const { defaultValue } = this.props;
+    const { defaultValue, didMount } = this.props;
     this.text.value = defaultValue;
     this.text.focus();
+    if (didMount) didMount();
   }
 
   getValue() {
@@ -27,7 +28,7 @@ class TextAreaEditor extends Component {
   }
 
   render() {
-    const { defaultValue, className, ...rest } = this.props;
+    const { defaultValue, didMount, className, ...rest } = this.props;
     const editorClass = cs('form-control editor edit-textarea', className);
     return (
       <textarea
@@ -50,11 +51,13 @@ TextAreaEditor.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]),
-  onKeyDown: PropTypes.func
+  onKeyDown: PropTypes.func,
+  didMount: PropTypes.func
 };
 TextAreaEditor.defaultProps = {
   className: '',
   defaultValue: '',
-  onKeyDown: undefined
+  onKeyDown: undefined,
+  didMount: undefined
 };
 export default TextAreaEditor;

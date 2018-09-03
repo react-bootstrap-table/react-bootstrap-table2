@@ -11,9 +11,18 @@ class Cell extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const shouldUpdate =
-      _.get(this.props.row, this.props.column.dataField)
-        !== _.get(nextProps.row, nextProps.column.dataField) ||
+    let shouldUpdate = false;
+    if (nextProps.column.isDummyField) {
+      shouldUpdate = !_.isEqual(this.props.row, nextProps.row);
+    } else {
+      shouldUpdate =
+        _.get(this.props.row, this.props.column.dataField)
+          !== _.get(nextProps.row, nextProps.column.dataField);
+    }
+
+    if (shouldUpdate) return true;
+
+    shouldUpdate =
       this.props.column.hidden !== nextProps.column.hidden ||
       this.props.rowIndex !== nextProps.rowIndex ||
       this.props.columnIndex !== nextProps.columnIndex ||
@@ -64,7 +73,7 @@ class Cell extends Component {
       formatExtraData
     } = column;
     const attrs = { ...rest };
-    let content = _.get(row, dataField);
+    let content = column.isDummyField ? null : _.get(row, dataField);
 
     if (formatter) {
       content = column.formatter(content, row, rowIndex, formatExtraData);

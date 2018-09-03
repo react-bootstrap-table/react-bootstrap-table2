@@ -15,6 +15,14 @@ export default (
       keyField: PropTypes.string.isRequired
     }
 
+    constructor(props) {
+      super(props);
+      if (props.registerExposedAPI) {
+        const getSelected = () => this.getSelected();
+        props.registerExposedAPI(getSelected);
+      }
+    }
+
     state = { selected: (this.props.selectRow && this.props.selectRow.selected) || [] };
 
     componentWillReceiveProps(nextProps) {
@@ -23,6 +31,11 @@ export default (
           selected: nextProps.selectRow.selected || this.state.selected
         }));
       }
+    }
+
+    // exposed API
+    getSelected() {
+      return this.state.selected;
     }
 
     handleRowSelect = (rowKey, checked, rowIndex, e) => {

@@ -26,7 +26,9 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
         fileName: PropTypes.string,
         separator: PropTypes.string,
         ignoreHeader: PropTypes.bool,
-        noAutoBOM: PropTypes.bool
+        noAutoBOM: PropTypes.bool,
+        exportAll: PropTypes.bool,
+        onlyExportSelection: PropTypes.bool
       })
     ])
   }

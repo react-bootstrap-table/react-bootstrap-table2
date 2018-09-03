@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 class DateEditor extends Component {
   componentDidMount() {
-    const { defaultValue } = this.props;
+    const { defaultValue, didMount } = this.props;
     this.date.valueAsDate = new Date(defaultValue);
     this.date.focus();
+    if (didMount) didMount();
   }
 
   getValue() {
@@ -15,7 +16,7 @@ class DateEditor extends Component {
   }
 
   render() {
-    const { defaultValue, className, ...rest } = this.props;
+    const { defaultValue, didMount, className, ...rest } = this.props;
     const editorClass = cs('form-control editor edit-date', className);
     return (
       <input
@@ -33,10 +34,12 @@ DateEditor.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
-  defaultValue: PropTypes.string
+  defaultValue: PropTypes.string,
+  didMount: PropTypes.func
 };
 DateEditor.defaultProps = {
   className: '',
-  defaultValue: ''
+  defaultValue: '',
+  didMount: undefined
 };
 export default DateEditor;
