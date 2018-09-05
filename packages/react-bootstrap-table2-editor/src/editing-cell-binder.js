@@ -3,8 +3,8 @@ import React from 'react';
 import { Consumer } from './context';
 import createEditingCell from './editing-cell';
 
-export default (_) => {
-  const EditingCell = createEditingCell(_);
+export default (_, onStartEdit) => {
+  const EditingCell = createEditingCell(_, onStartEdit);
   const renderWithEditingCell = (props, cellEdit) => {
     const content = _.get(props.row, props.column.dataField);
     let editCellstyle = props.column.editCellStyle || {};
