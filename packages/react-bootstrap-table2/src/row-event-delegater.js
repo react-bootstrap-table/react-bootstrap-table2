@@ -73,7 +73,7 @@ export default ExtendBase =>
     delegate(attrs = {}) {
       const newAttrs = {};
       const { expandRow, selectRow } = this.props;
-      if (expandRow || (selectRow && selectRow.clickToSelect)) {
+      if (expandRow && (selectRow && selectRow.clickToSelect)) {
         newAttrs.onClick = this.createClickEventHandler(attrs.onClick);
       }
       Object.keys(attrs).forEach((attr) => {
