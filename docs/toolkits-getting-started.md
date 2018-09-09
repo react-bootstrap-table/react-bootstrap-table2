@@ -53,6 +53,7 @@ In addition, You have to move following required props from `BootstraTable` to `
 * [keyField](./table-props.html#keyfield-required-string)
 * [data](./table-props.html#data-required-array)
 * [columns](./table-props.html#columns-required-object)
+* [bootstrap4](./table-props.html#bootstrap4-bool)
 
 ### Additional props on ToolkitProvider
 
