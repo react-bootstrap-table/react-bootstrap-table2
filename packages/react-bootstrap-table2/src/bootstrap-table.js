@@ -50,6 +50,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       hover,
       bordered,
       condensed,
+      responsive,
       noDataIndication,
       caption,
       rowStyle,
@@ -65,7 +66,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-striped': striped,
       'table-hover': hover,
       'table-bordered': bordered,
-      'table-condensed': condensed
+      'table-condensed': condensed,
+      'table-responsive': responsive
     }, classes);
 
     const cellSelectionInfo = this.resolveSelectRowProps({
@@ -135,6 +137,7 @@ BootstrapTable.propTypes = {
   classes: PropTypes.string,
   wrapperClasses: PropTypes.string,
   condensed: PropTypes.bool,
+  responsive: PropTypes.bool,
   caption: PropTypes.oneOfType([
     PropTypes.node,
     PropTypes.string
@@ -200,6 +203,7 @@ BootstrapTable.defaultProps = {
   bordered: true,
   hover: false,
   condensed: false,
+  responsive: false,
   noDataIndication: null
 };
 
