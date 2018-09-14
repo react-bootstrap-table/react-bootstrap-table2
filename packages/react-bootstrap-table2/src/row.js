@@ -23,6 +23,7 @@ class Row extends eventDelegater(Component) {
       cellEdit,
       selected,
       selectRow,
+      expandable,
       expanded,
       expandRow,
       selectable,
@@ -48,7 +49,7 @@ class Row extends eventDelegater(Component) {
     return (
       <tr style={ style } className={ className } { ...trAttrs }>
         {
-          showExpandColumn ? (
+          (showExpandColumn && expandable) ? (
             <ExpandCell
               { ...expandRow }
               rowKey={ key }
