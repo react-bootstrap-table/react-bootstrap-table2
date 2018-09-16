@@ -15,6 +15,10 @@
 @media only screen and (min-width: 1500px) {
 }
 
+.homeContainer .homeWrapper .projectLogo {
+  justify-content: flex-start;
+}
+
 .feature-block .blockImage img {
   width: 48px;
 }

@@ -21,7 +21,6 @@ const Block = props => (
   <Container
     padding={['bottom', 'top']}
     id={props.id}
-    background={props.background}
   >
     <GridBlock
       align={ props.align || 'center' }
@@ -58,10 +57,10 @@ const Features = () => (
 );
 
 const LearnHow = () => (
-  <Block background="light" align="left">
+  <Block align="left">
     {[
       {
-        content: 'Intuitive to use. <br/>Compatible for Bootstrap 3 and 4. <br/>Better than legacy react-bootstrap-table2!!<br/>',
+        content: 'Intuitive to use. <br/>Compatible for Bootstrap 3 and 4. <br/>Better than legacy react-bootstrap-table!!<br/>',
         image: imgUrl('react-bootstrap-table2-sample.png'),
         imageAlign: 'right',
         title: 'react-bootstrap-table2',
