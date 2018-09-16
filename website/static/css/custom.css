@@ -15,6 +15,10 @@
 @media only screen and (min-width: 1500px) {
 }
 
+footer.nav-footer {
+  background-color: #202020;
+}
+
 .homeContainer .homeWrapper .projectLogo {
   justify-content: flex-start;
 }

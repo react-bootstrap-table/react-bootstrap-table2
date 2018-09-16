@@ -30,6 +30,7 @@ const siteConfig = {
     {doc: 'table-props', label: 'API'},
     {page: 'help', label: 'Help'},
     {blog: true, label: 'Blog'},
+    {href: 'https://github.com/react-bootstrap-table/react-bootstrap-table2', label: 'GitHub' },
   ],
   users,
   /* path to images for header/footer */
