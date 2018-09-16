@@ -3,34 +3,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from './utils';
-import Row from './row';
+import RowContent from './row-pure-content';
+// import RowAggregatorContent from './row-aggregator-content';
+import shouldRowUpdater from './row-should-updater';
 import ExpandCell from './row-expand/expand-cell';
 import SelectionCell from './row-selection/selection-cell';
-import shouldRowUpdater from './row-should-updater';
+// import Cell from './cell';
+import eventDelegater from './row-event-delegater';
 
-export default class RowAggregator extends shouldRowUpdater(React.Component) {
+export default class RowAggregator extends shouldRowUpdater(eventDelegater(React.Component)) {
   static propTypes = {
-    attrs: PropTypes.object
+    attrs: PropTypes.object,
+    style: PropTypes.object
   }
   static defaultProps = {
-    attrs: {}
+    attrs: {},
+    style: {}
   }
 
   constructor(props) {
     super(props);
     this.clickNum = 0;
+    this.shouldUpdateRowContent = false;
     this.createClickEventHandler = this.createClickEventHandler.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
-    const shouldUpdate =
+    if (
       this.props.selected !== nextProps.selected ||
       this.props.expanded !== nextProps.expanded ||
       this.props.selectable !== nextProps.selectable ||
       this.shouldUpdateByWhenEditing(nextProps) ||
-      this.shouldUpdatedByNormalProps(nextProps);
+      this.shouldUpdatedBySelfProps(nextProps)
+    ) {
+      this.shouldUpdateRowContent = this.shouldUpdatedByNormalProps(nextProps);
+      return true;
+    }
+    this.shouldUpdateRowContent = this.shouldUpdatedByNormalProps(nextProps);
 
-    return shouldUpdate;
+    return this.shouldUpdateRowContent;
   }
 
   createClickEventHandler(cb) {
@@ -91,53 +102,77 @@ export default class RowAggregator extends shouldRowUpdater(React.Component) {
       selectable,
       ...rest
     } = this.props;
-
     const key = _.get(row, keyField);
     const { hideSelectColumn, clickToSelect } = selectRow;
     const { showExpandColumn } = expandRow;
 
-    const newAttrs = { ...attrs };
+    const newAttrs = this.delegate({ ...attrs });
     if (clickToSelect || !!expandRow.renderer) {
-      newAttrs.onClick = this.createClickEventHandler(attrs.onClick);
+      newAttrs.onClick = this.createClickEventHandler(newAttrs.onClick);
     }
 
     return (
-      <Row
-        shouldUpdate
-        key={ key }
-        row={ row }
-        keyField={ keyField }
-        rowIndex={ rowIndex }
-        columns={ columns }
+      <tr
         style={ style }
         className={ className }
-        attrs={ newAttrs }
-        { ...rest }
+        { ...newAttrs }
       >
-        {
-          showExpandColumn ? (
-            <ExpandCell
-              { ...expandRow }
-              rowKey={ key }
-              rowIndex={ rowIndex }
-              expanded={ expanded }
-            />
-          ) : null
-        }
-        {
-          !hideSelectColumn
-            ? (
-              <SelectionCell
-                { ...selectRow }
-                rowKey={ key }
-                rowIndex={ rowIndex }
-                selected={ selected }
-                disabled={ !selectable }
-              />
-            )
-            : null
-        }
-      </Row>
+        <td>123</td>
+        <td>12121212</td>
+      </tr>
     );
+    // const content0 = _.get(row, columns[1].dataField);
+    // const content1 = _.get(row, columns[1].dataField);
+    // const content2 = _.get(row, columns[2].dataField);
+    // return (
+    //   <tr
+    //     style={ style }
+    //     className={ className }
+    //     onClick={ e => selectRow.onRowSelect(key, !selected, rowIndex, e) }
+    //   >
+    //     <td>1</td>
+    //     <td>2</td>
+    //     <td>3</td>
+    //     <td>4</td>
+    //   </tr>
+    // );
+
+    // const newCols = [{ fake: true }, ...columns];
+
+    // return (
+    //   <tr
+    //     style={ style }
+    //     className={ className }
+    //     { ...newAttrs }
+    //   >
+    //     {
+    //       newCols.map((column, i) => {
+    //         if (column.fake) {
+    //           return (
+    //             <Cell
+    //               key={ `${key}_${i}_sel}` }
+    //               column={ {} }
+    //               row={ {} }
+    //               rowIndex={ rowIndex }
+    //               columnIndex={ i }
+    //             >
+    //               <input type="checkbox" />
+    //             </Cell>
+    //           );
+    //         }
+    //         const content = _.get(row, column.dataField);
+    //         return (
+    //           <Cell
+    //             key={ `${key}_${content}}` }
+    //             row={ row }
+    //             rowIndex={ rowIndex }
+    //             column={ column }
+    //             columnIndex={ i }
+    //           />
+    //         );
+    //       })
+    //     }
+    //   </tr>
+    // );
   }
 }

@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import _ from './utils';
-import Row from './row';
+import Row from './simple-row';
 import RowAggregator from './row-aggregator';
 import RowSection from './row-section';
 import Const from './const';
@@ -18,6 +18,7 @@ class Body extends React.Component {
     if (props.cellEdit.createContext) {
       this.EditingCell = props.cellEdit.createEditingCell(_, props.cellEdit.options.onStartEdit);
     }
+    this.RowComponent = bindSelection(RowAggregator);
   }
 
   render() {
@@ -54,9 +55,9 @@ class Body extends React.Component {
         RowComponent = bindExpansion(RowAggregator, visibleColumnSize);
       }
 
-      if (selectRowEnabled) {
-        RowComponent = bindSelection(expandRowEnabled ? RowComponent : RowAggregator);
-      }
+      // if (selectRowEnabled) {
+      //   RowComponent = bindSelection(expandRowEnabled ? RowComponent : RowAggregator);
+      // }
 
       if (cellEdit.createContext) {
         RowComponent = cellEdit.bindRowLevelCellEdit(RowComponent, selectRowEnabled, keyField, _);
@@ -85,7 +86,7 @@ class Body extends React.Component {
         baseRowProps.style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
         baseRowProps.className = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
 
-        return <RowComponent { ...baseRowProps } />;
+        return <this.RowComponent { ...baseRowProps } />;
       });
     }
 

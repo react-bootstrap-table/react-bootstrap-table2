@@ -11,14 +11,20 @@ export default ExtendBase =>
       );
     }
 
+    shouldUpdatedBySelfProps(nextProps) {
+      return (
+        this.props.className !== nextProps.className ||
+        !_.isEqual(this.props.style, nextProps.style) ||
+        !_.isEqual(this.props.attrs, nextProps.attrs)
+      );
+    }
+
     shouldUpdatedByNormalProps(nextProps) {
       const shouldUpdate =
         this.props.rowIndex !== nextProps.rowIndex ||
-        this.props.className !== nextProps.className ||
         this.props.editable !== nextProps.editable ||
         this.props.columns.length !== nextProps.columns.length ||
-        !_.isEqual(this.props.row, nextProps.row) ||
-        !_.isEqual(this.props.style, nextProps.style);
+        !_.isEqual(this.props.row, nextProps.row);
 
       return shouldUpdate;
     }

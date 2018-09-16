@@ -73,7 +73,10 @@ class Cell extends Component {
       formatExtraData
     } = column;
     const attrs = { ...rest };
-    let content = column.isDummyField ? null : _.get(row, dataField);
+    let content = this.props.children;
+    if (!content) {
+      content = column.isDummyField ? null : _.get(row, dataField);
+    }
 
     if (formatter) {
       content = column.formatter(content, row, rowIndex, formatExtraData);

@@ -43,15 +43,20 @@ export default (Component) => {
         { ...props }
         style={ style }
         className={ className }
-        selectRow={ { ...selectRow } }
+        selectRow={ selectRow }
         selected={ selected }
         selectable={ selectable }
       />
     );
   };
-  return props => (
-    <SelectionContext.Consumer>
-      { selectRow => renderWithSelection(props, selectRow) }
-    </SelectionContext.Consumer>
-  );
+  function withSelectionConsumer(props) {
+    return (
+      <SelectionContext.Consumer>
+        { selectRow => renderWithSelection(props, selectRow) }
+      </SelectionContext.Consumer>
+    );
+  }
+
+  withSelectionConsumer.displayName = 'WithSelectionConsumer';
+  return withSelectionConsumer;
 };

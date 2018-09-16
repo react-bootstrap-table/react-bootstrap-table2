@@ -19,17 +19,17 @@ export default class SelectionCell extends Component {
     selectionRenderer: PropTypes.func
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.handleClick = this.handleClick.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
     const shouldUpdate =
-      this.props.rowIndex !== nextProps.rowIndex ||
       this.props.selected !== nextProps.selected ||
-      this.props.disabled !== nextProps.disabled ||
-      this.props.rowKey !== nextProps.rowKey;
+      this.props.rowKey !== nextProps.rowKey ||
+      this.props.rowIndex !== nextProps.rowIndex ||
+      this.props.disabled !== nextProps.disabled;
 
     return shouldUpdate;
   }
