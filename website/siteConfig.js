@@ -6,7 +6,7 @@
  */
 const ORGANIZATION_NAME = 'react-bootstrap-table';
 const PROJECT_NAME = 'react-bootstrap-table2';
-const PRIMARY_COLOR = '#007bff';
+const PRIMARY_COLOR = '#1976d2';
 const SECONDARY_COLOR = '#1769aa';
 
 /* List of projects/orgs using your project for the users page */
