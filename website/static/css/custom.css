@@ -19,6 +19,10 @@ footer.nav-footer {
   background-color: #202020;
 }
 
+.navGroup ul {
+  background-color: #f9f9f9;
+}
+
 .homeContainer .homeWrapper .projectLogo {
   justify-content: flex-start;
 }
