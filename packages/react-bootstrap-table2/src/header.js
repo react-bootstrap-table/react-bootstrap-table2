@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import HeaderCell from './header-cell';
 import SelectionHeaderCell from './row-selection/selection-header-cell';
 import ExpandHeaderCell from './row-expand/expand-header-cell';
-import bindSelection from './row-selection/selection-header-cell-binder';
+import withHeaderSelection from './row-selection/selection-header-cell-consumer';
 import bindExpansion from './row-expand/expand-header-cell-binder';
 
 const Header = (props) => {
@@ -30,7 +30,7 @@ const Header = (props) => {
   }
 
   if (selectRow) {
-    SelectionHeaderCellComp = bindSelection(SelectionHeaderCell);
+    SelectionHeaderCellComp = withHeaderSelection(SelectionHeaderCell);
   }
 
   return (

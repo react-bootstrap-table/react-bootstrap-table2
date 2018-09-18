@@ -5,11 +5,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import _ from './utils';
-import Row from './row';
-import RowAggregator from './row-aggregator';
-import RowSection from './row-section';
+import Row from './row/simple-row';
+import RowAggregator from './row/aggregate-row';
+import RowSection from './row/row-section';
 import Const from './const';
-import bindSelection from './row-selection/row-binder';
+import withRowSelection from './row-selection/row-consumer';
 import bindExpansion from './row-expand/row-binder';
 
 class Body extends React.Component {
@@ -55,7 +55,7 @@ class Body extends React.Component {
       }
 
       if (selectRowEnabled) {
-        RowComponent = bindSelection(expandRowEnabled ? RowComponent : RowAggregator);
+        RowComponent = withRowSelection(expandRowEnabled ? RowComponent : RowAggregator);
       }
 
       if (cellEdit.createContext) {
