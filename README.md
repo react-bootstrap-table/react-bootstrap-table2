@@ -13,7 +13,7 @@ Rebuilt [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-tab
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
 * [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
 
-This can help your application with less bundled size and also help us have clean design to avoid handling to much logic in kernal module(SRP).
+This can help your application with less bundled size and also help us have clean design to avoid handling to much logic in kernel module(SRP).
 
 ## Migration
 If you are the user from legacy [`react-bootstrap-table`](https://github.com/AllenFang/react-bootstrap-table/), please have a look on [this](./docs/migration.md).
