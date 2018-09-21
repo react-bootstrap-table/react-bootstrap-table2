@@ -1,10 +1,9 @@
 import React from 'react';
-import sinon from 'sinon';
 import { shallow } from 'enzyme';
 
-import Cell from '../src/cell';
-import Row from '../src/row';
-import mockBodyResolvedProps from './test-helpers/mock/body-resolved-props';
+import Cell from '../../src/cell';
+import RowPureContent from '../../src/row/row-pure-content';
+import mockBodyResolvedProps from '../test-helpers/mock/body-resolved-props';
 
 let defaultColumns = [{
   dataField: 'id',
@@ -20,7 +19,7 @@ let defaultColumns = [{
 const keyField = 'id';
 const rowIndex = 1;
 
-describe('Row', () => {
+describe('RowPureContent', () => {
   let wrapper;
 
   const row = {
@@ -42,11 +41,55 @@ describe('Row', () => {
     }];
   });
 
+  describe('shouldComponentUpdate', () => {
+    let props;
+    let nextProps;
+
+    describe('if nextProps.shouldUpdate is different with this.props.shouldUpdate', () => {
+      beforeEach(() => {
+        props = {
+          keyField,
+          columns: defaultColumns,
+          rowIndex: 1,
+          row,
+          shouldUpdate: false
+        };
+        wrapper = shallow(
+          <RowPureContent { ...props } />
+        );
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, shouldUpdate: true };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('if nextProps.shouldUpdate is same with this.props.shouldUpdate', () => {
+      beforeEach(() => {
+        props = {
+          keyField,
+          columns: defaultColumns,
+          rowIndex: 1,
+          row,
+          shouldUpdate: false
+        };
+        wrapper = shallow(
+          <RowPureContent { ...props } />
+        );
+      });
+
+      it('should return false', () => {
+        nextProps = { ...props };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(false);
+      });
+    });
+  });
+
   describe('simplest row', () => {
     beforeEach(() => {
       wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
+        <RowPureContent
           keyField={ keyField }
           rowIndex={ rowIndex }
           columns={ defaultColumns }
@@ -56,66 +99,8 @@ describe('Row', () => {
     });
 
     it('should render successfully', () => {
-      expect(wrapper.length).toBe(1);
-      expect(wrapper.find('tr').length).toBe(1);
+      expect(wrapper.length).toBe(defaultColumns.length);
       expect(wrapper.find(Cell).length).toBe(Object.keys(row).length);
-    });
-  });
-
-  describe('when style prop is defined', () => {
-    const customStyle = { backgroundColor: 'red' };
-    beforeEach(() => {
-      wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
-          rowIndex={ rowIndex }
-          columns={ defaultColumns }
-          row={ row }
-          style={ customStyle }
-        />);
-    });
-
-    it('should render component with style successfully', () => {
-      expect(wrapper.length).toBe(1);
-      expect(wrapper.prop('style')).toEqual(customStyle);
-    });
-  });
-
-  describe('when className prop is defined', () => {
-    const className = 'test-class';
-    beforeEach(() => {
-      wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
-          rowIndex={ rowIndex }
-          columns={ defaultColumns }
-          row={ row }
-          className={ className }
-        />);
-    });
-
-    it('should render component with className successfully', () => {
-      expect(wrapper.length).toBe(1);
-      expect(wrapper.hasClass(className)).toBe(true);
-    });
-  });
-
-  describe('when CellComponent prop is defined', () => {
-    const CellComponent = () => null;
-    beforeEach(() => {
-      wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
-          rowIndex={ rowIndex }
-          columns={ defaultColumns }
-          row={ row }
-          CellComponent={ CellComponent }
-        />);
-    });
-
-    it('should render CellComponent successfully', () => {
-      expect(wrapper.length).toBe(1);
-      expect(wrapper.find(CellComponent)).toHaveLength(defaultColumns.length);
     });
   });
 
@@ -125,8 +110,8 @@ describe('Row', () => {
     const EditingCellComponent = () => null;
     beforeEach(() => {
       wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
+        <RowPureContent
+          keyField={ keyField }
           rowIndex={ rowIndex }
           columns={ defaultColumns }
           row={ row }
@@ -138,33 +123,12 @@ describe('Row', () => {
 
     it('should render EditingCell component correctly', () => {
       const EditingCell = wrapper.find(EditingCellComponent);
-      expect(wrapper.length).toBe(1);
+      expect(wrapper.length).toBe(defaultColumns.length);
       expect(EditingCell).toHaveLength(1);
       expect(EditingCell.prop('row')).toEqual(row);
       expect(EditingCell.prop('rowIndex')).toEqual(editingRowIdx);
       expect(EditingCell.prop('column')).toEqual(defaultColumns[editingColIdx]);
       expect(EditingCell.prop('columnIndex')).toEqual(editingColIdx);
-    });
-  });
-
-  describe('when attrs prop is defined', () => {
-    const customClickCallBack = sinon.stub();
-    const attrs = { 'data-index': 1, onClick: customClickCallBack };
-    beforeEach(() => {
-      wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
-          rowIndex={ rowIndex }
-          columns={ defaultColumns }
-          row={ row }
-          attrs={ attrs }
-        />);
-    });
-
-    it('should render component with correct attributes', () => {
-      expect(wrapper.length).toBe(1);
-      expect(wrapper.prop('data-index')).toBe(attrs['data-index']);
-      expect(wrapper.prop('onClick')).toBeDefined();
     });
   });
 
@@ -182,8 +146,8 @@ describe('Row', () => {
         text: 'Price'
       }];
       wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
+        <RowPureContent
+          keyField={ keyField }
           rowIndex={ rowIndex }
           columns={ newColumns }
           row={ row }
@@ -207,8 +171,7 @@ describe('Row', () => {
       beforeEach(() => {
         columns[columnIndex].style = { backgroundColor: 'red' };
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -218,7 +181,7 @@ describe('Row', () => {
       });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.style).toEqual(columns[columnIndex].style);
       });
     });
@@ -228,11 +191,10 @@ describe('Row', () => {
       let styleCallBack;
 
       beforeEach(() => {
-        styleCallBack = sinon.stub().returns(returnStyle);
+        styleCallBack = jest.fn().mockReturnValue(returnStyle);
         columns[columnIndex].style = styleCallBack;
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -241,18 +203,17 @@ describe('Row', () => {
         );
       });
 
-      afterEach(() => { styleCallBack.reset(); });
+      afterEach(() => { styleCallBack.mockClear(); });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.style).toEqual(returnStyle);
       });
 
       it('should call custom style function correctly', () => {
-        expect(styleCallBack.callCount).toBe(1);
-        expect(
-          styleCallBack.calledWith(row[columns[columnIndex].dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
+        expect(styleCallBack).toHaveBeenCalledTimes(1);
+        expect(styleCallBack).toHaveBeenCalledWith(
+          row[columns[columnIndex].dataField], row, rowIndex, columnIndex);
       });
     });
   });
@@ -269,8 +230,7 @@ describe('Row', () => {
       beforeEach(() => {
         columns[columnIndex].classes = 'td-test-class';
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -280,7 +240,7 @@ describe('Row', () => {
       });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.className)
           .toEqual(columns[columnIndex].classes);
       });
@@ -291,11 +251,10 @@ describe('Row', () => {
       let classesCallBack;
 
       beforeEach(() => {
-        classesCallBack = sinon.stub().returns(returnClasses);
+        classesCallBack = jest.fn().mockReturnValue(returnClasses);
         columns[columnIndex].classes = classesCallBack;
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -304,19 +263,17 @@ describe('Row', () => {
         );
       });
 
-      afterEach(() => { classesCallBack.reset(); });
+      afterEach(() => { classesCallBack.mockClear(); });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.className).toEqual(returnClasses);
       });
 
       it('should call custom classes function correctly', () => {
-        expect(classesCallBack.callCount).toBe(1);
-        expect(
-          classesCallBack.calledWith(
-            row[columns[columnIndex].dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
+        expect(classesCallBack).toHaveBeenCalledTimes(1);
+        expect(classesCallBack).toHaveBeenCalledWith(
+          row[columns[columnIndex].dataField], row, rowIndex, columnIndex);
       });
     });
   });
@@ -333,8 +290,7 @@ describe('Row', () => {
       beforeEach(() => {
         columns[columnIndex].title = true;
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -344,7 +300,7 @@ describe('Row', () => {
       });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.title)
           .toEqual(row[columns[columnIndex].dataField]);
       });
@@ -355,11 +311,10 @@ describe('Row', () => {
       let titleCallBack;
 
       beforeEach(() => {
-        titleCallBack = sinon.stub().returns(returnTitle);
+        titleCallBack = jest.fn().mockReturnValue(returnTitle);
         columns[columnIndex].title = titleCallBack;
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -368,19 +323,17 @@ describe('Row', () => {
         );
       });
 
-      afterEach(() => { titleCallBack.reset(); });
+      afterEach(() => { titleCallBack.mockClear(); });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.title).toEqual(returnTitle);
       });
 
       it('should call custom title function correctly', () => {
-        expect(titleCallBack.callCount).toBe(1);
-        expect(
-          titleCallBack.calledWith(
-            row[columns[columnIndex].dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
+        expect(titleCallBack).toHaveBeenCalledTimes(1);
+        expect(titleCallBack).toHaveBeenCalledWith(
+          row[columns[columnIndex].dataField], row, rowIndex, columnIndex);
       });
     });
   });
@@ -392,12 +345,11 @@ describe('Row', () => {
     beforeEach(() => {
       columns = [...defaultColumns];
       columns[columnIndex].events = {
-        onClick: sinon.stub()
+        onClick: jest.fn()
       };
 
       wrapper = shallow(
-        <Row
-          { ...mockBodyResolvedProps }
+        <RowPureContent
           keyField={ keyField }
           rowIndex={ rowIndex }
           columns={ columns }
@@ -407,7 +359,7 @@ describe('Row', () => {
     });
 
     it('should attachs DOM event successfully', () => {
-      expect(wrapper.length).toBe(1);
+      expect(wrapper.length).toBe(defaultColumns.length);
       expect(wrapper.find(Cell).get(columnIndex).props.onClick).toBeDefined();
     });
   });
@@ -424,8 +376,7 @@ describe('Row', () => {
       beforeEach(() => {
         columns[columnIndex].align = 'right';
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -435,7 +386,7 @@ describe('Row', () => {
       });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.style.textAlign)
           .toEqual(columns[columnIndex].align);
       });
@@ -446,10 +397,10 @@ describe('Row', () => {
       let alignCallBack;
 
       beforeEach(() => {
-        alignCallBack = sinon.stub().returns(returnAlign);
+        alignCallBack = jest.fn().mockReturnValue(returnAlign);
         columns[columnIndex].align = alignCallBack;
         wrapper = shallow(
-          <Row
+          <RowPureContent
             { ...mockBodyResolvedProps }
             keyField={ keyField }
             rowIndex={ rowIndex }
@@ -459,18 +410,17 @@ describe('Row', () => {
         );
       });
 
-      afterEach(() => { alignCallBack.reset(); });
+      afterEach(() => { alignCallBack.mockClear(); });
 
       it('should render Cell correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props.style.textAlign).toEqual(returnAlign);
       });
 
       it('should call custom align function correctly', () => {
-        expect(alignCallBack.callCount).toBe(1);
-        expect(
-          alignCallBack.calledWith(row[columns[columnIndex].dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
+        expect(alignCallBack).toHaveBeenCalledTimes(1);
+        expect(alignCallBack).toHaveBeenCalledWith(
+          row[columns[columnIndex].dataField], row, rowIndex, columnIndex);
       });
     });
   });
@@ -497,8 +447,7 @@ describe('Row', () => {
         };
 
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -506,7 +455,7 @@ describe('Row', () => {
           />
         );
 
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props['data-test'])
           .toEqual(columns[columnIndex].attrs['data-test']);
         expect(wrapper.find(Cell).get(columnIndex).props.title)
@@ -523,8 +472,7 @@ describe('Row', () => {
           columns[columnIndex].attrs = { title: 'title' };
 
           wrapper = shallow(
-            <Row
-              { ...mockBodyResolvedProps }
+            <RowPureContent
               keyField={ keyField }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -543,8 +491,7 @@ describe('Row', () => {
           columns[columnIndex].attrs = { className: 'attrs-class' };
 
           wrapper = shallow(
-            <Row
-              { ...mockBodyResolvedProps }
+            <RowPureContent
               keyField={ keyField }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -563,8 +510,7 @@ describe('Row', () => {
           columns[columnIndex].attrs = { style: { backgroundColor: 'attrs-style-test' } };
 
           wrapper = shallow(
-            <Row
-              { ...mockBodyResolvedProps }
+            <RowPureContent
               keyField={ keyField }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -583,8 +529,7 @@ describe('Row', () => {
           columns[columnIndex].attrs = { style: { textAlign: 'right' } };
 
           wrapper = shallow(
-            <Row
-              { ...mockBodyResolvedProps }
+            <RowPureContent
               keyField={ keyField }
               rowIndex={ rowIndex }
               columns={ columns }
@@ -606,11 +551,10 @@ describe('Row', () => {
       };
 
       beforeEach(() => {
-        attrsCallBack = sinon.stub().returns(customAttrs);
+        attrsCallBack = jest.fn().mockReturnValue(customAttrs);
         columns[columnIndex].attrs = attrsCallBack;
         wrapper = shallow(
-          <Row
-            { ...mockBodyResolvedProps }
+          <RowPureContent
             keyField={ keyField }
             rowIndex={ rowIndex }
             columns={ columns }
@@ -619,8 +563,10 @@ describe('Row', () => {
         );
       });
 
+      afterEach(() => { attrsCallBack.mockClear(); });
+
       it('should render style.attrs correctly', () => {
-        expect(wrapper.length).toBe(1);
+        expect(wrapper.length).toBe(defaultColumns.length);
         expect(wrapper.find(Cell).get(columnIndex).props['data-test'])
           .toEqual(customAttrs['data-test']);
         expect(wrapper.find(Cell).get(columnIndex).props.title)
@@ -628,10 +574,9 @@ describe('Row', () => {
       });
 
       it('should call custom attrs function correctly', () => {
-        expect(attrsCallBack.callCount).toBe(1);
-        expect(
-          attrsCallBack.calledWith(row[columns[columnIndex].dataField], row, rowIndex, columnIndex)
-        ).toBe(true);
+        expect(attrsCallBack).toHaveBeenCalledTimes(1);
+        expect(attrsCallBack).toHaveBeenCalledWith(
+          row[columns[columnIndex].dataField], row, rowIndex, columnIndex);
       });
     });
   });

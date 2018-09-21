@@ -1,15 +1,14 @@
 import 'jsdom-global/register';
 import React from 'react';
 import { mount } from 'enzyme';
-import mockBodyResolvedProps from './test-helpers/mock/body-resolved-props';
-import SelectionContext from '../src/contexts/selection-context';
-import ExpansionContext from '../src/contexts/row-expand-context';
-import bindSelection from '../src/row-selection/row-binder';
-import bindExpansion from '../src/row-expand/row-binder';
-import ExpandCell from '../src/row-expand/expand-cell';
-import SelectionCell from '../src/row-selection/selection-cell';
-import RowAggregator from '../src/row-aggregator';
-import Row from '../src/row';
+import mockBodyResolvedProps from '../test-helpers/mock/body-resolved-props';
+import SelectionContext from '../../src/contexts/selection-context';
+import ExpansionContext from '../../src/contexts/row-expand-context';
+import bindSelection from '../../src/row-selection/row-consumer';
+import bindExpansion from '../../src/row-expand/row-binder';
+import ExpandCell from '../../src/row-expand/expand-cell';
+import SelectionCell from '../../src/row-selection/selection-cell';
+import RowAggregator from '../../src/row/aggregate-row';
 
 describe('Row Aggregator', () => {
   let wrapper;
@@ -108,9 +107,9 @@ describe('Row Aggregator', () => {
       });
 
       it('should add onClick prop to Row Component', () => {
-        const rowComp = wrapper.find(Row);
-        expect(rowComp).toHaveLength(1);
-        expect(rowComp.props().attrs.onClick).toBeDefined();
+        const tr = wrapper.find('tr');
+        expect(tr).toHaveLength(1);
+        expect(tr.props().onClick).toBeDefined();
       });
     });
   });
