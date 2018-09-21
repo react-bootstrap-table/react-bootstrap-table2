@@ -23,8 +23,8 @@ export default ExtendBase =>
       const shouldUpdate =
         this.props.rowIndex !== nextProps.rowIndex ||
         this.props.editable !== nextProps.editable ||
-        !_.isEqual(this.props.row, nextProps.row ||
-        this.props.columns.length !== nextProps.columns.length);
+        !_.isEqual(this.props.row, nextProps.row) ||
+        this.props.columns.length !== nextProps.columns.length;
 
       return shouldUpdate;
     }

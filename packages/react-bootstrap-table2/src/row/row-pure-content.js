@@ -7,10 +7,8 @@ import Cell from '../cell';
 
 export default class RowPureContent extends React.Component {
   shouldComponentUpdate(nextProps) {
-    if (typeof this.props.shouldUpdate !== 'undefined') {
-      if (nextProps.shouldUpdate === this.props.shouldUpdate) {
-        return false;
-      }
+    if (typeof nextProps.shouldUpdate !== 'undefined') {
+      return nextProps.shouldUpdate;
     }
     return true;
   }
