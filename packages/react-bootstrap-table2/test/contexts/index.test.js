@@ -112,6 +112,7 @@ describe('Context', () => {
           Provider: CellEditContext.Provider,
           Consumer: CellEditContext.Consumer
         }),
+        options: {},
         bindCellLevelCellEdit: jest.fn().mockReturnValue(() => null),
         createEditingCell: jest.fn().mockReturnValue(() => null),
         bindRowLevelCellEdit: jest.fn().mockReturnValue(() => null)

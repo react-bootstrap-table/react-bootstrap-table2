@@ -3,13 +3,13 @@ import React from 'react';
 import { mount } from 'enzyme';
 
 import SelectionContext from '../../src/contexts/selection-context';
-import bindSelection from '../../src/row-selection/row-binder';
+import withSelectionConsumer from '../../src/row-selection/row-consumer';
 
-describe('Selection Row Binder', () => {
+describe('withSelectionConsumer', () => {
   let wrapper;
   let selectRow;
   const BaseComponent = () => null;
-  const WithSelectionComponent = bindSelection(props => <BaseComponent { ...props } />);
+  const WithSelectionComponent = withSelectionConsumer(props => <BaseComponent { ...props } />);
 
   const data = [{
     id: 1,

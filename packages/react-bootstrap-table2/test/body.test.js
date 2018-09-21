@@ -4,10 +4,10 @@ import sinon from 'sinon';
 import { shallow, mount } from 'enzyme';
 
 import Body from '../src/body';
-import Row from '../src/row';
-import RowAggregator from '../src/row-aggregator';
+import Row from '../src/row/simple-row';
+import RowAggregator from '../src/row/aggregate-row';
 import Const from '../src/const';
-import RowSection from '../src/row-section';
+import RowSection from '../src/row/row-section';
 import SelectionContext from '../src/contexts/selection-context';
 import ExpansionContext from '../src/contexts/row-expand-context';
 import mockBodyResolvedProps from './test-helpers/mock/body-resolved-props';
@@ -255,12 +255,11 @@ describe('Body', () => {
   });
 
   describe('when cellEdit.createContext props is defined', () => {
-    const CellComponent = () => null;
     const EditingCellComponent = () => null;
     const RowComponent = props => <Row { ...props } />;
     const cellEdit = {
+      options: { onStartEdit: jest.fn() },
       createContext: jest.fn(),
-      bindCellLevelCellEdit: jest.fn().mockReturnValue(CellComponent),
       createEditingCell: jest.fn().mockReturnValue(EditingCellComponent),
       bindRowLevelCellEdit: jest.fn().mockReturnValue(RowComponent)
     };
@@ -278,12 +277,10 @@ describe('Body', () => {
 
     it('should render Row Component correctly', () => {
       expect(wrapper.length).toBe(1);
-      expect(cellEdit.bindCellLevelCellEdit).toHaveBeenCalledTimes(1);
       expect(cellEdit.createEditingCell).toHaveBeenCalledTimes(1);
       expect(cellEdit.bindRowLevelCellEdit).toHaveBeenCalledTimes(1);
       expect(wrapper.find(RowComponent)).toHaveLength(2);
       const aRowElement = wrapper.find(RowComponent).get(0);
-      expect(aRowElement.props.CellComponent).toBeDefined();
       expect(aRowElement.props.EditingCellComponent).toBeDefined();
     });
   });
