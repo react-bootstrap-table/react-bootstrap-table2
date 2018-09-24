@@ -15,8 +15,7 @@ class Row extends shouldUpdater(eventDelegater(Component)) {
 
   shouldComponentUpdate(nextProps) {
     this.shouldUpdateRowContent = false;
-    this.shouldUpdateRowContent =
-      this.shouldUpdateByWhenEditing(nextProps) || this.shouldUpdatedByNormalProps(nextProps);
+    this.shouldUpdateRowContent = this.shouldUpdateChild(nextProps);
     if (this.shouldUpdateRowContent) return true;
 
     return this.shouldUpdatedBySelfProps(nextProps);

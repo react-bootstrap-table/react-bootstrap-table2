@@ -12,8 +12,8 @@ describe('Row shouldUpdater', () => {
     render() { return null; }
   }
 
-  describe('shouldUpdateByWhenEditing', () => {
-    describe('when nextProps.editingRowIdx eq props.rowIndex and it\' not null', () => {
+  describe('shouldUpdateByCellEditing', () => {
+    describe('when nextProps.clickToEdit and nexrProps.dbclickToEdit both are negative', () => {
       beforeEach(() => {
         props = {
           editingRowIdx: null,
@@ -22,15 +22,31 @@ describe('Row shouldUpdater', () => {
         wrapper = shallow(<DummyComponent { ...props } />);
       });
 
+      it('should always return false', () => {
+        nextProps = { ...props, editingRowIdx: 0 };
+        expect(wrapper.instance().shouldUpdateByCellEditing(nextProps)).toBeFalsy();
+      });
+    });
+    describe('when nextProps.editingRowIdx eq props.rowIndex and it\' not null', () => {
+      beforeEach(() => {
+        props = {
+          clickToEdit: true,
+          editingRowIdx: null,
+          rowIndex: 0
+        };
+        wrapper = shallow(<DummyComponent { ...props } />);
+      });
+
       it('should return true', () => {
         nextProps = { ...props, editingRowIdx: 0 };
-        expect(wrapper.instance().shouldUpdateByWhenEditing(nextProps)).toBeTruthy();
+        expect(wrapper.instance().shouldUpdateByCellEditing(nextProps)).toBeTruthy();
       });
     });
 
     describe('when props.editingRowIdx eq props.rowIndex but nextProps.editingRowIdx is null', () => {
       beforeEach(() => {
         props = {
+          clickToEdit: true,
           editingRowIdx: 0,
           rowIndex: 0
         };
@@ -39,7 +55,7 @@ describe('Row shouldUpdater', () => {
 
       it('should return true', () => {
         nextProps = { ...props, editingRowIdx: null };
-        expect(wrapper.instance().shouldUpdateByWhenEditing(nextProps)).toBeTruthy();
+        expect(wrapper.instance().shouldUpdateByCellEditing(nextProps)).toBeTruthy();
       });
     });
   });

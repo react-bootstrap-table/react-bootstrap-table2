@@ -45,7 +45,7 @@ export default ExtendBase =>
           }
         };
 
-        if (DELAY_FOR_DBCLICK) {
+        if (DELAY_FOR_DBCLICK && selectRow.clickToEdit) {
           this.clickNum += 1;
           _.debounce(() => {
             if (this.clickNum === 1) {

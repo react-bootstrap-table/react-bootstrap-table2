@@ -31,13 +31,12 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
       this.props.selected !== nextProps.selected ||
       this.props.expanded !== nextProps.expanded ||
       this.props.selectable !== nextProps.selectable ||
-      this.shouldUpdateByWhenEditing(nextProps) ||
       this.shouldUpdatedBySelfProps(nextProps)
     ) {
-      this.shouldUpdateRowContent = this.shouldUpdatedByNormalProps(nextProps);
+      this.shouldUpdateRowContent = this.shouldUpdateChild(nextProps);
       return true;
     }
-    this.shouldUpdateRowContent = this.shouldUpdatedByNormalProps(nextProps);
+    this.shouldUpdateRowContent = this.shouldUpdateChild(nextProps);
 
     return this.shouldUpdateRowContent;
   }

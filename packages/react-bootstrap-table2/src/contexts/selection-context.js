@@ -22,7 +22,7 @@ class SelectionProvider extends React.Component {
     }
   }
 
-  state = { selected: (this.props.selectRow && this.props.selectRow.selected) || [] };
+  state = { selected: this.props.selectRow.selected || [] };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.selectRow) {

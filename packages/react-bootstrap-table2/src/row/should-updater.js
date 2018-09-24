@@ -3,7 +3,8 @@ import _ from '../utils';
 
 export default ExtendBase =>
   class RowShouldUpdater extends ExtendBase {
-    shouldUpdateByWhenEditing(nextProps) {
+    shouldUpdateByCellEditing(nextProps) {
+      if (!(this.props.clickToEdit || this.props.dbclickToEdit)) return false;
       return (
         nextProps.editingRowIdx === nextProps.rowIndex ||
         (this.props.editingRowIdx === nextProps.rowIndex &&
@@ -27,5 +28,10 @@ export default ExtendBase =>
         this.props.columns.length !== nextProps.columns.length;
 
       return shouldUpdate;
+    }
+
+    shouldUpdateChild(nextProps) {
+      return this.shouldUpdateByCellEditing(nextProps) ||
+        this.shouldUpdatedByNormalProps(nextProps);
     }
   };
