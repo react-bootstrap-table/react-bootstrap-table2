@@ -59,7 +59,7 @@ class Body extends React.Component {
       }
 
       if (cellEdit.createContext) {
-        RowComponent = cellEdit.bindRowLevelCellEdit(RowComponent, selectRowEnabled, keyField, _);
+        RowComponent = cellEdit.withRowLevelCellEdit(RowComponent, selectRowEnabled, keyField, _);
         additionalRowProps.EditingCellComponent = this.EditingCell;
       }
 

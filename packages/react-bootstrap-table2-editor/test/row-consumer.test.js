@@ -4,12 +4,12 @@ import { mount } from 'enzyme';
 import _ from 'react-bootstrap-table-next/src/utils';
 import op from 'react-bootstrap-table-next/src/store/operators';
 
-import cellEditFactory from '../index';
+import cellEditFactory from '..';
 import { CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT, DELAY_FOR_DBCLICK } from '../src/const';
 import createCellEditContext from '../src/context';
-import bindCellEditing from '../src/row-binder';
+import withRowLevelCellEdit from '../src/row-consumer';
 
-describe('Row Binder', () => {
+describe('Row Consumer', () => {
   let wrapper;
   let cellEdit;
   const data = [{
@@ -28,7 +28,7 @@ describe('Row Binder', () => {
 
   describe('if cellEdit.nonEditableRows is undefined', () => {
     beforeEach(() => {
-      const WithCellEditComponent = bindCellEditing(
+      const WithCellEditComponent = withRowLevelCellEdit(
         props => <BaseComponent { ...props } />,
         false
       );
@@ -52,7 +52,7 @@ describe('Row Binder', () => {
     const nonEditableRows = jest.fn().mockReturnValue([value]);
     describe('if value prop is match in one of cellEdit.nonEditableRows', () => {
       beforeEach(() => {
-        const WithCellEditComponent = bindCellEditing(
+        const WithCellEditComponent = withRowLevelCellEdit(
           props => <BaseComponent { ...props } />,
           false
         );
@@ -72,7 +72,7 @@ describe('Row Binder', () => {
 
     describe('if value prop is not match in one of cellEdit.nonEditableRows', () => {
       beforeEach(() => {
-        const WithCellEditComponent = bindCellEditing(
+        const WithCellEditComponent = withRowLevelCellEdit(
           props => <BaseComponent { ...props } />,
           false
         );
@@ -93,7 +93,7 @@ describe('Row Binder', () => {
 
   describe(`if selectRowEnabled argument is true and cellEdit.mode is ${DBCLICK_TO_CELL_EDIT}`, () => {
     beforeEach(() => {
-      const WithCellEditComponent = bindCellEditing(
+      const WithCellEditComponent = withRowLevelCellEdit(
         props => <BaseComponent { ...props } />,
         true
       );
@@ -115,7 +115,7 @@ describe('Row Binder', () => {
     const ridx = 0;
     const cidx = 1;
     beforeEach(() => {
-      const WithCellEditComponent = bindCellEditing(
+      const WithCellEditComponent = withRowLevelCellEdit(
         props => <BaseComponent { ...props } />,
         false
       );

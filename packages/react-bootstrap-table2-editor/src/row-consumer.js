@@ -30,9 +30,14 @@ export default (Component, selectRowEnabled) => {
       />
     );
   };
-  return props => (
-    <Consumer>
-      { cellEdit => renderWithCellEdit(props, cellEdit) }
-    </Consumer>
-  );
+  function withConsumer(props) {
+    return (
+      <Consumer>
+        { cellEdit => renderWithCellEdit(props, cellEdit) }
+      </Consumer>
+    );
+  }
+
+  withConsumer.displayName = 'WithCellEditingRowConsumer';
+  return withConsumer;
 };

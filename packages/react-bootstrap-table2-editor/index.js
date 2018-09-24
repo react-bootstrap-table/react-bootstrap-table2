@@ -1,5 +1,5 @@
 import createContext from './src/context';
-import bindRowLevelCellEdit from './src/row-binder';
+import withRowLevelCellEdit from './src/row-consumer';
 import createEditingCell from './src/editing-cell-binder';
 import {
   EDITTYPE,
@@ -10,7 +10,7 @@ import {
 export default (options = {}) => ({
   createContext,
   createEditingCell,
-  bindRowLevelCellEdit,
+  withRowLevelCellEdit,
   DBCLICK_TO_CELL_EDIT,
   DELAY_FOR_DBCLICK,
   options

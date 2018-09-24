@@ -261,7 +261,7 @@ describe('Body', () => {
       options: { onStartEdit: jest.fn() },
       createContext: jest.fn(),
       createEditingCell: jest.fn().mockReturnValue(EditingCellComponent),
-      bindRowLevelCellEdit: jest.fn().mockReturnValue(RowComponent)
+      withRowLevelCellEdit: jest.fn().mockReturnValue(RowComponent)
     };
     beforeEach(() => {
       wrapper = shallow(
@@ -278,7 +278,7 @@ describe('Body', () => {
     it('should render Row Component correctly', () => {
       expect(wrapper.length).toBe(1);
       expect(cellEdit.createEditingCell).toHaveBeenCalledTimes(1);
-      expect(cellEdit.bindRowLevelCellEdit).toHaveBeenCalledTimes(1);
+      expect(cellEdit.withRowLevelCellEdit).toHaveBeenCalledTimes(1);
       expect(wrapper.find(RowComponent)).toHaveLength(2);
       const aRowElement = wrapper.find(RowComponent).get(0);
       expect(aRowElement.props.EditingCellComponent).toBeDefined();

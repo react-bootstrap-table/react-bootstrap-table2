@@ -113,9 +113,8 @@ describe('Context', () => {
           Consumer: CellEditContext.Consumer
         }),
         options: {},
-        bindCellLevelCellEdit: jest.fn().mockReturnValue(() => null),
         createEditingCell: jest.fn().mockReturnValue(() => null),
-        bindRowLevelCellEdit: jest.fn().mockReturnValue(() => null)
+        withRowLevelCellEdit: jest.fn().mockReturnValue(() => null)
       };
       wrapper = shallow(
         <BootstrapTable
