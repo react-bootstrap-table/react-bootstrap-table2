@@ -18,7 +18,9 @@ const columns = [{
 }];
 
 const selectRow = {
-  mode: 'checkbox'
+  mode: 'checkbox',
+  clickToSelect: true,
+  clickToExpand: true
 };
 
 const expandRow = {
@@ -48,7 +50,8 @@ const columns = [{
 
 const selectRow = {
   mode: 'checkbox',
-  clickToSelect: true
+  clickToSelect: true,
+  clickToExpand: true
 };
 
 const expandRow = {
@@ -67,6 +70,7 @@ const expandRow = {
   data={ products }
   columns={ columns }
   selectRow={ selectRow }
+  expandRow={ expandRow }
 />
 `;
 

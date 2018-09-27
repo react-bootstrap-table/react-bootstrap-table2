@@ -1,4 +1,5 @@
 import _ from '../utils';
+import Const from '../const';
 
 const events = [
   'onClick',
@@ -38,14 +39,19 @@ export default ExtendBase =>
           }
           const key = _.get(row, keyField);
           if (expandRow && expandable) {
-            expandRow.onRowExpand(key, !expanded, rowIndex, e);
+            if (
+              (selectRow.mode !== Const.ROW_SELECT_DISABLED && selectRow.clickToExpand) ||
+              selectRow.mode === Const.ROW_SELECT_DISABLED
+            ) {
+              expandRow.onRowExpand(key, !expanded, rowIndex, e);
+            }
           }
           if (selectRow.clickToSelect && selectable) {
             selectRow.onRowSelect(key, !selected, rowIndex, e);
           }
         };
 
-        if (DELAY_FOR_DBCLICK && selectRow.clickToEdit) {
+        if (DELAY_FOR_DBCLICK) {
           this.clickNum += 1;
           _.debounce(() => {
             if (this.clickNum === 1) {

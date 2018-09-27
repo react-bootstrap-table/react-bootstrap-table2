@@ -215,7 +215,7 @@ describe('Row Aggregator', () => {
       });
     });
 
-    describe('if props.expandRow.renderer is defined', () => {
+    describe('if props.expandRow is not defined', () => {
       describe('but expandable props is false', () => {
         const expandRow = { renderer: jest.fn(), nonExpandable: [row[keyField]] };
         beforeEach(() => {
@@ -235,7 +235,7 @@ describe('Row Aggregator', () => {
       });
     });
 
-    describe('if props.expandRow.renderer is defined', () => {
+    describe('if props.expandRow is defined', () => {
       const expandRow = { renderer: jest.fn() };
       beforeEach(() => {
         wrapper = mount(
@@ -252,7 +252,7 @@ describe('Row Aggregator', () => {
       });
     });
 
-    describe('if props.attrs.onClick and props.expandRow.renderer both are defined', () => {
+    describe('if props.attrs.onClick and props.expandRow both are defined', () => {
       const attrs = { onClick: jest.fn() };
       const expandRow = { renderer: jest.fn() };
 
