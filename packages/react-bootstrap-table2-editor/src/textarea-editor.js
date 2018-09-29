@@ -10,9 +10,10 @@ class TextAreaEditor extends Component {
   }
 
   componentDidMount() {
-    const { defaultValue, didMount } = this.props;
+    const { defaultValue, didMount, autoSelectText } = this.props;
     this.text.value = defaultValue;
     this.text.focus();
+    if (autoSelectText) this.text.select();
     if (didMount) didMount();
   }
 
@@ -28,7 +29,7 @@ class TextAreaEditor extends Component {
   }
 
   render() {
-    const { defaultValue, didMount, className, ...rest } = this.props;
+    const { defaultValue, didMount, className, autoSelectText, ...rest } = this.props;
     const editorClass = cs('form-control editor edit-textarea', className);
     return (
       <textarea
@@ -52,11 +53,13 @@ TextAreaEditor.propTypes = {
     PropTypes.number
   ]),
   onKeyDown: PropTypes.func,
+  autoSelectText: PropTypes.bool,
   didMount: PropTypes.func
 };
 TextAreaEditor.defaultProps = {
   className: '',
   defaultValue: '',
+  autoSelectText: false,
   onKeyDown: undefined,
   didMount: undefined
 };
