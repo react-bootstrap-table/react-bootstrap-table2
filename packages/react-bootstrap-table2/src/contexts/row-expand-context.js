@@ -25,12 +25,13 @@ export default (
     }
 
     handleRowExpand = (rowKey, expanded, rowIndex, e) => {
-      const { data, keyField, expandRow: { onExpand } } = this.props;
+      const { data, keyField, expandRow: { onExpand, onlyOneExpanding } } = this.props;
 
       let currExpanded = [...this.state.expanded];
 
       if (expanded) {
-        currExpanded.push(rowKey);
+        if (onlyOneExpanding) currExpanded = [rowKey];
+        else currExpanded.push(rowKey);
       } else {
         currExpanded = currExpanded.filter(value => value !== rowKey);
       }
