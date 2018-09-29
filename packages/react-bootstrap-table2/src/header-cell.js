@@ -49,6 +49,7 @@ const HeaderCell = (props) => {
 
   if (headerStyle) {
     cellStyle = _.isFunction(headerStyle) ? headerStyle(column, index) : headerStyle;
+    cellStyle = cellStyle ? { ...cellStyle } : cellStyle;
   }
 
   if (headerTitle) {
