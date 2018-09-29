@@ -63,6 +63,22 @@ const { SearchBar } = Search;
 
 ### Search Options
 
+#### defaultSearch - [string]
+Accept a string that will be used for default searching when first time table render.
+
+```js
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search={ {
+    defaultSearch: 'search something here'
+  } }
+>
+  // ...
+</ToolkitProvider>
+```
+
 #### searchFormatted - [bool]
 If you want to search on the formatted data, you are supposed to enable this props. `react-bootstrap-table2` will check if you define the `column.formatter` when doing search.
 

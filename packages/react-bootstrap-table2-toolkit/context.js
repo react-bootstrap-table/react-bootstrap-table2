@@ -17,6 +17,7 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
     search: PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.shape({
+        defaultSearch: PropTypes.string,
         searchFormatted: PropTypes.bool
       })
     ]),
@@ -42,7 +43,7 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
   constructor(props) {
     super(props);
     this.state = {
-      searchText: ''
+      searchText: typeof props.search === 'object' ? (props.search.defaultSearch || '') : ''
     };
     this._ = null;
     this.onSearch = this.onSearch.bind(this);
@@ -85,6 +86,7 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
     return (
       <ToolkitContext.Provider value={ {
         searchProps: {
+          searchText: this.state.searchText,
           onSearch: this.onSearch
         },
         csvProps: {
