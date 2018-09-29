@@ -104,6 +104,22 @@ describe('<SelectionHeaderCell />', () => {
   });
 
   describe('render', () => {
+    describe('when props.hideSelectAll is true', () => {
+      beforeEach(() => {
+        const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;
+
+        wrapper = shallow(
+          <SelectionHeaderCell mode="checkbox" checkedStatus={ checkedStatus } hideSelectAll />
+        );
+      });
+
+      it('should render empty th element', () => {
+        expect(wrapper.find('th').length).toBe(1);
+        expect(wrapper.find('th[data-row-selection]').length).toBe(1);
+        expect(wrapper.find(CheckBox).length).toBe(0);
+      });
+    });
+
     describe('when props.mode is radio', () => {
       beforeEach(() => {
         const checkedStatus = Const.CHECKBOX_STATUS_CHECKED;

@@ -146,6 +146,7 @@ BootstrapTable.propTypes = {
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired,
     clickToSelect: PropTypes.bool,
     clickToEdit: PropTypes.bool,
+    hideSelectAll: PropTypes.bool,
     onSelect: PropTypes.func,
     onSelectAll: PropTypes.func,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
