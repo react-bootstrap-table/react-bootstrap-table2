@@ -220,6 +220,25 @@ describe('DataContext', () => {
       it('should set state.selected correctly', () => {
         expect(wrapper.state('selected')).toEqual(data.map(d => d[keyField]));
       });
+
+      describe('when selectRow.onSelectAll is defined', () => {
+        const onSelectAll = jest.fn();
+        beforeEach(() => {
+          wrapper = shallow(shallowContext({
+            ...defaultSelectRow,
+            onSelectAll
+          }));
+          wrapper.instance().handleAllRowsSelect(e, false);
+        });
+
+        it('should call selectRow.onSelectAll correctly', () => {
+          expect(onSelectAll).toHaveBeenCalledWith(
+            true,
+            dataOperator.getSelectedRows(data, keyField, wrapper.state('selected')),
+            e
+          );
+        });
+      });
     });
 
     describe('when isUnSelect argument is true', () => {
@@ -234,24 +253,25 @@ describe('DataContext', () => {
       it('should set state.selected correctly', () => {
         expect(wrapper.state('selected')).toEqual([]);
       });
-    });
 
-    describe('when selectRow.onSelectAll is defined', () => {
-      const onSelectAll = jest.fn();
-      beforeEach(() => {
-        wrapper = shallow(shallowContext({
-          ...defaultSelectRow,
-          onSelectAll
-        }));
-        wrapper.instance().handleAllRowsSelect(e, false);
-      });
+      describe('when selectRow.onSelectAll is defined', () => {
+        const onSelectAll = jest.fn();
+        beforeEach(() => {
+          wrapper = shallow(shallowContext({
+            ...defaultSelectRow,
+            selected: data.map(d => d[keyField]),
+            onSelectAll
+          }));
+          wrapper.instance().handleAllRowsSelect(e, true);
+        });
 
-      it('should call selectRow.onSelectAll correctly', () => {
-        expect(onSelectAll).toHaveBeenCalledWith(
-          true,
-          dataOperator.getSelectedRows(data, keyField, wrapper.state('selected')),
-          e
-        );
+        it('should call selectRow.onSelectAll correctly', () => {
+          expect(onSelectAll).toHaveBeenCalledWith(
+            false,
+            dataOperator.getSelectedRows(data, keyField, data.map(d => d[keyField])),
+            e
+          );
+        });
       });
     });
   });
