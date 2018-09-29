@@ -137,6 +137,7 @@ import CustomPaginationTable from 'examples/pagination/custom-pagination';
 
 // search
 import SearchTable from 'examples/search';
+import DefaultSearch from 'examples/search/default-search';
 import DefaultCustomSearch from 'examples/search/default-custom-search';
 import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
@@ -323,6 +324,7 @@ storiesOf('Pagination', module)
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())
   .add('Basic Search Table', () => <SearchTable />)
+  .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Fromatted Value', () => <SearchFormattedData />)
