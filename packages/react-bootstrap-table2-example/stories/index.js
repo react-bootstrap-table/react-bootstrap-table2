@@ -116,6 +116,7 @@ import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-sele
 import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
+import HideSelectAllTable from 'examples/row-selection/hide-select-all';
 import CustomSelectionTable from 'examples/row-selection/custom-selection';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
@@ -300,6 +301,7 @@ storiesOf('Row Selection', module)
   .add('Selection without Data', () => <SelectionNoDataTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
+  .add('Hide Select All', () => <HideSelectAllTable />)
   .add('Custom Selection', () => <CustomSelectionTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
