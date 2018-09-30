@@ -5,9 +5,10 @@ import PropTypes from 'prop-types';
 
 class TextEditor extends Component {
   componentDidMount() {
-    const { defaultValue, didMount } = this.props;
+    const { defaultValue, didMount, autoSelectText } = this.props;
     this.text.value = defaultValue;
     this.text.focus();
+    if (autoSelectText) this.text.select();
     if (didMount) didMount();
   }
 
@@ -16,7 +17,7 @@ class TextEditor extends Component {
   }
 
   render() {
-    const { defaultValue, didMount, className, ...rest } = this.props;
+    const { defaultValue, didMount, className, autoSelectText, ...rest } = this.props;
     const editorClass = cs('form-control editor edit-text', className);
     return (
       <input
@@ -38,11 +39,13 @@ TextEditor.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]),
+  autoSelectText: PropTypes.bool,
   didMount: PropTypes.func
 };
 TextEditor.defaultProps = {
   className: null,
   defaultValue: '',
+  autoSelectText: false,
   didMount: undefined
 };
 export default TextEditor;

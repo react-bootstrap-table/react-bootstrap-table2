@@ -47,6 +47,7 @@ const SearchBar = ({
       style={ style }
       onKeyUp={ () => debounceCallback() }
       className={ `form-control ${className}` }
+      defaultValue={ searchText }
       placeholder={ placeholder || SearchBar.defaultProps.placeholder }
       { ...rest }
     />

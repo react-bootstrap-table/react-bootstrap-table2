@@ -10,6 +10,7 @@ $ npm install react-bootstrap-table2-editor --save
 * [blurToSave](#blurToSave)
 * [nonEditableRows](#nonEditableRows)
 * [timeToCloseMessage](#timeToCloseMessage)
+* [autoSelectText](#autoSelectText)
 * [beforeSaveCell](#beforeSaveCell)
 * [afterSaveCell](#afterSaveCell)
 * [errorMessage](#errorMessage)
@@ -42,6 +43,11 @@ Default is `false`, enable it will be able to save the cell automatically when b
 
 ### <a name='nonEditableRows'>cellEdit.nonEditableRows - [Function]</a>
 `cellEdit.nonEditableRows` accept a callback function and expect return an array which used to restrict all the columns of some rows as non-editable. So the each item in return array should be rowkey(`keyField`)
+
+### <a name='autoSelectText'>cellEdit.autoSelectText - [Bool]</a>
+Default is false, when enable it, `react-bootstrap-table2` will help you to select the text in the text input automatically when editing.
+
+> NOTE: This props only work for `text` and `textarea`.
 
 ### <a name='timeToCloseMessage'>cellEdit.timeToCloseMessage - [Function]</a>
 If a [`column.validator`](./columns.md#validator) defined and the new value is invalid, `react-bootstrap-table2` will popup a alert at the bottom of editor. `cellEdit.timeToCloseMessage` is a chance to let you decide how long the alert should be stay. Default is 3000 millisecond.

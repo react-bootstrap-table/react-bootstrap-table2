@@ -146,6 +146,7 @@ BootstrapTable.propTypes = {
     mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired,
     clickToSelect: PropTypes.bool,
     clickToEdit: PropTypes.bool,
+    hideSelectAll: PropTypes.bool,
     onSelect: PropTypes.func,
     onSelectAll: PropTypes.func,
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
@@ -165,6 +166,7 @@ BootstrapTable.propTypes = {
     onExpandAll: PropTypes.func,
     nonExpandable: PropTypes.array,
     showExpandColumn: PropTypes.bool,
+    onlyOneExpanding: PropTypes.bool,
     expandColumnRenderer: PropTypes.func,
     expandHeaderColumnRenderer: PropTypes.func
   }),

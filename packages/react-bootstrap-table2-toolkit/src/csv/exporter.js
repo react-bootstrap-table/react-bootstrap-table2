@@ -58,7 +58,7 @@ export const save = (
   }
 ) => {
   FileSaver.saveAs(
-    new Blob(['\ufeff', content], { type: 'text/plain;charset=utf-8' }),
+    new Blob([content], { type: 'text/plain;charset=utf-8' }),
     fileName,
     noAutoBOM
   );

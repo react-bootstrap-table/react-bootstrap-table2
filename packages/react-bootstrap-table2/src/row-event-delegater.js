@@ -5,7 +5,8 @@ const events = [
   'onClick',
   'onDoubleClick',
   'onMouseEnter',
-  'onMouseLeave'
+  'onMouseLeave',
+  'onContextMenu'
 ];
 
 export default ExtendBase =>

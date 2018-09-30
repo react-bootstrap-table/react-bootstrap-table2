@@ -24,6 +24,7 @@ export default (_, onStartEdit) =>
       onUpdate: PropTypes.func.isRequired,
       onEscape: PropTypes.func.isRequired,
       timeToCloseMessage: PropTypes.number,
+      autoSelectText: PropTypes.bool,
       className: PropTypes.string,
       style: PropTypes.object
     }
@@ -31,6 +32,7 @@ export default (_, onStartEdit) =>
     static defaultProps = {
       timeToCloseMessage: TIME_TO_CLOSE_MESSAGE,
       className: null,
+      autoSelectText: false,
       style: {}
     }
 
@@ -121,7 +123,7 @@ export default (_, onStartEdit) =>
 
     render() {
       let editor;
-      const { row, column, className, style, rowIndex, columnIndex } = this.props;
+      const { row, column, className, style, rowIndex, columnIndex, autoSelectText } = this.props;
       const { dataField } = column;
 
       const value = _.get(row, dataField);
@@ -174,13 +176,13 @@ export default (_, onStartEdit) =>
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.SELECT) {
         editor = <DropdownEditor { ...editorProps } />;
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.TEXTAREA) {
-        editor = <TextAreaEditor { ...editorProps } />;
+        editor = <TextAreaEditor { ...editorProps } autoSelectText={ autoSelectText } />;
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.CHECKBOX) {
         editor = <CheckBoxEditor { ...editorProps } />;
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.DATE) {
         editor = <DateEditor { ...editorProps } />;
       } else {
-        editor = <TextEditor { ...editorProps } />;
+        editor = <TextEditor { ...editorProps } autoSelectText={ autoSelectText } />;
       }
 
       return (

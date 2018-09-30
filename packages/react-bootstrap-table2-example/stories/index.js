@@ -97,6 +97,7 @@ import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
 import CellEditStyleTable from 'examples/cell-edit/cell-edit-style-table';
 import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
+import AutoSelectTextInput from 'examples/cell-edit/auto-select-text-input-table';
 import EditorStyleTable from 'examples/cell-edit/editor-style-table';
 import EditorClassTable from 'examples/cell-edit/editor-class-table';
 import DropdownEditorTable from 'examples/cell-edit/dropdown-editor-table';
@@ -115,6 +116,7 @@ import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-sele
 import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
+import HideSelectAllTable from 'examples/row-selection/hide-select-all';
 import CustomSelectionTable from 'examples/row-selection/custom-selection';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
@@ -126,6 +128,7 @@ import BasicRowExpand from 'examples/row-expand';
 import RowExpandManagement from 'examples/row-expand/expand-management';
 import NonExpandableRows from 'examples/row-expand/non-expandable-rows';
 import ExpandColumn from 'examples/row-expand/expand-column';
+import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
 
@@ -136,6 +139,7 @@ import CustomPaginationTable from 'examples/pagination/custom-pagination';
 
 // search
 import SearchTable from 'examples/search';
+import DefaultSearch from 'examples/search/default-search';
 import DefaultCustomSearch from 'examples/search/default-custom-search';
 import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
@@ -276,6 +280,7 @@ storiesOf('Cell Editing', module)
   .add('Cell Level Editable', () => <CellLevelEditable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
   .add('Validation', () => <CellEditValidator />)
+  .add('Auto Select Text Input', () => <AutoSelectTextInput />)
   .add('Custom Cell Style', () => <CellEditStyleTable />)
   .add('Custom Cell Classes', () => <CellEditClassTable />)
   .add('Custom Editor Classes', () => <EditorClassTable />)
@@ -297,6 +302,7 @@ storiesOf('Row Selection', module)
   .add('Selection without Data', () => <SelectionNoDataTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
+  .add('Hide Select All', () => <HideSelectAllTable />)
   .add('Custom Selection', () => <CustomSelectionTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
@@ -309,6 +315,7 @@ storiesOf('Row Expand', module)
   .add('Expand Management', () => <RowExpandManagement />)
   .add('Non Expandabled Rows', () => <NonExpandableRows />)
   .add('Expand Indicator', () => <ExpandColumn />)
+  .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Hooks', () => <ExpandHooks />);
 
@@ -321,6 +328,7 @@ storiesOf('Pagination', module)
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())
   .add('Basic Search Table', () => <SearchTable />)
+  .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Fromatted Value', () => <SearchFormattedData />)

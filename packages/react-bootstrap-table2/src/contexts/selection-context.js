@@ -80,7 +80,15 @@ export default (
       }
 
       if (onSelectAll) {
-        onSelectAll(!isUnSelect, dataOperator.getSelectedRows(data, keyField, currSelected), e);
+        onSelectAll(
+          !isUnSelect,
+          dataOperator.getSelectedRows(
+            data,
+            keyField,
+            isUnSelect ? this.state.selected : currSelected
+          ),
+          e
+        );
       }
 
       this.setState(() => ({ selected: currSelected }));

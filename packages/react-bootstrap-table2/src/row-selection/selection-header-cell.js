@@ -27,6 +27,7 @@ export default class SelectionHeaderCell extends Component {
     mode: PropTypes.string.isRequired,
     checkedStatus: PropTypes.string,
     onAllRowsSelect: PropTypes.func,
+    hideSelectAll: PropTypes.bool,
     selectionHeaderRenderer: PropTypes.func
   }
 
@@ -63,7 +64,10 @@ export default class SelectionHeaderCell extends Component {
       CHECKBOX_STATUS_CHECKED, CHECKBOX_STATUS_INDETERMINATE, ROW_SELECT_MULTIPLE
     } = Const;
 
-    const { mode, checkedStatus, selectionHeaderRenderer } = this.props;
+    const { mode, checkedStatus, selectionHeaderRenderer, hideSelectAll } = this.props;
+    if (hideSelectAll) {
+      return <th data-row-selection />;
+    }
 
     const checked = checkedStatus === CHECKBOX_STATUS_CHECKED;
 
