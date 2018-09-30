@@ -6,7 +6,7 @@ import HeaderCell from './header-cell';
 import SelectionHeaderCell from './row-selection/selection-header-cell';
 import ExpandHeaderCell from './row-expand/expand-header-cell';
 import withHeaderSelection from './row-selection/selection-header-cell-consumer';
-import bindExpansion from './row-expand/expand-header-cell-binder';
+import withHeaderExpansion from './row-expand/expand-header-cell-consumer';
 
 const Header = (props) => {
   const {
@@ -26,7 +26,7 @@ const Header = (props) => {
   let ExpansionHeaderCellComp = () => null;
 
   if (expandRow.showExpandColumn) {
-    ExpansionHeaderCellComp = bindExpansion(ExpandHeaderCell);
+    ExpansionHeaderCellComp = withHeaderExpansion(ExpandHeaderCell);
   }
 
   if (selectRow) {

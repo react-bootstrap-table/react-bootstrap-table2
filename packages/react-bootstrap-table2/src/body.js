@@ -10,7 +10,7 @@ import RowAggregator from './row/aggregate-row';
 import RowSection from './row/row-section';
 import Const from './const';
 import withRowSelection from './row-selection/row-consumer';
-import bindExpansion from './row-expand/row-binder';
+import withRowExpansion from './row-expand/row-consumer';
 
 class Body extends React.Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class Body extends React.Component {
 
       const additionalRowProps = {};
       if (expandRowEnabled) {
-        RowComponent = bindExpansion(RowAggregator, visibleColumnSize);
+        RowComponent = withRowExpansion(RowAggregator, visibleColumnSize);
       }
 
       if (selectRowEnabled) {

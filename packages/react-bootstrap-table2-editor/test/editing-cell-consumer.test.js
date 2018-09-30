@@ -3,12 +3,12 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import _ from 'react-bootstrap-table-next/src/utils';
 
-import cellEditFactory from '../index';
+import cellEditFactory from '..';
 import { CLICK_TO_CELL_EDIT } from '../src/const';
 import createCellEditContext from '../src/context';
-import bindEditingCell from '../src/editing-cell-binder';
+import bindEditingCell from '../src/editing-cell-consumer';
 
-describe('Cell Binder', () => {
+describe('Editing Cell Consumer', () => {
   let wrapper;
   let cellEdit;
   const data = [{

@@ -5,7 +5,7 @@ import mockBodyResolvedProps from '../test-helpers/mock/body-resolved-props';
 import SelectionContext from '../../src/contexts/selection-context';
 import ExpansionContext from '../../src/contexts/row-expand-context';
 import bindSelection from '../../src/row-selection/row-consumer';
-import bindExpansion from '../../src/row-expand/row-binder';
+import bindExpansion from '../../src/row-expand/row-consumer';
 import ExpandCell from '../../src/row-expand/expand-cell';
 import SelectionCell from '../../src/row-selection/selection-cell';
 import RowAggregator from '../../src/row/aggregate-row';

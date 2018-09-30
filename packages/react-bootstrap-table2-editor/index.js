@@ -1,6 +1,6 @@
 import createContext from './src/context';
 import withRowLevelCellEdit from './src/row-consumer';
-import createEditingCell from './src/editing-cell-binder';
+import createEditingCell from './src/editing-cell-consumer';
 import {
   EDITTYPE,
   DBCLICK_TO_CELL_EDIT,
