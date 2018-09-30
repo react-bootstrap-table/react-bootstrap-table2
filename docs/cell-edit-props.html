@@ -23,6 +23,7 @@
 <li><a href="#celleditblurtosave-bool">blurToSave</a></li>
 <li><a href="#celleditnoneditablerows-function">nonEditableRows</a></li>
 <li><a href="#celledittimetoclosemessage-function">timeToCloseMessage</a></li>
+<li><a href="#celleditautoselecttext-bool">autoSelectText</a></li>
 <li><a href="#celleditbeforesavecell-function">beforeSaveCell</a></li>
 <li><a href="#celleditaftersavecell-function">afterSaveCell</a></li>
 <li><a href="#celleditonstartedit-function">onStartEdit</a></li>
@@ -38,6 +39,11 @@
 <p><code>cellEdit.nonEditableRows</code> accept a callback function and expect return an array which used to restrict all the columns of some rows as non-editable. So the each item in return array should be rowkey(<code>keyField</code>)</p>
 <h2><a class="anchor" aria-hidden="true" name="celledittimetoclosemessage-function"></a><a href="#celledittimetoclosemessage-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>cellEdit.timeToCloseMessage - [Function]</h2>
 <p>If a <a href="./column-props.html#columnvalidator-function"><code>column.validator</code></a> defined and the new value is invalid, <code>react-bootstrap-table2</code> will popup a alert at the bottom of editor. <code>cellEdit.timeToCloseMessage</code> is a chance to let you decide how long the alert should be stay. Default is 3000 millisecond.</p>
+<h2><a class="anchor" aria-hidden="true" name="celleditautoselecttext-bool"></a><a href="#celleditautoselecttext-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>cellEdit.autoSelectText - [Bool]</h2>
+<p>Default is false, when enable it, <code>react-bootstrap-table2</code> will help you to select the text in the text input automatically when editing.</p>
+<blockquote>
+<p>NOTE: This props only work for <code>text</code> and <code>textarea</code>.</p>
+</blockquote>
 <h2><a class="anchor" aria-hidden="true" name="celleditbeforesavecell-function"></a><a href="#celleditbeforesavecell-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>cellEdit.beforeSaveCell - [Function]</h2>
 <p>This callback function will be called before triggering cell update.</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> cellEdit = {
