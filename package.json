@@ -82,8 +82,8 @@
   "dependencies": {
     "classnames": "2.2.5",
     "prop-types": "15.5.10",
-    "react": "16.3.2",
-    "react-dom": "16.3.2",
+    "react": "16.4.0",
+    "react-dom": "16.4.0",
     "underscore": "1.9.1"
   },
   "jest": {
