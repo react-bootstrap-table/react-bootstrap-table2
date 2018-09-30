@@ -10,6 +10,7 @@ Table search in one of features supported by `react-bootstrap-table2-toolkit`. B
 
 ## Optional
 * [searchFormatted](#searchsearchformatted-bool)
+* [defaultSearch](#searchdefaultSearch-string)
 
 -----
 
@@ -29,3 +30,20 @@ If you want to search on the formatted data, you are supposed to enable this pro
   // ...
 </ToolkitProvider>
 ```
+
+## search.defaultSearch - [String]
+Accept a string that will be used for default searching when first time table render.
+
+ ```js
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search={ {
+    defaultSearch: 'search something here'
+  } }
+>
+  // ...
+</ToolkitProvider>
+```
+

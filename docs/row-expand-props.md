@@ -15,6 +15,7 @@ title: Row Expand Props
 * [onExpand](#expandrowonexpand-function)
 * [onExpandAll](#expandrowonexpandall-function)
 * [showExpandColumn](#expandrowshowexpandcolumn-bool)
+* [onlyOneExpanding](#expandrowonlyoneexpanding-bool)
 * [expandColumnRenderer](#expandrowexpandcolumnrenderer-function)
 * [expandHeaderColumnRenderer](#expandrowexpandheadercolumnrenderer-function)
 
@@ -99,6 +100,16 @@ Default is `false`, if you want to have a expand indicator, give this prop as `t
 const expandRow = {
   renderer: (row) => ...
   showExpandColumn: true
+};
+```
+
+## expandRow.onlyOneExpanding - [Bool]
+Default is `false`. Enable this will only allow one row get expand at the same time.
+
+ ```js
+const expandRow = {
+  renderer: (row) => ...
+  onlyOneExpanding: true
 };
 ```
 

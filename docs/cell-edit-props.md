@@ -23,6 +23,7 @@ const cellEdit = cellEditFactory({
 * [blurToSave](#celleditblurtosave-bool)
 * [nonEditableRows](#celleditnoneditablerows-function)
 * [timeToCloseMessage](#celledittimetoclosemessage-function)
+* [autoSelectText](#celleditautoselecttext-bool)
 * [beforeSaveCell](#celleditbeforesavecell-function)
 * [afterSaveCell](#celleditaftersavecell-function)
 * [onStartEdit](#celleditonstartedit-function)
@@ -42,6 +43,11 @@ Default is `false`, enable it will be able to save the cell automatically when b
 
 ## cellEdit.timeToCloseMessage - [Function]
 If a [`column.validator`](./column-props.html#columnvalidator-function) defined and the new value is invalid, `react-bootstrap-table2` will popup a alert at the bottom of editor. `cellEdit.timeToCloseMessage` is a chance to let you decide how long the alert should be stay. Default is 3000 millisecond.
+
+## cellEdit.autoSelectText - [Bool]
+Default is false, when enable it, `react-bootstrap-table2` will help you to select the text in the text input automatically when editing.
+
+ > NOTE: This props only work for `text` and `textarea`.
 
 ## cellEdit.beforeSaveCell - [Function]
 This callback function will be called before triggering cell update.

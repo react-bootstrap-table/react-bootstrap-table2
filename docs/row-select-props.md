@@ -28,6 +28,7 @@ const selectRow = {
 * [onSelect](#selectrowonselect-function)
 * [onSelectAll](#selectrowonselectall-function)
 * [hideSelectColumn](#selectrowhideselectcolumn-bool)
+* [hideSelectAll](#selectrowhideselectall-bool)
 * [selectionRenderer](#selectrowselectionrenderer-function)
 * [selectionHeaderRenderer](#selectrowselectionheaderrenderer-function)
 
@@ -192,6 +193,15 @@ const selectRow = {
   hideSelectColumn: true,
   clickToSelect: true,
   bgColor: 'red'
+};
+```
+
+## selectRow.hideSelectAll - [Bool]
+Default is `false`, if you don't want to render the select all checkbox ine the header of selection column, give this prop as `true`!
+ ```js
+const selectRow = {
+  mode: 'checkbox',
+  hideSelectAll: true
 };
 ```
 

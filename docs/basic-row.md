@@ -25,6 +25,7 @@ Currently, `react-bootstrap-table2` only wrapped up the following events to allo
 * `onDoubleClick`
 * `onMouseEnter`
 * `onMouseLeave`
+* `onContextMenu`
 
 ```js
 const rowEvents = {
@@ -35,7 +36,7 @@ const rowEvents = {
 <BootstrapTable data={ data } columns={ columns } rowEvents={ rowEvents } />
 ```
 
-Anyway, it's welcome to ask us to add more wrapped on events. 
+Anyway, it's welcome to ask us to add more wrapped events. 
 
 ## Row Attributes
 
