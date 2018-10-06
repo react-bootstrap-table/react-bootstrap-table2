@@ -24,6 +24,7 @@ const HeaderCell = (props) => {
   const {
     text,
     sort,
+    sortCaret,
     filter,
     filterRenderer,
     headerTitle,
@@ -69,7 +70,7 @@ const HeaderCell = (props) => {
     cellAttrs.className = cs(cellAttrs.className, 'sortable');
 
     if (sorting) {
-      sortSymbol = <SortCaret order={ sortOrder } />;
+      sortSymbol = sortCaret ? sortCaret(sortOrder, column) : <SortCaret order={ sortOrder } />;
 
       // append customized classes or style if table was sorting based on the current column.
       cellClasses = cs(
@@ -86,7 +87,7 @@ const HeaderCell = (props) => {
           : headerSortingStyle
       };
     } else {
-      sortSymbol = <SortSymbol />;
+      sortSymbol = sortCaret ? sortCaret(undefined, column) : <SortSymbol />;
     }
   }
 
@@ -151,6 +152,7 @@ HeaderCell.propTypes = {
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
+  sortCaret: PropTypes.func,
   isLastSorting: PropTypes.bool,
   onFilter: PropTypes.func,
   onExternalFilter: PropTypes.func
