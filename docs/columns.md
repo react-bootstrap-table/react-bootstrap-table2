@@ -13,6 +13,7 @@ Available properties in a column object:
 * [formatExtraData](#formatExtraData)
 * [sort](#sort)
 * [sortFunc](#sortFunc)
+* [sortCaret](#sortCaret)
 * [onSort](#onSort)
 * [classes](#classes)
 * [style](#style)
@@ -153,6 +154,20 @@ Enable the column sort via a `true` value given.
   }
 }
 ```
+
+## <a name='sortCaret'>column.sortCaret - [Function]</a>
+Use`column.sortCaret` to custom the sort caret. This callback function accept two arguments: `order` and `column`
+
+```js
+{
+  // omit...
+  sort: true,
+  sortCaret: (order, column) => {
+    return //...
+  }
+}
+```
+> The possible value of `order` argument is **`asc`**, **`desc`** and **`undefined`**.
 
 ## <a name='classes'>column.classes - [String | Function]</a>
 It's available to have custom class on table column:

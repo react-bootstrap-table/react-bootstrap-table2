@@ -84,6 +84,7 @@ import DefaultSortTable from 'examples/sort/default-sort-table';
 import DefaultSortDirectionTable from 'examples/sort/default-sort-direction';
 import SortEvents from 'examples/sort/sort-events';
 import CustomSortTable from 'examples/sort/custom-sort-table';
+import CustomSortCaretTable from 'examples/sort/custom-sort-caret';
 import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
 import HeaderSortingStyleTable from 'examples/sort/header-sorting-style';
 
@@ -269,6 +270,7 @@ storiesOf('Sort Table', module)
   .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
   .add('Sort Events', () => <SortEvents />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
+  .add('Custom Sort Caret', () => <CustomSortCaretTable />)
   .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
   .add('Custom Style on Sorting Header Column', () => <HeaderSortingStyleTable />);
 
