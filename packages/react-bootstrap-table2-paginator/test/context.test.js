@@ -160,6 +160,27 @@ describe('PaginationContext', () => {
       });
     });
 
+    describe('when remote pagination is enable', () => {
+      beforeEach(() => {
+        wrapper = shallow(shallowContext({ ...defaultPagination }, true));
+        instance = wrapper.instance();
+        wrapper.render();
+        nextProps = {
+          data,
+          pagination: { ...defaultPagination, options: { page: 3, sizePerPage: 5 } }
+        };
+        instance.componentWillReceiveProps(nextProps);
+      });
+
+      it('should always set currPage from nextProps.pagination.options.page', () => {
+        expect(instance.currPage).toEqual(nextProps.pagination.options.page);
+      });
+
+      it('should always set currSizePerPage from nextProps.pagination.options.sizePerPage', () => {
+        expect(instance.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
+      });
+    });
+
     describe('when page is not align', () => {
       beforeEach(() => {
         wrapper = shallow(shallowContext({
