@@ -66,6 +66,7 @@ const withContext = Base =>
         selectionProps
       ) => (
         <Base
+          ref={ n => this.table = n }
           { ...this.props }
           { ...selectionProps }
           { ...sortProps }
@@ -91,6 +92,7 @@ const withContext = Base =>
       ) => (
         <this.SelectionContext.Provider
           { ...baseProps }
+          ref={ n => this.selectionContext = n }
           selectRow={ this.props.selectRow }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         >
@@ -123,6 +125,7 @@ const withContext = Base =>
       ) => (
         <this.RowExpandContext.Provider
           { ...baseProps }
+          ref={ n => this.rowExpandContext = n }
           expandRow={ this.props.expandRow }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         >

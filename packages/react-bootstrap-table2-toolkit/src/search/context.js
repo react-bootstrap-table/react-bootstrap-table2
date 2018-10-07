@@ -39,8 +39,10 @@ export default (options = {
       const { data, columns } = this.props;
       let { searchText } = this.props;
 
-      if (isRemoteSearch() && this.performRemoteSearch) {
-        handleRemoteSearchChange(searchText);
+      if (isRemoteSearch()) {
+        if (this.performRemoteSearch) {
+          handleRemoteSearchChange(searchText);
+        }
         return data;
       }
 

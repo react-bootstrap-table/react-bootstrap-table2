@@ -403,6 +403,24 @@ describe('HeaderCell', () => {
       it('header should render SortSymbol as default', () => {
         expect(wrapper.find(SortSymbol).length).toBe(1);
       });
+
+      describe('when sortCaret is defined ', () => {
+        beforeEach(() => {
+          column = { ...column, sortCaret: jest.fn() };
+          wrapper = shallow(
+            <HeaderCell column={ column } index={ index } onSort={ onSortCallBack } />
+          );
+        });
+
+        it('header should not render SortSymbol', () => {
+          expect(wrapper.find(SortSymbol).length).toBe(0);
+        });
+
+        it('should call column.sortCaret correctly', () => {
+          expect(column.sortCaret).toHaveBeenCalledTimes(1);
+          expect(column.sortCaret).toHaveBeenCalledWith(undefined, column);
+        });
+      });
     });
 
     describe('and sorting prop is true', () => {
@@ -417,6 +435,30 @@ describe('HeaderCell', () => {
             expect(wrapper.find(SortCaret).length).toBe(1);
             expect(wrapper.find(SortCaret).prop('order')).toEqual(order);
           });
+        });
+      });
+
+      describe('when sortCaret is defined ', () => {
+        beforeEach(() => {
+          column = { ...column, sortCaret: jest.fn() };
+          wrapper = shallow(
+            <HeaderCell
+              column={ column }
+              index={ index }
+              onSort={ onSortCallBack }
+              sortOrder={ Const.SORT_ASC }
+              sorting
+            />
+          );
+        });
+
+        it('header should not render SortSymbol', () => {
+          expect(wrapper.find(SortSymbol).length).toBe(0);
+        });
+
+        it('should call column.sortCaret correctly', () => {
+          expect(column.sortCaret).toHaveBeenCalledTimes(1);
+          expect(column.sortCaret).toHaveBeenCalledWith(Const.SORT_ASC, column);
         });
       });
 

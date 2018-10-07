@@ -68,6 +68,9 @@ export default (
           currPage = newPage;
           needNewState = true;
         }
+      } else {
+        this.currPage = nextProps.pagination.options.page;
+        this.currSizePerPage = nextProps.pagination.options.sizePerPage;
       }
 
       if (needNewState) {

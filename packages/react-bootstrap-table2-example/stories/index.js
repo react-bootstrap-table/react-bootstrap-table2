@@ -13,6 +13,7 @@ import NoDataTable from 'examples/basic/no-data-table';
 import CustomizedIdClassesTable from 'examples/basic/customized-id-classes';
 import CaptionTable from 'examples/basic/caption-table';
 import LargeTable from 'examples/basic/large-table';
+import ExposedAPITable from 'examples/basic/exposed-function';
 
 // bootstrap 4
 import Bootstrap4DefaultSortTable from 'examples/bootstrap4/sort';
@@ -83,6 +84,7 @@ import DefaultSortTable from 'examples/sort/default-sort-table';
 import DefaultSortDirectionTable from 'examples/sort/default-sort-direction';
 import SortEvents from 'examples/sort/sort-events';
 import CustomSortTable from 'examples/sort/custom-sort-table';
+import CustomSortCaretTable from 'examples/sort/custom-sort-caret';
 import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
 import HeaderSortingStyleTable from 'examples/sort/header-sorting-style';
 
@@ -189,7 +191,8 @@ storiesOf('Basic Table', module)
   .add('Indication For Empty Table', () => <NoDataTable />)
   .add('Customized id and class table', () => <CustomizedIdClassesTable />)
   .add('Table with caption', () => <CaptionTable />)
-  .add('Large Table', () => <LargeTable />);
+  .add('Large Table', () => <LargeTable />)
+  .add('Exposed API', () => <ExposedAPITable />);
 
 storiesOf('Bootstrap 4', module)
   .addDecorator(bootstrapStyle(BOOTSTRAP_VERSION.FOUR))
@@ -267,6 +270,7 @@ storiesOf('Sort Table', module)
   .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
   .add('Sort Events', () => <SortEvents />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
+  .add('Custom Sort Caret', () => <CustomSortCaretTable />)
   .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
   .add('Custom Style on Sorting Header Column', () => <HeaderSortingStyleTable />);
 
