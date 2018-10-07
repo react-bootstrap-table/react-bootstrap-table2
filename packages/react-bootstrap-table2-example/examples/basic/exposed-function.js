@@ -1,4 +1,5 @@
 /* eslint no-return-assign: 0 */
+/* eslint no-console: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
