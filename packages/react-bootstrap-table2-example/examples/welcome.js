@@ -1,6 +1,8 @@
 import React from 'react';
 import Typed from 'typed.js';
 
+const PROJECT_NAME = 'react-bootstrap-table2';
+
 export default class Welcome extends React.Component {
   componentDidMount() {
     // type.js config
@@ -21,13 +23,20 @@ export default class Welcome extends React.Component {
     return (
       <div>
         <div className="welcome">
-          <h1 className="welcome-title">react-bootstrap-table2</h1>
+          <div className="welcome-title">
+            <span className="welcome-title-logo">
+              <img src="images/logo-color-square.svg" alt={ `${PROJECT_NAME}-logo` } />
+            </span>
+            <h1>
+              {PROJECT_NAME}
+            </h1>
+          </div>
           <span
             className="welcome-sub-title"
             ref={ (el) => { this.el = el; } }
           />
         </div>
-        <a href="https://github.com/react-bootstrap-table/react-bootstrap-table2" className="github-corner" aria-label="View source on Github">
+        <a href={ `https://github.com/react-bootstrap-table/${PROJECT_NAME}` } className="github-corner" aria-label="View source on Github">
           <svg width="80" height="80" viewBox="0 0 250 250" style={ { fill: '#009688', color: '#fff', position: 'absolute', top: '0', border: '0', right: '0' } } aria-hidden="true">
             <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" />
             <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style={ { transformOrigin: '130px 106px' } } className="octo-arm" />
