@@ -15,12 +15,21 @@
 @media only screen and (min-width: 1500px) {
 }
 
+/* Footer */
 footer.nav-footer {
   background-color: #202020;
 }
 
-.navGroup ul {
-  background-color: #f9f9f9;
+/* Home */
+.logo {
+  display: flex;
+  justify-content: center;
+}
+
+.logo img {
+  height: 100%;
+  max-height: 250px;
+  margin-bottom: 0px;
 }
 
 .homeContainer .homeWrapper .projectLogo {
