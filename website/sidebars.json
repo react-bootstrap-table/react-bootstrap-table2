@@ -24,6 +24,9 @@
       "toolkits-getting-started",
       "basic-search",
       "basic-export-csv"
+    ],
+    "Exposed API": [
+      "exposed-api"
     ]
   },
   "api": {

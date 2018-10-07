@@ -16,6 +16,7 @@ Definition of columns props on BootstrapTable
 * [formatExtraData](#columnformatextradata-any)
 * [sort](#columnsort-bool)
 * [sortFunc](#columnsortfunc-function)
+* [sortCaret](#columnsortcaret-function)
 * [onSort](#columnonsort-function)
 * [classes](#columnclasses-string-function)
 * [style](#columnstyle-object-function)
@@ -127,6 +128,19 @@ Enable the column sort via a `true` value given.
 }
 ```
 > The possible value of `order` argument is **`asc`** and **`desc`**.
+
+## column.sortCaret - [Function]
+Use`column.sortCaret` to custom the sort caret. This callback function accept two arguments: `order` and `column`
+ ```js
+{
+  // omit...
+  sort: true,
+  sortCaret: (order, column) => {
+    return //...
+  }
+}
+```
+> The possible value of `order` argument is **`asc`**, **`desc`** and **`undefined`**.
 
 ## column.onSort - [Function]
 `column.onSort` is an event listener for subscribing the event of sort:

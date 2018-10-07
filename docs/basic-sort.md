@@ -79,4 +79,4 @@ There're two way you can change or prettify the header when sorting: [`headerSor
 
 ## Custom the Sort Caret
 
-**Coming Soon!**
+See [`column.sortCaret`](./column-props.html#columnsortcaret-function).
