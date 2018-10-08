@@ -1,3 +1,5 @@
+$logo-size: 96px;
+
 .welcome {
   margin-top: 70px;
   text-align: center;
@@ -5,7 +7,22 @@
 
   &-title {
     color: $grey-900;
+    width: 100%;
+
+    display: inline-flex;
+    justify-content: center;
+    align-content: center;
+
+    &-logo {
+      position: relative;
+      top: -8px;
+      right: -12px;
+
+      width: $logo-size;
+      height: $logo-size;
+    }
   }
+
   &-sub-title {
     font-size: 30px;
     color: $grey-500;
