@@ -132,6 +132,7 @@ import BasicRowExpand from 'examples/row-expand';
 import RowExpandManagement from 'examples/row-expand/expand-management';
 import NonExpandableRows from 'examples/row-expand/non-expandable-rows';
 import ExpandColumn from 'examples/row-expand/expand-column';
+import OnlyExpandByColumn from 'examples/row-expand/expand-by-column-only.js';
 import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
@@ -323,6 +324,7 @@ storiesOf('Row Expand', module)
   .add('Expand Management', () => <RowExpandManagement />)
   .add('Non Expandabled Rows', () => <NonExpandableRows />)
   .add('Expand Indicator', () => <ExpandColumn />)
+  .add('Only Expand by Indicator', () => <OnlyExpandByColumn />)
   .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Hooks', () => <ExpandHooks />);
