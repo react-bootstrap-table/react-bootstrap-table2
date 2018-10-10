@@ -32,13 +32,12 @@ export default ExtendBase =>
           selectRow,
           DELAY_FOR_DBCLICK
         } = this.props;
-
         const clickFn = () => {
           if (cb) {
             cb(e, row, rowIndex);
           }
           const key = _.get(row, keyField);
-          if (expandRow && expandable) {
+          if (expandRow && expandable && !expandRow.expandByColumnOnly) {
             if (
               (selectRow.mode !== Const.ROW_SELECT_DISABLED && selectRow.clickToExpand) ||
               selectRow.mode === Const.ROW_SELECT_DISABLED
