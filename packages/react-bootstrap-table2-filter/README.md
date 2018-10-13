@@ -288,3 +288,4 @@ Following properties is valid in `FILTER_TYPES`:
 * SELECT
 * NUMBER
 * DATE
+* MULTISELECT
