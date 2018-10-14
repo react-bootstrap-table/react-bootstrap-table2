@@ -15,6 +15,7 @@ export default class SelectionCell extends Component {
     onRowSelect: PropTypes.func,
     disabled: PropTypes.bool,
     rowIndex: PropTypes.number,
+    tabIndex: PropTypes.number,
     clickToSelect: PropTypes.bool,
     selectionRenderer: PropTypes.func
   }
@@ -25,9 +26,14 @@ export default class SelectionCell extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { selected } = this.props;
+    const shouldUpdate =
+      this.props.rowIndex !== nextProps.rowIndex ||
+      this.props.selected !== nextProps.selected ||
+      this.props.disabled !== nextProps.disabled ||
+      this.props.rowKey !== nextProps.rowKey ||
+      this.props.tabIndex !== nextProps.tabIndex;
 
-    return nextProps.selected !== selected;
+    return shouldUpdate;
   }
 
   handleClick(e) {
@@ -56,14 +62,18 @@ export default class SelectionCell extends Component {
       mode: inputType,
       selected,
       disabled,
+      tabIndex,
       selectionRenderer
     } = this.props;
+
+    const attrs = {};
+    if (tabIndex !== -1) attrs.tabIndex = tabIndex;
 
     return (
       <BootstrapContext.Consumer>
         {
           ({ bootstrap4 }) => (
-            <td onClick={ this.handleClick }>
+            <td onClick={ this.handleClick } { ...attrs }>
               {
                 selectionRenderer ? selectionRenderer({
                   mode: inputType,

@@ -4,15 +4,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT } from './const';
 
+const CellEditContext = React.createContext();
+
 export default (
   _,
   dataOperator,
   isRemoteCellEdit,
   handleCellChange
 ) => {
-  let EditingCell;
-  const CellEditContext = React.createContext();
-
   class CellEditProvider extends React.Component {
     static propTypes = {
       data: PropTypes.array.isRequired,
@@ -32,7 +31,6 @@ export default (
 
     constructor(props) {
       super(props);
-      EditingCell = props.cellEdit.editingCellFactory(_, props.cellEdit.options.onStartEdit);
       this.startEditing = this.startEditing.bind(this);
       this.escapeEditing = this.escapeEditing.bind(this);
       this.completeEditing = this.completeEditing.bind(this);
@@ -102,8 +100,6 @@ export default (
       const {
         cellEdit: {
           options: { nonEditableRows, errorMessage, ...optionsRest },
-          editingCellFactory,
-          createContext,
           ...cellEditRest
         }
       } = this.props;
@@ -112,7 +108,6 @@ export default (
         ...optionsRest,
         ...cellEditRest,
         ...this.state,
-        EditingCell,
         nonEditableRows: _.isDefined(nonEditableRows) ? nonEditableRows() : [],
         onStart: this.startEditing,
         onEscape: this.escapeEditing,
@@ -121,7 +116,7 @@ export default (
 
       return (
         <CellEditContext.Provider
-          value={ { cellEdit: newCellEdit } }
+          value={ { ...newCellEdit } }
         >
           { this.props.children }
         </CellEditContext.Provider>
@@ -129,7 +124,8 @@ export default (
     }
   }
   return {
-    Provider: CellEditProvider,
-    Consumer: CellEditContext.Consumer
+    Provider: CellEditProvider
   };
 };
+
+export const Consumer = CellEditContext.Consumer;

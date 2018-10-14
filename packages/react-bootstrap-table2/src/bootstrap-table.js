@@ -9,7 +9,6 @@ import Caption from './caption';
 import Body from './body';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
-import { getSelectionSummary } from './store/selection';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
@@ -44,6 +43,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       data,
       columns,
       keyField,
+      tabIndexCell,
       id,
       classes,
       striped,
@@ -56,7 +56,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowClasses,
       wrapperClasses,
       rowEvents,
-      selected
+      selectRow,
+      expandRow,
+      cellEdit
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -68,20 +70,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-condensed': condensed
     }, classes);
 
-    const cellSelectionInfo = this.resolveSelectRowProps({
-      onRowSelect: this.props.onRowSelect
-    });
-
-    const { allRowsSelected, allRowsNotSelected } = getSelectionSummary(data, keyField, selected);
-    const headerCellSelectionInfo = this.resolveSelectRowPropsForHeader({
-      onAllRowsSelect: this.props.onAllRowsSelect,
-      selected,
-      allRowsSelected,
-      allRowsNotSelected
-    });
-
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
-    const expandRow = this.resolveExpandRowProps();
 
     return (
       <div className={ tableWrapperClass }>
@@ -95,19 +84,19 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             onSort={ this.props.onSort }
             onFilter={ this.props.onFilter }
             onExternalFilter={ this.props.onExternalFilter }
-            selectRow={ headerCellSelectionInfo }
+            selectRow={ selectRow }
             expandRow={ expandRow }
           />
           <Body
             data={ data }
             keyField={ keyField }
+            tabIndexCell={ tabIndexCell }
             columns={ columns }
             isEmpty={ this.isEmpty() }
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
-            cellEdit={ this.props.cellEdit || {} }
-            selectRow={ cellSelectionInfo }
-            selectedRowKeys={ selected }
+            cellEdit={ cellEdit }
+            selectRow={ selectRow }
             expandRow={ expandRow }
             rowStyle={ rowStyle }
             rowClasses={ rowClasses }
@@ -131,6 +120,7 @@ BootstrapTable.propTypes = {
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
+  tabIndexCell: PropTypes.bool,
   id: PropTypes.string,
   classes: PropTypes.string,
   wrapperClasses: PropTypes.string,
@@ -143,8 +133,13 @@ BootstrapTable.propTypes = {
   filter: PropTypes.object,
   cellEdit: PropTypes.object,
   selectRow: PropTypes.shape({
-    mode: PropTypes.oneOf([Const.ROW_SELECT_SINGLE, Const.ROW_SELECT_MULTIPLE]).isRequired,
+    mode: PropTypes.oneOf([
+      Const.ROW_SELECT_SINGLE,
+      Const.ROW_SELECT_MULTIPLE,
+      Const.ROW_SELECT_DISABLED
+    ]).isRequired,
     clickToSelect: PropTypes.bool,
+    clickToExpand: PropTypes.bool,
     clickToEdit: PropTypes.bool,
     hideSelectAll: PropTypes.bool,
     onSelect: PropTypes.func,
@@ -157,22 +152,18 @@ BootstrapTable.propTypes = {
     selectionRenderer: PropTypes.func,
     selectionHeaderRenderer: PropTypes.func
   }),
-  onRowSelect: PropTypes.func,
-  onAllRowsSelect: PropTypes.func,
   expandRow: PropTypes.shape({
-    renderer: PropTypes.func.isRequired,
+    renderer: PropTypes.func,
     expanded: PropTypes.array,
     onExpand: PropTypes.func,
     onExpandAll: PropTypes.func,
     nonExpandable: PropTypes.array,
     showExpandColumn: PropTypes.bool,
     onlyOneExpanding: PropTypes.bool,
+    expandByColumnOnly: PropTypes.bool,
     expandColumnRenderer: PropTypes.func,
     expandHeaderColumnRenderer: PropTypes.func
   }),
-  onRowExpand: PropTypes.func,
-  onAllRowExpand: PropTypes.func,
-  isAnyExpands: PropTypes.bool,
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
@@ -202,7 +193,21 @@ BootstrapTable.defaultProps = {
   bordered: true,
   hover: false,
   condensed: false,
-  noDataIndication: null
+  noDataIndication: null,
+  selectRow: {
+    mode: Const.ROW_SELECT_DISABLED,
+    selected: [],
+    hideSelectColumn: true
+  },
+  expandRow: {
+    renderer: undefined,
+    expanded: [],
+    nonExpandable: []
+  },
+  cellEdit: {
+    mode: null,
+    nonEditableRows: []
+  }
 };
 
 export default BootstrapTable;

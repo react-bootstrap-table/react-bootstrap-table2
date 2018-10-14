@@ -6,7 +6,7 @@ export const getSelectionSummary = (
   keyField,
   selected = []
 ) => {
-  let allRowsSelected = true;
+  let allRowsSelected = data.length > 0;
   let allRowsNotSelected = true;
 
   const rowKeys = data.map(d => d[keyField]);

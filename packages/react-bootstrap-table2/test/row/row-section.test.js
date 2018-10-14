@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import RowSection from '../src/row-section';
+import RowSection from '../../src/row/row-section';
 
 describe('Row', () => {
   const colSpan = 3;

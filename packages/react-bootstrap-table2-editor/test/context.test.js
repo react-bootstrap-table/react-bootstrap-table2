@@ -3,14 +3,13 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import _ from 'react-bootstrap-table-next/src/utils';
 import dataOperator from 'react-bootstrap-table-next/src/store/operators';
-import BootstrapTable from 'react-bootstrap-table-next/src/bootstrap-table';
 
 import {
   CLICK_TO_CELL_EDIT,
   DBCLICK_TO_CELL_EDIT,
   DELAY_FOR_DBCLICK
 } from '../src/const';
-import createCellEditContext from '../src/context';
+import createCellEditContext, { Consumer } from '../src/context';
 import cellEditFactory from '../index';
 
 describe('CellEditContext', () => {
@@ -42,14 +41,7 @@ describe('CellEditContext', () => {
 
   const defaultSelectRow = undefined;
 
-  const mockBase = jest.fn((props => (
-    <BootstrapTable
-      data={ data }
-      columns={ columns }
-      keyField={ keyField }
-      { ...props }
-    />
-  )));
+  const mockBase = jest.fn((() => null));
 
   const handleCellChange = jest.fn();
 
@@ -75,11 +67,11 @@ describe('CellEditContext', () => {
         selectRow={ selectRow }
         data={ data }
       >
-        <CellEditContext.Consumer>
+        <Consumer>
           {
             cellEditProps => mockBase(cellEditProps)
           }
-        </CellEditContext.Consumer>
+        </Consumer>
       </CellEditContext.Provider>
     );
   }
@@ -92,10 +84,6 @@ describe('CellEditContext', () => {
 
     it('should have correct Provider property after calling createCellEditContext', () => {
       expect(CellEditContext.Provider).toBeDefined();
-    });
-
-    it('should have correct Consumer property after calling createCellEditContext', () => {
-      expect(CellEditContext.Consumer).toBeDefined();
     });
 
     it('should have correct state.ridx', () => {
@@ -113,14 +101,11 @@ describe('CellEditContext', () => {
     it('should pass correct cell editing props to children element', () => {
       expect(wrapper.length).toBe(1);
       expect(JSON.stringify(mockBase.mock.calls[0])).toEqual(JSON.stringify([{
-        cellEdit: {
-          ...defaultCellEdit,
-          CLICK_TO_CELL_EDIT,
-          DBCLICK_TO_CELL_EDIT,
-          DELAY_FOR_DBCLICK,
-          ...wrapper.state(),
-          nonEditableRows: []
-        }
+        ...defaultCellEdit,
+        DBCLICK_TO_CELL_EDIT,
+        DELAY_FOR_DBCLICK,
+        ...wrapper.state(),
+        nonEditableRows: []
       }]));
     });
   });
