@@ -24,6 +24,7 @@ const selectRow = {
 * [bgColor](#selectrowbgcolor-string-function)
 * [nonSelectable](#selectrownonselectable-array)
 * [clickToSelect](#selectrowclicktoselect-bool)
+* [clickToExpand](#selectrowclicktoexpand-bool)
 * [clickToEdit](#selectrowclicktoedit-bool)
 * [onSelect](#selectrowonselect-function)
 * [onSelectAll](#selectrowonselectall-function)
@@ -147,6 +148,16 @@ const selectRow = {
 ```
 
 > Note: When you also enable [cellEdit](./cell-edit-props.html), the `selectRow.clickToSelect` will deactivate the functionality of cell editing. If you want to click on row to select row and edit cell simultaneously, you are suppose to enable [`selectRow.clickToEdit`](#selectrowclicktoedit-bool)
+
+## selectRow.clickToExpand - [Bool]
+Default is false, enable it will let user able to expand and select row when user clicking on the row.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  clickToExpand: true
+};
+```
 
 ## selectRow.clickToEdit - [Bool]
 Able to click to edit cell and select row at the same time.

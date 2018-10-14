@@ -16,6 +16,7 @@ title: Row Expand Props
 * [onExpandAll](#expandrowonexpandall-function)
 * [showExpandColumn](#expandrowshowexpandcolumn-bool)
 * [onlyOneExpanding](#expandrowonlyoneexpanding-bool)
+* [expandByColumnOnly](#expandrowexpandbycolumnonly-bool)
 * [expandColumnRenderer](#expandrowexpandcolumnrenderer-function)
 * [expandHeaderColumnRenderer](#expandrowexpandheadercolumnrenderer-function)
 
@@ -106,10 +107,21 @@ const expandRow = {
 ## expandRow.onlyOneExpanding - [Bool]
 Default is `false`. Enable this will only allow one row get expand at the same time.
 
- ```js
+```js
 const expandRow = {
   renderer: (row) => ...
   onlyOneExpanding: true
+};
+```
+
+## expandRow.expandByColumnOnly - [Bool]
+Default is `false`. If you want to restrict user to expand/collapse row via clicking the expand column only, you can enable it. 
+
+ ```js
+const expandRow = {
+  renderer: (row) => ...,
+  showExpandColumn: true,
+  expandByColumnOnly: true
 };
 ```
 

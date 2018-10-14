@@ -19,6 +19,7 @@ title: BootstrapTable Props
 * [hover](#hover-bool)
 * [condensed](#condensed-bool)
 * [id](#id-string)
+* [tabIndexCell](#tabindexcell-bool)
 * [classes](#classes-string)
 * [wrapperClasses](#wrapperClasses-string)
 * [headerClasses](#headerClasses-string)
@@ -117,6 +118,10 @@ Same as bootstrap `.table-condensed` class for making a table more compact by cu
 
 ## id - [String]
 Customize id on `table` element.
+
+## tabIndexCell - [Bool]
+Enable the `tabIndex` attribute on `<td>` element.
+
 ## classes - [String]
 Customize class on `table` element.
 
