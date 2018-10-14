@@ -57,6 +57,49 @@ describe('SimpleRow', () => {
       expect(wrapper.length).toBe(1);
       expect(wrapper.find(RowPureContent)).toHaveLength(1);
     });
+
+    describe('when tabIndexCell prop is enable', () => {
+      const visibleColumnSize = 3;
+      beforeEach(() => {
+        wrapper = shallow(
+          <SimpleRow
+            keyField={ keyField }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            tabIndexCell
+            visibleColumnSize={ visibleColumnSize }
+          />
+        );
+      });
+
+      it('should render correct tabIndexStart', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find(RowPureContent)).toHaveLength(1);
+        expect(wrapper.find(RowPureContent).prop('tabIndexStart')).toBe((rowIndex * visibleColumnSize) + 1);
+      });
+    });
+
+    describe('when tabIndexCell prop is disable', () => {
+      const visibleColumnSize = 3;
+      beforeEach(() => {
+        wrapper = shallow(
+          <SimpleRow
+            keyField={ keyField }
+            rowIndex={ rowIndex }
+            columns={ defaultColumns }
+            row={ row }
+            visibleColumnSize={ visibleColumnSize }
+          />
+        );
+      });
+
+      it('should always render tabIndexStart as -1', () => {
+        expect(wrapper.length).toBe(1);
+        expect(wrapper.find(RowPureContent)).toHaveLength(1);
+        expect(wrapper.find(RowPureContent).prop('tabIndexStart')).toBe(-1);
+      });
+    });
   });
 
   describe('shouldComponentUpdate', () => {

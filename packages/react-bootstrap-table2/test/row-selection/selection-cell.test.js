@@ -57,6 +57,27 @@ describe('<SelectionCell />', () => {
       });
     });
 
+    describe('when tabIndex prop has been changed', () => {
+      beforeEach(() => {
+        props = {
+          selected: false,
+          mode,
+          rowIndex,
+          disabled: false,
+          tabIndex: 0,
+          rowKey: 1
+        };
+        wrapper = shallow(
+          <SelectionCell { ...props } />
+        );
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, tabIndex: 2 };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
     describe('when disabled prop has been changed', () => {
       beforeEach(() => {
         props = {
