@@ -54,6 +54,16 @@ const withContext = Base =>
       }
     }
 
+    componentWillReceiveProps(nextProps) {
+      if (!nextProps.pagination && this.props.pagination) {
+        this.PaginationContext = null;
+      }
+      if (nextProps.pagination && !this.props.pagination) {
+        this.PaginationContext = nextProps.pagination.createContext(
+          this.isRemotePagination, this.handleRemotePageChange);
+      }
+    }
+
     renderBase() {
       return (
         rootProps,
