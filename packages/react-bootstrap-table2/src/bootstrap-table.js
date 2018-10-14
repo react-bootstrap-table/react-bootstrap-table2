@@ -43,6 +43,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       data,
       columns,
       keyField,
+      tabIndexCell,
       id,
       classes,
       striped,
@@ -89,6 +90,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Body
             data={ data }
             keyField={ keyField }
+            tabIndexCell={ tabIndexCell }
             columns={ columns }
             isEmpty={ this.isEmpty() }
             visibleColumnSize={ this.visibleColumnSize() }
@@ -118,6 +120,7 @@ BootstrapTable.propTypes = {
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
+  tabIndexCell: PropTypes.bool,
   id: PropTypes.string,
   classes: PropTypes.string,
   wrapperClasses: PropTypes.string,

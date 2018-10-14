@@ -7,7 +7,7 @@ import RowPureContent from './row-pure-content';
 import eventDelegater from './event-delegater';
 import shouldUpdater from './should-updater';
 
-class Row extends shouldUpdater(eventDelegater(Component)) {
+class SimpleRow extends shouldUpdater(eventDelegater(Component)) {
   constructor(props) {
     super(props);
     this.shouldUpdateRowContent = false;
@@ -26,19 +26,26 @@ class Row extends shouldUpdater(eventDelegater(Component)) {
       className,
       style,
       attrs,
+      visibleColumnSize,
+      tabIndexCell,
       ...rest
     } = this.props;
     const trAttrs = this.delegate(attrs);
+    const tabIndexStart = (this.props.rowIndex * visibleColumnSize) + 1;
 
     return (
       <tr style={ style } className={ className } { ...trAttrs }>
-        <RowPureContent shouldUpdate={ this.shouldUpdateRowContent } { ...rest } />
+        <RowPureContent
+          shouldUpdate={ this.shouldUpdateRowContent }
+          tabIndexStart={ tabIndexCell ? tabIndexStart : -1 }
+          { ...rest }
+        />
       </tr>
     );
   }
 }
 
-Row.propTypes = {
+SimpleRow.propTypes = {
   row: PropTypes.object.isRequired,
   rowIndex: PropTypes.number.isRequired,
   columns: PropTypes.array.isRequired,
@@ -47,11 +54,11 @@ Row.propTypes = {
   attrs: PropTypes.object
 };
 
-Row.defaultProps = {
+SimpleRow.defaultProps = {
   editable: true,
   style: {},
   className: null,
   attrs: {}
 };
 
-export default Row;
+export default SimpleRow;

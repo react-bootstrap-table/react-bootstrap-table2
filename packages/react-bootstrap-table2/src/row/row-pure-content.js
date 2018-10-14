@@ -1,5 +1,6 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/no-array-index-key: 0 */
+/* eslint no-plusplus: 0 */
 import React from 'react';
 
 import _ from '../utils';
@@ -25,8 +26,11 @@ export default class RowPureContent extends React.Component {
       onStart,
       clickToEdit,
       dbclickToEdit,
-      EditingCellComponent
+      EditingCellComponent,
+      tabIndexStart
     } = this.props;
+
+    let tabIndex = tabIndexStart;
 
     return columns.map((column, index) => {
       if (!column.hidden) {
@@ -85,6 +89,10 @@ export default class RowPureContent extends React.Component {
         if (column.dataField === keyField || !editable) editableCell = false;
         if (_.isFunction(column.editable)) {
           editableCell = column.editable(content, row, rowIndex, index);
+        }
+
+        if (tabIndexStart !== -1) {
+          cellAttrs.tabIndex = tabIndex++;
         }
 
         return (
