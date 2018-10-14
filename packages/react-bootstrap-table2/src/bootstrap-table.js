@@ -139,6 +139,7 @@ BootstrapTable.propTypes = {
       Const.ROW_SELECT_DISABLED
     ]).isRequired,
     clickToSelect: PropTypes.bool,
+    clickToExpand: PropTypes.bool,
     clickToEdit: PropTypes.bool,
     hideSelectAll: PropTypes.bool,
     onSelect: PropTypes.func,

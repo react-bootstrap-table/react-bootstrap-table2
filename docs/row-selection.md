@@ -12,6 +12,7 @@
 * [bgColor](#bgColor)
 * [nonSelectable)](#nonSelectable)
 * [clickToSelect)](#clickToSelect)
+* [clickToExpand)](#clickToExpand)
 * [clickToEdit](#clickToEdit)
 * [onSelect](#onSelect)
 * [onSelectAll](#onSelectAll)
@@ -147,6 +148,16 @@ const selectRow = {
 
 > Note: When you also enable [cellEdit](./cell-edit.md), the `selectRow.clickToSelect` will deactivate the functionality of cell editing   
 > If you want to click on row to select row and edit cell simultaneously, you are suppose to enable [`selectRow.clickToEdit`](#clickToEdit)
+
+### <a name='clickToExpand'>selectRow.clickToExpand - [Bool]</a>
+Default is false, enable it will let user able to expand and select row when user clicking on the row.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  clickToExpand: true
+};
+```
 
 ### <a name='clickToEdit'>selectRow.clickToEdit - [Bool]</a>
 Able to click to edit cell and select row
