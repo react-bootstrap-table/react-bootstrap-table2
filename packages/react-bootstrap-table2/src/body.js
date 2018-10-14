@@ -3,129 +3,103 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import cs from 'classnames';
 
 import _ from './utils';
-import Row from './row';
-import ExpandRow from './row-expand/expand-row';
-import RowSection from './row-section';
+import Row from './row/simple-row';
+import RowAggregator from './row/aggregate-row';
+import RowSection from './row/row-section';
 import Const from './const';
+import withRowSelection from './row-selection/row-consumer';
+import withRowExpansion from './row-expand/row-consumer';
 
-const Body = (props) => {
-  const {
-    columns,
-    data,
-    keyField,
-    isEmpty,
-    noDataIndication,
-    visibleColumnSize,
-    cellEdit,
-    selectRow,
-    selectedRowKeys,
-    rowStyle,
-    rowClasses,
-    rowEvents,
-    expandRow
-  } = props;
-
-  const {
-    bgColor,
-    nonSelectable
-  } = selectRow;
-
-  let content;
-
-  if (isEmpty) {
-    const indication = _.isFunction(noDataIndication) ? noDataIndication() : noDataIndication;
-    if (!indication) {
-      return null;
+class Body extends React.Component {
+  constructor(props) {
+    super(props);
+    if (props.cellEdit.createContext) {
+      this.EditingCell = props.cellEdit.createEditingCell(_, props.cellEdit.options.onStartEdit);
     }
-    content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
-  } else {
-    const nonEditableRows = cellEdit.nonEditableRows || [];
-    content = data.map((row, index) => {
-      const key = _.get(row, keyField);
-      const editable = !(nonEditableRows.length > 0 && nonEditableRows.indexOf(key) > -1);
-
-      const selected = selectRow.mode !== Const.ROW_SELECT_DISABLED
-        ? selectedRowKeys.includes(key)
-        : null;
-
-      const attrs = rowEvents || {};
-      let style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
-      let classes = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
-      if (selected) {
-        const selectedStyle = _.isFunction(selectRow.style)
-          ? selectRow.style(row, index)
-          : selectRow.style;
-
-        const selectedClasses = _.isFunction(selectRow.classes)
-          ? selectRow.classes(row, index)
-          : selectRow.classes;
-
-        style = {
-          ...style,
-          ...selectedStyle
-        };
-        classes = cs(classes, selectedClasses);
-
-        if (bgColor) {
-          style = style || {};
-          style.backgroundColor = _.isFunction(bgColor) ? bgColor(row, index) : bgColor;
-        }
-      }
-
-      const selectable = !nonSelectable || !nonSelectable.includes(key);
-      const expandable = expandRow && !expandRow.nonExpandable.includes(key);
-      const expanded = expandRow && expandRow.expanded.includes(key);
-
-      const result = [
-        <Row
-          key={ key }
-          row={ row }
-          keyField={ keyField }
-          rowIndex={ index }
-          columns={ columns }
-          cellEdit={ cellEdit }
-          editable={ editable }
-          selectable={ selectable }
-          expandable={ expandable }
-          selected={ selected }
-          expanded={ expanded }
-          selectRow={ selectRow }
-          expandRow={ expandRow }
-          style={ style }
-          className={ classes }
-          attrs={ attrs }
-        />
-      ];
-
-      if (expanded) {
-        result.push((
-          <ExpandRow
-            key={ `${key}-expanding` }
-            colSpan={ visibleColumnSize }
-          >
-            { expandRow.renderer(row) }
-          </ExpandRow>
-        ));
-      }
-
-      return result;
-    });
   }
 
-  return (
-    <tbody>{ content }</tbody>
-  );
-};
+  render() {
+    const {
+      columns,
+      data,
+      keyField,
+      isEmpty,
+      noDataIndication,
+      visibleColumnSize,
+      cellEdit,
+      selectRow,
+      rowStyle,
+      rowClasses,
+      rowEvents,
+      expandRow
+    } = this.props;
+
+    let content;
+
+    if (isEmpty) {
+      const indication = _.isFunction(noDataIndication) ? noDataIndication() : noDataIndication;
+      if (!indication) {
+        return null;
+      }
+      content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
+    } else {
+      let RowComponent = Row;
+      const selectRowEnabled = selectRow.mode !== Const.ROW_SELECT_DISABLED;
+      const expandRowEnabled = !!expandRow.renderer;
+
+      const additionalRowProps = {};
+      if (expandRowEnabled) {
+        RowComponent = withRowExpansion(RowAggregator, visibleColumnSize);
+      }
+
+      if (selectRowEnabled) {
+        RowComponent = withRowSelection(expandRowEnabled ? RowComponent : RowAggregator);
+      }
+
+      if (cellEdit.createContext) {
+        RowComponent = cellEdit.withRowLevelCellEdit(RowComponent, selectRowEnabled, keyField, _);
+        additionalRowProps.EditingCellComponent = this.EditingCell;
+      }
+
+      if (selectRowEnabled || expandRowEnabled) {
+        additionalRowProps.expandRow = expandRow;
+        additionalRowProps.selectRow = selectRow;
+      }
+
+      content = data.map((row, index) => {
+        const key = _.get(row, keyField);
+        const baseRowProps = {
+          key,
+          row,
+          columns,
+          keyField,
+          cellEdit,
+          value: key,
+          rowIndex: index,
+          attrs: rowEvents || {},
+          ...additionalRowProps
+        };
+
+        baseRowProps.style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
+        baseRowProps.className = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
+
+        return <RowComponent { ...baseRowProps } />;
+      });
+    }
+
+    return (
+      <tbody>{ content }</tbody>
+    );
+  }
+}
 
 Body.propTypes = {
   keyField: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
-  selectRow: PropTypes.object,
-  selectedRowKeys: PropTypes.array
+  selectRow: PropTypes.object
 };
 
 export default Body;

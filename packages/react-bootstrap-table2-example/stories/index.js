@@ -102,6 +102,7 @@ import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
 import AutoSelectTextInput from 'examples/cell-edit/auto-select-text-input-table';
 import EditorStyleTable from 'examples/cell-edit/editor-style-table';
 import EditorClassTable from 'examples/cell-edit/editor-class-table';
+import DBClickEditWithSelection from 'examples/cell-edit/dbclick-to-edit-with-selection-table';
 import DropdownEditorTable from 'examples/cell-edit/dropdown-editor-table';
 import TextareaEditorTable from 'examples/cell-edit/textarea-editor-table';
 import CheckboxEditorTable from 'examples/cell-edit/checkbox-editor-table';
@@ -115,6 +116,7 @@ import ClickToSelectTable from 'examples/row-selection/click-to-select';
 import DefaultSelectTable from 'examples/row-selection/default-select';
 import SelectionManagement from 'examples/row-selection/selection-management';
 import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-select-with-cell-edit';
+import SelectionWithExpansionTable from 'examples/row-selection/selection-with-expansion';
 import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
@@ -130,6 +132,7 @@ import BasicRowExpand from 'examples/row-expand';
 import RowExpandManagement from 'examples/row-expand/expand-management';
 import NonExpandableRows from 'examples/row-expand/non-expandable-rows';
 import ExpandColumn from 'examples/row-expand/expand-column';
+import OnlyExpandByColumn from 'examples/row-expand/expand-by-column-only.js';
 import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
@@ -289,6 +292,7 @@ storiesOf('Cell Editing', module)
   .add('Custom Cell Classes', () => <CellEditClassTable />)
   .add('Custom Editor Classes', () => <EditorClassTable />)
   .add('Custom Editor Style', () => <EditorStyleTable />)
+  .add('DoubleClick to Edit with Selection', () => <DBClickEditWithSelection />)
   .add('Dropdown Editor', () => <DropdownEditorTable />)
   .add('Textarea Editor', () => <TextareaEditorTable />)
   .add('Checkbox Editor', () => <CheckboxEditorTable />)
@@ -303,6 +307,7 @@ storiesOf('Row Selection', module)
   .add('Default Select', () => <DefaultSelectTable />)
   .add('Selection Management', () => <SelectionManagement />)
   .add('Click to Select and Edit Cell', () => <ClickToSelectWithCellEditTable />)
+  .add('Row Select and Expand', () => <SelectionWithExpansionTable />)
   .add('Selection without Data', () => <SelectionNoDataTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
@@ -319,6 +324,7 @@ storiesOf('Row Expand', module)
   .add('Expand Management', () => <RowExpandManagement />)
   .add('Non Expandabled Rows', () => <NonExpandableRows />)
   .add('Expand Indicator', () => <ExpandColumn />)
+  .add('Only Expand by Indicator', () => <OnlyExpandByColumn />)
   .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Hooks', () => <ExpandHooks />);

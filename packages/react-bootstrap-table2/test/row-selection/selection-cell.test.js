@@ -14,24 +14,85 @@ describe('<SelectionCell />', () => {
   let wrapper;
 
   describe('shouldComponentUpdate', () => {
-    const selected = true;
+    let props;
+    let nextProps;
 
-    describe('when selected prop has not been changed', () => {
-      it('should not update component', () => {
-        const nextProps = { selected };
+    describe('when selected prop has been changed', () => {
+      beforeEach(() => {
+        props = {
+          selected: false,
+          mode,
+          rowIndex,
+          disabled: false,
+          rowKey: 1
+        };
+        wrapper = shallow(
+          <SelectionCell { ...props } />
+        );
+      });
 
-        wrapper = shallow(<SelectionCell rowKey={ 1 } mode={ mode } selected={ selected } />);
-
-        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(false);
+      it('should return true', () => {
+        nextProps = { ...props, selected: true };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
       });
     });
 
-    describe('when selected prop has been changed', () => {
-      it('should update component', () => {
-        const nextProps = { selected: !selected };
+    describe('when rowIndex prop has been changed', () => {
+      beforeEach(() => {
+        props = {
+          selected: false,
+          mode,
+          rowIndex,
+          disabled: false,
+          rowKey: 1
+        };
+        wrapper = shallow(
+          <SelectionCell { ...props } />
+        );
+      });
 
-        wrapper = shallow(<SelectionCell rowKey={ 1 } mode={ mode } selected={ selected } />);
+      it('should return true', () => {
+        nextProps = { ...props, rowIndex: 2 };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
 
+    describe('when disabled prop has been changed', () => {
+      beforeEach(() => {
+        props = {
+          selected: false,
+          mode,
+          rowIndex,
+          disabled: false,
+          rowKey: 1
+        };
+        wrapper = shallow(
+          <SelectionCell { ...props } />
+        );
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, disabled: true };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
+    describe('when rowKey prop has been changed', () => {
+      beforeEach(() => {
+        props = {
+          selected: false,
+          mode,
+          rowIndex,
+          disabled: false,
+          rowKey: 1
+        };
+        wrapper = shallow(
+          <SelectionCell { ...props } />
+        );
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, rowKey: '1' };
         expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
       });
     });

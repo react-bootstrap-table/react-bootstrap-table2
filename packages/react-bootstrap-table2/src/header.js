@@ -1,15 +1,14 @@
 /* eslint react/require-default-props: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Const from './const';
 
 import HeaderCell from './header-cell';
 import SelectionHeaderCell from './row-selection/selection-header-cell';
 import ExpandHeaderCell from './row-expand/expand-header-cell';
+import withHeaderSelection from './row-selection/selection-header-cell-consumer';
+import withHeaderExpansion from './row-expand/expand-header-cell-consumer';
 
 const Header = (props) => {
-  const { ROW_SELECT_DISABLED } = Const;
-
   const {
     className,
     columns,
@@ -23,20 +22,24 @@ const Header = (props) => {
     bootstrap4
   } = props;
 
+  let SelectionHeaderCellComp = () => null;
+  let ExpansionHeaderCellComp = () => null;
+
+  if (expandRow.showExpandColumn) {
+    ExpansionHeaderCellComp = withHeaderExpansion(ExpandHeaderCell);
+  }
+
+  if (selectRow) {
+    SelectionHeaderCellComp = withHeaderSelection(SelectionHeaderCell);
+  }
+
   return (
     <thead>
       <tr className={ className }>
+        <ExpansionHeaderCellComp />
         {
-          (expandRow && expandRow.showExpandColumn)
-            ? <ExpandHeaderCell
-              onAllRowExpand={ expandRow.onAllRowExpand }
-              anyExpands={ expandRow.isAnyExpands }
-              renderer={ expandRow.expandHeaderColumnRenderer }
-            /> : null
-        }
-        {
-          (selectRow.mode !== ROW_SELECT_DISABLED && !selectRow.hideSelectColumn)
-            ? <SelectionHeaderCell { ...selectRow } /> : null
+          !selectRow.hideSelectColumn ?
+            <SelectionHeaderCellComp /> : null
         }
         {
           columns.map((column, i) => {

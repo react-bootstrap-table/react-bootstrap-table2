@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import _ from '../utils';
 import createDataContext from './data-context';
 import createSortContext from './sort-context';
-import createSelectionContext from './selection-context';
-import createRowExpandContext from './row-expand-context';
+import SelectionContext from './selection-context';
+import RowExpandContext from './row-expand-context';
 import remoteResolver from '../props-resolver/remote-resolver';
 import { BootstrapContext } from './bootstrap';
 import dataOperator from '../store/operators';
@@ -22,11 +22,11 @@ const withContext = Base =>
       }
 
       if (props.selectRow) {
-        this.SelectionContext = createSelectionContext(dataOperator);
+        this.SelectionContext = SelectionContext;
       }
 
       if (props.expandRow) {
-        this.RowExpandContext = createRowExpandContext(dataOperator);
+        this.RowExpandContext = RowExpandContext;
       }
 
       if (props.cellEdit && props.cellEdit.createContext) {
@@ -57,24 +57,18 @@ const withContext = Base =>
     renderBase() {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps,
         paginationProps,
-        expandProps,
-        selectionProps
       ) => (
         <Base
           ref={ n => this.table = n }
           { ...this.props }
-          { ...selectionProps }
           { ...sortProps }
-          { ...cellEditProps }
           { ...filterProps }
           { ...searchProps }
           { ...paginationProps }
-          { ...expandProps }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         />
       );
@@ -83,12 +77,10 @@ const withContext = Base =>
     renderWithSelectionCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps,
-        paginationProps,
-        expandProps
+        paginationProps
       ) => (
         <this.SelectionContext.Provider
           { ...baseProps }
@@ -96,20 +88,15 @@ const withContext = Base =>
           selectRow={ this.props.selectRow }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         >
-          <this.SelectionContext.Consumer>
-            {
-              selectionProps => base(
-                rootProps,
-                cellEditProps,
-                filterProps,
-                searchProps,
-                sortProps,
-                paginationProps,
-                expandProps,
-                selectionProps
-              )
-            }
-          </this.SelectionContext.Consumer>
+          {
+            base(
+              rootProps,
+              filterProps,
+              searchProps,
+              sortProps,
+              paginationProps
+            )
+          }
         </this.SelectionContext.Provider>
       );
     }
@@ -117,7 +104,6 @@ const withContext = Base =>
     renderWithRowExpandCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps,
@@ -129,19 +115,15 @@ const withContext = Base =>
           expandRow={ this.props.expandRow }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         >
-          <this.RowExpandContext.Consumer>
-            {
-              expandProps => base(
-                rootProps,
-                cellEditProps,
-                filterProps,
-                searchProps,
-                sortProps,
-                paginationProps,
-                expandProps
-              )
-            }
-          </this.RowExpandContext.Consumer>
+          {
+            base(
+              rootProps,
+              filterProps,
+              searchProps,
+              sortProps,
+              paginationProps
+            )
+          }
         </this.RowExpandContext.Provider>
       );
     }
@@ -149,7 +131,6 @@ const withContext = Base =>
     renderWithPaginationCtx(base) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps,
         sortProps
@@ -164,7 +145,6 @@ const withContext = Base =>
             {
               paginationProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps,
                 searchProps,
                 sortProps,
@@ -179,7 +159,6 @@ const withContext = Base =>
     renderWithSortCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps,
         searchProps
       ) => (
@@ -194,7 +173,6 @@ const withContext = Base =>
             {
               sortProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps,
                 searchProps,
                 sortProps,
@@ -208,7 +186,6 @@ const withContext = Base =>
     renderWithSearchCtx(base, baseProps) {
       return (
         rootProps,
-        cellEditProps,
         filterProps
       ) => (
         <this.SearchContext.Provider
@@ -221,7 +198,6 @@ const withContext = Base =>
             {
               searchProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps,
                 searchProps
               )
@@ -232,10 +208,7 @@ const withContext = Base =>
     }
 
     renderWithFilterCtx(base, baseProps) {
-      return (
-        rootProps,
-        cellEditProps
-      ) => (
+      return rootProps => (
         <this.FilterContext.Provider
           { ...baseProps }
           ref={ n => this.filterContext = n }
@@ -245,7 +218,6 @@ const withContext = Base =>
             {
               filterProps => base(
                 rootProps,
-                cellEditProps,
                 filterProps
               )
             }
@@ -262,11 +234,7 @@ const withContext = Base =>
           cellEdit={ this.props.cellEdit }
           data={ rootProps.getData() }
         >
-          <this.CellEditContext.Consumer>
-            {
-              cellEditProps => base(rootProps, cellEditProps)
-            }
-          </this.CellEditContext.Consumer>
+          { base(rootProps) }
         </this.CellEditContext.Provider>
       );
     }

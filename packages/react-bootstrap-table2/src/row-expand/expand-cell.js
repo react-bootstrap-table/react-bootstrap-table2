@@ -23,7 +23,7 @@ export default class ExpandCell extends Component {
   handleClick(e) {
     const { rowKey, expanded, onRowExpand, rowIndex } = this.props;
 
-    onRowExpand(rowKey, expanded, rowIndex, e);
+    onRowExpand(rowKey, !expanded, rowIndex, e);
   }
 
   render() {

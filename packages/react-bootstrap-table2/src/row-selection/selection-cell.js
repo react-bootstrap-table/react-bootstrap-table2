@@ -25,9 +25,13 @@ export default class SelectionCell extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { selected } = this.props;
+    const shouldUpdate =
+      this.props.rowIndex !== nextProps.rowIndex ||
+      this.props.selected !== nextProps.selected ||
+      this.props.disabled !== nextProps.disabled ||
+      this.props.rowKey !== nextProps.rowKey;
 
-    return nextProps.selected !== selected;
+    return shouldUpdate;
   }
 
   handleClick(e) {
