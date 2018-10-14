@@ -1,4 +1,5 @@
 /* eslint react/prop-types: 0 */
+/* eslint no-plusplus: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import _ from '../utils';
@@ -55,6 +56,8 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
       expanded,
       selected,
       selectable,
+      visibleColumnSize,
+      tabIndexCell,
       ...rest
     } = this.props;
     const key = _.get(row, keyField);
@@ -65,6 +68,8 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
     if (clickToSelect || !!expandRow.renderer) {
       newAttrs.onClick = this.createClickEventHandler(newAttrs.onClick);
     }
+
+    let tabIndexStart = (rowIndex * visibleColumnSize) + 1;
 
     return (
       <tr
@@ -79,6 +84,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
               rowKey={ key }
               rowIndex={ rowIndex }
               expanded={ expanded }
+              tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
             />
           ) : null
         }
@@ -91,6 +97,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
                 rowIndex={ rowIndex }
                 selected={ selected }
                 disabled={ !selectable }
+                tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
               />
             )
             : null
@@ -101,6 +108,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
           keyField={ keyField }
           rowIndex={ rowIndex }
           shouldUpdate={ this.shouldUpdateRowContent }
+          tabIndexStart={ tabIndexCell ? tabIndexStart : -1 }
           { ...rest }
         />
       </tr>

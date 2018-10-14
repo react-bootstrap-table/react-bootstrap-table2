@@ -198,6 +198,26 @@ describe('Cell', () => {
       });
     });
 
+    describe('when props.tabIndex is change', () => {
+      const column = { dataField: 'name', text: 'Product Name' };
+      beforeEach(() => {
+        props = {
+          row,
+          columnIndex: 1,
+          rowIndex: 1,
+          tabIndex: 5,
+          column
+        };
+        wrapper = shallow(
+          <Cell { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, tabIndex: 2 };
+        expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+      });
+    });
+
     describe('if column.isDummyField is true', () => {
       describe('when content is change', () => {
         const column = { dataField: '', text: 'Product Name', isDummyField: true };

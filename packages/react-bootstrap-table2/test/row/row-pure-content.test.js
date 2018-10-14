@@ -104,6 +104,47 @@ describe('RowPureContent', () => {
     });
   });
 
+  describe('when tabIndexStart prop is -1', () => {
+    beforeEach(() => {
+      wrapper = shallow(
+        <RowPureContent
+          tabIndexStart={ -1 }
+          keyField={ keyField }
+          rowIndex={ rowIndex }
+          columns={ defaultColumns }
+          row={ row }
+        />
+      );
+    });
+
+    it('should not render tabIndex prop on Cell', () => {
+      wrapper.find(Cell).forEach((cell) => {
+        expect(cell.prop('tabIndex')).toBeUndefined();
+      });
+    });
+  });
+
+  describe('when tabIndexStart prop is not -1', () => {
+    const tabIndexStart = 4;
+    beforeEach(() => {
+      wrapper = shallow(
+        <RowPureContent
+          tabIndexStart={ tabIndexStart }
+          keyField={ keyField }
+          rowIndex={ rowIndex }
+          columns={ defaultColumns }
+          row={ row }
+        />
+      );
+    });
+
+    it('should render correct tabIndex prop on Cell', () => {
+      wrapper.find(Cell).forEach((cell, i) => {
+        expect(cell.prop('tabIndex')).toEqual(tabIndexStart + i);
+      });
+    });
+  });
+
   describe('when editingRowIdx and editingColIdx prop is defined', () => {
     const editingRowIdx = rowIndex;
     const editingColIdx = 1;

@@ -12,12 +12,23 @@ export default class ExpandCell extends Component {
     expanded: PropTypes.bool.isRequired,
     onRowExpand: PropTypes.func.isRequired,
     expandColumnRenderer: PropTypes.func,
-    rowIndex: PropTypes.number
+    rowIndex: PropTypes.number,
+    tabIndex: PropTypes.number
   }
 
   constructor() {
     super();
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const shouldUpdate =
+      this.props.rowIndex !== nextProps.rowIndex ||
+      this.props.expanded !== nextProps.expanded ||
+      this.props.rowKey !== nextProps.rowKey ||
+      this.props.tabIndex !== nextProps.tabIndex;
+
+    return shouldUpdate;
   }
 
   handleClick(e) {
@@ -27,10 +38,12 @@ export default class ExpandCell extends Component {
   }
 
   render() {
-    const { expanded, expandColumnRenderer } = this.props;
+    const { expanded, expandColumnRenderer, tabIndex } = this.props;
+    const attrs = {};
+    if (tabIndex !== -1) attrs.tabIndex = tabIndex;
 
     return (
-      <td onClick={ this.handleClick }>
+      <td onClick={ this.handleClick } { ...attrs }>
         {
           expandColumnRenderer ? expandColumnRenderer({
             expanded

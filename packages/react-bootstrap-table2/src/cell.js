@@ -34,7 +34,8 @@ class Cell extends Component {
       !_.isEqual(this.props.style, nextProps.style) ||
       !_.isEqual(this.props.column.formatExtraData, nextProps.column.formatExtraData) ||
       !_.isEqual(this.props.column.events, nextProps.column.events) ||
-      !_.isEqual(this.props.column.attrs, nextProps.column.attrs);
+      !_.isEqual(this.props.column.attrs, nextProps.column.attrs) ||
+      this.props.tabIndex !== nextProps.tabIndex;
     return shouldUpdate;
   }
 

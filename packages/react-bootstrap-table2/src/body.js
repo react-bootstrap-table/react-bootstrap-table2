@@ -5,7 +5,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import _ from './utils';
-import Row from './row/simple-row';
+import SimpleRow from './row/simple-row';
 import RowAggregator from './row/aggregate-row';
 import RowSection from './row/row-section';
 import Const from './const';
@@ -24,6 +24,7 @@ class Body extends React.Component {
     const {
       columns,
       data,
+      tabIndexCell,
       keyField,
       isEmpty,
       noDataIndication,
@@ -45,7 +46,7 @@ class Body extends React.Component {
       }
       content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
     } else {
-      let RowComponent = Row;
+      let RowComponent = SimpleRow;
       const selectRowEnabled = selectRow.mode !== Const.ROW_SELECT_DISABLED;
       const expandRowEnabled = !!expandRow.renderer;
 
@@ -73,11 +74,13 @@ class Body extends React.Component {
         const baseRowProps = {
           key,
           row,
+          tabIndexCell,
           columns,
           keyField,
           cellEdit,
           value: key,
           rowIndex: index,
+          visibleColumnSize,
           attrs: rowEvents || {},
           ...additionalRowProps
         };
