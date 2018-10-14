@@ -17,6 +17,7 @@
 * [hover](#hover)
 * [condensed](#condensed)
 * [id](#id)
+* [tabIndexCell](#tabIndexCell)
 * [classes](#classes)
 * [wrapperClasses](#wrapperClasses)
 * [headerClasses](#headerClasses)
@@ -112,6 +113,10 @@ Same as bootstrap `.table-condensed` class for making a table more compact by cu
 
 ### <a name='id'>id - [String]</a>
 Customize id on `table` element.
+
+### <a name='tabIndexCell'>tabIndexCell - [Bool]</a>
+Enable the `tabIndex` attribute on `<td>` element.
+
 ### <a name='classes'>classes - [String]</a>
 Customize class on `table` element.
 
