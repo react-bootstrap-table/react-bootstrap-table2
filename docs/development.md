@@ -3,7 +3,7 @@
 ### Setup
 ```bash
 $ git clone https://github.com/react-bootstrap-table/react-bootstrap-table2.git
-$ cd react-bootstrap-table
+$ cd react-bootstrap-table2
 $ npm install
 $ lerna bootstrap  # ./node_modules/.bin/lerna bootstrap
 ```
