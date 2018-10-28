@@ -553,6 +553,28 @@ The return value can be a bool or an object. If your validation is pass, return 
 }
 ```
 
+If you want to perform a asycn validation, you can do it like this:
+```js
+{
+  // omit...
+  validator: (newValue, row, column, done) => {
+    settimeout(() => {
+      // async validation ok
+      return done();
+
+      // async validation not ok
+      return done({
+        valid: false,
+        message: 'SOME_REASON_HERE'
+      });
+
+    }, 2000);
+    return { async: true };
+  }
+}
+```
+
+
 ## <a name='editCellStyle'>column.editCellStyle - [Object | Function]</a>
 You can use `column.editCellStyle` to custom the style of `<td>` when cell editing. It like most of customizable functionality, it also accept a callback function with following params:
 
