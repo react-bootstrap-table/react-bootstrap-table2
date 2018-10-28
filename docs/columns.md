@@ -379,16 +379,26 @@ A new `String` will be the result of element headerAlign.
 
 
 ## <a name='events'>column.events - [Object]</a>
-You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattributes.asp) on table column via event property:
+You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattributes.asp) on table column via `events` property.   
+
+`react-bootstrap-table2` currently only support following events which will receive some specific information:
+
+* onClick
+* onDoubleClick
+* onMouseEnter
+* onMouseLeave
+* onContextMenu
 
 ```js
 {
   // omit...
   events: {
-    onClick: e => { ... }
+    onClick: (e, column, columnIndex, row, rowIndex) => { ... },
   }
 }
 ```
+
+If the events is not listed above, the callback function will only pass the `event` object.
 
 ## <a name='headerEvents'>column.headerEvents - [Object]</a>
 `headerEvents` same as [`column.events`](#events) but this is for header column.
