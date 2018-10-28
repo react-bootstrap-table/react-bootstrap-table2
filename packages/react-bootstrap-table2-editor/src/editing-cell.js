@@ -44,6 +44,8 @@ export default (_, onStartEdit) =>
       this.handleClick = this.handleClick.bind(this);
       this.handleKeyDown = this.handleKeyDown.bind(this);
       this.beforeComplete = this.beforeComplete.bind(this);
+      this.asyncbeforeCompete = this.asyncbeforeCompete.bind(this);
+      this.displayErrorMessage = this.displayErrorMessage.bind(this);
       this.state = {
         invalidMessage: null
       };
@@ -79,16 +81,41 @@ export default (_, onStartEdit) =>
       }, timeToCloseMessage);
     }
 
+    displayErrorMessage(message) {
+      this.setState(() => ({
+        invalidMessage: message
+      }));
+      this.createTimer();
+    }
+
+    asyncbeforeCompete(newValue) {
+      return (result = { valid: true }) => {
+        const { valid, message } = result;
+        const { onUpdate, row, column } = this.props;
+        if (!valid) {
+          this.displayErrorMessage(message);
+          return;
+        }
+        onUpdate(row, column, newValue);
+      };
+    }
+
     beforeComplete(newValue) {
       const { onUpdate, row, column } = this.props;
       if (_.isFunction(column.validator)) {
-        const validateForm = column.validator(newValue, row, column);
-        if (_.isObject(validateForm) && !validateForm.valid) {
-          this.setState(() => ({
-            invalidMessage: validateForm.message
-          }));
-          this.createTimer();
-          return;
+        const validateForm = column.validator(
+          newValue,
+          row,
+          column,
+          this.asyncbeforeCompete(newValue)
+        );
+        if (_.isObject(validateForm)) {
+          if (validateForm.async) {
+            return;
+          } else if (!validateForm.valid) {
+            this.displayErrorMessage(validateForm.message);
+            return;
+          }
         }
       }
       onUpdate(row, column, newValue);
