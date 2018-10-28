@@ -235,7 +235,8 @@ describe('CellEditContext', () => {
 
       it('should call cellEdit.beforeSaveCell correctly', () => {
         expect(beforeSaveCell).toHaveBeenCalledTimes(1);
-        expect(beforeSaveCell).toHaveBeenCalledWith(oldValue, newValue, row, column);
+        expect(beforeSaveCell)
+          .toHaveBeenCalledWith(oldValue, newValue, row, column, expect.anything());
       });
     });
 
