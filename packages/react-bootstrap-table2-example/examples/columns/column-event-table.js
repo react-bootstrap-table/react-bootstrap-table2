@@ -45,7 +45,22 @@ const columns = [{
   dataField: 'id',
   text: 'Product ID',
   events: {
-    onClick: () => alert('Click on Product ID field')
+    onClick: (e, column, columnIndex, row, rowIndex) => {
+      console.log(e);
+      console.log(column);
+      console.log(columnIndex);
+      console.log(row);
+      console.log(rowIndex);
+      alert('Click on Product ID field');
+    },
+    onMouseEnter: (e, column, columnIndex, row, rowIndex) => {
+      console.log(e);
+      console.log(column);
+      console.log(columnIndex);
+      console.log(row);
+      console.log(rowIndex);
+      console.log('onMouseEnter on Product ID field');
+    }
   }
 }, {
   dataField: 'name',
