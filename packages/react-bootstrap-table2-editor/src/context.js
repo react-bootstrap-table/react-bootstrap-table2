@@ -31,6 +31,7 @@ export default (
 
     constructor(props) {
       super(props);
+      this.doUpdate = this.doUpdate.bind(this);
       this.startEditing = this.startEditing.bind(this);
       this.escapeEditing = this.escapeEditing.bind(this);
       this.completeEditing = this.completeEditing.bind(this);
@@ -55,11 +56,36 @@ export default (
     }
 
     handleCellUpdate(row, column, newValue) {
-      const { keyField, cellEdit, data } = this.props;
-      const { beforeSaveCell, afterSaveCell } = cellEdit.options;
+      const { cellEdit } = this.props;
+      const { beforeSaveCell } = cellEdit.options;
       const oldValue = _.get(row, column.dataField);
+      const beforeSaveCellDone = (result = true) => {
+        if (result) {
+          this.doUpdate(row, column, newValue);
+        } else {
+          this.escapeEditing();
+        }
+      };
+      if (_.isFunction(beforeSaveCell)) {
+        const result = beforeSaveCell(
+          oldValue,
+          newValue,
+          row,
+          column,
+          beforeSaveCellDone
+        );
+        if (_.isObject(result) && result.async) {
+          return;
+        }
+      }
+      this.doUpdate(row, column, newValue);
+    }
+
+    doUpdate(row, column, newValue) {
+      const { keyField, cellEdit, data } = this.props;
+      const { afterSaveCell } = cellEdit.options;
       const rowId = _.get(row, keyField);
-      if (_.isFunction(beforeSaveCell)) beforeSaveCell(oldValue, newValue, row, column);
+      const oldValue = _.get(row, column.dataField);
       if (isRemoteCellEdit()) {
         handleCellChange(rowId, column.dataField, newValue);
       } else {
