@@ -98,6 +98,7 @@ import ColumnLevelEditableTable from 'examples/cell-edit/column-level-editable-t
 import CellLevelEditable from 'examples/cell-edit/cell-level-editable-table';
 import CellEditHooks from 'examples/cell-edit/cell-edit-hooks-table';
 import CellEditValidator from 'examples/cell-edit/cell-edit-validator-table';
+import AsyncCellEditValidator from 'examples/cell-edit/cell-edit-async-validator-table';
 import CellEditStyleTable from 'examples/cell-edit/cell-edit-style-table';
 import CellEditClassTable from 'examples/cell-edit/cell-edit-class-table';
 import AutoSelectTextInput from 'examples/cell-edit/auto-select-text-input-table';
@@ -289,6 +290,7 @@ storiesOf('Cell Editing', module)
   .add('Cell Level Editable', () => <CellLevelEditable />)
   .add('Rich Hook Functions', () => <CellEditHooks />)
   .add('Validation', () => <CellEditValidator />)
+  .add('Async Validation', () => <AsyncCellEditValidator />)
   .add('Auto Select Text Input', () => <AutoSelectTextInput />)
   .add('Custom Cell Style', () => <CellEditStyleTable />)
   .add('Custom Cell Classes', () => <CellEditClassTable />)
