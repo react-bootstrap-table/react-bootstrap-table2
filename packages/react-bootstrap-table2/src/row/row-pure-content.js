@@ -50,12 +50,20 @@ export default class RowPureContent extends React.Component {
         // render cell
         let cellTitle;
         let cellStyle = {};
-        const cellAttrs = {
+        let cellAttrs = {
           ..._.isFunction(column.attrs)
             ? column.attrs(content, row, rowIndex, index)
-            : column.attrs,
-          ...column.events
+            : column.attrs
         };
+
+        if (column.events) {
+          const events = Object.assign({}, column.events);
+          Object.keys(Object.assign({}, column.events)).forEach((key) => {
+            const originFn = events[key];
+            events[key] = (...rest) => originFn(...rest, row, rowIndex);
+          });
+          cellAttrs = { ...cellAttrs, ...events };
+        }
 
         const cellClasses = _.isFunction(column.classes)
           ? column.classes(content, row, rowIndex, index)
