@@ -365,16 +365,26 @@ A new `String` will be the result of element headerAlign.
 
 
 ## column.events - [Object]
-You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattributes.asp) on table column via event property:
+You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattributes.asp) on table column via `events` property.   
+
+`react-bootstrap-table2` currently only support following events which will receive some specific information:
+
+* onClick
+* onDoubleClick
+* onMouseEnter
+* onMouseLeave
+* onContextMenu
 
 ```js
 {
   // omit...
   events: {
-    onClick: e => { ... }
+    onClick: (e, column, columnIndex, row, rowIndex) => { ... },
   }
 }
 ```
+
+If the events is not listed above, the callback function will only receive the `event` object.
 
 ## column.headerEvents - [Object]
 `headerEvents` same as [`column.events`](#columnevents-object) but this is for header column.
@@ -525,6 +535,27 @@ The return value can be a bool or an object. If your validation is pass, return 
 {
   valid: false,
   message: 'SOME_REASON_HERE'
+}
+```
+
+If you want to perform a asycn validation, you can do it like this:
+```js
+{
+  // omit...
+  validator: (newValue, row, column, done) => {
+    settimeout(() => {
+      // async validation ok
+      return done();
+
+      // async validation not ok
+      return done({
+        valid: false,
+        message: 'SOME_REASON_HERE'
+      });
+
+    }, 2000);
+    return { async: true };
+  }
 }
 ```
 
