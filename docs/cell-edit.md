@@ -62,6 +62,24 @@ const cellEdit = {
 }
 ```
 
+If you want to perform a async `beforeSaveCell`, you can do it like that:
+
+```js
+const cellEdit: {
+  // omit...
+  beforeSaveCell(oldValue, newValue, row, column, done) {
+    setTimeout(() => {
+      if (confirm('Do you want to accep this change?')) {
+        done(); // contine to save the changes
+      } else {
+        done(false); // reject the changes
+      }
+    }, 0);
+    return { async: true };
+  }
+};
+```
+
 ### <a name='afterSaveCell'>cellEdit.afterSaveCell - [Function]</a>
 This callback function will be called after updating cell.
 

@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import eventDelegater from './cell-event-delegater';
 import _ from './utils';
 
-class Cell extends Component {
+class Cell extends eventDelegater(Component) {
   constructor(props) {
     super(props);
     this.handleEditingCell = this.handleEditingCell.bind(this);
@@ -73,7 +74,7 @@ class Cell extends Component {
       formatter,
       formatExtraData
     } = column;
-    const attrs = { ...rest };
+    const attrs = this.delegate({ ...rest });
     let content = column.isDummyField ? null : _.get(row, dataField);
 
     if (formatter) {

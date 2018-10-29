@@ -7,17 +7,16 @@ const events = [
 ];
 
 export default ExtendBase =>
-  class RowEventDelegater extends ExtendBase {
+  class CellEventDelegater extends ExtendBase {
     constructor(props) {
       super(props);
-      this.clickNum = 0;
       this.createDefaultEventHandler = this.createDefaultEventHandler.bind(this);
     }
 
     createDefaultEventHandler(cb) {
       return (e) => {
-        const { row, rowIndex } = this.props;
-        cb(e, row, rowIndex);
+        const { column, columnIndex } = this.props;
+        cb(e, column, columnIndex);
       };
     }
 
