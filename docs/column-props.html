@@ -296,14 +296,23 @@ In addition, please make formatter function as pure function as possible as you 
 <p><strong>Return value</strong></p>
 <p>A new <code>String</code> will be the result of element headerAlign.</p>
 <h2><a class="anchor" aria-hidden="true" name="columnevents-object"></a><a href="#columnevents-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.events - [Object]</h2>
-<p>You can assign any <a href="https://www.w3schools.com/tags/ref_eventattributes.asp">HTML Event</a> on table column via event property:</p>
+<p>You can assign any <a href="https://www.w3schools.com/tags/ref_eventattributes.asp">HTML Event</a> on table column via <code>events</code> property.</p>
+<p><code>react-bootstrap-table2</code> currently only support following events which will receive some specific information:</p>
+<ul>
+<li>onClick</li>
+<li>onDoubleClick</li>
+<li>onMouseEnter</li>
+<li>onMouseLeave</li>
+<li>onContextMenu</li>
+</ul>
 <pre><code class="hljs css js">{
   <span class="hljs-comment">// omit...</span>
   events: {
-    <span class="hljs-attr">onClick</span>: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> { ... }
+    <span class="hljs-attr">onClick</span>: <span class="hljs-function">(<span class="hljs-params">e, column, columnIndex, row, rowIndex</span>) =&gt;</span> { ... },
   }
 }
 </code></pre>
+<p>If the events is not listed above, the callback function will only receive the <code>event</code> object.</p>
 <h2><a class="anchor" aria-hidden="true" name="columnheaderevents-object"></a><a href="#columnheaderevents-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.headerEvents - [Object]</h2>
 <p><code>headerEvents</code> same as <a href="#columnevents-object"><code>column.events</code></a> but this is for header column.</p>
 <pre><code class="hljs css js">{
@@ -420,6 +429,25 @@ overwrited when other props related to HTML attributes were given.</p>
 <pre><code class="hljs css js">{
   <span class="hljs-attr">valid</span>: <span class="hljs-literal">false</span>,
   <span class="hljs-attr">message</span>: <span class="hljs-string">'SOME_REASON_HERE'</span>
+}
+</code></pre>
+<p>If you want to perform a asycn validation, you can do it like this:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  validator: <span class="hljs-function">(<span class="hljs-params">newValue, row, column, done</span>) =&gt;</span> {
+    settimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+      <span class="hljs-comment">// async validation ok</span>
+      <span class="hljs-keyword">return</span> done();
+
+      <span class="hljs-comment">// async validation not ok</span>
+      <span class="hljs-keyword">return</span> done({
+        <span class="hljs-attr">valid</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">message</span>: <span class="hljs-string">'SOME_REASON_HERE'</span>
+      });
+
+    }, <span class="hljs-number">2000</span>);
+    <span class="hljs-keyword">return</span> { <span class="hljs-attr">async</span>: <span class="hljs-literal">true</span> };
+  }
 }
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="columneditcellstyle-object-function"></a><a href="#columneditcellstyle-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.editCellStyle - [Object | Function]</h2>
