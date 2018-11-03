@@ -43,20 +43,23 @@ class SelectionProvider extends React.Component {
 
     let currSelected = [...this.state.selected];
 
-    if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
-      currSelected = [rowKey];
-    } else if (checked) { // when select mode is checkbox
-      currSelected.push(rowKey);
-    } else {
-      currSelected = currSelected.filter(value => value !== rowKey);
-    }
-
-    if (onSelect) {
-      const row = dataOperator.getRowByRowId(data, keyField, rowKey);
-      onSelect(row, checked, rowIndex, e);
-    }
-
-    this.setState(() => ({ selected: currSelected }));
+    this.setState(() => {
+      let result = true;
+      if (onSelect) {
+        const row = dataOperator.getRowByRowId(data, keyField, rowKey);
+        result = onSelect(row, checked, rowIndex, e);
+      }
+      if (result === true || result === undefined) {
+        if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
+          currSelected = [rowKey];
+        } else if (checked) { // when select mode is checkbox
+          currSelected.push(rowKey);
+        } else {
+          currSelected = currSelected.filter(value => value !== rowKey);
+        }
+      }
+      return { selected: currSelected };
+    });
   }
 
   handleAllRowsSelect = (e, isUnSelect) => {
@@ -78,19 +81,24 @@ class SelectionProvider extends React.Component {
       currSelected = selected.filter(s => typeof data.find(d => d[keyField] === s) === 'undefined');
     }
 
-    if (onSelectAll) {
-      onSelectAll(
-        !isUnSelect,
-        dataOperator.getSelectedRows(
-          data,
-          keyField,
-          isUnSelect ? this.state.selected : currSelected
-        ),
-        e
-      );
-    }
-
-    this.setState(() => ({ selected: currSelected }));
+    this.setState(() => {
+      let result;
+      if (onSelectAll) {
+        result = onSelectAll(
+          !isUnSelect,
+          dataOperator.getSelectedRows(
+            data,
+            keyField,
+            isUnSelect ? this.state.selected : currSelected
+          ),
+          e
+        );
+        if (Array.isArray(result)) {
+          currSelected = result;
+        }
+      }
+      return { selected: currSelected };
+    });
   }
 
   render() {
