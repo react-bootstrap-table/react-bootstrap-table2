@@ -211,14 +211,40 @@ const selectRow = {
 };
 ```
 
+> If you want to reject current select action, just return `false`:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  onSelect: (row, isSelect, rowIndex, e) => {
+    if (SOME_CONDITION) {
+      return false;
+    }
+  }
+};
+```
+
 ### <a name='onSelectAll'>selectRow.onSelectAll - [Function]</a>
 This callback function will be called when select/unselect all and it only work when you configure [`selectRow.mode`](#mode) as `checkbox`.
 
 ```js
 const selectRow = {
   mode: 'checkbox',
-  onSelectAll: (isSelect, results, e) => {
+  onSelectAll: (isSelect, rows, e) => {
     // ...
+  }
+};
+```
+
+> If you want to control the final selection result, just return a row key array:
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  onSelectAll: (isSelect, rows, e) => {
+    if (isSelect && SOME_CONDITION) {
+      return [1, 3, 4];  // finally, key 1, 3, 4 will being selected 
+    }
   }
 };
 ```

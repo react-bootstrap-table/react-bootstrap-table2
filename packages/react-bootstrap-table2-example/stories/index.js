@@ -118,6 +118,7 @@ import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
 import ClickToSelectTable from 'examples/row-selection/click-to-select';
 import DefaultSelectTable from 'examples/row-selection/default-select';
 import SelectionManagement from 'examples/row-selection/selection-management';
+import AdvanceSelectionManagement from 'examples/row-selection/selection-advance-management';
 import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-select-with-cell-edit';
 import SelectionWithExpansionTable from 'examples/row-selection/selection-with-expansion';
 import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
@@ -312,6 +313,7 @@ storiesOf('Row Selection', module)
   .add('Click to Select', () => <ClickToSelectTable />)
   .add('Default Select', () => <DefaultSelectTable />)
   .add('Selection Management', () => <SelectionManagement />)
+  .add('Advance Selection Management', () => <AdvanceSelectionManagement />)
   .add('Click to Select and Edit Cell', () => <ClickToSelectWithCellEditTable />)
   .add('Row Select and Expand', () => <SelectionWithExpansionTable />)
   .add('Selection without Data', () => <SelectionNoDataTable />)
