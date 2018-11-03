@@ -26,4 +26,31 @@
       overflow-y: auto;
     }
   }
+
+  // Disable double strips when table was displayed in bordered.
+  table.table-sticky.table-bordered {
+    border-left: 0;
+
+    thead,
+    tbody {
+      tr {
+        th {
+          border-top: 0;
+          border-right: 0;
+        }
+
+        td {
+          border-top: 0;
+          border-right: 0;
+
+        }
+
+        &:last-child {
+          td {
+            border-bottom: 0;
+          }
+        }
+      }
+    }
+  }
 }
