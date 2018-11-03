@@ -1,0 +1,29 @@
+.react-bootstrap-table {
+  .table-sticky {
+    thead,
+    tbody {
+      display: block;
+      width: 100%;
+  
+      tr {
+        display: inline-flex;
+        width: 100%;
+  
+        th,
+        td {
+          width: 100%;
+
+          &[data-row-selection] {
+            width: 30px;
+            min-width: 30px;
+          }
+        }
+      }
+    }
+  
+    tbody {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+  }
+}

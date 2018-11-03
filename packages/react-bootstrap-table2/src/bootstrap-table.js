@@ -57,7 +57,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowEvents,
       selectRow,
       expandRow,
-      cellEdit
+      cellEdit,
+      sticky
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -66,7 +67,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-striped': striped,
       'table-hover': hover,
       'table-bordered': bordered,
-      'table-condensed': condensed
+      'table-condensed': condensed,
+      'table-sticky': sticky
     }, classes);
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
@@ -118,6 +120,7 @@ BootstrapTable.propTypes = {
   noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
+  sticky: PropTypes.bool,
   hover: PropTypes.bool,
   tabIndexCell: PropTypes.bool,
   id: PropTypes.string,
@@ -190,6 +193,7 @@ BootstrapTable.defaultProps = {
   remote: false,
   striped: false,
   bordered: true,
+  sticky: false,
   hover: false,
   condensed: false,
   noDataIndication: null,

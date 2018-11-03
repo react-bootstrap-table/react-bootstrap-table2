@@ -1,3 +1,5 @@
+@import "partials/all";
+
 .react-bootstrap-table {
 
   table {
@@ -55,8 +57,10 @@
     content: "\2193";
   }
 
-  th[data-row-selection] {
+  th[data-row-selection],
+  td[data-row-selection] {
     width: 30px;
+    min-width: 30px;
   }
 
   th > .selection-input-4,

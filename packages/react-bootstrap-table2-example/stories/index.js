@@ -168,6 +168,9 @@ import CustomCSV from 'examples/csv/custom-csv';
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
 import TableOverlay from 'examples/loading-overlay/table-overlay';
 
+// sticky header table
+import StickyHeaderTable from 'examples/sticky-header/default';
+
 // remote
 import RemoteSort from 'examples/remote/remote-sort';
 import RemoteFilter from 'examples/remote/remote-filter';
@@ -361,6 +364,10 @@ storiesOf('Export CSV', module)
   .add('Custom CSV Button', () => <CustomCSVButton />)
   .add('Export Custom Data', () => <ExportCustomData />)
   .add('Custom CSV', () => <CustomCSV />);
+
+storiesOf('Sticky header', module)
+  .addDecorator(bootstrapStyle())
+  .add('Default sticky header', () => <StickyHeaderTable />);
 
 storiesOf('EmptyTableOverlay', module)
   .addDecorator(bootstrapStyle())
