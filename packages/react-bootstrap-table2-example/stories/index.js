@@ -170,6 +170,7 @@ import TableOverlay from 'examples/loading-overlay/table-overlay';
 
 // sticky header table
 import StickyHeaderTable from 'examples/sticky-header/default';
+import StickyHeaderCustomStyleTable from 'examples/sticky-header/customized-style.js';
 
 // remote
 import RemoteSort from 'examples/remote/remote-sort';
@@ -367,7 +368,8 @@ storiesOf('Export CSV', module)
 
 storiesOf('Sticky header', module)
   .addDecorator(bootstrapStyle())
-  .add('Default sticky header', () => <StickyHeaderTable />);
+  .add('Default sticky header', () => <StickyHeaderTable />)
+  .add('Custom style for sticky header', () => <StickyHeaderCustomStyleTable />);
 
 storiesOf('EmptyTableOverlay', module)
   .addDecorator(bootstrapStyle())
