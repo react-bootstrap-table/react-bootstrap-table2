@@ -1,13 +1,13 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import statelessDrcorator from './statelessOp';
+import statelessDecorator from './statelessOp';
 
 import createContext from './src/search/context';
 
 const ToolkitContext = React.createContext();
 
-class ToolkitProvider extends statelessDrcorator(React.Component) {
+class ToolkitProvider extends statelessDecorator(React.Component) {
   static propTypes = {
     keyField: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,

@@ -2,18 +2,18 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ToolkitContext from './context';
 
-const Toolkitprovider = props => (
+const ToolkitProvider = props => (
   <ToolkitContext.Provider { ...props }>
     <ToolkitContext.Consumer>
       {
-        tookKitProps => props.children(tookKitProps)
+        toolkitProps => props.children(toolkitProps)
       }
     </ToolkitContext.Consumer>
   </ToolkitContext.Provider>
 );
 
-Toolkitprovider.propTypes = {
+ToolkitProvider.propTypes = {
   children: PropTypes.func.isRequired
 };
 
-export default Toolkitprovider;
+export default ToolkitProvider;
