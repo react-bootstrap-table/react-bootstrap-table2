@@ -3,6 +3,7 @@
 <url> <loc>https://react-bootstrap-table.github.io/help.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://react-bootstrap-table.github.io/en/help.html" /> </url>
 <url> <loc>https://react-bootstrap-table.github.io/index.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://react-bootstrap-table.github.io/en/index.html" /> </url>
 <url> <loc>https://react-bootstrap-table.github.io/users.html</loc> <changefreq>weekly</changefreq> <priority>0.5</priority> <xhtml:link rel="alternate" hreflang="en" href="https://react-bootstrap-table.github.io/en/users.html" /> </url>
+<url> <loc>https://react-bootstrap-table.github.io/blog/2018/11/04/version.bump.html</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://react-bootstrap-table.github.io/blog/2018/10/29/version-bump.html</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://react-bootstrap-table.github.io/blog/2018/10/14/version-bump.html</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>
 <url> <loc>https://react-bootstrap-table.github.io/blog/2018/10/07/version-bump.html</loc> <changefreq>weekly</changefreq> <priority>0.3</priority> </url>

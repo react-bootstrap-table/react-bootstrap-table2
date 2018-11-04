@@ -143,13 +143,37 @@
   }
 };
 </code></pre>
+<blockquote>
+<p>If you want to reject current select action, just return <code>false</code>:</p>
+</blockquote>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> selectRow = {
+ <span class="hljs-attr">mode</span>: <span class="hljs-string">'checkbox'</span>,
+ <span class="hljs-attr">onSelect</span>: <span class="hljs-function">(<span class="hljs-params">row, isSelect, rowIndex, e</span>) =&gt;</span> {
+   <span class="hljs-keyword">if</span> (SOME_CONDITION) {
+     <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+   }
+ }
+};
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" name="selectrowonselectall-function"></a><a href="#selectrowonselectall-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectRow.onSelectAll - [Function]</h2>
 <p>This callback function will be called when select/unselect all and it only work when you configure <a href="#selectrowmode-string"><code>selectRow.mode</code></a> as <code>checkbox</code>.</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> selectRow = {
   <span class="hljs-attr">mode</span>: <span class="hljs-string">'checkbox'</span>,
-  <span class="hljs-attr">onSelectAll</span>: <span class="hljs-function">(<span class="hljs-params">isSelect, results, e</span>) =&gt;</span> {
+  <span class="hljs-attr">onSelectAll</span>: <span class="hljs-function">(<span class="hljs-params">isSelect, rows, e</span>) =&gt;</span> {
     <span class="hljs-comment">// ...</span>
   }
+};
+</code></pre>
+<blockquote>
+<p>If you want to control the final selection result, just return a row key array:</p>
+</blockquote>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> selectRow = {
+ <span class="hljs-attr">mode</span>: <span class="hljs-string">'checkbox'</span>,
+ <span class="hljs-attr">onSelectAll</span>: <span class="hljs-function">(<span class="hljs-params">isSelect, rows, e</span>) =&gt;</span> {
+   <span class="hljs-keyword">if</span> (isSelect &amp;&amp; SOME_CONDITION) {
+     <span class="hljs-keyword">return</span> [<span class="hljs-number">1</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>];  <span class="hljs-comment">// finally, key 1, 3, 4 will being selected </span>
+   }
+ }
 };
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="selectrowhideselectcolumn-bool"></a><a href="#selectrowhideselectcolumn-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectRow.hideSelectColumn - [Bool]</h2>
