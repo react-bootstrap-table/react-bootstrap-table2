@@ -55,6 +55,7 @@ import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 import SelectFilter from 'examples/column-filter/select-filter';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
+import SelectFilterWithPreservedOptionsOrder from 'examples/column-filter/select-filter-preserve-option-order';
 import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
 import MultiSelectFilter from 'examples/column-filter/multi-select-filter';
 import MultiSelectFilterDefaultValue from 'examples/column-filter/multi-select-filter-default-value';
@@ -263,6 +264,7 @@ storiesOf('Column Filter', module)
   .add('Programmatically Multi Select Filter', () => <ProgrammaticallyMultiSelectFilter />)
   .add('Custom Filter', () => <CustomFilter />)
   .add('Advance Custom Filter', () => <AdvanceCustomFilter />)
+  .add('Preserved Option Order on Select Filter', () => <SelectFilterWithPreservedOptionsOrder />)
   .add('Clear All Filters', () => <ClearAllFilters />);
 
 storiesOf('Work on Rows', module)
