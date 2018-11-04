@@ -115,6 +115,27 @@ const qualityFilter = selectFilter({
 // omit...
 ```
 
+> Note, the selectOptions can be an array also: 
+
+```js
+const selectOptions = [
+  { label: 0, value: 'good' },
+  { label: 1, value: 'Bad' },
+  { label: 2, value: 'unknown' }
+];
+const columns = [
+  ..., {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions.find(opt => opt.label === cell).value,
+  filter: selectFilter({
+    options: selectOptions
+  })
+}];
+```
+
+The benifit is `react-bootstrap-table2` will render the select options by the order of array.
+
 ## MultiSelect Filter
 
 A quick example: 

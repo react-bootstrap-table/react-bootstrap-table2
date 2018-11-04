@@ -55,6 +55,7 @@ import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 import SelectFilter from 'examples/column-filter/select-filter';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
+import SelectFilterWithPreservedOptionsOrder from 'examples/column-filter/select-filter-preserve-option-order';
 import CustomSelectFilter from 'examples/column-filter/custom-select-filter';
 import MultiSelectFilter from 'examples/column-filter/multi-select-filter';
 import MultiSelectFilterDefaultValue from 'examples/column-filter/multi-select-filter-default-value';
@@ -118,6 +119,7 @@ import MultipleSelectionTable from 'examples/row-selection/multiple-selection';
 import ClickToSelectTable from 'examples/row-selection/click-to-select';
 import DefaultSelectTable from 'examples/row-selection/default-select';
 import SelectionManagement from 'examples/row-selection/selection-management';
+import AdvanceSelectionManagement from 'examples/row-selection/selection-advance-management';
 import ClickToSelectWithCellEditTable from 'examples/row-selection/click-to-select-with-cell-edit';
 import SelectionWithExpansionTable from 'examples/row-selection/selection-with-expansion';
 import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
@@ -262,6 +264,7 @@ storiesOf('Column Filter', module)
   .add('Programmatically Multi Select Filter', () => <ProgrammaticallyMultiSelectFilter />)
   .add('Custom Filter', () => <CustomFilter />)
   .add('Advance Custom Filter', () => <AdvanceCustomFilter />)
+  .add('Preserved Option Order on Select Filter', () => <SelectFilterWithPreservedOptionsOrder />)
   .add('Clear All Filters', () => <ClearAllFilters />);
 
 storiesOf('Work on Rows', module)
@@ -312,6 +315,7 @@ storiesOf('Row Selection', module)
   .add('Click to Select', () => <ClickToSelectTable />)
   .add('Default Select', () => <DefaultSelectTable />)
   .add('Selection Management', () => <SelectionManagement />)
+  .add('Advance Selection Management', () => <AdvanceSelectionManagement />)
   .add('Click to Select and Edit Cell', () => <ClickToSelectWithCellEditTable />)
   .add('Row Select and Expand', () => <SelectionWithExpansionTable />)
   .add('Selection without Data', () => <SelectionNoDataTable />)

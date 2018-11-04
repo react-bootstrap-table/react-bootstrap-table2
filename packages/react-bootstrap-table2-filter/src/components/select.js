@@ -7,6 +7,14 @@ import { LIKE, EQ } from '../comparison';
 import { FILTER_TYPE } from '../const';
 
 function optionsEquals(currOpts, prevOpts) {
+  if (Array.isArray(currOpts)) {
+    for (let i = 0; i < currOpts.length; i += 1) {
+      if (currOpts[i].label !== prevOpts[i].label) {
+        return false;
+      }
+    }
+    return currOpts.length === prevOpts.length;
+  }
   const keys = Object.keys(currOpts);
   for (let i = 0; i < keys.length; i += 1) {
     if (currOpts[keys[i]] !== prevOpts[keys[i]]) {
@@ -16,11 +24,21 @@ function optionsEquals(currOpts, prevOpts) {
   return Object.keys(currOpts).length === Object.keys(prevOpts).length;
 }
 
+function getOptionValue(options, key) {
+  if (Array.isArray(options)) {
+    const result = options
+      .filter(({ label }) => label === key)
+      .map(({ value }) => value);
+    return result[0];
+  }
+  return options[key];
+}
+
 class SelectFilter extends Component {
   constructor(props) {
     super(props);
     this.filter = this.filter.bind(this);
-    const isSelected = props.options[props.defaultValue] !== undefined;
+    const isSelected = getOptionValue(props.options, props.defaultValue) !== undefined;
     this.state = { isSelected };
   }
 
@@ -66,9 +84,14 @@ class SelectFilter extends Component {
         <option key="-1" value="">{ placeholder || `Select ${column.text}...` }</option>
       ));
     }
-    Object.keys(options).forEach(key =>
-      optionTags.push(<option key={ key } value={ key }>{ options[key] }</option>)
-    );
+    if (Array.isArray(options)) {
+      options.forEach(({ value, label }) =>
+        optionTags.push(<option key={ label } value={ label }>{ value }</option>));
+    } else {
+      Object.keys(options).forEach(key =>
+        optionTags.push(<option key={ key } value={ key }>{ options[key] }</option>)
+      );
+    }
     return optionTags;
   }
 
@@ -128,7 +151,7 @@ class SelectFilter extends Component {
 SelectFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
-  options: PropTypes.object.isRequired,
+  options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   placeholder: PropTypes.string,
   style: PropTypes.object,
