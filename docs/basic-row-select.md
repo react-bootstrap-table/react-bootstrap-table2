@@ -20,8 +20,13 @@ By default behavior, user need to click on the selection column or the checkbox/
 ## Selection Management
 Please check [`selectoRow.selected`](./row-select-props.html#selectrowselected-array), it's used for default selection usually but also can be used as a external selection control.   
 
-This is an example for [selection management](../storybook/index.html?selectedKind=Row%20Selection&selectedStory=Selection%20Management)
+This is an example for [selection management](../storybook/index.html?selectedKind=Row%20Selection&selectedStory=Selection%20Management).   
+
+
+In addition, this is another example for [selection management](../storybook/index.html?selectedKind=Row%20Selection&selectedStory=Advance%20Selection%20Management)
 ## Customization
+
+
 
 ### Style/Class
 Like column, we support to custom the style, class on the selecting row easily via following `selectRow` props:
