@@ -86,7 +86,7 @@ class SelectFilter extends Component {
     }
     if (Array.isArray(options)) {
       options.forEach(({ value, label }) =>
-        optionTags.push(<option key={ label } value={ label }>{ value }</option>));
+        optionTags.push(<option key={ value } value={ value }>{ label }</option>));
     } else {
       Object.keys(options).forEach(key =>
         optionTags.push(<option key={ key } value={ key }>{ options[key] }</option>)
