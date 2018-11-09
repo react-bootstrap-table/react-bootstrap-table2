@@ -14,7 +14,7 @@ Rebuilt of [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-
 - [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
 - [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
 
-This not only reduce the bundle size of your apps but also help us have a cleaner design to avoid handling too much logic in the kernel module(SRP).
+Not only does this reduce the bundle size of your apps but also helps us have a cleaner design to avoid handling too much logic in the kernel module(SRP).
 
 ## Migration
 
