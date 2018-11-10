@@ -9,7 +9,10 @@ import { FILTER_TYPE } from '../const';
 function optionsEquals(currOpts, prevOpts) {
   if (Array.isArray(currOpts)) {
     for (let i = 0; i < currOpts.length; i += 1) {
-      if (currOpts[i].label !== prevOpts[i].label) {
+      if (
+        currOpts[i].value !== prevOpts[i].value ||
+        currOpts[i].label !== prevOpts[i].label
+      ) {
         return false;
       }
     }
@@ -86,7 +89,7 @@ class SelectFilter extends Component {
     }
     if (Array.isArray(options)) {
       options.forEach(({ value, label }) =>
-        optionTags.push(<option key={ label } value={ label }>{ value }</option>));
+        optionTags.push(<option key={ value } value={ value }>{ label }</option>));
     } else {
       Object.keys(options).forEach(key =>
         optionTags.push(<option key={ key } value={ key }>{ options[key] }</option>)

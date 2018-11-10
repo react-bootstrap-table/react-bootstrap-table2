@@ -8,9 +8,9 @@ import { productsQualityGenerator } from 'utils/common';
 const products = productsQualityGenerator(6);
 
 const selectOptions = [
-  { label: 0, value: 'good' },
-  { label: 1, value: 'Bad' },
-  { label: 2, value: 'unknown' }
+  { value: 0, label: 'good' },
+  { value: 1, label: 'Bad' },
+  { value: 2, label: 'unknown' }
 ];
 
 const columns = [{
@@ -22,7 +22,7 @@ const columns = [{
 }, {
   dataField: 'quality',
   text: 'Product Quailty',
-  formatter: cell => selectOptions.find(opt => opt.label === cell).value,
+  formatter: cell => selectOptions.find(opt => opt.value === cell).label,
   filter: selectFilter({
     options: selectOptions
   })
@@ -33,9 +33,9 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 
 const selectOptions = [
-  { label: 0, value: 'good' },
-  { label: 1, value: 'Bad' },
-  { label: 2, value: 'unknown' }
+  { value: 0, label: 'good' },
+  { value: 1, label: 'Bad' },
+  { value: 2, label: 'unknown' }
 ];
 
 const columns = [{
@@ -47,7 +47,7 @@ const columns = [{
 }, {
   dataField: 'quality',
   text: 'Product Quailty',
-  formatter: cell => selectOptions.find(opt => opt.label === cell).value,
+  formatter: cell => selectOptions.find(opt => opt.value === cell).label,
   filter: selectFilter({
     options: selectOptions
   })
