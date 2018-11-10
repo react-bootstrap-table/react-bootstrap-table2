@@ -119,15 +119,15 @@ const qualityFilter = selectFilter({
 
 ```js
 const selectOptions = [
-  { label: 0, value: 'good' },
-  { label: 1, value: 'Bad' },
-  { label: 2, value: 'unknown' }
+  { value: 0, label: 'good' },
+  { value: 1, label: 'Bad' },
+  { value: 2, label: 'unknown' }
 ];
 const columns = [
   ..., {
   dataField: 'quality',
   text: 'Product Quailty',
-  formatter: cell => selectOptions.find(opt => opt.label === cell).value,
+  formatter: cell => selectOptions.find(opt => opt.value === cell).label,
   filter: selectFilter({
     options: selectOptions
   })
