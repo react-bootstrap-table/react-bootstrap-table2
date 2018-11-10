@@ -51,7 +51,8 @@ const expandRow = {
       <p>expandRow.renderer callback will pass the origin row object to you</p>
     </div>
   ),
-  showExpandColumn: true
+  showExpandColumn: true,
+  expandByColumnOnly: true
 };
 
 <BootstrapTable
