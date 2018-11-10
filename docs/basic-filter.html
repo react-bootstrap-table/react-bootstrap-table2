@@ -104,15 +104,15 @@
 <p>Note, the <code>selectOptions</code> can be an array also:</p>
 </blockquote>
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> selectOptions = [
- { <span class="hljs-attr">label</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'good'</span> },
- { <span class="hljs-attr">label</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'Bad'</span> },
- { <span class="hljs-attr">label</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">value</span>: <span class="hljs-string">'unknown'</span> }
+ { <span class="hljs-attr">value</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">'good'</span> },
+ { <span class="hljs-attr">value</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">'Bad'</span> },
+ { <span class="hljs-attr">value</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">label</span>: <span class="hljs-string">'unknown'</span> }
 ];
 <span class="hljs-keyword">const</span> columns = [
  ..., {
  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'quality'</span>,
  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Quailty'</span>,
- <span class="hljs-attr">formatter</span>: <span class="hljs-function"><span class="hljs-params">cell</span> =&gt;</span> selectOptions.find(<span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span> opt.label === cell).value,
+ <span class="hljs-attr">formatter</span>: <span class="hljs-function"><span class="hljs-params">cell</span> =&gt;</span> selectOptions.find(<span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span> opt.value === cell).label,
  <span class="hljs-attr">filter</span>: selectFilter({
    <span class="hljs-attr">options</span>: selectOptions
  })
