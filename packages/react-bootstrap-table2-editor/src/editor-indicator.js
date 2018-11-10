@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const EditorIndicator = ({ invalidMessage }) =>
   (
-    <div className="alert alert-danger fade in">
+    <div className="alert alert-danger in" role="alert">
       <strong>{ invalidMessage }</strong>
     </div>
   );
