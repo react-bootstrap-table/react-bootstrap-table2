@@ -45,6 +45,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       tabIndexCell,
       id,
       classes,
+      bootstrap4,
       striped,
       hover,
       bordered,
@@ -66,7 +67,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-striped': striped,
       'table-hover': hover,
       'table-bordered': bordered,
-      'table-condensed': condensed
+      [(bootstrap4 ? 'table-sm' : 'table-condensed')]: condensed
     }, classes);
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
