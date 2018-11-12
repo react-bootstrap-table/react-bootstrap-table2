@@ -22,6 +22,3 @@ storybook-static
 # build
 lib
 dist
-
-#webstorm
-.idea
