@@ -26,6 +26,8 @@ class Body extends React.Component {
       data,
       tabIndexCell,
       keyField,
+      condensed,
+      bootstrap4,
       isEmpty,
       noDataIndication,
       visibleColumnSize,
@@ -76,6 +78,8 @@ class Body extends React.Component {
           row,
           tabIndexCell,
           columns,
+          condensed,
+          bootstrap4,
           keyField,
           cellEdit,
           value: key,
@@ -84,7 +88,6 @@ class Body extends React.Component {
           attrs: rowEvents || {},
           ...additionalRowProps
         };
-
         baseRowProps.style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
         baseRowProps.className = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
 

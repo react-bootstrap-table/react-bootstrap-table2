@@ -147,10 +147,10 @@ export default (_, onStartEdit) =>
         e.stopPropagation();
       }
     }
-
     render() {
       let editor;
-      const { row, column, className, style, rowIndex, columnIndex, autoSelectText } = this.props;
+      const { row, column, className, style, rowIndex, columnIndex, autoSelectText, condensed,
+        bootstrap4 } = this.props;
       const { dataField } = column;
 
       const value = _.get(row, dataField);
@@ -173,6 +173,8 @@ export default (_, onStartEdit) =>
 
       let editorProps = {
         ref: node => this.editor = node,
+        condensed,
+        bootstrap4,
         defaultValue: value,
         style: editorStyle,
         className: editorClass,
@@ -197,7 +199,6 @@ export default (_, onStartEdit) =>
           onUpdate: this.beforeComplete
         };
       }
-
       if (_.isFunction(column.editorRenderer)) {
         editor = column.editorRenderer(editorProps, value, row, column, rowIndex, columnIndex);
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.SELECT) {

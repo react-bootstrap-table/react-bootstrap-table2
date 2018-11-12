@@ -16,8 +16,12 @@ class DateEditor extends Component {
   }
 
   render() {
-    const { defaultValue, didMount, className, ...rest } = this.props;
-    const editorClass = cs('form-control editor edit-date', className);
+    const { defaultValue, didMount, className, bootstrap4, condensed, ...rest } = this.props;
+    let condensedClass = '';
+    if (condensed) {
+      condensedClass = (bootstrap4 ? 'form-control-sm' : 'input-sm');
+    }
+    const editorClass = cs('form-control editor edit-date', condensedClass, className);
     return (
       <input
         ref={ node => this.date = node }
@@ -34,12 +38,16 @@ DateEditor.propTypes = {
     PropTypes.string,
     PropTypes.object
   ]),
+  condensed: PropTypes.bool,
+  bootstrap4: PropTypes.bool,
   defaultValue: PropTypes.string,
   didMount: PropTypes.func
 };
 DateEditor.defaultProps = {
   className: '',
   defaultValue: '',
+  condensed: false,
+  bootstrap4: false,
   didMount: undefined
 };
 export default DateEditor;

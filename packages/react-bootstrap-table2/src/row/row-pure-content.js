@@ -27,7 +27,9 @@ export default class RowPureContent extends React.Component {
       clickToEdit,
       dbclickToEdit,
       EditingCellComponent,
-      tabIndexStart
+      tabIndexStart,
+      condensed,
+      bootstrap4
     } = this.props;
 
     let tabIndex = tabIndexStart;
@@ -44,6 +46,8 @@ export default class RowPureContent extends React.Component {
               rowIndex={ rowIndex }
               column={ column }
               columnIndex={ index }
+              condensed={ condensed }
+              bootstrap4={ bootstrap4 }
             />
           );
         }

@@ -93,6 +93,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             tabIndexCell={ tabIndexCell }
             columns={ columns }
             isEmpty={ this.isEmpty() }
+            condensed={ condensed }
+            bootstrap4={ bootstrap4 }
             visibleColumnSize={ this.visibleColumnSize() }
             noDataIndication={ noDataIndication }
             cellEdit={ cellEdit }

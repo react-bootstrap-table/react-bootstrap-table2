@@ -16,9 +16,13 @@ class DropDownEditor extends Component {
   }
 
   render() {
-    const { defaultValue, didMount, className, options, ...rest } = this.props;
-    const editorClass = cs('form-control editor edit-select', className);
-
+    const { defaultValue, didMount, className, options, bootstrap4, condensed, ...rest } =
+      this.props;
+    let condensedClass = '';
+    if (condensed) {
+      condensedClass = (bootstrap4 ? 'form-control-sm' : 'input-sm');
+    }
+    const editorClass = cs('form-control editor edit-select', condensedClass, className);
     const attr = {
       ...rest,
       className: editorClass
@@ -45,6 +49,8 @@ DropDownEditor.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]),
+  condensed: PropTypes.bool,
+  bootstrap4: PropTypes.bool,
   className: PropTypes.string,
   style: PropTypes.object,
   options: PropTypes.oneOfType([
@@ -58,6 +64,8 @@ DropDownEditor.propTypes = {
 DropDownEditor.defaultProps = {
   className: '',
   defaultValue: '',
+  condensed: false,
+  bootstrap4: false,
   style: {},
   didMount: undefined
 };

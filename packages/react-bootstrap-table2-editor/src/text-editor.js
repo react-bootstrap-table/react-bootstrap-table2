@@ -11,14 +11,18 @@ class TextEditor extends Component {
     if (autoSelectText) this.text.select();
     if (didMount) didMount();
   }
-
   getValue() {
     return this.text.value;
   }
 
   render() {
-    const { defaultValue, didMount, className, autoSelectText, ...rest } = this.props;
-    const editorClass = cs('form-control editor edit-text', className);
+    const { defaultValue, didMount, className, autoSelectText, bootstrap4, condensed, ...rest } =
+      this.props;
+    let condensedClass = '';
+    if (condensed) {
+      condensedClass = (bootstrap4 ? 'form-control-sm' : 'input-sm');
+    }
+    const editorClass = cs('form-control editor edit-text', condensedClass, className);
     return (
       <input
         ref={ node => this.text = node }
@@ -39,12 +43,16 @@ TextEditor.propTypes = {
     PropTypes.string,
     PropTypes.number
   ]),
+  condensed: PropTypes.bool,
+  bootstrap4: PropTypes.bool,
   autoSelectText: PropTypes.bool,
   didMount: PropTypes.func
 };
 TextEditor.defaultProps = {
   className: null,
   defaultValue: '',
+  condensed: false,
+  bootstrap4: false,
   autoSelectText: false,
   didMount: undefined
 };
