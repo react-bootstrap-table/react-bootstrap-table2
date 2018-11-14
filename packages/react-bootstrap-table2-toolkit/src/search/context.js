@@ -18,7 +18,7 @@ export default (options = {
       data: PropTypes.array.isRequired,
       columns: PropTypes.array.isRequired,
       searchText: PropTypes.string
-    }
+    };
 
     constructor(props) {
       super(props);
@@ -27,11 +27,7 @@ export default (options = {
 
     componentWillReceiveProps(nextProps) {
       if (isRemoteSearch()) {
-        if (nextProps.searchText !== this.props.searchText) {
-          this.performRemoteSearch = true;
-        } else {
-          this.performRemoteSearch = false;
-        }
+        this.performRemoteSearch = nextProps.searchText !== this.props.searchText;
       }
     }
 
@@ -58,9 +54,22 @@ export default (options = {
             targetValue = column.filterValue(targetValue, row);
           }
           if (targetValue !== null && typeof targetValue !== 'undefined') {
-            targetValue = targetValue.toString().toLowerCase();
-            if (targetValue.indexOf(searchText) > -1) {
-              return true;
+            if (Array.isArray(targetValue)) {
+              const searchStrings = searchText.split(' ');
+              for (let i = 0; i < searchStrings.length; i += 1) {
+                const searchValue = searchStrings[i].toString().toLowerCase();
+                for (let j = 0; j < targetValue.length; j += 1) {
+                  const arrValue = targetValue[j].toString().toLowerCase();
+                  if (arrValue.indexOf(searchValue) > -1) {
+                    return true;
+                  }
+                }
+              }
+            } else {
+              targetValue = targetValue.toString().toLowerCase();
+              if (targetValue.indexOf(searchText) > -1) {
+                return true;
+              }
             }
           }
         }
