@@ -178,6 +178,10 @@ import RemoteSearch from 'examples/remote/remote-search';
 import RemoteCellEdit from 'examples/remote/remote-celledit';
 import RemoteAll from 'examples/remote/remote-all';
 
+
+// drag and drop
+import DragAndDrop from 'examples/drag-and-drop/drag-and-drop';
+
 // css style
 import 'stories/stylesheet/tomorrow.min.css';
 import 'stories/stylesheet/storybook.scss';
@@ -379,3 +383,7 @@ storiesOf('Remote', module)
   .add('Remote Search', () => <RemoteSearch />)
   .add('Remote Cell Editing', () => <RemoteCellEdit />)
   .add('Remote All', () => <RemoteAll />);
+
+storiesOf('Drag and Drop', module)
+  .addDecorator(bootstrapStyle())
+  .add('Drag and Drop', () => <DragAndDrop />);
