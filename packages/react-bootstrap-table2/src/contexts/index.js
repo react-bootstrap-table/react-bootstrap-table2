@@ -40,8 +40,7 @@ const withContext = Base =>
       }
 
       if (props.pagination) {
-        this.PaginationContext = props.pagination.createContext(
-          this.isRemotePagination, this.handleRemotePageChange);
+        this.PaginationContext = props.pagination.createContext();
       }
 
       if (props.search && props.search.searchContext) {
@@ -51,6 +50,10 @@ const withContext = Base =>
 
       if (props.setDependencyModules) {
         props.setDependencyModules(_);
+      }
+
+      if (props.setPaginationRemoteEmitter) {
+        props.setPaginationRemoteEmitter(this.remoteEmitter);
       }
     }
 
@@ -150,6 +153,8 @@ const withContext = Base =>
           pagination={ this.props.pagination }
           data={ rootProps.getData(filterProps, searchProps, sortProps) }
           bootstrap4={ this.props.bootstrap4 }
+          isRemotePagination={ this.isRemotePagination }
+          remoteEmitter={ this.remoteEmitter }
         >
           <this.PaginationContext.Consumer>
             {

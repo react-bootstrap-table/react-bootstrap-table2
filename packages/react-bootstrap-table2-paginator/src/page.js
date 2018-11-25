@@ -18,13 +18,11 @@ const startIndex = (
 ) => end - (sizePerPage - 1);
 
 export const alignPage = (
-  data,
+  dataSize,
   page,
   sizePerPage,
   pageStartIndex
 ) => {
-  const dataSize = data.length;
-
   if (page < pageStartIndex || page > (Math.floor(dataSize / sizePerPage) + pageStartIndex)) {
     return pageStartIndex;
   }
