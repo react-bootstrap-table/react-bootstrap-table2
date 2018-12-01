@@ -39,4 +39,22 @@ describe('PaginationList', () => {
     expect(wrapper.find('ul.react-bootstrap-table-page-btns-ul').length).toBe(1);
     expect(wrapper.find(PageButton).length).toBe(pages.length);
   });
+
+  describe('when props.pageButtonRenderer is existing', () => {
+    const pageButtonRenderer = jest.fn().mockReturnValue(null);
+    beforeEach(() => {
+      wrapper = shallow(
+        <PaginationList
+          pages={ pages }
+          onPageChange={ onPageChange }
+          pageButtonRenderer={ pageButtonRenderer }
+        />
+      );
+    });
+
+    it('should call props.pageButtonRenderer correctly', () => {
+      expect(wrapper.length).toBe(1);
+      expect(pageButtonRenderer).toHaveBeenCalledTimes(pages.length);
+    });
+  });
 });

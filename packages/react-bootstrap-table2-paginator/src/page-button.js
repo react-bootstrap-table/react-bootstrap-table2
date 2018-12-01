@@ -20,13 +20,14 @@ class PageButton extends Component {
       page,
       title,
       active,
-      disabled
+      disabled,
+      className
     } = this.props;
     const classes = cs({
       active,
       disabled,
       'page-item': true
-    });
+    }, className);
 
     return (
       <li className={ classes } title={ title }>
@@ -41,6 +42,7 @@ PageButton.propTypes = {
   page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
   active: PropTypes.bool.isRequired,
   disabled: PropTypes.bool.isRequired,
+  className: PropTypes.string,
   title: PropTypes.string
 };
 
