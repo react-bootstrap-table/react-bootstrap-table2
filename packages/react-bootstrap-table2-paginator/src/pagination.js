@@ -108,6 +108,7 @@ class Pagination extends pageResolver(Component) {
     const {
       showTotal,
       dataSize,
+      pageListRenderer,
       pageButtonRenderer,
       paginationTotalRenderer,
       sizePerPageList,
@@ -148,13 +149,20 @@ class Pagination extends pageResolver(Component) {
               ) : null
           }
         </div>
-        <div className={ pageListClass }>
-          <PaginationList
-            pages={ pages }
-            pageButtonRenderer={ pageButtonRenderer }
-            onPageChange={ this.handleChangePage }
-          />
-        </div>
+        {
+          pageListRenderer ? pageListRenderer({
+            pages,
+            onPageChange: this.handleChangePage
+          }) : (
+            <div className={ pageListClass }>
+              <PaginationList
+                pages={ pages }
+                pageButtonRenderer={ pageButtonRenderer }
+                onPageChange={ this.handleChangePage }
+              />
+            </div>
+          )
+        }
       </div>
     );
   }
@@ -170,6 +178,7 @@ Pagination.propTypes = {
   pageStartIndex: PropTypes.number,
   paginationSize: PropTypes.number,
   showTotal: PropTypes.bool,
+  pageListRenderer: PropTypes.func,
   pageButtonRenderer: PropTypes.func,
   paginationTotalRenderer: PropTypes.func,
   firstPageText: PropTypes.string,
@@ -192,6 +201,7 @@ Pagination.defaultProps = {
   withFirstAndLast: Const.With_FIRST_AND_LAST,
   alwaysShowAllBtns: Const.SHOW_ALL_PAGE_BTNS,
   showTotal: Const.SHOW_TOTAL,
+  pageListRenderer: null,
   pageButtonRenderer: null,
   paginationTotalRenderer: Const.PAGINATION_TOTAL,
   firstPageText: Const.FIRST_PAGE_TEXT,

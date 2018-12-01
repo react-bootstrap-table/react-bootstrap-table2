@@ -109,6 +109,24 @@ describe('Pagination', () => {
     });
   });
 
+  describe('when props.pageListRenderer is defined', () => {
+    const pageListRenderer = jest.fn().mockReturnValue(null);
+    beforeEach(() => {
+      pageListRenderer.mockClear();
+      const props = createMockProps({ pageListRenderer });
+      wrapper = shallow(<Pagination { ...props } />);
+      instance = wrapper.instance();
+    });
+
+    it('should not render PaginationList', () => {
+      expect(wrapper.find(PaginationList)).toHaveLength(0);
+    });
+
+    it('should call props.pageListRenderer correctly', () => {
+      expect(pageListRenderer).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('componentWillReceiveProps', () => {
     describe('when next props.currSizePerPage is diff than current one', () => {
       const nextProps = createMockProps({ currSizePerPage: 20 });
