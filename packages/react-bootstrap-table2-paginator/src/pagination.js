@@ -103,18 +103,47 @@ class Pagination extends pageResolver(Component) {
     return this.defaultTotal(from, to, size);
   };
 
+  renderSizePerPageDropDown() {
+    const {
+      sizePerPageList,
+      currSizePerPage,
+      hideSizePerPage,
+      sizePerPageRenderer,
+      sizePerPageOptionRenderer
+    } = this.props;
+    const { dropdownOpen: open } = this.state;
+
+    if (sizePerPageList.length > 1 && !hideSizePerPage) {
+      if (sizePerPageRenderer) {
+        return sizePerPageRenderer({
+          options: this.calculateSizePerPageStatus(),
+          currSizePerPage: `${currSizePerPage}`,
+          onSizePerPageChange: this.handleChangeSizePerPage
+        });
+      }
+      return (
+        <SizePerPageDropDown
+          currSizePerPage={ `${currSizePerPage}` }
+          options={ this.calculateSizePerPageStatus() }
+          optionRenderer={ sizePerPageOptionRenderer }
+          onSizePerPageChange={ this.handleChangeSizePerPage }
+          onClick={ this.toggleDropDown }
+          onBlur={ this.closeDropDown }
+          open={ open }
+        />
+      );
+    }
+    return null;
+  }
+
   render() {
-    const { totalPages, lastPage, dropdownOpen: open } = this.state;
+    const { totalPages, lastPage } = this.state;
     const {
       showTotal,
       dataSize,
       pageListRenderer,
       pageButtonRenderer,
       paginationTotalRenderer,
-      sizePerPageOptionRenderer,
-      sizePerPageList,
-      currSizePerPage,
-      hideSizePerPage,
       hidePageListOnlyOnePage
     } = this.props;
     const pages = this.calculatePageStatus(this.calculatePages(totalPages), lastPage);
@@ -127,20 +156,7 @@ class Pagination extends pageResolver(Component) {
     return (
       <div className="row react-bootstrap-table-pagination">
         <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
-          {
-            sizePerPageList.length > 1 && !hideSizePerPage ?
-              (
-                <SizePerPageDropDown
-                  currSizePerPage={ `${currSizePerPage}` }
-                  options={ this.calculateSizePerPageStatus() }
-                  optionRenderer={ sizePerPageOptionRenderer }
-                  onSizePerPageChange={ this.handleChangeSizePerPage }
-                  onClick={ this.toggleDropDown }
-                  onBlur={ this.closeDropDown }
-                  open={ open }
-                />
-              ) : null
-          }
+          { this.renderSizePerPageDropDown() }
           {
             showTotal ?
               this.setTotal(
@@ -182,6 +198,7 @@ Pagination.propTypes = {
   showTotal: PropTypes.bool,
   pageListRenderer: PropTypes.func,
   pageButtonRenderer: PropTypes.func,
+  sizePerPageRenderer: PropTypes.func,
   paginationTotalRenderer: PropTypes.func,
   sizePerPageOptionRenderer: PropTypes.func,
   firstPageText: PropTypes.string,
@@ -206,6 +223,7 @@ Pagination.defaultProps = {
   showTotal: Const.SHOW_TOTAL,
   pageListRenderer: null,
   pageButtonRenderer: null,
+  sizePerPageRenderer: null,
   paginationTotalRenderer: Const.PAGINATION_TOTAL,
   sizePerPageOptionRenderer: null,
   firstPageText: Const.FIRST_PAGE_TEXT,

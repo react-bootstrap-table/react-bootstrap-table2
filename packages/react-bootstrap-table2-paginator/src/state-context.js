@@ -78,6 +78,7 @@ class StateProvider extends React.Component {
       showTotal: options.showTotal,
       pageListRenderer: options.pageListRenderer,
       pageButtonRenderer: options.pageButtonRenderer,
+      sizePerPageRenderer: options.sizePerPageRenderer,
       paginationTotalRenderer: options.paginationTotalRenderer,
       sizePerPageOptionRenderer: options.sizePerPageOptionRenderer,
       firstPageText: options.firstPageText || Const.FIRST_PAGE_TEXT,

@@ -127,6 +127,24 @@ describe('Pagination', () => {
     });
   });
 
+  describe('when props.sizePerPageRenderer is defined', () => {
+    const sizePerPageRenderer = jest.fn().mockReturnValue(null);
+    beforeEach(() => {
+      sizePerPageRenderer.mockClear();
+      const props = createMockProps({ sizePerPageRenderer });
+      wrapper = shallow(<Pagination { ...props } />);
+      instance = wrapper.instance();
+    });
+
+    it('should not render SizePerPageDropDown', () => {
+      expect(wrapper.find(SizePerPageDropDown)).toHaveLength(0);
+    });
+
+    it('should call props.sizePerPageRenderer correctly', () => {
+      expect(sizePerPageRenderer).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('componentWillReceiveProps', () => {
     describe('when next props.currSizePerPage is diff than current one', () => {
       const nextProps = createMockProps({ currSizePerPage: 20 });
