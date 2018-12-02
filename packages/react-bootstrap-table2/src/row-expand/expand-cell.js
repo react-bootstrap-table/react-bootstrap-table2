@@ -33,7 +33,7 @@ export default class ExpandCell extends Component {
 
   handleClick(e) {
     const { rowKey, expanded, onRowExpand, rowIndex } = this.props;
-
+    e.stopPropagation();
     onRowExpand(rowKey, !expanded, rowIndex, e);
   }
 
