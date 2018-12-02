@@ -111,6 +111,7 @@ class Pagination extends pageResolver(Component) {
       pageListRenderer,
       pageButtonRenderer,
       paginationTotalRenderer,
+      sizePerPageOptionRenderer,
       sizePerPageList,
       currSizePerPage,
       hideSizePerPage,
@@ -132,6 +133,7 @@ class Pagination extends pageResolver(Component) {
                 <SizePerPageDropDown
                   currSizePerPage={ `${currSizePerPage}` }
                   options={ this.calculateSizePerPageStatus() }
+                  optionRenderer={ sizePerPageOptionRenderer }
                   onSizePerPageChange={ this.handleChangeSizePerPage }
                   onClick={ this.toggleDropDown }
                   onBlur={ this.closeDropDown }
@@ -181,6 +183,7 @@ Pagination.propTypes = {
   pageListRenderer: PropTypes.func,
   pageButtonRenderer: PropTypes.func,
   paginationTotalRenderer: PropTypes.func,
+  sizePerPageOptionRenderer: PropTypes.func,
   firstPageText: PropTypes.string,
   prePageText: PropTypes.string,
   nextPageText: PropTypes.string,
@@ -204,6 +207,7 @@ Pagination.defaultProps = {
   pageListRenderer: null,
   pageButtonRenderer: null,
   paginationTotalRenderer: Const.PAGINATION_TOTAL,
+  sizePerPageOptionRenderer: null,
   firstPageText: Const.FIRST_PAGE_TEXT,
   prePageText: Const.PRE_PAGE_TEXT,
   nextPageText: Const.NEXT_PAGE_TEXT,
