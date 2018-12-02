@@ -103,7 +103,7 @@ const columns = [{
 }, {
   dataField: 'quality',
   text: 'Product Quality',
-  editorRenderer: (editorProps, value, row, rowIndex, columnIndex) => (
+  editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
     <QualityRanger { ...editorProps } value={ value } />
   )
 }];
