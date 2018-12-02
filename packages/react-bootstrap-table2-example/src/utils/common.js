@@ -1,4 +1,5 @@
 /* eslint no-mixed-operators: 0 */
+/* eslint no-param-reassign: 0 */
 
 /**
  * products generator for stories
@@ -21,6 +22,12 @@ export const productsGenerator = (quantity = 5, callback) => {
     }))
   );
 };
+
+export const withOnSale = rows => rows.map((row) => {
+  if (row.id > 2) row.onSale = false;
+  else row.onSale = true;
+  return row;
+});
 
 export const productsQualityGenerator = (quantity = 5) =>
   Array.from({ length: quantity }, (value, index) => ({
