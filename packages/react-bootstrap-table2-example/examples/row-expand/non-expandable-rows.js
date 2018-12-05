@@ -25,6 +25,7 @@ const expandRow = {
       <p>expandRow.renderer callback will pass the origin row object to you</p>
     </div>
   ),
+  showExpandColumn: true,
   nonExpandable: [1, 3]
 };
 
@@ -50,6 +51,7 @@ const expandRow = {
       <p>expandRow.renderer callback will pass the origin row object to you</p>
     </div>
   ),
+  showExpandColumn: true,
   nonExpandable: [1, 3]
 };
 
