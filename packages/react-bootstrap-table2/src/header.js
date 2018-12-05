@@ -18,8 +18,7 @@ const Header = (props) => {
     sortOrder,
     selectRow,
     onExternalFilter,
-    expandRow,
-    bootstrap4
+    expandRow
   } = props;
 
   let SelectionHeaderCellComp = () => null;
@@ -50,7 +49,6 @@ const Header = (props) => {
               return (
                 <HeaderCell
                   index={ i }
-                  bootstrap4={ bootstrap4 }
                   key={ column.dataField }
                   column={ column }
                   onSort={ onSort }
@@ -78,8 +76,7 @@ Header.propTypes = {
   selectRow: PropTypes.object,
   onExternalFilter: PropTypes.func,
   className: PropTypes.string,
-  expandRow: PropTypes.object,
-  bootstrap4: PropTypes.bool
+  expandRow: PropTypes.object
 };
 
 export default Header;

@@ -43,12 +43,13 @@ class SelectionProvider extends React.Component {
 
     let currSelected = [...this.state.selected];
 
+    let result = true;
+    if (onSelect) {
+      const row = dataOperator.getRowByRowId(data, keyField, rowKey);
+      result = onSelect(row, checked, rowIndex, e);
+    }
+
     this.setState(() => {
-      let result = true;
-      if (onSelect) {
-        const row = dataOperator.getRowByRowId(data, keyField, rowKey);
-        result = onSelect(row, checked, rowIndex, e);
-      }
       if (result === true || result === undefined) {
         if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
           currSelected = [rowKey];
@@ -81,24 +82,22 @@ class SelectionProvider extends React.Component {
       currSelected = selected.filter(s => typeof data.find(d => d[keyField] === s) === 'undefined');
     }
 
-    this.setState(() => {
-      let result;
-      if (onSelectAll) {
-        result = onSelectAll(
-          !isUnSelect,
-          dataOperator.getSelectedRows(
-            data,
-            keyField,
-            isUnSelect ? this.state.selected : currSelected
-          ),
-          e
-        );
-        if (Array.isArray(result)) {
-          currSelected = result;
-        }
+    let result;
+    if (onSelectAll) {
+      result = onSelectAll(
+        !isUnSelect,
+        dataOperator.getSelectedRows(
+          data,
+          keyField,
+          isUnSelect ? this.state.selected : currSelected
+        ),
+        e
+      );
+      if (Array.isArray(result)) {
+        currSelected = result;
       }
-      return { selected: currSelected };
-    });
+    }
+    this.setState(() => ({ selected: currSelected }));
   }
 
   render() {

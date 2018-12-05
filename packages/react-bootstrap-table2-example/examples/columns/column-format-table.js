@@ -2,9 +2,9 @@ import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import Code from 'components/common/code-block';
-import { productsGenerator } from 'utils/common';
+import { productsGenerator, withOnSale } from 'utils/common';
 
-const products = productsGenerator();
+const products = withOnSale(productsGenerator());
 
 function priceFormatter(cell, row) {
   if (row.onSale) {
