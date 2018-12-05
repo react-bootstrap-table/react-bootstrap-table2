@@ -41,7 +41,7 @@ export default class ExpandCell extends Component {
   render() {
     const { expanded, nonExpandable, expandColumnRenderer, tabIndex } = this.props;
     const attrs = {};
-    const isExpandable = !nonExpandable.includes(this.props.rowKey);
+    const isExpandable = !nonExpandable || !nonExpandable.includes(this.props.rowKey);
     if (tabIndex !== -1) attrs.tabIndex = tabIndex;
 
     return (
