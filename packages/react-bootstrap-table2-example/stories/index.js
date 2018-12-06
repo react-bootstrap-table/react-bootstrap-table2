@@ -45,6 +45,13 @@ import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
 import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 import HeaderClassTable from 'examples/header-columns/header-class-table';
 
+// footer
+import SimpleFooter from 'examples/footer/simple-footer';
+import FunctionFooter from 'examples/footer/function-footer';
+import FooterClassTable from 'examples/footer/footer-class-table';
+import FooterColumnFormatTable from 'examples/footer/column-format-table';
+import FooterColumnAlignTable from 'examples/footer/column-align-table';
+
 // column filter
 import TextFilter from 'examples/column-filter/text-filter';
 import TextFilterWithDefaultValue from 'examples/column-filter/text-filter-default-value';
@@ -199,8 +206,7 @@ import '../../react-bootstrap-table2-filter/style/react-bootstrap-table2-filter.
 // import bootstrap style by given version
 import bootstrapStyle, { BOOTSTRAP_VERSION } from './bootstrap-style';
 
-storiesOf('Welcome', module)
-  .add('react bootstrap table 2 ', () => <Welcome />);
+storiesOf('Welcome', module).add('react bootstrap table 2 ', () => <Welcome />);
 
 storiesOf('Basic Table', module)
   .addDecorator(bootstrapStyle())
@@ -285,6 +291,14 @@ storiesOf('Work on Rows', module)
   .add('Customize Row Class', () => <RowClassTable />)
   .add('Hide Rows', () => <RowHiddenTable />)
   .add('Row Event', () => <RowEventTable />);
+
+storiesOf('Footer', module)
+  .addDecorator(bootstrapStyle())
+  .add('Simple Footer', () => <SimpleFooter />)
+  .add('Function Footer', () => <FunctionFooter />)
+  .add('Footer Class', () => <FooterClassTable />)
+  .add('Column Formatter', () => <FooterColumnFormatTable />)
+  .add('Column Align', () => <FooterColumnAlignTable />);
 
 storiesOf('Sort Table', module)
   .addDecorator(bootstrapStyle())
