@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 
 import pageResolver from './page-resolver';
+import SizePerPageDropDown from './size-per-page-dropdown';
 
-export default WrappedComponent =>
+const sizePerPageDropdownAdapter = WrappedComponent =>
   class SizePerPageDropdownAdapter extends pageResolver(Component) {
     constructor(props) {
       super(props);
@@ -61,3 +62,6 @@ export default WrappedComponent =>
     }
   };
 
+
+export const SizePerPageDropdownAdapter = sizePerPageDropdownAdapter(SizePerPageDropDown);
+export default sizePerPageDropdownAdapter;

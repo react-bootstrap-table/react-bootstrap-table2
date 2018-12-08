@@ -2,8 +2,9 @@
 import React, { Component } from 'react';
 
 import pageResolver from './page-resolver';
+import PaginationList from './pagination-list';
 
-export default WrappedComponent =>
+const paginationListAdapter = WrappedComponent =>
   class PaginationListAdapter extends pageResolver(Component) {
     render() {
       const { lastPage, totalPages, pageButtonRenderer, onPageChange } = this.props;
@@ -18,3 +19,6 @@ export default WrappedComponent =>
     }
   };
 
+
+export const PaginationListWithAdapter = paginationListAdapter(PaginationList);
+export default paginationListAdapter;

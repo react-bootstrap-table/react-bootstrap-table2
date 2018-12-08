@@ -124,7 +124,7 @@ describe('PaginationDataContext', () => {
         expect(pagination.prop('lastPageTitle')).toEqual(Const.LAST_PAGE_TITLE);
         expect(pagination.prop('hideSizePerPage')).toEqual(Const.HIDE_SIZE_PER_PAGE);
         expect(pagination.prop('hideSizePerPage')).toEqual(Const.HIDE_SIZE_PER_PAGE);
-        expect(pagination.prop('paginationTotalRenderer')).toBeNull();
+        expect(pagination.prop('paginationTotalRenderer')).toBeUndefined();
       });
     });
 
