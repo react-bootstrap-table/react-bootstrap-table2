@@ -8,12 +8,6 @@ export default ExtendBase =>
       return (currPage - 1) < pageStartIndex ? pageStartIndex : currPage - 1;
     }
 
-    goToNextPage() {
-      const { currPage } = this.props;
-      const { lastPage } = this.state;
-      return (currPage + 1) > lastPage ? lastPage : currPage + 1;
-    }
-
     initialState() {
       const totalPages = this.calculateTotalPage();
       const lastPage = this.calculateLastPage(totalPages);
@@ -47,8 +41,9 @@ export default ExtendBase =>
     }
 
     calculatePages(
-      totalPages = this.state.totalPages,
-      lastPage = this.state.lastPage) {
+      totalPages,
+      lastPage
+    ) {
       const {
         currPage,
         paginationSize,
@@ -94,7 +89,7 @@ export default ExtendBase =>
       return pages;
     }
 
-    calculatePageStatus(pages = [], lastPage = this.state.lastPage) {
+    calculatePageStatus(pages = [], lastPage) {
       const {
         currPage,
         pageStartIndex,

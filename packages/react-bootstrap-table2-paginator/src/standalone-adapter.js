@@ -1,12 +1,12 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 
-export default Component => ({
+export default WrappedComponent => ({
   page,
   sizePerPage,
   ...rest
 }) => (
-  <Component
+  <WrappedComponent
     { ...rest }
     currPage={ page }
     currSizePerPage={ sizePerPage }

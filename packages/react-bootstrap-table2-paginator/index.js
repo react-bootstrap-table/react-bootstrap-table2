@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import createBaseContext from './src/state-context';
 import createDataContext from './src/data-context';
+import PaginationListStandalone from './src/pagination-list-standalone';
 
 export default (options = {}) => ({
   createContext: createDataContext,
@@ -21,3 +22,4 @@ CustomizableProvider.propTypes = {
 };
 
 export const PaginationProvider = CustomizableProvider;
+export { PaginationListStandalone };

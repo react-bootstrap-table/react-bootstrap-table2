@@ -146,7 +146,7 @@ class Pagination extends pageResolver(Component) {
       paginationTotalRenderer,
       hidePageListOnlyOnePage
     } = this.props;
-    const pages = this.calculatePageStatus(this.calculatePages(totalPages), lastPage);
+    const pages = this.calculatePageStatus(this.calculatePages(totalPages, lastPage), lastPage);
     const [from, to] = this.calculateFromTo();
     const pageListClass = cs(
       'react-bootstrap-table-pagination-list',

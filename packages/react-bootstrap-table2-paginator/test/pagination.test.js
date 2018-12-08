@@ -54,8 +54,9 @@ describe('Pagination', () => {
 
     it('should rendering PaginationList component successfully', () => {
       const paginationList = wrapper.find(PaginationList);
+      const pageList = instance.calculatePages(instance.state.totalPages, instance.state.lastPage);
       expect(paginationList.length).toBe(1);
-      expect(paginationList.prop('pages')).toEqual(instance.calculatePageStatus(instance.calculatePages()));
+      expect(paginationList.prop('pages')).toEqual(instance.calculatePageStatus(pageList, instance.state.lastPage));
       expect(paginationList.prop('onPageChange')).toEqual(instance.handleChangePage);
     });
 
