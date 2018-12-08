@@ -68,7 +68,6 @@ describe('Pagination', () => {
       expect(sizePerPageDropDown.prop('options')).toEqual(instance.calculateSizePerPageStatus());
       expect(sizePerPageDropDown.prop('onSizePerPageChange')).toEqual(instance.handleChangeSizePerPage);
       expect(sizePerPageDropDown.prop('onClick')).toEqual(instance.toggleDropDown);
-      expect(sizePerPageDropDown.prop('open')).toEqual(instance.state.dropdownOpen);
     });
   });
 

@@ -46,8 +46,6 @@ describe('PageResolver', () => {
       expect(instance.state.lastPage).toBeDefined();
       expect(instance.state.lastPage).toEqual(
         instance.calculateLastPage(instance.state.totalPages));
-      expect(instance.state.dropdownOpen).toBeDefined();
-      expect(instance.state.dropdownOpen).toBeFalsy();
     });
   });
 

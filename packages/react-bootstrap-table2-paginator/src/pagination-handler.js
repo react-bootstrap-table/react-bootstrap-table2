@@ -31,7 +31,6 @@ export default WrappedComponent =>
         if (currPage > newLastPage) currPage = newLastPage;
         onSizePerPageChange(selectedSize, currPage);
       }
-      this.closeDropDown();
     }
 
     handleChangePage(newPage) {
