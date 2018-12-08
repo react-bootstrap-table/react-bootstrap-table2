@@ -98,6 +98,8 @@ class StateProvider extends React.Component {
     this.remoteEmitter = remoteEmitter;
   }
 
+  getPaginationRemoteEmitter = () => this.remoteEmitter || this.props.remoteEmitter;
+
   isRemotePagination = () => {
     const e = {};
     this.remoteEmitter.emit('isRemotePagination', e);
@@ -115,7 +117,7 @@ class StateProvider extends React.Component {
     this.currPage = currPage;
 
     if (this.isRemotePagination()) {
-      this.remoteEmitter.emit('paginationChange', currPage, currSizePerPage);
+      this.getPaginationRemoteEmitter().emit('paginationChange', currPage, currSizePerPage);
       return;
     }
     this.forceUpdate();
@@ -132,7 +134,7 @@ class StateProvider extends React.Component {
     this.currSizePerPage = currSizePerPage;
 
     if (this.isRemotePagination()) {
-      this.remoteEmitter.emit('paginationChange', currPage, currSizePerPage);
+      this.getPaginationRemoteEmitter().emit('paginationChange', currPage, currSizePerPage);
       return;
     }
     this.forceUpdate();
