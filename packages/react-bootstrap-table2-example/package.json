@@ -22,6 +22,8 @@
     "@storybook/react": "^3.2.8",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-preset-env": "^1.6.1",
+    "react-dnd": "6.0.0",
+    "react-dnd-html5-backend": "6.0.0",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
