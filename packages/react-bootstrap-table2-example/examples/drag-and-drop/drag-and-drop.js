@@ -6,7 +6,7 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
-import dragFactory, { dragFormatter } from '../../../react-bootstrap-table2-drag';
+import dragFactory, { dragFormatter } from 'react-bootstrap-table2-drag';
 
 const products = productsGenerator();
 
