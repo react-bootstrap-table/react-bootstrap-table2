@@ -181,6 +181,7 @@ import RemoteAll from 'examples/remote/remote-all';
 
 // drag and drop
 import DragAndDrop from 'examples/drag-and-drop/drag-and-drop';
+import DragAndDropReorder from 'examples/drag-and-drop/drag-and-drop-reorder';
 
 // css style
 import 'stories/stylesheet/tomorrow.min.css';
@@ -386,4 +387,5 @@ storiesOf('Remote', module)
 
 storiesOf('Drag and Drop', module)
   .addDecorator(bootstrapStyle())
-  .add('Drag and Drop', () => <DragAndDrop />);
+  .add('Drag and Drop', () => <DragAndDrop />)
+  .add('Drag and Drop Reorder', () => <DragAndDropReorder />);
