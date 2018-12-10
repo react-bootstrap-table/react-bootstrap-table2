@@ -272,6 +272,10 @@ const withContext = Base =>
 
       let base = this.renderBase();
 
+      if (this.DragContext) {
+        base = this.renderWithDragCtx(base, baseProps);
+      }
+
       if (this.SelectionContext) {
         base = this.renderWithSelectionCtx(base, baseProps);
       }
@@ -294,10 +298,6 @@ const withContext = Base =>
 
       if (this.FilterContext) {
         base = this.renderWithFilterCtx(base, baseProps);
-      }
-
-      if (this.DragContext) {
-        base = this.renderWithDragCtx(base, baseProps);
       }
 
       if (this.CellEditContext) {
