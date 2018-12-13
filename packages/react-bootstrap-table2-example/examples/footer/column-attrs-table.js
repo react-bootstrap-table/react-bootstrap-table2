@@ -1,4 +1,5 @@
 /* eslint no-unused-vars: 0 */
+/* eslint no-alert: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -10,13 +11,13 @@ const products = productsGenerator();
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  footerAlign: 'center',
-  footer: 'Footer 1'
+  footer: 'Footer 1',
+  footerAttrs: { title: 'ID footer column' }
 }, {
   dataField: 'name',
   text: 'Product Name',
-  footerAlign: (column, colIndex) => 'right',
-  footer: 'Footer 2'
+  footer: 'Footer 2',
+  footerAttrs: (column, colIndex) => ({ 'data-test': `customized data ${colIndex}` })
 }, {
   dataField: 'price',
   text: 'Product Price',
@@ -27,20 +28,20 @@ const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 
 const columns = [{
-  dataField: 'id',
-  text: 'Product ID',
-  footerAlign: 'center',
-  footer: 'Footer 1'
-}, {
-  dataField: 'name',
-  text: 'Product Name',
-  footerAlign: (column, colIndex) => 'right',
-  footer: 'Footer 2'
-}, {
-  dataField: 'price',
-  text: 'Product Price',
-  footer: 'Footer 3'
-}];
+    dataField: 'id',
+    text: 'Product ID',
+    footer: 'Footer 1',
+    footerAttrs: { title: 'ID footer column' }
+  }, {
+    dataField: 'name',
+    text: 'Product Name',
+    footer: 'Footer 2',
+    footerAttrs: (column, colIndex) => ({ 'data-test': \`customized data \${colIndex}\` })
+  }, {
+    dataField: 'price',
+    text: 'Product Price',
+    footer: 'Footer 3'
+  }];
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } />
 `;

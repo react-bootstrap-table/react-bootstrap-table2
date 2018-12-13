@@ -10,12 +10,12 @@ const products = productsGenerator();
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  footerAlign: 'center',
+  footerTitle: true,
   footer: 'Footer 1'
 }, {
   dataField: 'name',
   text: 'Product Name',
-  footerAlign: (column, colIndex) => 'right',
+  footerTitle: (column, colIndex) => `this is custom title for ${column.text}`,
   footer: 'Footer 2'
 }, {
   dataField: 'price',
@@ -29,12 +29,12 @@ import BootstrapTable from 'react-bootstrap-table-next';
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  footerAlign: 'center',
+  footerTitle: true,
   footer: 'Footer 1'
 }, {
   dataField: 'name',
   text: 'Product Name',
-  footerAlign: (column, colIndex) => 'right',
+  footerTitle: (column, colIndex) => \`this is custom title for \${column.text}\`,
   footer: 'Footer 2'
 }, {
   dataField: 'price',

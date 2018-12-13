@@ -51,6 +51,11 @@ import FunctionFooter from 'examples/footer/function-footer';
 import FooterClassTable from 'examples/footer/footer-class-table';
 import FooterColumnFormatTable from 'examples/footer/column-format-table';
 import FooterColumnAlignTable from 'examples/footer/column-align-table';
+import FooterColumnTitleTable from 'examples/footer/column-title-table.js';
+import FooterColumnEventsTable from 'examples/footer/column-event-table.js';
+import FooterColumnClassTable from 'examples/footer/column-class-table.js';
+import FooterColumnStyleTable from 'examples/footer/column-style-table.js';
+import FooterColumnAttrsTable from 'examples/footer/column-attrs-table.js';
 
 // column filter
 import TextFilter from 'examples/column-filter/text-filter';
@@ -296,9 +301,14 @@ storiesOf('Footer', module)
   .addDecorator(bootstrapStyle())
   .add('Simple Footer', () => <SimpleFooter />)
   .add('Function Footer', () => <FunctionFooter />)
-  .add('Footer Class', () => <FooterClassTable />)
   .add('Column Formatter', () => <FooterColumnFormatTable />)
-  .add('Column Align', () => <FooterColumnAlignTable />);
+  .add('Column Align', () => <FooterColumnAlignTable />)
+  .add('Column Title', () => <FooterColumnTitleTable />)
+  .add('Column Events', () => <FooterColumnEventsTable />)
+  .add('Customize Column Class', () => <FooterColumnClassTable />)
+  .add('Customize Column Style', () => <FooterColumnStyleTable />)
+  .add('Customize Column HTML attribute', () => <FooterColumnAttrsTable />)
+  .add('Footer Class', () => <FooterClassTable />);
 
 storiesOf('Sort Table', module)
   .addDecorator(bootstrapStyle())

@@ -1,4 +1,5 @@
 /* eslint no-unused-vars: 0 */
+/* eslint no-alert: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -10,12 +11,13 @@ const products = productsGenerator();
 const columns = [{
   dataField: 'id',
   text: 'Product ID',
-  footerAlign: 'center',
+  footerEvents: {
+    onClick: () => alert('Click on Product ID footer column')
+  },
   footer: 'Footer 1'
 }, {
   dataField: 'name',
   text: 'Product Name',
-  footerAlign: (column, colIndex) => 'right',
   footer: 'Footer 2'
 }, {
   dataField: 'price',
@@ -27,20 +29,21 @@ const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 
 const columns = [{
-  dataField: 'id',
-  text: 'Product ID',
-  footerAlign: 'center',
-  footer: 'Footer 1'
-}, {
-  dataField: 'name',
-  text: 'Product Name',
-  footerAlign: (column, colIndex) => 'right',
-  footer: 'Footer 2'
-}, {
-  dataField: 'price',
-  text: 'Product Price',
-  footer: 'Footer 3'
-}];
+    dataField: 'id',
+    text: 'Product ID',
+    footerEvents: {
+      onClick: () => alert('Click on Product ID footer column')
+    },
+    footer: 'Footer 1'
+  }, {
+    dataField: 'name',
+    text: 'Product Name',
+    footer: 'Footer 2'
+  }, {
+    dataField: 'price',
+    text: 'Product Price',
+    footer: 'Footer 3'
+  }];
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } />
 `;

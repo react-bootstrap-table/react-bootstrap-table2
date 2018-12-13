@@ -27,7 +27,11 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     const { loading, overlay } = this.props;
     if (overlay) {
       const LoadingOverlay = overlay(loading);
-      return <LoadingOverlay>{this.renderTable()}</LoadingOverlay>;
+      return (
+        <LoadingOverlay>
+          { this.renderTable() }
+        </LoadingOverlay>
+      );
     }
     return this.renderTable();
   }
@@ -57,25 +61,21 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
 
-    const tableClass = cs(
-      'table',
-      {
-        'table-striped': striped,
-        'table-hover': hover,
-        'table-bordered': bordered,
-        [bootstrap4 ? 'table-sm' : 'table-condensed']: condensed
-      },
-      classes
-    );
+    const tableClass = cs('table', {
+      'table-striped': striped,
+      'table-hover': hover,
+      'table-bordered': bordered,
+      [bootstrap4 ? 'table-sm' : 'table-condensed']: condensed
+    }, classes);
 
     const hasFooter = _.filter(columns, col => _.has(col, 'footer')).length > 0;
 
-    const tableCaption = caption && <Caption>{caption}</Caption>;
+    const tableCaption = (caption && <Caption>{ caption }</Caption>);
 
     return (
       <div className={ tableWrapperClass }>
         <table id={ id } className={ tableClass }>
-          {tableCaption}
+          { tableCaption }
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
@@ -116,12 +116,9 @@ BootstrapTable.propTypes = {
   data: PropTypes.array.isRequired,
   columns: PropTypes.array.isRequired,
   bootstrap4: PropTypes.bool,
-  remote: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.shape({
-      pagination: PropTypes.bool
-    })
-  ]),
+  remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
+    pagination: PropTypes.bool
+  })]),
   noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
@@ -131,7 +128,10 @@ BootstrapTable.propTypes = {
   classes: PropTypes.string,
   wrapperClasses: PropTypes.string,
   condensed: PropTypes.bool,
-  caption: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
+  caption: PropTypes.oneOfType([
+    PropTypes.node,
+    PropTypes.string
+  ]),
   pagination: PropTypes.object,
   filter: PropTypes.object,
   cellEdit: PropTypes.object,
@@ -176,12 +176,10 @@ BootstrapTable.propTypes = {
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   headerClasses: PropTypes.string,
   footerClasses: PropTypes.string,
-  defaultSorted: PropTypes.arrayOf(
-    PropTypes.shape({
-      dataField: PropTypes.string.isRequired,
-      order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
-    })
-  ),
+  defaultSorted: PropTypes.arrayOf(PropTypes.shape({
+    dataField: PropTypes.string.isRequired,
+    order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
+  })),
   defaultSortDirection: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
   overlay: PropTypes.func,
   onTableChange: PropTypes.func,
