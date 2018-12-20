@@ -47,6 +47,7 @@ export default class ExpandCell extends Component {
       <td onClick={ this.handleClick } { ...attrs }>
         {
           expandColumnRenderer ? expandColumnRenderer({
+            expandable,
             expanded,
             rowKey
           }) : (expandable ? (expanded ? '(-)' : '(+)') : '')
