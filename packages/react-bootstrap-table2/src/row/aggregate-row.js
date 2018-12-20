@@ -31,6 +31,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
     if (
       this.props.selected !== nextProps.selected ||
       this.props.expanded !== nextProps.expanded ||
+      this.props.expandable !== nextProps.expandable ||
       this.props.selectable !== nextProps.selectable ||
       this.shouldUpdatedBySelfProps(nextProps)
     ) {
@@ -54,6 +55,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
       selectRow,
       expandRow,
       expanded,
+      expandable,
       selected,
       selectable,
       visibleColumnSize,
@@ -84,6 +86,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
               rowKey={ key }
               rowIndex={ rowIndex }
               expanded={ expanded }
+              expandable={ expandable }
               tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
             />
           ) : null
