@@ -10,6 +10,7 @@ export default class ExpandCell extends Component {
   static propTypes = {
     rowKey: PropTypes.any,
     expanded: PropTypes.bool.isRequired,
+    expandable: PropTypes.bool.isRequired,
     onRowExpand: PropTypes.func.isRequired,
     expandColumnRenderer: PropTypes.func,
     rowIndex: PropTypes.number,
@@ -38,7 +39,7 @@ export default class ExpandCell extends Component {
   }
 
   render() {
-    const { expanded, expandColumnRenderer, tabIndex, rowKey } = this.props;
+    const { expanded, expandable, expandColumnRenderer, tabIndex, rowKey } = this.props;
     const attrs = {};
     if (tabIndex !== -1) attrs.tabIndex = tabIndex;
 
@@ -46,9 +47,10 @@ export default class ExpandCell extends Component {
       <td onClick={ this.handleClick } { ...attrs }>
         {
           expandColumnRenderer ? expandColumnRenderer({
+            expandable,
             expanded,
             rowKey
-          }) : (expanded ? '(-)' : '(+)')
+          }) : (expandable ? (expanded ? '(-)' : '(+)') : '')
         }
       </td>
     );

@@ -34,7 +34,7 @@ const expandRow = {
     }
     return <b>+</b>;
   },
-  expandColumnRenderer: ({ expanded, rowKey }) => {
+  expandColumnRenderer: ({ expanded, rowKey, expandable }) => {
     if (expanded) {
       return (
         <b>-</b>

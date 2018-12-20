@@ -23,6 +23,9 @@ class RowExpandProvider extends React.Component {
   }
 
   handleRowExpand = (rowKey, expanded, rowIndex, e) => {
+    if (this.props.expandRow.nonExpandable.includes(rowKey)) {
+      return;
+    }
     const { data, keyField, expandRow: { onExpand, onlyOneExpanding } } = this.props;
 
     let currExpanded = [...this.state.expanded];
@@ -73,6 +76,7 @@ class RowExpandProvider extends React.Component {
       <RowExpandContext.Provider
         value={ {
           ...this.props.expandRow,
+          nonExpandable: this.props.expandRow.nonExpandable,
           expanded: this.state.expanded,
           isAnyExpands: dataOperator.isAnyExpands(data, keyField, this.state.expanded),
           onRowExpand: this.handleRowExpand,
