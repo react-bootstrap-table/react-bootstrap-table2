@@ -1,4 +1,5 @@
 /* eslint react/prop-types: 0 */
+/* eslint no-unused-vars: 0 */
 import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -33,7 +34,7 @@ const expandRow = {
     }
     return <b>+</b>;
   },
-  expandColumnRenderer: ({ expanded }) => {
+  expandColumnRenderer: ({ expanded, rowKey }) => {
     if (expanded) {
       return (
         <b>-</b>

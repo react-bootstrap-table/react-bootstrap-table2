@@ -92,13 +92,15 @@ const expandRow = {
 ```
 
 ### <a name='expandColumnRenderer'>expandRow.expandColumnRenderer - [Function]</a>
-Provide a callback function which allow you to custom the expand indicator. This callback only have one argument which is an object and contain one property  `expanded` which indicate if current row is expanded
+Provide a callback function which allow you to custom the expand indicator. This callback only have one argument which is an object and contain two properties:
+* `expanded`: Indicate if current row is expanded or not
+* `rowKey`: Current row key
 
 
 ```js
 const expandRow = {
   renderer: (row) => ...
-  expandColumnRenderer: ({ expanded }) => (
+  expandColumnRenderer: ({ expanded, rowKey }) => (
     // ....
   )
 };
