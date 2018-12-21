@@ -28,6 +28,7 @@ title: BootstrapTable Props
 * [rowStyle](#rowstyle-object-function)
 * [rowClasses](#rowclasses-string-function)
 * [rowEvents](#rowevents-object)
+* [hiddenRows](#hiddenrows-array)
 * [defaultSorted](#defaultsorted-array)
 * [defaultSortDirection](#defaultSortDirection-string)
 * [pagination](#pagination-object)
@@ -181,6 +182,14 @@ const rowEvents = {
   }
 };
 <BootstrapTable data={ data } columns={ columns } rowEvents={ rowEvents } />
+```
+
+## hiddenRows - [Array]
+Hide rows, this props accept an array of row keys:
+
+```js
+const hiddenRows = [1, 4];
+<BootstrapTable data={ data } columns={ columns } hiddenRows={ hiddenRows } />
 ```
 
 ## defaultSorted - [Array]
