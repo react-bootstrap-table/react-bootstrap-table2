@@ -21,7 +21,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
   // Exposed APIs
   getData() {
-    return this.props.data;
+    return this.visibleRows();
   }
 
   render() {
@@ -39,7 +39,6 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
   renderTable() {
     const {
-      data,
       columns,
       keyField,
       tabIndexCell,
@@ -88,7 +87,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             expandRow={ expandRow }
           />
           <Body
-            data={ data }
+            data={ this.getData() }
             keyField={ keyField }
             tabIndexCell={ tabIndexCell }
             columns={ columns }
