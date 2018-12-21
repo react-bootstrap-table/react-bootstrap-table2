@@ -25,6 +25,51 @@ describe('TableResolver', () => {
   const BootstrapTableMock = extendTo(ExtendBase);
   let wrapper;
 
+  describe('visibleRows', () => {
+    describe('if hiddenRows prop is not existing', () => {
+      beforeEach(() => {
+        const mockElement = React.createElement(BootstrapTableMock, {
+          data, columns, keyField
+        }, null);
+        wrapper = shallow(mockElement);
+      });
+
+      it('should return correct data', () => {
+        expect(wrapper.instance().visibleRows()).toEqual(data);
+      });
+    });
+
+    describe('if hiddenRows prop is an empty array', () => {
+      beforeEach(() => {
+        const mockElement = React.createElement(BootstrapTableMock, {
+          data, columns, keyField, hiddenRows: []
+        }, null);
+        wrapper = shallow(mockElement);
+      });
+
+      it('should return correct data', () => {
+        expect(wrapper.instance().visibleRows()).toEqual(data);
+      });
+    });
+
+    describe('if hiddenRows prop is not an empty array', () => {
+      const hiddenRows = [1];
+
+      beforeEach(() => {
+        const mockElement = React.createElement(BootstrapTableMock, {
+          data, columns, keyField, hiddenRows
+        }, null);
+        wrapper = shallow(mockElement);
+      });
+
+      it('should return correct data', () => {
+        const result = wrapper.instance().visibleRows();
+        expect(result).toHaveLength(data.length - hiddenRows.length);
+        expect(result).toEqual(data.filter(d => !hiddenRows.includes(d.id)));
+      });
+    });
+  });
+
   describe('validateProps', () => {
     describe('if keyField is defined and columns is all visible', () => {
       beforeEach(() => {

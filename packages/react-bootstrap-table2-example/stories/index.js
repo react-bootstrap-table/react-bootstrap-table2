@@ -79,6 +79,7 @@ import ClearAllFilters from 'examples/column-filter/clear-all-filters';
 import RowStyleTable from 'examples/rows/row-style';
 import RowClassTable from 'examples/rows/row-class';
 import RowEventTable from 'examples/rows/row-event';
+import RowHiddenTable from 'examples/rows/row-hidden';
 
 // table sort
 import EnableSortTable from 'examples/sort/enable-sort-table';
@@ -271,6 +272,7 @@ storiesOf('Work on Rows', module)
   .addDecorator(bootstrapStyle())
   .add('Customize Row Style', () => <RowStyleTable />)
   .add('Customize Row Class', () => <RowClassTable />)
+  .add('Hide Rows', () => <RowHiddenTable />)
   .add('Row Event', () => <RowEventTable />);
 
 storiesOf('Sort Table', module)

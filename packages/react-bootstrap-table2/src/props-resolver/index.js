@@ -1,3 +1,4 @@
+import _ from '../utils';
 import ColumnResolver from './column-resolver';
 
 export default ExtendBase =>
@@ -14,5 +15,14 @@ export default ExtendBase =>
 
     isEmpty() {
       return this.props.data.length === 0;
+    }
+
+    visibleRows() {
+      const { data, hiddenRows, keyField } = this.props;
+      if (!hiddenRows || hiddenRows.length === 0) return data;
+      return data.filter((row) => {
+        const key = _.get(row, keyField);
+        return !hiddenRows.includes(key);
+      });
     }
   };
