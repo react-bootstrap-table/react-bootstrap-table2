@@ -4,7 +4,7 @@
         <title>react-bootstrap-table2 Blog</title>
         <link>https://react-bootstrap-table.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</description>
-        <lastBuildDate>Wed, 05 Dec 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Fri, 21 Dec 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,23 @@
             <link>https://react-bootstrap-table.github.io/blog</link>
         </image>
         <copyright>Copyright © 2018 react-bootstrap-table2</copyright>
+        <item>
+            <title><![CDATA[New Release (2018-12-21)]]></title>
+            <link>https://react-bootstrap-table.github.io/blog/2018/12/21/version-bump.html</link>
+            <guid>https://react-bootstrap-table.github.io/blog/2018/12/21/version-bump.html</guid>
+            <pubDate>Fri, 21 Dec 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[## Changed Packages
+
+We got following package version bump in this release:
+
+* `react-bootstrap-table-next@1.4.3`
+
+
+## Changelog
+
+### Bug fixes
+* Fixed a non expandable row still expandable when `expandRow.showExpandColumn` is enable([#698](https://g]]></description>
+        </item>
         <item>
             <title><![CDATA[New Release (2018-12-05)]]></title>
             <link>https://react-bootstrap-table.github.io/blog/2018/12/05/version-bump.html</link>
