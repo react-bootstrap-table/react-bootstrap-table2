@@ -70,7 +70,7 @@ class FullyCustomPagination extends React.Component {
           {
             ({
               paginationProps,
-              paginationBaseProps
+              paginationTableProps
             }) => (
               <div>
                 <div>
@@ -87,7 +87,7 @@ class FullyCustomPagination extends React.Component {
                   keyField="id"
                   data={ products }
                   columns={ columns }
-                  { ...paginationBaseProps }
+                  { ...paginationTableProps }
                 />
               </div>
             )
@@ -136,7 +136,7 @@ export default class FullyCustomPagination extends React.Component {
           {
             ({
               paginationProps,
-              paginationBaseProps
+              paginationTableProps
             }) => (
               <div>
                 <div>
@@ -153,7 +153,7 @@ export default class FullyCustomPagination extends React.Component {
                   keyField="id"
                   data={ products }
                   columns={ columns }
-                  { ...paginationBaseProps }
+                  { ...paginationTableProps }
                 />
               </div>
             )

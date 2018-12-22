@@ -151,7 +151,7 @@ class StateProvider extends React.Component {
       <StateContext.Provider
         value={ {
           paginationProps,
-          paginationBaseProps: {
+          paginationTableProps: {
             pagination,
             setPaginationRemoteEmitter: this.setPaginationRemoteEmitter
           }

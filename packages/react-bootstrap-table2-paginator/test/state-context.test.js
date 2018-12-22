@@ -97,7 +97,7 @@ describe('PaginationStateContext', () => {
       expect(renderMockComponent).toHaveBeenCalledTimes(1);
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -338,7 +338,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -369,7 +369,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -396,7 +396,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -423,7 +423,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -450,7 +450,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -477,7 +477,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -504,7 +504,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -531,7 +531,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -558,7 +558,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -585,7 +585,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -612,7 +612,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -639,7 +639,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -666,7 +666,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -693,7 +693,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -720,7 +720,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -747,7 +747,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -774,7 +774,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -801,7 +801,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
@@ -828,7 +828,7 @@ describe('PaginationStateContext', () => {
 
       expect(renderMockComponent).toHaveBeenCalledWith({
         paginationProps: instance.getPaginationProps(),
-        paginationBaseProps: {
+        paginationTableProps: {
           pagination: {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()

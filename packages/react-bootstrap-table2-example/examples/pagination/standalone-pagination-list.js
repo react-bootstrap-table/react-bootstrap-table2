@@ -45,7 +45,7 @@ const options = {
   {
     ({
       paginationProps,
-      paginationBaseProps
+      paginationTableProps
     }) => (
       <div>
         <PaginationListStandalone
@@ -55,7 +55,7 @@ const options = {
           keyField="id"
           data={ products }
           columns={ columns }
-          { ...paginationBaseProps }
+          { ...paginationTableProps }
         />
       </div>
     )
@@ -79,7 +79,7 @@ export default class StandalonePaginationList extends React.Component {
           {
             ({
               paginationProps,
-              paginationBaseProps
+              paginationTableProps
             }) => (
               <div>
                 <PaginationListStandalone
@@ -89,7 +89,7 @@ export default class StandalonePaginationList extends React.Component {
                   keyField="id"
                   data={ products }
                   columns={ columns }
-                  { ...paginationBaseProps }
+                  { ...paginationTableProps }
                 />
               </div>
             )
