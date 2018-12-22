@@ -113,8 +113,6 @@ Please see [available pagination configurations](https://react-bootstrap-table.g
 
 Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator) firstly.   
 
-No big changes for pagination, but still can't custom the pagination list, button and sizePerPage dropdown.
-
 ## Table Search
 Ｔhe usage of search functionality is a little bit different from legacy search. The mainly different thing is developer have to render the search input field, we do believe it will be very flexible for all the developers who want to custom the search position or search field itself.
 
