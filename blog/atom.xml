@@ -2,12 +2,34 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://react-bootstrap-table.github.io/blog</id>
     <title>react-bootstrap-table2 Blog</title>
-    <updated>2018-12-21T06:00:00Z</updated>
+    <updated>2018-12-23T06:00:00Z</updated>
     <generator>Feed for Node.js</generator>
     <link rel="alternate" href="https://react-bootstrap-table.github.io/blog"/>
     <subtitle>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</subtitle>
     <logo>https://react-bootstrap-table.github.ioimg/logo/hybrid-white-large.svg</logo>
     <rights>Copyright © 2018 react-bootstrap-table2</rights>
+    <entry>
+        <title type="html"><![CDATA[New Release (2018-12-23)]]></title>
+        <id>https://react-bootstrap-table.github.io/blog/2018/12/23/version-bump.html</id>
+        <link href="https://react-bootstrap-table.github.io/blog/2018/12/23/version-bump.html">
+        </link>
+        <updated>2018-12-23T06:00:00Z</updated>
+        <summary type="html"><![CDATA[## Changed Packages
+
+We got following package version bump in this release:
+
+* `react-bootstrap-table-next@1.4.4`
+
+
+## Changelog
+
+### Bug fixes
+* Fixed expand row borken([#725](https://github.com/react-bootstrap-table/react-bootstrap-table2/issues/72]]></summary>
+        <author>
+            <name>Allen Fang</name>
+            <uri>https://twitter.com/allenfang_tw</uri>
+        </author>
+    </entry>
     <entry>
         <title type="html"><![CDATA[New Release (2018-12-21)]]></title>
         <id>https://react-bootstrap-table.github.io/blog/2018/12/21/version-bump.html</id>
