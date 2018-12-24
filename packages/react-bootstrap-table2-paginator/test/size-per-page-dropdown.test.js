@@ -178,4 +178,23 @@ describe('SizePerPageDropDown', () => {
       expect(wrapper.hasClass(className)).toBeTruthy();
     });
   });
+
+  describe('when optionRenderer prop is defined', () => {
+    const optionRenderer = jest.fn();
+    beforeEach(() => {
+      optionRenderer.mockReset();
+      wrapper = shallowWithContext(
+        <SizePerPageDropDown { ...props } optionRenderer={ optionRenderer } />,
+        { bootstrap4: false }
+      );
+    });
+
+    it('should not render SizePerPageOption', () => {
+      expect(wrapper.find(SizePerPageOption)).toHaveLength(0);
+    });
+
+    it('should call optionRenderer prop correctly', () => {
+      expect(optionRenderer).toHaveBeenCalledTimes(props.options.length);
+    });
+  });
 });

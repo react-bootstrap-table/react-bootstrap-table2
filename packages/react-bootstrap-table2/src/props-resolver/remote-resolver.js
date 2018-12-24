@@ -1,7 +1,15 @@
+import EventEmitter from 'events';
 import _ from '../utils';
 
 export default ExtendBase =>
   class RemoteResolver extends ExtendBase {
+    constructor(props) {
+      super(props);
+      this.remoteEmitter = new EventEmitter();
+      this.remoteEmitter.on('paginationChange', this.handleRemotePageChange);
+      this.remoteEmitter.on('isRemotePagination', this.isRemotePagination);
+    }
+
     getNewestState = (state = {}) => {
       let sortOrder;
       let sortField;
@@ -47,9 +55,10 @@ export default ExtendBase =>
       return remote === true || (_.isObject(remote) && remote.search) || this.isRemotePagination();
     }
 
-    isRemotePagination = () => {
+    isRemotePagination = (e = {}) => {
       const { remote } = this.props;
-      return remote === true || (_.isObject(remote) && remote.pagination);
+      e.result = (remote === true || (_.isObject(remote) && remote.pagination));
+      return e.result;
     }
 
     isRemoteFiltering = () => {

@@ -46,29 +46,15 @@ describe('Page Functions', () => {
     const pageStartIndex = 1;
     const sizePerPage = 10;
     const page = 3;
-    describe('if the page does not fit the pages interval calculated from the length of store.data', () => {
-      beforeEach(() => {
-        data = [];
-        for (let i = 0; i < 15; i += 1) {
-          data.push({ id: i, name: `test_name${i}` });
-        }
-      });
-
+    describe('if the page does not fit the pages which calculated from the length of data', () => {
       it('should return pageStartIndex argument', () => {
-        expect(alignPage(data, page, sizePerPage, pageStartIndex)).toEqual(pageStartIndex);
+        expect(alignPage(15, page, sizePerPage, pageStartIndex)).toEqual(pageStartIndex);
       });
     });
 
     describe('if the length of store.data is large than the end page index', () => {
-      beforeEach(() => {
-        data = [];
-        for (let i = 0; i < 30; i += 1) {
-          data.push({ id: i, name: `test_name${i}` });
-        }
-      });
-
       it('should return current page', () => {
-        expect(alignPage(data, page, sizePerPage, pageStartIndex)).toEqual(page);
+        expect(alignPage(30, page, sizePerPage, pageStartIndex)).toEqual(page);
       });
     });
   });

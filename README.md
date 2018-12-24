@@ -28,10 +28,6 @@ See [getting started](https://react-bootstrap-table.github.io/react-bootstrap-ta
 
 See `react-bootstrap-table2` [storybook](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html).
 
-## Roadmap
-
-See [release plans](https://react-bootstrap-table.github.io/react-bootstrap-table2/blog/2018/01/24/release-plan.html).
-
 ## Development
 
 Please check the [development guide](./docs/development.md).

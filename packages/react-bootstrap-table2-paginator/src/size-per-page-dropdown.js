@@ -16,6 +16,7 @@ const SizePerPageDropDown = (props) => {
     className,
     variation,
     btnContextual,
+    optionRenderer,
     currSizePerPage,
     onSizePerPageChange
   } = props;
@@ -61,14 +62,22 @@ const SizePerPageDropDown = (props) => {
               aria-labelledby="pageDropDown"
             >
               {
-                options.map(option => (
-                  <SizePerPageOption
-                    { ...option }
-                    key={ option.text }
-                    bootstrap4={ bootstrap4 }
-                    onSizePerPageChange={ onSizePerPageChange }
-                  />
-                ))
+                options.map((option) => {
+                  if (optionRenderer) {
+                    return optionRenderer({
+                      ...option,
+                      onSizePerPageChange
+                    });
+                  }
+                  return (
+                    <SizePerPageOption
+                      { ...option }
+                      key={ option.text }
+                      bootstrap4={ bootstrap4 }
+                      onSizePerPageChange={ onSizePerPageChange }
+                    />
+                  );
+                })
               }
             </ul>
           </span>
@@ -88,14 +97,16 @@ SizePerPageDropDown.propTypes = {
   hidden: PropTypes.bool,
   btnContextual: PropTypes.string,
   variation: PropTypes.oneOf(['dropdown', 'dropup']),
-  className: PropTypes.string
+  className: PropTypes.string,
+  optionRenderer: PropTypes.func
 };
 SizePerPageDropDown.defaultProps = {
   open: false,
   hidden: false,
   btnContextual: 'btn-default btn-secondary',
   variation: 'dropdown',
-  className: ''
+  className: '',
+  optionRenderer: null
 };
 
 
