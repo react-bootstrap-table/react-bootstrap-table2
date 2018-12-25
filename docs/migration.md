@@ -119,8 +119,7 @@ Please see [available pagination configurations](./pagination-props.html).
 
 Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator) firstly.   
 
-No big changes for pagination, but still can't custom the pagination list, button and sizePerPage dropdown.
-
+Until newest `react-bootstrap-table2-paginator@2.0.0`, we allow you to custom any part of pagination component more flexible.
 
 ## Table Search
 Please see [Work with table search](./basic-search.html).   
