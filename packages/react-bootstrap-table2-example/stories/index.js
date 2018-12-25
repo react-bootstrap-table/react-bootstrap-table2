@@ -147,6 +147,13 @@ import ExpandHooks from 'examples/row-expand/expand-hooks';
 import PaginationTable from 'examples/pagination';
 import PaginationHooksTable from 'examples/pagination/pagination-hooks';
 import CustomPaginationTable from 'examples/pagination/custom-pagination';
+import CustomPageButtonTable from 'examples/pagination/custom-page-button';
+import CustomSizePerPageOptionTable from 'examples/pagination/custom-size-per-page-option';
+import CustomSizePerPageTable from 'examples/pagination/custom-size-per-page';
+import CustomPageListTable from 'examples/pagination/custom-page-list';
+import StandalonePaginationList from 'examples/pagination/standalone-pagination-list';
+import StandaloneSizePerPage from 'examples/pagination/standalone-size-per-page';
+import FullyCustomPaginationTable from 'examples/pagination/fully-custom-pagination';
 
 // search
 import SearchTable from 'examples/search';
@@ -345,7 +352,14 @@ storiesOf('Pagination', module)
   .addDecorator(bootstrapStyle())
   .add('Basic Pagination Table', () => <PaginationTable />)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
-  .add('Custom Pagination', () => <CustomPaginationTable />);
+  .add('Custom Pagination', () => <CustomPaginationTable />)
+  .add('Custom Page Button', () => <CustomPageButtonTable />)
+  .add('Custom Page List', () => <CustomPageListTable />)
+  .add('Custom SizePerPage Option', () => <CustomSizePerPageOptionTable />)
+  .add('Custom SizePerPage', () => <CustomSizePerPageTable />)
+  .add('Standalone Pagination List', () => <StandalonePaginationList />)
+  .add('Standalone SizePerPage Dropdown', () => <StandaloneSizePerPage />)
+  .add('Fully Custom Pagination', () => <FullyCustomPaginationTable />);
 
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())
