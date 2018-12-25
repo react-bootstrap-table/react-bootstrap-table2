@@ -18,6 +18,7 @@
 <p><strong>NONE</strong></p>
 <h2><a class="anchor" aria-hidden="true" name="optional"></a><a href="#optional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional</h2>
 <ul>
+<li><a href="#paginationcustom-bool">custom</a></li>
 <li><a href="#paginationpage-number">page</a></li>
 <li><a href="#paginationsizeperpage-number">sizePerPage</a></li>
 <li><a href="#paginationtotalsize-number">totalSize</a></li>
@@ -39,9 +40,15 @@
 <li><a href="#paginationonpagechange-function">onPageChange</a></li>
 <li><a href="#paginationonsizeperpagechange-function">onSizePerPageChange</a></li>
 <li><a href="#paginationshowtotal-bool">showTotal</a></li>
+<li><a href="#paginationpagebuttonrenderer-function">pageButtonRenderer</a></li>
+<li><a href="#paginationpagelistrenderer-function">pageListRenderer</a></li>
+<li><a href="#paginationsizeperpagerenderer-function">sizePerPageRenderer</a></li>
+<li><a href="#paginationsizeperpageoptionrenderer-function">sizePerPageOptionRenderer</a></li>
 <li><a href="#paginationpaginationtotalrenderer-function">paginationTotalRenderer</a></li>
 </ul>
 <hr>
+<h2><a class="anchor" aria-hidden="true" name="paginationcustom-bool"></a><a href="#paginationcustom-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.custom - [Bool]</h2>
+<p>Default is false, you will enable it only when you need to implement a <a href="./basic-pagination.html#completely-customization">customization completely</a>.</p>
 <h2><a class="anchor" aria-hidden="true" name="paginationpage-number"></a><a href="#paginationpage-number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.page - [Number]</h2>
 <p>Use <code>pagination.page</code> specify the current page when table render.</p>
 <blockquote>
@@ -53,7 +60,11 @@
 <p>It's necessary value when <a href="./table-props.html#remote-bool-object">remote</a> pagination is enabled.</p>
 </blockquote>
 <h2><a class="anchor" aria-hidden="true" name="paginationtotalsize-number"></a><a href="#paginationtotalsize-number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.totalSize - [Number]</h2>
-<p>It's only work for <a href="./table-props.html#remote-bool-object">remote</a> mode, because <code>react-bootstrap-table2</code> will never know the totally data size actually. Remeber to assign <code>totalSize</code> when you enable the remote pagination.</p>
+<p>This props will be necessary value for below two cases:</p>
+<h3><a class="anchor" aria-hidden="true" name="remote-mode"></a><a href="#remote-mode" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remote mode</h3>
+<p>Because <code>react-bootstrap-table2</code> will never know the totally data size actually. Remeber to assign <code>totalSize</code> when you enable the remote pagination.</p>
+<h3><a class="anchor" aria-hidden="true" name="customization"></a><a href="#customization" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customization</h3>
+<p>When you need to implement a <a href="./basic-pagination.html#completely-customization">customization completely</a>. You have to give props.</p>
 <h2><a class="anchor" aria-hidden="true" name="paginationpagestartindex-number"></a><a href="#paginationpagestartindex-number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.pageStartIndex - [Number]</h2>
 <p>Default is <strong>1</strong>, which means the first page index is start from 1. If your first page want to start from <strong>0</strong>, you can control it via <code>pageStartIndex</code>.</p>
 <h2><a class="anchor" aria-hidden="true" name="paginationpaginationsize-number"></a><a href="#paginationpaginationsize-number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.paginationSize - [Number]</h2>
@@ -94,6 +105,146 @@
 <p>You can hide the pagination when there's only one page in table. Default is <code>false</code>.</p>
 <h2><a class="anchor" aria-hidden="true" name="paginationshowtotal-bool"></a><a href="#paginationshowtotal-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.showTotal - [Bool]</h2>
 <p>Default is <code>false</code>, if enable will display a text to indicate the row range of current page.</p>
+<h2><a class="anchor" aria-hidden="true" name="paginationpagebuttonrenderer-function"></a><a href="#paginationpagebuttonrenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.pageButtonRenderer - [Function]</h2>
+<p>Custom the page button inside the pagination list. This callback function have one argument which is an object and contain following props:</p>
+<ul>
+<li><code>page</code>: Page number</li>
+<li><code>active</code>: If this page is current page or not.</li>
+<li><code>disable</code>: If this page is disabled or not.</li>
+<li><code>title</code>: Page title</li>
+<li><code>onPageChange</code>: Call it when you need to change page</li>
+</ul>
+<p>Following is a minimal example:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> pageButtonRenderer = ({
+  page,
+  active,
+  disable,
+  title,
+  onPageChange
+}) =&gt; {
+  <span class="hljs-keyword">const</span> handleClick = <span class="hljs-function">(<span class="hljs-params">e</span>) =&gt;</span> {
+    e.preventDefault();
+    onPageChange(page);
+  };
+  <span class="hljs-comment">// ....</span>
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"page-item"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> <span class="hljs-attr">handleClick</span> } <span class="hljs-attr">....</span>&gt;</span>{ page }<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">const</span> options = {
+  pageButtonRenderer
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">"id"</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">pagination</span>=<span class="hljs-string">{</span> <span class="hljs-attr">paginationFactory</span>(<span class="hljs-attr">options</span>) } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="paginationpagelistrenderer-function"></a><a href="#paginationpagelistrenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.pageListRenderer - [Function]</h2>
+<p>Custom the pagination list component, this callback function have one argument which is an object and contain following props:</p>
+<ul>
+<li><code>pages</code>: Current page</li>
+<li><code>onPageChange</code>: Call it when you need to change page</li>
+</ul>
+<p>Below is a minimal example:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> pageListRenderer = ({
+  pages,
+  onPageChange
+}) =&gt; {
+  <span class="hljs-comment">// just exclude &lt;, &lt;&lt;, &gt;&gt;, &gt;</span>
+  <span class="hljs-keyword">const</span> pageWithoutIndication = pages.filter(<span class="hljs-function"><span class="hljs-params">p</span> =&gt;</span> <span class="hljs-keyword">typeof</span> p.page !== <span class="hljs-string">'string'</span>);
+  <span class="hljs-keyword">return</span> (
+    <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+      {
+        pageWithoutIndication.map(p =&gt; (
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"btn btn-success"</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> onPageChange(p.page) }&gt;{ p.page }<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        ))
+      }
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+  );
+};
+
+<span class="hljs-keyword">const</span> options = {
+  pageListRenderer
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">"id"</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">pagination</span>=<span class="hljs-string">{</span> <span class="hljs-attr">paginationFactory</span>(<span class="hljs-attr">options</span>) } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="paginationsizeperpagerenderer-function"></a><a href="#paginationsizeperpagerenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.sizePerPageRenderer - [Function]</h2>
+<p>Custom the size per page dropdown component, this callback function have one argument which is an object and contain following props:</p>
+<ul>
+<li><code>options</code>: Dropdown option.</li>
+<li><code>currSizePerPage</code>: Current size per page.</li>
+<li><code>onSizePerPageChange</code>: Call it when you need to change size per page.</li>
+</ul>
+<p>Below is a minimal example:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> sizePerPageRenderer = ({
+  options,
+  currSizePerPage,
+  onSizePerPageChange
+}) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"btn-group"</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"group"</span>&gt;</span>
+    {
+      options.map(option =&gt; (
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+          <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">option.text</span> }
+          <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>
+          <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> onSizePerPageChange(option.page) }
+          className={ `btn ${currSizePerPage === `${option.page}` ? 'btn-secondary' : 'btn-warning'}` }
+        &gt;
+          { option.text }
+        <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+      ))
+    }
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">const</span> options = {
+  sizePerPageRenderer
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">"id"</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">pagination</span>=<span class="hljs-string">{</span> <span class="hljs-attr">paginationFactory</span>(<span class="hljs-attr">options</span>) } /&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="paginationsizeperpageoptionrenderer-function"></a><a href="#paginationsizeperpageoptionrenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.sizePerPageOptionRenderer - [Function]</h2>
+<p>Custom the option of size per page dropdown component, this callback function have one argument which is an object and contain following props:</p>
+<ul>
+<li><code>text</code>: The text of option.</li>
+<li><code>page</code>: The size per page of option.</li>
+<li><code>onSizePerPageChange</code>: Call it when you need to change size per page.</li>
+</ul>
+<p>Below is a minimal example:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> sizePerPageOptionRenderer = ({
+  text,
+  page,
+  onSizePerPageChange
+}) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>
+    <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">text</span> }
+    <span class="hljs-attr">role</span>=<span class="hljs-string">"presentation"</span>
+    <span class="hljs-attr">className</span>=<span class="hljs-string">"dropdown-item"</span>
+  &gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">a</span>
+      <span class="hljs-attr">href</span>=<span class="hljs-string">"#"</span>
+      <span class="hljs-attr">tabIndex</span>=<span class="hljs-string">"-1"</span>
+      <span class="hljs-attr">role</span>=<span class="hljs-string">"menuitem"</span>
+      <span class="hljs-attr">data-page</span>=<span class="hljs-string">{</span> <span class="hljs-attr">page</span> }
+      <span class="hljs-attr">onMouseDown</span>=<span class="hljs-string">{</span> (<span class="hljs-attr">e</span>) =&gt;</span> {
+        e.preventDefault();
+        onSizePerPageChange(page);
+      } }
+      style={ { color: 'red' } }
+    &gt;
+      { text }
+    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">const</span> options = {
+  sizePerPageOptionRenderer
+};
+
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">"id"</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">pagination</span>=<span class="hljs-string">{</span> <span class="hljs-attr">paginationFactory</span>(<span class="hljs-attr">options</span>) } /&gt;</span>
+</span></code></pre>
 <h2><a class="anchor" aria-hidden="true" name="paginationpaginationtotalrenderer-function"></a><a href="#paginationpaginationtotalrenderer-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>pagination.paginationTotalRenderer - [Function]</h2>
 <p>Custom the total information, this callbacok function have three arguments: <code>from</code>, <code>to</code> and <code>size</code>. Following is an example:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> customTotal = <span class="hljs-function">(<span class="hljs-params"><span class="hljs-keyword">from</span>, to, size</span>) =&gt;</span> (

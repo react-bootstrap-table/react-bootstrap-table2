@@ -26,5 +26,168 @@
 &lt;BootstrapTable keyField=<span class="hljs-string">'id'</span> data={ products } columns={ columns } pagination={ paginationFactory() } /&gt;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="customization"></a><a href="#customization" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customization</h2>
-<p>See <a href="./pagination-props.html">pagination props</a></p>
+<h3><a class="anchor" aria-hidden="true" name="basic-customization"></a><a href="#basic-customization" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basic Customization</h3>
+<p><code>react-bootstrap-table2</code> give some simple ways to customize something like text, styling etc, following is all the props we support for basic customization:</p>
+<ul>
+<li><a href="./pagination-props.html#paginationpaginationsize-number">paginationSize</a></li>
+<li><a href="./pagination-props.html#paginationsizeperpagelist-array">sizePerPageList</a></li>
+<li><a href="./pagination-props.html#paginationwithfirstandlast-bool">withFirstAndLast</a></li>
+<li><a href="./pagination-props.html#paginationalwaysshowallbtns-bool">alwaysShowAllBtns</a></li>
+<li><a href="./pagination-props.html#paginationfirstpagetext-any">firstPageText</a></li>
+<li><a href="./pagination-props.html#paginationprepagetext-any">prePageText</a></li>
+<li><a href="./pagination-props.html#paginationnextpagetext-any">nextPageText</a></li>
+<li><a href="./pagination-props.html#paginationlastpagetext-any">lastPageText</a></li>
+<li><a href="./pagination-props.html#paginationfirstpagetitle-any">firstPageTitle</a></li>
+<li><a href="./pagination-props.html#paginationprepagetitle-any">prePageTitle</a></li>
+<li><a href="./pagination-props.html#paginationnextpagetitle-any">nextPageTitle</a></li>
+<li><a href="./pagination-props.html#paginationlastpagetitle-any">lastPageTitle</a></li>
+<li><a href="./pagination-props.html#paginationhidesizeperpage-bool">hideSizePerPage</a></li>
+<li><a href="./pagination-props.html#paginationhidepagelistonlyonepage-bool">hidePageListOnlyOnePage</a></li>
+<li><a href="./pagination-props.html#paginationshowtotal-bool">showTotal</a></li>
+</ul>
+<p>You can check <a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Pagination&amp;selectedStory=Custom%20Pagination&amp;full=0&amp;addons=1&amp;stories=1&amp;panelRight=0&amp;addonPanel=storybook%2Factions%2Factions-panel">this online demo</a> for above props usage.</p>
+<h3><a class="anchor" aria-hidden="true" name="advance-customization"></a><a href="#advance-customization" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advance Customization</h3>
+<p>Sometime, you may feel above props is not satisfied with your requirement, don't worry, we provide following renderer for each part of pagination:</p>
+<ul>
+<li><a href="./pagination-props.html#paginationpagelistrenderer-function">pageListRenderer</a></li>
+<li><a href="./pagination-props.html#paginationpagebuttonrenderer-function">pageButtonRenderer</a></li>
+<li><a href="./pagination-props.html#paginationsizeperpagerenderer-function">sizePerPageRenderer</a></li>
+<li><a href="./pagination-props.html#paginationsizeperpageoptionrenderer-function">sizePerPageOptionRenderer</a></li>
+<li><a href="./pagination-props.html#paginationpaginationtotalrenderer-function">paginationTotalRenderer</a></li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="completely-customization"></a><a href="#completely-customization" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Completely Customization</h3>
+<p>If you want to customize the pagination component completely, you may get interesting on following solution:</p>
+<ul>
+<li>Standalone</li>
+<li>Non-standalone</li>
+</ul>
+<p><code>react-bootstrap-table2-paginator</code> have a <code>PaginationProvider</code> which is a react context and you will be easier to customize the pagination components under the scope of <code>PaginationProvider</code>. Let's introduce it step by step:</p>
+<h4><a class="anchor" aria-hidden="true" name="import-paginationprovider"></a><a href="#import-paginationprovider" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Import PaginationProvider</h4>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> paginationFactory, { PaginationProvider } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-paginator'</span>;
+
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" name="declare-custom-and-totalsize-in-pagination-option"></a><a href="#declare-custom-and-totalsize-in-pagination-option" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Declare custom and totalSize in pagination option:</h4>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> paginationOption = {
+  <span class="hljs-attr">custom</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">totalSize</span>: products.length
+};
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" name="render-paginationprovider"></a><a href="#render-paginationprovider" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Render PaginationProvider</h4>
+<pre><code class="hljs css js">&lt;PaginationProvider
+  pagination={ paginationFactory(options) }
+&gt;
+  {
+    ({
+      paginationProps,
+      paginationTableProps
+    }) =&gt; (
+      .....
+    ) 
+  }
+&lt;/PaginationProvider&gt;
+</code></pre>
+<p><code>PaginationProvider</code> actually is a wrapper for the consumer of react context so that you are able to get the props from context then render to your compoennt and <code>BootstrapTable</code>:</p>
+<ul>
+<li><code>paginationProps</code>: this include everything about pagination, you will use it when you render standalone component or your custom component.</li>
+<li><code>paginationTableProps</code>: you don't need to know about this, but you have to give it as props when render <code>BootstrapTable</code>.</li>
+</ul>
+<p>So far, your customization pagination should look like it:</p>
+<pre><code class="hljs css js">&lt;PaginationProvider
+  pagination={ paginationFactory(options) }
+&gt;
+  {
+    ({
+      paginationProps,
+      paginationTableProps
+    }) =&gt; (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span>
+          <span class="hljs-attr">keyField</span>=<span class="hljs-string">"id"</span>
+          <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> }
+          <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> }
+          { <span class="hljs-attr">...paginationTableProps</span> }
+        /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    )
+  }
+<span class="hljs-tag">&lt;/<span class="hljs-name">PaginationProvider</span>&gt;</span></span>
+</code></pre>
+<p>Now, you have two choices</p>
+<ul>
+<li>Use built-in standalne components</li>
+<li>Customize everything by yourself</li>
+</ul>
+<h4><a class="anchor" aria-hidden="true" name="use-standalone-component"></a><a href="#use-standalone-component" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Use Standalone Component</h4>
+<p><code>react-bootstrap-table2-paginator</code> provider two standalone components:</p>
+<ul>
+<li>Size Per Page Dropdwn Standalone</li>
+<li>Pagination List Standalone</li>
+</ul>
+<p>When render each standalone, you just need to pass the <code>paginationProps</code> props to standalone component:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> paginationFactory, { PaginationProvider, PaginationListStandalone, SizePerPageDropdownStandalone } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-paginator'</span>;
+
+&lt;PaginationProvider
+  pagination={ paginationFactory(options) }
+&gt;
+  {
+    ({
+      paginationProps,
+      paginationTableProps
+    }) =&gt; (
+      &lt;div&gt;
+        &lt;SizePerPageDropdownStandalone
+          { ...paginationProps }
+        /&gt;
+        &lt;BootstrapTable
+          keyField="id"
+          data={ products }
+          columns={ columns }
+          { ...paginationTableProps }
+        /&gt;
+        &lt;PaginationListStandalone
+          { ...paginationProps }
+        /&gt;
+      &lt;/div&gt;
+    )
+  }
+&lt;/PaginationProvider&gt;
+</code></pre>
+<p>That's it!!  The benifit for using standalone is you can much easier to render the standalone component in any posistion. In the future, we will implement more featue like applying <code>style</code>, <code>className</code> etc on standalone components.</p>
+<h4><a class="anchor" aria-hidden="true" name="customization-everything"></a><a href="#customization-everything" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customization Everything</h4>
+<p>If you choose to custom the pagination component by yourself, the <code>paginationProps</code> will be important for you. Becasue you have to know for example how to change page or what's the current page etc. Therefore, following is all the props in <code>paginationProps</code> object:</p>
+<pre><code class="hljs css js">page,
+sizePerPage,
+pageStartIndex,
+hidePageListOnlyOnePage,
+hideSizePerPage,
+alwaysShowAllBtns,
+withFirstAndLast,
+dataSize,
+sizePerPageList,
+paginationSize,
+showTotal,
+pageListRenderer,
+pageButtonRenderer,
+sizePerPageRenderer,
+paginationTotalRenderer,
+sizePerPageOptionRenderer,
+firstPageText,
+prePageText,
+nextPageText,
+lastPageText,
+prePageTitle,
+nextPageTitle,
+firstPageTitle,
+lastPageTitle,
+onPageChange,
+onSizePerPageChange
+</code></pre>
+<p>In most of case, <code>page</code>, <code>sizePerPage</code>, <code>onPageChange</code> and <code>onSizePerPageChange</code> are most important propertoes for you:</p>
+<ul>
+<li><code>page</code>: Current page.</li>
+<li><code>sizePerPage</code>: Current size per page.</li>
+<li><code>onPageChange</code>: Call it when you nede to change page. This function accept one number argument which indicate the new page</li>
+<li><code>onSizePerPageChange</code>: Call it when you nede to change size per page. This function accept two number argument which indicate the new sizePerPage and new page</li>
+</ul>
+<p><a href="https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Pagination&amp;selectedStory=Fully%20Custom%20Pagination&amp;full=0&amp;addons=1&amp;stories=1&amp;panelRight=0&amp;addonPanel=storybook%2Factions%2Factions-panel">This</a> is a online example for showing how to custom pagination completely.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="basic-celledit.html">← Cell Edit</a><a class="docs-next button" href="basic-row-expand.html">Expandable Row →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>

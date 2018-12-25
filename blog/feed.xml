@@ -4,7 +4,7 @@
         <title>react-bootstrap-table2 Blog</title>
         <link>https://react-bootstrap-table.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</description>
-        <lastBuildDate>Sun, 23 Dec 2018 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 24 Dec 2018 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,30 @@
             <link>https://react-bootstrap-table.github.io/blog</link>
         </image>
         <copyright>Copyright © 2018 react-bootstrap-table2</copyright>
+        <item>
+            <title><![CDATA[New Release (2018-12-25)]]></title>
+            <link>https://react-bootstrap-table.github.io/blog/2018/12/24/version.bump.html</link>
+            <guid>https://react-bootstrap-table.github.io/blog/2018/12/24/version.bump.html</guid>
+            <pubDate>Mon, 24 Dec 2018 06:00:00 GMT</pubDate>
+            <description><![CDATA[## Changed Packages
+
+We got following package version bump in this release:
+
+* `react-bootstrap-table-next@2.0.0`
+* `react-bootstrap-table2-paginator@2.0.0`
+
+
+## Changelog
+
+### Bug fixes
+N/A
+
+### Features
+N/A
+
+### Enhancements
+* Impove the flexibilit]]></description>
+        </item>
         <item>
             <title><![CDATA[New Release (2018-12-23)]]></title>
             <link>https://react-bootstrap-table.github.io/blog/2018/12/23/version-bump.html</link>
