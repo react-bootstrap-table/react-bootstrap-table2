@@ -64,6 +64,10 @@ export default (
           return;
         }
 
+        if (filter.props.onFilter) {
+          filter.props.onFilter(filterVal);
+        }
+
         this.forceUpdate();
       };
     }
