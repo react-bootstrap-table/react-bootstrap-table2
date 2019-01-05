@@ -104,6 +104,50 @@ describe('Row shouldUpdater', () => {
     });
   });
 
+  describe('shouldUpdateByColumnsForSimpleCheck', () => {
+    describe('when nextProps.columns.length is not eq props.columns.length', () => {
+      beforeEach(() => {
+        props = {
+          columns: [{ dataField: 'price', text: 'Price' }]
+        };
+        wrapper = shallow(<DummyComponent { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, columns: [...props.columns, { dataField: 'name', text: 'Name' }] };
+        expect(wrapper.instance().shouldUpdateByColumnsForSimpleCheck(nextProps)).toBeTruthy();
+      });
+    });
+
+    describe('when any nextProps.columns.hidden is change', () => {
+      beforeEach(() => {
+        props = {
+          columns: [{ dataField: 'price', text: 'Price' }]
+        };
+        wrapper = shallow(<DummyComponent { ...props } />);
+      });
+
+      it('should return true', () => {
+        nextProps = { ...props, columns: [{ dataField: 'price', text: 'Price', hidden: true }] };
+        expect(wrapper.instance().shouldUpdateByColumnsForSimpleCheck(nextProps)).toBeTruthy();
+      });
+    });
+
+    describe('if any nextProps.columns.hidden is not change and column length is same', () => {
+      beforeEach(() => {
+        props = {
+          columns: [{ dataField: 'price', text: 'Price' }]
+        };
+        wrapper = shallow(<DummyComponent { ...props } />);
+      });
+
+      it('should return false', () => {
+        nextProps = { ...props, columns: [...props.columns] };
+        expect(wrapper.instance().shouldUpdateByColumnsForSimpleCheck(nextProps)).toBeFalsy();
+      });
+    });
+  });
+
   describe('shouldUpdatedByNormalProps', () => {
     describe('when nextProps.rowIndex is not eq props.rowIndex', () => {
       beforeEach(() => {
