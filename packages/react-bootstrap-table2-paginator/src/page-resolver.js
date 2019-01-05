@@ -135,8 +135,8 @@ export default ExtendBase =>
     calculateSizePerPageStatus() {
       const { sizePerPageList } = this.props;
       return sizePerPageList.map((_sizePerPage) => {
-        const pageText = _sizePerPage.text || _sizePerPage;
-        const pageNumber = _sizePerPage.value || _sizePerPage;
+        const pageText = typeof _sizePerPage.text !== 'undefined' ? _sizePerPage.text : _sizePerPage;
+        const pageNumber = typeof _sizePerPage.value !== 'undefined' ? _sizePerPage.value : _sizePerPage;
         return {
           text: `${pageText}`,
           page: pageNumber
