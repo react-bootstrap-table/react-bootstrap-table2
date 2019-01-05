@@ -44,7 +44,8 @@ describe('FilterContext', () => {
   const handleFilterChange = jest.fn();
 
   function shallowContext(
-    enableRemote = false
+    enableRemote = false,
+    tableColumns = columns
   ) {
     mockBase.mockReset();
     handleFilterChange.mockReset();
@@ -56,7 +57,7 @@ describe('FilterContext', () => {
 
     return (
       <FilterContext.Provider
-        columns={ columns }
+        columns={ tableColumns }
         data={ data }
       >
         <FilterContext.Consumer>
@@ -222,6 +223,32 @@ describe('FilterContext', () => {
 
       it('should not call handleFilterChange correctly', () => {
         expect(handleFilterChange).toHaveBeenCalledTimes(0);
+      });
+    });
+
+    describe('if filter.props.onFilter is defined', () => {
+      const filterVal = '3';
+      const onFilter = jest.fn();
+      const customColumns = columns.map((column, i) => {
+        if (i === 1) {
+          return {
+            ...column,
+            filter: textFilter({ onFilter })
+          };
+        }
+        return column;
+      });
+
+      beforeEach(() => {
+        wrapper = shallow(shallowContext(false, customColumns));
+        wrapper.render();
+        instance = wrapper.instance();
+      });
+
+      it('should call filter.props.onFilter correctly', () => {
+        instance.onFilter(customColumns[1], FILTER_TYPE.TEXT)(filterVal);
+        expect(onFilter).toHaveBeenCalledTimes(1);
+        expect(onFilter).toHaveBeenCalledWith(filterVal);
       });
     });
 
