@@ -6,7 +6,7 @@ sidebar_label: Getting Started
 
 ## Installation
 
-> Due to `react-bootstrap-table2` already taked on npm so that our npm module name is **`react-bootstrap-table-next`**. Anyway, we still use or mention `react-bootstrap-table2` in any our git repository, offical website and documents!!, ony the npm name is different!!!!
+> Due to `react-bootstrap-table2` already taken on npm our module is called **`react-bootstrap-table-next`**. We still use `react-bootstrap-table2` in any our git repository, official website and documentation - only the npm name is different!
 
 ```sh
 $ npm install react-bootstrap-table-next --save
@@ -14,9 +14,9 @@ $ npm install react-bootstrap-table-next --save
 
 ## Add CSS
 
-> `react-bootstrap-table2` need you to add bootstrap css in your application firstly. After **v1.0.0**, we start to suport `bootstrap@4`.
+> You first need to add bootstrap css in your application. After **v1.0.0**, we start to suport `bootstrap@4`.
 
-Finish above step, let's add the `react-bootstrap-table2` styles: 
+Finish above step, then add the `react-bootstrap-table2` styles: 
 
 ```js
 // es5 

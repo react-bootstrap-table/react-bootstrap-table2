@@ -4,15 +4,16 @@ title: react-bootstrap-table2
 sidebar_label: About
 ---
 
-[`react-bootstrap-table2`](https://github.com/react-bootstrap-table/react-bootstrap-table2) is next generation of [`react-bootstrap-table`](https://github.com/AllenFang/react-bootstrap-table). We rebuilt it to makie it more better and easy to use. Following is our mission:
+[`react-bootstrap-table2`](https://github.com/react-bootstrap-table/react-bootstrap-table2) is next generation of [`react-bootstrap-table`](https://github.com/AllenFang/react-bootstrap-table). We rebuilt it to make it better and easier to use:
 
-* Refactoring core module and make challenges be possible
+* Refactoring core modules
 * More customizable table
-* Reduce the bugs and bundled size
-* Solve the performance issue
+* Smaller bundled size
+* Reduce bug count
+* Solve performance issues
 * Improve the [`remote`](https://allenfang.github.io/react-bootstrap-table/docs.html#remote) mode
-* Improve handling of DOM events well
-* Support nest data
+* Improve handling of DOM events
+* Support nested data
 * Support table footer
 
-> Due to `react-bootstrap-table2` already taked on npm so that our npm module name is **`react-bootstrap-table-next`**. Anyway, we still use or mention `react-bootstrap-table2` in any our git repository, offical website and documents!!, only the npm name is different!!!!
+> Due to `react-bootstrap-table2` already taken on npm our module is called **`react-bootstrap-table-next`**. We still use `react-bootstrap-table2` in any our git repository, official website and documentation - only the npm name is different!
