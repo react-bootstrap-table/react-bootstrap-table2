@@ -20,6 +20,19 @@ export default ExtendBase =>
       );
     }
 
+    // Only use for simple-row
+    shouldUpdateByColumnsForSimpleCheck(nextProps) {
+      if (this.props.columns.length !== nextProps.columns.length) {
+        return true;
+      }
+      for (let i = 0; i < this.props.columns.length; i += 1) {
+        if (this.props.columns[i].hidden !== nextProps.columns[i].hidden) {
+          return true;
+        }
+      }
+      return false;
+    }
+
     shouldUpdatedByNormalProps(nextProps) {
       const shouldUpdate =
         this.props.rowIndex !== nextProps.rowIndex ||

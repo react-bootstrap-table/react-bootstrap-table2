@@ -15,6 +15,7 @@
 * [showExpandColumn](#showExpandColumn)
 * [onlyOneExpanding](#onlyOneExpanding)
 * [expandByColumnOnly](#expandByColumnOnly)
+* [expandColumnPosition](#expandColumnPosition)
 * [expandColumnRenderer](#expandColumnRenderer)
 * [expandHeaderColumnRenderer](#expandHeaderColumnRenderer)
 
@@ -151,5 +152,16 @@ const expandRow = {
   renderer: (row) => ...,
   showExpandColumn: true,
   expandByColumnOnly: true
+};
+```
+
+### <a name='expandColumnPosition'>expandRow.expandColumnPosition - [String]</a>
+Default is `left`. You can give this as `right` for rendering expand column in the right side.
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  showExpandColumn: true,
+  expandColumnPosition: 'right'
 };
 ```

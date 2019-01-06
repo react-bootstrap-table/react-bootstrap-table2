@@ -25,13 +25,19 @@ export default Base =>
       let data;
       if (typeof source !== 'undefined') {
         data = source;
+      } else if (options.exportAll) {
+        data = this.props.data;
       } else {
-        data = options.exportAll ? this.props.data : this.getData();
+        const payload = {};
+        this.tableExposedAPIEmitter.emit('get.table.data', payload);
+        data = payload.result;
       }
 
       // filter data
       if (options.onlyExportSelection) {
-        const selections = this.getSelected();
+        const payload = {};
+        this.tableExposedAPIEmitter.emit('get.selected.rows', payload);
+        const selections = payload.result;
         data = data.filter(row => !!selections.find(sel => row[keyField] === sel));
       }
       const content = transform(data, meta, this._.get, options);

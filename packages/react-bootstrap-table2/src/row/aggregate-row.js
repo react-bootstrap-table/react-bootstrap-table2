@@ -1,3 +1,4 @@
+/* eslint class-methods-use-this: 0 */
 /* eslint react/prop-types: 0 */
 /* eslint no-plusplus: 0 */
 import React from 'react';
@@ -8,6 +9,7 @@ import SelectionCell from '../row-selection/selection-cell';
 import shouldUpdater from './should-updater';
 import eventDelegater from './event-delegater';
 import RowPureContent from './row-pure-content';
+import Const from '../const';
 
 export default class RowAggregator extends shouldUpdater(eventDelegater(React.Component)) {
   static propTypes = {
@@ -43,6 +45,12 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
     return this.shouldUpdateRowContent;
   }
 
+  isRenderExpandColumnInLeft(
+    expandColumnPosition = Const.INDICATOR_POSITION_LEFT
+  ) {
+    return expandColumnPosition === Const.INDICATOR_POSITION_LEFT;
+  }
+
   render() {
     const {
       row,
@@ -64,7 +72,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
     } = this.props;
     const key = _.get(row, keyField);
     const { hideSelectColumn, clickToSelect } = selectRow;
-    const { showExpandColumn } = expandRow;
+    const { showExpandColumn, expandColumnPosition } = expandRow;
 
     const newAttrs = this.delegate({ ...attrs });
     if (clickToSelect || !!expandRow.renderer) {
@@ -73,47 +81,59 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
 
     let tabIndexStart = (rowIndex * visibleColumnSize) + 1;
 
+    const childrens = [(
+      <RowPureContent
+        key="row"
+        row={ row }
+        columns={ columns }
+        keyField={ keyField }
+        rowIndex={ rowIndex }
+        shouldUpdate={ this.shouldUpdateRowContent }
+        tabIndexStart={ tabIndexCell ? tabIndexStart : -1 }
+        { ...rest }
+      />
+    )];
+
+    if (!hideSelectColumn) {
+      childrens.unshift((
+        <SelectionCell
+          { ...selectRow }
+          key="selection-cell"
+          rowKey={ key }
+          rowIndex={ rowIndex }
+          selected={ selected }
+          disabled={ !selectable }
+          tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
+        />
+      ));
+    }
+
+    if (showExpandColumn) {
+      const expandCell = (
+        <ExpandCell
+          { ...expandRow }
+          key="expand-cell"
+          rowKey={ key }
+          rowIndex={ rowIndex }
+          expanded={ expanded }
+          expandable={ expandable }
+          tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
+        />
+      );
+      if (this.isRenderExpandColumnInLeft(expandColumnPosition)) {
+        childrens.unshift(expandCell);
+      } else {
+        childrens.push(expandCell);
+      }
+    }
+
     return (
       <tr
         style={ style }
         className={ className }
         { ...newAttrs }
       >
-        {
-          showExpandColumn ? (
-            <ExpandCell
-              { ...expandRow }
-              rowKey={ key }
-              rowIndex={ rowIndex }
-              expanded={ expanded }
-              expandable={ expandable }
-              tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
-            />
-          ) : null
-        }
-        {
-          !hideSelectColumn
-            ? (
-              <SelectionCell
-                { ...selectRow }
-                rowKey={ key }
-                rowIndex={ rowIndex }
-                selected={ selected }
-                disabled={ !selectable }
-                tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
-              />
-            )
-            : null
-        }
-        <RowPureContent
-          row={ row }
-          columns={ columns }
-          keyField={ keyField }
-          rowIndex={ rowIndex }
-          shouldUpdate={ this.shouldUpdateRowContent }
-          tabIndexStart={ tabIndexCell ? tabIndexStart : -1 }
-          { ...rest }
-        />
+        { childrens }
       </tr>
     );
   }

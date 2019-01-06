@@ -14,13 +14,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
-    if (props.registerExposedAPI) {
-      props.registerExposedAPI(this.getData);
-    }
   }
 
   // Exposed APIs
-  getData() {
+  getData = () => {
     return this.visibleRows();
   }
 
@@ -161,7 +158,11 @@ BootstrapTable.propTypes = {
     onlyOneExpanding: PropTypes.bool,
     expandByColumnOnly: PropTypes.bool,
     expandColumnRenderer: PropTypes.func,
-    expandHeaderColumnRenderer: PropTypes.func
+    expandHeaderColumnRenderer: PropTypes.func,
+    expandColumnPosition: PropTypes.oneOf([
+      Const.INDICATOR_POSITION_LEFT,
+      Const.INDICATOR_POSITION_RIGHT
+    ])
   }),
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,

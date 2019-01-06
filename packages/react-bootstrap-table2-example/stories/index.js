@@ -74,6 +74,7 @@ import ProgrammaticallyMultiSelectFilter from 'examples/column-filter/programmat
 import CustomFilter from 'examples/column-filter/custom-filter';
 import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
 import ClearAllFilters from 'examples/column-filter/clear-all-filters';
+import FilterHooks from 'examples/column-filter/filter-hooks';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -141,6 +142,7 @@ import ExpandColumn from 'examples/row-expand/expand-column';
 import OnlyExpandByColumn from 'examples/row-expand/expand-by-column-only.js';
 import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
+import ExpandColumnPosition from 'examples/row-expand/expand-column-position';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
 
 // pagination
@@ -154,6 +156,7 @@ import CustomPageListTable from 'examples/pagination/custom-page-list';
 import StandalonePaginationList from 'examples/pagination/standalone-pagination-list';
 import StandaloneSizePerPage from 'examples/pagination/standalone-size-per-page';
 import FullyCustomPaginationTable from 'examples/pagination/fully-custom-pagination';
+import RemoteStandalonePaginationTable from 'examples/pagination/remote-standalone-pagination';
 
 // search
 import SearchTable from 'examples/search';
@@ -273,7 +276,8 @@ storiesOf('Column Filter', module)
   .add('Custom Filter', () => <CustomFilter />)
   .add('Advance Custom Filter', () => <AdvanceCustomFilter />)
   .add('Preserved Option Order on Select Filter', () => <SelectFilterWithPreservedOptionsOrder />)
-  .add('Clear All Filters', () => <ClearAllFilters />);
+  .add('Clear All Filters', () => <ClearAllFilters />)
+  .add('Filter Hooks', () => <FilterHooks />);
 
 storiesOf('Work on Rows', module)
   .addDecorator(bootstrapStyle())
@@ -346,6 +350,7 @@ storiesOf('Row Expand', module)
   .add('Only Expand by Indicator', () => <OnlyExpandByColumn />)
   .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
+  .add('Expand Column Position', () => <ExpandColumnPosition />)
   .add('Expand Hooks', () => <ExpandHooks />);
 
 storiesOf('Pagination', module)
@@ -359,7 +364,8 @@ storiesOf('Pagination', module)
   .add('Custom SizePerPage', () => <CustomSizePerPageTable />)
   .add('Standalone Pagination List', () => <StandalonePaginationList />)
   .add('Standalone SizePerPage Dropdown', () => <StandaloneSizePerPage />)
-  .add('Fully Custom Pagination', () => <FullyCustomPaginationTable />);
+  .add('Fully Custom Pagination', () => <FullyCustomPaginationTable />)
+  .add('Remote Fully Custom Pagination', () => <RemoteStandalonePaginationTable />);
 
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())
