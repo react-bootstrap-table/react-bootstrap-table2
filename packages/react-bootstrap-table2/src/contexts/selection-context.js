@@ -14,14 +14,6 @@ class SelectionProvider extends React.Component {
     keyField: PropTypes.string.isRequired
   }
 
-  constructor(props) {
-    super(props);
-    if (props.registerExposedAPI) {
-      const getSelected = () => this.getSelected();
-      props.registerExposedAPI(getSelected);
-    }
-  }
-
   state = { selected: this.props.selectRow.selected || [] };
 
   componentWillReceiveProps(nextProps) {

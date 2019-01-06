@@ -1,6 +1,8 @@
 /* eslint no-return-assign: 0 */
+/* eslint no-param-reassign: 0 */
 /* eslint class-methods-use-this: 0 */
 import React, { Component } from 'react';
+import EventEmitter from 'events';
 import _ from '../utils';
 import createDataContext from './data-context';
 import createSortContext from './sort-context';
@@ -15,6 +17,13 @@ const withContext = Base =>
     constructor(props) {
       super(props);
       this.DataContext = createDataContext();
+
+      if (props.registerExposedAPI) {
+        const exposedAPIEmitter = new EventEmitter();
+        exposedAPIEmitter.on('get.table.data', payload => payload.result = this.table.getData());
+        exposedAPIEmitter.on('get.selected.rows', payload => payload.result = this.selectionContext.getSelected());
+        props.registerExposedAPI(exposedAPIEmitter);
+      }
 
       if (props.columns.filter(col => col.sort).length > 0) {
         this.SortContext = createSortContext(
@@ -255,9 +264,8 @@ const withContext = Base =>
     }
 
     render() {
-      const { keyField, columns, bootstrap4, registerExposedAPI } = this.props;
+      const { keyField, columns, bootstrap4 } = this.props;
       const baseProps = { keyField, columns };
-      if (registerExposedAPI) baseProps.registerExposedAPI = registerExposedAPI;
 
       let base = this.renderBase();
 

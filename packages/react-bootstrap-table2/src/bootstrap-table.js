@@ -14,13 +14,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
     super(props);
     this.validateProps();
-    if (props.registerExposedAPI) {
-      props.registerExposedAPI(this.getData);
-    }
   }
 
   // Exposed APIs
-  getData() {
+  getData = () => {
     return this.visibleRows();
   }
 
