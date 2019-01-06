@@ -94,6 +94,10 @@
 <ul>
 <li>export <code>filter</code> function to allow users to access. For textFilter, <code>filter(value)</code> to filter columns dynamically.</li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" name="textfilteronfilter-function"></a><a href="#textfilteronfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>textFilter.onFilter - [Function]</h3>
+<ul>
+<li>Register a listener which will be called when column filter being triggered.</li>
+</ul>
 <p><strong>Example</strong></p>
 <pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
 <span class="hljs-keyword">import</span> filterFactory, { textFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
@@ -115,6 +119,9 @@
     onClick: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(e),
     <span class="hljs-attr">getFilter</span>: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// nameFilter was assigned once the component has been mounted.</span>
       nameFilter = filter;
+    },
+    <span class="hljs-attr">onFilter</span>: <span class="hljs-function">(<span class="hljs-params">filterValue</span>) =&gt;</span> { filter listener
+      <span class="hljs-comment">//...</span>
     }
   })
 }, {
@@ -156,6 +163,10 @@
 <ul>
 <li>export <code>filter</code> function to allow users to access. For selectFilter, <code>filter(value)</code> to filter columns dynamically.</li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" name="selectfilteronfilter-function"></a><a href="#selectfilteronfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>selectFilter.onFilter - [Function]</h3>
+<ul>
+<li>Register a listener which will be called when column filter being triggered.</li>
+</ul>
 <p><strong>Example</strong></p>
 <pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
 <span class="hljs-keyword">import</span> filterFactory, { selectFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
@@ -180,6 +191,9 @@
     style: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'pink'</span> },
     <span class="hljs-attr">getFilter</span>: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// qualityFilter was assigned once the component has been mounted.</span>
       qualityFilter = filter;
+    },
+    <span class="hljs-attr">onFilter</span>: <span class="hljs-function">(<span class="hljs-params">filterValue</span>) =&gt;</span> { filter listener
+      <span class="hljs-comment">//...</span>
     }
   })
 }];
@@ -217,6 +231,10 @@
 <ul>
 <li>export <code>filter</code> function to allow users to access. For multiSelectFilter, <code>filter(value)</code> to filter columns dynamically.</li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" name="multiselectfilteronfilter-function"></a><a href="#multiselectfilteronfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>multiSelectFilter.onFilter - [Function]</h3>
+<ul>
+<li>Register a listener which will be called when column filter being triggered.</li>
+</ul>
 <p><strong>Example</strong></p>
 <pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
 <span class="hljs-keyword">import</span> filterFactory, { multiSelectFilter } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
@@ -241,6 +259,9 @@
     style: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'pink'</span> },
     <span class="hljs-attr">getFilter</span>: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// qualityFilter was assigned once the component has been mounted.</span>
       qualityFilter = filter;
+    },
+    <span class="hljs-attr">onFilter</span>: <span class="hljs-function">(<span class="hljs-params">filterValue</span>) =&gt;</span> { filter listener
+      <span class="hljs-comment">//...</span>
     }
   })
 }];
@@ -310,6 +331,10 @@
 <ul>
 <li>export <code>filter</code> function to allow users to access. For numberFilter,<br><code>filter({ number, comparator })</code> to filter columns dynamically.</li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" name="numberfilteronfilter-function"></a><a href="#numberfilteronfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>numberFilter.onFilter - [Function]</h3>
+<ul>
+<li>Register a listener which will be called when column filter being triggered.</li>
+</ul>
 <p><strong>Example</strong>:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
 <span class="hljs-keyword">import</span> filterFactory, { numberFilter, Comparator } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
@@ -333,6 +358,9 @@
     defaultValue: { <span class="hljs-attr">number</span>: <span class="hljs-number">2103</span>, <span class="hljs-attr">comparator</span>: Comparator.GT },  <span class="hljs-comment">// default value</span>
     getFilter: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// priceFilter was assigned once the component has been mounted.</span>
       priceFilter = filter;
+    },
+    <span class="hljs-attr">onFilter</span>: <span class="hljs-function">(<span class="hljs-params">filterValue</span>) =&gt;</span> { filter listener
+      <span class="hljs-comment">//...</span>
     }
   })
 }];
@@ -394,13 +422,17 @@
 <ul>
 <li>export <code>filter</code> function to allow users to access. For dateFilter,<br><code>filter({ date, comparator })</code> to filter columns dynamically.</li>
 </ul>
+<h3><a class="anchor" aria-hidden="true" name="datefilteronfilter-function"></a><a href="#datefilteronfilter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>dateFilter.onFilter - [Function]</h3>
+<ul>
+<li>Register a listener which will be called when column filter being triggered.</li>
+</ul>
 <p><strong>Example</strong>:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">import</span> BootstrapTable <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table-next'</span>;
 <span class="hljs-keyword">import</span> filterFactory, { dateFilter, Comparator } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-filter'</span>;
 
 <span class="hljs-keyword">const</span> columns = [{ ... }, { ... }, {
-  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
-  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'date'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Date'</span>,
   <span class="hljs-attr">filter</span>: dateFilter({
     <span class="hljs-attr">delay</span>: <span class="hljs-number">600</span>,  <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
     placeholder: <span class="hljs-string">'custom placeholder'</span>,  <span class="hljs-comment">// placeholder for date input</span>
@@ -412,7 +444,13 @@
     comparatorClassName: <span class="hljs-string">'custom-comparator-class'</span>,  <span class="hljs-comment">// custom the class on comparator select</span>
     dateStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'cadetblue'</span>, <span class="hljs-attr">margin</span>: <span class="hljs-string">'0px'</span> },  <span class="hljs-comment">// custom the style on date input</span>
     dateClassName: <span class="hljs-string">'custom-date-class'</span>,  <span class="hljs-comment">// custom the class on date input</span>
-    defaultValue: { <span class="hljs-attr">date</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2018</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), <span class="hljs-attr">comparator</span>: Comparator.GT }  <span class="hljs-comment">// default value</span>
+    defaultValue: { <span class="hljs-attr">date</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2018</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), <span class="hljs-attr">comparator</span>: Comparator.GT },  <span class="hljs-comment">// default value</span>
+    getFilter: <span class="hljs-function">(<span class="hljs-params">filter</span>) =&gt;</span> { <span class="hljs-comment">// prodDateFilter was assigned once the component has been mounted.</span>
+      prodDateFilter = filter;
+    },
+    <span class="hljs-attr">onFilter</span>: <span class="hljs-function">(<span class="hljs-params">filterValue</span>) =&gt;</span> { filter listener
+      <span class="hljs-comment">//...</span>
+    }
   });
 }];
 
@@ -459,4 +497,4 @@
 <li>DATE</li>
 </ul>
 <p>You will only need the <code>FILTER_TYPES</code> when you are customize the filter component and you want to assign a specify filter mode.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="row-expand-props.html">← Row Expand Props</a><a class="docs-next button" href="search-props.html">Search Props →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2018 react-bootstrap-table2.</section></footer></div></body></html>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="row-expand-props.html">← Row Expand Props</a><a class="docs-next button" href="search-props.html">Search Props →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-bootstrap-table2.</section></footer></div></body></html>
