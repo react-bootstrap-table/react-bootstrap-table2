@@ -44,10 +44,13 @@ This is an example for [manage on expands](../storybook/index.html?selectedKind=
 ### Expand Column
 `react-bootstrap-table2` default doesn't render a additional indicator column, just like row selection. But if you want it, you can enable it via [`expandRow.showExpandColumn`](./row-expand-props.html#expandrowshowexpandcolumn-bool)
 
-In addition, we allow you to custom the expand columns:
+In addition, we allow you to custom the expand columns in following ways:
 
 * For header cell: [`expandRow.expandHeaderColumnRenderer`](row-expand-props.html#expandrowexpandheadercolumnrenderer-function)
 * For normal cell: [`expandRow.expandColumnRenderer`](./row-expand-props.html#expandrowexpandcolumnrenderer-function)
+
+
+You can render expand column at the right side of table via [`expandRow.expandColumnPosition`](./row-expand-props.html#expandrowexpandcolumnposition-string).
 
 
 ## Event Listening

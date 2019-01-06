@@ -17,6 +17,7 @@ title: Row Expand Props
 * [showExpandColumn](#expandrowshowexpandcolumn-bool)
 * [onlyOneExpanding](#expandrowonlyoneexpanding-bool)
 * [expandByColumnOnly](#expandrowexpandbycolumnonly-bool)
+* [expandColumnPosition](#expandrowexpandcolumnposition-string)
 * [expandColumnRenderer](#expandrowexpandcolumnrenderer-function)
 * [expandHeaderColumnRenderer](#expandrowexpandheadercolumnrenderer-function)
 
@@ -113,6 +114,16 @@ const expandRow = {
   onlyOneExpanding: true
 };
 ```
+
+## expandRow.expandColumnPosition - [String]
+Default is `left`. You can give this as `right` for rendering expand column in the right side.
+
+ ```js
+const expandRow = {
+  renderer: (row) => ...,
+  showExpandColumn: true,
+  expandColumnPosition: 'right'
+};
 
 ## expandRow.expandByColumnOnly - [Bool]
 Default is `false`. If you want to restrict user to expand/collapse row via clicking the expand column only, you can enable it. 

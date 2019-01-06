@@ -84,8 +84,12 @@ const columns = [{
 
 ### textFilter.delay - [Number]
 * Debounce time, which means how long will trigger filtering after user typing. Default is `500ms`. 
+
 ### textFilter.getFilter - [Function]
 * export `filter` function to allow users to access. For textFilter, `filter(value)` to filter columns dynamically.
+
+### textFilter.onFilter - [Function]
+* Register a listener which will be called when column filter being triggered.
 
 **Example**
 ```js
@@ -109,6 +113,9 @@ const columns = [{
     onClick: e => console.log(e),
     getFilter: (filter) => { // nameFilter was assigned once the component has been mounted.
       nameFilter = filter;
+    },
+    onFilter: (filterValue) => { filter listener
+      //...
     }
   })
 }, {
@@ -145,6 +152,9 @@ const columns = [{
 ### selectFilter.getFilter - [Function]
 * export `filter` function to allow users to access. For selectFilter, `filter(value)` to filter columns dynamically.
 
+### selectFilter.onFilter - [Function]
+* Register a listener which will be called when column filter being triggered.
+
 **Example**
 ```js
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -170,6 +180,9 @@ const columns = [
     style: { backgroundColor: 'pink' },
     getFilter: (filter) => { // qualityFilter was assigned once the component has been mounted.
       qualityFilter = filter;
+    },
+    onFilter: (filterValue) => { filter listener
+      //...
     }
   })
 }];
@@ -203,6 +216,9 @@ const columns = [
 ### multiSelectFilter.getFilter - [Function]
 * export `filter` function to allow users to access. For multiSelectFilter, `filter(value)` to filter columns dynamically.
 
+### multiSelectFilter.onFilter - [Function]
+* Register a listener which will be called when column filter being triggered.
+
 **Example**
 ```js
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -228,6 +244,9 @@ const columns = [
     style: { backgroundColor: 'pink' },
     getFilter: (filter) => { // qualityFilter was assigned once the component has been mounted.
       qualityFilter = filter;
+    },
+    onFilter: (filterValue) => { filter listener
+      //...
     }
   })
 }];
@@ -284,6 +303,9 @@ const columns = [
 ### numberFilter.getFilter - [Function]
 * export `filter` function to allow users to access. For numberFilter,<br>`filter({ number, comparator })` to filter columns dynamically.
 
+### numberFilter.onFilter - [Function]
+* Register a listener which will be called when column filter being triggered.
+
 **Example**:
 ```js
 import BootstrapTable from 'react-bootstrap-table-next';
@@ -308,6 +330,9 @@ const columns = [{ ... }, { ... }, {
     defaultValue: { number: 2103, comparator: Comparator.GT },  // default value
     getFilter: (filter) => { // priceFilter was assigned once the component has been mounted.
       priceFilter = filter;
+    },
+    onFilter: (filterValue) => { filter listener
+      //...
     }
   })
 }];
@@ -358,14 +383,17 @@ const columns = [{ ... }, { ... }, {
 ### dateFilter.getFilter - [Function]
 * export `filter` function to allow users to access. For dateFilter,<br>`filter({ date, comparator })` to filter columns dynamically.
 
+### dateFilter.onFilter - [Function]
+* Register a listener which will be called when column filter being triggered.
+
 **Example**:
 ```js
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { dateFilter, Comparator } from 'react-bootstrap-table2-filter';
 
 const columns = [{ ... }, { ... }, {
-  dataField: 'price',
-  text: 'Product Price',
+  dataField: 'date',
+  text: 'Product Date',
   filter: dateFilter({
     delay: 600,  // how long will trigger filtering after user typing, default is 500 ms
     placeholder: 'custom placeholder',  // placeholder for date input
@@ -377,7 +405,13 @@ const columns = [{ ... }, { ... }, {
     comparatorClassName: 'custom-comparator-class',  // custom the class on comparator select
     dateStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on date input
     dateClassName: 'custom-date-class',  // custom the class on date input
-    defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT }  // default value
+    defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT },  // default value
+    getFilter: (filter) => { // prodDateFilter was assigned once the component has been mounted.
+      prodDateFilter = filter;
+    },
+    onFilter: (filterValue) => { filter listener
+      //...
+    }
   });
 }];
 
