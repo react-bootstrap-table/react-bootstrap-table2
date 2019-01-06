@@ -158,7 +158,11 @@ BootstrapTable.propTypes = {
     onlyOneExpanding: PropTypes.bool,
     expandByColumnOnly: PropTypes.bool,
     expandColumnRenderer: PropTypes.func,
-    expandHeaderColumnRenderer: PropTypes.func
+    expandHeaderColumnRenderer: PropTypes.func,
+    expandColumnPosition: PropTypes.oneOf([
+      Const.INDICATOR_POSITION_LEFT,
+      Const.INDICATOR_POSITION_RIGHT
+    ])
   }),
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,

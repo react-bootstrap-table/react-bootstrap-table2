@@ -142,6 +142,7 @@ import ExpandColumn from 'examples/row-expand/expand-column';
 import OnlyExpandByColumn from 'examples/row-expand/expand-by-column-only.js';
 import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
+import ExpandColumnPosition from 'examples/row-expand/expand-column-position';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
 
 // pagination
@@ -349,6 +350,7 @@ storiesOf('Row Expand', module)
   .add('Only Expand by Indicator', () => <OnlyExpandByColumn />)
   .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
+  .add('Expand Column Position', () => <ExpandColumnPosition />)
   .add('Expand Hooks', () => <ExpandHooks />);
 
 storiesOf('Pagination', module)

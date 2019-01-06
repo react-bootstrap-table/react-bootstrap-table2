@@ -225,4 +225,31 @@ describe('Context', () => {
       expect(wrapper.instance().PaginationContext).toBeDefined();
     });
   });
+
+  describe('if registerExposedAPI props is defined', () => {
+    const registerExposedAPI = jest.fn();
+    beforeEach(() => {
+      const PaginationContext = React.createContext();
+      const paginator = {
+        createContext: jest.fn().mockReturnValue({
+          Provider: PaginationContext.Provider,
+          Consumer: PaginationContext.Consumer
+        })
+      };
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          pagination={ paginator }
+          registerExposedAPI={ registerExposedAPI }
+        />
+      );
+      wrapper.render();
+    });
+
+    it('should call props.registerExposedAPI correctly', () => {
+      expect(registerExposedAPI).toHaveBeenCalledTimes(1);
+    });
+  });
 });
