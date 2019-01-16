@@ -103,7 +103,11 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             rowEvents={ rowEvents }
           />
           {hasFooter && (
-            <Footer data={ data } columns={ columns } className={ this.props.footerClasses } />
+            <Footer
+              data={ this.getData() }
+              columns={ columns }
+              className={ this.props.footerClasses }
+            />
           )}
         </table>
       </div>
