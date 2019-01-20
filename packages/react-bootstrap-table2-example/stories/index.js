@@ -172,6 +172,7 @@ import RemoteStandalonePaginationTable from 'examples/pagination/remote-standalo
 
 // search
 import SearchTable from 'examples/search';
+import ClearSearchButton from 'examples/search/clear-search-button';
 import DefaultSearch from 'examples/search/default-search';
 import DefaultCustomSearch from 'examples/search/default-custom-search';
 import FullyCustomSearch from 'examples/search/fully-custom-search';
@@ -394,6 +395,7 @@ storiesOf('Pagination', module)
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())
   .add('Basic Search Table', () => <SearchTable />)
+  .add('Clear Search Button', () => <ClearSearchButton />)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
