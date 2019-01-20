@@ -7,8 +7,10 @@ import cs from 'classnames';
 import Header from './header';
 import Caption from './caption';
 import Body from './body';
+import Footer from './footer';
 import PropsBaseResolver from './props-resolver';
 import Const from './const';
+import _ from './utils';
 
 class BootstrapTable extends PropsBaseResolver(Component) {
   constructor(props) {
@@ -63,8 +65,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-striped': striped,
       'table-hover': hover,
       'table-bordered': bordered,
-      [(bootstrap4 ? 'table-sm' : 'table-condensed')]: condensed
+      [bootstrap4 ? 'table-sm' : 'table-condensed']: condensed
     }, classes);
+
+    const hasFooter = _.filter(columns, col => _.has(col, 'footer')).length > 0;
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
 
@@ -98,6 +102,13 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             rowClasses={ rowClasses }
             rowEvents={ rowEvents }
           />
+          {hasFooter && (
+            <Footer
+              data={ this.getData() }
+              columns={ columns }
+              className={ this.props.footerClasses }
+            />
+          )}
         </table>
       </div>
     );
@@ -168,6 +179,7 @@ BootstrapTable.propTypes = {
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   headerClasses: PropTypes.string,
+  footerClasses: PropTypes.string,
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
