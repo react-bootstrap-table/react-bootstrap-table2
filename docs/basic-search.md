@@ -137,3 +137,29 @@ When table search on a specified column, will use the return value from `column.
   filterValue: (cell, row) => types[cell] // we will search the value after filterValue called
 }
 ```
+
+## Clear Search Button
+We have a built-in clear search function which allow user to clear search status via clicking button:
+
+```js
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+
+const { SearchBar, ClearSearchButton } = Search;
+
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search
+>
+  {
+    props => (
+      <div>
+        <SearchBar { ...props.searchProps } />
+        <ClearSearchButton { ...props.searchProps } />
+        ....
+      </div>
+    )
+  }
+</ToolkitProvider>
+```

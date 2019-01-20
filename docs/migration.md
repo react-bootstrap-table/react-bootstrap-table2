@@ -129,7 +129,7 @@ The usage of search functionality is a little bit different from legacy search. 
 
 - [x] Custom search component and position
 - [x] Custom search value
-- [ ] Clear search
+- [x] Clear search
 - [ ] Multiple search
 - [ ] Strict search
 

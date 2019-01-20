@@ -33,6 +33,14 @@ Definition of columns props on BootstrapTable
 * [headerAttrs](#columnheaderattrs-object-function)
 * [headerSortingClasses](#headersortingclasses-string-function)
 * [headerSortingStyle](#headersortingstyle-object-function)
+* [footer](#columnfooter-string-function)
+* [footerFormatter](#columnfooterformatter-function)
+* [footerClasses](#columnfooterclasses-string-function)
+* [footerStyle](#columnfooterstyle-object-function)
+* [footerTitle](#columnfootertitle-string-function)
+* [footerEvents](#columnfooterevents-object)
+* [footerAlign](#columnfooteralign-string-function)
+* [footerAttrs](#columnfooterattrs-object-function)
 * [editable](#columneditable-bool-function)
 * [validator](#columnvalidator-function)
 * [editCellStyle](#columneditcellstyle-object-function)
@@ -502,6 +510,162 @@ const sortingHeaderStyle = {
   backgroundColor: 'red'
 };
 ```
+
+## column.footer - [String | Function]
+Give a string to render the string value on the footer column.
+
+```js
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID',
+  footerAlign: 'center',
+  footer: 'Footer 1'
+}, .....];
+```
+
+This prop also accept a function:
+
+```js
+{
+  dataField: 'price',
+  text: 'Product Price',
+  footer: column => column.reduce((acc, item) => acc + item, 0)
+}
+```
+
+## column.footerFormatter - [Function]
+`footerFormatter` allow you to customize the table footer column and only accept a callback function which take two arguments and a JSX/String are expected for return.
+
+* `column`
+* `columnIndex`
+
+## column.footerClasses - [String | Function]
+It's similar to [`column.classes`](#columnclasses-string-function), `footerClasses` is available to have customized class on table footer column:
+
+```js
+{
+  // omit...
+  footerClasses: 'id-custom-cell'
+}
+```
+Furthermore, it also accept a callback function which takes 2 arguments and a `String` is expect to return:
+
+```js
+{
+  footerClasses: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## column.footerStyle - [Object | Function]
+Customized the inline-style on table footer column:
+
+```js
+{
+  // omit...
+  footerStyle: { backgroundColor: 'green' }
+}
+```
+
+Moreover, it also accept a callback function which takes **2** arguments and an `Object` is expect to return:
+
+```js
+{
+  footerStyle: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## column.footerTitle - [Bool | Function]
+Configure the title on footer column, default is disable. The usage is almost same as [`column.title`](#columntitle-bool-function), 
+
+```js
+{
+  // omit...
+  footerTitle: true
+}
+```
+
+It's also available to custom via a callback function:
+```js
+{
+  footerTitle: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## column.footerEvents - [Object]
+`footerEvents` same as [`column.events`](#columnevents-object) but it is for footer column:
+
+```js
+{
+  // omit...
+  footerEvents: {
+    onClick: e => { ... }
+  }
+}
+```
+
+## column.footerAlign - [String | Function]
+It's almost same as [`column.align`](#columnalign-string-function), but it's for the [CSS text-align](https://www.w3schools.com/cssref/pr_text_text-align.asp) on footer column. 
+
+```js
+{
+  // omit...
+  footerAlign: 'center'
+}
+```
+
+Also, you can custom the align by a callback function:
+
+```js
+{
+  // omit...
+  footerAlign: (column, colIndex) => {
+    // column is an object and perform itself
+    // return custom title here
+  }
+}
+```
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## column.footerAttrs - [Object | Function]
+`footerAttrs` is similar to [`column.attrs`](#columnattrs-object-function) but it works for footer column. 
+```js
+{
+  // omit...
+  footerAttrs: {
+    title: 'bar',
+    'data-test': 'foo'
+  }
+}
+```
+
+Additionally, customize the header attributes by a **2** arguments callback function:
+
+```js
+{
+  // omit...
+  footerAttrs: (column, colIndex) => ({
+    // return customized HTML attribute here
+  })
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
 
 ## column.editable - [Bool | Function]
 `column.editable` default is true, means every column is editable if you configure [`cellEdit`](./cell-edit-props.html). But you can disable some columns editable via setting `false`.
