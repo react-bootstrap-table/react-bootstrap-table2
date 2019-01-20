@@ -118,7 +118,7 @@ Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/p
 
 - [x] Custom search component and position
 - [x] Custom search value
-- [ ] Clear search
+- [x] Clear search
 - [ ] Multiple search
 - [ ] Strict search
 

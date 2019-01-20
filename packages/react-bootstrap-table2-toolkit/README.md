@@ -95,8 +95,34 @@ If you want to search on the formatted data, you are supposed to enable this pro
 </ToolkitProvider>
 ```
 
+### Clear Search Button
+We have a built-in clear search function which allow user clear search status via clicking button:
+
+```js
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+
+const { SearchBar, ClearSearchButton } = Search;
+
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search
+>
+  {
+    props => (
+      <div>
+        <SearchBar { ...props.searchProps } />
+        <ClearSearchButton { ...props.searchProps } />
+        ....
+      </div>
+    )
+  }
+</ToolkitProvider>
+```
+
 ## Export CSV
-There are two step to enable the export CSV functionality:
+There are two steps to enable the export CSV functionality:
 
 1. Give `exportCSV` prop as `true` on `ToolkitProvider`.
 2. Render `ExportCSVButton` with `csvProps`. The position of `ExportCSVButton` is depends on you.
