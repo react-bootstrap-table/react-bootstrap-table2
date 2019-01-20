@@ -35,6 +35,14 @@
 <li><a href="#columnheaderattrs-object-function">headerAttrs</a></li>
 <li><a href="#headersortingclasses-string-function">headerSortingClasses</a></li>
 <li><a href="#headersortingstyle-object-function">headerSortingStyle</a></li>
+<li><a href="#columnfooter-string-function">footer</a></li>
+<li><a href="#columnfooterformatter-function">footerFormatter</a></li>
+<li><a href="#columnfooterclasses-string-function">footerClasses</a></li>
+<li><a href="#columnfooterstyle-object-function">footerStyle</a></li>
+<li><a href="#columnfootertitle-string-function">footerTitle</a></li>
+<li><a href="#columnfooterevents-object">footerEvents</a></li>
+<li><a href="#columnfooteralign-string-function">footerAlign</a></li>
+<li><a href="#columnfooterattrs-object-function">footerAttrs</a></li>
 <li><a href="#columneditable-bool-function">editable</a></li>
 <li><a href="#columnvalidator-function">validator</a></li>
 <li><a href="#columneditcellstyle-object-function">editCellStyle</a></li>
@@ -405,6 +413,132 @@ overwrited when other props related to HTML attributes were given.</p>
   <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'red'</span>
 };
 </code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnfooter-string-function"></a><a href="#columnfooter-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footer - [String | Function]</h2>
+<p>Give a string to render the string value on the footer column.</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> columns = [{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product ID'</span>,
+  <span class="hljs-attr">footerAlign</span>: <span class="hljs-string">'center'</span>,
+  <span class="hljs-attr">footer</span>: <span class="hljs-string">'Footer 1'</span>
+}, .....];
+</code></pre>
+<p>This prop also accept a function:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
+  <span class="hljs-attr">footer</span>: <span class="hljs-function"><span class="hljs-params">column</span> =&gt;</span> column.reduce(<span class="hljs-function">(<span class="hljs-params">acc, item</span>) =&gt;</span> acc + item, <span class="hljs-number">0</span>)
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnfooterformatter-function"></a><a href="#columnfooterformatter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerFormatter - [Function]</h2>
+<p><code>footerFormatter</code> allow you to customize the table footer column and only accept a callback function which take two arguments and a JSX/String are expected for return.</p>
+<ul>
+<li><code>column</code></li>
+<li><code>columnIndex</code></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="columnfooterclasses-string-function"></a><a href="#columnfooterclasses-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerClasses - [String | Function]</h2>
+<p>It's similar to <a href="#columnclasses-string-function"><code>column.classes</code></a>, <code>footerClasses</code> is available to have customized class on table footer column:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerClasses: <span class="hljs-string">'id-custom-cell'</span>
+}
+</code></pre>
+<p>Furthermore, it also accept a callback function which takes 2 arguments and a <code>String</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">footerClasses</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">column, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="columnfooterstyle-object-function"></a><a href="#columnfooterstyle-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerStyle - [Object | Function]</h2>
+<p>Customized the inline-style on table footer column:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'green'</span> }
+}
+</code></pre>
+<p>Moreover, it also accept a callback function which takes <strong>2</strong> arguments and an <code>Object</code> is expect to return:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">footerStyle</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">column, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="columnfootertitle-bool-function"></a><a href="#columnfootertitle-bool-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerTitle - [Bool | Function]</h2>
+<p>Configure the title on footer column, default is disable. The usage is almost same as <a href="#columntitle-bool-function"><code>column.title</code></a>,</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerTitle: <span class="hljs-literal">true</span>
+}
+</code></pre>
+<p>It's also available to custom via a callback function:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-attr">footerTitle</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">callback</span>(<span class="hljs-params">column, colIndex</span>) </span>{ ... }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="columnfooterevents-object"></a><a href="#columnfooterevents-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerEvents - [Object]</h2>
+<p><code>footerEvents</code> same as <a href="#columnevents-object"><code>column.events</code></a> but it is for footer column:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerEvents: {
+    <span class="hljs-attr">onClick</span>: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> { ... }
+  }
+}
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="columnfooteralign-string-function"></a><a href="#columnfooteralign-string-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerAlign - [String | Function]</h2>
+<p>It's almost same as <a href="#columnalign-string-function"><code>column.align</code></a>, but it's for the <a href="https://www.w3schools.com/cssref/pr_text_text-align.asp">CSS text-align</a> on footer column.</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerAlign: <span class="hljs-string">'center'</span>
+}
+</code></pre>
+<p>Also, you can custom the align by a callback function:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerAlign: <span class="hljs-function">(<span class="hljs-params">column, colIndex</span>) =&gt;</span> {
+    <span class="hljs-comment">// column is an object and perform itself</span>
+    <span class="hljs-comment">// return custom title here</span>
+  }
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="columnfooterattrs-object-function"></a><a href="#columnfooterattrs-object-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerAttrs - [Object | Function]</h2>
+<p><code>footerAttrs</code> is similar to <a href="#columnattrs-object-function"><code>column.attrs</code></a> but it works for footer column.</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerAttrs: {
+    <span class="hljs-attr">title</span>: <span class="hljs-string">'bar'</span>,
+    <span class="hljs-string">'data-test'</span>: <span class="hljs-string">'foo'</span>
+  }
+}
+</code></pre>
+<p>Additionally, customize the header attributes by a <strong>2</strong> arguments callback function:</p>
+<pre><code class="hljs css js">{
+  <span class="hljs-comment">// omit...</span>
+  footerAttrs: <span class="hljs-function">(<span class="hljs-params">column, colIndex</span>) =&gt;</span> ({
+    <span class="hljs-comment">// return customized HTML attribute here</span>
+  })
+}
+</code></pre>
+<p><strong>Parameters</strong></p>
+<ul>
+<li><code>column</code>: The value of current column.</li>
+<li><code>colIndex</code>: The index of the current <code>column</code> being processed in <code>BootstrapTable</code>.</li>
+</ul>
 <h2><a class="anchor" aria-hidden="true" name="columneditable-bool-function"></a><a href="#columneditable-bool-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.editable - [Bool | Function]</h2>
 <p><code>column.editable</code> default is true, means every column is editable if you configure <a href="./cell-edit-props.html"><code>cellEdit</code></a>. But you can disable some columns editable via setting <code>false</code>.</p>
 <p>If a callback function given, you can control the editable level as cell level:</p>
