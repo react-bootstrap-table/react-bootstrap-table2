@@ -34,7 +34,7 @@ describe('Footer', () => {
 
   const keyField = 'id';
 
-  describe('simplest header', () => {
+  describe('simplest footer', () => {
     beforeEach(() => {
       wrapper = shallow(<Footer data={ data } columns={ columns } />);
     });
