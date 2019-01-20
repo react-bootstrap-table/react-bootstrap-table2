@@ -70,6 +70,7 @@ export const stockGenerator = (quantity = 5) =>
   Array.from({ length: quantity }, (value, index) => ({
     id: index,
     name: `Todo item ${index}`,
+    price: Math.floor((Math.random() * 2) + 1),
     inStockDate:
       new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
   }));
