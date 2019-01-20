@@ -46,6 +46,7 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
       searchText: typeof props.search === 'object' ? (props.search.defaultSearch || '') : ''
     };
     this._ = null;
+    this.onClear = this.onClear.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.setDependencyModules = this.setDependencyModules.bind(this);
   }
@@ -54,6 +55,10 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
     if (searchText !== this.state.searchText) {
       this.setState({ searchText });
     }
+  }
+
+  onClear() {
+    this.setState({ searchText: '' });
   }
 
   /**
@@ -87,7 +92,8 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
       <ToolkitContext.Provider value={ {
         searchProps: {
           searchText: this.state.searchText,
-          onSearch: this.onSearch
+          onSearch: this.onSearch,
+          onClear: this.onClear
         },
         csvProps: {
           onExport: this.handleExportCSV
