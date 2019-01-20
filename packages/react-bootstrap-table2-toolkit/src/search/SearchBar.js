@@ -26,33 +26,51 @@ const handleDebounce = (func, wait, immediate) => {
   };
 };
 
-const SearchBar = ({
-  delay,
-  onSearch,
-  className,
-  style,
-  placeholder,
-  searchText,
-  ...rest
-}) => {
-  let input;
-  const debounceCallback = handleDebounce(() => {
-    onSearch(input.value);
-  }, delay);
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: props.searchText
+    };
+  }
 
-  return (
-    <input
-      ref={ n => input = n }
-      type="text"
-      style={ style }
-      onKeyUp={ () => debounceCallback() }
-      className={ `form-control ${className}` }
-      defaultValue={ searchText }
-      placeholder={ placeholder || SearchBar.defaultProps.placeholder }
-      { ...rest }
-    />
-  );
-};
+  componentWillReceiveProps(nextProps) {
+    this.setState({ value: nextProps.searchText });
+  }
+
+  onChangeValue = (e) => {
+    this.setState({ value: e.target.value });
+  }
+
+  onKeyup = () => {
+    const { delay, onSearch } = this.props;
+    const debounceCallback = handleDebounce(() => {
+      onSearch(this.input.value);
+    }, delay);
+    debounceCallback();
+  }
+
+  render() {
+    const {
+      className,
+      style,
+      placeholder
+    } = this.props;
+
+    return (
+      <input
+        ref={ n => this.input = n }
+        type="text"
+        style={ style }
+        onKeyUp={ () => this.onKeyup() }
+        onChange={ this.onChangeValue }
+        className={ `form-control ${className}` }
+        value={ this.state.value }
+        placeholder={ placeholder || SearchBar.defaultProps.placeholder }
+      />
+    );
+  }
+}
 
 SearchBar.propTypes = {
   onSearch: PropTypes.func.isRequired,

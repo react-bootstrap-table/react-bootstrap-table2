@@ -45,6 +45,18 @@ import HeaderColumnStyleTable from 'examples/header-columns/column-style-table';
 import HeaderColumnAttrsTable from 'examples/header-columns/column-attrs-table';
 import HeaderClassTable from 'examples/header-columns/header-class-table';
 
+// footer
+import SimpleFooter from 'examples/footer/simple-footer';
+import FunctionFooter from 'examples/footer/function-footer';
+import FooterClassTable from 'examples/footer/footer-class-table';
+import FooterColumnFormatTable from 'examples/footer/column-format-table';
+import FooterColumnAlignTable from 'examples/footer/column-align-table';
+import FooterColumnTitleTable from 'examples/footer/column-title-table.js';
+import FooterColumnEventsTable from 'examples/footer/column-event-table.js';
+import FooterColumnClassTable from 'examples/footer/column-class-table.js';
+import FooterColumnStyleTable from 'examples/footer/column-style-table.js';
+import FooterColumnAttrsTable from 'examples/footer/column-attrs-table.js';
+
 // column filter
 import TextFilter from 'examples/column-filter/text-filter';
 import TextFilterWithDefaultValue from 'examples/column-filter/text-filter-default-value';
@@ -160,6 +172,7 @@ import RemoteStandalonePaginationTable from 'examples/pagination/remote-standalo
 
 // search
 import SearchTable from 'examples/search';
+import ClearSearchButton from 'examples/search/clear-search-button';
 import DefaultSearch from 'examples/search/default-search';
 import DefaultCustomSearch from 'examples/search/default-custom-search';
 import FullyCustomSearch from 'examples/search/fully-custom-search';
@@ -199,8 +212,7 @@ import '../../react-bootstrap-table2-filter/style/react-bootstrap-table2-filter.
 // import bootstrap style by given version
 import bootstrapStyle, { BOOTSTRAP_VERSION } from './bootstrap-style';
 
-storiesOf('Welcome', module)
-  .add('react bootstrap table 2 ', () => <Welcome />);
+storiesOf('Welcome', module).add('react bootstrap table 2 ', () => <Welcome />);
 
 storiesOf('Basic Table', module)
   .addDecorator(bootstrapStyle())
@@ -286,6 +298,19 @@ storiesOf('Work on Rows', module)
   .add('Hide Rows', () => <RowHiddenTable />)
   .add('Row Event', () => <RowEventTable />);
 
+storiesOf('Footer', module)
+  .addDecorator(bootstrapStyle())
+  .add('Simple Footer', () => <SimpleFooter />)
+  .add('Function Footer', () => <FunctionFooter />)
+  .add('Column Formatter', () => <FooterColumnFormatTable />)
+  .add('Column Align', () => <FooterColumnAlignTable />)
+  .add('Column Title', () => <FooterColumnTitleTable />)
+  .add('Column Events', () => <FooterColumnEventsTable />)
+  .add('Customize Column Class', () => <FooterColumnClassTable />)
+  .add('Customize Column Style', () => <FooterColumnStyleTable />)
+  .add('Customize Column HTML attribute', () => <FooterColumnAttrsTable />)
+  .add('Footer Class', () => <FooterClassTable />);
+
 storiesOf('Sort Table', module)
   .addDecorator(bootstrapStyle())
   .add('Enable Sort', () => <EnableSortTable />)
@@ -370,6 +395,7 @@ storiesOf('Pagination', module)
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())
   .add('Basic Search Table', () => <SearchTable />)
+  .add('Clear Search Button', () => <ClearSearchButton />)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)

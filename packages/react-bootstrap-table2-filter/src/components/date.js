@@ -42,10 +42,11 @@ class DateFilter extends Component {
     // export onFilter function to allow users to access
     if (getFilter) {
       getFilter((filterVal) => {
-        this.dateFilterComparator.value = filterVal.comparator;
-        this.inputDate.value = dateParser(filterVal.date);
+        const nullableFilterVal = filterVal || { date: null, comparator: null };
+        this.dateFilterComparator.value = nullableFilterVal.comparator;
+        this.inputDate.value = nullableFilterVal.date ? dateParser(nullableFilterVal.date) : null;
 
-        this.applyFilter(filterVal.date, filterVal.comparator);
+        this.applyFilter(nullableFilterVal.date, nullableFilterVal.comparator);
       });
     }
   }

@@ -30,6 +30,14 @@ Available properties in a column object:
 * [headerAttrs](#headerAttrs)
 * [headerSortingClasses](#headerSortingClasses)
 * [headerSortingStyle](#headerSortingStyle)
+* [footer](#footer)
+* [footerFormatter](#footerFormatter)
+* [footerClasses](#footerClasses)
+* [footerStyle](#footerStyle)
+* [footerTitle](#footerTitle)
+* [footerEvents](#footerEvents)
+* [footerAlign](#footerAlign)
+* [footerAttrs](#footerAttrs)
 * [editable](#editable)
 * [validator](#validator)
 * [editCellStyle](#editCellStyle)
@@ -302,7 +310,7 @@ A new `Object` will be the result of element headerStyle.
 A new `String` will be the result of element title.
 
 ## <a name='headerTitle'>column.headerTitle - [Bool | Function]</a>
-`headerTitle` is only for the title on header column, default is disable. The usage almost same as [`column.title`](#title), 
+Configure the title on header column, default is disable. The usage almost same as [`column.title`](#title), 
 
 ```js
 {
@@ -517,6 +525,162 @@ const sortingHeaderStyle = {
   backgroundColor: 'red'
 };
 ```
+
+### <a name='footer'>footer - [String | Function]</a>
+Give a string to render the string value on the footer column.
+
+```js
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID',
+  footerAlign: 'center',
+  footer: 'Footer 1'
+}, .....];
+```
+
+This prop also accept a function:
+
+```js
+{
+  dataField: 'price',
+  text: 'Product Price',
+  footer: column => column.reduce((acc, item) => acc + item, 0)
+}
+```
+
+## <a name='footerFormatter'>column.footerFormatter - [Function]</a>
+`footerFormatter` allow you to customize the table footer column and only accept a callback function which take two arguments and a JSX/String are expected for return.
+
+* `column`
+* `columnIndex`
+
+## <a name='footerClasses'>column.footerClasses - [String | Function]</a>
+It's similar to [`column.classes`](#classes), `footerClasses` is available to have customized class on table footer column:
+
+```js
+{
+  // omit...
+  footerClasses: 'id-custom-cell'
+}
+```
+Furthermore, it also accept a callback function which takes 2 arguments and a `String` is expect to return:
+
+```js
+{
+  footerClasses: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerStyle'>column.footerStyle - [Object | Function]</a>
+Customized the inline-style on table footer column:
+
+```js
+{
+  // omit...
+  footerStyle: { backgroundColor: 'green' }
+}
+```
+
+Moreover, it also accept a callback function which takes **2** arguments and an `Object` is expect to return:
+
+```js
+{
+  footerStyle: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerTitle'>column.footerTitle - [Bool | Function]</a>
+Configure the title on footer column, default is disable. The usage is almost same as [`column.title`](#title), 
+
+```js
+{
+  // omit...
+  footerTitle: true
+}
+```
+
+It's also available to custom via a callback function:
+```js
+{
+  footerTitle: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerEvents'>column.footerEvents - [Object]</a>
+`footerEvents` same as [`column.events`](#events) but it is for footer column:
+
+```js
+{
+  // omit...
+  footerEvents: {
+    onClick: e => { ... }
+  }
+}
+```
+
+## <a name='footerAlign'>column.footerAlign - [String | Function]</a>
+It's almost same as [`column.align`](#align), but it's for the [CSS text-align](https://www.w3schools.com/cssref/pr_text_text-align.asp) on footer column. 
+
+```js
+{
+  // omit...
+  footerAlign: 'center'
+}
+```
+
+Also, you can custom the align by a callback function:
+
+```js
+{
+  // omit...
+  footerAlign: (column, colIndex) => {
+    // column is an object and perform itself
+    // return custom title here
+  }
+}
+```
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerAttrs'>column.footerAttrs - [Object | Function]</a>
+`footerAttrs` is similar to [`column.attrs`](#attrs) but it works for footer column. 
+```js
+{
+  // omit...
+  footerAttrs: {
+    title: 'bar',
+    'data-test': 'foo'
+  }
+}
+```
+
+Additionally, customize the header attributes by a **2** arguments callback function:
+
+```js
+{
+  // omit...
+  footerAttrs: (column, colIndex) => ({
+    // return customized HTML attribute here
+  })
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
 
 ## <a name='editable'>column.editable - [Bool | Function]</a>
 `column.editable` default is true, means every column is editable if you configure [`cellEdit`](./README.md#cellEdit). But you can disable some columns editable via setting `false`.

@@ -1,3 +1,4 @@
 import SearchBar from './SearchBar';
+import ClearSearchButton from './clear-button';
 
-export default { SearchBar };
+export default { SearchBar, ClearSearchButton };
