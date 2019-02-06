@@ -254,6 +254,41 @@ describe('FilterContext', () => {
       });
     });
 
+    describe('if filter.props.onFilter is defined and return an undefined data', () => {
+      const mockReturn = [{
+        id: 1,
+        name: 'A'
+      }];
+      const filterVal = 'A';
+      const onFilter = jest.fn().mockReturnValue(mockReturn);
+      const customColumns = columns.map((column, i) => {
+        if (i === 1) {
+          return {
+            ...column,
+            filter: textFilter({ onFilter })
+          };
+        }
+        return column;
+      });
+
+      beforeEach(() => {
+        wrapper = shallow(shallowContext(false, customColumns));
+        wrapper.render();
+        instance = wrapper.instance();
+      });
+
+      it('should call filter.props.onFilter correctly', () => {
+        instance.onFilter(customColumns[1], FILTER_TYPE.TEXT)(filterVal);
+        expect(onFilter).toHaveBeenCalledTimes(1);
+        expect(onFilter).toHaveBeenCalledWith(filterVal);
+      });
+
+      it('should set state.data correctly', () => {
+        instance.onFilter(customColumns[1], FILTER_TYPE.TEXT)(filterVal);
+        expect(instance.state.data).toEqual(mockReturn);
+      });
+    });
+
     describe('when props.listenerForPagination is defined', () => {
       const filterVal = '3';
       const newDataLength = 0;

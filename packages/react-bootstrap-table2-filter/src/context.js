@@ -68,12 +68,13 @@ export default (
           return;
         }
 
+        let result;
         if (filter.props.onFilter) {
-          filter.props.onFilter(filterVal);
+          result = filter.props.onFilter(filterVal);
         }
 
         const { listenerForPagination, data } = this.props;
-        const result = filters(data, this.props.columns, _)(this.currFilters);
+        result = result || filters(data, this.props.columns, _)(this.currFilters);
         if (listenerForPagination) {
           listenerForPagination.emit('filterChanged', result.length);
         }
