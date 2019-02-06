@@ -15,9 +15,36 @@ import withRowExpansion from './row-expand/row-consumer';
 class Body extends React.Component {
   constructor(props) {
     super(props);
-    if (props.cellEdit.createContext) {
-      this.EditingCell = props.cellEdit.createEditingCell(_, props.cellEdit.options.onStartEdit);
+    const {
+      keyField,
+      visibleColumnSize,
+      cellEdit,
+      selectRow,
+      expandRow
+    } = props;
+
+    // Construct Editing Cell Component
+    if (cellEdit.createContext) {
+      this.EditingCell = cellEdit.createEditingCell(_, cellEdit.options.onStartEdit);
     }
+
+    // Construct Row Component
+    let RowComponent = SimpleRow;
+    const selectRowEnabled = selectRow.mode !== Const.ROW_SELECT_DISABLED;
+    const expandRowEnabled = !!expandRow.renderer;
+
+    if (expandRowEnabled) {
+      RowComponent = withRowExpansion(RowAggregator, visibleColumnSize);
+    }
+
+    if (selectRowEnabled) {
+      RowComponent = withRowSelection(expandRowEnabled ? RowComponent : RowAggregator);
+    }
+
+    if (cellEdit.createContext) {
+      RowComponent = cellEdit.withRowLevelCellEdit(RowComponent, selectRowEnabled, keyField, _);
+    }
+    this.RowComponent = RowComponent;
   }
 
   render() {
@@ -46,21 +73,12 @@ class Body extends React.Component {
       }
       content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
     } else {
-      let RowComponent = SimpleRow;
       const selectRowEnabled = selectRow.mode !== Const.ROW_SELECT_DISABLED;
       const expandRowEnabled = !!expandRow.renderer;
 
       const additionalRowProps = {};
-      if (expandRowEnabled) {
-        RowComponent = withRowExpansion(RowAggregator, visibleColumnSize);
-      }
-
-      if (selectRowEnabled) {
-        RowComponent = withRowSelection(expandRowEnabled ? RowComponent : RowAggregator);
-      }
 
       if (cellEdit.createContext) {
-        RowComponent = cellEdit.withRowLevelCellEdit(RowComponent, selectRowEnabled, keyField, _);
         additionalRowProps.EditingCellComponent = this.EditingCell;
       }
 
@@ -88,7 +106,7 @@ class Body extends React.Component {
         baseRowProps.style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
         baseRowProps.className = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
 
-        return <RowComponent { ...baseRowProps } />;
+        return <this.RowComponent { ...baseRowProps } />;
       });
     }
 
