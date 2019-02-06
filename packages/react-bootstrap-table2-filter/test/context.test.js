@@ -45,7 +45,8 @@ describe('FilterContext', () => {
 
   function shallowContext(
     enableRemote = false,
-    tableColumns = columns
+    tableColumns = columns,
+    listenerForPagination,
   ) {
     mockBase.mockReset();
     handleFilterChange.mockReset();
@@ -59,6 +60,7 @@ describe('FilterContext', () => {
       <FilterContext.Provider
         columns={ tableColumns }
         data={ data }
+        listenerForPagination={ listenerForPagination }
       >
         <FilterContext.Consumer>
           {
@@ -249,6 +251,23 @@ describe('FilterContext', () => {
         instance.onFilter(customColumns[1], FILTER_TYPE.TEXT)(filterVal);
         expect(onFilter).toHaveBeenCalledTimes(1);
         expect(onFilter).toHaveBeenCalledWith(filterVal);
+      });
+    });
+
+    describe('when props.listenerForPagination is defined', () => {
+      const filterVal = '3';
+      const newDataLength = 0;
+      const listenerForPagination = { emit: jest.fn() };
+
+      beforeEach(() => {
+        wrapper = shallow(shallowContext(false, columns, listenerForPagination));
+        wrapper.render();
+        instance = wrapper.instance();
+      });
+
+      it('should call listenerForPagination.emit correctly', () => {
+        instance.onFilter(columns[1], FILTER_TYPE.TEXT)(filterVal);
+        expect(listenerForPagination.emit).toHaveBeenCalledWith('filterChanged', newDataLength);
       });
     });
 

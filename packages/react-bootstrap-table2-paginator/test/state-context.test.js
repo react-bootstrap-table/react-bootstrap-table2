@@ -91,6 +91,10 @@ describe('PaginationStateContext', () => {
       expect(wrapper.instance().currSizePerPage).toEqual(Const.SIZE_PER_PAGE_LIST[0]);
     });
 
+    it('should have correct dataSize', () => {
+      expect(wrapper.instance().dataSize).toEqual(options.totalSize);
+    });
+
     it('should get correct pagination props', () => {
       const instance = wrapper.instance();
       expect(wrapper.length).toBe(1);
@@ -102,7 +106,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -179,6 +184,31 @@ describe('PaginationStateContext', () => {
         expect(instance.currPage).toEqual(nextProps.pagination.options.page);
         expect(instance.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
       });
+    });
+  });
+
+  describe('handleDataSizeChange', () => {
+    let instance;
+    const newTotalSize = 8;
+    beforeEach(() => {
+      wrapper = shallow(shallowContext({
+        ...defaultPagination,
+        page: 3
+      }));
+      instance = wrapper.instance();
+      setRemotePaginationEmitter(instance);
+      jest.spyOn(instance, 'forceUpdate');
+      instance.handleDataSizeChange(newTotalSize);
+    });
+
+    it('should update dataSize correctly', () => {
+      expect(instance.dataSize).toEqual(newTotalSize);
+      expect(instance.forceUpdate).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update currPage correctly if page list shrink', () => {
+      expect(instance.currPage).toEqual(Const.PAGE_START_INDEX);
+      expect(instance.forceUpdate).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -343,7 +373,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -374,7 +405,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -401,7 +433,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -428,7 +461,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -455,7 +489,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -482,7 +517,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -509,7 +545,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -536,7 +573,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -563,7 +601,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -590,7 +629,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -617,7 +657,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -644,7 +685,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -671,7 +713,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -698,7 +741,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -725,7 +769,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -752,7 +797,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -779,7 +825,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -806,7 +853,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });
@@ -833,7 +881,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          listenerForPagination: instance.filterListener
         }
       });
     });

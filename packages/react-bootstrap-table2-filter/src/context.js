@@ -17,7 +17,8 @@ export default (
   class FilterProvider extends React.Component {
     static propTypes = {
       data: PropTypes.array.isRequired,
-      columns: PropTypes.array.isRequired
+      columns: PropTypes.array.isRequired,
+      listenerForPagination: PropTypes.object
     }
 
     constructor(props) {
@@ -25,6 +26,9 @@ export default (
       this.currFilters = {};
       this.onFilter = this.onFilter.bind(this);
       this.onExternalFilter = this.onExternalFilter.bind(this);
+      this.state = {
+        data: props.data
+      };
     }
 
     componentDidMount() {
@@ -68,7 +72,12 @@ export default (
           filter.props.onFilter(filterVal);
         }
 
-        this.forceUpdate();
+        const { listenerForPagination, data } = this.props;
+        const result = filters(data, this.props.columns, _)(this.currFilters);
+        if (listenerForPagination) {
+          listenerForPagination.emit('filterChanged', result.length);
+        }
+        this.setState({ data: result });
       };
     }
 
@@ -79,13 +88,9 @@ export default (
     }
 
     render() {
-      let { data } = this.props;
-      if (!isRemoteFiltering()) {
-        data = filters(data, this.props.columns, _)(this.currFilters);
-      }
       return (
         <FilterContext.Provider value={ {
-          data,
+          data: this.state.data,
           onFilter: this.onFilter,
           onExternalFilter: this.onExternalFilter
         } }

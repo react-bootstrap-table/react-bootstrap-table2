@@ -237,6 +237,7 @@ const withContext = Base =>
           { ...baseProps }
           ref={ n => this.filterContext = n }
           data={ rootProps.getData() }
+          listenerForPagination={ this.props.listenerForPagination }
         >
           <this.FilterContext.Consumer>
             {

@@ -2,7 +2,9 @@
 /* eslint react/require-default-props: 0 */
 /* eslint no-lonely-if: 0 */
 import React from 'react';
+import EventEmitter from 'events';
 import Const from './const';
+import { alignPage } from './page';
 
 const StateContext = React.createContext();
 
@@ -10,6 +12,7 @@ class StateProvider extends React.Component {
   constructor(props) {
     super(props);
     this.handleChangePage = this.handleChangePage.bind(this);
+    this.handleDataSizeChange = this.handleDataSizeChange.bind(this);
     this.handleChangeSizePerPage = this.handleChangeSizePerPage.bind(this);
 
     let currPage;
@@ -36,7 +39,10 @@ class StateProvider extends React.Component {
     }
 
     this.currPage = currPage;
+    this.dataSize = options.totalSize;
     this.currSizePerPage = currSizePerPage;
+    this.filterListener = new EventEmitter();
+    this.filterListener.on('filterChanged', this.handleDataSizeChange);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,7 +57,7 @@ class StateProvider extends React.Component {
 
   getPaginationProps = () => {
     const { pagination: { options }, bootstrap4 } = this.props;
-    const { currPage, currSizePerPage } = this;
+    const { currPage, currSizePerPage, dataSize } = this;
     const withFirstAndLast = typeof options.withFirstAndLast === 'undefined' ?
       Const.With_FIRST_AND_LAST : options.withFirstAndLast;
     const alwaysShowAllBtns = typeof options.alwaysShowAllBtns === 'undefined' ?
@@ -72,7 +78,7 @@ class StateProvider extends React.Component {
       hideSizePerPage,
       alwaysShowAllBtns,
       withFirstAndLast,
-      dataSize: options.totalSize,
+      dataSize,
       sizePerPageList: options.sizePerPageList || Const.SIZE_PER_PAGE_LIST,
       paginationSize: options.paginationSize || Const.PAGINATION_SIZE,
       showTotal: options.showTotal,
@@ -105,6 +111,20 @@ class StateProvider extends React.Component {
     this.remoteEmitter.emit('isRemotePagination', e);
     return e.result;
   };
+
+  handleDataSizeChange(newDataSize) {
+    const { pagination: { options } } = this.props;
+    const pageStartIndex = typeof options.pageStartIndex === 'undefined' ?
+      Const.PAGE_START_INDEX : options.pageStartIndex;
+    this.dataSize = newDataSize;
+    this.currPage = alignPage(
+      newDataSize,
+      this.currPage,
+      this.currSizePerPage,
+      pageStartIndex
+    );
+    this.forceUpdate();
+  }
 
   handleChangePage(currPage) {
     const { currSizePerPage } = this;
@@ -153,7 +173,8 @@ class StateProvider extends React.Component {
           paginationProps,
           paginationTableProps: {
             pagination,
-            setPaginationRemoteEmitter: this.setPaginationRemoteEmitter
+            setPaginationRemoteEmitter: this.setPaginationRemoteEmitter,
+            listenerForPagination: this.filterListener
           }
         } }
       >
