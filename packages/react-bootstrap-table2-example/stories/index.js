@@ -87,6 +87,7 @@ import CustomFilter from 'examples/column-filter/custom-filter';
 import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
 import ClearAllFilters from 'examples/column-filter/clear-all-filters';
 import FilterHooks from 'examples/column-filter/filter-hooks';
+import CustomFilterLogic from 'examples/column-filter/custom-filter-logic';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -290,7 +291,8 @@ storiesOf('Column Filter', module)
   .add('Advance Custom Filter', () => <AdvanceCustomFilter />)
   .add('Preserved Option Order on Select Filter', () => <SelectFilterWithPreservedOptionsOrder />)
   .add('Clear All Filters', () => <ClearAllFilters />)
-  .add('Filter Hooks', () => <FilterHooks />);
+  .add('Filter Hooks', () => <FilterHooks />)
+  .add('Implement custom filter logic', () => <CustomFilterLogic />);
 
 storiesOf('Work on Rows', module)
   .addDecorator(bootstrapStyle())
