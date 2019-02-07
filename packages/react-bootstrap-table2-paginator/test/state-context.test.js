@@ -107,7 +107,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -374,7 +374,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -406,7 +406,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -434,7 +434,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -462,7 +462,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -490,7 +490,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -518,7 +518,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -546,7 +546,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -574,7 +574,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -602,7 +602,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -630,7 +630,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -658,7 +658,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -686,7 +686,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -714,7 +714,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -742,7 +742,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -770,7 +770,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -798,7 +798,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -826,7 +826,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -854,7 +854,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });
@@ -882,7 +882,7 @@ describe('PaginationStateContext', () => {
             options: instance.getPaginationProps()
           },
           setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
-          listenerForPagination: instance.filterListener
+          dataChangeListener: instance.filterListener
         }
       });
     });

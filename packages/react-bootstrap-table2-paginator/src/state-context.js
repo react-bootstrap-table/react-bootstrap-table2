@@ -41,8 +41,8 @@ class StateProvider extends React.Component {
     this.currPage = currPage;
     this.dataSize = options.totalSize;
     this.currSizePerPage = currSizePerPage;
-    this.filterListener = new EventEmitter();
-    this.filterListener.on('filterChanged', this.handleDataSizeChange);
+    this.dataChangeListener = new EventEmitter();
+    this.dataChangeListener.on('filterChanged', this.handleDataSizeChange);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -174,7 +174,7 @@ class StateProvider extends React.Component {
           paginationTableProps: {
             pagination,
             setPaginationRemoteEmitter: this.setPaginationRemoteEmitter,
-            listenerForPagination: this.filterListener
+            dataChangeListener: this.dataChangeListener
           }
         } }
       >

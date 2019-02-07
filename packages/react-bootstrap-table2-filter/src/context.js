@@ -18,7 +18,7 @@ export default (
     static propTypes = {
       data: PropTypes.array.isRequired,
       columns: PropTypes.array.isRequired,
-      listenerForPagination: PropTypes.object
+      dataChangeListener: PropTypes.object
     }
 
     constructor(props) {
@@ -73,10 +73,10 @@ export default (
           result = filter.props.onFilter(filterVal);
         }
 
-        const { listenerForPagination, data } = this.props;
+        const { dataChangeListener, data } = this.props;
         result = result || filters(data, this.props.columns, _)(this.currFilters);
-        if (listenerForPagination) {
-          listenerForPagination.emit('filterChanged', result.length);
+        if (dataChangeListener) {
+          dataChangeListener.emit('filterChanged', result.length);
         }
         this.setState({ data: result });
       };
