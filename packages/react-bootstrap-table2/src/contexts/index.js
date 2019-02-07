@@ -217,6 +217,7 @@ const withContext = Base =>
           ref={ n => this.searchContext = n }
           data={ rootProps.getData(filterProps) }
           searchText={ this.props.search.searchText }
+          dataChangeListener={ this.props.dataChangeListener }
         >
           <this.SearchContext.Consumer>
             {
@@ -237,7 +238,7 @@ const withContext = Base =>
           { ...baseProps }
           ref={ n => this.filterContext = n }
           data={ rootProps.getData() }
-          listenerForPagination={ this.props.listenerForPagination }
+          dataChangeListener={ this.props.dataChangeListener }
         >
           <this.FilterContext.Consumer>
             {

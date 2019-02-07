@@ -17,36 +17,44 @@ export default (options = {
     static propTypes = {
       data: PropTypes.array.isRequired,
       columns: PropTypes.array.isRequired,
-      searchText: PropTypes.string
+      searchText: PropTypes.string,
+      dataChangeListener: PropTypes.object
     }
 
     constructor(props) {
       super(props);
-      this.performRemoteSearch = props.searchText !== '';
+      let initialData = props.data;
+      if (isRemoteSearch() && this.props.searchText !== '') {
+        handleRemoteSearchChange(this.props.searchText);
+      } else {
+        initialData = this.search(props.searchText.toLowerCase());
+        this.triggerListener(initialData);
+      }
+      this.state = { data: initialData };
     }
 
     componentWillReceiveProps(nextProps) {
-      if (isRemoteSearch()) {
-        if (nextProps.searchText !== this.props.searchText) {
-          this.performRemoteSearch = true;
+      if (nextProps.searchText !== this.props.searchText) {
+        if (isRemoteSearch()) {
+          handleRemoteSearchChange(nextProps.searchText);
         } else {
-          this.performRemoteSearch = false;
+          const result = this.search(nextProps.searchText.toLowerCase());
+          this.triggerListener(result);
+          this.setState({
+            data: result
+          });
         }
       }
     }
 
-    search() {
-      const { data, columns } = this.props;
-      let { searchText } = this.props;
-
-      if (isRemoteSearch()) {
-        if (this.performRemoteSearch) {
-          handleRemoteSearchChange(searchText);
-        }
-        return data;
+    triggerListener(result) {
+      if (this.props.dataChangeListener) {
+        this.props.dataChangeListener.emit('filterChanged', result.length);
       }
+    }
 
-      searchText = searchText.toLowerCase();
+    search(searchText) {
+      const { data, columns } = this.props;
       return data.filter((row, ridx) => {
         for (let cidx = 0; cidx < columns.length; cidx += 1) {
           const column = columns[cidx];
@@ -69,9 +77,8 @@ export default (options = {
     }
 
     render() {
-      const data = this.search();
       return (
-        <SearchContext.Provider value={ { data } }>
+        <SearchContext.Provider value={ { data: this.state.data } }>
           { this.props.children }
         </SearchContext.Provider>
       );

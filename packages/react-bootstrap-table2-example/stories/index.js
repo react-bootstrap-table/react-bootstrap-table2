@@ -171,6 +171,7 @@ import StandaloneSizePerPage from 'examples/pagination/standalone-size-per-page'
 import FullyCustomPaginationTable from 'examples/pagination/fully-custom-pagination';
 import RemoteStandalonePaginationTable from 'examples/pagination/remote-standalone-pagination';
 import CustomePaginationWithFilter from 'examples/pagination/custome-page-list-with-filter';
+import CustomePaginationWithSearch from 'examples/pagination/custom-page-list-with-search';
 
 // search
 import SearchTable from 'examples/search';
@@ -394,7 +395,8 @@ storiesOf('Pagination', module)
   .add('Standalone SizePerPage Dropdown', () => <StandaloneSizePerPage />)
   .add('Fully Custom Pagination', () => <FullyCustomPaginationTable />)
   .add('Remote Fully Custom Pagination', () => <RemoteStandalonePaginationTable />)
-  .add('Custom Pagination with Filter', () => <CustomePaginationWithFilter />);
+  .add('Custom Pagination with Filter', () => <CustomePaginationWithFilter />)
+  .add('Custom Pagination with Search', () => <CustomePaginationWithSearch />);
 
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())
