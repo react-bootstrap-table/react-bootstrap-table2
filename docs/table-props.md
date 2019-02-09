@@ -8,32 +8,37 @@ title: BootstrapTable Props
 * [columns (**required**)](#columns-required-object)
 
 ## Optional
-* [remote](#remote-bool-object)
-* [bootstrap4](#bootstrap4-bool)
-* [noDataIndication](#nodataindication-function)
-* [loading](#loading-bool)
-* [overlay](#overlay-function)
-* [caption](#caption-string-node)
-* [striped](#striped-bool)
-* [bordered](#bordered-bool)
-* [hover](#hover-bool)
-* [condensed](#condensed-bool)
-* [id](#id-string)
-* [tabIndexCell](#tabindexcell-bool)
-* [classes](#classes-string)
-* [wrapperClasses](#wrapperClasses-string)
-* [headerClasses](#headerClasses-string)
-* [cellEdit](#celledit-object)
-* [selectRow](#selectrow-object)
-* [rowStyle](#rowstyle-object-function)
-* [rowClasses](#rowclasses-string-function)
-* [rowEvents](#rowevents-object)
-* [hiddenRows](#hiddenrows-array)
-* [defaultSorted](#defaultsorted-array)
-* [defaultSortDirection](#defaultSortDirection-string)
-* [pagination](#pagination-object)
-* [filter](#filter-object)
-* [onTableChange](#ontablechange-function)
+- [Required](#required)
+- [Optional](#optional)
+- [keyField(**required**) - [String]](#keyfieldrequired---string)
+- [data(**required**) - [Array]](#datarequired---array)
+- [columns(**required**) - [Object]](#columnsrequired---object)
+- [remote - [Bool | Object]](#remote---bool--object)
+- [bootstrap4 - [Bool]](#bootstrap4---bool)
+- [noDataIndication - [Function]](#nodataindication---function)
+- [loading - [Bool]](#loading---bool)
+- [overlay - [Function]](#overlay---function)
+- [caption - [String | Node]](#caption---string--node)
+- [striped - [Bool]](#striped---bool)
+- [bordered - [Bool]](#bordered---bool)
+- [hover - [Bool]](#hover---bool)
+- [condensed - [Bool]](#condensed---bool)
+- [id - [String]](#id---string)
+- [tabIndexCell - [Bool]](#tabindexcell---bool)
+- [classes - [String]](#classes---string)
+- [wrapperClasses - [String]](#wrapperclasses---string)
+- [headerClasses - [String]](#headerclasses---string)
+- [cellEdit - [Object]](#celledit---object)
+- [selectRow - [Object]](#selectrow---object)
+- [rowStyle - [Object | Function]](#rowstyle---object--function)
+- [rowClasses - [String | Function]](#rowclasses---string--function)
+- [rowEvents - [Object]](#rowevents---object)
+- [hiddenRows - [Array]](#hiddenrows---array)
+- [defaultSorted - [Array]](#defaultsorted---array)
+- [defaultSortDirection - [String]](#defaultsortdirection---string)
+- [pagination - [Object]](#pagination---object)
+- [filter - [Object]](#filter---object)
+- [onTableChange - [Function]](#ontablechange---function)
 
 -----
 
@@ -54,13 +59,13 @@ For flexibility reason, you can control what functionality should be handled on 
 ```js
 remote={ {
   filter: true,
-  pagination: true,
-  sort: true,
-  cellEdit: true
+  pagination: false,
+  sort: false,
+  cellEdit: false
 } }
 ```
 
-In above case, only column filter will be handled on remote.
+In above case, only column filter will be handled on remote because we enable it by giving `true`.
 
 > Note: when remote is enable, you are suppose to give [`onTableChange`](#ontablechange-function) prop on `BootstrapTable`
 > It's the only way to communicate to your remote server and update table states.
@@ -306,7 +311,7 @@ There's only two arguments will be passed to `onTableChange`: `type` and `newSta
 * `sort`
 * `cellEdit`
 
-Following is a shape of `newState`
+Following is a all available properties in `newState` object:
 
 ```js
 {

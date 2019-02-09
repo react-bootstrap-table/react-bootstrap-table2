@@ -89,7 +89,7 @@ const columns = [{
 * export `filter` function to allow users to access. For textFilter, `filter(value)` to filter columns dynamically.
 
 ### textFilter.onFilter - [Function]
-* Register a listener which will be called when column filter being triggered.
+* Register a listener which will be called when column filter being triggered. If you return an array value, `react-bootstrap-table2` will adopt this value as final filted result.
 
 **Example**
 ```js
@@ -153,7 +153,7 @@ const columns = [{
 * export `filter` function to allow users to access. For selectFilter, `filter(value)` to filter columns dynamically.
 
 ### selectFilter.onFilter - [Function]
-* Register a listener which will be called when column filter being triggered.
+* Register a listener which will be called when column filter being triggered. If you return an array value, `react-bootstrap-table2` will adopt this value as final filted result.
 
 **Example**
 ```js
@@ -217,7 +217,7 @@ const columns = [
 * export `filter` function to allow users to access. For multiSelectFilter, `filter(value)` to filter columns dynamically.
 
 ### multiSelectFilter.onFilter - [Function]
-* Register a listener which will be called when column filter being triggered.
+* Register a listener which will be called when column filter being triggered. If you return an array value, `react-bootstrap-table2` will adopt this value as final filted result.
 
 **Example**
 ```js
@@ -304,7 +304,7 @@ const columns = [
 * export `filter` function to allow users to access. For numberFilter,<br>`filter({ number, comparator })` to filter columns dynamically.
 
 ### numberFilter.onFilter - [Function]
-* Register a listener which will be called when column filter being triggered.
+* Register a listener which will be called when column filter being triggered. If you return an array value, `react-bootstrap-table2` will adopt this value as final filted result.
 
 **Example**:
 ```js
@@ -384,7 +384,7 @@ const columns = [{ ... }, { ... }, {
 * export `filter` function to allow users to access. For dateFilter,<br>`filter({ date, comparator })` to filter columns dynamically.
 
 ### dateFilter.onFilter - [Function]
-* Register a listener which will be called when column filter being triggered.
+* Register a listener which will be called when column filter being triggered. If you return an array value, `react-bootstrap-table2` will adopt this value as final filted result.
 
 **Example**:
 ```js
