@@ -37,6 +37,14 @@ export default (
       }
     }
 
+    componentWillReceiveProps(nextProps) {
+      if (isRemoteFiltering()) {
+        this.setState({
+          data: nextProps.data
+        });
+      }
+    }
+
     onFilter(column, filterType, initialize = false) {
       return (filterVal) => {
         // watch out here if migration to context API, #334

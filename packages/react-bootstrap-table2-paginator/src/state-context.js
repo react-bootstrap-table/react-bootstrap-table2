@@ -52,6 +52,7 @@ class StateProvider extends React.Component {
     if (this.isRemotePagination() || custom) {
       this.currPage = nextProps.pagination.options.page;
       this.currSizePerPage = nextProps.pagination.options.sizePerPage;
+      this.dataSize = nextProps.pagination.options.totalSize;
     }
   }
 

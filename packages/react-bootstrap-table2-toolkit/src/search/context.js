@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
 /* eslint no-continue: 0 */
+/* eslint no-lonely-if: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -43,6 +44,10 @@ export default (options = {
           this.setState({
             data: result
           });
+        }
+      } else {
+        if (isRemoteSearch()) {
+          this.setState({ data: nextProps.data });
         }
       }
     }
