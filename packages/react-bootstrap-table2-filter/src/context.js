@@ -17,7 +17,8 @@ export default (
   class FilterProvider extends React.Component {
     static propTypes = {
       data: PropTypes.array.isRequired,
-      columns: PropTypes.array.isRequired
+      columns: PropTypes.array.isRequired,
+      dataChangeListener: PropTypes.object
     }
 
     constructor(props) {
@@ -25,11 +26,22 @@ export default (
       this.currFilters = {};
       this.onFilter = this.onFilter.bind(this);
       this.onExternalFilter = this.onExternalFilter.bind(this);
+      this.state = {
+        data: props.data
+      };
     }
 
     componentDidMount() {
       if (isRemoteFiltering() && Object.keys(this.currFilters).length > 0) {
         handleFilterChange(this.currFilters);
+      }
+    }
+
+    componentWillReceiveProps(nextProps) {
+      if (isRemoteFiltering()) {
+        this.setState({
+          data: nextProps.data
+        });
       }
     }
 
@@ -64,11 +76,17 @@ export default (
           return;
         }
 
+        let result;
         if (filter.props.onFilter) {
-          filter.props.onFilter(filterVal);
+          result = filter.props.onFilter(filterVal);
         }
 
-        this.forceUpdate();
+        const { dataChangeListener, data } = this.props;
+        result = result || filters(data, this.props.columns, _)(this.currFilters);
+        if (dataChangeListener) {
+          dataChangeListener.emit('filterChanged', result.length);
+        }
+        this.setState({ data: result });
       };
     }
 
@@ -79,13 +97,9 @@ export default (
     }
 
     render() {
-      let { data } = this.props;
-      if (!isRemoteFiltering()) {
-        data = filters(data, this.props.columns, _)(this.currFilters);
-      }
       return (
         <FilterContext.Provider value={ {
-          data,
+          data: this.state.data,
           onFilter: this.onFilter,
           onExternalFilter: this.onExternalFilter
         } }

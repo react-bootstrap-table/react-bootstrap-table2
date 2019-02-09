@@ -87,6 +87,7 @@ import CustomFilter from 'examples/column-filter/custom-filter';
 import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
 import ClearAllFilters from 'examples/column-filter/clear-all-filters';
 import FilterHooks from 'examples/column-filter/filter-hooks';
+import CustomFilterLogic from 'examples/column-filter/custom-filter-logic';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -169,6 +170,8 @@ import StandalonePaginationList from 'examples/pagination/standalone-pagination-
 import StandaloneSizePerPage from 'examples/pagination/standalone-size-per-page';
 import FullyCustomPaginationTable from 'examples/pagination/fully-custom-pagination';
 import RemoteStandalonePaginationTable from 'examples/pagination/remote-standalone-pagination';
+import CustomePaginationWithFilter from 'examples/pagination/custome-page-list-with-filter';
+import CustomePaginationWithSearch from 'examples/pagination/custom-page-list-with-search';
 
 // search
 import SearchTable from 'examples/search';
@@ -289,7 +292,8 @@ storiesOf('Column Filter', module)
   .add('Advance Custom Filter', () => <AdvanceCustomFilter />)
   .add('Preserved Option Order on Select Filter', () => <SelectFilterWithPreservedOptionsOrder />)
   .add('Clear All Filters', () => <ClearAllFilters />)
-  .add('Filter Hooks', () => <FilterHooks />);
+  .add('Filter Hooks', () => <FilterHooks />)
+  .add('Implement custom filter logic', () => <CustomFilterLogic />);
 
 storiesOf('Work on Rows', module)
   .addDecorator(bootstrapStyle())
@@ -390,7 +394,9 @@ storiesOf('Pagination', module)
   .add('Standalone Pagination List', () => <StandalonePaginationList />)
   .add('Standalone SizePerPage Dropdown', () => <StandaloneSizePerPage />)
   .add('Fully Custom Pagination', () => <FullyCustomPaginationTable />)
-  .add('Remote Fully Custom Pagination', () => <RemoteStandalonePaginationTable />);
+  .add('Remote Fully Custom Pagination', () => <RemoteStandalonePaginationTable />)
+  .add('Custom Pagination with Filter', () => <CustomePaginationWithFilter />)
+  .add('Custom Pagination with Search', () => <CustomePaginationWithSearch />);
 
 storiesOf('Table Search', module)
   .addDecorator(bootstrapStyle())

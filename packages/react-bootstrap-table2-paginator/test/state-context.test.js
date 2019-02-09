@@ -91,6 +91,10 @@ describe('PaginationStateContext', () => {
       expect(wrapper.instance().currSizePerPage).toEqual(Const.SIZE_PER_PAGE_LIST[0]);
     });
 
+    it('should have correct dataSize', () => {
+      expect(wrapper.instance().dataSize).toEqual(options.totalSize);
+    });
+
     it('should get correct pagination props', () => {
       const instance = wrapper.instance();
       expect(wrapper.length).toBe(1);
@@ -102,7 +106,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -149,7 +154,7 @@ describe('PaginationStateContext', () => {
         setRemotePaginationEmitter(instance, true);
         nextProps = {
           data,
-          pagination: { ...defaultPagination, options: { page: 3, sizePerPage: 5 } }
+          pagination: { ...defaultPagination, options: { page: 3, sizePerPage: 5, totalSize: 50 } }
         };
         instance.componentWillReceiveProps(nextProps);
       });
@@ -157,6 +162,7 @@ describe('PaginationStateContext', () => {
       it('should always reset currPage and currSizePerPage', () => {
         expect(instance.currPage).toEqual(nextProps.pagination.options.page);
         expect(instance.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
+        expect(instance.dataSize).toEqual(nextProps.pagination.options.totalSize);
       });
     });
 
@@ -170,7 +176,10 @@ describe('PaginationStateContext', () => {
         setRemotePaginationEmitter(instance, true);
         nextProps = {
           data,
-          pagination: { ...defaultPagination, options: { page: 3, sizePerPage: 5, custom: true } }
+          pagination: {
+            ...defaultPagination,
+            options: { page: 3, sizePerPage: 5, custom: true, totalSize: 50 }
+          }
         };
         instance.componentWillReceiveProps(nextProps);
       });
@@ -178,7 +187,33 @@ describe('PaginationStateContext', () => {
       it('should always reset currPage and currSizePerPage', () => {
         expect(instance.currPage).toEqual(nextProps.pagination.options.page);
         expect(instance.currSizePerPage).toEqual(nextProps.pagination.options.sizePerPage);
+        expect(instance.dataSize).toEqual(nextProps.pagination.options.totalSize);
       });
+    });
+  });
+
+  describe('handleDataSizeChange', () => {
+    let instance;
+    const newTotalSize = 8;
+    beforeEach(() => {
+      wrapper = shallow(shallowContext({
+        ...defaultPagination,
+        page: 3
+      }));
+      instance = wrapper.instance();
+      setRemotePaginationEmitter(instance);
+      jest.spyOn(instance, 'forceUpdate');
+      instance.handleDataSizeChange(newTotalSize);
+    });
+
+    it('should update dataSize correctly', () => {
+      expect(instance.dataSize).toEqual(newTotalSize);
+      expect(instance.forceUpdate).toHaveBeenCalledTimes(1);
+    });
+
+    it('should update currPage correctly if page list shrink', () => {
+      expect(instance.currPage).toEqual(Const.PAGE_START_INDEX);
+      expect(instance.forceUpdate).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -343,7 +378,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -374,7 +410,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -401,7 +438,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -428,7 +466,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -455,7 +494,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -482,7 +522,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -509,7 +550,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -536,7 +578,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -563,7 +606,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -590,7 +634,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -617,7 +662,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -644,7 +690,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -671,7 +718,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -698,7 +746,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -725,7 +774,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -752,7 +802,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -779,7 +830,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -806,7 +858,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
@@ -833,7 +886,8 @@ describe('PaginationStateContext', () => {
             createContext: expect.any(Function),
             options: instance.getPaginationProps()
           },
-          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter
+          setPaginationRemoteEmitter: instance.setPaginationRemoteEmitter,
+          dataChangeListener: expect.any(Object)
         }
       });
     });
