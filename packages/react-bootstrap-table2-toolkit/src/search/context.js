@@ -2,6 +2,7 @@
 /* eslint react/require-default-props: 0 */
 /* eslint no-continue: 0 */
 /* eslint no-lonely-if: 0 */
+/* eslint class-methods-use-this: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -28,7 +29,7 @@ export default (options = {
       if (isRemoteSearch() && this.props.searchText !== '') {
         handleRemoteSearchChange(this.props.searchText);
       } else {
-        initialData = this.search(props.searchText.toLowerCase());
+        initialData = this.search(props);
         this.triggerListener(initialData);
       }
       this.state = { data: initialData };
@@ -39,7 +40,7 @@ export default (options = {
         if (isRemoteSearch()) {
           handleRemoteSearchChange(nextProps.searchText);
         } else {
-          const result = this.search(nextProps.searchText.toLowerCase());
+          const result = this.search(nextProps);
           this.triggerListener(result);
           this.setState({
             data: result
@@ -48,6 +49,12 @@ export default (options = {
       } else {
         if (isRemoteSearch()) {
           this.setState({ data: nextProps.data });
+        } else if (!_.isEqual(nextProps.data, this.props.data)) {
+          const result = this.search(nextProps);
+          this.triggerListener(result);
+          this.setState({
+            data: result
+          });
         }
       }
     }
@@ -58,8 +65,9 @@ export default (options = {
       }
     }
 
-    search(searchText) {
-      const { data, columns } = this.props;
+    search(props) {
+      const { data, columns } = props;
+      const searchText = props.searchText.toLowerCase();
       return data.filter((row, ridx) => {
         for (let cidx = 0; cidx < columns.length; cidx += 1) {
           const column = columns[cidx];

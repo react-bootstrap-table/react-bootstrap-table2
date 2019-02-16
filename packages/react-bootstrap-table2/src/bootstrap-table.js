@@ -106,6 +106,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             <Footer
               data={ this.getData() }
               columns={ columns }
+              selectRow={ selectRow }
+              expandRow={ expandRow }
               className={ this.props.footerClasses }
             />
           )}
