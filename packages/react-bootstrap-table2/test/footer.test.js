@@ -1,8 +1,9 @@
 /* eslint no-unused-vars: 0 */
 import 'jsdom-global/register';
 import React from 'react';
-import { shallow, mount } from 'enzyme';
+import { shallow, render } from 'enzyme';
 
+import Const from '../src/const';
 import Footer from '../src/footer';
 import FooterCell from '../src/footer-cell';
 
@@ -32,11 +33,29 @@ describe('Footer', () => {
     }
   ];
 
+  const selectRow = {
+    mode: Const.ROW_SELECT_DISABLED,
+    selected: [],
+    hideSelectColumn: true
+  };
+  const expandRow = {
+    renderer: undefined,
+    expanded: [],
+    nonExpandable: []
+  };
+
   const keyField = 'id';
 
   describe('simplest footer', () => {
     beforeEach(() => {
-      wrapper = shallow(<Footer data={ data } columns={ columns } />);
+      wrapper = shallow(
+        <Footer
+          data={ data }
+          columns={ columns }
+          selectRow={ selectRow }
+          expandRow={ expandRow }
+        />
+      );
     });
 
     it('should render successfully', () => {
@@ -50,12 +69,56 @@ describe('Footer', () => {
     const className = 'test-class';
 
     beforeEach(() => {
-      wrapper = shallow(<Footer data={ data } columns={ columns } className={ className } />);
+      wrapper = shallow(
+        <Footer
+          data={ data }
+          columns={ columns }
+          className={ className }
+          selectRow={ selectRow }
+          expandRow={ expandRow }
+        />
+      );
     });
 
     it('should render successfully', () => {
       expect(wrapper.length).toBe(1);
       expect(wrapper.find(`.${className}`).length).toBe(1);
+    });
+  });
+
+  describe('when selecrRow prop is enable', () => {
+    beforeEach(() => {
+      wrapper = render(
+        <Footer
+          data={ data }
+          columns={ columns }
+          selectRow={ { ...selectRow, mode: 'radio', hideSelectColumn: false } }
+          expandRow={ expandRow }
+        />
+      );
+    });
+
+    it('should render successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('th').length).toBe(columns.length + 1);
+    });
+  });
+
+  describe('when expandRow prop is enable', () => {
+    beforeEach(() => {
+      wrapper = render(
+        <Footer
+          data={ data }
+          columns={ columns }
+          selectRow={ selectRow }
+          expandRow={ { expandRow, showExpandColumn: true } }
+        />
+      );
+    });
+
+    it('should render successfully', () => {
+      expect(wrapper.length).toBe(1);
+      expect(wrapper.find('th').length).toBe(columns.length + 1);
     });
   });
 });
