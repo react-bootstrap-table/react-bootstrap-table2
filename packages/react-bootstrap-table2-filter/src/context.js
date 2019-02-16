@@ -25,6 +25,7 @@ export default (
       super(props);
       this.currFilters = {};
       this.onFilter = this.onFilter.bind(this);
+      this.doFilter = this.doFilter.bind(this);
       this.onExternalFilter = this.onExternalFilter.bind(this);
       this.state = {
         data: props.data
@@ -38,11 +39,13 @@ export default (
     }
 
     componentWillReceiveProps(nextProps) {
-      if (isRemoteFiltering()) {
-        this.setState({
-          data: nextProps.data
-        });
+      let nextData = nextProps.data;
+      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.props.data)) {
+        nextData = this.doFilter(nextProps);
       }
+      this.setState({
+        data: nextData
+      });
     }
 
     onFilter(column, filterType, initialize = false) {
@@ -81,11 +84,7 @@ export default (
           result = filter.props.onFilter(filterVal);
         }
 
-        const { dataChangeListener, data } = this.props;
-        result = result || filters(data, this.props.columns, _)(this.currFilters);
-        if (dataChangeListener) {
-          dataChangeListener.emit('filterChanged', result.length);
-        }
+        result = this.doFilter(this.props, result);
         this.setState({ data: result });
       };
     }
@@ -94,6 +93,17 @@ export default (
       return (value) => {
         this.onFilter(column, filterType)(value);
       };
+    }
+
+    doFilter(props, customResult) {
+      let result = customResult;
+
+      const { dataChangeListener, data, columns } = props;
+      result = result || filters(data, columns, _)(this.currFilters);
+      if (dataChangeListener) {
+        dataChangeListener.emit('filterChanged', result.length);
+      }
+      return result;
     }
 
     render() {

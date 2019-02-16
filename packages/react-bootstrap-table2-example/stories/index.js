@@ -205,6 +205,13 @@ import RemoteSearch from 'examples/remote/remote-search';
 import RemoteCellEdit from 'examples/remote/remote-celledit';
 import RemoteAll from 'examples/remote/remote-all';
 
+// data
+import LoadDataWithFilter from 'examples/data/load-data-on-the-fly-with-filter';
+import LoadDataWithDefaultFilter from 'examples/data/load-data-on-the-fly-with-default-filter';
+import LoadDataWithSearch from 'examples/data/load-data-on-the-fly-with-search';
+import LoadDataWithDefaultSearch from 'examples/data/load-data-on-the-fly-with-default-search';
+import LoadDataWithPaginationAndFilter from 'examples/data/load-data-on-the-fly-with-pagination-and-filter';
+
 // css style
 import 'stories/stylesheet/tomorrow.min.css';
 import 'stories/stylesheet/storybook.scss';
@@ -433,3 +440,11 @@ storiesOf('Remote', module)
   .add('Remote Search', () => <RemoteSearch />)
   .add('Remote Cell Editing', () => <RemoteCellEdit />)
   .add('Remote All', () => <RemoteAll />);
+
+storiesOf('Data', module)
+  .addDecorator(bootstrapStyle())
+  .add('Load data with Filter', () => <LoadDataWithFilter />)
+  .add('Load data with Default Filter', () => <LoadDataWithDefaultFilter />)
+  .add('Load data with Search', () => <LoadDataWithSearch />)
+  .add('Load data with Default Search', () => <LoadDataWithDefaultSearch />)
+  .add('Load data with Filter and Pagination', () => <LoadDataWithPaginationAndFilter />);
