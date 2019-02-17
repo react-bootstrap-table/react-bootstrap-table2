@@ -63,5 +63,5 @@ const sizePerPageDropdownAdapter = WrappedComponent =>
   };
 
 
-export const SizePerPageDropdownAdapter = sizePerPageDropdownAdapter(SizePerPageDropDown);
+export const SizePerPageDropdownWithAdapter = sizePerPageDropdownAdapter(SizePerPageDropDown);
 export default sizePerPageDropdownAdapter;
