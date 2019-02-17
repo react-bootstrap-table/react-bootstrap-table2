@@ -23,7 +23,7 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
   * Overlay/Loading Addons
 * [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
-  * Table Toolkits, like search, csv etc.
+  * Table Toolkits, like search, csv, column toggle etc.
 
 This can help your application with less bundled size and also help `react-bootstrap-table2` have clean design to avoid handling to much logic in kernel module(SRP). Hence, which means you probably need to install above addons when you need specific features.
 

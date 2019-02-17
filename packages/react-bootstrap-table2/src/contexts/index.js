@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import EventEmitter from 'events';
 import _ from '../utils';
 import createDataContext from './data-context';
+import createColumnMgtContext from './column-context';
 import createSortContext from './sort-context';
 import SelectionContext from './selection-context';
 import RowExpandContext from './row-expand-context';
@@ -28,6 +29,13 @@ const withContext = Base =>
       if (props.columns.filter(col => col.sort).length > 0) {
         this.SortContext = createSortContext(
           dataOperator, this.isRemoteSort, this.handleRemoteSortChange);
+      }
+
+      if (
+        props.columnToggle ||
+        props.columns.filter(col => col.hidden).length > 0
+      ) {
+        this.ColumnManagementContext = createColumnMgtContext();
       }
 
       if (props.selectRow) {
@@ -83,6 +91,7 @@ const withContext = Base =>
         searchProps,
         sortProps,
         paginationProps,
+        columnToggleProps
       ) => (
         <Base
           ref={ n => this.table = n }
@@ -91,8 +100,37 @@ const withContext = Base =>
           { ...filterProps }
           { ...searchProps }
           { ...paginationProps }
+          { ...columnToggleProps }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         />
+      );
+    }
+
+    renderWithColumnManagementCtx(base, baseProps) {
+      return (
+        rootProps,
+        filterProps,
+        searchProps,
+        sortProps,
+        paginationProps
+      ) => (
+        <this.ColumnManagementContext.Provider
+          { ...baseProps }
+          toggles={ this.props.columnToggle ? this.props.columnToggle.toggles : null }
+        >
+          <this.ColumnManagementContext.Consumer>
+            {
+              columnToggleProps => base(
+                rootProps,
+                filterProps,
+                searchProps,
+                sortProps,
+                paginationProps,
+                columnToggleProps
+              )
+            }
+          </this.ColumnManagementContext.Consumer>
+        </this.ColumnManagementContext.Provider>
       );
     }
 
@@ -270,6 +308,10 @@ const withContext = Base =>
       const baseProps = { keyField, columns };
 
       let base = this.renderBase();
+
+      if (this.ColumnManagementContext) {
+        base = this.renderWithColumnManagementCtx(base, baseProps);
+      }
 
       if (this.SelectionContext) {
         base = this.renderWithSelectionCtx(base, baseProps);
