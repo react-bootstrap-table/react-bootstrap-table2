@@ -5,30 +5,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import pageResolver from './page-resolver';
 import paginationHandler from './pagination-handler';
-import { SizePerPageDropdownAdapter } from './size-per-page-dropdown-adapter';
+import { SizePerPageDropdownWithAdapter } from './size-per-page-dropdown-adapter';
 import { PaginationListWithAdapter } from './pagination-list-adapter';
-import PaginationTotal from './pagination-total';
+import { PaginationTotalWithAdapter } from './pagination-total-adapter';
 import Const from './const';
 
 class Pagination extends pageResolver(Component) {
-  defaultTotal = (from, to, size) => (
-    <PaginationTotal
-      from={ from }
-      to={ to }
-      dataSize={ size }
-    />
-  );
-
-  setTotal = (from, to, size, total) => {
-    if (total && (typeof total === 'function')) {
-      return total(from, to, size);
-    }
-
-    return this.defaultTotal(from, to, size);
-  };
-
   render() {
     const {
+      currPage,
+      pageStartIndex,
       showTotal,
       dataSize,
       pageListRenderer,
@@ -48,7 +34,6 @@ class Pagination extends pageResolver(Component) {
     } = this.props;
 
     const pages = this.calculatePageStatus(this.calculatePages(totalPages, lastPage), lastPage);
-    const [from, to] = this.calculateFromTo();
     const pageListClass = cs(
       'react-bootstrap-table-pagination-list',
       'col-md-6 col-xs-6 col-sm-6 col-lg-6', {
@@ -57,7 +42,7 @@ class Pagination extends pageResolver(Component) {
     return (
       <div className="row react-bootstrap-table-pagination">
         <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
-          <SizePerPageDropdownAdapter
+          <SizePerPageDropdownWithAdapter
             sizePerPageList={ sizePerPageList }
             currSizePerPage={ currSizePerPage }
             hideSizePerPage={ hideSizePerPage }
@@ -67,12 +52,13 @@ class Pagination extends pageResolver(Component) {
           />
           {
             showTotal ?
-              this.setTotal(
-                from,
-                to,
-                dataSize,
-                paginationTotalRenderer
-              ) : null
+              <PaginationTotalWithAdapter
+                currPage={ currPage }
+                currSizePerPage={ currSizePerPage }
+                pageStartIndex={ pageStartIndex }
+                dataSize={ dataSize }
+                paginationTotalRenderer={ paginationTotalRenderer }
+              /> : null
           }
         </div>
         {
@@ -83,6 +69,9 @@ class Pagination extends pageResolver(Component) {
             <div className={ pageListClass }>
               <PaginationListWithAdapter
                 { ...rest }
+                currPage={ currPage }
+                currSizePerPage={ currSizePerPage }
+                pageStartIndex={ pageStartIndex }
                 lastPage={ lastPage }
                 totalPages={ totalPages }
                 pageButtonRenderer={ pageButtonRenderer }
