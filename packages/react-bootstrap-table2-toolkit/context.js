@@ -1,13 +1,14 @@
+/* eslint no-param-reassign: 0 */
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import statelessDrcorator from './statelessOp';
+import statelessDecorator from './statelessOp';
 
-import createContext from './src/search/context';
+import createSearchContext from './src/search/context';
 
 const ToolkitContext = React.createContext();
 
-class ToolkitProvider extends statelessDrcorator(React.Component) {
+class ToolkitProvider extends statelessDecorator(React.Component) {
   static propTypes = {
     keyField: PropTypes.string.isRequired,
     data: PropTypes.array.isRequired,
@@ -42,13 +43,22 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
 
   constructor(props) {
     super(props);
-    this.state = {
-      searchText: typeof props.search === 'object' ? (props.search.defaultSearch || '') : ''
-    };
+    const state = {};
     this._ = null;
     this.onClear = this.onClear.bind(this);
     this.onSearch = this.onSearch.bind(this);
+    this.onColumnToggle = this.onColumnToggle.bind(this);
     this.setDependencyModules = this.setDependencyModules.bind(this);
+
+    if (props.columnToggle) {
+      state.columnToggle = props.columns
+        .reduce((obj, column) => {
+          obj[column.dataField] = !column.hidden;
+          return obj;
+        }, {});
+    }
+    state.searchText = typeof props.search === 'object' ? (props.search.defaultSearch || '') : '';
+    this.state = state;
   }
 
   onSearch(searchText) {
@@ -61,6 +71,14 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
     this.setState({ searchText: '' });
   }
 
+  onColumnToggle(dataField) {
+    const { columnToggle } = this.state;
+    columnToggle[dataField] = !columnToggle[dataField];
+    this.setState(({
+      ...this.state,
+      columnToggle
+    }));
+  }
   /**
    * 
    * @param {*} _ 
@@ -84,8 +102,13 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
     };
     if (this.props.search) {
       baseProps.search = {
-        searchContext: createContext(this.props.search),
+        searchContext: createSearchContext(this.props.search),
         searchText: this.state.searchText
+      };
+    }
+    if (this.props.columnToggle) {
+      baseProps.columnToggle = {
+        toggles: this.state.columnToggle
       };
     }
     return (
@@ -97,6 +120,11 @@ class ToolkitProvider extends statelessDrcorator(React.Component) {
         },
         csvProps: {
           onExport: this.handleExportCSV
+        },
+        columnToggleProps: {
+          columns: this.props.columns,
+          toggles: this.state.columnToggle,
+          onColumnToggle: this.onColumnToggle
         },
         baseProps
       } }

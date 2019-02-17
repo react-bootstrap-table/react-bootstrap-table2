@@ -2,9 +2,15 @@
 
 `react-bootstrap-table2` support some additional features in [`react-bootstrap-table2-toolkit`](https://github.com/react-bootstrap-table/react-bootstrap-table2/tree/develop/packages/react-bootstrap-table2-toolkit).
 
-In the future, this toolkit will support other feature like row delete, insert etc. Right now we only support Table Search and CSV export.   
+In the future, this toolkit will support other feature like row delete, insert etc. Right now we only following features:
+
+* Table Search
+* Export CSV
+* Column Toggle
 
 **[Live Demo For Table Search](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Table%20Search)**
+**[Live Demo For Export CSV](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Export%20CSV&selectedStory=Basic%20Export%20CSV)**
+**[Live Demo For Column Toggle](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Column%20Toggle&selectedStory=Basic%20Column%20Toggle)**
 
 **[API&Props Definitation](https://react-bootstrap-table.github.io/react-bootstrap-table2/docs/pagination-props.html)**
 
@@ -169,3 +175,35 @@ Default is `true`. `false` will only export current data which display on table.
 
 #### onlyExportSelection - [bool]
 Default is `false`. `true` will only export the data which is selected.
+
+## Column Toggle
+
+Let's see how to render the column toggle in your react component:
+
+```js
+import BootstrapTable from 'react-bootstrap-table-next';
+import ToolkitProvider, { ColumnToggle } from 'react-bootstrap-table2-toolkit';
+
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  columnToggle
+>
+  {
+    props => (
+      <div>
+        <ToggleList { ...props.columnToggleProps } />
+        <hr />
+        <BootstrapTable
+          { ...props.baseProps }
+        />
+      </div>
+    )
+  }
+</ToolkitProvider>
+```
+
+> `columnToggleProps` props have enough information to let you custom the toggle list: [demo]([Live Demo For Export CSV](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Export%20CSV&selectedStory=Custom%20Column%20Toggle))
+
+If you want to have default visibility on specified column, you can just give `true` or `false` on `column.hidden`.
