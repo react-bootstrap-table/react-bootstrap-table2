@@ -169,6 +169,7 @@ import CustomSizePerPageTable from 'examples/pagination/custom-size-per-page';
 import CustomPageListTable from 'examples/pagination/custom-page-list';
 import StandalonePaginationList from 'examples/pagination/standalone-pagination-list';
 import StandaloneSizePerPage from 'examples/pagination/standalone-size-per-page';
+import StandalonePaginationTotal from 'examples/pagination/standalone-pagination-total';
 import FullyCustomPaginationTable from 'examples/pagination/fully-custom-pagination';
 import RemoteStandalonePaginationTable from 'examples/pagination/remote-standalone-pagination';
 import CustomePaginationWithFilter from 'examples/pagination/custome-page-list-with-filter';
@@ -408,6 +409,7 @@ storiesOf('Pagination', module)
   .add('Custom SizePerPage', () => <CustomSizePerPageTable />)
   .add('Standalone Pagination List', () => <StandalonePaginationList />)
   .add('Standalone SizePerPage Dropdown', () => <StandaloneSizePerPage />)
+  .add('Standalone Pagination Total', () => <StandalonePaginationTotal />)
   .add('Fully Custom Pagination', () => <FullyCustomPaginationTable />)
   .add('Remote Fully Custom Pagination', () => <RemoteStandalonePaginationTable />)
   .add('Custom Pagination with Filter', () => <CustomePaginationWithFilter />)
