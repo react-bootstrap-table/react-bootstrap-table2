@@ -89,7 +89,8 @@
   "jest": {
     "collectCoverageFrom": [
       "packages/*/src/**/*.js",
-      "packages/*/index.js"
+      "packages/*/index.js",
+      "!packages/react-bootstrap-table2-example/**/*.js"
     ],
     "roots": [
       "<rootDir>/packages"
