@@ -10,6 +10,7 @@ sidebar_label: Getting Started
 
 * Export CSV
 * Table Search
+* Column Toggle
 
 
 ## Installation
@@ -58,7 +59,8 @@ In addition, You have to move following required props from `BootstraTable` to `
 ### Additional props on ToolkitProvider
 
 * [search](./search-props.html): For enabling search.
-* [exportCSV](./export-csv-props.html): For enableing export CSV.
+* [exportCSV](./export-csv-props.html): For enabling export CSV.
+* **columnToggle**: For enabling column toggle.
 
 ## Available children props
 
@@ -67,3 +69,4 @@ In addition, You have to move following required props from `BootstraTable` to `
 * `baseProps`: It have the basic props from `ToolkitProvider` and also contain few internal data.
 * `searchProps`: props for search component.
 * `csvProps`: props for export csv component.
+* `columnToggleProps`: props for column toggle component.

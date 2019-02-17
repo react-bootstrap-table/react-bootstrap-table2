@@ -115,6 +115,17 @@ const expandRow = {
 };
 ```
 
+## expandRow.expandByColumnOnly - [Bool]
+Default is `false`. If you want to restrict user to expand/collapse row via clicking the expand column only, you can enable it. 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  showExpandColumn: true,
+  expandByColumnOnly: true
+};
+```
+
 ## expandRow.expandColumnPosition - [String]
 Default is `left`. You can give this as `right` for rendering expand column in the right side.
 
@@ -128,7 +139,7 @@ const expandRow = {
 ## expandRow.expandByColumnOnly - [Bool]
 Default is `false`. If you want to restrict user to expand/collapse row via clicking the expand column only, you can enable it. 
 
- ```js
+```js
 const expandRow = {
   renderer: (row) => ...,
   showExpandColumn: true,
@@ -137,6 +148,7 @@ const expandRow = {
 ```
 
 ## expandRow.expandColumnRenderer - [Function]
+
 Provide a callback function which allow you to custom the expand indicator. This callback only have one argument which is an object and contain these properties:
 * `expanded`: If current row is expanded or not
 * `rowKey`: Current row key
@@ -150,7 +162,6 @@ const expandRow = {
     // ....
   )
 };
-```
 ```
 
 

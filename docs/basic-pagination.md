@@ -80,14 +80,14 @@ If you want to customize the pagination component completely, you may get intere
 
 `react-bootstrap-table2-paginator` have a `PaginationProvider` which is a react context and you will be easier to customize the pagination components under the scope of `PaginationProvider`. Let's introduce it step by step:
 
-#### Import PaginationProvider
+#### 1. Import PaginationProvider
 
 ```js
 import paginationFactory, { PaginationProvider } from 'react-bootstrap-table2-paginator';
 
 ```
 
-#### Declare custom and totalSize in pagination option:
+#### 2. Declare custom and totalSize in pagination option:
 
 ```js
 const paginationOption = {
@@ -96,7 +96,7 @@ const paginationOption = {
 };
 ```
 
-#### Render PaginationProvider
+#### 3. Render PaginationProvider
 
 ```js
 <PaginationProvider
@@ -142,19 +142,25 @@ So far, your customization pagination should look like it:
 ```
 
 Now, you have two choices
-* Use built-in standalne components
+* Use Standalone Component
 * Customize everything by yourself
 
-#### Use Standalone Component
-`react-bootstrap-table2-paginator` provider two standalone components:
+#### 4.1 Use Standalone Component
+`react-bootstrap-table2-paginator` provider three standalone components:
 
-* Size Per Page Dropdwn Standalone
+* Size Per Page Dropdown Standalone
 * Pagination List Standalone
+* Pagination Total Standalone
 
 When render each standalone, you just need to pass the `paginationProps` props to standalone component:
 
 ```js
-import paginationFactory, { PaginationProvider, PaginationListStandalone, SizePerPageDropdownStandalone } from 'react-bootstrap-table2-paginator';
+import paginationFactory, {
+  PaginationProvider,
+  PaginationListStandalone,
+  PaginationTotalStandalone,
+  SizePerPageDropdownStandalone
+} from 'react-bootstrap-table2-paginator';
 
 <PaginationProvider
   pagination={ paginationFactory(options) }
@@ -166,6 +172,9 @@ import paginationFactory, { PaginationProvider, PaginationListStandalone, SizePe
     }) => (
       <div>
         <SizePerPageDropdownStandalone
+          { ...paginationProps }
+        />
+        <PaginationTotalStandalone
           { ...paginationProps }
         />
         <BootstrapTable
@@ -185,7 +194,7 @@ import paginationFactory, { PaginationProvider, PaginationListStandalone, SizePe
 
 That's it!!  The benifit for using standalone is you can much easier to render the standalone component in any posistion. In the future, we will implement more featue like applying `style`, `className` etc on standalone components.
 
-#### Customization Everything
+#### 4.2 Customization Everything
 
 If you choose to custom the pagination component by yourself, the `paginationProps` will be important for you. Becasue you have to know for example how to change page or what's the current page etc. Therefore, following is all the props in `paginationProps` object:
 
@@ -218,7 +227,7 @@ onPageChange,
 onSizePerPageChange
 ```
 
-In most of case, `page`, `sizePerPage`, `onPageChange` and `onSizePerPageChange` are most important propertoes for you:
+In most of case, `page`, `sizePerPage`, `onPageChange` and `onSizePerPageChange` are much important properties for you:
 
 * `page`: Current page.
 * `sizePerPage`: Current size per page.

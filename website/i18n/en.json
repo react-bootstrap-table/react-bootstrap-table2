@@ -8,6 +8,8 @@
     "About": "About",
     "basic-celledit": "Cell Edit",
     "Cell Edit": "Cell Edit",
+    "basic-column-toggle": "Column Toggle",
+    "Column Toggle": "Column Toggle",
     "basic-column": "Work on Column",
     "Work on Column": "Work on Column",
     "basic-export-csv": "Export to CSV",

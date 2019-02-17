@@ -23,7 +23,8 @@
     "Table Toolkits": [
       "toolkits-getting-started",
       "basic-search",
-      "basic-export-csv"
+      "basic-export-csv",
+      "basic-column-toggle"
     ],
     "Exposed API": [
       "exposed-api"

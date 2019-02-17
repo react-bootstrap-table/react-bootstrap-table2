@@ -28,6 +28,7 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
 * [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
   * Table Search
   * CSV Export
+  * Column Toggle
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
   * Overlay/Loading Addons
 
@@ -63,12 +64,12 @@ The `text` property is just same as the children for the `TableHeaderColumn`, if
 
 Please see [Work with table sort](./basic-sort.html).   
 
-- [x] Basic sorting
-- [x] Custom sort function
-- [x] Default Sort
-- [x] Remote mode
-- [x] Custom the sorting header
-- [x] Sort event listener
+- [v] Basic sorting
+- [v] Custom sort function
+- [v] Default Sort
+- [v] Remote mode
+- [v] Custom the sorting header
+- [v] Sort event listener
 - [ ] Custom the sort caret
 - [ ] Sort management
 - [ ] Multi sort
@@ -87,17 +88,15 @@ No huge changes in row selection.
 Please see [Work with column filter](./basic-filter.html).   
 Please see [available filter configuration](./filter-props.html).   
 
-- [x] Text Filter
-- [x] Custom Text Filter
-- [x] Remote Filter
-- [x] Custom Filter Component
+- [v] Text Filter
+- [v] Remote Filter
+- [v] Custom Filter Component
 - [ ] Regex Filter
-- [x] Select Filter
-- [x] Custom Select Filter
-- [x] Number Filter
-- [X] Date Filter
-- [x] Array Filter
-- [X] Programmatically Filter
+- [v] Select Filter
+- [v] Number Filter
+- [v] Date Filter
+- [v] Array Filter
+- [v] Programmatically Filter
 
 Remember to install [`react-bootstrap-table2-filter`](https://www.npmjs.com/package/react-bootstrap-table2-filter) firstly.   
 
@@ -119,7 +118,7 @@ Please see [available pagination configurations](./pagination-props.html).
 
 Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator) firstly.   
 
-Until newest `react-bootstrap-table2-paginator@2.0.0`, we allow you to custom any part of pagination component more flexible.
+In newest `react-bootstrap-table2-paginator@2.0.0`, we allow you to custom any part of pagination component more flexible.
 
 ## Table Search
 Please see [Work with table search](./basic-search.html).   
@@ -127,9 +126,9 @@ Please see [Search configurations](./search-props.html).
 
 The usage of search functionality is a little bit different from legacy search. The mainly different thing is developer have to render the search input field, we do believe it will be very flexible for all the developers who want to custom the search position or search field itself.
 
-- [x] Custom search component and position
-- [x] Custom search value
-- [x] Clear search
+- [v] Custom search component and position
+- [v] Custom search value
+- [v] Clear search
 - [ ] Multiple search
 - [ ] Strict search
 
@@ -137,13 +136,13 @@ The usage of search functionality is a little bit different from legacy search. 
 Please see [Work with expandable row](./basic-row-expand.html).   
 Please see [Row expand configurations](./row-expand-props.html).   
 
-- [x] Expand Row Events
-- [x] Expand Row Indicator
-- [x] Expand Row Management
-- [x] Custom Expand Row Indicators
-- [ ] Compatiable with Row Selection
-- [ ] Expand Column position
-- [ ] Expand Column Style/Class
+- [v] Expand Row Events
+- [v] Expand Row Indicator
+- [v] Expand Row Management
+- [v] Custom Expand Row Indicators
+- [v] Compatiable with Row Selection
+- [v] Expand Column position
+- [v] Expand Column Style/Class
 
 ## Export CSV
 Please see [Work with export to CSV](./basic-export-csv.html).   
