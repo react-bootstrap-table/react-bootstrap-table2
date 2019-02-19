@@ -26,7 +26,7 @@ ExportCSVButton.propTypes = {
   style: PropTypes.object
 };
 ExportCSVButton.defaultProps = {
-  className: 'react-bs-table-csv-btn btn btn-default',
+  className: 'react-bs-table-csv-btn btn btn-default btn-secondary',
   style: {}
 };
 

@@ -5,7 +5,7 @@ const ClearButton = ({
   onClear,
   text
 }) => (
-  <button className="btn btn-default" onClick={ onClear }>{ text }</button>
+  <button className="btn btn-default btn-secondary" onClick={ onClear }>{ text }</button>
 );
 
 ClearButton.propTypes = {
