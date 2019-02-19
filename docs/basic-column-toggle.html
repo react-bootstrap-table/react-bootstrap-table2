@@ -1,0 +1,108 @@
+<html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Column Toggle · react-bootstrap-table2</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Column Toggle · react-bootstrap-table2"/><meta property="og:type" content="website"/><meta property="og:url" content="https://react-bootstrap-table.github.io/react-bootstrap-table2/index.html"/><meta property="og:description" content="`react-bootstrap-table2` support a toggle list for user to toggle the column visibility."/><link rel="shortcut icon" href="/react-bootstrap-table2/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><link rel="alternate" type="application/atom+xml" href="https://react-bootstrap-table.github.io/blog/atom.xml" title="react-bootstrap-table2 Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://react-bootstrap-table.github.io/blog/feed.xml" title="react-bootstrap-table2 Blog RSS Feed"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/react-bootstrap-table2/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/react-bootstrap-table2/"><img class="logo" src="/react-bootstrap-table2/img/logo/hybrid-white-large.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/react-bootstrap-table2/docs/about.html" target="_self">Docs</a></li><li><a href="/react-bootstrap-table2/docs/table-props.html" target="_self">API</a></li><li><a href="/react-bootstrap-table2/en/help.html" target="_self">Help</a></li><li><a href="/react-bootstrap-table2/blog" target="_self">Blog</a></li><li><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Table Toolkits</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Getting Started</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/about.html">About</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/getting-started.html">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/bootstrap4.html">Bootstrap 4</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/migration.html">Migration</a></li></ul></div><div class="navGroup navGroupActive"><h3>Basic Usage</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-row.html">Work on Row</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-column.html">Work on Column</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-sort.html">Table Sort</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-row-select.html">Row Selection</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-filter.html">Column Filter</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-celledit.html">Cell Edit</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-pagination.html">Pagination</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-row-expand.html">Expandable Row</a></li></ul></div><div class="navGroup navGroupActive"><h3>Remote Table</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-remote.html">Work on Remote</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/overlay.html">Overlay</a></li></ul></div><div class="navGroup navGroupActive"><h3>Table Toolkits</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/toolkits-getting-started.html">Getting Started</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-search.html">Table Search</a></li><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/basic-export-csv.html">Export to CSV</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/react-bootstrap-table2/docs/basic-column-toggle.html">Column Toggle</a></li></ul></div><div class="navGroup navGroupActive"><h3>Exposed API</h3><ul><li class="navListItem"><a class="navItem" href="/react-bootstrap-table2/docs/exposed-api.html">Introduction</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Column Toggle</h1></header><article><div><span><p><code>react-bootstrap-table2</code> support a toggle list for user to toggle the column visibility.</p>
+<p><strong><a href="../storybook/index.html?selectedKind=Column%20Toggle">Live Demo For Column Toggle</a></strong></p>
+<hr>
+<h2><a class="anchor" aria-hidden="true" name="prepare"></a><a href="#prepare" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prepare</h2>
+<p>Please check <a href="./toolkits-getting-started.html">How to start with table toolkit</a></p>
+<h2><a class="anchor" aria-hidden="true" name="enable-column-toggle"></a><a href="#enable-column-toggle" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Enable Column Toggle</h2>
+<pre><code class="hljs css js"><span class="hljs-keyword">import</span> ToolkitProvider, { ColumnToggle } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-bootstrap-table2-toolkit'</span>;
+
+<span class="hljs-keyword">const</span> { ToggleList } = ColumnToggle;
+<span class="hljs-comment">//...</span>
+
+&lt;ToolkitProvider
+  keyField=<span class="hljs-string">"id"</span>
+  data={ products }
+  columns={ columns }
+  columnToggle
+&gt;
+  {
+    props =&gt; (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">ToggleList</span> { <span class="hljs-attr">...props.columnToggleProps</span> } /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">hr</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span>
+          { <span class="hljs-attr">...props.baseProps</span> }
+        /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    )
+  }
+<span class="hljs-tag">&lt;/<span class="hljs-name">ToolkitProvider</span>&gt;</span>
+</span></code></pre>
+<ol>
+<li><p>Enable column toggle via <code>columnToggle</code> prop on <code>ToolkitProvider</code>.</p></li>
+<li><p><code>ToolkitProvider</code> is a wrapper of react context, you should wrap the <code>BootstrapTable</code> and <code>ToggleList</code> as the child of <code>ToolkitProvider</code>.</p></li>
+<li><p>Rendering <code>ToggleList</code> with <code>columnToggleProps</code>. The position of <code>ToggleList</code> is depends on you.</p></li>
+</ol>
+<h2><a class="anchor" aria-hidden="true" name="customize-togglelist-component"></a><a href="#customize-togglelist-component" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Customize ToggleList Component</h2>
+<p>So far we only have limited customization on <code>ToggleList</code> component, following props is available for you:</p>
+<ul>
+<li><code>btnClassName</code>: Add custom class on toggle button.</li>
+<li><code>className</code>: Add custom class on toggle list.</li>
+<li><code>contextual</code>: config bootstrap contextual, default is <code>primary</code>.</li>
+</ul>
+<p>However, you can custom the whole thing by yourself like following:</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// This is my custom column toggle component</span>
+
+<span class="hljs-keyword">const</span> CustomToggleList = ({
+  columns,
+  onColumnToggle,
+  toggles
+}) =&gt; (
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">"btn-group btn-group-toggle btn-group-vertical"</span> <span class="hljs-attr">data-toggle</span>=<span class="hljs-string">"buttons"</span>&gt;</span>
+    {
+      columns
+        .map(column =&gt; ({
+          ...column,
+          toggle: toggles[column.dataField]
+        }))
+        .map(column =&gt; (
+          <span class="hljs-tag">&lt;<span class="hljs-name">button</span>
+            <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>
+            <span class="hljs-attr">key</span>=<span class="hljs-string">{</span> <span class="hljs-attr">column.dataField</span> }
+            <span class="hljs-attr">className</span>=<span class="hljs-string">{</span> `<span class="hljs-attr">btn</span> <span class="hljs-attr">btn-warning</span> ${<span class="hljs-attr">column.toggle</span> ? '<span class="hljs-attr">active</span>' <span class="hljs-attr">:</span> ''}` }
+            <span class="hljs-attr">data-toggle</span>=<span class="hljs-string">"button"</span>
+            <span class="hljs-attr">aria-pressed</span>=<span class="hljs-string">{</span> <span class="hljs-attr">column.toggle</span> ? '<span class="hljs-attr">true</span>' <span class="hljs-attr">:</span> '<span class="hljs-attr">false</span>' }
+            <span class="hljs-attr">onClick</span>=<span class="hljs-string">{</span> () =&gt;</span> onColumnToggle(column.dataField) }
+          &gt;
+            { column.text }
+          <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        ))
+    }
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+);
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> MyTable = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> (
+    &lt;ToolkitProvider
+      keyField="id"
+      data={ products }
+      columns={ columnsdt }
+      columnToggle
+    &gt;
+      {
+        props =&gt; (
+          &lt;div&gt;
+            &lt;CustomToggleList { ...props.columnToggleProps } /&gt;
+            &lt;hr /&gt;
+            &lt;BootstrapTable
+              { ...props.baseProps }
+            /&gt;
+          &lt;/div&gt;
+        )
+      }
+    &lt;/ToolkitProvider&gt;
+);
+</code></pre>
+<p>Following, we just explain how it work:</p>
+<p><code>ToolkitProvider</code> will pass a props which have a property called <code>columnToggleProps</code>. <code>columnToggleProps</code> have following properties:</p>
+<ul>
+<li><code>columns</code>: Column list</li>
+<li><code>toggles</code>: An object which describe current column visibilities. <code>true</code> is on and <code>false</code> is off.</li>
+<li><code>onColumnToggle</code>: Call this method when user toggle a column.</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="basic-export-csv.html">← Export to CSV</a><a class="docs-next button" href="exposed-api.html">Introduction Exposed API →</a></div></div></div></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/react-bootstrap-table2/" class="nav-home"></a><div><h5>Docs</h5><a href="/react-bootstrap-table2/docs/en/getting-started.html">Getting Started</a><a href="/react-bootstrap-table2/docs/en/table-props.html">API References</a></div><div><h5>Community</h5><a href="https://stackoverflow.com/questions/tagged/react-bootstrap-table" target="_blank">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank">Twitter</a></div><div><h5>More</h5><a href="/react-bootstrap-table2/blog/index.html">Blog</a><a href="https://github.com/react-bootstrap-table/react-bootstrap-table2">GitHub</a><a class="github-button" href="https://github.com/react-bootstrap-table/react-bootstrap-table2" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><section class="copyright">Copyright © 2019 react-bootstrap-table2.</section></footer></div></body></html>
