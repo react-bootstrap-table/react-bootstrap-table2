@@ -20,6 +20,7 @@ import TabIndexCellTable from 'examples/basic/tabindex-column';
 import Bootstrap4DefaultSortTable from 'examples/bootstrap4/sort';
 import Bootstrap4RowSelectionTable from 'examples/bootstrap4/row-selection';
 import Bootstrap4PaginationTable from 'examples/bootstrap4/pagination';
+import Bootstrap4ColumnToggleTable from 'examples/bootstrap4/column-toggle';
 
 // work on columns
 import NestedDataTable from 'examples/columns/nested-data-table';
@@ -168,6 +169,7 @@ import CustomSizePerPageTable from 'examples/pagination/custom-size-per-page';
 import CustomPageListTable from 'examples/pagination/custom-page-list';
 import StandalonePaginationList from 'examples/pagination/standalone-pagination-list';
 import StandaloneSizePerPage from 'examples/pagination/standalone-size-per-page';
+import StandalonePaginationTotal from 'examples/pagination/standalone-pagination-total';
 import FullyCustomPaginationTable from 'examples/pagination/fully-custom-pagination';
 import RemoteStandalonePaginationTable from 'examples/pagination/remote-standalone-pagination';
 import CustomePaginationWithFilter from 'examples/pagination/custome-page-list-with-filter';
@@ -192,6 +194,12 @@ import CSVColumnType from 'examples/csv/csv-column-type';
 import CustomCSVButton from 'examples/csv/custom-csv-button';
 import ExportCustomData from 'examples/csv/export-custom-data';
 import CustomCSV from 'examples/csv/custom-csv';
+
+// Column toggle
+import BasicColumnToggle from 'examples/column-toggle';
+import DefaultVisibility from 'examples/column-toggle/default-visibility';
+import StylingColumnToggle from 'examples/column-toggle/styling-toggle-list';
+import CustomToggleList from 'examples/column-toggle/custom-toggle-list';
 
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
@@ -240,7 +248,8 @@ storiesOf('Bootstrap 4', module)
   .addDecorator(bootstrapStyle(BOOTSTRAP_VERSION.FOUR))
   .add('Sort table with bootstrap 4', () => <Bootstrap4DefaultSortTable />)
   .add('Row selection table with bootstrap 4', () => <Bootstrap4RowSelectionTable />)
-  .add('Pagination table with bootstrap 4', () => <Bootstrap4PaginationTable />);
+  .add('Pagination table with bootstrap 4', () => <Bootstrap4PaginationTable />)
+  .add('Column Toggle with bootstrap 4', () => <Bootstrap4ColumnToggleTable />);
 
 storiesOf('Work on Columns', module)
   .addDecorator(bootstrapStyle())
@@ -400,6 +409,7 @@ storiesOf('Pagination', module)
   .add('Custom SizePerPage', () => <CustomSizePerPageTable />)
   .add('Standalone Pagination List', () => <StandalonePaginationList />)
   .add('Standalone SizePerPage Dropdown', () => <StandaloneSizePerPage />)
+  .add('Standalone Pagination Total', () => <StandalonePaginationTotal />)
   .add('Fully Custom Pagination', () => <FullyCustomPaginationTable />)
   .add('Remote Fully Custom Pagination', () => <RemoteStandalonePaginationTable />)
   .add('Custom Pagination with Filter', () => <CustomePaginationWithFilter />)
@@ -414,6 +424,13 @@ storiesOf('Table Search', module)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Fromatted Value', () => <SearchFormattedData />)
   .add('Custom Search Value', () => <CustomSearchValue />);
+
+storiesOf('Column Toggle', module)
+  .addDecorator(bootstrapStyle())
+  .add('Basic Column Toggle', () => <BasicColumnToggle />)
+  .add('Default Visibility', () => <DefaultVisibility />)
+  .add('Styling Column Toggle', () => <StylingColumnToggle />)
+  .add('Custom Column Toggle', () => <CustomToggleList />);
 
 storiesOf('Export CSV', module)
   .addDecorator(bootstrapStyle())
