@@ -63,6 +63,7 @@ export default class SelectionCell extends Component {
       selected,
       disabled,
       tabIndex,
+      rowIndex,
       selectionRenderer
     } = this.props;
 
@@ -78,7 +79,8 @@ export default class SelectionCell extends Component {
                 selectionRenderer ? selectionRenderer({
                   mode: inputType,
                   checked: selected,
-                  disabled
+                  disabled,
+                  rowIndex
                 }) : (
                   <input
                     type={ inputType }

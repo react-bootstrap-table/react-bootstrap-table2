@@ -16,7 +16,7 @@ const Footer = (props) => {
   ) => expandColumnPosition === Const.INDICATOR_POSITION_LEFT;
 
   const childrens = columns.map((column, i) => {
-    if (column.footer === undefined || column.footer === null || column.hidden) {
+    if (column.footer === undefined || column.footer === null) {
       return false;
     }
 

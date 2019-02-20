@@ -39,24 +39,21 @@ const Header = (props) => {
 
   const childrens = [
     columns.map((column, i) => {
-      if (!column.hidden) {
-        const currSort = column.dataField === sortField;
-        const isLastSorting = column.dataField === sortField;
+      const currSort = column.dataField === sortField;
+      const isLastSorting = column.dataField === sortField;
 
-        return (
-          <HeaderCell
-            index={ i }
-            key={ column.dataField }
-            column={ column }
-            onSort={ onSort }
-            sorting={ currSort }
-            onFilter={ onFilter }
-            onExternalFilter={ onExternalFilter }
-            sortOrder={ sortOrder }
-            isLastSorting={ isLastSorting }
-          />);
-      }
-      return false;
+      return (
+        <HeaderCell
+          index={ i }
+          key={ column.dataField }
+          column={ column }
+          onSort={ onSort }
+          sorting={ currSort }
+          onFilter={ onFilter }
+          onExternalFilter={ onExternalFilter }
+          sortOrder={ sortOrder }
+          isLastSorting={ isLastSorting }
+        />);
     })
   ];
 

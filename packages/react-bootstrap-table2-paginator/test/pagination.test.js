@@ -1,11 +1,10 @@
 import React from 'react';
 import sinon from 'sinon';
-import { shallow } from 'enzyme';
+import { shallow, render } from 'enzyme';
 
 import SizePerPageDropDown from '../src/size-per-page-dropdown';
 import PaginationList from '../src/pagination-list';
 import Pagination from '../src/pagination';
-import PaginationTotal from '../src/pagination-total';
 
 describe('Pagination', () => {
   let wrapper;
@@ -107,28 +106,24 @@ describe('Pagination', () => {
   describe('when props.showTotal is true', () => {
     beforeEach(() => {
       const props = createMockProps({ showTotal: true });
-      wrapper = shallow(<Pagination { ...props } />);
-      wrapper.render();
-      instance = wrapper.instance();
+      wrapper = render(<Pagination { ...props } />);
     });
 
     it('should render PaginationTotal correctly', () => {
-      expect(wrapper.dive().find(PaginationTotal)).toHaveLength(1);
+      expect(wrapper.find('.react-bootstrap-table-pagination-total')).toHaveLength(1);
     });
 
     describe('if props.paginationTotalRenderer is defined', () => {
       let paginationTotalRenderer;
 
       beforeEach(() => {
-        paginationTotalRenderer = jest.fn();
+        paginationTotalRenderer = jest.fn(() => <div />);
         const props = createMockProps({ showTotal: true, paginationTotalRenderer });
-        wrapper = shallow(<Pagination { ...props } />);
-        wrapper.render();
-        instance = wrapper.instance();
+        wrapper = render(<Pagination { ...props } />);
       });
 
       it('should not render PaginationTotal', () => {
-        expect(wrapper.dive().find(PaginationTotal)).toHaveLength(0);
+        expect(wrapper.find('.react-bootstrap-table-pagination-total')).toHaveLength(0);
       });
 
       it('should call props.paginationTotalRenderer correctly', () => {

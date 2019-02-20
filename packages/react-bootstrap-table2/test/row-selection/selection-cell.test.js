@@ -295,7 +295,8 @@ describe('<SelectionCell />', () => {
         expect(selectionRenderer).toHaveBeenCalledWith({
           mode,
           checked: selected,
-          disabled: wrapper.prop('disabled')
+          disabled: wrapper.prop('disabled'),
+          rowIndex
         });
       });
     });

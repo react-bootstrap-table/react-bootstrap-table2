@@ -47,6 +47,7 @@ describe('Context', () => {
       expect(wrapper.instance().CellEditContext).not.toBeDefined();
       expect(wrapper.instance().FilterContext).not.toBeDefined();
       expect(wrapper.instance().PaginationContext).not.toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).not.toBeDefined();
     });
 
     it('should render correctly', () => {
@@ -77,6 +78,57 @@ describe('Context', () => {
       expect(wrapper.instance().CellEditContext).not.toBeDefined();
       expect(wrapper.instance().FilterContext).not.toBeDefined();
       expect(wrapper.instance().PaginationContext).not.toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).not.toBeDefined();
+    });
+  });
+
+  describe('if thers\'s any column hidden', () => {
+    beforeEach(() => {
+      const columnsWithHidden = [{
+        dataField: keyField,
+        text: 'ID'
+      }, {
+        dataField: 'name',
+        text: 'Name',
+        hidden: true
+      }];
+      wrapper = shallow(
+        <BootstrapTable keyField={ keyField } data={ data } columns={ columnsWithHidden } />
+      );
+      wrapper.render();
+    });
+
+    it('should create contexts correctly', () => {
+      expect(wrapper.instance().DataContext).toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).toBeDefined();
+      expect(wrapper.instance().SelectionContext).not.toBeDefined();
+      expect(wrapper.instance().CellEditContext).not.toBeDefined();
+      expect(wrapper.instance().FilterContext).not.toBeDefined();
+      expect(wrapper.instance().PaginationContext).not.toBeDefined();
+    });
+  });
+
+  describe('if columnToggle is enable', () => {
+    beforeEach(() => {
+      const columnToggle = { toggles: { id: true, name: true } };
+      wrapper = shallow(
+        <BootstrapTable
+          keyField={ keyField }
+          data={ data }
+          columns={ columns }
+          columnToggle={ columnToggle }
+        />
+      );
+      wrapper.render();
+    });
+
+    it('should create contexts correctly', () => {
+      expect(wrapper.instance().DataContext).toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).toBeDefined();
+      expect(wrapper.instance().SelectionContext).not.toBeDefined();
+      expect(wrapper.instance().CellEditContext).not.toBeDefined();
+      expect(wrapper.instance().FilterContext).not.toBeDefined();
+      expect(wrapper.instance().PaginationContext).not.toBeDefined();
     });
   });
 
@@ -101,6 +153,7 @@ describe('Context', () => {
       expect(wrapper.instance().CellEditContext).not.toBeDefined();
       expect(wrapper.instance().FilterContext).not.toBeDefined();
       expect(wrapper.instance().PaginationContext).not.toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).not.toBeDefined();
     });
   });
 
@@ -134,6 +187,7 @@ describe('Context', () => {
       expect(wrapper.instance().CellEditContext).toBeDefined();
       expect(wrapper.instance().FilterContext).not.toBeDefined();
       expect(wrapper.instance().PaginationContext).not.toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).not.toBeDefined();
     });
   });
 
@@ -163,6 +217,7 @@ describe('Context', () => {
       expect(wrapper.instance().CellEditContext).not.toBeDefined();
       expect(wrapper.instance().FilterContext).not.toBeDefined();
       expect(wrapper.instance().PaginationContext).not.toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).not.toBeDefined();
     });
   });
 
@@ -193,6 +248,7 @@ describe('Context', () => {
       expect(wrapper.instance().CellEditContext).not.toBeDefined();
       expect(wrapper.instance().FilterContext).toBeDefined();
       expect(wrapper.instance().PaginationContext).not.toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).not.toBeDefined();
     });
   });
 
@@ -223,6 +279,7 @@ describe('Context', () => {
       expect(wrapper.instance().CellEditContext).not.toBeDefined();
       expect(wrapper.instance().FilterContext).not.toBeDefined();
       expect(wrapper.instance().PaginationContext).toBeDefined();
+      expect(wrapper.instance().ColumnManagementContext).not.toBeDefined();
     });
   });
 
