@@ -10,9 +10,10 @@ class RowExpandProvider extends React.Component {
     children: PropTypes.node.isRequired,
     data: PropTypes.array.isRequired,
     keyField: PropTypes.string.isRequired
-  }
+  };
 
-  state = { expanded: this.props.expandRow.expanded || [] };
+  state = { expanded: this.props.expandRow.expanded || [],
+    isClosing: this.props.expandRow.isClosing || [] };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.expandRow) {
@@ -22,6 +23,10 @@ class RowExpandProvider extends React.Component {
     }
   }
 
+  onClosed = (closedRow) => {
+    this.setState({ isClosing: this.state.isClosing.filter(value => value !== closedRow) });
+  };
+
   handleRowExpand = (rowKey, expanded, rowIndex, e) => {
     const { data, keyField, expandRow: { onExpand, onlyOneExpanding, nonExpandable } } = this.props;
     if (nonExpandable && nonExpandable.includes(rowKey)) {
@@ -29,11 +34,15 @@ class RowExpandProvider extends React.Component {
     }
 
     let currExpanded = [...this.state.expanded];
+    let isClosing = [...this.state.isClosing];
 
     if (expanded) {
-      if (onlyOneExpanding) currExpanded = [rowKey];
-      else currExpanded.push(rowKey);
+      if (onlyOneExpanding) {
+        isClosing = isClosing.concat(currExpanded);
+        currExpanded = [rowKey];
+      } else currExpanded.push(rowKey);
     } else {
+      isClosing.push(rowKey);
       currExpanded = currExpanded.filter(value => value !== rowKey);
     }
 
@@ -41,8 +50,8 @@ class RowExpandProvider extends React.Component {
       const row = dataOperator.getRowByRowId(data, keyField, rowKey);
       onExpand(row, expanded, rowIndex, e);
     }
-    this.setState(() => ({ expanded: currExpanded }));
-  }
+    this.setState(() => ({ expanded: currExpanded, isClosing }));
+  };
 
   handleAllRowExpand = (e, expandAll) => {
     const {
@@ -68,7 +77,7 @@ class RowExpandProvider extends React.Component {
     }
 
     this.setState(() => ({ expanded: currExpanded }));
-  }
+  };
 
   render() {
     const { data, keyField } = this.props;
@@ -78,6 +87,8 @@ class RowExpandProvider extends React.Component {
           ...this.props.expandRow,
           nonExpandable: this.props.expandRow.nonExpandable,
           expanded: this.state.expanded,
+          isClosing: this.state.isClosing,
+          onClosed: this.onClosed,
           isAnyExpands: dataOperator.isAnyExpands(data, keyField, this.state.expanded),
           onRowExpand: this.handleRowExpand,
           onAllRowExpand: this.handleAllRowExpand
