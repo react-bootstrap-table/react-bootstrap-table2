@@ -24,7 +24,7 @@ In addition, we also allow you use `React` `Refs` to directly access the compone
 
 ## Get Current Selected Rows
 
-`this.node.selectionContext.state.selected`
+`this.node.selectionContext.selected`
 
 ## Get Current Expanded Rows
 
@@ -49,3 +49,7 @@ In addition, we also allow you use `React` `Refs` to directly access the compone
 ## Get Current Filters
 
 `this.node.filterContext.currFilters`
+
+## Trigger Cell Editing:
+
+`this.node.cellEditContext.startEditing(0, 1);  // rowindex, columnindex`

@@ -163,3 +163,6 @@ const { SearchBar, ClearSearchButton } = Search;
   }
 </ToolkitProvider>
 ```
+
+### Props
+* `className`: Add custom class name on clear search button.
