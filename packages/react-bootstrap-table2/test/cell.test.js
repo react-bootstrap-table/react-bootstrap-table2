@@ -218,6 +218,47 @@ describe('Cell', () => {
       });
     });
 
+    describe('when props.row is change', () => {
+      describe('and column.formatter is enable', () => {
+        const column = { dataField: 'name', text: 'Product Name', formatter: () => 123 };
+        beforeEach(() => {
+          props = {
+            row,
+            columnIndex: 1,
+            rowIndex: 1,
+            tabIndex: 5,
+            column
+          };
+          wrapper = shallow(
+            <Cell { ...props } />);
+        });
+
+        it('should return true', () => {
+          nextProps = { ...props, row: { ...row, alert: 'test' } };
+          expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(true);
+        });
+      });
+      describe('but column.formatter is disable', () => {
+        const column = { dataField: 'name', text: 'Product Name' };
+        beforeEach(() => {
+          props = {
+            row,
+            columnIndex: 1,
+            rowIndex: 1,
+            tabIndex: 5,
+            column
+          };
+          wrapper = shallow(
+            <Cell { ...props } />);
+        });
+
+        it('should return true', () => {
+          nextProps = { ...props, row: { ...row, alert: 'test' } };
+          expect(wrapper.instance().shouldComponentUpdate(nextProps)).toBe(false);
+        });
+      });
+    });
+
     describe('if column.isDummyField is true', () => {
       describe('when content is change', () => {
         const column = { dataField: '', text: 'Product Name', isDummyField: true };

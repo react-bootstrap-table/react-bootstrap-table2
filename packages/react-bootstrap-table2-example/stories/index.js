@@ -21,6 +21,7 @@ import Bootstrap4DefaultSortTable from 'examples/bootstrap4/sort';
 import Bootstrap4RowSelectionTable from 'examples/bootstrap4/row-selection';
 import Bootstrap4PaginationTable from 'examples/bootstrap4/pagination';
 import Bootstrap4ColumnToggleTable from 'examples/bootstrap4/column-toggle';
+import ToolkitsTable from 'examples/bootstrap4/toolkits';
 
 // work on columns
 import NestedDataTable from 'examples/columns/nested-data-table';
@@ -249,7 +250,8 @@ storiesOf('Bootstrap 4', module)
   .add('Sort table with bootstrap 4', () => <Bootstrap4DefaultSortTable />)
   .add('Row selection table with bootstrap 4', () => <Bootstrap4RowSelectionTable />)
   .add('Pagination table with bootstrap 4', () => <Bootstrap4PaginationTable />)
-  .add('Column Toggle with bootstrap 4', () => <Bootstrap4ColumnToggleTable />);
+  .add('Column Toggle with bootstrap 4', () => <Bootstrap4ColumnToggleTable />)
+  .add('toolkits Table bootstrap 4', () => <ToolkitsTable />);
 
 storiesOf('Work on Columns', module)
   .addDecorator(bootstrapStyle())

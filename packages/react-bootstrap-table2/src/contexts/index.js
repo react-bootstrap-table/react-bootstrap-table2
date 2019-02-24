@@ -294,6 +294,7 @@ const withContext = Base =>
       return rootProps => (
         <this.CellEditContext.Provider
           { ...baseProps }
+          ref={ n => this.cellEditContext = n }
           selectRow={ this.props.selectRow }
           cellEdit={ this.props.cellEdit }
           data={ rootProps.getData() }

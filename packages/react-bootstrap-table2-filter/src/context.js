@@ -40,7 +40,7 @@ export default (
 
     componentWillReceiveProps(nextProps) {
       let nextData = nextProps.data;
-      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.props.data)) {
+      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.state.data)) {
         nextData = this.doFilter(nextProps);
       }
       this.setState({

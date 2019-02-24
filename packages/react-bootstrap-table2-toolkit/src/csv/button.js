@@ -5,12 +5,14 @@ const ExportCSVButton = (props) => {
   const {
     onExport,
     children,
+    className,
     ...rest
   } = props;
 
   return (
     <button
       type="button"
+      className={ `react-bs-table-csv-btn btn btn-default ${className}` }
       onClick={ () => onExport() }
       { ...rest }
     >
@@ -26,7 +28,7 @@ ExportCSVButton.propTypes = {
   style: PropTypes.object
 };
 ExportCSVButton.defaultProps = {
-  className: 'react-bs-table-csv-btn btn btn-default',
+  className: '',
   style: {}
 };
 
