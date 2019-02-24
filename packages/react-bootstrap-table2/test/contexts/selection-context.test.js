@@ -73,15 +73,15 @@ describe('DataContext', () => {
       expect(SelectionContext.Consumer).toBeDefined();
     });
 
-    it('should have correct state.data', () => {
-      expect(wrapper.state().selected).toEqual([]);
+    it('should have correct this.selected', () => {
+      expect(wrapper.instance().selected).toEqual([]);
     });
 
     it('should pass correct sort props to children element', () => {
       expect(wrapper.length).toBe(1);
       expect(mockBase).toHaveBeenCalledWith({
         ...defaultSelectRow,
-        selected: wrapper.state().selected,
+        selected: wrapper.instance().selected,
         onRowSelect: wrapper.instance().handleRowSelect,
         onAllRowsSelect: wrapper.instance().handleAllRowsSelect,
         allRowsNotSelected: true,
@@ -104,8 +104,8 @@ describe('DataContext', () => {
       });
     });
 
-    it('should have correct state.selected', () => {
-      expect(wrapper.state().selected).toEqual(newSelectRow.selected);
+    it('should have correct this.selected', () => {
+      expect(wrapper.instance().selected).toEqual(newSelectRow.selected);
     });
 
     describe('if nextProps.selectRow is not existing', () => {
@@ -120,8 +120,8 @@ describe('DataContext', () => {
         });
       });
 
-      it('should keep origin state.selected', () => {
-        expect(wrapper.state().selected).toEqual(defaultSelected);
+      it('should keep origin this.selected', () => {
+        expect(wrapper.instance().selected).toEqual(defaultSelected);
       });
     });
 
@@ -131,8 +131,8 @@ describe('DataContext', () => {
         wrapper.instance().componentWillReceiveProps({});
       });
 
-      it('should not set state.selected', () => {
-        expect(wrapper.state().selected).toEqual([]);
+      it('should not set this.selected', () => {
+        expect(wrapper.instance().selected).toEqual([]);
       });
     });
   });
@@ -148,8 +148,8 @@ describe('DataContext', () => {
       wrapper = shallow(shallowContext(selectRow));
     });
 
-    it('should have correct state.data', () => {
-      expect(wrapper.state().selected).toEqual(selectRow.selected);
+    it('should have correct this.selected', () => {
+      expect(wrapper.instance().selected).toEqual(selectRow.selected);
     });
   });
 
@@ -164,12 +164,12 @@ describe('DataContext', () => {
         wrapper = shallow(shallowContext(selectRow));
       });
 
-      it('should set state.selected correctly', () => {
+      it('should set this.selected correctly', () => {
         wrapper.instance().handleRowSelect(firstSelectedRow, true, rowIndex);
-        expect(wrapper.state('selected')).toEqual([firstSelectedRow]);
+        expect(wrapper.instance().selected).toEqual([firstSelectedRow]);
 
         wrapper.instance().handleRowSelect(secondSelectedRow, true, rowIndex);
-        expect(wrapper.state('selected')).toEqual([secondSelectedRow]);
+        expect(wrapper.instance().selected).toEqual([secondSelectedRow]);
       });
     });
 
@@ -178,18 +178,19 @@ describe('DataContext', () => {
         wrapper = shallow(shallowContext());
       });
 
-      it('should set state.selected correctly', () => {
+      it('should set this.selected correctly', () => {
         wrapper.instance().handleRowSelect(firstSelectedRow, true, rowIndex);
-        expect(wrapper.state('selected')).toEqual(expect.arrayContaining([firstSelectedRow]));
+        expect(wrapper.instance().selected).toEqual(expect.arrayContaining([firstSelectedRow]));
 
         wrapper.instance().handleRowSelect(secondSelectedRow, true, rowIndex);
-        expect(wrapper.state('selected')).toEqual(expect.arrayContaining([firstSelectedRow, secondSelectedRow]));
+        expect(wrapper.instance().selected)
+          .toEqual(expect.arrayContaining([firstSelectedRow, secondSelectedRow]));
 
         wrapper.instance().handleRowSelect(firstSelectedRow, false, rowIndex);
-        expect(wrapper.state('selected')).toEqual(expect.arrayContaining([secondSelectedRow]));
+        expect(wrapper.instance().selected).toEqual(expect.arrayContaining([secondSelectedRow]));
 
         wrapper.instance().handleRowSelect(secondSelectedRow, false, rowIndex);
-        expect(wrapper.state('selected')).toEqual([]);
+        expect(wrapper.instance().selected).toEqual([]);
       });
     });
 
@@ -220,8 +221,8 @@ describe('DataContext', () => {
         wrapper.instance().handleAllRowsSelect(e, false);
       });
 
-      it('should set state.selected correctly', () => {
-        expect(wrapper.state('selected')).toEqual(data.map(d => d[keyField]));
+      it('should set this.selected correctly', () => {
+        expect(wrapper.instance().selected).toEqual(data.map(d => d[keyField]));
       });
 
       describe('when selectRow.onSelectAll is defined', () => {
@@ -237,7 +238,7 @@ describe('DataContext', () => {
         it('should call selectRow.onSelectAll correctly', () => {
           expect(onSelectAll).toHaveBeenCalledWith(
             true,
-            dataOperator.getSelectedRows(data, keyField, wrapper.state('selected')),
+            dataOperator.getSelectedRows(data, keyField, wrapper.instance().selected),
             e
           );
         });
@@ -253,8 +254,8 @@ describe('DataContext', () => {
         wrapper.instance().handleAllRowsSelect(e, true);
       });
 
-      it('should set state.selected correctly', () => {
-        expect(wrapper.state('selected')).toEqual([]);
+      it('should set this.selected correctly', () => {
+        expect(wrapper.instance().selected).toEqual([]);
       });
 
       describe('when selectRow.onSelectAll is defined', () => {
