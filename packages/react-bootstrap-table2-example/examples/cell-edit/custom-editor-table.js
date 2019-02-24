@@ -18,6 +18,11 @@ class QualityRanger extends React.Component {
   static defaultProps = {
     value: 0
   }
+
+  componentDidMount() {
+    this.range.focus();
+  }
+
   getValue() {
     return parseInt(this.range.value, 10);
   }
