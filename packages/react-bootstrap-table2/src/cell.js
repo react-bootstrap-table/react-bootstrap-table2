@@ -23,7 +23,10 @@ class Cell extends eventDelegater(Component) {
 
     if (shouldUpdate) return true;
 
+    // if (nextProps.formatter)
+
     shouldUpdate =
+      nextProps.column.formatter ? !_.isEqual(this.props.row, nextProps.row) : false ||
       this.props.column.hidden !== nextProps.column.hidden ||
       this.props.rowIndex !== nextProps.rowIndex ||
       this.props.columnIndex !== nextProps.columnIndex ||
