@@ -13,7 +13,9 @@ const ExpandRow = ({ children, expanded, onClosed, ...rest }) => (
         onExited={ onClosed }
       >
         <div>
-          { children }
+          <div className="row-expansion-style">
+            { children }
+          </div>
         </div>
       </CSSTransition>
     </td>

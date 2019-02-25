@@ -158,7 +158,10 @@
     }
   }
   .reset-expansion-style{
-    padding: 0 8px 0 8px;
+    padding: 0;
+  }
+  .row-expansion-style{
+    padding: 8px;
   }
   .row-expand-slide-appear{
     max-height: 0;
