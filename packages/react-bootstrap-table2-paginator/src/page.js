@@ -23,7 +23,7 @@ export const alignPage = (
   sizePerPage,
   pageStartIndex
 ) => {
-  if (page < pageStartIndex || page > (Math.floor(dataSize / sizePerPage) + pageStartIndex)) {
+  if (page < pageStartIndex || page > (Math.floor(dataSize / sizePerPage) + ((dataSize % sizePerPage !== 0) ? pageStartIndex : 0))) {
     return pageStartIndex;
   }
   return page;
