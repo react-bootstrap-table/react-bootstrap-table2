@@ -3,28 +3,70 @@ import React from 'react';
 
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, selectFilter } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
-import { productsGenerator } from 'utils/common';
+import { productsQualityGenerator } from 'utils/common';
 
-const products = productsGenerator(21);
+const products = productsQualityGenerator(21);
+
+const selectOptions = {
+  0: 'good',
+  1: 'Bad',
+  2: 'unknown'
+};
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID',
-  filter: textFilter({})
+  text: 'Product ID'
 }, {
   dataField: 'name',
   text: 'Product Name',
   filter: textFilter()
+}, {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions[cell],
+  filter: selectFilter({
+    options: selectOptions,
+    defaultValue: 0
+  })
 }];
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import paginationFactory, { PaginationProvider, PaginationListStandalone } from 'react-bootstrap-table2-paginator';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, selectFilter } from 'react-bootstrap-table2-filter';
+
+const selectOptions = {
+  0: 'good',
+  1: 'Bad',
+  2: 'unknown'
+};
+
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID'
+}, {
+  dataField: 'name',
+  text: 'Product Name',
+  filter: textFilter()
+}, {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions[cell],
+  filter: selectFilter({
+    options: selectOptions,
+    defaultValue: 0
+  })
+}];
 
 class Table extends React.Component {
+  state = { products }
+
+  loadData = () => {
+    this.setState({ products: productsQualityGenerator(40, 7) });
+  }
+
   render() {
     const options = {
       custom: true,
@@ -39,10 +81,11 @@ class Table extends React.Component {
       firstPageTitle: 'Next page',
       lastPageTitle: 'Last page',
       showTotal: true,
-      totalSize: products.length
+      totalSize: this.state.products.length
     };
     const contentTable = ({ paginationProps, paginationTableProps }) => (
       <div>
+        <button className="btn btn-default" onClick={ this.loadData }>Load Another Data</button>
         <PaginationListStandalone { ...paginationProps } />
         <div>
           <div>
@@ -50,10 +93,9 @@ class Table extends React.Component {
               striped
               hover
               keyField="id"
-              data={ products }
+              data={ this.state.products }
               columns={ columns }
               filter={ filterFactory() }
-              cellEdit={ cellEditFactory() }
               { ...paginationTableProps }
             />
           </div>
@@ -72,7 +114,6 @@ class Table extends React.Component {
         >
           { contentTable }
         </PaginationProvider>
-        <Code>{ sourceCode }</Code>
       </div >
     );
   }
@@ -80,6 +121,12 @@ class Table extends React.Component {
 `;
 
 export default class Table extends React.Component {
+  state = { products }
+
+  loadData = () => {
+    this.setState({ products: productsQualityGenerator(40, 7) });
+  }
+
   render() {
     const options = {
       custom: true,
@@ -94,10 +141,11 @@ export default class Table extends React.Component {
       firstPageTitle: 'Next page',
       lastPageTitle: 'Last page',
       showTotal: true,
-      totalSize: products.length
+      totalSize: this.state.products.length
     };
     const contentTable = ({ paginationProps, paginationTableProps }) => (
       <div>
+        <button className="btn btn-default" onClick={ this.loadData }>Load Another Data</button>
         <PaginationListStandalone { ...paginationProps } />
         <div>
           <div>
@@ -105,7 +153,7 @@ export default class Table extends React.Component {
               striped
               hover
               keyField="id"
-              data={ products }
+              data={ this.state.products }
               columns={ columns }
               filter={ filterFactory() }
               { ...paginationTableProps }

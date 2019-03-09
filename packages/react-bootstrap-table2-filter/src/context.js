@@ -27,9 +27,8 @@ export default (
       this.onFilter = this.onFilter.bind(this);
       this.doFilter = this.doFilter.bind(this);
       this.onExternalFilter = this.onExternalFilter.bind(this);
-      this.state = {
-        data: props.data
-      };
+      this.data = props.data;
+      this.isEmitDataChange = false;
     }
 
     componentDidMount() {
@@ -39,13 +38,10 @@ export default (
     }
 
     componentWillReceiveProps(nextProps) {
-      let nextData = nextProps.data;
-      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.state.data)) {
-        nextData = this.doFilter(nextProps);
+      // let nextData = nextProps.data;
+      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.data)) {
+        this.doFilter(nextProps, undefined, this.isEmitDataChange);
       }
-      this.setState({
-        data: nextData
-      });
     }
 
     onFilter(column, filterType, initialize = false) {
@@ -83,9 +79,7 @@ export default (
         if (filter.props.onFilter) {
           result = filter.props.onFilter(filterVal);
         }
-
-        result = this.doFilter(this.props, result);
-        this.setState({ data: result });
+        this.doFilter(this.props, result);
       };
     }
 
@@ -95,21 +89,25 @@ export default (
       };
     }
 
-    doFilter(props, customResult) {
+    doFilter(props, customResult, ignoreEmitDataChange = false) {
       let result = customResult;
 
       const { dataChangeListener, data, columns } = props;
       result = result || filters(data, columns, _)(this.currFilters);
-      if (dataChangeListener) {
+      this.data = result;
+      if (dataChangeListener && !ignoreEmitDataChange) {
+        this.isEmitDataChange = true;
         dataChangeListener.emit('filterChanged', result.length);
+      } else {
+        this.isEmitDataChange = false;
+        this.forceUpdate();
       }
-      return result;
     }
 
     render() {
       return (
         <FilterContext.Provider value={ {
-          data: this.state.data,
+          data: this.data,
           onFilter: this.onFilter,
           onExternalFilter: this.onExternalFilter
         } }
