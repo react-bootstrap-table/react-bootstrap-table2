@@ -17,7 +17,6 @@ class Body extends React.Component {
     super(props);
     const {
       keyField,
-      visibleColumnSize,
       cellEdit,
       selectRow,
       expandRow
@@ -34,7 +33,7 @@ class Body extends React.Component {
     const expandRowEnabled = !!expandRow.renderer;
 
     if (expandRowEnabled) {
-      RowComponent = withRowExpansion(RowAggregator, visibleColumnSize);
+      RowComponent = withRowExpansion(RowAggregator);
     }
 
     if (selectRowEnabled) {
