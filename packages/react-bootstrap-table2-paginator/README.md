@@ -190,6 +190,19 @@ import paginationFactory, {
 
 That's it!!  The benifit for using standalone is you can much easier to render the standalone component in any posistion. In the future, we will implement more featue like applying `style`, `className` etc on standalone components.
 
+##### Customizable props for `PaginationListStandalone`
+* N/A
+
+##### Customizable props for `SizePerPageDropdownStandalone`
+* `open`: `true` to make dropdown show.
+* `hidden`: `true` to hide the size per page dropdown.
+* `btnContextual`: Set the button contextual
+* `variation`: Variation for dropdown, available value is `dropdown` and `dropup`.
+* `className`: Custom the class on size per page dropdown
+
+##### Customizable props for `SizePerPageDropdownStandalone`
+* N/A
+
 #### 4.2 Customization Everything
 
 If you choose to custom the pagination component by yourself, the `paginationProps` will be important for you. Becasue you have to know for example how to change page or what's the current page etc. Hence, following is all the props in `paginationProps` object:

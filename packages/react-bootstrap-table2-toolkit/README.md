@@ -67,6 +67,19 @@ const { SearchBar } = Search;
 
 3. You should render `SearchBar` with `searchProps` as well. The position of `SearchBar` is depends on you.
 
+### `SearchBar` Props
+#### className - [string]
+Custom the class on input element.
+
+#### placeholder - [string]
+Custom the placeholder on input element.
+
+#### style - [object]
+Custom the style on input element.
+
+#### delay = [number]
+milionsecond for debounce user input.
+
 ### Search Options
 
 #### defaultSearch - [string]
@@ -127,6 +140,8 @@ const { SearchBar, ClearSearchButton } = Search;
 </ToolkitProvider>
 ```
 
+-----
+
 ## Export CSV
 There are two steps to enable the export CSV functionality:
 
@@ -175,6 +190,8 @@ Default is `true`. `false` will only export current data which display on table.
 
 #### onlyExportSelection - [bool]
 Default is `false`. `true` will only export the data which is selected.
+
+-----
 
 ## Column Toggle
 
