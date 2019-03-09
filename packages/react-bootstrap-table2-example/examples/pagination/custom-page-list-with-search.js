@@ -7,7 +7,7 @@ import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Code from 'components/common/code-block';
 import { productsGenerator } from 'utils/common';
 
-const products = productsGenerator(21);
+const products = productsGenerator(40);
 const { SearchBar } = Search;
 
 const columns = [{
@@ -24,6 +24,12 @@ import paginationFactory, { PaginationProvider, PaginationListStandalone } from 
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 class Table extends React.Component {
+  state = { products }
+
+  loadData = () => {
+    this.setState({ products: productsGenerator(17) });
+  }
+
   render() {
     const options = {
       custom: true,
@@ -38,25 +44,32 @@ class Table extends React.Component {
       firstPageTitle: 'Next page',
       lastPageTitle: 'Last page',
       showTotal: true,
-      totalSize: products.length
+      totalSize: this.state.products.length
     };
     const contentTable = ({ paginationProps, paginationTableProps }) => (
       <div>
+        <button className="btn btn-default" onClick={ this.loadData }>Load Another Data</button>
         <PaginationListStandalone { ...paginationProps } />
-        <div>
-          <div>
-            <BootstrapTable
-              striped
-              hover
-              keyField="id"
-              data={ products }
-              columns={ columns }
-              filter={ filterFactory() }
-              cellEdit={ cellEditFactory() }
-              { ...paginationTableProps }
-            />
-          </div>
-        </div>
+        <ToolkitProvider
+          keyField="id"
+          columns={ columns }
+          data={ this.state.products }
+          search
+        >
+          {
+            toolkitprops => (
+              <div>
+                <SearchBar { ...toolkitprops.searchProps } />
+                <BootstrapTable
+                  striped
+                  hover
+                  { ...toolkitprops.baseProps }
+                  { ...paginationTableProps }
+                />
+              </div>
+            )
+          }
+        </ToolkitProvider>
         <PaginationListStandalone { ...paginationProps } />
       </div>
     );
@@ -79,6 +92,12 @@ class Table extends React.Component {
 `;
 
 export default class Table extends React.Component {
+  state = { products }
+
+  loadData = () => {
+    this.setState({ products: productsGenerator(17) });
+  }
+
   render() {
     const options = {
       custom: true,
@@ -93,15 +112,16 @@ export default class Table extends React.Component {
       firstPageTitle: 'Next page',
       lastPageTitle: 'Last page',
       showTotal: true,
-      totalSize: products.length
+      totalSize: this.state.products.length
     };
     const contentTable = ({ paginationProps, paginationTableProps }) => (
       <div>
+        <button className="btn btn-default" onClick={ this.loadData }>Load Another Data</button>
         <PaginationListStandalone { ...paginationProps } />
         <ToolkitProvider
           keyField="id"
           columns={ columns }
-          data={ products }
+          data={ this.state.products }
           search
         >
           {
