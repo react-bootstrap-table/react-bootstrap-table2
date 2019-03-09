@@ -117,13 +117,14 @@ class StateProvider extends React.Component {
     const { pagination: { options } } = this.props;
     const pageStartIndex = typeof options.pageStartIndex === 'undefined' ?
       Const.PAGE_START_INDEX : options.pageStartIndex;
-    this.dataSize = newDataSize;
     this.currPage = alignPage(
       newDataSize,
+      this.dataSize,
       this.currPage,
       this.currSizePerPage,
       pageStartIndex
     );
+    this.dataSize = newDataSize;
     this.forceUpdate();
   }
 

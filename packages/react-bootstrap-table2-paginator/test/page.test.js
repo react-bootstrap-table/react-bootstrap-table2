@@ -43,18 +43,132 @@ describe('Page Functions', () => {
   });
 
   describe('alignPage', () => {
-    const pageStartIndex = 1;
-    const sizePerPage = 10;
-    const page = 3;
-    describe('if the page does not fit the pages which calculated from the length of data', () => {
-      it('should return pageStartIndex argument', () => {
-        expect(alignPage(15, page, sizePerPage, pageStartIndex)).toEqual(pageStartIndex);
+    let newDataSize;
+    let prevDataSize;
+    let currPage;
+    let pageStartIndex;
+    let sizePerPage;
+
+    describe('if prevDataSize < newDataSize', () => {
+      beforeEach(() => {
+        newDataSize = 10;
+        prevDataSize = 6;
+        currPage = 2;
+        pageStartIndex = 1;
+        sizePerPage = 5;
+      });
+      it('should return same page', () => {
+        expect(alignPage(
+          newDataSize,
+          prevDataSize,
+          currPage,
+          sizePerPage,
+          pageStartIndex
+        )).toEqual(currPage);
       });
     });
 
-    describe('if the length of store.data is large than the end page index', () => {
-      it('should return current page', () => {
-        expect(alignPage(30, page, sizePerPage, pageStartIndex)).toEqual(page);
+    describe('if currPage < newDataSize', () => {
+      beforeEach(() => {
+        newDataSize = 10;
+        prevDataSize = 12;
+        currPage = 0;
+        pageStartIndex = 1;
+        sizePerPage = 5;
+      });
+
+      it('should return correct page', () => {
+        expect(alignPage(
+          newDataSize,
+          prevDataSize,
+          currPage,
+          sizePerPage,
+          pageStartIndex
+        )).toEqual(pageStartIndex);
+      });
+    });
+
+    describe('if partStartIndex is default 1', () => {
+      describe('and currPage is bigger than newest last page', () => {
+        beforeEach(() => {
+          newDataSize = 9;
+          prevDataSize = 12;
+          currPage = 3;
+          pageStartIndex = 1;
+          sizePerPage = 5;
+        });
+
+        it('should return correct page', () => {
+          expect(alignPage(
+            newDataSize,
+            prevDataSize,
+            currPage,
+            sizePerPage,
+            pageStartIndex
+          )).toEqual(2);
+        });
+      });
+
+      describe('and currPage is short than newest last page', () => {
+        beforeEach(() => {
+          newDataSize = 11;
+          prevDataSize = 12;
+          currPage = 3;
+          pageStartIndex = 1;
+          sizePerPage = 5;
+        });
+
+        it('should return correct page', () => {
+          expect(alignPage(
+            newDataSize,
+            prevDataSize,
+            currPage,
+            sizePerPage,
+            pageStartIndex
+          )).toEqual(currPage);
+        });
+      });
+    });
+
+    describe('if partStartIndex is default 0', () => {
+      describe('and currPage is bigger than newest last page', () => {
+        beforeEach(() => {
+          newDataSize = 8;
+          prevDataSize = 11;
+          currPage = 2;
+          pageStartIndex = 0;
+          sizePerPage = 5;
+        });
+
+        it('should return correct page', () => {
+          expect(alignPage(
+            newDataSize,
+            prevDataSize,
+            currPage,
+            sizePerPage,
+            pageStartIndex
+          )).toEqual(1);
+        });
+      });
+
+      describe('and currPage is short than newest last page', () => {
+        beforeEach(() => {
+          newDataSize = 11;
+          prevDataSize = 12;
+          currPage = 2;
+          pageStartIndex = 0;
+          sizePerPage = 5;
+        });
+
+        it('should return correct page', () => {
+          expect(alignPage(
+            newDataSize,
+            prevDataSize,
+            currPage,
+            sizePerPage,
+            pageStartIndex
+          )).toEqual(currPage);
+        });
       });
     });
   });

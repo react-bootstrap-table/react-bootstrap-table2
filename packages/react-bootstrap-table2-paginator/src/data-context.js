@@ -32,7 +32,12 @@ class PaginationDataProvider extends Provider {
     // user should align the page when the page is not fit to the data size when remote enable
     if (!this.isRemotePagination() && !custom) {
       const newPage = alignPage(
-        nextProps.data.length, this.currPage, currSizePerPage, pageStartIndex);
+        nextProps.data.length,
+        this.props.data.length,
+        this.currPage,
+        currSizePerPage,
+        pageStartIndex
+      );
 
       if (this.currPage !== newPage) {
         if (onPageChange) {
