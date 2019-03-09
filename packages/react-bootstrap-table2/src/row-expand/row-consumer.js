@@ -3,7 +3,7 @@ import React from 'react';
 import ExpandRow from './expand-row';
 import ExpansionContext from '../contexts/row-expand-context';
 
-export default (Component, visibleColumnSize) => {
+export default (Component) => {
   const renderWithExpansion = (props, expandRow) => {
     const key = props.value;
 
@@ -20,7 +20,7 @@ export default (Component, visibleColumnSize) => {
       />,
       expanded ? <ExpandRow
         key={ `${key}-expanding` }
-        colSpan={ visibleColumnSize }
+        colSpan={ props.visibleColumnSize }
       >
         { expandRow.renderer(props.row) }
       </ExpandRow> : null
