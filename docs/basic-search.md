@@ -51,6 +51,19 @@ const { SearchBar } = Search;
 
 * You should render `SearchBar` with `searchProps` as well. The `SearchBar` position is depends on you.
 
+### `SearchBar` Props
+
+#### className - [string]
+Custom the class on input element.
+
+#### placeholder - [string]
+Custom the placeholder on input element.
+
+#### style - [object]
+Custom the style on input element.
+
+#### delay = [number]
+milionsecond for debounce user input.
 
 ## Customize Search Component
 

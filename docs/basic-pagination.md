@@ -100,7 +100,7 @@ const paginationOption = {
 
 ```js
 <PaginationProvider
-  pagination={ paginationFactory(options) }
+  pagination={ paginationFactory(paginationOption) }
 >
   {
     ({
@@ -121,7 +121,7 @@ const paginationOption = {
 So far, your customization pagination should look like it:
 ```js
 <PaginationProvider
-  pagination={ paginationFactory(options) }
+  pagination={ paginationFactory(paginationOption) }
 >
   {
     ({
@@ -192,7 +192,22 @@ import paginationFactory, {
 </PaginationProvider>
 ```
 
-That's it!!  The benifit for using standalone is you can much easier to render the standalone component in any posistion. In the future, we will implement more featue like applying `style`, `className` etc on standalone components.
+That's it!!  The benifit for using standalone is you can much easier to render the standalone component in any posistion. In the future, we will implement more featue like applying `style`, `className` etc on standalone components.    
+
+
+<h5><b>Customizable props on `PaginationListStandalone`</b></h5>
+* N/A
+
+<h5><b>Customizable props on `SizePerPageDropdownStandalone`</b></h5>
+* `open`: <b>true</b> to make dropdown show.
+* `hidden`: <b>true</b> to hide the size per page dropdown.
+* `btnContextual`: Set the button contextual.
+* `variation`: Variation for dropdown, available value is `dropdown` and `dropup`.
+* `className`: Custom the class on size per page dropdown
+
+<h5><b>Customizable props on `SizePerPageDropdownStandalone`</b></h5>
+* N/A
+
 
 #### 4.2 Customization Everything
 
@@ -227,7 +242,7 @@ onPageChange,
 onSizePerPageChange
 ```
 
-In most of case, `page`, `sizePerPage`, `onPageChange` and `onSizePerPageChange` are much important properties for you:
+In most of case, `page`, `sizePerPage`, `onPageChange` and `onSizePerPageChange` are most important properties for you:
 
 * `page`: Current page.
 * `sizePerPage`: Current size per page.
