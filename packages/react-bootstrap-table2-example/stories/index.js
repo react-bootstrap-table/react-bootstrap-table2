@@ -163,6 +163,7 @@ import ExpandHooks from 'examples/row-expand/expand-hooks';
 // pagination
 import PaginationTable from 'examples/pagination';
 import PaginationHooksTable from 'examples/pagination/pagination-hooks';
+import PaginationWithDynamicData from 'examples/pagination/pagination-with-dynamic-data';
 import CustomPaginationTable from 'examples/pagination/custom-pagination';
 import CustomPageButtonTable from 'examples/pagination/custom-page-button';
 import CustomSizePerPageOptionTable from 'examples/pagination/custom-size-per-page-option';
@@ -404,6 +405,7 @@ storiesOf('Pagination', module)
   .addDecorator(bootstrapStyle())
   .add('Basic Pagination Table', () => <PaginationTable />)
   .add('Pagination Hooks', () => <PaginationHooksTable />)
+  .add('Pagination with Dynamic Data', () => <PaginationWithDynamicData />)
   .add('Custom Pagination', () => <CustomPaginationTable />)
   .add('Custom Page Button', () => <CustomPageButtonTable />)
   .add('Custom Page List', () => <CustomPageListTable />)

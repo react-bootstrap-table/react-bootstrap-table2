@@ -283,9 +283,9 @@ describe('FilterContext', () => {
         expect(onFilter).toHaveBeenCalledWith(filterVal);
       });
 
-      it('should set state.data correctly', () => {
+      it('should set data correctly', () => {
         instance.onFilter(customColumns[1], FILTER_TYPE.TEXT)(filterVal);
-        expect(instance.state.data).toEqual(mockReturn);
+        expect(instance.data).toEqual(mockReturn);
       });
     });
 

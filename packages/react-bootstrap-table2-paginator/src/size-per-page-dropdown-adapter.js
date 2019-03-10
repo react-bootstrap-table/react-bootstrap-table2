@@ -48,6 +48,7 @@ const sizePerPageDropdownAdapter = WrappedComponent =>
         }
         return (
           <WrappedComponent
+            { ...this.props }
             currSizePerPage={ `${currSizePerPage}` }
             options={ this.calculateSizePerPageStatus() }
             optionRenderer={ sizePerPageOptionRenderer }

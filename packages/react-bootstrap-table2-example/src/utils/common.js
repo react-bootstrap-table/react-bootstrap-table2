@@ -29,10 +29,10 @@ export const withOnSale = rows => rows.map((row) => {
   return row;
 });
 
-export const productsQualityGenerator = (quantity = 5) =>
+export const productsQualityGenerator = (quantity = 5, factor = 0) =>
   Array.from({ length: quantity }, (value, index) => ({
-    id: index,
-    name: `Item name ${index}`,
+    id: index + factor,
+    name: `Item name ${index + factor}`,
     quality: index % 3
   }));
 

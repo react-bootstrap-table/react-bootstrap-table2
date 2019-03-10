@@ -69,7 +69,7 @@ const cellEdit: {
   // omit...
   beforeSaveCell(oldValue, newValue, row, column, done) {
     setTimeout(() => {
-      if (confirm('Do you want to accep this change?')) {
+      if (confirm('Do you want to accept this change?')) {
         done(); // contine to save the changes
       } else {
         done(false); // reject the changes

@@ -84,6 +84,7 @@ export default class StandaloneSizePerPage extends React.Component {
               <div>
                 <SizePerPageDropdownStandalone
                   { ...paginationProps }
+                  btnContextual="btn btn-primary"
                 />
                 <BootstrapTable
                   keyField="id"

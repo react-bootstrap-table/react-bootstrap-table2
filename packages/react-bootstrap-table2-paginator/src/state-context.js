@@ -50,9 +50,15 @@ class StateProvider extends React.Component {
 
     // user should align the page when the page is not fit to the data size when remote enable
     if (this.isRemotePagination() || custom) {
-      this.currPage = nextProps.pagination.options.page;
-      this.currSizePerPage = nextProps.pagination.options.sizePerPage;
-      this.dataSize = nextProps.pagination.options.totalSize;
+      if (typeof nextProps.pagination.options.page !== 'undefined') {
+        this.currPage = nextProps.pagination.options.page;
+      }
+      if (typeof nextProps.pagination.options.sizePerPage !== 'undefined') {
+        this.currSizePerPage = nextProps.pagination.options.sizePerPage;
+      }
+      if (typeof nextProps.pagination.options.totalSize !== 'undefined') {
+        this.dataSize = nextProps.pagination.options.totalSize;
+      }
     }
   }
 
@@ -117,13 +123,14 @@ class StateProvider extends React.Component {
     const { pagination: { options } } = this.props;
     const pageStartIndex = typeof options.pageStartIndex === 'undefined' ?
       Const.PAGE_START_INDEX : options.pageStartIndex;
-    this.dataSize = newDataSize;
     this.currPage = alignPage(
       newDataSize,
+      this.dataSize,
       this.currPage,
       this.currSizePerPage,
       pageStartIndex
     );
+    this.dataSize = newDataSize;
     this.forceUpdate();
   }
 
