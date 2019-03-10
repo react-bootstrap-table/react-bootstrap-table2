@@ -74,7 +74,7 @@
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" name="3-render-paginationprovider"></a><a href="#3-render-paginationprovider" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>3. Render PaginationProvider</h4>
 <pre><code class="hljs css js">&lt;PaginationProvider
-  pagination={ paginationFactory(options) }
+  pagination={ paginationFactory(paginationOption) }
 &gt;
   {
     ({
@@ -93,7 +93,7 @@
 </ul>
 <p>So far, your customization pagination should look like it:</p>
 <pre><code class="hljs css js">&lt;PaginationProvider
-  pagination={ paginationFactory(options) }
+  pagination={ paginationFactory(paginationOption) }
 &gt;
   {
     ({
@@ -162,6 +162,22 @@
 &lt;/PaginationProvider&gt;
 </code></pre>
 <p>That's it!!  The benifit for using standalone is you can much easier to render the standalone component in any posistion. In the future, we will implement more featue like applying <code>style</code>, <code>className</code> etc on standalone components.</p>
+<p><h5><b>Customizable props on <code>PaginationListStandalone</code></b></h5></p>
+<ul>
+<li>N/A</li>
+</ul>
+<p><h5><b>Customizable props on <code>SizePerPageDropdownStandalone</code></b></h5></p>
+<ul>
+<li><code>open</code>: <b>true</b> to make dropdown show.</li>
+<li><code>hidden</code>: <b>true</b> to hide the size per page dropdown.</li>
+<li><code>btnContextual</code>: Set the button contextual.</li>
+<li><code>variation</code>: Variation for dropdown, available value is <code>dropdown</code> and <code>dropup</code>.</li>
+<li><code>className</code>: Custom the class on size per page dropdown</li>
+</ul>
+<p><h5><b>Customizable props on <code>SizePerPageDropdownStandalone</code></b></h5></p>
+<ul>
+<li>N/A</li>
+</ul>
 <h4><a class="anchor" aria-hidden="true" name="42-customization-everything"></a><a href="#42-customization-everything" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>4.2 Customization Everything</h4>
 <p>If you choose to custom the pagination component by yourself, the <code>paginationProps</code> will be important for you. Becasue you have to know for example how to change page or what's the current page etc. Therefore, following is all the props in <code>paginationProps</code> object:</p>
 <pre><code class="hljs css js">page,
@@ -191,7 +207,7 @@ lastPageTitle,
 onPageChange,
 onSizePerPageChange
 </code></pre>
-<p>In most of case, <code>page</code>, <code>sizePerPage</code>, <code>onPageChange</code> and <code>onSizePerPageChange</code> are much important properties for you:</p>
+<p>In most of case, <code>page</code>, <code>sizePerPage</code>, <code>onPageChange</code> and <code>onSizePerPageChange</code> are most important properties for you:</p>
 <ul>
 <li><code>page</code>: Current page.</li>
 <li><code>sizePerPage</code>: Current size per page.</li>
