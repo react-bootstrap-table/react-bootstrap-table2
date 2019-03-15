@@ -2,7 +2,7 @@
 # Row expand
 `react-bootstrap-table2` supports the row expand feature. By passing prop `expandRow` to enable this functionality. 
 
-> Default is click to expand/collapse a row. In addition, we don't support any way to chagne this mechanism!
+> Default is click to expand/collapse a row. In addition, we don't support any way to change this mechanism!
 
 ## Required
 * [renderer (**required**)](#renderer)
