@@ -164,7 +164,7 @@ Enable the column sort via a `true` value given.
 ```
 
 ## <a name='sortCaret'>column.sortCaret - [Function]</a>
-Use`column.sortCaret` to custom the sort caret. This callback function accept two arguments: `order` and `column`
+Use`column.sortCaret` to customize the sort caret. This callback function accept two arguments: `order` and `column`
 
 ```js
 {
