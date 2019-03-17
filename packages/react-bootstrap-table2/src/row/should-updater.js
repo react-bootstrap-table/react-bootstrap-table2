@@ -8,7 +8,8 @@ export default ExtendBase =>
       return (
         nextProps.editingRowIdx === nextProps.rowIndex ||
         (this.props.editingRowIdx === nextProps.rowIndex &&
-        nextProps.editingRowIdx === null)
+        nextProps.editingRowIdx === null) ||
+        this.props.editingRowIdx === nextProps.rowIndex
       );
     }
 
