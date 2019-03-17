@@ -15,6 +15,7 @@ Export CSV in one of features supported by `react-bootstrap-table2-toolkit`. By 
 * [noAutoBOM](#exportCSVnoautobom-bool)
 * [exportAll](#exportCSVexportall-bool)
 * [onlyExportSelection](#exportCSVonlyexportselection-bool)
+* [onlyExportFiltered](#exportCSVonlyexportfiltered-bool)
 
 ## Example
 
@@ -53,3 +54,8 @@ Default is `true`. `false` will only export current display data on table.
 
 ## exportCSV.onlyExportSelection - [bool]
 Default is `false`. `true` will only export the data which is selected
+
+## exportCSV.onlyExportFiltered - [bool]
+Default is `false`. `true` will only export the data which is filtered/searched.
+
+>> Note: When you configure this prop as true, you must turn off `exportAll`.
