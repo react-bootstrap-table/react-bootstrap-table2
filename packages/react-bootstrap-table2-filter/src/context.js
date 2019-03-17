@@ -91,6 +91,10 @@ export default (
       };
     }
 
+    getFiltered() {
+      return this.data;
+    }
+
     doFilter(props, customResult, ignoreEmitDataChange = false) {
       let result = customResult;
 

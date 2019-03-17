@@ -27,19 +27,24 @@ export default Base =>
         data = source;
       } else if (options.exportAll) {
         data = this.props.data;
+      } else if (options.onlyExportFiltered) {
+        const payload = {};
+        this.tableExposedAPIEmitter.emit('get.filtered.rows', payload);
+        data = payload.result;
       } else {
         const payload = {};
         this.tableExposedAPIEmitter.emit('get.table.data', payload);
         data = payload.result;
       }
 
-      // filter data
+      // filter data by row selection
       if (options.onlyExportSelection) {
         const payload = {};
         this.tableExposedAPIEmitter.emit('get.selected.rows', payload);
         const selections = payload.result;
         data = data.filter(row => !!selections.find(sel => row[keyField] === sel));
       }
+
       const content = transform(data, meta, this._.get, options);
       save(content, options);
     }
