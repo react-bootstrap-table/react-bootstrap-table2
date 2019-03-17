@@ -191,6 +191,11 @@ Default is `true`. `false` will only export current data which display on table.
 #### onlyExportSelection - [bool]
 Default is `false`. `true` will only export the data which is selected.
 
+#### onlyExportFiltered - [bool]
+Default is `false`. `true` will only export the data which is filtered/searched.
+
+>> When you configure this prop as true, you must turn off `exportAll`.
+
 -----
 
 ## Column Toggle

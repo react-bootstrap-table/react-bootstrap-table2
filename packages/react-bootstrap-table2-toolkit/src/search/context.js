@@ -59,6 +59,10 @@ export default (options = {
       }
     }
 
+    getSearched() {
+      return this.state.data;
+    }
+
     triggerListener(result) {
       if (this.props.dataChangeListener) {
         this.props.dataChangeListener.emit('filterChanged', result.length);

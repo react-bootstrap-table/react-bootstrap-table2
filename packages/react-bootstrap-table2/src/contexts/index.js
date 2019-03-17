@@ -23,6 +23,15 @@ const withContext = Base =>
         const exposedAPIEmitter = new EventEmitter();
         exposedAPIEmitter.on('get.table.data', payload => payload.result = this.table.getData());
         exposedAPIEmitter.on('get.selected.rows', payload => payload.result = this.selectionContext.getSelected());
+        exposedAPIEmitter.on('get.filtered.rows', (payload) => {
+          if (this.searchContext) {
+            payload.result = this.searchContext.getSearched();
+          } else if (this.filterContext) {
+            payload.result = this.filterContext.getFiltered();
+          } else {
+            payload.result = this.table.getData();
+          }
+        });
         props.registerExposedAPI(exposedAPIEmitter);
       }
 
