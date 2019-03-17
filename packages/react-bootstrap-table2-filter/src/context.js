@@ -41,6 +41,8 @@ export default (
       // let nextData = nextProps.data;
       if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.data)) {
         this.doFilter(nextProps, undefined, this.isEmitDataChange);
+      } else {
+        this.data = nextProps.data;
       }
     }
 
