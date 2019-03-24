@@ -137,7 +137,7 @@ Custom the page button inside the pagination list. This callback function have o
 
 * `page`: Page number
 * `active`: If this page is current page or not.
-* `disable`: If this page is disabled or not.
+* `disabled`: If this page is disabled or not.
 * `title`: Page title
 * `onPageChange`: Call it when you need to change page
 
@@ -146,7 +146,7 @@ Following is a minimal example:
 const pageButtonRenderer = ({
   page,
   active,
-  disable,
+  disabled,
   title,
   onPageChange
 }) => {
