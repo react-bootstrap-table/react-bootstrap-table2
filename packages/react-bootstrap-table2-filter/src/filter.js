@@ -98,9 +98,9 @@ export const filterByDate = _ => (
   customFilterValue
 ) => {
   if (!date || !comparator) return data;
-  const filterDate = date.getDate();
-  const filterMonth = date.getMonth();
-  const filterYear = date.getFullYear();
+  const filterDate = date.getUTCDate();
+  const filterMonth = date.getUTCMonth();
+  const filterYear = date.getUTCFullYear();
 
   return data.filter((row) => {
     let valid = true;
@@ -114,9 +114,9 @@ export const filterByDate = _ => (
       cell = new Date(cell);
     }
 
-    const targetDate = cell.getDate();
-    const targetMonth = cell.getMonth();
-    const targetYear = cell.getFullYear();
+    const targetDate = cell.getUTCDate();
+    const targetMonth = cell.getUTCMonth();
+    const targetYear = cell.getUTCFullYear();
 
 
     switch (comparator) {

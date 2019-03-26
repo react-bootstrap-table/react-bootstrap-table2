@@ -18,7 +18,7 @@ const legalComparators = [
 ];
 
 function dateParser(d) {
-  return `${d.getFullYear()}-${('0' + (d.getMonth() + 1)).slice(-2)}-${('0' + d.getDate()).slice(-2)}`;
+  return `${d.getUTCFullYear()}-${('0' + (d.getUTCMonth() + 1)).slice(-2)}-${('0' + d.getUTCDate()).slice(-2)}`;
 }
 
 class DateFilter extends Component {

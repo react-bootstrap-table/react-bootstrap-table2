@@ -23,7 +23,7 @@ const columns = [{
     if (typeof cell !== 'object') {
       dateObj = new Date(cell);
     }
-    return `${('0' + dateObj.getDate()).slice(-2)}/${('0' + (dateObj.getMonth() + 1)).slice(-2)}/${dateObj.getFullYear()}`;
+    return `${('0' + dateObj.getUTCDate()).slice(-2)}/${('0' + (dateObj.getUTCMonth() + 1)).slice(-2)}/${dateObj.getUTCFullYear()}`;
   },
   editor: {
     type: Type.DATE
@@ -48,7 +48,7 @@ const columns = [{
     if (typeof cell !== 'object') {
       dateObj = new Date(cell);
     }
-    return \`$\{('0' + dateObj.getDate()).slice(-2)}/$\{('0' + (dateObj.getMonth() + 1)).slice(-2)}/$\{dateObj.getFullYear()}\`;
+    return \`$\{('0' + dateObj.getUTCDate()).slice(-2)}/$\{('0' + (dateObj.getUTCMonth() + 1)).slice(-2)}/$\{dateObj.getUTCFullYear()}\`;
   },
   editor: {
     type: Type.DATE
