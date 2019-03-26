@@ -97,7 +97,8 @@ Default size per page have **10**, **25**, **30**, **50**. You can assign a numb
 Default is `true`, you can disable it if you don't want to show the **"Go to first"** and **"Go to last"** page buttons.
 
 ## pagination.alwaysShowAllBtns - [Bool]
-Default is `false`, which means `react-bootstrap-table2` will hide the next or previouse page button if unnecessary. Anyway, you can still show them always via `alwaysShowAllBtns` prop.
+Default is `false`, which means `react-bootstrap-table2` will hide the next or previouse page button if unnecessary. Anyway, you can still show them always via `alwaysShowAllBtns` prop.   
+If you also enable `withFirstAndLast`, this prop also keep to show first and last page when you enable it.
 
 ## pagination.firstPageText - [Any]
 A quick way to specify the text on the first page button.
