@@ -56,7 +56,7 @@ export default ExtendBase =>
         alwaysShowAllBtns
       } = this.props;
 
-      let pages;
+      let pages = [];
       let endPage = totalPages;
       if (endPage <= 0) return [];
 
@@ -68,24 +68,42 @@ export default ExtendBase =>
         startPage = endPage - paginationSize + 1;
       }
 
-      if (startPage !== pageStartIndex && totalPages > paginationSize && withFirstAndLast) {
+      if (alwaysShowAllBtns) {
+        if (withFirstAndLast) {
+          pages = [firstPageText, prePageText];
+        } else {
+          pages = [prePageText];
+        }
+      }
+
+      if (startPage !== pageStartIndex &&
+        totalPages > paginationSize &&
+        withFirstAndLast &&
+        pages.length === 0
+      ) {
         pages = [firstPageText, prePageText];
-      } else if (totalPages > 1 || alwaysShowAllBtns) {
+      } else if (totalPages > 1 && pages.length === 0) {
         pages = [prePageText];
-      } else {
-        pages = [];
       }
 
       for (let i = startPage; i <= endPage; i += 1) {
         if (i >= pageStartIndex) pages.push(i);
       }
 
-      if (endPage <= lastPage && pages.length > 1) {
+      if (alwaysShowAllBtns || (endPage <= lastPage && pages.length > 1)) {
         pages.push(nextPageText);
       }
-      if (endPage !== lastPage && withFirstAndLast) {
+      if ((endPage !== lastPage && withFirstAndLast) || (withFirstAndLast && alwaysShowAllBtns)) {
         pages.push(lastPageText);
       }
+
+      // if ((endPage <= lastPage && pages.length > 1) || alwaysShowAllBtns) {
+      //   pages.push(nextPageText);
+      // }
+      // if (endPage !== lastPage && withFirstAndLast) {
+      //   pages.push(lastPageText);
+      // }
+
       return pages;
     }
 

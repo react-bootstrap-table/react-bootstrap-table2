@@ -27,7 +27,7 @@ export default ExtendBase =>
         return true;
       }
       for (let i = 0; i < this.props.columns.length; i += 1) {
-        if (this.props.columns[i].hidden !== nextProps.columns[i].hidden) {
+        if (!_.isEqual(this.props.columns[i], nextProps.columns[i])) {
           return true;
         }
       }
