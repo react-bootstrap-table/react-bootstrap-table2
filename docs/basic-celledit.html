@@ -112,7 +112,7 @@
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> cell !== <span class="hljs-string">'object'</span>) {
       dateObj = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(cell);
     }
-    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${(<span class="hljs-string">'0'</span> + dateObj.getDate()).slice(<span class="hljs-number">-2</span>)}</span>/<span class="hljs-subst">${(<span class="hljs-string">'0'</span> + (dateObj.getMonth() + <span class="hljs-number">1</span>)).slice(<span class="hljs-number">-2</span>)}</span>/<span class="hljs-subst">${dateObj.getFullYear()}</span>`</span>;
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${(<span class="hljs-string">'0'</span> + dateObj.getUTCDate()).slice(<span class="hljs-number">-2</span>)}</span>/<span class="hljs-subst">${(<span class="hljs-string">'0'</span> + (dateObj.getUTCMonth() + <span class="hljs-number">1</span>)).slice(<span class="hljs-number">-2</span>)}</span>/<span class="hljs-subst">${dateObj.getUTCFullYear()}</span>`</span>;
   },
   <span class="hljs-attr">editor</span>: {
     <span class="hljs-attr">type</span>: Type.DATE
