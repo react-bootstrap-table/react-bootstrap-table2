@@ -111,18 +111,22 @@ class MultiSelectFilter extends Component {
       `filter select-filter form-control ${className} ${this.state.isSelected ? '' : 'placeholder-selected'}`;
 
     return (
-      <select
-        { ...rest }
-        ref={ n => this.selectInput = n }
-        style={ style }
-        multiple
-        className={ selectClass }
-        onChange={ this.filter }
-        onClick={ e => e.stopPropagation() }
-        defaultValue={ defaultValue !== undefined ? defaultValue : '' }
-      >
-        { this.getOptions() }
-      </select>
+      <label htmlFor={`multiselect-filter-column-${column.text}`}>
+        <span className="sr-only">Filter by {column.text}</span>
+        <select
+          { ...rest }
+          ref={ n => this.selectInput = n }
+          id={`multiselect-filter-column-${column.text}`}
+          style={ style }
+          multiple
+          className={ selectClass }
+          onChange={ this.filter }
+          onClick={ e => e.stopPropagation() }
+          defaultValue={ defaultValue !== undefined ? defaultValue : '' }
+        >
+          { this.getOptions() }
+        </select>
+      </label>
     );
   }
 }
