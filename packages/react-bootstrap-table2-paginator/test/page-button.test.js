@@ -105,7 +105,7 @@ describe('PageButton', () => {
     const title = 'aTitle';
     beforeEach(() => {
       wrapper = shallow(
-        <PageButton { ...props } active disabled={ false } title={ title } />
+        <PageButton {...props} active disabled={false} title={`page-${ title }`} />
       );
     });
 
