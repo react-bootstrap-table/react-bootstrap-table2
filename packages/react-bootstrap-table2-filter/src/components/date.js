@@ -132,11 +132,11 @@ class DateFilter extends Component {
         className={ `filter date-filter ${className}` }
         style={ style }
       >
-        <label htmlFor={`date-filter-comparator-${ column.text }`}>
+        <label htmlFor={ `date-filter-comparator-${text}` }>
           <span className="sr-only">Filter comparator</span>
           <select
             ref={ n => this.dateFilterComparator = n }
-            id={`date-filter-comparator-${ column.text }`}
+            id={ `date-filter-comparator-${text}` }
             style={ comparatorStyle }
             className={ `date-filter-comparator form-control ${comparatorClassName}` }
             onChange={ this.onChangeComparator }
@@ -145,11 +145,11 @@ class DateFilter extends Component {
             { this.getComparatorOptions() }
           </select>
         </label>
-        <label htmlFor={`date-filter-column-${ column.text }`}>
-          <span className="sr-only">Enter ${ column.text }</span>
+        <label htmlFor={ `date-filter-column-${text}` }>
+          <span className="sr-only">Enter ${ text }</span>
           <input
             ref={ n => this.inputDate = n }
-            id={`date-filter-column-${ column.text }`}
+            id={ `date-filter-column-${text}` }
             className={ `filter date-filter-input form-control ${dateClassName}` }
             style={ dateStyle }
             type="date"

@@ -94,13 +94,13 @@ class TextFilter extends Component {
 
     // stopPropagation for onClick event is try to prevent sort was triggered.
     return (
-      <label htmlFor={`text-filter-column-${text}`}>
+      <label htmlFor={ `text-filter-column-${text}` }>
         <span className="sr-only">Filter by {text}</span>
         <input
           { ...rest }
           ref={ n => this.input = n }
           type="text"
-          id={`text-filter-column-${ text }`}
+          id={ `text-filter-column-${text}` }
           className={ `filter text-filter form-control ${className}` }
           style={ style }
           onChange={ this.filter }

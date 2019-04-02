@@ -170,16 +170,16 @@ class NumberFilter extends Component {
     return (
       <div
         onClick={ e => e.stopPropagation() }
-        className={`filter number-filter ${className}`}
+        className={ `filter number-filter ${className}` }
         style={ style }
       >
-        <label htmlFor={`number-filter-comparator-${column.text}`}>
+        <label htmlFor={ `number-filter-comparator-${column.text}` }>
           <span className="sr-only">Filter comparator</span>
           <select
             ref={ n => this.numberFilterComparator = n }
             style={ comparatorStyle }
-            id={`number-filter-comparator-${ column.text }`}
-            className={`number-filter-comparator form-control ${comparatorClassName}`}
+            id={ `number-filter-comparator-${column.text}` }
+            className={ `number-filter-comparator form-control ${comparatorClassName}` }
             onChange={ this.onChangeComparator }
             defaultValue={ defaultValue ? defaultValue.comparator : '' }
           >
@@ -187,33 +187,33 @@ class NumberFilter extends Component {
           </select>
         </label>
         {
-          options ? 
-          <label htmlFor={`number-filter-column-${ column.text }`}>
-            <span className="sr-only">{`Select ${column.text}`}</span>
-            <select
-              ref={ n => this.numberFilter = n }
-              id={`number-filter-column-${ column.text }`}
-              style={ numberStyle }
-              className={ selectClass }
-              onChange={ this.onChangeNumberSet }
-              defaultValue={ defaultValue ? defaultValue.number : '' }
-            >
-              { this.getNumberOptions() }
-            </select>
-          </label> :
-          <label htmlFor={`number-filter-column-${ column.text }`}>
-            <span className="sr-only">{`Enter ${ column.text }`}</span>
-            <input
-              ref={ n => this.numberFilter = n }
-              id={`number-filter-column-${ column.text }`}
-              type="number"
-              style={ numberStyle }
-              className={`number-filter-input form-control ${numberClassName}`}
-              placeholder={ placeholder || `Enter ${column.text}...` }
-              onChange={ this.onChangeNumber }
-              defaultValue={ defaultValue ? defaultValue.number : '' }
-            />
-          </label>
+          options ?
+            <label htmlFor={ `number-filter-column-${column.text}` }>
+              <span className="sr-only">{`Select ${column.text}`}</span>
+              <select
+                ref={ n => this.numberFilter = n }
+                id={ `number-filter-column-${column.text}` }
+                style={ numberStyle }
+                className={ selectClass }
+                onChange={ this.onChangeNumberSet }
+                defaultValue={ defaultValue ? defaultValue.number : '' }
+              >
+                { this.getNumberOptions() }
+              </select>
+            </label> :
+            <label htmlFor={ `number-filter-column-${column.text}` }>
+              <span className="sr-only">{`Enter ${column.text}`}</span>
+              <input
+                ref={ n => this.numberFilter = n }
+                id={ `number-filter-column-${column.text}` }
+                type="number"
+                style={ numberStyle }
+                className={ `number-filter-input form-control ${numberClassName}` }
+                placeholder={ placeholder || `Enter ${column.text}...` }
+                onChange={ this.onChangeNumber }
+                defaultValue={ defaultValue ? defaultValue.number : '' }
+              />
+            </label>
         }
       </div>
     );

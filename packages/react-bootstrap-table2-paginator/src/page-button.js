@@ -30,7 +30,7 @@ class PageButton extends Component {
     }, className);
 
     return (
-      <li className={ classes } title={`page-${title}`}>
+      <li className={ classes } title={ `page-${title}` }>
         <a href="#" onClick={ this.handleClick } className="page-link">{ page }</a>
       </li>
     );

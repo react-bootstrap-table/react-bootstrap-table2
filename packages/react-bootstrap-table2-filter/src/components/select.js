@@ -136,12 +136,12 @@ class SelectFilter extends Component {
       `filter select-filter form-control ${className} ${this.state.isSelected ? '' : 'placeholder-selected'}`;
 
     return (
-      <label htmlFor={`select-filter-column-${ column.text }`}>
+      <label htmlFor={ `select-filter-column-${column.text}` }>
         <span className="sr-only">Filter by { column.text }</span>
         <select
           { ...rest }
           ref={ n => this.selectInput = n }
-          id={`select-filter-column-${ column.text }`}
+          id={ `select-filter-column-${column.text}` }
           style={ style }
           className={ selectClass }
           onChange={ this.filter }

@@ -55,15 +55,15 @@ class SearchBar extends React.Component {
       className,
       style,
       placeholder,
-      tableId,
+      tableId
     } = this.props;
 
     return (
-      <label htmlFor={`search-bar-${tableId}`} className="w-100">
-      <span className="sr-only">Search this table</span>
+      <label htmlFor={ `search-bar-${tableId}` } className="w-100">
+        <span className="sr-only">Search this table</span>
         <input
           ref={ n => this.input = n }
-          id={`search-bar-${ tableId }`}
+          id={ `search-bar-${tableId}` }
           type="text"
           style={ style }
           onKeyUp={ () => this.onKeyup() }
