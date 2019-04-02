@@ -132,7 +132,7 @@ const columns = [
     if (typeof cell !== 'object') {
       dateObj = new Date(cell);
     }
-    return `${('0' + dateObj.getDate()).slice(-2)}/${('0' + (dateObj.getMonth() + 1)).slice(-2)}/${dateObj.getFullYear()}`;
+    return `${('0' + dateObj.getUTCDate()).slice(-2)}/${('0' + (dateObj.getUTCMonth() + 1)).slice(-2)}/${dateObj.getUTCFullYear()}`;
   },
   editor: {
     type: Type.DATE
@@ -173,16 +173,16 @@ If you feel above predefined editors are not satisfied to your requirement, you 
 
 * `editorProps`: Some useful attributes you can use on DOM editor, like class, style etc.
 * `value`: Current cell value
-* `row`: Current row data 
-* `column`: Current column definition 
-* `rowIndex`: Current row index 
+* `row`: Current row data
+* `column`: Current column definition
+* `rowIndex`: Current row index
 * `columnIndex`: Current column index
 
 > Note when implement a custom React editor component, this component should have a **getValue** function which return current value on editor
 
 > Note when you want to save value, you can call **editorProps.onUpdate** function
 
-Following is a short example: 
+Following is a short example:
 
 ```js
 class QualityRanger extends React.Component {

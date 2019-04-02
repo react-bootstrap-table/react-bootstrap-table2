@@ -8,8 +8,8 @@ export default (Component) => {
     const key = props.value;
 
     const expanded = expandRow.expanded.includes(key);
+    const isClosing = expandRow.isClosing.includes(key);
     const expandable = !expandRow.nonExpandable || !expandRow.nonExpandable.includes(key);
-
     return [
       <Component
         { ...props }
@@ -18,9 +18,11 @@ export default (Component) => {
         expandable={ expandable }
         expandRow={ { ...expandRow } }
       />,
-      expanded ? <ExpandRow
+      expanded || isClosing ? <ExpandRow
         key={ `${key}-expanding` }
         colSpan={ props.visibleColumnSize }
+        expanded={ expanded }
+        onClosed={ () => expandRow.onClosed(key) }
       >
         { expandRow.renderer(props.row) }
       </ExpandRow> : null

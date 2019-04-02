@@ -37,6 +37,7 @@
   ],
   "dependencies": {
     "classnames": "2.2.5",
+    "react-transition-group": "2.5.3",
     "underscore": "1.9.1"
   },
   "peerDependencies": {
