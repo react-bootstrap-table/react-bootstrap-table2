@@ -17,10 +17,8 @@ function optionsEquals(currOpts, prevOpts) {
           return false;
         }
       }
-      return true;
-    } else {
-      return false;
     }
+    return currOpts.length === prevOpts.length;
   }
   const keys = Object.keys(currOpts);
   for (let i = 0; i < keys.length; i += 1) {
