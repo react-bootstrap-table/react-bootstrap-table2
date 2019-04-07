@@ -173,7 +173,10 @@ class NumberFilter extends Component {
         className={ `filter number-filter ${className}` }
         style={ style }
       >
-        <label htmlFor={ `number-filter-comparator-${column.text}` }>
+        <label
+          className="filter-label"
+          htmlFor={ `number-filter-comparator-${column.text}` }
+        >
           <span className="sr-only">Filter comparator</span>
           <select
             ref={ n => this.numberFilterComparator = n }
@@ -188,7 +191,10 @@ class NumberFilter extends Component {
         </label>
         {
           options ?
-            <label htmlFor={ `number-filter-column-${column.text}` }>
+            <label
+              className="filter-label"
+              htmlFor={ `number-filter-column-${column.text}` }
+            >
               <span className="sr-only">{`Select ${column.text}`}</span>
               <select
                 ref={ n => this.numberFilter = n }

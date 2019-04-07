@@ -132,7 +132,10 @@ class DateFilter extends Component {
         className={ `filter date-filter ${className}` }
         style={ style }
       >
-        <label htmlFor={ `date-filter-comparator-${text}` }>
+        <label
+          className="filter-label"
+          htmlFor={ `date-filter-comparator-${text}` }
+        >
           <span className="sr-only">Filter comparator</span>
           <select
             ref={ n => this.dateFilterComparator = n }

@@ -59,7 +59,10 @@ class SearchBar extends React.Component {
     } = this.props;
 
     return (
-      <label htmlFor={ `search-bar-${tableId}` } className="w-100">
+      <label
+        htmlFor={ `search-bar-${tableId}` }
+        className="search-label"
+      >
         <span className="sr-only">Search this table</span>
         <input
           ref={ n => this.input = n }
