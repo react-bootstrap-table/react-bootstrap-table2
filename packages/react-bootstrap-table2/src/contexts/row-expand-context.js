@@ -17,13 +17,17 @@ class RowExpandProvider extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.expandRow) {
+      const nextExpanded = nextProps.expandRow.expanded || this.state.expanded;
       const isClosing = this.state.expanded.reduce((acc, cur) => {
-        if (!nextProps.expandRow.expanded.includes(cur)) {
+        if (!nextExpanded.includes(cur)) {
           acc.push(cur);
         }
         return acc;
       }, []);
-      this.setState(() => ({ expanded: nextProps.expandRow.expanded, isClosing }));
+      this.setState(() => ({
+        expanded: nextExpanded,
+        isClosing
+      }));
     } else {
       this.setState(() => ({
         expanded: this.state.expanded
