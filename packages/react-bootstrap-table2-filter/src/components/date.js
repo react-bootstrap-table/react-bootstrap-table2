@@ -132,24 +132,35 @@ class DateFilter extends Component {
         className={ `filter date-filter ${className}` }
         style={ style }
       >
-        <select
-          ref={ n => this.dateFilterComparator = n }
-          style={ comparatorStyle }
-          className={ `date-filter-comparator form-control ${comparatorClassName}` }
-          onChange={ this.onChangeComparator }
-          defaultValue={ defaultValue ? defaultValue.comparator : '' }
+        <label
+          className="filter-label"
+          htmlFor={ `date-filter-comparator-${text}` }
         >
-          { this.getComparatorOptions() }
-        </select>
-        <input
-          ref={ n => this.inputDate = n }
-          className={ `filter date-filter-input form-control ${dateClassName}` }
-          style={ dateStyle }
-          type="date"
-          onChange={ this.onChangeDate }
-          placeholder={ placeholder || `Enter ${text}...` }
-          defaultValue={ this.getDefaultDate() }
-        />
+          <span className="sr-only">Filter comparator</span>
+          <select
+            ref={ n => this.dateFilterComparator = n }
+            id={ `date-filter-comparator-${text}` }
+            style={ comparatorStyle }
+            className={ `date-filter-comparator form-control ${comparatorClassName}` }
+            onChange={ this.onChangeComparator }
+            defaultValue={ defaultValue ? defaultValue.comparator : '' }
+          >
+            { this.getComparatorOptions() }
+          </select>
+        </label>
+        <label htmlFor={ `date-filter-column-${text}` }>
+          <span className="sr-only">Enter ${ text }</span>
+          <input
+            ref={ n => this.inputDate = n }
+            id={ `date-filter-column-${text}` }
+            className={ `filter date-filter-input form-control ${dateClassName}` }
+            style={ dateStyle }
+            type="date"
+            onChange={ this.onChangeDate }
+            placeholder={ placeholder || `Enter ${text}...` }
+            defaultValue={ this.getDefaultDate() }
+          />
+        </label>
       </div>
     );
   }

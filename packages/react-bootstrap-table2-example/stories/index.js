@@ -229,6 +229,7 @@ import 'stories/stylesheet/storybook.scss';
 import '../../react-bootstrap-table2/style/react-bootstrap-table2.scss';
 import '../../react-bootstrap-table2-paginator/style/react-bootstrap-table2-paginator.scss';
 import '../../react-bootstrap-table2-filter/style/react-bootstrap-table2-filter.scss';
+import '../../react-bootstrap-table2-toolkit/style/react-bootstrap-table2-toolkit.scss';
 
 // import bootstrap style by given version
 import bootstrapStyle, { BOOTSTRAP_VERSION } from './bootstrap-style';
