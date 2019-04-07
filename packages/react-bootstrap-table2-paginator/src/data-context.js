@@ -46,6 +46,9 @@ class PaginationDataProvider extends Provider {
         this.currPage = newPage;
       }
     }
+    if (nextProps.onDataSizeChange && nextProps.data.length !== this.props.data.length) {
+      nextProps.onDataSizeChange({ dataSize: nextProps.data.length });
+    }
   }
 
   isRemotePagination = () => this.props.isRemotePagination();

@@ -211,6 +211,7 @@ const withContext = Base =>
           bootstrap4={ this.props.bootstrap4 }
           isRemotePagination={ this.isRemotePagination }
           remoteEmitter={ this.remoteEmitter }
+          onDataSizeChange={ this.props.onDataSizeChange }
         >
           <this.PaginationContext.Consumer>
             {

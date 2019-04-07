@@ -217,6 +217,7 @@ import RemoteCellEdit from 'examples/remote/remote-celledit';
 import RemoteAll from 'examples/remote/remote-all';
 
 // data
+import DataChangeListener from 'examples/data/data-change-listener';
 import LoadDataWithFilter from 'examples/data/load-data-on-the-fly-with-filter';
 import LoadDataWithDefaultFilter from 'examples/data/load-data-on-the-fly-with-default-filter';
 import LoadDataWithSearch from 'examples/data/load-data-on-the-fly-with-search';
@@ -467,6 +468,7 @@ storiesOf('Remote', module)
 
 storiesOf('Data', module)
   .addDecorator(bootstrapStyle())
+  .add('Data Change Listener', () => <DataChangeListener />)
   .add('Load data with Filter', () => <LoadDataWithFilter />)
   .add('Load data with Default Filter', () => <LoadDataWithDefaultFilter />)
   .add('Load data with Search', () => <LoadDataWithSearch />)

@@ -18,6 +18,14 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.onDataSizeChange && !nextProps.pagination) {
+      if (nextProps.data.length !== this.props.data.length) {
+        nextProps.onDataSizeChange({ dataSize: nextProps.data.length });
+      }
+    }
+  }
+
   // Exposed APIs
   getData = () => {
     return this.visibleRows();
@@ -192,6 +200,7 @@ BootstrapTable.propTypes = {
   onSort: PropTypes.func,
   onFilter: PropTypes.func,
   onExternalFilter: PropTypes.func,
+  onDataSizeChange: PropTypes.func,
   // Inject from toolkit
   search: PropTypes.shape({
     searchText: PropTypes.string,
