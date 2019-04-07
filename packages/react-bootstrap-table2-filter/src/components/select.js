@@ -8,12 +8,14 @@ import { FILTER_TYPE } from '../const';
 
 function optionsEquals(currOpts, prevOpts) {
   if (Array.isArray(currOpts)) {
-    for (let i = 0; i < currOpts.length; i += 1) {
-      if (
-        currOpts[i].value !== prevOpts[i].value ||
-        currOpts[i].label !== prevOpts[i].label
-      ) {
-        return false;
+    if (currOpts.length === prevOpts.length) {
+      for (let i = 0; i < currOpts.length; i += 1) {
+        if (
+          currOpts[i].value !== prevOpts[i].value ||
+          currOpts[i].label !== prevOpts[i].label
+        ) {
+          return false;
+        }
       }
     }
     return currOpts.length === prevOpts.length;
