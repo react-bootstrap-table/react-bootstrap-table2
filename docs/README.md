@@ -33,6 +33,7 @@
 * [pagination](#pagination)
 * [filter](#filter)
 * [onTableChange](#onTableChange)
+* [onDataSizeChange](#onDataSizeChange)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -317,4 +318,20 @@ Following is a shape of `newState`
     newValue
   }
 }
+```
+
+### <a name='onDataSizeChange'>onDataSizeChange - [Function]</a>
+This callback function will be called only when data size change by search/filter etc. This function have one argument which is an object contains below props:
+
+* `dataSize`: The new data size
+
+```js
+handleDataChange = ({ dataSize }) => {
+  this.setState({ rowCount: dataSize });
+}
+
+<BootstrapTable
+  onDataSizeChange={ handleDataChange }
+  ....
+/>
 ```

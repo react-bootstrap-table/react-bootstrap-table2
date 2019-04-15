@@ -54,20 +54,28 @@ class SearchBar extends React.Component {
     const {
       className,
       style,
-      placeholder
+      placeholder,
+      tableId
     } = this.props;
 
     return (
-      <input
-        ref={ n => this.input = n }
-        type="text"
-        style={ style }
-        onKeyUp={ () => this.onKeyup() }
-        onChange={ this.onChangeValue }
-        className={ `form-control ${className}` }
-        value={ this.state.value }
-        placeholder={ placeholder || SearchBar.defaultProps.placeholder }
-      />
+      <label
+        htmlFor={ `search-bar-${tableId}` }
+        className="search-label"
+      >
+        <span className="sr-only">Search this table</span>
+        <input
+          ref={ n => this.input = n }
+          id={ `search-bar-${tableId}` }
+          type="text"
+          style={ style }
+          onKeyUp={ () => this.onKeyup() }
+          onChange={ this.onChangeValue }
+          className={ `form-control ${className}` }
+          value={ this.state.value }
+          placeholder={ placeholder || SearchBar.defaultProps.placeholder }
+        />
+      </label>
     );
   }
 }
@@ -78,7 +86,8 @@ SearchBar.propTypes = {
   placeholder: PropTypes.string,
   style: PropTypes.object,
   delay: PropTypes.number,
-  searchText: PropTypes.string
+  searchText: PropTypes.string,
+  tableId: PropTypes.string
 };
 
 SearchBar.defaultProps = {
@@ -86,7 +95,8 @@ SearchBar.defaultProps = {
   style: {},
   placeholder: 'Search',
   delay: 250,
-  searchText: ''
+  searchText: '',
+  tableId: 0
 };
 
 export default SearchBar;
