@@ -34,6 +34,7 @@ title: BootstrapTable Props
 * [pagination](#pagination-object)
 * [filter](#filter-object)
 * [onTableChange](#ontablechange-function)
+* [onDataSizeChange](#ondatasizechange-function)
 
 -----
 
@@ -323,3 +324,20 @@ Following is a all available properties in `newState` object:
   }
 }
 ```
+
+## onDataSizeChange - [Function]
+This callback function will be called only when data size change by search/filter etc. This function have one argument which is an object contains below props:
+
+* `dataSize`: The new data size
+
+```js
+handleDataChange = ({ dataSize }) => {
+  this.setState({ rowCount: dataSize });
+}
+
+<BootstrapTable
+  onDataSizeChange={ handleDataChange }
+  ....
+/>
+```
+
