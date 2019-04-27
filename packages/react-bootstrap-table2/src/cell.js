@@ -8,7 +8,7 @@ import _ from './utils';
 class Cell extends eventDelegater(Component) {
   constructor(props) {
     super(props);
-    this.handleEditingCell = this.handleEditingCell.bind(this);
+    this.createHandleEditingCell = this.createHandleEditingCell.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -43,17 +43,10 @@ class Cell extends eventDelegater(Component) {
     return shouldUpdate;
   }
 
-  handleEditingCell(e) {
-    const { column, onStart, rowIndex, columnIndex, clickToEdit, dbclickToEdit } = this.props;
-    const { events } = column;
-    if (events) {
-      if (clickToEdit) {
-        const customClick = events.onClick;
-        if (_.isFunction(customClick)) customClick(e);
-      } else if (dbclickToEdit) {
-        const customDbClick = events.onDoubleClick;
-        if (_.isFunction(customDbClick)) customDbClick(e);
-      }
+  createHandleEditingCell = originFunc => (e) => {
+    const { onStart, rowIndex, columnIndex, clickToEdit, dbclickToEdit } = this.props;
+    if ((clickToEdit || dbclickToEdit) && _.isFunction(originFunc)) {
+      originFunc(e);
     }
     if (onStart) {
       onStart(rowIndex, columnIndex);
@@ -85,9 +78,9 @@ class Cell extends eventDelegater(Component) {
     }
 
     if (clickToEdit && editable) {
-      attrs.onClick = this.handleEditingCell;
+      attrs.onClick = this.createHandleEditingCell(attrs.onClick);
     } else if (dbclickToEdit && editable) {
-      attrs.onDoubleClick = this.handleEditingCell;
+      attrs.onDoubleClick = this.createHandleEditingCell(attrs.onDoubleClick);
     }
 
     return (
