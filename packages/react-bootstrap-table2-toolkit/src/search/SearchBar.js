@@ -96,7 +96,7 @@ SearchBar.defaultProps = {
   placeholder: 'Search',
   delay: 250,
   searchText: '',
-  tableId: 0
+  tableId: '0'
 };
 
 export default SearchBar;
