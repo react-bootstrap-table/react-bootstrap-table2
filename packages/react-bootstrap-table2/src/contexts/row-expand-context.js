@@ -2,6 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dataOperator from '../store/operators';
+import _ from '../utils';
 
 const RowExpandContext = React.createContext();
 
@@ -81,7 +82,7 @@ class RowExpandProvider extends React.Component {
     if (expandAll) {
       currExpanded = expanded.concat(dataOperator.expandableKeys(data, keyField, nonExpandable));
     } else {
-      currExpanded = expanded.filter(s => typeof data.find(d => d[keyField] === s) === 'undefined');
+      currExpanded = expanded.filter(s => typeof data.find(d => _.get(d, keyField) === s) === 'undefined');
     }
 
     if (onExpandAll) {
