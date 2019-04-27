@@ -142,6 +142,7 @@ import SelectionWithExpansionTable from 'examples/row-selection/selection-with-e
 import SelectionNoDataTable from 'examples/row-selection/selection-no-data';
 import SelectionStyleTable from 'examples/row-selection/selection-style';
 import SelectionClassTable from 'examples/row-selection/selection-class';
+import HeaderStyleTable from 'examples/row-selection/header-style';
 import HideSelectAllTable from 'examples/row-selection/hide-select-all';
 import CustomSelectionTable from 'examples/row-selection/custom-selection';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
@@ -385,6 +386,7 @@ storiesOf('Row Selection', module)
   .add('Selection without Data', () => <SelectionNoDataTable />)
   .add('Selection Style', () => <SelectionStyleTable />)
   .add('Selection Class', () => <SelectionClassTable />)
+  .add('Custom Selection Column Header Style', () => <HeaderStyleTable />)
   .add('Hide Select All', () => <HideSelectAllTable />)
   .add('Custom Selection', () => <CustomSelectionTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)

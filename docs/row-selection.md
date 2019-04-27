@@ -20,6 +20,7 @@
 * [hideSelectAll](#hideSelectAll)
 * [selectionRenderer](#selectionRenderer)
 * [selectionHeaderRenderer](#selectionHeaderRenderer)
+* [headerColumnStyle](#headerColumnStyle)
 
 ### <a name="mode">selectRow.mode - [String]</a>
 
@@ -197,6 +198,31 @@ const selectRow = {
 ```
 
 > By default, `react-bootstrap-table2` will help you to handle the click event, it's not necessary to handle again by developer.
+
+
+### <a name='headerColumnStyle'>selectRow.headerColumnStyle - [Object | Function]</a>
+A way to custome the selection header cell. `headerColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
+
+### Style Object
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  headerColumnStyle: { backgroundColor: 'blue' }
+};
+```
+
+### Callback Function
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  headerColumnStyle:  (status) => (
+    // status available value is checked, indeterminate and unchecked
+    return { backgroundColor: 'blue' };
+  )
+};
+```
 
 ### <a name='onSelect'>selectRow.onSelect - [Function]</a>
 This callback function will be called when a row is select/unselect and pass following three arguments:

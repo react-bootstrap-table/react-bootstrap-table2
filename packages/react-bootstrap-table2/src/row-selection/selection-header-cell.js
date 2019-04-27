@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
 import { BootstrapContext } from '../contexts/bootstrap';
+import _ from '../utils';
 
 export const CheckBox = ({ className, checked, indeterminate }) => (
   <input
@@ -28,7 +29,8 @@ export default class SelectionHeaderCell extends Component {
     checkedStatus: PropTypes.string,
     onAllRowsSelect: PropTypes.func,
     hideSelectAll: PropTypes.bool,
-    selectionHeaderRenderer: PropTypes.func
+    selectionHeaderRenderer: PropTypes.func,
+    headerColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
   }
 
   constructor() {
@@ -64,7 +66,13 @@ export default class SelectionHeaderCell extends Component {
       CHECKBOX_STATUS_CHECKED, CHECKBOX_STATUS_INDETERMINATE, ROW_SELECT_MULTIPLE
     } = Const;
 
-    const { mode, checkedStatus, selectionHeaderRenderer, hideSelectAll } = this.props;
+    const {
+      mode,
+      checkedStatus,
+      selectionHeaderRenderer,
+      hideSelectAll,
+      headerColumnStyle
+    } = this.props;
     if (hideSelectAll) {
       return <th data-row-selection />;
     }
@@ -78,6 +86,10 @@ export default class SelectionHeaderCell extends Component {
     if (selectionHeaderRenderer || mode === ROW_SELECT_MULTIPLE) {
       attrs.onClick = this.handleCheckBoxClick;
     }
+
+    attrs.style = _.isFunction(headerColumnStyle) ?
+      headerColumnStyle(checkedStatus) :
+      headerColumnStyle;
 
     return (
       <BootstrapContext.Consumer>

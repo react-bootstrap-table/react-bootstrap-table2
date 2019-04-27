@@ -167,7 +167,8 @@ BootstrapTable.propTypes = {
     bgColor: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     hideSelectColumn: PropTypes.bool,
     selectionRenderer: PropTypes.func,
-    selectionHeaderRenderer: PropTypes.func
+    selectionHeaderRenderer: PropTypes.func,
+    headerColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
   }),
   expandRow: PropTypes.shape({
     renderer: PropTypes.func,
