@@ -32,6 +32,7 @@ const selectRow = {
 * [hideSelectAll](#selectrowhideselectall-bool)
 * [selectionRenderer](#selectrowselectionrenderer-function)
 * [selectionHeaderRenderer](#selectrowselectionheaderrenderer-function)
+* [headerColumnStyle](#selectrowheadercolumnstyle-object-function)
 
 -----
 
@@ -260,6 +261,30 @@ const selectRow = {
   mode: 'checkbox',
   selectionHeaderRenderer: ({ mode, checked, indeterminate }) => (
     // ....
+  )
+};
+```
+
+## selectRow.headerColumnStyle - [Object | Function]
+A way to custome the selection header cell. `headerColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
+
+### Style Object
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  headerColumnStyle: { backgroundColor: 'blue' }
+};
+```
+
+### Callback Function
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  headerColumnStyle:  (status) => (
+    // status available value is checked, indeterminate and unchecked
+    return { backgroundColor: 'blue' };
   )
 };
 ```
