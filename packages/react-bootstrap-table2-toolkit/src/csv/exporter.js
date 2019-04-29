@@ -42,7 +42,7 @@ export const transform = (
           cellContent = m.formatter(cellContent, row, rowIndex, m.formatExtraData);
         }
         if (m.type === String) {
-          return `"${cellContent}"`;
+          return `"${`${cellContent}`.replace(/"/g, '""')}"`;
         }
         return cellContent;
       }).join(separator)).join('\n');

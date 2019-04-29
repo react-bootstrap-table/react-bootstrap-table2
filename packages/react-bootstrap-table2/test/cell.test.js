@@ -124,10 +124,10 @@ describe('Cell', () => {
             onClick: sinon.stub()
           };
         });
-        it('should calling custom onClick callback also', () => {
+
+        it('should call onStart correctly', () => {
           wrapper.find('td').simulate('click');
           expect(onStartCallBack.callCount).toBe(1);
-          expect(column.events.onClick.callCount).toBe(1);
         });
       });
     });
@@ -164,10 +164,10 @@ describe('Cell', () => {
             onDoubleClick: sinon.stub()
           };
         });
-        it('should calling custom onDoubleClick callback also', () => {
+
+        it('should call onStart correctly', () => {
           wrapper.find('td').simulate('doubleclick');
           expect(onStartCallBack.callCount).toBe(1);
-          expect(column.events.onDoubleClick.callCount).toBe(1);
         });
       });
     });

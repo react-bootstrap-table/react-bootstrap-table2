@@ -45,8 +45,12 @@ class ExposedFunctionTable extends React.Component {
     console.log(this.node.table.props.data);
   }
 
+  handleGetCurrentData = () => {
+    console.log(this.node.table.props.data);
+  }
+
   handleGetSelectedData = () => {
-    console.log(this.node.selectionContext.state.selected);
+    console.log(this.node.selectionContext.selected);
   }
 
   handleGetExpandedData = () => {
@@ -117,7 +121,7 @@ export default class ExposedFunctionTable extends React.Component {
   }
 
   handleGetSelectedData = () => {
-    console.log(this.node.selectionContext.state.selected);
+    console.log(this.node.selectionContext.selected);
   }
 
   handleGetExpandedData = () => {
