@@ -43,12 +43,10 @@ export default class SelectionCell extends Component {
       selected,
       onRowSelect,
       disabled,
-      rowIndex,
-      clickToSelect
+      rowIndex
     } = this.props;
-
+    e.stopPropagation();
     if (disabled) return;
-    if (clickToSelect) return;
 
     const checked = inputType === Const.ROW_SELECT_SINGLE
       ? true

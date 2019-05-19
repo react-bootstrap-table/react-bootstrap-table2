@@ -147,7 +147,7 @@ describe('<SelectionCell />', () => {
             />,
             { bootstrap4: false }
           );
-          wrapper.find('td').simulate('click');
+          wrapper.find('td').simulate('click', { stopPropagation: jest.fn() });
         });
 
         it('should calling handleRowClicked', () => {
@@ -173,7 +173,7 @@ describe('<SelectionCell />', () => {
             />,
             { bootstrap4: false }
           );
-          wrapper.find('td').simulate('click');
+          wrapper.find('td').simulate('click', { stopPropagation: jest.fn() });
         });
 
         it('should calling handleRowClicked', () => {
@@ -201,7 +201,7 @@ describe('<SelectionCell />', () => {
 
         it('should be called with correct paramters', () => {
           // first click
-          wrapper.find('td').simulate('click');
+          wrapper.find('td').simulate('click', { stopPropagation: jest.fn() });
           expect(mockOnRowSelect.callCount).toBe(1);
           expect(mockOnRowSelect.calledWith(rowKey, true, rowIndex)).toBe(true);
         });
@@ -223,9 +223,9 @@ describe('<SelectionCell />', () => {
 
         it('should be called with correct parameters', () => {
           // first click
-          wrapper.find('td').simulate('click');
+          wrapper.find('td').simulate('click', { stopPropagation: jest.fn() });
           expect(mockOnRowSelect.callCount).toBe(1);
-          expect(mockOnRowSelect.calledWith(rowKey, false, rowIndex, undefined)).toBe(true);
+          expect(mockOnRowSelect.calledWith(rowKey, false, rowIndex)).toBe(true);
         });
       });
     });
