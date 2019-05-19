@@ -37,7 +37,7 @@
     }
   ],
   "dependencies": {
-    "react-loading-overlay": "0.2.8"
+    "react-loading-overlay": "1.0.1"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",

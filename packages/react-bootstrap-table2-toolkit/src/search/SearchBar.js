@@ -69,6 +69,7 @@ class SearchBar extends React.Component {
           id={ `search-bar-${tableId}` }
           type="text"
           style={ style }
+          aria-label="enter text you want to search"
           onKeyUp={ () => this.onKeyup() }
           onChange={ this.onChangeValue }
           className={ `form-control ${className}` }

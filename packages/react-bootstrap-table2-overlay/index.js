@@ -11,10 +11,10 @@ export default options => loading =>
     componentDidMount() {
       if (loading) {
         const { wrapper } = this.overlay;
-        const masker = wrapper.firstChild;
-        const headerDOM = wrapper.parentElement.querySelector('thead');
-        const bodyDOM = wrapper.parentElement.querySelector('tbody');
-        const captionDOM = wrapper.parentElement.querySelector('caption');
+        const masker = wrapper.current.firstChild;
+        const headerDOM = wrapper.current.parentElement.querySelector('thead');
+        const bodyDOM = wrapper.current.parentElement.querySelector('tbody');
+        const captionDOM = wrapper.current.parentElement.querySelector('caption');
 
         let marginTop = window.getComputedStyle(headerDOM).height;
         if (captionDOM) {
