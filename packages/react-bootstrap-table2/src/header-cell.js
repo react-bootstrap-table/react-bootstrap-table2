@@ -40,7 +40,8 @@ const HeaderCell = (props) => {
 
   const cellAttrs = {
     ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
-    ...headerEvents
+    ...headerEvents,
+    tabIndex: index + 1
   };
 
   let sortSymbol;
