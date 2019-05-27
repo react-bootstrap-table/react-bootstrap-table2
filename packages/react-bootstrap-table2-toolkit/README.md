@@ -185,6 +185,9 @@ Default is `false`. Give true to avoid to attach the csv header.
 #### noAutoBOM - [bool]
 Default is `true`.
 
+#### blobType - [string]
+Default is `text/plain;charset=utf-8`. Change to update the blob type of the exported file.
+
 #### exportAll - [bool]
 Default is `true`. `false` will only export current data which display on table.
 
