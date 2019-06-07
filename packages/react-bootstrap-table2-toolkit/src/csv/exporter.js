@@ -54,11 +54,12 @@ export const save = (
   content,
   {
     noAutoBOM,
-    fileName
+    fileName,
+    blobType
   }
 ) => {
   FileSaver.saveAs(
-    new Blob([content], { type: 'text/plain;charset=utf-8' }),
+    new Blob([content], { type: blobType }),
     fileName,
     noAutoBOM
   );
