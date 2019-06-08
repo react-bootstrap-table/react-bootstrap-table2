@@ -22,6 +22,7 @@
 * [selectionRenderer](#selectionRenderer)
 * [selectionHeaderRenderer](#selectionHeaderRenderer)
 * [headerColumnStyle](#headerColumnStyle)
+* [selectColumnStyle](#selectColumnStyle)
 
 ### <a name="mode">selectRow.mode - [String]</a>
 
@@ -220,6 +221,42 @@ const selectRow = {
   mode: 'checkbox',
   headerColumnStyle:  (status) => (
     // status available value is checked, indeterminate and unchecked
+    return { backgroundColor: 'blue' };
+  )
+};
+```
+
+### <a name='selectColumnStyle'>selectRow.selectColumnStyle - [Object | Function]</a>
+A way to custome the selection cell. `selectColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
+
+### Style Object
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnStyle: { backgroundColor: 'blue' }
+};
+```
+
+### Callback Function
+If a callback function present, you can get below information to custom the selection cell:
+
+* `checked`: Whether current row is seleccted or not
+* `disabled`: Whether current row is disabled or not
+* `rowIndex`: Current row index
+* `rowKey`: Current row key
+
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnStyle:  ({
+    checked,
+    disabled,
+    rowIndex,
+    rowKey
+  }) => (
+    // ....
     return { backgroundColor: 'blue' };
   )
 };

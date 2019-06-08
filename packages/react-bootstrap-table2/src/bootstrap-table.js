@@ -169,6 +169,7 @@ BootstrapTable.propTypes = {
     selectionRenderer: PropTypes.func,
     selectionHeaderRenderer: PropTypes.func,
     headerColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    selectColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     selectColumnPosition: PropTypes.oneOf([
       Const.INDICATOR_POSITION_LEFT,
       Const.INDICATOR_POSITION_RIGHT
