@@ -45,10 +45,10 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
     return this.shouldUpdateRowContent;
   }
 
-  isRenderExpandColumnInLeft(
-    expandColumnPosition = Const.INDICATOR_POSITION_LEFT
+  isRenderFunctionColumnInLeft(
+    position = Const.INDICATOR_POSITION_LEFT
   ) {
-    return expandColumnPosition === Const.INDICATOR_POSITION_LEFT;
+    return position === Const.INDICATOR_POSITION_LEFT;
   }
 
   render() {
@@ -71,7 +71,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
       ...rest
     } = this.props;
     const key = _.get(row, keyField);
-    const { hideSelectColumn, clickToSelect } = selectRow;
+    const { hideSelectColumn, selectColumnPosition, clickToSelect } = selectRow;
     const { showExpandColumn, expandColumnPosition } = expandRow;
 
     const newAttrs = this.delegate({ ...attrs });
@@ -95,7 +95,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
     )];
 
     if (!hideSelectColumn) {
-      childrens.unshift((
+      const selectCell = (
         <SelectionCell
           { ...selectRow }
           key="selection-cell"
@@ -105,7 +105,12 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
           disabled={ !selectable }
           tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
         />
-      ));
+      );
+      if (this.isRenderFunctionColumnInLeft(selectColumnPosition)) {
+        childrens.unshift(selectCell);
+      } else {
+        childrens.push(selectCell);
+      }
     }
 
     if (showExpandColumn) {
@@ -120,7 +125,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
           tabIndex={ tabIndexCell ? tabIndexStart++ : -1 }
         />
       );
-      if (this.isRenderExpandColumnInLeft(expandColumnPosition)) {
+      if (this.isRenderFunctionColumnInLeft(expandColumnPosition)) {
         childrens.unshift(expandCell);
       } else {
         childrens.push(expandCell);

@@ -16,6 +16,7 @@
 * [clickToEdit](#clickToEdit)
 * [onSelect](#onSelect)
 * [onSelectAll](#onSelectAll)
+* [selectColumnPosition](#selectColumnPosition)
 * [hideSelectColumn](#hideSelectColumn)
 * [hideSelectAll](#hideSelectAll)
 * [selectionRenderer](#selectionRenderer)
@@ -272,6 +273,16 @@ const selectRow = {
       return [1, 3, 4];  // finally, key 1, 3, 4 will being selected 
     }
   }
+};
+```
+
+### <a name='selectColumnPosition'>selectRow.selectColumnPosition - [String]</a>
+Default is `left`. You can give this as `right` for rendering selection column in the right side.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnPosition: 'right'
 };
 ```
 

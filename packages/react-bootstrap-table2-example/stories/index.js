@@ -150,6 +150,7 @@ import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
 import HideSelectionColumnTable from 'examples/row-selection/hide-selection-column';
+import SelectionColumnPositionTable from 'examples/row-selection/selection-column-position';
 
 // work on row expand
 import BasicRowExpand from 'examples/row-expand';
@@ -394,7 +395,8 @@ storiesOf('Row Selection', module)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
   .add('Selection Hooks', () => <SelectionHooks />)
-  .add('Hide Selection Column', () => <HideSelectionColumnTable />);
+  .add('Hide Selection Column', () => <HideSelectionColumnTable />)
+  .add('Selection Column Position', () => <SelectionColumnPositionTable />);
 
 storiesOf('Row Expand', module)
   .addDecorator(bootstrapStyle())
