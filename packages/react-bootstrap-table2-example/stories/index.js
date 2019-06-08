@@ -125,6 +125,7 @@ import EditorStyleTable from 'examples/cell-edit/editor-style-table';
 import EditorClassTable from 'examples/cell-edit/editor-class-table';
 import DBClickEditWithSelection from 'examples/cell-edit/dbclick-to-edit-with-selection-table';
 import DropdownEditorTable from 'examples/cell-edit/dropdown-editor-table';
+import DropdownEditorWithDynamicOptionsTable from 'examples/cell-edit/dropdown-editor-with-dynamic-options-table';
 import TextareaEditorTable from 'examples/cell-edit/textarea-editor-table';
 import CheckboxEditorTable from 'examples/cell-edit/checkbox-editor-table';
 import DateEditorTable from 'examples/cell-edit/date-editor-table';
@@ -368,6 +369,7 @@ storiesOf('Cell Editing', module)
   .add('Custom Editor Style', () => <EditorStyleTable />)
   .add('DoubleClick to Edit with Selection', () => <DBClickEditWithSelection />)
   .add('Dropdown Editor', () => <DropdownEditorTable />)
+  .add('Dropdown Editor with Dynamic Options', () => <DropdownEditorWithDynamicOptionsTable />)
   .add('Textarea Editor', () => <TextareaEditorTable />)
   .add('Checkbox Editor', () => <CheckboxEditorTable />)
   .add('Date Editor', () => <DateEditorTable />)
