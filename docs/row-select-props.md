@@ -28,11 +28,13 @@ const selectRow = {
 * [clickToEdit](#selectrowclicktoedit-bool)
 * [onSelect](#selectrowonselect-function)
 * [onSelectAll](#selectrowonselectall-function)
+* [selectColumnPosition](#selectrowselectcolumnposition-string)
 * [hideSelectColumn](#selectrowhideselectcolumn-bool)
 * [hideSelectAll](#selectrowhideselectall-bool)
 * [selectionRenderer](#selectrowselectionrenderer-function)
 * [selectionHeaderRenderer](#selectrowselectionheaderrenderer-function)
 * [headerColumnStyle](#selectrowheadercolumnstyle-object-function)
+* [selectColumnStyle](#selectrowselectcolumnstyle-object-function)
 
 -----
 
@@ -220,6 +222,16 @@ const selectRow = {
 };
 ```
 
+## selectRow.selectColumnPosition - [String]
+Default is `left`. You can give this as `right` for rendering selection column in the right side.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnPosition: 'right'
+};
+```
+
 ## selectRow.hideSelectColumn - [Bool]
 Default is `false`, if you don't want to have a selection column, give this prop as `true`
 
@@ -284,6 +296,42 @@ const selectRow = {
   mode: 'checkbox',
   headerColumnStyle:  (status) => (
     // status available value is checked, indeterminate and unchecked
+    return { backgroundColor: 'blue' };
+  )
+};
+```
+
+## selectRow.selectColumnStyle - [Object | Function]
+A way to custome the selection cell. `selectColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
+
+### Style Object
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnStyle: { backgroundColor: 'blue' }
+};
+```
+
+### Callback Function
+If a callback function present, you can get below information to custom the selection cell:
+
+* `checked`: Whether current row is seleccted or not
+* `disabled`: Whether current row is disabled or not
+* `rowIndex`: Current row index
+* `rowKey`: Current row key
+
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnStyle:  ({
+    checked,
+    disabled,
+    rowIndex,
+    rowKey
+  }) => (
+    // ....
     return { backgroundColor: 'blue' };
   )
 };

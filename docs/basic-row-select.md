@@ -24,8 +24,8 @@ This is an example for [selection management](../storybook/index.html?selectedKi
 
 
 In addition, this is another example for [selection management](../storybook/index.html?selectedKind=Row%20Selection&selectedStory=Advance%20Selection%20Management)
-## Customization
 
+## Customization
 
 
 ### Style/Class
@@ -37,8 +37,13 @@ Like column, we support to custom the style, class on the selecting row easily v
 
 ### Selection Column
 
-* For header cell: [`selectRow.selectionRenderer`](row-select-props.html#selectrowselectionrenderer-function)
-* For normal cell: [`selectRow.selectionHeaderRenderer`](./row-select-props.html#selectrowselectionheaderrenderer-function)
+* For Custom header cell: [`selectRow.selectionRenderer`](./row-select-props.html#selectrowselectionrenderer-function)
+* For Custom normal cell: [`selectRow.selectionHeaderRenderer`](./row-select-props.html#selectrowselectionheaderrenderer-function)
+* For Custom header cell style: [`selectRow.headerColumnStyle`](./row-select-props.html#selectrowheadercolumnstyle-object-function)
+* For Custom normal cell style: [`selectRow.selectColumnStyle`](./row-select-props.html#selectrowselectcolumnstyle-object-function)
+
+### Position
+Default we render selection column in the left side of table, you can use [`selectRow.selectColumnPosition`](./row-select-props.html#selectrowselectcolumnposition-string) to make it on the right.
 
 <br/>
 
