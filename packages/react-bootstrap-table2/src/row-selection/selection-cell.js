@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
+import _ from '../utils';
 import { BootstrapContext } from '../contexts/bootstrap';
 
 export default class SelectionCell extends Component {
@@ -17,7 +18,8 @@ export default class SelectionCell extends Component {
     rowIndex: PropTypes.number,
     tabIndex: PropTypes.number,
     clickToSelect: PropTypes.bool,
-    selectionRenderer: PropTypes.func
+    selectionRenderer: PropTypes.func,
+    selectColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
   }
 
   constructor() {
@@ -31,7 +33,8 @@ export default class SelectionCell extends Component {
       this.props.selected !== nextProps.selected ||
       this.props.disabled !== nextProps.disabled ||
       this.props.rowKey !== nextProps.rowKey ||
-      this.props.tabIndex !== nextProps.tabIndex;
+      this.props.tabIndex !== nextProps.tabIndex ||
+      this.props.selectColumnStyle !== nextProps.selectColumnStyle;
 
     return shouldUpdate;
   }
@@ -57,16 +60,27 @@ export default class SelectionCell extends Component {
 
   render() {
     const {
+      rowKey,
       mode: inputType,
       selected,
       disabled,
       tabIndex,
       rowIndex,
-      selectionRenderer
+      selectionRenderer,
+      selectColumnStyle
     } = this.props;
 
     const attrs = {};
     if (tabIndex !== -1) attrs.tabIndex = tabIndex;
+
+    attrs.style = _.isFunction(selectColumnStyle) ?
+      selectColumnStyle({
+        checked: selected,
+        disabled,
+        rowIndex,
+        rowKey
+      }) :
+      selectColumnStyle;
 
     return (
       <BootstrapContext.Consumer>

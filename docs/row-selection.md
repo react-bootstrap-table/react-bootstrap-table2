@@ -16,11 +16,13 @@
 * [clickToEdit](#clickToEdit)
 * [onSelect](#onSelect)
 * [onSelectAll](#onSelectAll)
+* [selectColumnPosition](#selectColumnPosition)
 * [hideSelectColumn](#hideSelectColumn)
 * [hideSelectAll](#hideSelectAll)
 * [selectionRenderer](#selectionRenderer)
 * [selectionHeaderRenderer](#selectionHeaderRenderer)
 * [headerColumnStyle](#headerColumnStyle)
+* [selectColumnStyle](#selectColumnStyle)
 
 ### <a name="mode">selectRow.mode - [String]</a>
 
@@ -224,6 +226,42 @@ const selectRow = {
 };
 ```
 
+### <a name='selectColumnStyle'>selectRow.selectColumnStyle - [Object | Function]</a>
+A way to custome the selection cell. `selectColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
+
+### Style Object
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnStyle: { backgroundColor: 'blue' }
+};
+```
+
+### Callback Function
+If a callback function present, you can get below information to custom the selection cell:
+
+* `checked`: Whether current row is seleccted or not
+* `disabled`: Whether current row is disabled or not
+* `rowIndex`: Current row index
+* `rowKey`: Current row key
+
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnStyle:  ({
+    checked,
+    disabled,
+    rowIndex,
+    rowKey
+  }) => (
+    // ....
+    return { backgroundColor: 'blue' };
+  )
+};
+```
+
 ### <a name='onSelect'>selectRow.onSelect - [Function]</a>
 This callback function will be called when a row is select/unselect and pass following three arguments:
 `row`, `isSelect`, `rowIndex` and `e`.
@@ -272,6 +310,16 @@ const selectRow = {
       return [1, 3, 4];  // finally, key 1, 3, 4 will being selected 
     }
   }
+};
+```
+
+### <a name='selectColumnPosition'>selectRow.selectColumnPosition - [String]</a>
+Default is `left`. You can give this as `right` for rendering selection column in the right side.
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  selectColumnPosition: 'right'
 };
 ```
 

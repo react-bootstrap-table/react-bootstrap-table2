@@ -33,9 +33,9 @@ const Header = (props) => {
     SelectionHeaderCellComp = withHeaderSelection(SelectionHeaderCell);
   }
 
-  const isRenderExpandColumnInLeft = (
-    expandColumnPosition = Const.INDICATOR_POSITION_LEFT
-  ) => expandColumnPosition === Const.INDICATOR_POSITION_LEFT;
+  const isRenderFunctionColumnInLeft = (
+    position = Const.INDICATOR_POSITION_LEFT
+  ) => position === Const.INDICATOR_POSITION_LEFT;
 
   const childrens = [
     columns.map((column, i) => {
@@ -58,11 +58,15 @@ const Header = (props) => {
   ];
 
   if (!selectRow.hideSelectColumn) {
-    childrens.unshift(<SelectionHeaderCellComp key="selection" />);
+    if (isRenderFunctionColumnInLeft(selectRow.selectColumnPosition)) {
+      childrens.unshift(<SelectionHeaderCellComp key="selection" />);
+    } else {
+      childrens.push(<SelectionHeaderCellComp key="selection" />);
+    }
   }
 
   if (expandRow.showExpandColumn) {
-    if (isRenderExpandColumnInLeft(expandRow.expandColumnPosition)) {
+    if (isRenderFunctionColumnInLeft(expandRow.expandColumnPosition)) {
       childrens.unshift(<ExpansionHeaderCellComp key="expansion" />);
     } else {
       childrens.push(<ExpansionHeaderCellComp key="expansion" />);

@@ -11,9 +11,9 @@ const Footer = (props) => {
   const SelectionFooterCellComp = () => <th />;
   const ExpansionFooterCellComp = () => <th />;
 
-  const isRenderExpandColumnInLeft = (
-    expandColumnPosition = Const.INDICATOR_POSITION_LEFT
-  ) => expandColumnPosition === Const.INDICATOR_POSITION_LEFT;
+  const isRenderFunctionColumnInLeft = (
+    position = Const.INDICATOR_POSITION_LEFT
+  ) => position === Const.INDICATOR_POSITION_LEFT;
 
   const childrens = columns.map((column, i) => {
     if (column.footer === undefined || column.footer === null) {
@@ -33,11 +33,15 @@ const Footer = (props) => {
   });
 
   if (selectRow && selectRow.hideSelectColumn !== true) {
-    childrens.unshift(<SelectionFooterCellComp key="selection" />);
+    if (isRenderFunctionColumnInLeft(selectRow.selectColumnPosition)) {
+      childrens.unshift(<SelectionFooterCellComp key="selection" />);
+    } else {
+      childrens.push(<SelectionFooterCellComp key="selection" />);
+    }
   }
 
   if (expandRow.showExpandColumn) {
-    if (isRenderExpandColumnInLeft(expandRow.expandColumnPosition)) {
+    if (isRenderFunctionColumnInLeft(expandRow.expandColumnPosition)) {
       childrens.unshift(<ExpansionFooterCellComp key="expansion" />);
     } else {
       childrens.push(<ExpansionFooterCellComp key="expansion" />);

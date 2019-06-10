@@ -125,6 +125,7 @@ import EditorStyleTable from 'examples/cell-edit/editor-style-table';
 import EditorClassTable from 'examples/cell-edit/editor-class-table';
 import DBClickEditWithSelection from 'examples/cell-edit/dbclick-to-edit-with-selection-table';
 import DropdownEditorTable from 'examples/cell-edit/dropdown-editor-table';
+import DropdownEditorWithDynamicOptionsTable from 'examples/cell-edit/dropdown-editor-with-dynamic-options-table';
 import TextareaEditorTable from 'examples/cell-edit/textarea-editor-table';
 import CheckboxEditorTable from 'examples/cell-edit/checkbox-editor-table';
 import DateEditorTable from 'examples/cell-edit/date-editor-table';
@@ -149,6 +150,8 @@ import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
 import HideSelectionColumnTable from 'examples/row-selection/hide-selection-column';
+import SelectionColumnStyleTable from 'examples/row-selection/select-column-style';
+import SelectionColumnPositionTable from 'examples/row-selection/selection-column-position';
 
 // work on row expand
 import BasicRowExpand from 'examples/row-expand';
@@ -368,6 +371,7 @@ storiesOf('Cell Editing', module)
   .add('Custom Editor Style', () => <EditorStyleTable />)
   .add('DoubleClick to Edit with Selection', () => <DBClickEditWithSelection />)
   .add('Dropdown Editor', () => <DropdownEditorTable />)
+  .add('Dropdown Editor with Dynamic Options', () => <DropdownEditorWithDynamicOptionsTable />)
   .add('Textarea Editor', () => <TextareaEditorTable />)
   .add('Checkbox Editor', () => <CheckboxEditorTable />)
   .add('Date Editor', () => <DateEditorTable />)
@@ -392,7 +396,9 @@ storiesOf('Row Selection', module)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
   .add('Selection Hooks', () => <SelectionHooks />)
-  .add('Hide Selection Column', () => <HideSelectionColumnTable />);
+  .add('Hide Selection Column', () => <HideSelectionColumnTable />)
+  .add('Custom Selection Column Style', () => <SelectionColumnStyleTable />)
+  .add('Selection Column Position', () => <SelectionColumnPositionTable />);
 
 storiesOf('Row Expand', module)
   .addDecorator(bootstrapStyle())
