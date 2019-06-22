@@ -18,8 +18,18 @@ function optionsEquals(currOpts, prevOpts) {
   return Object.keys(currOpts).length === Object.keys(prevOpts).length;
 }
 
-const getSelections = container =>
-  Array.from(container.selectedOptions).map(item => item.value);
+const getSelections = (container) => {
+  if (container.selectedOptions) {
+    return Array.from(container.selectedOptions).map(item => item.value);
+  }
+  const selections = [];
+  const totalLen = container.options.length;
+  for (let i = 0; i < totalLen; i += 1) {
+    const option = container.options.item(i);
+    if (option.selected) selections.push(option.value);
+  }
+  return selections;
+};
 
 class MultiSelectFilter extends Component {
   constructor(props) {
