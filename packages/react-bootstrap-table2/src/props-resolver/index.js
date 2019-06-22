@@ -22,7 +22,7 @@ export default ExtendBase =>
       if (!hiddenRows || hiddenRows.length === 0) return data;
       return data.filter((row) => {
         const key = _.get(row, keyField);
-        return !hiddenRows.includes(key);
+        return !_.contains(hiddenRows, key);
       });
     }
   };
