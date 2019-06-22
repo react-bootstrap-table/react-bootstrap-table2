@@ -1,3 +1,5 @@
+import _ from './utils';
+
 const events = [
   'onClick',
   'onDoubleClick',
@@ -23,7 +25,7 @@ export default ExtendBase =>
     delegate(attrs = {}) {
       const newAttrs = { ...attrs };
       Object.keys(attrs).forEach((attr) => {
-        if (events.includes(attr)) {
+        if (_.contains(events, attr)) {
           newAttrs[attr] = this.createDefaultEventHandler(attrs[attr]);
         }
       });

@@ -1,15 +1,16 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import ExpandRow from './expand-row';
+import _ from '../utils';
 import ExpansionContext from '../contexts/row-expand-context';
 
 export default (Component) => {
   const renderWithExpansion = (props, expandRow) => {
     const key = props.value;
 
-    const expanded = expandRow.expanded.includes(key);
-    const isClosing = expandRow.isClosing.includes(key);
-    const expandable = !expandRow.nonExpandable || !expandRow.nonExpandable.includes(key);
+    const expanded = _.contains(expandRow.expanded, key);
+    const isClosing = _.contains(expandRow.isClosing, key);
+    const expandable = !expandRow.nonExpandable || !_.contains(expandRow.nonExpandable, key);
     return [
       <Component
         { ...props }
