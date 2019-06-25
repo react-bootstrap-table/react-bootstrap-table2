@@ -20,7 +20,7 @@ class RowExpandProvider extends React.Component {
     if (nextProps.expandRow) {
       const nextExpanded = nextProps.expandRow.expanded || this.state.expanded;
       const isClosing = this.state.expanded.reduce((acc, cur) => {
-        if (!nextExpanded.includes(cur)) {
+        if (!_.contains(nextExpanded, cur)) {
           acc.push(cur);
         }
         return acc;
@@ -42,7 +42,7 @@ class RowExpandProvider extends React.Component {
 
   handleRowExpand = (rowKey, expanded, rowIndex, e) => {
     const { data, keyField, expandRow: { onExpand, onlyOneExpanding, nonExpandable } } = this.props;
-    if (nonExpandable && nonExpandable.includes(rowKey)) {
+    if (nonExpandable && _.contains(nonExpandable, rowKey)) {
       return;
     }
 

@@ -27,7 +27,11 @@ const PaginatonList = props => (
 
 PaginatonList.propTypes = {
   pages: PropTypes.arrayOf(PropTypes.shape({
-    page: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    page: PropTypes.oneOfType([
+      PropTypes.node,
+      PropTypes.number,
+      PropTypes.string
+    ]),
     active: PropTypes.bool,
     disable: PropTypes.bool,
     title: PropTypes.string

@@ -29,7 +29,7 @@ export const selectableKeys = (data, keyField, skips = []) => {
     return data.map(row => _.get(row, keyField));
   }
   return data
-    .filter(row => !skips.includes(_.get(row, keyField)))
+    .filter(row => !_.contains(skips, _.get(row, keyField)))
     .map(row => _.get(row, keyField));
 };
 
@@ -37,7 +37,7 @@ export const unSelectableKeys = (selected, skips = []) => {
   if (skips.length === 0) {
     return [];
   }
-  return selected.filter(x => skips.includes(x));
+  return selected.filter(x => _.contains(skips, x));
 };
 
 export const getSelectedRows = (data, keyField, selected) =>

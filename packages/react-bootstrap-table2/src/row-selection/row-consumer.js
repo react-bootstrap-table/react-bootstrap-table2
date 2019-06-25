@@ -7,8 +7,8 @@ import SelectionContext from '../contexts/selection-context';
 export default (Component) => {
   const renderWithSelection = (props, selectRow) => {
     const key = props.value;
-    const selected = selectRow.selected.includes(key);
-    const selectable = !selectRow.nonSelectable || !selectRow.nonSelectable.includes(key);
+    const selected = _.contains(selectRow.selected, key);
+    const selectable = !selectRow.nonSelectable || !_.contains(selectRow.nonSelectable, key);
 
     let {
       style,

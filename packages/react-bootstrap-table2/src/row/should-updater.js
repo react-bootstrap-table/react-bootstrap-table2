@@ -48,4 +48,9 @@ export default ExtendBase =>
       return this.shouldUpdateByCellEditing(nextProps) ||
         this.shouldUpdatedByNormalProps(nextProps);
     }
+
+    shouldRowContentUpdate(nextProps) {
+      return this.shouldUpdateChild(nextProps) ||
+        this.shouldUpdateByColumnsForSimpleCheck(nextProps);
+    }
   };
