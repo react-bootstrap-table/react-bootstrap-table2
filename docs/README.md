@@ -98,7 +98,14 @@ import overlayFactory from 'react-bootstrap-table2-overlay';
 Actually, `react-bootstrap-table-overlay` is depends on [`react-loading-overlay`](https://github.com/derrickpelletier/react-loading-overlay) and `overlayFactory` just a factory function and you can pass any props which available for `react-loading-overlay`:
 
 ```js
-overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
+overlay={
+  overlayFactory({
+    spinner: true,
+    styles: {
+      overlay: (base) => ({...base, background: 'rgba(255, 0, 0, 0.5)'})
+    }
+  })
+}
 ```
 
 ### <a name='caption'>caption - [String | Node]</a>
