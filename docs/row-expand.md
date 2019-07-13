@@ -18,6 +18,7 @@
 * [expandColumnPosition](#expandColumnPosition)
 * [expandColumnRenderer](#expandColumnRenderer)
 * [expandHeaderColumnRenderer](#expandHeaderColumnRenderer)
+* [parentClassName](#parentClassName)
 
 ### <a name="renderer">expandRow.renderer - [Function]</a>
 
@@ -163,5 +164,26 @@ const expandRow = {
   renderer: (row) => ...,
   showExpandColumn: true,
   expandColumnPosition: 'right'
+};
+```
+
+### <a name='parentClassName'>expandRow.parentClassName - [String | Function]</a>
+Apply the custom class name on parent row of expanded row. For example: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: 'foo'
+};
+```
+Below case is more flexible way to custom the class name: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: (isExpanded, row, rowIndex) => {
+    if (rowIndex > 2) return 'foo';
+    return 'bar';
+  }
 };
 ```

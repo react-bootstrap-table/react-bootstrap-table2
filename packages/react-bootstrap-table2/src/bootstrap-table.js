@@ -189,7 +189,8 @@ BootstrapTable.propTypes = {
     expandColumnPosition: PropTypes.oneOf([
       Const.INDICATOR_POSITION_LEFT,
       Const.INDICATOR_POSITION_RIGHT
-    ])
+    ]),
+    parentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   }),
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,

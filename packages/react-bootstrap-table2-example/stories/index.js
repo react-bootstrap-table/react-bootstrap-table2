@@ -165,6 +165,7 @@ import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandColumnPosition from 'examples/row-expand/expand-column-position';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
+import ParentRowClassName from 'examples/row-expand/parent-row-classname';
 
 // pagination
 import PaginationTable from 'examples/pagination';
@@ -414,7 +415,8 @@ storiesOf('Row Expand', module)
   .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Column Position', () => <ExpandColumnPosition />)
-  .add('Expand Hooks', () => <ExpandHooks />);
+  .add('Expand Hooks', () => <ExpandHooks />)
+  .add('Custom Parent Row ClassName', () => <ParentRowClassName />);
 
 storiesOf('Pagination', module)
   .addDecorator(bootstrapStyle())
