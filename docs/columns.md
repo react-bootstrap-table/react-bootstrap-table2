@@ -11,6 +11,7 @@ Available properties in a column object:
 * [hidden](#hidden)
 * [formatter](#formatter)
 * [formatExtraData](#formatExtraData)
+* [type](#type)
 * [sort](#sort)
 * [sortFunc](#sortFunc)
 * [sortCaret](#sortCaret)
@@ -131,6 +132,10 @@ The third argument: `components` have following specified properties:
 
 ## <a name='formatExtraData'>column.formatExtraData - [Any]</a>
 It's only used for [`column.formatter`](#formatter), you can define any value for it and will be passed as fourth argument for [`column.formatter`](#formatter) callback function.
+
+## <a name='type'>column.type - [String]</a>
+Specify the data type on column. Available value so far is `string`, `number`, `bool` and `date`. Default is `string`.   
+`column.type` can be used when you enable the cell editing and want to save your cell data with correct data type.
 
 ## <a name='sort'>column.sort - [Bool]</a>
 Enable the column sort via a `true` value given.

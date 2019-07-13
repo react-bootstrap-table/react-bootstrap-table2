@@ -131,6 +131,7 @@ import TextareaEditorTable from 'examples/cell-edit/textarea-editor-table';
 import CheckboxEditorTable from 'examples/cell-edit/checkbox-editor-table';
 import DateEditorTable from 'examples/cell-edit/date-editor-table';
 import CustomEditorTable from 'examples/cell-edit/custom-editor-table';
+import CellEditorWithDataType from 'examples/cell-edit/cell-edit-with-data-type';
 
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
@@ -377,7 +378,8 @@ storiesOf('Cell Editing', module)
   .add('Textarea Editor', () => <TextareaEditorTable />)
   .add('Checkbox Editor', () => <CheckboxEditorTable />)
   .add('Date Editor', () => <DateEditorTable />)
-  .add('Custom Editor', () => <CustomEditorTable />);
+  .add('Custom Editor', () => <CustomEditorTable />)
+  .add('Cell Editor with Data Type', () => <CellEditorWithDataType />);
 
 storiesOf('Row Selection', module)
   .addDecorator(bootstrapStyle())

@@ -117,6 +117,12 @@ HeaderCell.propTypes = {
   column: PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     text: PropTypes.string.isRequired,
+    type: PropTypes.oneOf([
+      Const.TYPE_STRING,
+      Const.TYPE_NUMBER,
+      Const.TYPE_BOOLEAN,
+      Const.TYPE_DATE
+    ]),
     isDummyField: PropTypes.bool,
     hidden: PropTypes.bool,
     headerFormatter: PropTypes.func,
