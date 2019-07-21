@@ -39,7 +39,10 @@ This is an example for [manage on expands](../storybook/index.html?selectedKind=
 ## Customization
 
 ### Style/Class
-`expandRow.renderer` allow you to render everything in the content of expanding row. You can control the style or class by yourself. However, a expand row is wrapped by a HTML `tr` element. Currently, we don't support any ways to custom the style or class on the expanding `tr` elemnt.
+`expandRow.renderer` allow you to render everything in the content of expanding row. You can control the style or class by yourself. However, a expand row is wrapped by a HTML `tr` element(Parent row). Currently, we support following way to custom the class/style on parent row element:
+
+* For the class of parent row: [`expandRow.parentClassName`](./row-expand-props.html#expandrowparentclassname-string-function)
+* For the style of parent row: N/A
 
 ### Expand Column
 `react-bootstrap-table2` default doesn't render a additional indicator column, just like row selection. But if you want it, you can enable it via [`expandRow.showExpandColumn`](./row-expand-props.html#expandrowshowexpandcolumn-bool)

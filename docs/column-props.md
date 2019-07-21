@@ -11,6 +11,7 @@ Definition of columns props on BootstrapTable
 
 ## Optional
 * [isDummyField](#columnisdummyfield-bool)
+* [type](#columntype-string)
 * [hidden](#columnhidden-bool)
 * [formatter](#columnformatter-function)
 * [formatExtraData](#columnformatextradata-any)
@@ -79,6 +80,10 @@ dataField: 'address.city'
 
 ## column.text (**required**) - [String]
 `text` will be the column text in header column by default, if your header is not only text or you want to customize the header column, please check [`column.headerFormatter`](#columnheaderformatter-function)
+
+## column.type - [String]
+Specify the data type on column. Available value so far is `string`, `number`, `bool` and `date`. Default is `string`.   
+`column.type` can be used when you enable the cell editing and want to save your cell data with correct data type.
 
 ## column.isDummyField - [Bool]
 Sometime, you just want to have a column which is not perform any data but just some action components. In this situation, we suggest you to use `isDummyField`. If column is dummy, the [`column.dataField`](#dataField) can be any string value, cause of it's meaningless. However, please keep `dataField` as unique as possible.

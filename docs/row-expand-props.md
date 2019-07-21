@@ -20,17 +20,21 @@ title: Row Expand Props
 * [expandColumnPosition](#expandrowexpandcolumnposition-string)
 * [expandColumnRenderer](#expandrowexpandcolumnrenderer-function)
 * [expandHeaderColumnRenderer](#expandrowexpandheadercolumnrenderer-function)
+* [parentClassName](#expandrowparentclassname-string-function)
 
 -----
 
 ## expandRow.renderer - [Function]
 
-Specify the content of expand row, `react-bootstrap-table2` will pass the currnet row object as argument and expect this function to return a react element.
+Specify the content of expand row, `react-bootstrap-table2` will pass the two arguments and expect to return a react element:
+
+* `row`: Currnet row data.
+* `rowIndex`: Currnet row index.
 
 
 ```js
 const expandRow = {
-  renderer: row => (
+  renderer: (row, rowIndex) => (
     <div>
       <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
       <p>You can render anything here, also you can add additional data on every row object</p>
@@ -175,5 +179,26 @@ const expandRow = {
   expandHeaderColumnRenderer: ({ isAnyExpands }) => (
     // ....
   )
+};
+```
+
+## expandRow.parentClassName - [String | Function]
+Apply the custom class name on parent row of expanded row. For example: 
+
+ ```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: 'foo'
+};
+```
+Below case is more flexible way to custom the class name: 
+
+ ```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: (isExpanded, row, rowIndex) => {
+    if (rowIndex > 2) return 'foo';
+    return 'bar';
+  }
 };
 ```
