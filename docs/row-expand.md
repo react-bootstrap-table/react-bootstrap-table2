@@ -26,12 +26,13 @@ Specify the content of expand row, `react-bootstrap-table2` will pass a row obje
 
 #### values
 * **row**
+* **rowIndex**
 
 #### examples
 
 ```js
 const expandRow = {
-  renderer: row => (
+  renderer: (row, rowIndex) => (
     <div>
       <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
       <p>You can render anything here, also you can add additional data on every row object</p>

@@ -34,7 +34,7 @@ export default (Component) => {
         expanded={ expanded }
         onClosed={ () => expandRow.onClosed(key) }
       >
-        { expandRow.renderer(props.row) }
+        { expandRow.renderer(props.row, props.rowIndex) }
       </ExpandRow> : null
     ];
   };
