@@ -35,6 +35,7 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
       this.props.expanded !== nextProps.expanded ||
       this.props.expandable !== nextProps.expandable ||
       this.props.selectable !== nextProps.selectable ||
+      this.props.selectRow.hideSelectColumn !== nextProps.selectRow.hideSelectColumn ||
       this.shouldUpdatedBySelfProps(nextProps)
     ) {
       this.shouldUpdateRowContent = this.shouldRowContentUpdate(nextProps);
