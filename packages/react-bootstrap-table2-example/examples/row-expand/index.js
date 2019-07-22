@@ -18,9 +18,9 @@ const columns = [{
 }];
 
 const expandRow = {
-  renderer: row => (
+  renderer: (row, rowIndex) => (
     <div>
-      <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
+      <p>{ `This Expand row is belong to rowKey ${row.id} and index: ${rowIndex}` }</p>
       <p>You can render anything here, also you can add additional data on every row object</p>
       <p>expandRow.renderer callback will pass the origin row object to you</p>
     </div>

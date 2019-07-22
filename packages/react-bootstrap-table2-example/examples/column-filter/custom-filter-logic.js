@@ -12,8 +12,12 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
 class Table extends React.Component {
-  filterByPrice = filterVal =>
-    products.filter(product => product.price == filterVal);
+  filterByPrice = (filterVal) => {
+    if (filterVal) {
+      return products.filter(product => product.price == filterVal);
+    }
+    return products;
+  }
 
   render() {
     const columns = [{
@@ -46,8 +50,12 @@ class Table extends React.Component {
 `;
 
 export default class Table extends React.Component {
-  filterByPrice = filterVal =>
-    products.filter(product => product.price == filterVal);
+  filterByPrice = (filterVal) => {
+    if (filterVal) {
+      return products.filter(product => product.price == filterVal);
+    }
+    return products;
+  }
 
   render() {
     const columns = [{
@@ -67,7 +75,7 @@ export default class Table extends React.Component {
 
     return (
       <div>
-        <h2>Implement a eq filter on product price column</h2>
+        <h2>Implement Custom Filter</h2>
         <BootstrapTable
           keyField="id"
           data={ products }

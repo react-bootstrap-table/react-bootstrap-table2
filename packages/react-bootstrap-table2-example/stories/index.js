@@ -131,6 +131,7 @@ import TextareaEditorTable from 'examples/cell-edit/textarea-editor-table';
 import CheckboxEditorTable from 'examples/cell-edit/checkbox-editor-table';
 import DateEditorTable from 'examples/cell-edit/date-editor-table';
 import CustomEditorTable from 'examples/cell-edit/custom-editor-table';
+import CellEditorWithDataType from 'examples/cell-edit/cell-edit-with-data-type';
 
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
@@ -164,6 +165,7 @@ import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandColumnPosition from 'examples/row-expand/expand-column-position';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
+import ParentRowClassName from 'examples/row-expand/parent-row-classname';
 
 // pagination
 import PaginationTable from 'examples/pagination';
@@ -377,7 +379,8 @@ storiesOf('Cell Editing', module)
   .add('Textarea Editor', () => <TextareaEditorTable />)
   .add('Checkbox Editor', () => <CheckboxEditorTable />)
   .add('Date Editor', () => <DateEditorTable />)
-  .add('Custom Editor', () => <CustomEditorTable />);
+  .add('Custom Editor', () => <CustomEditorTable />)
+  .add('Cell Editor with Data Type', () => <CellEditorWithDataType />);
 
 storiesOf('Row Selection', module)
   .addDecorator(bootstrapStyle())
@@ -412,7 +415,8 @@ storiesOf('Row Expand', module)
   .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Column Position', () => <ExpandColumnPosition />)
-  .add('Expand Hooks', () => <ExpandHooks />);
+  .add('Expand Hooks', () => <ExpandHooks />)
+  .add('Custom Parent Row ClassName', () => <ParentRowClassName />);
 
 storiesOf('Pagination', module)
   .addDecorator(bootstrapStyle())
