@@ -65,7 +65,7 @@ class MultiSelectFilter extends Component {
       needFilter = true;
     }
     if (needFilter) {
-      this.applyFilter(this.selectInput.value);
+      this.applyFilter(getSelections(this.selectInput));
     }
   }
 
