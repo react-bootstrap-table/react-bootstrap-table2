@@ -237,13 +237,21 @@ export const filters = (data, columns, _) => (currFilters) => {
     const filterObj = currFilters[dataField];
     filterFn = factory(filterObj.filterType);
     let filterValue;
+    let customFilter;
     for (let i = 0; i < columns.length; i += 1) {
       if (columns[i].dataField === dataField) {
         filterValue = columns[i].filterValue;
+        if (columns[i].filter) {
+          customFilter = columns[i].filter.props.onFilter;
+        }
         break;
       }
     }
-    result = filterFn(result, dataField, filterObj, filterValue);
+    if (customFilter) {
+      result = customFilter(filterObj.filterVal, result);
+    } else {
+      result = filterFn(result, dataField, filterObj, filterValue);
+    }
   });
   return result;
 };
