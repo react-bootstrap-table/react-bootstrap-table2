@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 /* eslint react/prefer-stateless-function: 0 */
 import React from 'react';
 
@@ -25,22 +26,26 @@ const columns = [{
   text: 'Job Type1',
   editor: {
     type: Type.SELECT,
-    getOptions: () => [{
-      value: 'A',
-      label: 'A'
-    }, {
-      value: 'B',
-      label: 'B'
-    }, {
-      value: 'C',
-      label: 'C'
-    }, {
-      value: 'D',
-      label: 'D'
-    }, {
-      value: 'E',
-      label: 'E'
-    }]
+    getOptions: (setOptions, { row, column }) => {
+      console.log(`current editing row id: ${row.id}`);
+      console.log(`current editing column: ${column.dataField}`);
+      return [{
+        value: 'A',
+        label: 'A'
+      }, {
+        value: 'B',
+        label: 'B'
+      }, {
+        value: 'C',
+        label: 'C'
+      }, {
+        value: 'D',
+        label: 'D'
+      }, {
+        value: 'E',
+        label: 'E'
+      }];
+    }
   }
 }, {
   dataField: 'type2',
@@ -88,22 +93,26 @@ const columns = [{
   text: 'Job Type1',
   editor: {
     type: Type.SELECT,
-    getOptions: () => [{
-      value: 'A',
-      label: 'A'
-    }, {
-      value: 'B',
-      label: 'B'
-    }, {
-      value: 'C',
-      label: 'C'
-    }, {
-      value: 'D',
-      label: 'D'
-    }, {
-      value: 'E',
-      label: 'E'
-    }]
+    getOptions: (setOptions, { row, column }) => {
+      console.log(\`current editing row id: $\{row.id}\`);
+      console.log(\`current editing column: $\{column.dataField}\`);
+      return [{
+        value: 'A',
+        label: 'A'
+      }, {
+        value: 'B',
+        label: 'B'
+      }, {
+        value: 'C',
+        label: 'C'
+      }, {
+        value: 'D',
+        label: 'D'
+      }, {
+        value: 'E',
+        label: 'E'
+      }];
+    }
   }
 }, {
   dataField: 'type2',

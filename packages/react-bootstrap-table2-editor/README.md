@@ -140,7 +140,7 @@ const columns = [
   text: 'Job Type',
   editor: {
     type: Type.SELECT,
-    getOptions: () => [.....]
+    getOptions: (setOptions, { row, column }) => [.....]
   }
 }];
 
@@ -152,7 +152,7 @@ const columns = [
   text: 'Job Type',
   editor: {
     type: Type.SELECT,
-    getOptions: (setOptions) => {
+    getOptions: (setOptions, { row, column }) => {
       setTimeout(() => setOptions([...]), 1500);
     }
   }
