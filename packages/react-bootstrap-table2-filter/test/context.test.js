@@ -228,33 +228,7 @@ describe('FilterContext', () => {
       });
     });
 
-    describe('if filter.props.onFilter is defined', () => {
-      const filterVal = '3';
-      const onFilter = jest.fn();
-      const customColumns = columns.map((column, i) => {
-        if (i === 1) {
-          return {
-            ...column,
-            filter: textFilter({ onFilter })
-          };
-        }
-        return column;
-      });
-
-      beforeEach(() => {
-        wrapper = shallow(shallowContext(false, customColumns));
-        wrapper.render();
-        instance = wrapper.instance();
-      });
-
-      it('should call filter.props.onFilter correctly', () => {
-        instance.onFilter(customColumns[1], FILTER_TYPE.TEXT)(filterVal);
-        expect(onFilter).toHaveBeenCalledTimes(1);
-        expect(onFilter).toHaveBeenCalledWith(filterVal);
-      });
-    });
-
-    describe('if filter.props.onFilter is defined and return an undefined data', () => {
+    describe('if filter.props.onFilter is defined and return data', () => {
       const mockReturn = [{
         id: 1,
         name: 'A'
@@ -280,7 +254,7 @@ describe('FilterContext', () => {
       it('should call filter.props.onFilter correctly', () => {
         instance.onFilter(customColumns[1], FILTER_TYPE.TEXT)(filterVal);
         expect(onFilter).toHaveBeenCalledTimes(1);
-        expect(onFilter).toHaveBeenCalledWith(filterVal);
+        expect(onFilter).toHaveBeenCalledWith(filterVal, data);
       });
 
       it('should set data correctly', () => {
