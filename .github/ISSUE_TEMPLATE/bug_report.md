@@ -8,7 +8,7 @@ assignees: AllenFang
 ---
 
 **Describe the bug**
-A clear and concise description of what the bug is.
+A clear and concise description of what the bug is. In addition, please search issues before you open a report to make sure there's no any duplicated report
 
 **To Reproduce**
 Steps to reproduce the behavior:
