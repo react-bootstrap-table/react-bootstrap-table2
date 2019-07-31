@@ -443,7 +443,7 @@ storiesOf('Table Search', module)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
-  .add('Search Fromatted Value', () => <SearchFormattedData />)
+  .add('Search Formatted Value', () => <SearchFormattedData />)
   .add('Custom Search Value', () => <CustomSearchValue />);
 
 storiesOf('Column Toggle', module)
