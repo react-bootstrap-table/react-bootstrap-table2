@@ -37,13 +37,13 @@
   ],
   "dependencies": {
     "classnames": "2.2.5",
-    "react-transition-group": "2.5.3",
+    "react-transition-group": "4.2.2",
     "underscore": "1.9.1"
   },
   "peerDependencies": {
-    "classnames": "^2.2.5",
-    "prop-types": "^15.0.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
