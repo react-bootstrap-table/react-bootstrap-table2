@@ -160,6 +160,12 @@ There are two case for `getOptions`:
 ```
 
 
+`getOptions` have two arguments:
+
+* `setOptions`: call it when you are ready to set the options asynchronous.
+* `params`: An object which have `row` and `column` for current editing cell.
+
+
 ### Date Editor
 Date editor is use `<input type="date">`, the configuration is very simple:
 
