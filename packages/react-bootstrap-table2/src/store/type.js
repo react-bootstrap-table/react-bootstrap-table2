@@ -1,7 +1,7 @@
 import Const from '../const';
 
 export const typeConvert = (type, value) => {
-  if (!type || type === Const.TYPE_STRING) {
+  if (type === Const.TYPE_STRING) {
     return String(value);
   } else if (type === Const.TYPE_NUMBER) {
     return Number(value);
