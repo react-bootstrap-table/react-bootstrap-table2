@@ -108,7 +108,8 @@ export default (
         <FilterContext.Provider value={ {
           data: this.data,
           onFilter: this.onFilter,
-          onExternalFilter: this.onExternalFilter
+          onExternalFilter: this.onExternalFilter,
+          currFilters: this.currFilters
         } }
         >
           { this.props.children }

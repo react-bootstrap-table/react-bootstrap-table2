@@ -69,6 +69,14 @@ class MultiSelectFilter extends Component {
     }
   }
 
+  getDefaultValue() {
+    const { filterState, defaultValue } = this.props;
+    if (filterState && typeof filterState.filterVal !== 'undefined') {
+      return filterState.filterVal;
+    }
+    return defaultValue;
+  }
+
   getOptions() {
     const optionTags = [];
     const { options, placeholder, column, withoutEmptyOption } = this.props;
@@ -106,6 +114,7 @@ class MultiSelectFilter extends Component {
     const {
       style,
       className,
+      filterState,
       defaultValue,
       onFilter,
       column,
@@ -135,7 +144,7 @@ class MultiSelectFilter extends Component {
           className={ selectClass }
           onChange={ this.filter }
           onClick={ e => e.stopPropagation() }
-          defaultValue={ defaultValue !== undefined ? defaultValue : '' }
+          defaultValue={ this.getDefaultValue() }
         >
           { this.getOptions() }
         </select>
@@ -148,6 +157,7 @@ MultiSelectFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
   options: PropTypes.object.isRequired,
+  filterState: PropTypes.object,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   placeholder: PropTypes.string,
   style: PropTypes.object,
@@ -160,6 +170,7 @@ MultiSelectFilter.propTypes = {
 
 MultiSelectFilter.defaultProps = {
   defaultValue: [],
+  filterState: {},
   className: '',
   withoutEmptyOption: false,
   comparator: EQ,
