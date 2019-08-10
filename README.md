@@ -1,7 +1,7 @@
 # react-bootstrap-table2
 
 [![Build Status](https://travis-ci.org/react-bootstrap-table/react-bootstrap-table2.svg?branch=master)](https://travis-ci.org/react-bootstrap-table/react-bootstrap-table2)  
-Rebuilt of [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table)
+Rebuild of [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table)
 
 > Note that `react-bootstrap-table2`'s npm module name is [**`react-bootstrap-table-next`**](https://www.npmjs.com/package/react-bootstrap-table-next) due to the name being already taken.
 
