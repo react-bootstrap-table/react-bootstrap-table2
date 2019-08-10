@@ -44,7 +44,7 @@ class SelectFilter extends Component {
   constructor(props) {
     super(props);
     this.filter = this.filter.bind(this);
-    const isSelected = getOptionValue(props.options, props.defaultValue) !== undefined;
+    const isSelected = getOptionValue(props.options, this.getDefaultValue()) !== undefined;
     this.state = { isSelected };
   }
 
@@ -80,6 +80,14 @@ class SelectFilter extends Component {
         this.props.onFilter(this.props.column, FILTER_TYPE.SELECT)(value);
       }
     }
+  }
+
+  getDefaultValue() {
+    const { filterState, defaultValue } = this.props;
+    if (filterState && typeof filterState.filterVal !== 'undefined') {
+      return filterState.filterVal;
+    }
+    return defaultValue;
   }
 
   getOptions() {
@@ -132,6 +140,7 @@ class SelectFilter extends Component {
       withoutEmptyOption,
       caseSensitive,
       getFilter,
+      filterState,
       ...rest
     } = this.props;
 
@@ -152,7 +161,7 @@ class SelectFilter extends Component {
           className={ selectClass }
           onChange={ this.filter }
           onClick={ e => e.stopPropagation() }
-          defaultValue={ defaultValue !== undefined ? defaultValue : '' }
+          defaultValue={ this.getDefaultValue() || '' }
         >
           { this.getOptions() }
         </select>
@@ -164,6 +173,7 @@ class SelectFilter extends Component {
 SelectFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  filterState: PropTypes.object,
   options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   placeholder: PropTypes.string,
@@ -177,6 +187,7 @@ SelectFilter.propTypes = {
 
 SelectFilter.defaultProps = {
   defaultValue: '',
+  filterState: {},
   className: '',
   withoutEmptyOption: false,
   comparator: EQ,

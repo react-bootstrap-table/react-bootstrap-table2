@@ -94,7 +94,8 @@ describe('FilterContext', () => {
       expect(mockBase).toHaveBeenCalledWith({
         data,
         onFilter: wrapper.instance().onFilter,
-        onExternalFilter: wrapper.instance().onExternalFilter
+        onExternalFilter: wrapper.instance().onExternalFilter,
+        currFilters: wrapper.instance().currFilters
       });
     });
   });
@@ -103,7 +104,6 @@ describe('FilterContext', () => {
     beforeEach(() => {
       wrapper = shallow(shallowContext(true));
       wrapper.render();
-      wrapper.instance().currFilters = { price: { filterVal: 20, filterType: FILTER_TYPE.TEXT } };
     });
 
     it('should pass original data without internal filtering', () => {
@@ -111,7 +111,8 @@ describe('FilterContext', () => {
       expect(mockBase).toHaveBeenCalledWith({
         data,
         onFilter: wrapper.instance().onFilter,
-        onExternalFilter: wrapper.instance().onExternalFilter
+        onExternalFilter: wrapper.instance().onExternalFilter,
+        currFilters: wrapper.instance().currFilters
       });
     });
   });
