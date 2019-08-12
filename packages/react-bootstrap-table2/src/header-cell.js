@@ -18,6 +18,7 @@ const HeaderCell = (props) => {
     sortOrder,
     isLastSorting,
     onFilter,
+    currFilters,
     onExternalFilter
   } = props;
 
@@ -99,7 +100,14 @@ const HeaderCell = (props) => {
     const onCustomFilter = onExternalFilter(column, filter.props.type);
     filterElm = filterRenderer(onCustomFilter, column);
   } else if (filter) {
-    filterElm = <filter.Filter { ...filter.props } onFilter={ onFilter } column={ column } />;
+    filterElm = (
+      <filter.Filter
+        { ...filter.props }
+        filterState={ currFilters[column.dataField] }
+        onFilter={ onFilter }
+        column={ column }
+      />
+    );
   }
 
   const children = headerFormatter ?
@@ -162,6 +170,7 @@ HeaderCell.propTypes = {
   sortCaret: PropTypes.func,
   isLastSorting: PropTypes.bool,
   onFilter: PropTypes.func,
+  currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func
 };
 

@@ -728,7 +728,9 @@ describe('HeaderCell', () => {
           Filter
         }
       };
-      wrapper = shallow(<HeaderCell column={ column } index={ index } onFilter={ onFilter } />);
+      wrapper = shallow(
+        <HeaderCell column={ column } index={ index } onFilter={ onFilter } currFilters={ {} } />
+      );
     });
 
     it('should render successfully', () => {

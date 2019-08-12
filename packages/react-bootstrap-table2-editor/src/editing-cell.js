@@ -201,7 +201,7 @@ export default (_, onStartEdit) =>
       if (_.isFunction(column.editorRenderer)) {
         editor = column.editorRenderer(editorProps, value, row, column, rowIndex, columnIndex);
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.SELECT) {
-        editor = <DropdownEditor { ...editorProps } />;
+        editor = <DropdownEditor { ...editorProps } row={ row } column={ column } />;
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.TEXTAREA) {
         editor = <TextAreaEditor { ...editorProps } autoSelectText={ autoSelectText } />;
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.CHECKBOX) {

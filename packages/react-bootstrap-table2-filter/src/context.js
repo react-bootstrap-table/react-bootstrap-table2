@@ -40,7 +40,7 @@ export default (
     componentWillReceiveProps(nextProps) {
       // let nextData = nextProps.data;
       if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.data)) {
-        this.doFilter(nextProps, undefined, this.isEmitDataChange);
+        this.doFilter(nextProps, this.isEmitDataChange);
       } else {
         this.data = nextProps.data;
       }
@@ -76,12 +76,7 @@ export default (
           }
           return;
         }
-
-        let result;
-        if (filter.props.onFilter) {
-          result = filter.props.onFilter(filterVal);
-        }
-        this.doFilter(this.props, result);
+        this.doFilter(this.props);
       };
     }
 
@@ -95,11 +90,9 @@ export default (
       return this.data;
     }
 
-    doFilter(props, customResult, ignoreEmitDataChange = false) {
-      let result = customResult;
-
+    doFilter(props, ignoreEmitDataChange = false) {
       const { dataChangeListener, data, columns } = props;
-      result = result || filters(data, columns, _)(this.currFilters);
+      const result = filters(data, columns, _)(this.currFilters);
       this.data = result;
       if (dataChangeListener && !ignoreEmitDataChange) {
         this.isEmitDataChange = true;
@@ -115,7 +108,8 @@ export default (
         <FilterContext.Provider value={ {
           data: this.data,
           onFilter: this.onFilter,
-          onExternalFilter: this.onExternalFilter
+          onExternalFilter: this.onExternalFilter,
+          currFilters: this.currFilters
         } }
         >
           { this.props.children }

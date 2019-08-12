@@ -8,7 +8,13 @@ class DropDownEditor extends Component {
     super(props);
     let options = props.options;
     if (props.getOptions) {
-      options = props.getOptions(this.setOptions.bind(this)) || [];
+      options = props.getOptions(
+        this.setOptions.bind(this),
+        {
+          row: props.row,
+          column: props.column
+        }
+      ) || [];
     }
     this.state = { options };
   }
@@ -54,6 +60,8 @@ class DropDownEditor extends Component {
 }
 
 DropDownEditor.propTypes = {
+  row: PropTypes.object.isRequired,
+  column: PropTypes.object.isRequired,
   defaultValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number

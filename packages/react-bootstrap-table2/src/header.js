@@ -18,6 +18,7 @@ const Header = (props) => {
     sortField,
     sortOrder,
     selectRow,
+    currFilters,
     onExternalFilter,
     expandRow
   } = props;
@@ -50,6 +51,7 @@ const Header = (props) => {
           onSort={ onSort }
           sorting={ currSort }
           onFilter={ onFilter }
+          currFilters={ currFilters }
           onExternalFilter={ onExternalFilter }
           sortOrder={ sortOrder }
           isLastSorting={ isLastSorting }
@@ -89,6 +91,7 @@ Header.propTypes = {
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
+  currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func,
   className: PropTypes.string,
   expandRow: PropTypes.object

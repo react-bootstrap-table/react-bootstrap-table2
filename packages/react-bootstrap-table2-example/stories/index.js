@@ -210,6 +210,7 @@ import BasicColumnToggle from 'examples/column-toggle';
 import DefaultVisibility from 'examples/column-toggle/default-visibility';
 import StylingColumnToggle from 'examples/column-toggle/styling-toggle-list';
 import CustomToggleList from 'examples/column-toggle/custom-toggle-list';
+import ColumnToggleWithFilter from 'examples/column-toggle/column-toggle-with-filter';
 
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
@@ -443,7 +444,7 @@ storiesOf('Table Search', module)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
-  .add('Search Fromatted Value', () => <SearchFormattedData />)
+  .add('Search Formatted Value', () => <SearchFormattedData />)
   .add('Custom Search Value', () => <CustomSearchValue />);
 
 storiesOf('Column Toggle', module)
@@ -451,7 +452,8 @@ storiesOf('Column Toggle', module)
   .add('Basic Column Toggle', () => <BasicColumnToggle />)
   .add('Default Visibility', () => <DefaultVisibility />)
   .add('Styling Column Toggle', () => <StylingColumnToggle />)
-  .add('Custom Column Toggle', () => <CustomToggleList />);
+  .add('Custom Column Toggle', () => <CustomToggleList />)
+  .add('Column Toggle with Filter', () => <ColumnToggleWithFilter />);
 
 storiesOf('Export CSV', module)
   .addDecorator(bootstrapStyle())
