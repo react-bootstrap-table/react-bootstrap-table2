@@ -18,6 +18,7 @@ const Header = (props) => {
     sortField,
     sortOrder,
     selectRow,
+    currFilters,
     onExternalFilter,
     expandRow
   } = props;
@@ -33,9 +34,9 @@ const Header = (props) => {
     SelectionHeaderCellComp = withHeaderSelection(SelectionHeaderCell);
   }
 
-  const isRenderExpandColumnInLeft = (
-    expandColumnPosition = Const.INDICATOR_POSITION_LEFT
-  ) => expandColumnPosition === Const.INDICATOR_POSITION_LEFT;
+  const isRenderFunctionColumnInLeft = (
+    position = Const.INDICATOR_POSITION_LEFT
+  ) => position === Const.INDICATOR_POSITION_LEFT;
 
   const childrens = [
     columns.map((column, i) => {
@@ -50,6 +51,7 @@ const Header = (props) => {
           onSort={ onSort }
           sorting={ currSort }
           onFilter={ onFilter }
+          currFilters={ currFilters }
           onExternalFilter={ onExternalFilter }
           sortOrder={ sortOrder }
           isLastSorting={ isLastSorting }
@@ -58,11 +60,15 @@ const Header = (props) => {
   ];
 
   if (!selectRow.hideSelectColumn) {
-    childrens.unshift(<SelectionHeaderCellComp key="selection" />);
+    if (isRenderFunctionColumnInLeft(selectRow.selectColumnPosition)) {
+      childrens.unshift(<SelectionHeaderCellComp key="selection" />);
+    } else {
+      childrens.push(<SelectionHeaderCellComp key="selection" />);
+    }
   }
 
   if (expandRow.showExpandColumn) {
-    if (isRenderExpandColumnInLeft(expandRow.expandColumnPosition)) {
+    if (isRenderFunctionColumnInLeft(expandRow.expandColumnPosition)) {
       childrens.unshift(<ExpansionHeaderCellComp key="expansion" />);
     } else {
       childrens.push(<ExpansionHeaderCellComp key="expansion" />);
@@ -85,6 +91,7 @@ Header.propTypes = {
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
+  currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func,
   className: PropTypes.string,
   expandRow: PropTypes.object

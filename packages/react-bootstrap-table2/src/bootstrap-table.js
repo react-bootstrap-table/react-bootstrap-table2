@@ -91,6 +91,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
             onFilter={ this.props.onFilter }
+            currFilters={ this.props.currFilters }
             onExternalFilter={ this.props.onExternalFilter }
             selectRow={ selectRow }
             expandRow={ expandRow }
@@ -168,7 +169,12 @@ BootstrapTable.propTypes = {
     hideSelectColumn: PropTypes.bool,
     selectionRenderer: PropTypes.func,
     selectionHeaderRenderer: PropTypes.func,
-    headerColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
+    headerColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    selectColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
+    selectColumnPosition: PropTypes.oneOf([
+      Const.INDICATOR_POSITION_LEFT,
+      Const.INDICATOR_POSITION_RIGHT
+    ])
   }),
   expandRow: PropTypes.shape({
     renderer: PropTypes.func,
@@ -184,7 +190,8 @@ BootstrapTable.propTypes = {
     expandColumnPosition: PropTypes.oneOf([
       Const.INDICATOR_POSITION_LEFT,
       Const.INDICATOR_POSITION_RIGHT
-    ])
+    ]),
+    parentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
   }),
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,

@@ -13,8 +13,14 @@ class TextFilter extends Component {
     this.filter = this.filter.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.timeout = null;
+    function getDefaultValue() {
+      if (props.filterState && typeof props.filterState.filterVal !== 'undefined') {
+        return props.filterState.filterVal;
+      }
+      return props.defaultValue;
+    }
     this.state = {
-      value: props.defaultValue
+      value: getDefaultValue()
     };
   }
 
@@ -89,6 +95,7 @@ class TextFilter extends Component {
       caseSensitive,
       defaultValue,
       getFilter,
+      filterState,
       ...rest
     } = this.props;
 
@@ -119,6 +126,7 @@ class TextFilter extends Component {
 TextFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  filterState: PropTypes.object,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   defaultValue: PropTypes.string,
   delay: PropTypes.number,
@@ -131,6 +139,7 @@ TextFilter.propTypes = {
 
 TextFilter.defaultProps = {
   delay: FILTER_DELAY,
+  filterState: {},
   defaultValue: '',
   caseSensitive: false
 };

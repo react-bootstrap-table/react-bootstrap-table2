@@ -35,6 +35,7 @@ import ColumnEventTable from 'examples/columns/column-event-table';
 import ColumnHiddenTable from 'examples/columns/column-hidden-table';
 import ColumnAttrsTable from 'examples/columns/column-attrs-table';
 import DummyColumnTable from 'examples/columns/dummy-column-table';
+import RowExpandWithFormattedDummyColumn from 'examples/columns/row-expand-with-formatted-dummy-column.js';
 
 // work on header columns
 import HeaderColumnFormatTable from 'examples/header-columns/column-format-table';
@@ -125,10 +126,12 @@ import EditorStyleTable from 'examples/cell-edit/editor-style-table';
 import EditorClassTable from 'examples/cell-edit/editor-class-table';
 import DBClickEditWithSelection from 'examples/cell-edit/dbclick-to-edit-with-selection-table';
 import DropdownEditorTable from 'examples/cell-edit/dropdown-editor-table';
+import DropdownEditorWithDynamicOptionsTable from 'examples/cell-edit/dropdown-editor-with-dynamic-options-table';
 import TextareaEditorTable from 'examples/cell-edit/textarea-editor-table';
 import CheckboxEditorTable from 'examples/cell-edit/checkbox-editor-table';
 import DateEditorTable from 'examples/cell-edit/date-editor-table';
 import CustomEditorTable from 'examples/cell-edit/custom-editor-table';
+import CellEditorWithDataType from 'examples/cell-edit/cell-edit-with-data-type';
 
 // work on row selection
 import SingleSelectionTable from 'examples/row-selection/single-selection';
@@ -149,6 +152,8 @@ import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
 import HideSelectionColumnTable from 'examples/row-selection/hide-selection-column';
+import SelectionColumnStyleTable from 'examples/row-selection/select-column-style';
+import SelectionColumnPositionTable from 'examples/row-selection/selection-column-position';
 
 // work on row expand
 import BasicRowExpand from 'examples/row-expand';
@@ -160,6 +165,7 @@ import ExpandOnlyOne from 'examples/row-expand/expand-only-one';
 import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandColumnPosition from 'examples/row-expand/expand-column-position';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
+import ParentRowClassName from 'examples/row-expand/parent-row-classname';
 
 // pagination
 import PaginationTable from 'examples/pagination';
@@ -204,6 +210,7 @@ import BasicColumnToggle from 'examples/column-toggle';
 import DefaultVisibility from 'examples/column-toggle/default-visibility';
 import StylingColumnToggle from 'examples/column-toggle/styling-toggle-list';
 import CustomToggleList from 'examples/column-toggle/custom-toggle-list';
+import ColumnToggleWithFilter from 'examples/column-toggle/column-toggle-with-filter';
 
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
@@ -270,7 +277,8 @@ storiesOf('Work on Columns', module)
   .add('Customize Column Class', () => <ColumnClassTable />)
   .add('Customize Column Style', () => <ColumnStyleTable />)
   .add('Customize Column HTML attribute', () => <ColumnAttrsTable />)
-  .add('Dummy Column', () => <DummyColumnTable />);
+  .add('Dummy Column', () => <DummyColumnTable />)
+  .add('Row Expand with Dummy Column Formatter', () => <RowExpandWithFormattedDummyColumn />);
 
 storiesOf('Work on Header Columns', module)
   .addDecorator(bootstrapStyle())
@@ -368,10 +376,12 @@ storiesOf('Cell Editing', module)
   .add('Custom Editor Style', () => <EditorStyleTable />)
   .add('DoubleClick to Edit with Selection', () => <DBClickEditWithSelection />)
   .add('Dropdown Editor', () => <DropdownEditorTable />)
+  .add('Dropdown Editor with Dynamic Options', () => <DropdownEditorWithDynamicOptionsTable />)
   .add('Textarea Editor', () => <TextareaEditorTable />)
   .add('Checkbox Editor', () => <CheckboxEditorTable />)
   .add('Date Editor', () => <DateEditorTable />)
-  .add('Custom Editor', () => <CustomEditorTable />);
+  .add('Custom Editor', () => <CustomEditorTable />)
+  .add('Cell Editor with Data Type', () => <CellEditorWithDataType />);
 
 storiesOf('Row Selection', module)
   .addDecorator(bootstrapStyle())
@@ -392,7 +402,9 @@ storiesOf('Row Selection', module)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
   .add('Selection Hooks', () => <SelectionHooks />)
-  .add('Hide Selection Column', () => <HideSelectionColumnTable />);
+  .add('Hide Selection Column', () => <HideSelectionColumnTable />)
+  .add('Custom Selection Column Style', () => <SelectionColumnStyleTable />)
+  .add('Selection Column Position', () => <SelectionColumnPositionTable />);
 
 storiesOf('Row Expand', module)
   .addDecorator(bootstrapStyle())
@@ -404,7 +416,8 @@ storiesOf('Row Expand', module)
   .add('Expand Only One Row at The Same Time', () => <ExpandOnlyOne />)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Column Position', () => <ExpandColumnPosition />)
-  .add('Expand Hooks', () => <ExpandHooks />);
+  .add('Expand Hooks', () => <ExpandHooks />)
+  .add('Custom Parent Row ClassName', () => <ParentRowClassName />);
 
 storiesOf('Pagination', module)
   .addDecorator(bootstrapStyle())
@@ -431,7 +444,7 @@ storiesOf('Table Search', module)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
-  .add('Search Fromatted Value', () => <SearchFormattedData />)
+  .add('Search Formatted Value', () => <SearchFormattedData />)
   .add('Custom Search Value', () => <CustomSearchValue />);
 
 storiesOf('Column Toggle', module)
@@ -439,7 +452,8 @@ storiesOf('Column Toggle', module)
   .add('Basic Column Toggle', () => <BasicColumnToggle />)
   .add('Default Visibility', () => <DefaultVisibility />)
   .add('Styling Column Toggle', () => <StylingColumnToggle />)
-  .add('Custom Column Toggle', () => <CustomToggleList />);
+  .add('Custom Column Toggle', () => <CustomToggleList />)
+  .add('Column Toggle with Filter', () => <ColumnToggleWithFilter />);
 
 storiesOf('Export CSV', module)
   .addDecorator(bootstrapStyle())

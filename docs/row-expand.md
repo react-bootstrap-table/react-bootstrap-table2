@@ -18,6 +18,7 @@
 * [expandColumnPosition](#expandColumnPosition)
 * [expandColumnRenderer](#expandColumnRenderer)
 * [expandHeaderColumnRenderer](#expandHeaderColumnRenderer)
+* [parentClassName](#parentClassName)
 
 ### <a name="renderer">expandRow.renderer - [Function]</a>
 
@@ -25,12 +26,13 @@ Specify the content of expand row, `react-bootstrap-table2` will pass a row obje
 
 #### values
 * **row**
+* **rowIndex**
 
 #### examples
 
 ```js
 const expandRow = {
-  renderer: row => (
+  renderer: (row, rowIndex) => (
     <div>
       <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
       <p>You can render anything here, also you can add additional data on every row object</p>
@@ -163,5 +165,26 @@ const expandRow = {
   renderer: (row) => ...,
   showExpandColumn: true,
   expandColumnPosition: 'right'
+};
+```
+
+### <a name='parentClassName'>expandRow.parentClassName - [String | Function]</a>
+Apply the custom class name on parent row of expanded row. For example: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: 'foo'
+};
+```
+Below case is more flexible way to custom the class name: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: (isExpanded, row, rowIndex) => {
+    if (rowIndex > 2) return 'foo';
+    return 'bar';
+  }
 };
 ```

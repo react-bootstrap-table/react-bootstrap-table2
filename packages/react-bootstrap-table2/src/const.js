@@ -8,5 +8,9 @@ export default {
   CHECKBOX_STATUS_INDETERMINATE: 'indeterminate',
   CHECKBOX_STATUS_UNCHECKED: 'unchecked',
   INDICATOR_POSITION_LEFT: 'left',
-  INDICATOR_POSITION_RIGHT: 'right'
+  INDICATOR_POSITION_RIGHT: 'right',
+  TYPE_STRING: 'string',
+  TYPE_NUMBER: 'number',
+  TYPE_BOOLEAN: 'bool',
+  TYPE_DATE: 'date'
 };

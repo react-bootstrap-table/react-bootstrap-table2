@@ -5,6 +5,7 @@ const csvDefaultOptions = {
   separator: ',',
   ignoreHeader: false,
   noAutoBOM: true,
+  blobType: 'text/plain;charset=utf-8',
   exportAll: true,
   onlyExportSelection: false
 };

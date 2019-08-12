@@ -25,7 +25,7 @@ describe('Select Filter', () => {
     2: 'Unknown'
   };
 
-  afterEach(() => {
+  beforeEach(() => {
     onFilter.reset();
     onFilterFirstReturn.reset();
 

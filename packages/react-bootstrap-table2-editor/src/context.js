@@ -56,12 +56,13 @@ export default (
     }
 
     handleCellUpdate(row, column, newValue) {
+      const newValueWithType = dataOperator.typeConvert(column.type, newValue);
       const { cellEdit } = this.props;
       const { beforeSaveCell } = cellEdit.options;
       const oldValue = _.get(row, column.dataField);
       const beforeSaveCellDone = (result = true) => {
         if (result) {
-          this.doUpdate(row, column, newValue);
+          this.doUpdate(row, column, newValueWithType);
         } else {
           this.escapeEditing();
         }
@@ -69,7 +70,7 @@ export default (
       if (_.isFunction(beforeSaveCell)) {
         const result = beforeSaveCell(
           oldValue,
-          newValue,
+          newValueWithType,
           row,
           column,
           beforeSaveCellDone
@@ -78,7 +79,7 @@ export default (
           return;
         }
       }
-      this.doUpdate(row, column, newValue);
+      this.doUpdate(row, column, newValueWithType);
     }
 
     doUpdate(row, column, newValue) {

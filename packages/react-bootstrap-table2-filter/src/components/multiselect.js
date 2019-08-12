@@ -18,8 +18,18 @@ function optionsEquals(currOpts, prevOpts) {
   return Object.keys(currOpts).length === Object.keys(prevOpts).length;
 }
 
-const getSelections = container =>
-  Array.from(container.selectedOptions).map(item => item.value);
+const getSelections = (container) => {
+  if (container.selectedOptions) {
+    return Array.from(container.selectedOptions).map(item => item.value);
+  }
+  const selections = [];
+  const totalLen = container.options.length;
+  for (let i = 0; i < totalLen; i += 1) {
+    const option = container.options.item(i);
+    if (option.selected) selections.push(option.value);
+  }
+  return selections;
+};
 
 class MultiSelectFilter extends Component {
   constructor(props) {
@@ -55,8 +65,16 @@ class MultiSelectFilter extends Component {
       needFilter = true;
     }
     if (needFilter) {
-      this.applyFilter(this.selectInput.value);
+      this.applyFilter(getSelections(this.selectInput));
     }
+  }
+
+  getDefaultValue() {
+    const { filterState, defaultValue } = this.props;
+    if (filterState && typeof filterState.filterVal !== 'undefined') {
+      return filterState.filterVal;
+    }
+    return defaultValue;
   }
 
   getOptions() {
@@ -96,6 +114,7 @@ class MultiSelectFilter extends Component {
     const {
       style,
       className,
+      filterState,
       defaultValue,
       onFilter,
       column,
@@ -125,7 +144,7 @@ class MultiSelectFilter extends Component {
           className={ selectClass }
           onChange={ this.filter }
           onClick={ e => e.stopPropagation() }
-          defaultValue={ defaultValue !== undefined ? defaultValue : '' }
+          defaultValue={ this.getDefaultValue() }
         >
           { this.getOptions() }
         </select>
@@ -138,6 +157,7 @@ MultiSelectFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
   options: PropTypes.object.isRequired,
+  filterState: PropTypes.object,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   placeholder: PropTypes.string,
   style: PropTypes.object,
@@ -150,6 +170,7 @@ MultiSelectFilter.propTypes = {
 
 MultiSelectFilter.defaultProps = {
   defaultValue: [],
+  filterState: {},
   className: '',
   withoutEmptyOption: false,
   comparator: EQ,
