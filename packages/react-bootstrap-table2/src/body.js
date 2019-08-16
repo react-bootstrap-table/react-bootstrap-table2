@@ -1,30 +1,28 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import _ from './utils';
-import SimpleRow from './row/simple-row';
-import RowAggregator from './row/aggregate-row';
-import RowSection from './row/row-section';
-import Const from './const';
-import withRowSelection from './row-selection/row-consumer';
-import withRowExpansion from './row-expand/row-consumer';
+import _ from "./utils";
+import SimpleRow from "./row/simple-row";
+import RowAggregator from "./row/aggregate-row";
+import RowSection from "./row/row-section";
+import Const from "./const";
+import withRowSelection from "./row-selection/row-consumer";
+import withRowExpansion from "./row-expand/row-consumer";
 
 class Body extends React.Component {
   constructor(props) {
     super(props);
-    const {
-      keyField,
-      cellEdit,
-      selectRow,
-      expandRow
-    } = props;
+    const { keyField, cellEdit, selectRow, expandRow } = props;
 
     // Construct Editing Cell Component
     if (cellEdit.createContext) {
-      this.EditingCell = cellEdit.createEditingCell(_, cellEdit.options.onStartEdit);
+      this.EditingCell = cellEdit.createEditingCell(
+        _,
+        cellEdit.options.onStartEdit
+      );
     }
 
     // Construct Row Component
@@ -37,11 +35,18 @@ class Body extends React.Component {
     }
 
     if (selectRowEnabled) {
-      RowComponent = withRowSelection(expandRowEnabled ? RowComponent : RowAggregator);
+      RowComponent = withRowSelection(
+        expandRowEnabled ? RowComponent : RowAggregator
+      );
     }
 
     if (cellEdit.createContext) {
-      RowComponent = cellEdit.withRowLevelCellEdit(RowComponent, selectRowEnabled, keyField, _);
+      RowComponent = cellEdit.withRowLevelCellEdit(
+        RowComponent,
+        selectRowEnabled,
+        keyField,
+        _
+      );
     }
     this.RowComponent = RowComponent;
   }
@@ -66,11 +71,13 @@ class Body extends React.Component {
     let content;
 
     if (isEmpty) {
-      const indication = _.isFunction(noDataIndication) ? noDataIndication() : noDataIndication;
+      const indication = _.isFunction(noDataIndication)
+        ? noDataIndication()
+        : noDataIndication;
       if (!indication) {
         return null;
       }
-      content = <RowSection content={ indication } colSpan={ visibleColumnSize } />;
+      content = <RowSection content={indication} colSpan={visibleColumnSize} />;
     } else {
       const selectRowEnabled = selectRow.mode !== Const.ROW_SELECT_DISABLED;
       const expandRowEnabled = !!expandRow.renderer;
@@ -86,7 +93,7 @@ class Body extends React.Component {
         additionalRowProps.selectRow = selectRow;
       }
 
-            if (data) {
+      if (data) {
         content = data.map((row, index) => {
           const key = _.get(row, keyField);
           const baseRowProps = {
@@ -117,9 +124,7 @@ class Body extends React.Component {
       }
     }
 
-    return (
-      <tbody>{ content }</tbody>
-    );
+    return <tbody>{content}</tbody>;
   }
 }
 
