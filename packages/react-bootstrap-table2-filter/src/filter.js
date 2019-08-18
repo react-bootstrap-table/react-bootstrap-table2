@@ -234,6 +234,7 @@ export const filters = (data, columns, _) => (currFilters) => {
   let result = data;
   let filterFn;
   Object.keys(currFilters).forEach((dataField) => {
+    let currentResult;
     const filterObj = currFilters[dataField];
     filterFn = factory(filterObj.filterType);
     let filterValue;
@@ -248,9 +249,12 @@ export const filters = (data, columns, _) => (currFilters) => {
       }
     }
     if (customFilter) {
-      result = customFilter(filterObj.filterVal, result);
-    } else {
+      currentResult = customFilter(filterObj.filterVal, result);
+    }
+    if (typeof currentResult === 'undefined') {
       result = filterFn(result, dataField, filterObj, filterValue);
+    } else {
+      result = currentResult;
     }
   });
   return result;
