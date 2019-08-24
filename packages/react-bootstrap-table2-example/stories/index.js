@@ -193,6 +193,7 @@ import DefaultCustomSearch from 'examples/search/default-custom-search';
 import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
 import CustomSearchValue from 'examples/search/custom-search-value';
+import SearchableColumn from 'examples/search/searchable-column';
 
 // CSV
 import ExportCSV from 'examples/csv';
@@ -445,6 +446,7 @@ storiesOf('Table Search', module)
   .add('Clear Search Button', () => <ClearSearchButton />)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
+  .add('Searchable Column', () => <SearchableColumn />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Formatted Value', () => <SearchFormattedData />)
   .add('Custom Search Value', () => <CustomSearchValue />);
