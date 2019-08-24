@@ -167,6 +167,7 @@ import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandColumnPosition from 'examples/row-expand/expand-column-position';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
 import ParentRowClassName from 'examples/row-expand/parent-row-classname';
+import ExpandingRowClassName from 'examples/row-expand/expanding-row-classname';
 
 // pagination
 import PaginationTable from 'examples/pagination';
@@ -420,7 +421,8 @@ storiesOf('Row Expand', module)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Column Position', () => <ExpandColumnPosition />)
   .add('Expand Hooks', () => <ExpandHooks />)
-  .add('Custom Parent Row ClassName', () => <ParentRowClassName />);
+  .add('Custom Parent Row ClassName', () => <ParentRowClassName />)
+  .add('Custom Expanding Row ClassName', () => <ExpandingRowClassName />);
 
 storiesOf('Pagination', module)
   .addDecorator(bootstrapStyle())
