@@ -68,6 +68,7 @@ import TextFilterCaseSensitive from 'examples/column-filter/text-filter-caseSens
 import CustomTextFilter from 'examples/column-filter/custom-text-filter';
 import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 import SelectFilter from 'examples/column-filter/select-filter';
+import ConfigureSelectFilterOptions from 'examples/column-filter/select-filter-option-type';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
 import SelectFilterWithPreservedOptionsOrder from 'examples/column-filter/select-filter-preserve-option-order';
@@ -300,6 +301,7 @@ storiesOf('Column Filter', module)
   .add('Text Filter with Case Sensitive', () => <TextFilterCaseSensitive />)
   // add another filter type example right here.
   .add('Select Filter', () => <SelectFilter />)
+  .add('Configure Select Filter Options', () => <ConfigureSelectFilterOptions />)
   .add('Select Filter with Default Value', () => <SelectFilterWithDefaultValue />)
   .add('Select Filter with Comparator', () => <SelectFilterComparator />)
   .add('MultiSelect Filter', () => <MultiSelectFilter />)
