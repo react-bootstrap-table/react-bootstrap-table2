@@ -52,6 +52,7 @@ Definition of columns props on BootstrapTable
 * [editorRenderer](#columneditorrenderer-function)
 * [filter](#columnfilter-object)
 * [filterValue](#columnfiltervalue-function)
+* [searchable](#columnsearchable-bool)
 * [csvType](#columncsvType-object)
 * [csvFormatter](#columncsvFormatter-function)
 * [csvText](#columncsvText-string)
@@ -901,6 +902,9 @@ A final `String` value you want to be filtered.
   filterValue: (cell, row) => owners[cell]
 }
 ```
+
+## column.searchable - [Bool]
+Default the column is searchable. Give `false` to disable search functionality on specified column.
 
 
 ## column.csvType - [Object]

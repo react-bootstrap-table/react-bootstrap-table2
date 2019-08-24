@@ -20,6 +20,7 @@ title: Row Expand Props
 * [expandColumnPosition](#expandrowexpandcolumnposition-string)
 * [expandColumnRenderer](#expandrowexpandcolumnrenderer-function)
 * [expandHeaderColumnRenderer](#expandrowexpandheadercolumnrenderer-function)
+* [className](#expandrowclassname-string-function)
 * [parentClassName](#expandrowparentclassname-string-function)
 
 -----
@@ -182,10 +183,32 @@ const expandRow = {
 };
 ```
 
+## expandRow.className - [String | Function]
+Apply the custom class name on the expanding row. For example: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  className: 'foo'
+};
+```
+
+Following case is more flexible way to custom the class name: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  className: (isExpanded, row, rowIndex) => {
+    if (rowIndex > 2) return 'foo';
+    return 'bar';
+  }
+};
+```
+
 ## expandRow.parentClassName - [String | Function]
 Apply the custom class name on parent row of expanded row. For example: 
 
- ```js
+```js
 const expandRow = {
   renderer: (row) => ...,
   parentClassName: 'foo'
@@ -193,7 +216,7 @@ const expandRow = {
 ```
 Below case is more flexible way to custom the class name: 
 
- ```js
+```js
 const expandRow = {
   renderer: (row) => ...,
   parentClassName: (isExpanded, row, rowIndex) => {
