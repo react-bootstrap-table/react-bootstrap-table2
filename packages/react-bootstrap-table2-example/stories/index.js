@@ -68,6 +68,7 @@ import TextFilterCaseSensitive from 'examples/column-filter/text-filter-caseSens
 import CustomTextFilter from 'examples/column-filter/custom-text-filter';
 import CustomFilterValue from 'examples/column-filter/custom-filter-value';
 import SelectFilter from 'examples/column-filter/select-filter';
+import ConfigureSelectFilterOptions from 'examples/column-filter/select-filter-option-type';
 import SelectFilterWithDefaultValue from 'examples/column-filter/select-filter-default-value';
 import SelectFilterComparator from 'examples/column-filter/select-filter-like-comparator';
 import SelectFilterWithPreservedOptionsOrder from 'examples/column-filter/select-filter-preserve-option-order';
@@ -166,6 +167,7 @@ import CustomExpandColumn from 'examples/row-expand/custom-expand-column';
 import ExpandColumnPosition from 'examples/row-expand/expand-column-position';
 import ExpandHooks from 'examples/row-expand/expand-hooks';
 import ParentRowClassName from 'examples/row-expand/parent-row-classname';
+import ExpandingRowClassName from 'examples/row-expand/expanding-row-classname';
 
 // pagination
 import PaginationTable from 'examples/pagination';
@@ -192,6 +194,7 @@ import DefaultCustomSearch from 'examples/search/default-custom-search';
 import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
 import CustomSearchValue from 'examples/search/custom-search-value';
+import SearchableColumn from 'examples/search/searchable-column';
 
 // CSV
 import ExportCSV from 'examples/csv';
@@ -300,6 +303,7 @@ storiesOf('Column Filter', module)
   .add('Text Filter with Case Sensitive', () => <TextFilterCaseSensitive />)
   // add another filter type example right here.
   .add('Select Filter', () => <SelectFilter />)
+  .add('Configure Select Filter Options', () => <ConfigureSelectFilterOptions />)
   .add('Select Filter with Default Value', () => <SelectFilterWithDefaultValue />)
   .add('Select Filter with Comparator', () => <SelectFilterComparator />)
   .add('MultiSelect Filter', () => <MultiSelectFilter />)
@@ -417,7 +421,8 @@ storiesOf('Row Expand', module)
   .add('Custom Expand Indicator', () => <CustomExpandColumn />)
   .add('Expand Column Position', () => <ExpandColumnPosition />)
   .add('Expand Hooks', () => <ExpandHooks />)
-  .add('Custom Parent Row ClassName', () => <ParentRowClassName />);
+  .add('Custom Parent Row ClassName', () => <ParentRowClassName />)
+  .add('Custom Expanding Row ClassName', () => <ExpandingRowClassName />);
 
 storiesOf('Pagination', module)
   .addDecorator(bootstrapStyle())
@@ -443,6 +448,7 @@ storiesOf('Table Search', module)
   .add('Clear Search Button', () => <ClearSearchButton />)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
+  .add('Searchable Column', () => <SearchableColumn />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Formatted Value', () => <SearchFormattedData />)
   .add('Custom Search Value', () => <CustomSearchValue />);

@@ -161,7 +161,8 @@ HeaderCell.propTypes = {
     validator: PropTypes.func,
     filter: PropTypes.object,
     filterRenderer: PropTypes.func,
-    filterValue: PropTypes.func
+    filterValue: PropTypes.func,
+    searchable: PropTypes.bool
   }).isRequired,
   index: PropTypes.number.isRequired,
   onSort: PropTypes.func,

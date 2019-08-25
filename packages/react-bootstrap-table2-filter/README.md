@@ -115,7 +115,9 @@ const qualityFilter = selectFilter({
 // omit...
 ```
 
-> Note, the selectOptions can be an array also: 
+> Note, the selectOptions can be an array or a function which return an array: 
+
+### Array as options
 
 ```js
 const selectOptions = [
@@ -130,6 +132,24 @@ const columns = [
   formatter: cell => selectOptions.find(opt => opt.value === cell).label,
   filter: selectFilter({
     options: selectOptions
+  })
+}];
+```
+### Function as options
+
+```js
+const selectOptions = [
+  { value: 0, label: 'good' },
+  { value: 1, label: 'Bad' },
+  { value: 2, label: 'unknown' }
+];
+const columns = [
+  ..., {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions.find(opt => opt.value === cell).label,
+  filter: selectFilter({
+    options: () => selectOptions
   })
 }];
 ```

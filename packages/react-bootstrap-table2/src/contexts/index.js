@@ -91,6 +91,13 @@ const withContext = Base =>
         this.PaginationContext = nextProps.pagination.createContext(
           this.isRemotePagination, this.handleRemotePageChange);
       }
+      if (!nextProps.cellEdit && this.props.cellEdit) {
+        this.CellEditContext = null;
+      }
+      if (nextProps.cellEdit && !this.props.cellEdit) {
+        this.CellEditContext = nextProps.cellEdit.createContext(
+          _, dataOperator, this.isRemoteCellEdit, this.handleRemoteCellChange);
+      }
     }
 
     renderBase() {
