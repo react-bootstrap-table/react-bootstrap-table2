@@ -19,7 +19,8 @@ class SelectionProvider extends React.Component {
     this.selected = props.selectRow.selected || [];
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase, react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.selectRow) {
       this.selected = nextProps.selectRow.selected || this.selected;
     }

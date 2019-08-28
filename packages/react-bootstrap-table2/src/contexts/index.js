@@ -14,7 +14,7 @@ import { BootstrapContext } from './bootstrap';
 import dataOperator from '../store/operators';
 
 const withContext = Base =>
-  class BootstrapTableContainer extends remoteResolver(Component) {
+  (class BootstrapTableContainer extends remoteResolver(Component) {
     constructor(props) {
       super(props);
       this.DataContext = createDataContext();
@@ -83,7 +83,8 @@ const withContext = Base =>
       }
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase, react/sort-comp
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (!nextProps.pagination && this.props.pagination) {
         this.PaginationContext = null;
       }
@@ -374,6 +375,6 @@ const withContext = Base =>
         </BootstrapContext.Provider>
       );
     }
-  };
+  });
 
 export default withContext;

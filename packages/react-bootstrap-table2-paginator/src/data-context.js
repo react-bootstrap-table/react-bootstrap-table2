@@ -21,8 +21,9 @@ class PaginationDataProvider extends Provider {
     isRemotePagination: PropTypes.func.isRequired
   }
 
-  componentWillReceiveProps(nextProps) {
-    super.componentWillReceiveProps(nextProps);
+  // eslint-disable-next-line camelcase, react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    super.UNSAFE_componentWillReceiveProps(nextProps);
     const { currSizePerPage } = this;
     const { custom, onPageChange } = nextProps.pagination.options;
 

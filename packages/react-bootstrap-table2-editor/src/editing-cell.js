@@ -15,7 +15,7 @@ import EditorIndicator from './editor-indicator';
 import { TIME_TO_CLOSE_MESSAGE, EDITTYPE } from './const';
 
 export default (_, onStartEdit) =>
-  class EditingCell extends Component {
+  (class EditingCell extends Component {
     static propTypes = {
       row: PropTypes.object.isRequired,
       rowIndex: PropTypes.number.isRequired,
@@ -51,7 +51,8 @@ export default (_, onStartEdit) =>
       };
     }
 
-    componentWillReceiveProps({ message }) {
+    // eslint-disable-next-line camelcase, react/sort-comp
+    UNSAFE_componentWillReceiveProps({ message }) {
       if (_.isDefined(message)) {
         this.createTimer();
         this.setState(() => ({
@@ -223,4 +224,4 @@ export default (_, onStartEdit) =>
         </td>
       );
     }
-  };
+  });

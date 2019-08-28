@@ -37,7 +37,8 @@ export default (
       }
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase, react/sort-comp
+    UNSAFE_componentWillReceiveProps(nextProps) {
       // let nextData = nextProps.data;
       if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.data)) {
         this.doFilter(nextProps, this.isEmitDataChange);

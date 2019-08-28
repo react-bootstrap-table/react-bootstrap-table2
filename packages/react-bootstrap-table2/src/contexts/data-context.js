@@ -12,7 +12,8 @@ export default () => {
 
     state = { data: this.props.data };
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase, react/sort-comp
+    UNSAFE_componentWillReceiveProps(nextProps) {
       this.setState(() => ({ data: nextProps.data }));
     }
 

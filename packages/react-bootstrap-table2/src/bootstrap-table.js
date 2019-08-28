@@ -18,7 +18,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase, react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.onDataSizeChange && !nextProps.pagination) {
       if (nextProps.data.length !== this.props.data.length) {
         nextProps.onDataSizeChange({ dataSize: nextProps.data.length });

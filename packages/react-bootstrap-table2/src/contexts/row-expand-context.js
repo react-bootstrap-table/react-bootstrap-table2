@@ -16,7 +16,8 @@ class RowExpandProvider extends React.Component {
   state = { expanded: this.props.expandRow.expanded || [],
     isClosing: this.props.expandRow.isClosing || [] };
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase, react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.expandRow) {
       const nextExpanded = nextProps.expandRow.expanded || this.state.expanded;
       const isClosing = this.state.expanded.reduce((acc, cur) => {

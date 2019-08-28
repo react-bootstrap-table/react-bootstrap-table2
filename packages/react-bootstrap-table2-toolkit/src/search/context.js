@@ -35,7 +35,8 @@ export default (options = {
       this.state = { data: initialData };
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase, react/sort-comp
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.searchText !== this.props.searchText) {
         if (isRemoteSearch()) {
           handleRemoteSearchChange(nextProps.searchText);

@@ -16,6 +16,7 @@ export default (
     static propTypes = {
       data: PropTypes.array.isRequired,
       selectRow: PropTypes.object,
+      // eslint-disable-next-line react/no-unused-prop-types
       options: PropTypes.shape({
         mode: PropTypes.oneOf([CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT]).isRequired,
         onErrorMessageDisappear: PropTypes.func,
@@ -43,7 +44,8 @@ export default (
       };
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase, react/sort-comp
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.cellEdit && isRemoteCellEdit()) {
         if (nextProps.cellEdit.options.errorMessage) {
           this.setState(() => ({

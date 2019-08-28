@@ -34,7 +34,8 @@ class SearchBar extends React.Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase, react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({ value: nextProps.searchText });
   }
 

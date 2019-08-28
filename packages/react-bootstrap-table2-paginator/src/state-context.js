@@ -45,7 +45,8 @@ class StateProvider extends React.Component {
     this.dataChangeListener.on('filterChanged', this.handleDataSizeChange);
   }
 
-  componentWillReceiveProps(nextProps) {
+  // eslint-disable-next-line camelcase, react/sort-comp
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { custom } = nextProps.pagination.options;
 
     // user should align the page when the page is not fit to the data size when remote enable
