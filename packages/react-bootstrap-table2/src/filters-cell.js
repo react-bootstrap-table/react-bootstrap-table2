@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import _ from './utils';
 
 const FiltersCell = (props) => {
-  const { index, column, onExternalFilter, currFilters, onFilter } = props;
+  const {
+    index, column, onExternalFilter,
+    currFilters, onFilter
+  } = props;
   const { filterRenderer, filter } = column;
   let filterElm;
   const cellAttrs = {};
@@ -32,10 +35,14 @@ const FiltersCell = (props) => {
 
 FiltersCell.propTypes = {
   index: PropTypes.number.isRequired,
-  column: PropTypes.object,
+  column: PropTypes.object.isRequired,
+  currFilters: PropTypes.object.isRequired,
   onFilter: PropTypes.func,
-  currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func
 };
 
+FiltersCell.defaultProps = {
+  onFilter: () => { },
+  onExternalFilter: () => { }
+}
 export default FiltersCell;

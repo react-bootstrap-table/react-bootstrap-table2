@@ -148,8 +148,7 @@ HeaderCell.propTypes = {
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
-  sortCaret: PropTypes.func,
-  isLastSorting: PropTypes.bool,
+  isLastSorting: PropTypes.bool
 };
 
 export default HeaderCell;
