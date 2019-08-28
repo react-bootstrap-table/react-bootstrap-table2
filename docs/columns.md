@@ -49,6 +49,7 @@ Available properties in a column object:
 * [editorRenderer](#editorRenderer)
 * [filter](#filter)
 * [filterValue](#filterValue)
+* [searchable](#searchable)
 * [csvType](#csvType)
 * [csvFormatter](#csvFormatter)
 * [csvText](#csvText)
@@ -916,6 +917,9 @@ A final `String` value you want to be filtered.
   filterValue: (cell, row) => owners[cell]
 }
 ```
+
+## <a name='searchable'>column.searchable - [Boolean]</a>
+Default the column is searchable. Give `false` to disable search functionality on specified column.
 
 ## <a name='csvType'>column.csvType - [Object]</a>
 Default is `String`. Currently, the available value is `String` and `Number`. If `Number` assigned, the cell value will not wrapped with double quote.

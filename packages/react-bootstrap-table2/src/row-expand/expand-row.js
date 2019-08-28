@@ -1,10 +1,11 @@
+import cs from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 
-const ExpandRow = ({ children, expanded, onClosed, ...rest }) => (
+const ExpandRow = ({ children, expanded, onClosed, className, ...rest }) => (
   <tr>
-    <td className="reset-expansion-style" { ...rest }>
+    <td className={ cs('reset-expansion-style', className) } { ...rest }>
       <CSSTransition
         appear
         in={ expanded }
@@ -25,13 +26,15 @@ const ExpandRow = ({ children, expanded, onClosed, ...rest }) => (
 ExpandRow.propTypes = {
   children: PropTypes.node,
   expanded: PropTypes.bool,
-  onClosed: PropTypes.func
+  onClosed: PropTypes.func,
+  className: PropTypes.string
 };
 
 ExpandRow.defaultProps = {
   children: null,
   expanded: false,
-  onClosed: null
+  onClosed: null,
+  className: ''
 };
 
 export default ExpandRow;

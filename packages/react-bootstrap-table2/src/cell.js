@@ -28,6 +28,7 @@ class Cell extends eventDelegater(Component) {
     shouldUpdate =
       (nextProps.column.formatter ? !_.isEqual(this.props.row, nextProps.row) : false) ||
       this.props.column.hidden !== nextProps.column.hidden ||
+      this.props.column.isDummyField !== nextProps.column.isDummyField ||
       this.props.rowIndex !== nextProps.rowIndex ||
       this.props.columnIndex !== nextProps.columnIndex ||
       this.props.className !== nextProps.className ||

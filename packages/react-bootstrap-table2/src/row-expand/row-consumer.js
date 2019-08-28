@@ -8,6 +8,7 @@ import ExpansionContext from '../contexts/row-expand-context';
 export default (Component) => {
   const renderWithExpansion = (props, expandRow) => {
     let parentClassName = '';
+    let className = '';
     const key = props.value;
 
     const expanded = _.contains(expandRow.expanded, key);
@@ -17,6 +18,10 @@ export default (Component) => {
       parentClassName = _.isFunction(expandRow.parentClassName) ?
         expandRow.parentClassName(expanded, props.row, props.rowIndex) :
         (expandRow.parentClassName || '');
+
+      className = _.isFunction(expandRow.className) ?
+        expandRow.className(expanded, props.row, props.rowIndex) :
+        (expandRow.className || '');
     }
 
     return [
@@ -33,6 +38,7 @@ export default (Component) => {
         colSpan={ props.visibleColumnSize }
         expanded={ expanded }
         onClosed={ () => expandRow.onClosed(key) }
+        className={ className }
       >
         { expandRow.renderer(props.row, props.rowIndex) }
       </ExpandRow> : null
