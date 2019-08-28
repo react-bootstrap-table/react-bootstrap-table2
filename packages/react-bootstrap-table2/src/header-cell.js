@@ -16,18 +16,13 @@ const HeaderCell = (props) => {
     onSort,
     sorting,
     sortOrder,
-    isLastSorting,
-    onFilter,
-    currFilters,
-    onExternalFilter
+    isLastSorting
   } = props;
 
   const {
     text,
     sort,
     sortCaret,
-    filter,
-    filterRenderer,
     headerTitle,
     headerAlign,
     headerFormatter,
@@ -46,7 +41,6 @@ const HeaderCell = (props) => {
   };
 
   let sortSymbol;
-  let filterElm;
   let cellStyle = {};
   let cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
@@ -96,29 +90,15 @@ const HeaderCell = (props) => {
   if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
   if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
-  if (filterRenderer) {
-    const onCustomFilter = onExternalFilter(column, filter.props.type);
-    filterElm = filterRenderer(onCustomFilter, column);
-  } else if (filter) {
-    filterElm = (
-      <filter.Filter
-        { ...filter.props }
-        filterState={ currFilters[column.dataField] }
-        onFilter={ onFilter }
-        column={ column }
-      />
-    );
-  }
-
   const children = headerFormatter ?
-    headerFormatter(column, index, { sortElement: sortSymbol, filterElement: filterElm }) :
+    headerFormatter(column, index, { sortElement: sortSymbol }) :
     text;
 
   if (headerFormatter) {
     return React.createElement('th', cellAttrs, children);
   }
 
-  return React.createElement('th', cellAttrs, children, sortSymbol, filterElm);
+  return React.createElement('th', cellAttrs, children, sortSymbol);
 };
 
 HeaderCell.propTypes = {
@@ -170,9 +150,6 @@ HeaderCell.propTypes = {
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
   sortCaret: PropTypes.func,
   isLastSorting: PropTypes.bool,
-  onFilter: PropTypes.func,
-  currFilters: PropTypes.object,
-  onExternalFilter: PropTypes.func
 };
 
 export default HeaderCell;
