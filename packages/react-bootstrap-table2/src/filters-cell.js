@@ -44,5 +44,6 @@ FiltersCell.propTypes = {
 FiltersCell.defaultProps = {
   onFilter: () => { },
   onExternalFilter: () => { }
-}
+};
+
 export default FiltersCell;
