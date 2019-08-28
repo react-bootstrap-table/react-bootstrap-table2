@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import Header from './header';
+import Filters from './filters';
 import Caption from './caption';
 import Body from './body';
 import Footer from './footer';
@@ -77,6 +78,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       [bootstrap4 ? 'table-sm' : 'table-condensed']: condensed
     }, classes);
 
+    const hasFilters = columns.some(col => col.filter || col.filterRenderer);
+
     const hasFooter = _.filter(columns, col => _.has(col, 'footer')).length > 0;
 
     const tableCaption = (caption && <Caption>{ caption }</Caption>);
@@ -91,12 +94,20 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
-            onFilter={ this.props.onFilter }
-            currFilters={ this.props.currFilters }
-            onExternalFilter={ this.props.onExternalFilter }
             selectRow={ selectRow }
             expandRow={ expandRow }
           />
+          {hasFilters && (
+            <Filters
+              columns={ columns }
+              className={ this.props.filtersClasses }
+              onSort={ this.props.onSort }
+              onFilter={ this.props.onFilter }
+              currFilters={ this.props.currFilters }
+              position={ this.props.filtersPosition }
+              onExternalFilter={ this.props.onExternalFilter }
+            />
+          )}
           <Body
             data={ this.getData() }
             keyField={ keyField }
@@ -199,6 +210,11 @@ BootstrapTable.propTypes = {
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   headerClasses: PropTypes.string,
+  filtersClasses: PropTypes.string,
+  filtersPosition: PropTypes.oneOf([
+    Const.FILTERS_POSITION_TOP,
+    Const.FILTERS_POSITION_BOTTOM
+  ]),
   footerClasses: PropTypes.string,
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
