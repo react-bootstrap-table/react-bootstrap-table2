@@ -192,7 +192,8 @@ BootstrapTable.propTypes = {
       Const.INDICATOR_POSITION_RIGHT
     ]),
     className: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-    parentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func])
+    parentClassName: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    rowEvents: PropTypes.object
   }),
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
