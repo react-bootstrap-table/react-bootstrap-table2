@@ -3,6 +3,7 @@
 /* eslint no-continue: 0 */
 /* eslint no-lonely-if: 0 */
 /* eslint class-methods-use-this: 0 */
+/* eslint camelcase: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -35,7 +36,17 @@ export default (options = {
       this.state = { data: initialData };
     }
 
-    componentWillReceiveProps(nextProps) {
+    getSearched() {
+      return this.state.data;
+    }
+
+    triggerListener(result) {
+      if (this.props.dataChangeListener) {
+        this.props.dataChangeListener.emit('filterChanged', result.length);
+      }
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.searchText !== this.props.searchText) {
         if (isRemoteSearch()) {
           handleRemoteSearchChange(nextProps.searchText);
@@ -56,16 +67,6 @@ export default (options = {
             data: result
           });
         }
-      }
-    }
-
-    getSearched() {
-      return this.state.data;
-    }
-
-    triggerListener(result) {
-      if (this.props.dataChangeListener) {
-        this.props.dataChangeListener.emit('filterChanged', result.length);
       }
     }
 

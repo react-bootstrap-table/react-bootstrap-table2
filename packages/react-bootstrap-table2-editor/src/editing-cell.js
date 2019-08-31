@@ -2,6 +2,7 @@
 /* eslint no-return-assign: 0 */
 /* eslint class-methods-use-this: 0 */
 /* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
+/* eslint camelcase: 0 */
 import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
@@ -51,17 +52,17 @@ export default (_, onStartEdit) =>
       };
     }
 
-    componentWillReceiveProps({ message }) {
+    componentWillUnmount() {
+      this.clearTimer();
+    }
+
+    UNSAFE_componentWillReceiveProps({ message }) {
       if (_.isDefined(message)) {
         this.createTimer();
         this.setState(() => ({
           invalidMessage: message
         }));
       }
-    }
-
-    componentWillUnmount() {
-      this.clearTimer();
     }
 
     clearTimer() {

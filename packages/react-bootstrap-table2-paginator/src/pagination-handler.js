@@ -1,4 +1,5 @@
 /* eslint react/prop-types: 0 */
+/* eslint camelcase: 0 */
 import React, { Component } from 'react';
 
 import pageResolver from './page-resolver';
@@ -12,7 +13,7 @@ export default WrappedComponent =>
       this.state = this.initialState();
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       const { dataSize, currSizePerPage } = nextProps;
       if (currSizePerPage !== this.props.currSizePerPage || dataSize !== this.props.dataSize) {
         const totalPages = this.calculateTotalPage(currSizePerPage, dataSize);

@@ -156,7 +156,7 @@ describe('PaginationStateContext', () => {
           data,
           pagination: { ...defaultPagination, options: { page: 3, sizePerPage: 5, totalSize: 50 } }
         };
-        instance.componentWillReceiveProps(nextProps);
+        instance.UNSAFE_componentWillReceiveProps(nextProps);
       });
 
       it('should always reset currPage and currSizePerPage', () => {
@@ -181,7 +181,7 @@ describe('PaginationStateContext', () => {
             options: { page: 3, sizePerPage: 5, custom: true, totalSize: 50 }
           }
         };
-        instance.componentWillReceiveProps(nextProps);
+        instance.UNSAFE_componentWillReceiveProps(nextProps);
       });
 
       it('should always reset currPage and currSizePerPage', () => {

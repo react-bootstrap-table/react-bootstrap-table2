@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -19,15 +20,15 @@ class SelectionProvider extends React.Component {
     this.selected = props.selectRow.selected || [];
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectRow) {
-      this.selected = nextProps.selectRow.selected || this.selected;
-    }
-  }
-
   // exposed API
   getSelected() {
     return this.selected;
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.selectRow) {
+      this.selected = nextProps.selectRow.selected || this.selected;
+    }
   }
 
   handleRowSelect = (rowKey, checked, rowIndex, e) => {

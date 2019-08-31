@@ -1,5 +1,6 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
+/* eslint camelcase: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -34,15 +35,6 @@ export default (
     componentDidMount() {
       if (isRemoteFiltering() && Object.keys(this.currFilters).length > 0) {
         handleFilterChange(this.currFilters);
-      }
-    }
-
-    componentWillReceiveProps(nextProps) {
-      // let nextData = nextProps.data;
-      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.data)) {
-        this.doFilter(nextProps, this.isEmitDataChange);
-      } else {
-        this.data = nextProps.data;
       }
     }
 
@@ -88,6 +80,15 @@ export default (
 
     getFiltered() {
       return this.data;
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      // let nextData = nextProps.data;
+      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.data)) {
+        this.doFilter(nextProps, this.isEmitDataChange);
+      } else {
+        this.data = nextProps.data;
+      }
     }
 
     doFilter(props, ignoreEmitDataChange = false) {

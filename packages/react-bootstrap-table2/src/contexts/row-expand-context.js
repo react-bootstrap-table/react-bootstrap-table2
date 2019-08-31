@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -16,7 +17,11 @@ class RowExpandProvider extends React.Component {
   state = { expanded: this.props.expandRow.expanded || [],
     isClosing: this.props.expandRow.isClosing || [] };
 
-  componentWillReceiveProps(nextProps) {
+  onClosed = (closedRow) => {
+    this.setState({ isClosing: this.state.isClosing.filter(value => value !== closedRow) });
+  };
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.expandRow) {
       const nextExpanded = nextProps.expandRow.expanded || this.state.expanded;
       const isClosing = this.state.expanded.reduce((acc, cur) => {
@@ -35,10 +40,6 @@ class RowExpandProvider extends React.Component {
       }));
     }
   }
-
-  onClosed = (closedRow) => {
-    this.setState({ isClosing: this.state.isClosing.filter(value => value !== closedRow) });
-  };
 
   handleRowExpand = (rowKey, expanded, rowIndex, e) => {
     const { data, keyField, expandRow: { onExpand, onlyOneExpanding, nonExpandable } } = this.props;
