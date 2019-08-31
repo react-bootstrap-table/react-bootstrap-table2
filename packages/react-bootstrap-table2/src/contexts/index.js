@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 /* eslint no-return-assign: 0 */
 /* eslint no-param-reassign: 0 */
 /* eslint class-methods-use-this: 0 */
@@ -14,7 +15,7 @@ import { BootstrapContext } from './bootstrap';
 import dataOperator from '../store/operators';
 
 const withContext = Base =>
-  (class BootstrapTableContainer extends remoteResolver(Component) {
+  class BootstrapTableContainer extends remoteResolver(Component) {
     constructor(props) {
       super(props);
       this.DataContext = createDataContext();
@@ -83,7 +84,6 @@ const withContext = Base =>
       }
     }
 
-    // eslint-disable-next-line camelcase, react/sort-comp
     UNSAFE_componentWillReceiveProps(nextProps) {
       if (!nextProps.pagination && this.props.pagination) {
         this.PaginationContext = null;
@@ -375,6 +375,6 @@ const withContext = Base =>
         </BootstrapContext.Provider>
       );
     }
-  });
+  };
 
 export default withContext;

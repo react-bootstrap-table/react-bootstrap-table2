@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
@@ -12,17 +13,16 @@ export default () => {
 
     state = { data: this.props.data };
 
-    // eslint-disable-next-line camelcase, react/sort-comp
-    UNSAFE_componentWillReceiveProps(nextProps) {
-      this.setState(() => ({ data: nextProps.data }));
-    }
-
     getData = (filterProps, searchProps, sortProps, paginationProps) => {
       if (paginationProps) return paginationProps.data;
       else if (sortProps) return sortProps.data;
       else if (searchProps) return searchProps.data;
       else if (filterProps) return filterProps.data;
       return this.props.data;
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      this.setState(() => ({ data: nextProps.data }));
     }
 
     render() {

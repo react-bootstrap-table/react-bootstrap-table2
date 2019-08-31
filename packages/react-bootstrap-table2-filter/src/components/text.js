@@ -1,6 +1,7 @@
 /* eslint react/require-default-props: 0 */
 /* eslint react/prop-types: 0 */
 /* eslint no-return-assign: 0 */
+/* eslint camelcase: 0 */
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
@@ -41,15 +42,14 @@ class TextFilter extends Component {
     }
   }
 
-  // eslint-disable-next-line camelcase, react/sort-comp
+  componentWillUnmount() {
+    this.cleanTimer();
+  }
+
   UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.defaultValue !== this.props.defaultValue) {
       this.applyFilter(nextProps.defaultValue);
     }
-  }
-
-  componentWillUnmount() {
-    this.cleanTimer();
   }
 
   filter(e) {

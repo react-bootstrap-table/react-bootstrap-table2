@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 /* eslint no-return-assign: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -34,11 +35,6 @@ class SearchBar extends React.Component {
     };
   }
 
-  // eslint-disable-next-line camelcase, react/sort-comp
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({ value: nextProps.searchText });
-  }
-
   onChangeValue = (e) => {
     this.setState({ value: e.target.value });
   }
@@ -49,6 +45,10 @@ class SearchBar extends React.Component {
       onSearch(this.input.value);
     }, delay);
     debounceCallback();
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    this.setState({ value: nextProps.searchText });
   }
 
   render() {

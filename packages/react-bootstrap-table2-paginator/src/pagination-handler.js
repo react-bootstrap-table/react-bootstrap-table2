@@ -1,10 +1,11 @@
 /* eslint react/prop-types: 0 */
+/* eslint camelcase: 0 */
 import React, { Component } from 'react';
 
 import pageResolver from './page-resolver';
 
 export default WrappedComponent =>
-  (class PaginationHandler extends pageResolver(Component) {
+  class PaginationHandler extends pageResolver(Component) {
     constructor(props) {
       super(props);
       this.handleChangePage = this.handleChangePage.bind(this);
@@ -12,7 +13,6 @@ export default WrappedComponent =>
       this.state = this.initialState();
     }
 
-    // eslint-disable-next-line camelcase, react/sort-comp
     UNSAFE_componentWillReceiveProps(nextProps) {
       const { dataSize, currSizePerPage } = nextProps;
       if (currSizePerPage !== this.props.currSizePerPage || dataSize !== this.props.dataSize) {
@@ -74,5 +74,5 @@ export default WrappedComponent =>
         />
       );
     }
-  });
+  };
 
