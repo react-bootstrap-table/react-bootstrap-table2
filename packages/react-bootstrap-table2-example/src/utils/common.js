@@ -29,6 +29,11 @@ export const withOnSale = rows => rows.map((row) => {
   return row;
 });
 
+export const withRandomPrice = rows => rows.map((row) => {
+  row.price = Math.floor((Math.random() * 10) + 2000);
+  return row;
+});
+
 export const productsQualityGenerator = (quantity = 5, factor = 0) =>
   Array.from({ length: quantity }, (value, index) => ({
     id: index + factor,

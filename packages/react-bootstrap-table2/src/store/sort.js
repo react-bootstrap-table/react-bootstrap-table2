@@ -14,14 +14,19 @@ function comparator(a, b) {
   return result;
 }
 
-export const sort = (data, sortOrder, { dataField, sortFunc }) => {
+export const sort = (data, sortOrder, { dataField, sortFunc, sortValue }) => {
   const _data = [...data];
   _data.sort((a, b) => {
     let result;
     let valueA = _.get(a, dataField);
     let valueB = _.get(b, dataField);
-    valueA = _.isDefined(valueA) ? valueA : '';
-    valueB = _.isDefined(valueB) ? valueB : '';
+    if (sortValue) {
+      valueA = sortValue(valueA, a);
+      valueB = sortValue(valueB, b);
+    } else {
+      valueA = _.isDefined(valueA) ? valueA : '';
+      valueB = _.isDefined(valueB) ? valueB : '';
+    }
 
     if (sortFunc) {
       result = sortFunc(valueA, valueB, sortOrder, dataField, a, b);
