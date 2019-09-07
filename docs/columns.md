@@ -456,7 +456,7 @@ If the events is not listed above, the callback function will only pass the `eve
 {
   // omit...
   headerEvents: {
-    onClick: e => { ... }
+    onClick: (e, column, columnIndex) => { ... }
   }
 }
 ```

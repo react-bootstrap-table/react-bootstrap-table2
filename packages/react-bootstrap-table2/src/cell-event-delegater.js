@@ -17,8 +17,8 @@ export default ExtendBase =>
 
     createDefaultEventHandler(cb) {
       return (e) => {
-        const { column, columnIndex } = this.props;
-        cb(e, column, columnIndex);
+        const { column, columnIndex, index } = this.props;
+        cb(e, column, typeof columnIndex !== 'undefined' ? columnIndex : index);
       };
     }
 
