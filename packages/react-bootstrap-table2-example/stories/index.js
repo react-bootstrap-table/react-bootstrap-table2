@@ -195,6 +195,7 @@ import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
 import CustomSearchValue from 'examples/search/custom-search-value';
 import SearchableColumn from 'examples/search/searchable-column';
+import CustomMatchFunction from 'examples/search/custom-match-function';
 
 // CSV
 import ExportCSV from 'examples/csv';
@@ -451,7 +452,8 @@ storiesOf('Table Search', module)
   .add('Searchable Column', () => <SearchableColumn />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Formatted Value', () => <SearchFormattedData />)
-  .add('Custom Search Value', () => <CustomSearchValue />);
+  .add('Custom Search Value', () => <CustomSearchValue />)
+  .add('Custom match function', () => <CustomMatchFunction />);
 
 storiesOf('Column Toggle', module)
   .addDecorator(bootstrapStyle())

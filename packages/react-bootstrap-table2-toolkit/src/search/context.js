@@ -8,7 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default (options = {
-  searchFormatted: false
+  searchFormatted: false,
+  onColumnMatch: null
 }) => (
   _,
   isRemoteSearch,
@@ -83,10 +84,21 @@ export default (options = {
           } else if (column.filterValue) {
             targetValue = column.filterValue(targetValue, row);
           }
-          if (targetValue !== null && typeof targetValue !== 'undefined') {
-            targetValue = targetValue.toString().toLowerCase();
-            if (targetValue.indexOf(searchText) > -1) {
+          if (options.onColumnMatch) {
+            if (options.onColumnMatch({
+              searchText,
+              value: targetValue,
+              column,
+              row
+            })) {
               return true;
+            }
+          } else {
+            if (targetValue !== null && typeof targetValue !== 'undefined') {
+              targetValue = targetValue.toString().toLowerCase();
+              if (targetValue.indexOf(searchText) > -1) {
+                return true;
+              }
             }
           }
         }
