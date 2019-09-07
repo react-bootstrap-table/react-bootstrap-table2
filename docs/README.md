@@ -208,6 +208,8 @@ const defaultSorted = [{
 }];
 ```
 
+**Note**: Only the first column is sorted currently, see #1083.
+
 ### <a name='defaultSortDirection'>defaultSortDirection - [String]</a>
 Default sort direction when user click on header column at first time, available value is `asc` and `desc`. Default is `desc`.
 
