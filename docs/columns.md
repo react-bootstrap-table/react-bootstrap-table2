@@ -666,7 +666,7 @@ It's also available to custom via a callback function:
 {
   // omit...
   footerEvents: {
-    onClick: e => { ... }
+    onClick: (e, column, columnIndex) => { ... }
   }
 }
 ```
