@@ -16,6 +16,7 @@ Definition of columns props on BootstrapTable
 * [formatter](#columnformatter-function)
 * [formatExtraData](#columnformatextradata-any)
 * [sort](#columnsort-bool)
+* [sortValue](#columnsortvalue-function)
 * [sortFunc](#columnsortfunc-function)
 * [sortCaret](#columnsortcaret-function)
 * [onSort](#columnonsort-function)
@@ -127,6 +128,40 @@ It's only used for [`column.formatter`](#columnformatter-function), you can defi
 
 ## column.sort - [Bool]
 Enable the column sort via a `true` value given.
+
+## column.sortValue - [Function]
+`column.sortValue` only work when `column.sort` enabled. This prop allow you to replace the value when table sorting.
+
+For example, consider following data:
+
+```js
+const types = ['Cloud Service', 'Message Service', 'Add Service', 'Edit Service', 'Money'];
+const data = [{id: 1, type: 2}, {id: 2, type: 1}, {id: 3, type:0}];
+const columns = [{
+  dataField: 'id',
+  text: 'Job ID'
+}, {
+  dataField: 'type',
+  text: 'Job Type'
+  sort: true,
+  formatter: (cell, row) => types[cell]
+}]
+```
+
+In above case, when user try to sort Job Type column which will sort the original value: 0, 1, 2 but we display the type name via [`column.formatter`](#formatter), which will lead confuse because we are sorting by type value instead of type name. So `sortValue` is a way for you to decide what kind of value should be adopted when sorting on a specify column:
+
+```js
+const columns = [{
+  dataField: 'id',
+  text: 'Job ID'
+}, {
+  dataField: 'type',
+  text: 'Job Type'
+  sort: true,
+  formatter: (cell, row) => types[cell],
+  sortValue: (cell, row) => types[cell] // we use type name to sort.
+}]
+```
 
 ## column.sortFunc - [Function]
 `column.sortFunc` only work when `column.sort` is enable. `sortFunc` allow you to define your sorting algorithm. This callback function accept six arguments:
@@ -407,7 +442,7 @@ If the events is not listed above, the callback function will only receive the `
 {
   // omit...
   headerEvents: {
-    onClick: e => { ... }
+    onClick: (e, column, columnIndex) => { ... }
   }
 }
 ```
@@ -535,7 +570,7 @@ This prop also accept a function:
 {
   dataField: 'price',
   text: 'Product Price',
-  footer: column => column.reduce((acc, item) => acc + item, 0)
+  footer: (columnData, column, columnIndex) => columnData.reduce((acc, item) => acc + item, 0)
 }
 ```
 
@@ -616,7 +651,7 @@ It's also available to custom via a callback function:
 {
   // omit...
   footerEvents: {
-    onClick: e => { ... }
+    onClick: (e, column, columnIndex) => { ... }
   }
 }
 ```

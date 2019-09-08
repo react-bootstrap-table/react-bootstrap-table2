@@ -11,6 +11,7 @@ Table search in one of features supported by `react-bootstrap-table2-toolkit`. B
 ## Optional
 * [searchFormatted](#searchsearchformatted-bool)
 * [defaultSearch](#searchdefaultSearch-string)
+* [onColumnMatch](#searchoncolumnmatch-function)
 
 -----
 
@@ -34,7 +35,7 @@ If you want to search on the formatted data, you are supposed to enable this pro
 ## search.defaultSearch - [String]
 Accept a string that will be used for default searching when first time table render.
 
- ```js
+```js
 <ToolkitProvider
   keyField="id"
   data={ products }
@@ -46,4 +47,30 @@ Accept a string that will be used for default searching when first time table re
   // ...
 </ToolkitProvider>
 ```
+
+## search.onColumnMatch - [Function]
+Acccpt a function which will be called when table try to match every cells when search happening. This function accept an object like below example:
+
+```js
+function onColumnMatch({
+  searchText,
+  value,
+  column,
+  row
+}) {
+  // implement your custom match logic on every cell value
+}
+ <ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search={ {
+    onColumnMatch
+  } }
+>
+  // ...
+</ToolkitProvider>
+```
+
+> Notes: You have to return `true` when your match logic is positive and vice versa.
 
