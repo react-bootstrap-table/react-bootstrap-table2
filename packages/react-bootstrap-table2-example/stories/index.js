@@ -104,6 +104,7 @@ import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
 import DefaultSortDirectionTable from 'examples/sort/default-sort-direction';
 import SortEvents from 'examples/sort/sort-events';
+import CustomSortValue from 'examples/sort/custom-sort-value';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 import CustomSortCaretTable from 'examples/sort/custom-sort-caret';
 import HeaderSortingClassesTable from 'examples/sort/header-sorting-classes';
@@ -195,6 +196,7 @@ import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
 import CustomSearchValue from 'examples/search/custom-search-value';
 import SearchableColumn from 'examples/search/searchable-column';
+import CustomMatchFunction from 'examples/search/custom-match-function';
 
 // CSV
 import ExportCSV from 'examples/csv';
@@ -356,6 +358,7 @@ storiesOf('Sort Table', module)
   .add('Default Sort Table', () => <DefaultSortTable />)
   .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
   .add('Sort Events', () => <SortEvents />)
+  .add('Custom Sort Value', () => <CustomSortValue />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
   .add('Custom Sort Caret', () => <CustomSortCaretTable />)
   .add('Custom Classes on Sorting Header Column', () => <HeaderSortingClassesTable />)
@@ -451,7 +454,8 @@ storiesOf('Table Search', module)
   .add('Searchable Column', () => <SearchableColumn />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Formatted Value', () => <SearchFormattedData />)
-  .add('Custom Search Value', () => <CustomSearchValue />);
+  .add('Custom Search Value', () => <CustomSearchValue />)
+  .add('Custom match function', () => <CustomMatchFunction />);
 
 storiesOf('Column Toggle', module)
   .addDecorator(bootstrapStyle())

@@ -7,119 +7,124 @@ import Const from './const';
 import SortSymbol from './sort/symbol';
 import SortCaret from './sort/caret';
 import _ from './utils';
+import eventDelegater from './cell-event-delegater';
 
 
-const HeaderCell = (props) => {
-  const {
-    column,
-    index,
-    onSort,
-    sorting,
-    sortOrder,
-    isLastSorting,
-    onFilter,
-    currFilters,
-    onExternalFilter
-  } = props;
+class HeaderCell extends eventDelegater(React.Component) {
+  render() {
+    const {
+      column,
+      index,
+      onSort,
+      sorting,
+      sortOrder,
+      isLastSorting,
+      onFilter,
+      currFilters,
+      onExternalFilter
+    } = this.props;
 
-  const {
-    text,
-    sort,
-    sortCaret,
-    filter,
-    filterRenderer,
-    headerTitle,
-    headerAlign,
-    headerFormatter,
-    headerEvents,
-    headerClasses,
-    headerStyle,
-    headerAttrs,
-    headerSortingClasses,
-    headerSortingStyle
-  } = column;
+    const {
+      text,
+      sort,
+      sortCaret,
+      filter,
+      filterRenderer,
+      headerTitle,
+      headerAlign,
+      headerFormatter,
+      headerEvents,
+      headerClasses,
+      headerStyle,
+      headerAttrs,
+      headerSortingClasses,
+      headerSortingStyle
+    } = column;
 
-  const cellAttrs = {
-    ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
-    ...headerEvents,
-    tabIndex: 0
-  };
+    const delegateEvents = this.delegate(headerEvents);
 
-  let sortSymbol;
-  let filterElm;
-  let cellStyle = {};
-  let cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
-
-  if (headerStyle) {
-    cellStyle = _.isFunction(headerStyle) ? headerStyle(column, index) : headerStyle;
-    cellStyle = cellStyle ? { ...cellStyle } : cellStyle;
-  }
-
-  if (headerTitle) {
-    cellAttrs.title = _.isFunction(headerTitle) ? headerTitle(column, index) : text;
-  }
-
-  if (headerAlign) {
-    cellStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
-  }
-
-  if (sort) {
-    const customClick = cellAttrs.onClick;
-    cellAttrs.onClick = (e) => {
-      onSort(column);
-      if (_.isFunction(customClick)) customClick(e);
+    const cellAttrs = {
+      ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
+      ...delegateEvents,
+      tabIndex: 0
     };
-    cellAttrs.className = cs(cellAttrs.className, 'sortable');
 
-    if (sorting) {
-      sortSymbol = sortCaret ? sortCaret(sortOrder, column) : <SortCaret order={ sortOrder } />;
+    let sortSymbol;
+    let filterElm;
+    let cellStyle = {};
+    let cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
-      // append customized classes or style if table was sorting based on the current column.
-      cellClasses = cs(
-        cellClasses,
-        _.isFunction(headerSortingClasses)
-          ? headerSortingClasses(column, sortOrder, isLastSorting, index)
-          : headerSortingClasses
-      );
-
-      cellStyle = {
-        ...cellStyle,
-        ..._.isFunction(headerSortingStyle)
-          ? headerSortingStyle(column, sortOrder, isLastSorting, index)
-          : headerSortingStyle
-      };
-    } else {
-      sortSymbol = sortCaret ? sortCaret(undefined, column) : <SortSymbol />;
+    if (headerStyle) {
+      cellStyle = _.isFunction(headerStyle) ? headerStyle(column, index) : headerStyle;
+      cellStyle = cellStyle ? { ...cellStyle } : cellStyle;
     }
+
+    if (headerTitle) {
+      cellAttrs.title = _.isFunction(headerTitle) ? headerTitle(column, index) : text;
+    }
+
+    if (headerAlign) {
+      cellStyle.textAlign = _.isFunction(headerAlign) ? headerAlign(column, index) : headerAlign;
+    }
+
+    if (sort) {
+      const customClick = cellAttrs.onClick;
+      cellAttrs.onClick = (e) => {
+        onSort(column);
+        if (_.isFunction(customClick)) customClick(e);
+      };
+      cellAttrs.className = cs(cellAttrs.className, 'sortable');
+
+      if (sorting) {
+        sortSymbol = sortCaret ? sortCaret(sortOrder, column) : <SortCaret order={ sortOrder } />;
+
+        // append customized classes or style if table was sorting based on the current column.
+        cellClasses = cs(
+          cellClasses,
+          _.isFunction(headerSortingClasses)
+            ? headerSortingClasses(column, sortOrder, isLastSorting, index)
+            : headerSortingClasses
+        );
+
+        cellStyle = {
+          ...cellStyle,
+          ..._.isFunction(headerSortingStyle)
+            ? headerSortingStyle(column, sortOrder, isLastSorting, index)
+            : headerSortingStyle
+        };
+      } else {
+        sortSymbol = sortCaret ? sortCaret(undefined, column) : <SortSymbol />;
+      }
+    }
+
+    if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
+    if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
+
+    if (filterRenderer) {
+      const onCustomFilter = onExternalFilter(column, filter.props.type);
+      filterElm = filterRenderer(onCustomFilter, column);
+    } else if (filter) {
+      filterElm = (
+        <filter.Filter
+          { ...filter.props }
+          filterState={ currFilters[column.dataField] }
+          onFilter={ onFilter }
+          column={ column }
+        />
+      );
+    }
+
+    const children = headerFormatter ?
+      headerFormatter(column, index, { sortElement: sortSymbol, filterElement: filterElm }) :
+      text;
+
+    if (headerFormatter) {
+      return React.createElement('th', cellAttrs, children);
+    }
+
+    return React.createElement('th', cellAttrs, children, sortSymbol, filterElm);
   }
-
-  if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
-  if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
-
-  if (filterRenderer) {
-    const onCustomFilter = onExternalFilter(column, filter.props.type);
-    filterElm = filterRenderer(onCustomFilter, column);
-  } else if (filter) {
-    filterElm = (
-      <filter.Filter
-        { ...filter.props }
-        filterState={ currFilters[column.dataField] }
-        onFilter={ onFilter }
-        column={ column }
-      />
-    );
-  }
-
-  const children = headerFormatter ?
-    headerFormatter(column, index, { sortElement: sortSymbol, filterElement: filterElm }) :
-    text;
-
-  if (headerFormatter) {
-    return React.createElement('th', cellAttrs, children);
-  }
-
-  return React.createElement('th', cellAttrs, children, sortSymbol, filterElm);
-};
+}
 
 HeaderCell.propTypes = {
   column: PropTypes.shape({

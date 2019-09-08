@@ -3,11 +3,13 @@
 /* eslint no-continue: 0 */
 /* eslint no-lonely-if: 0 */
 /* eslint class-methods-use-this: 0 */
+/* eslint camelcase: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
 export default (options = {
-  searchFormatted: false
+  searchFormatted: false,
+  onColumnMatch: null
 }) => (
   _,
   isRemoteSearch,
@@ -35,7 +37,17 @@ export default (options = {
       this.state = { data: initialData };
     }
 
-    componentWillReceiveProps(nextProps) {
+    getSearched() {
+      return this.state.data;
+    }
+
+    triggerListener(result) {
+      if (this.props.dataChangeListener) {
+        this.props.dataChangeListener.emit('filterChanged', result.length);
+      }
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.searchText !== this.props.searchText) {
         if (isRemoteSearch()) {
           handleRemoteSearchChange(nextProps.searchText);
@@ -59,16 +71,6 @@ export default (options = {
       }
     }
 
-    getSearched() {
-      return this.state.data;
-    }
-
-    triggerListener(result) {
-      if (this.props.dataChangeListener) {
-        this.props.dataChangeListener.emit('filterChanged', result.length);
-      }
-    }
-
     search(props) {
       const { data, columns } = props;
       const searchText = props.searchText.toLowerCase();
@@ -82,10 +84,21 @@ export default (options = {
           } else if (column.filterValue) {
             targetValue = column.filterValue(targetValue, row);
           }
-          if (targetValue !== null && typeof targetValue !== 'undefined') {
-            targetValue = targetValue.toString().toLowerCase();
-            if (targetValue.indexOf(searchText) > -1) {
+          if (options.onColumnMatch) {
+            if (options.onColumnMatch({
+              searchText,
+              value: targetValue,
+              column,
+              row
+            })) {
               return true;
+            }
+          } else {
+            if (targetValue !== null && typeof targetValue !== 'undefined') {
+              targetValue = targetValue.toString().toLowerCase();
+              if (targetValue.indexOf(searchText) > -1) {
+                return true;
+              }
             }
           }
         }

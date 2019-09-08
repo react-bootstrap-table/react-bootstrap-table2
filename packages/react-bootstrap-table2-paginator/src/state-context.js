@@ -1,6 +1,7 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
 /* eslint no-lonely-if: 0 */
+/* eslint camelcase: 0 */
 import React from 'react';
 import EventEmitter from 'events';
 import Const from './const';
@@ -43,23 +44,6 @@ class StateProvider extends React.Component {
     this.currSizePerPage = currSizePerPage;
     this.dataChangeListener = new EventEmitter();
     this.dataChangeListener.on('filterChanged', this.handleDataSizeChange);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    const { custom } = nextProps.pagination.options;
-
-    // user should align the page when the page is not fit to the data size when remote enable
-    if (this.isRemotePagination() || custom) {
-      if (typeof nextProps.pagination.options.page !== 'undefined') {
-        this.currPage = nextProps.pagination.options.page;
-      }
-      if (typeof nextProps.pagination.options.sizePerPage !== 'undefined') {
-        this.currSizePerPage = nextProps.pagination.options.sizePerPage;
-      }
-      if (typeof nextProps.pagination.options.totalSize !== 'undefined') {
-        this.dataSize = nextProps.pagination.options.totalSize;
-      }
-    }
   }
 
   getPaginationProps = () => {
@@ -112,6 +96,23 @@ class StateProvider extends React.Component {
   }
 
   getPaginationRemoteEmitter = () => this.remoteEmitter || this.props.remoteEmitter;
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    const { custom } = nextProps.pagination.options;
+
+    // user should align the page when the page is not fit to the data size when remote enable
+    if (this.isRemotePagination() || custom) {
+      if (typeof nextProps.pagination.options.page !== 'undefined') {
+        this.currPage = nextProps.pagination.options.page;
+      }
+      if (typeof nextProps.pagination.options.sizePerPage !== 'undefined') {
+        this.currSizePerPage = nextProps.pagination.options.sizePerPage;
+      }
+      if (typeof nextProps.pagination.options.totalSize !== 'undefined') {
+        this.dataSize = nextProps.pagination.options.totalSize;
+      }
+    }
+  }
 
   isRemotePagination = () => {
     const e = {};

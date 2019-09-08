@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 /* eslint no-return-assign: 0 */
 /* eslint no-param-reassign: 0 */
 /* eslint class-methods-use-this: 0 */
@@ -83,7 +84,7 @@ const withContext = Base =>
       }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (!nextProps.pagination && this.props.pagination) {
         this.PaginationContext = null;
       }

@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 /* eslint arrow-body-style: 0 */
 
 import React, { Component } from 'react';
@@ -18,7 +19,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     this.validateProps();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.onDataSizeChange && !nextProps.pagination) {
       if (nextProps.data.length !== this.props.data.length) {
         nextProps.onDataSizeChange({ dataSize: nextProps.data.length });
