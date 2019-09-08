@@ -18,6 +18,7 @@
 <li><a href="#columnformatter-function">formatter</a></li>
 <li><a href="#columnformatextradata-any">formatExtraData</a></li>
 <li><a href="#columnsort-bool">sort</a></li>
+<li><a href="#columnsortvalue-function">sortValue</a></li>
 <li><a href="#columnsortfunc-function">sortFunc</a></li>
 <li><a href="#columnsortcaret-function">sortCaret</a></li>
 <li><a href="#columnonsort-function">onSort</a></li>
@@ -115,6 +116,33 @@ In addition, please make formatter function as pure function as possible as you 
 <p>It's only used for <a href="#columnformatter-function"><code>column.formatter</code></a>, you can define any value for it and will be passed as fourth argument for <a href="#columnformatter-function"><code>column.formatter</code></a> callback function.</p>
 <h2><a class="anchor" aria-hidden="true" name="columnsort-bool"></a><a href="#columnsort-bool" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.sort - [Bool]</h2>
 <p>Enable the column sort via a <code>true</code> value given.</p>
+<h2><a class="anchor" aria-hidden="true" name="columnsortvalue-function"></a><a href="#columnsortvalue-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.sortValue - [Function]</h2>
+<p><code>column.sortValue</code> only work when <code>column.sort</code> enabled. This prop allow you to replace the value when table sorting.</p>
+<p>For example, consider following data:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> types = [<span class="hljs-string">'Cloud Service'</span>, <span class="hljs-string">'Message Service'</span>, <span class="hljs-string">'Add Service'</span>, <span class="hljs-string">'Edit Service'</span>, <span class="hljs-string">'Money'</span>];
+<span class="hljs-keyword">const</span> data = [{<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">type</span>: <span class="hljs-number">2</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">type</span>: <span class="hljs-number">1</span>}, {<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">type</span>:<span class="hljs-number">0</span>}];
+<span class="hljs-keyword">const</span> columns = [{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Job ID'</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'type'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Job Type'</span>
+  sort: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">formatter</span>: <span class="hljs-function">(<span class="hljs-params">cell, row</span>) =&gt;</span> types[cell]
+}]
+</code></pre>
+<p>In above case, when user try to sort Job Type column which will sort the original value: 0, 1, 2 but we display the type name via <a href="#formatter"><code>column.formatter</code></a>, which will lead confuse because we are sorting by type value instead of type name. So <code>sortValue</code> is a way for you to decide what kind of value should be adopted when sorting on a specify column:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">const</span> columns = [{
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Job ID'</span>
+}, {
+  <span class="hljs-attr">dataField</span>: <span class="hljs-string">'type'</span>,
+  <span class="hljs-attr">text</span>: <span class="hljs-string">'Job Type'</span>
+  sort: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">formatter</span>: <span class="hljs-function">(<span class="hljs-params">cell, row</span>) =&gt;</span> types[cell],
+  <span class="hljs-attr">sortValue</span>: <span class="hljs-function">(<span class="hljs-params">cell, row</span>) =&gt;</span> types[cell] <span class="hljs-comment">// we use type name to sort.</span>
+}]
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" name="columnsortfunc-function"></a><a href="#columnsortfunc-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.sortFunc - [Function]</h2>
 <p><code>column.sortFunc</code> only work when <code>column.sort</code> is enable. <code>sortFunc</code> allow you to define your sorting algorithm. This callback function accept six arguments:</p>
 <pre><code class="hljs css js">{
@@ -331,7 +359,7 @@ In addition, please make formatter function as pure function as possible as you 
 <pre><code class="hljs css js">{
   <span class="hljs-comment">// omit...</span>
   headerEvents: {
-    <span class="hljs-attr">onClick</span>: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> { ... }
+    <span class="hljs-attr">onClick</span>: <span class="hljs-function">(<span class="hljs-params">e, column, columnIndex</span>) =&gt;</span> { ... }
   }
 }
 </code></pre>
@@ -431,7 +459,7 @@ overwrited when other props related to HTML attributes were given.</p>
 <pre><code class="hljs css js">{
   <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>,
   <span class="hljs-attr">text</span>: <span class="hljs-string">'Product Price'</span>,
-  <span class="hljs-attr">footer</span>: <span class="hljs-function"><span class="hljs-params">column</span> =&gt;</span> column.reduce(<span class="hljs-function">(<span class="hljs-params">acc, item</span>) =&gt;</span> acc + item, <span class="hljs-number">0</span>)
+  <span class="hljs-attr">footer</span>: <span class="hljs-function">(<span class="hljs-params">columnData, column, columnIndex</span>) =&gt;</span> columnData.reduce(<span class="hljs-function">(<span class="hljs-params">acc, item</span>) =&gt;</span> acc + item, <span class="hljs-number">0</span>)
 }
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="columnfooterformatter-function"></a><a href="#columnfooterformatter-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>column.footerFormatter - [Function]</h2>
@@ -496,7 +524,7 @@ overwrited when other props related to HTML attributes were given.</p>
 <pre><code class="hljs css js">{
   <span class="hljs-comment">// omit...</span>
   footerEvents: {
-    <span class="hljs-attr">onClick</span>: <span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> { ... }
+    <span class="hljs-attr">onClick</span>: <span class="hljs-function">(<span class="hljs-params">e, column, columnIndex</span>) =&gt;</span> { ... }
   }
 }
 </code></pre>
