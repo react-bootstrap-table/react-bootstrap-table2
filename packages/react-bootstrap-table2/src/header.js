@@ -14,9 +14,13 @@ const Header = (props) => {
     className,
     columns,
     onSort,
+    onFilter,
+    filtersPosition,
     sortField,
     sortOrder,
     selectRow,
+    currFilters,
+    onExternalFilter,
     expandRow
   } = props;
 
@@ -31,9 +35,8 @@ const Header = (props) => {
     SelectionHeaderCellComp = withHeaderSelection(SelectionHeaderCell);
   }
 
-  const isRenderFunctionColumnInLeft = (
-    position = Const.INDICATOR_POSITION_LEFT
-  ) => position === Const.INDICATOR_POSITION_LEFT;
+  const isRenderFunctionColumnInLeft = (position = Const.INDICATOR_POSITION_LEFT) =>
+    position === Const.INDICATOR_POSITION_LEFT;
 
   const childrens = [
     columns.map((column, i) => {
@@ -47,6 +50,10 @@ const Header = (props) => {
           column={ column }
           onSort={ onSort }
           sorting={ currSort }
+          onFilter={ onFilter }
+          currFilters={ currFilters }
+          filtersPosition={ filtersPosition }
+          onExternalFilter={ onExternalFilter }
           sortOrder={ sortOrder }
           isLastSorting={ isLastSorting }
         />);
@@ -81,9 +88,13 @@ const Header = (props) => {
 Header.propTypes = {
   columns: PropTypes.array.isRequired,
   onSort: PropTypes.func,
+  onFilter: PropTypes.func,
+  filtersPosition: PropTypes.string,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
+  currFilters: PropTypes.object,
+  onExternalFilter: PropTypes.func,
   className: PropTypes.string,
   expandRow: PropTypes.object
 };

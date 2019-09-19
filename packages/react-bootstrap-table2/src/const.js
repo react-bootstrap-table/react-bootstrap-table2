@@ -13,6 +13,7 @@ export default {
   TYPE_NUMBER: 'number',
   TYPE_BOOLEAN: 'bool',
   TYPE_DATE: 'date',
+  FILTERS_POSITION_INLINE: 'inline',
   FILTERS_POSITION_TOP: 'top',
   FILTERS_POSITION_BOTTOM: 'bottom'
 };

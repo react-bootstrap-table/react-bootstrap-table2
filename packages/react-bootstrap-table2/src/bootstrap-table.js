@@ -93,10 +93,14 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
+            onFilter={ this.props.onFilter }
+            currFilters={ this.props.currFilters }
+            onExternalFilter={ this.props.onExternalFilter }
+            filtersPosition={ this.props.filtersPosition }
             selectRow={ selectRow }
             expandRow={ expandRow }
           />
-          {hasFilters && (
+          {hasFilters && this.props.filtersPosition !== Const.FILTERS_POSITION_INLINE && (
             <Filters
               columns={ columns }
               className={ this.props.filtersClasses }
@@ -211,6 +215,7 @@ BootstrapTable.propTypes = {
   headerClasses: PropTypes.string,
   filtersClasses: PropTypes.string,
   filtersPosition: PropTypes.oneOf([
+    Const.FILTERS_POSITION_INLINE,
     Const.FILTERS_POSITION_TOP,
     Const.FILTERS_POSITION_BOTTOM
   ]),
@@ -242,6 +247,7 @@ BootstrapTable.defaultProps = {
   hover: false,
   condensed: false,
   noDataIndication: null,
+  filtersPosition: Const.FILTERS_POSITION_INLINE,
   selectRow: {
     mode: Const.ROW_SELECT_DISABLED,
     selected: [],

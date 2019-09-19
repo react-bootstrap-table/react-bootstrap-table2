@@ -16,13 +16,19 @@ const HeaderCell = (props) => {
     onSort,
     sorting,
     sortOrder,
-    isLastSorting
+    isLastSorting,
+    onFilter,
+    filtersPosition,
+    currFilters,
+    onExternalFilter
   } = props;
 
   const {
     text,
     sort,
     sortCaret,
+    filter,
+    filterRenderer,
     headerTitle,
     headerAlign,
     headerFormatter,
@@ -41,6 +47,7 @@ const HeaderCell = (props) => {
   };
 
   let sortSymbol;
+  let filterElm;
   let cellStyle = {};
   let cellClasses = _.isFunction(headerClasses) ? headerClasses(column, index) : headerClasses;
 
@@ -90,6 +97,23 @@ const HeaderCell = (props) => {
   if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
   if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
+  if (filtersPosition === Const.FILTERS_POSITION_INLINE) {
+    if (filterRenderer) {
+      const onCustomFilter = onExternalFilter(column, filter.props.type);
+      filterElm = filterRenderer(onCustomFilter, column);
+    } else if (filter) {
+      filterElm = (
+        <filter.Filter
+          { ...filter.props }
+          filterState={ currFilters[column.dataField] }
+          onFilter={ onFilter }
+          column={ column }
+        />
+      );
+    }
+  }
+
+
   const children = headerFormatter ?
     headerFormatter(column, index, { sortElement: sortSymbol }) :
     text;
@@ -98,7 +122,7 @@ const HeaderCell = (props) => {
     return React.createElement('th', cellAttrs, children);
   }
 
-  return React.createElement('th', cellAttrs, children, sortSymbol);
+  return React.createElement('th', cellAttrs, children, sortSymbol, filterElm);
 };
 
 HeaderCell.propTypes = {
@@ -148,7 +172,13 @@ HeaderCell.propTypes = {
   onSort: PropTypes.func,
   sorting: PropTypes.bool,
   sortOrder: PropTypes.oneOf([Const.SORT_ASC, Const.SORT_DESC]),
-  isLastSorting: PropTypes.bool
+  sortCaret: PropTypes.func,
+  isLastSorting: PropTypes.bool,
+  onFilter: PropTypes.func,
+  filtersPosition: PropTypes.oneOf([Const.FILTERS_POSITION_INLINE,
+    Const.FILTERS_POSITION_BOTTOM, Const.FILTERS_POSITION_TOP]),
+  currFilters: PropTypes.object,
+  onExternalFilter: PropTypes.func
 };
 
 export default HeaderCell;
