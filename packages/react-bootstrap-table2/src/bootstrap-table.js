@@ -107,6 +107,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
               onSort={ this.props.onSort }
               onFilter={ this.props.onFilter }
               currFilters={ this.props.currFilters }
+              expandRow={ this.props.expandRow }
               position={ this.props.filtersPosition }
               onExternalFilter={ this.props.onExternalFilter }
             />

@@ -12,7 +12,8 @@ const Filters = (props) => {
     currFilters,
     position,
     onExternalFilter,
-    className
+    className,
+    expandRow
   } = props;
 
   const filterColumns = [];
@@ -34,6 +35,9 @@ const Filters = (props) => {
     }
   });
 
+  if (expandRow.renderer) {
+    filterColumns.unshift(React.createElement('th', {}, <span />));
+  }
   return (
     <tfoot
       className={ className }
@@ -58,7 +62,8 @@ Filters.propTypes = {
   ]),
   currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  expandRow: PropTypes.object
 };
 
 Filters.defaultProps = {
