@@ -43,10 +43,14 @@ class HeaderCell extends eventDelegater(React.Component) {
 
     const delegateEvents = this.delegate(headerEvents);
 
+    const customAttrs = _.isFunction(headerAttrs)
+      ? headerAttrs(column, index)
+      : (headerAttrs || {});
+
     const cellAttrs = {
-      ..._.isFunction(headerAttrs) ? headerAttrs(column, index) : headerAttrs,
+      ...customAttrs,
       ...delegateEvents,
-      tabIndex: 0
+      tabIndex: _.isDefined(customAttrs.tabIndex) ? customAttrs.tabIndex : 0
     };
 
     let sortSymbol;
