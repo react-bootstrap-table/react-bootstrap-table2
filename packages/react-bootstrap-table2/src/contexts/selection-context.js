@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
+import _ from '../utils';
 
 import dataOperator from '../store/operators';
 import { getSelectionSummary } from '../store/selection';
@@ -72,7 +73,7 @@ class SelectionProvider extends React.Component {
     if (!isUnSelect) {
       currSelected = selected.concat(dataOperator.selectableKeys(data, keyField, nonSelectable));
     } else {
-      currSelected = selected.filter(s => typeof data.find(d => d[keyField] === s) === 'undefined');
+      currSelected = selected.filter(s => typeof data.find(d => _.get(d, keyField) === s) === 'undefined');
     }
 
     let result;

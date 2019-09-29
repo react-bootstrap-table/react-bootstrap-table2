@@ -9,7 +9,7 @@ export const getSelectionSummary = (
   let allRowsSelected = data.length > 0;
   let allRowsNotSelected = true;
 
-  const rowKeys = data.map(d => d[keyField]);
+  const rowKeys = data.map(d => _.get(d, keyField));
   for (let i = 0; i < rowKeys.length; i += 1) {
     const curr = rowKeys[i];
     if (typeof selected.find(x => x === curr) === 'undefined') {
