@@ -61,6 +61,6 @@ export const save = (
   FileSaver.saveAs(
     new Blob([content], { type: blobType }),
     fileName,
-    noAutoBOM
+    { autoBom: !noAutoBOM }
   );
 };
