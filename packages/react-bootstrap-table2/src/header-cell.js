@@ -21,6 +21,7 @@ class HeaderCell extends eventDelegater(React.Component) {
       isLastSorting,
       onFilter,
       currFilters,
+      filterPosition,
       onExternalFilter
     } = this.props;
 
@@ -104,18 +105,20 @@ class HeaderCell extends eventDelegater(React.Component) {
     if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
     if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
-    if (filterRenderer) {
-      const onCustomFilter = onExternalFilter(column, filter.props.type);
-      filterElm = filterRenderer(onCustomFilter, column);
-    } else if (filter) {
-      filterElm = (
-        <filter.Filter
-          { ...filter.props }
-          filterState={ currFilters[column.dataField] }
-          onFilter={ onFilter }
-          column={ column }
-        />
-      );
+    if (filterPosition === Const.FILTERS_POSITION_INLINE) {
+      if (filterRenderer) {
+        const onCustomFilter = onExternalFilter(column, filter.props.type);
+        filterElm = filterRenderer(onCustomFilter, column);
+      } else if (filter) {
+        filterElm = (
+          <filter.Filter
+            { ...filter.props }
+            filterState={ currFilters[column.dataField] }
+            onFilter={ onFilter }
+            column={ column }
+          />
+        );
+      }
     }
 
     const children = headerFormatter ?
@@ -180,6 +183,8 @@ HeaderCell.propTypes = {
   sortCaret: PropTypes.func,
   isLastSorting: PropTypes.bool,
   onFilter: PropTypes.func,
+  filterPosition: PropTypes.oneOf([Const.FILTERS_POSITION_INLINE,
+    Const.FILTERS_POSITION_BOTTOM, Const.FILTERS_POSITION_TOP]),
   currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func
 };

@@ -92,6 +92,7 @@ import AdvanceCustomFilter from 'examples/column-filter/advance-custom-filter';
 import ClearAllFilters from 'examples/column-filter/clear-all-filters';
 import FilterHooks from 'examples/column-filter/filter-hooks';
 import CustomFilterLogic from 'examples/column-filter/custom-filter-logic';
+import FilterPosition from 'examples/column-filter/filter-position';
 
 // work on rows
 import RowStyleTable from 'examples/rows/row-style';
@@ -314,6 +315,7 @@ storiesOf('Column Filter', module)
   .add('Number Filter with Default Value', () => <NumberFilterWithDefaultValue />)
   .add('Date Filter', () => <DateFilter />)
   .add('Date Filter with Default Value', () => <DateFilterWithDefaultValue />)
+  .add('Filter Position', () => <FilterPosition />)
   .add('Custom Text Filter', () => <CustomTextFilter />)
   .add('Custom Select Filter', () => <CustomSelectFilter />)
   .add('Custom Number Filter', () => <CustomNumberFilter />)
