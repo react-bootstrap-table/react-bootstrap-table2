@@ -135,7 +135,7 @@ BootstrapTable.propTypes = {
   remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
     pagination: PropTypes.bool
   })]),
-  noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  noDataIndication: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
