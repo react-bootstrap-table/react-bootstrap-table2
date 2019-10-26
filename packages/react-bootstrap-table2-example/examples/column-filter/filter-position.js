@@ -8,21 +8,18 @@ const products = productsGenerator(8);
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID',
-  footer: 'hello'
+  text: 'Product ID'
 }, {
   dataField: 'name',
   text: 'Product Name',
-  footer: 'hello',
   filter: textFilter()
 }, {
   dataField: 'price',
   text: 'Product Price',
-  footer: 'hello',
   filter: textFilter()
 }];
 
-const sourceCode = `\
+const sourceCode1 = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 
@@ -39,13 +36,40 @@ const columns = [{
   filter: textFilter()
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+<BootstrapTable
+  keyField='id'
+  data={ products }
+  columns={ columns }
+  filter={ filterFactory() }
+  filterPosition="top"
+/>
 `;
 
-const selectRow = {
-  mode: 'checkbox',
-  clickToSelect: true
-};
+const sourceCode2 = `\
+import BootstrapTable from 'react-bootstrap-table-next';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID',
+}, {
+  dataField: 'name',
+  text: 'Product Name',
+  filter: textFilter()
+}, {
+  dataField: 'price',
+  text: 'Product Price',
+  filter: textFilter()
+}];
+
+<BootstrapTable
+  keyField='id'
+  data={ products }
+  columns={ columns }
+  filter={ filterFactory() }
+  filterPosition="bottom"
+/>
+`;
 
 export default () => (
   <div>
@@ -54,9 +78,16 @@ export default () => (
       data={ products }
       columns={ columns }
       filter={ filterFactory() }
-      filterPosition="bottom"
-      selectRow={ selectRow }
+      filterPosition="top"
     />
-    <Code>{ sourceCode }</Code>
+    <Code>{ sourceCode1 }</Code>
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      filter={ filterFactory() }
+      filterPosition="bottom"
+    />
+    <Code>{ sourceCode2 }</Code>
   </div>
 );

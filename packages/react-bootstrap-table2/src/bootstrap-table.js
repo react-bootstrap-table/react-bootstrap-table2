@@ -66,7 +66,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowEvents,
       selectRow,
       expandRow,
-      cellEdit
+      cellEdit,
+      filterPosition
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -94,17 +95,21 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
+            onFilter={ this.props.onFilter }
+            currFilters={ this.props.currFilters }
+            onExternalFilter={ this.props.onExternalFilter }
             selectRow={ selectRow }
             expandRow={ expandRow }
+            filterPosition={ filterPosition }
           />
-          {hasFilters && (
+          {hasFilters && filterPosition !== Const.FILTERS_POSITION_INLINE && (
             <Filters
               columns={ columns }
               className={ this.props.filtersClasses }
               onSort={ this.props.onSort }
               onFilter={ this.props.onFilter }
               currFilters={ this.props.currFilters }
-              position={ this.props.filtersPosition }
+              filterPosition={ this.props.filterPosition }
               onExternalFilter={ this.props.onExternalFilter }
             />
           )}
@@ -211,8 +216,9 @@ BootstrapTable.propTypes = {
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   headerClasses: PropTypes.string,
   filtersClasses: PropTypes.string,
-  filtersPosition: PropTypes.oneOf([
+  filterPosition: PropTypes.oneOf([
     Const.FILTERS_POSITION_TOP,
+    Const.FILTERS_POSITION_INLINE,
     Const.FILTERS_POSITION_BOTTOM
   ]),
   footerClasses: PropTypes.string,
@@ -256,7 +262,8 @@ BootstrapTable.defaultProps = {
   cellEdit: {
     mode: null,
     nonEditableRows: []
-  }
+  },
+  filterPosition: Const.FILTERS_POSITION_INLINE
 };
 
 export default BootstrapTable;

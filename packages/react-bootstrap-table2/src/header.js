@@ -14,10 +14,14 @@ const Header = (props) => {
     className,
     columns,
     onSort,
+    onFilter,
     sortField,
     sortOrder,
     selectRow,
-    expandRow
+    expandRow,
+    currFilters,
+    onExternalFilter,
+    filterPosition
   } = props;
 
   let SelectionHeaderCellComp = () => null;
@@ -49,6 +53,10 @@ const Header = (props) => {
           sorting={ currSort }
           sortOrder={ sortOrder }
           isLastSorting={ isLastSorting }
+          onFilter={ onFilter }
+          currFilters={ currFilters }
+          onExternalFilter={ onExternalFilter }
+          filterPosition={ filterPosition }
         />);
     })
   ];
@@ -81,11 +89,19 @@ const Header = (props) => {
 Header.propTypes = {
   columns: PropTypes.array.isRequired,
   onSort: PropTypes.func,
+  onFilter: PropTypes.func,
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
+  currFilters: PropTypes.object,
+  onExternalFilter: PropTypes.func,
   className: PropTypes.string,
-  expandRow: PropTypes.object
+  expandRow: PropTypes.object,
+  filterPosition: PropTypes.oneOf([
+    Const.FILTERS_POSITION_TOP,
+    Const.FILTERS_POSITION_INLINE,
+    Const.FILTERS_POSITION_BOTTOM
+  ])
 };
 
 export default Header;

@@ -10,7 +10,7 @@ const Filters = (props) => {
     columns,
     onFilter,
     currFilters,
-    position,
+    filterPosition,
     onExternalFilter,
     className
   } = props;
@@ -35,25 +35,26 @@ const Filters = (props) => {
   });
 
   return (
-    <tfoot
+    <tbody
       className={ className }
       style={ {
         display:
-          position === Const.FILTERS_POSITION_TOP
-            ? 'table-header-group'
-            : 'table-footer-group'
+        filterPosition === Const.FILTERS_POSITION_TOP
+          ? 'table-header-group'
+          : 'table-footer-group'
       } }
     >
       <tr>{filterColumns}</tr>
-    </tfoot>
+    </tbody>
   );
 };
 
 Filters.propTypes = {
   columns: PropTypes.array.isRequired,
   onFilter: PropTypes.func,
-  position: PropTypes.oneOf([
+  filterPosition: PropTypes.oneOf([
     Const.FILTERS_POSITION_TOP,
+    Const.FILTERS_POSITION_INLINE,
     Const.FILTERS_POSITION_BOTTOM
   ]),
   currFilters: PropTypes.object,

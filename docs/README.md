@@ -32,6 +32,7 @@
 * [defaultSortDirection](#defaultSortDirection)
 * [pagination](#pagination)
 * [filter](#filter)
+* [filterPosition](filterPosition)
 * [onTableChange](#onTableChange)
 * [onDataSizeChange](#onDataSizeChange)
 
@@ -328,6 +329,9 @@ Following is a shape of `newState`
   }
 }
 ```
+
+### <a name='filterPosition'>filterPosition - [String]</a>
+Available value is `inline`, `top` and `bottom`, default is `inline`. This prop decide where `react-bootstrap-table` render column filter.
 
 ### <a name='onDataSizeChange'>onDataSizeChange - [Function]</a>
 This callback function will be called only when data size change by search/filter etc. This function have one argument which is an object contains below props:
