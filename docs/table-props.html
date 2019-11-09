@@ -37,6 +37,7 @@
 <li><a href="#defaultSortDirection-string">defaultSortDirection</a></li>
 <li><a href="#pagination-object">pagination</a></li>
 <li><a href="#filter-object">filter</a></li>
+<li><a href="#filterposition-string">filterPosition</a></li>
 <li><a href="#ontablechange-function">onTableChange</a></li>
 <li><a href="#ondatasizechange-function">onDataSizeChange</a></li>
 </ul>
@@ -226,6 +227,8 @@ When <code>loading</code> is <code>true</code>, <code>react-bootstrap-table2</co
 
 <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">keyField</span>=<span class="hljs-string">'id'</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">products</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">filter</span>=<span class="hljs-string">{</span> <span class="hljs-attr">filterFactory</span>() } /&gt;</span>
 </span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="filterposition-string"></a><a href="#filterposition-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>filterPosition - [String]</h2>
+<p>Available value is <code>inline</code>, <code>top</code> and <code>bottom</code>, default is <code>inline</code>. This prop decide where <code>react-bootstrap-table</code> render column filter.</p>
 <h2><a class="anchor" aria-hidden="true" name="ontablechange-function"></a><a href="#ontablechange-function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>onTableChange - [Function]</h2>
 <p>This callback function will be called when <a href="#remote-bool-object"><code>remote</code></a> enabled only.</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> onTableChange = <span class="hljs-function">(<span class="hljs-params">type, newState</span>) =&gt;</span> {
