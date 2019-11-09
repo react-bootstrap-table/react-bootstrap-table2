@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import Header from './header';
+import Filters from './filters';
 import Caption from './caption';
 import Body from './body';
 import Footer from './footer';
@@ -65,7 +66,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowEvents,
       selectRow,
       expandRow,
-      cellEdit
+      cellEdit,
+      filterPosition
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -76,6 +78,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       'table-bordered': bordered,
       [bootstrap4 ? 'table-sm' : 'table-condensed']: condensed
     }, classes);
+
+    const hasFilters = columns.some(col => col.filter || col.filterRenderer);
 
     const hasFooter = _.filter(columns, col => _.has(col, 'footer')).length > 0;
 
@@ -96,7 +100,19 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             onExternalFilter={ this.props.onExternalFilter }
             selectRow={ selectRow }
             expandRow={ expandRow }
+            filterPosition={ filterPosition }
           />
+          {hasFilters && filterPosition !== Const.FILTERS_POSITION_INLINE && (
+            <Filters
+              columns={ columns }
+              className={ this.props.filtersClasses }
+              onSort={ this.props.onSort }
+              onFilter={ this.props.onFilter }
+              currFilters={ this.props.currFilters }
+              filterPosition={ this.props.filterPosition }
+              onExternalFilter={ this.props.onExternalFilter }
+            />
+          )}
           <Body
             data={ this.getData() }
             keyField={ keyField }
@@ -135,7 +151,7 @@ BootstrapTable.propTypes = {
   remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
     pagination: PropTypes.bool
   })]),
-  noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  noDataIndication: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
@@ -199,6 +215,12 @@ BootstrapTable.propTypes = {
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   headerClasses: PropTypes.string,
+  filtersClasses: PropTypes.string,
+  filterPosition: PropTypes.oneOf([
+    Const.FILTERS_POSITION_TOP,
+    Const.FILTERS_POSITION_INLINE,
+    Const.FILTERS_POSITION_BOTTOM
+  ]),
   footerClasses: PropTypes.string,
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
@@ -240,7 +262,8 @@ BootstrapTable.defaultProps = {
   cellEdit: {
     mode: null,
     nonEditableRows: []
-  }
+  },
+  filterPosition: Const.FILTERS_POSITION_INLINE
 };
 
 export default BootstrapTable;

@@ -330,3 +330,29 @@ Following properties is valid in `FILTER_TYPES`:
 * NUMBER
 * DATE
 * MULTISELECT
+
+### Position
+Default filter is rendered inside the table column header, but you can choose to render them as a row by `filterPosition`:
+
+#### Render in the top of table body
+
+```js
+<BootstrapTable
+  keyField='id'
+  data={ products }
+  columns={ columns }
+  filter={ filterFactory() }
+  filterPosition="top"
+/>
+```
+
+#### Render in the bottom of table body
+```js
+<BootstrapTable
+  keyField='id'
+  data={ products }
+  columns={ columns }
+  filter={ filterFactory() }
+  filterPosition="bottom"
+/>
+```
