@@ -18,6 +18,7 @@ title: Column Filter Props
    * [customFilter](#customFilter)
 * [Comparator](#comparator)
 * [FILTER_TYPES](#filter-types)
+* [Position](#position)
 
 ## **Getting Started**
 Please check [Getting Started Guide](./basic-filter.html)
@@ -454,3 +455,30 @@ Following properties is valid in `FILTER_TYPES`:
 * DATE
 
 You will only need the `FILTER_TYPES` when you are customize the filter component and you want to assign a specify filter mode.
+
+## **Position**
+
+Default filter is rendered inside the table column header, but you can choose to render them as a row by `filterPosition`:
+
+### Render in the top of table body
+
+```js
+<BootstrapTable
+  keyField='id'
+  data={ products }
+  columns={ columns }
+  filter={ filterFactory() }
+  filterPosition="top"
+/>
+```
+
+### Render in the bottom of table body
+```js
+<BootstrapTable
+  keyField='id'
+  data={ products }
+  columns={ columns }
+  filter={ filterFactory() }
+  filterPosition="bottom"
+/>
+```

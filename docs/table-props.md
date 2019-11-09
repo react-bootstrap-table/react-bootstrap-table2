@@ -33,6 +33,7 @@ title: BootstrapTable Props
 * [defaultSortDirection](#defaultSortDirection-string)
 * [pagination](#pagination-object)
 * [filter](#filter-object)
+* [filterPosition](#filterposition-string)
 * [onTableChange](#ontablechange-function)
 * [onDataSizeChange](#ondatasizechange-function)
 
@@ -287,6 +288,11 @@ const columns = [{
 
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
+
+## filterPosition - [String]
+Available value is `inline`, `top` and `bottom`, default is `inline`. This prop decide where `react-bootstrap-table` render column filter.
+
+
 
 ## onTableChange - [Function]
 This callback function will be called when [`remote`](#remote-bool-object) enabled only.
