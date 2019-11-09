@@ -148,7 +148,7 @@ describe('HeaderCell', () => {
     it('should call custom headerFormatter correctly', () => {
       expect(formatter.callCount).toBe(1);
       expect(formatter.calledWith(
-        column, index, { sortElement: undefined })).toBe(true);
+        column, index, { sortElement: undefined, filterElement: undefined })).toBe(true);
     });
   });
 
@@ -729,7 +729,13 @@ describe('HeaderCell', () => {
         }
       };
       wrapper = shallow(
-        <HeaderCell column={ column } index={ index } onFilter={ onFilter } currFilters={ {} } />
+        <HeaderCell
+          column={ column }
+          index={ index }
+          onFilter={ onFilter }
+          currFilters={ {} }
+          filterPosition="inline"
+        />
       );
     });
 
@@ -738,14 +744,14 @@ describe('HeaderCell', () => {
       expect(wrapper.find('th').length).toBe(1);
     });
 
-    // it('should render filter correctly', () => {
-    //   expect(wrapper.find(Filter).length).toBe(1);
-    //   expect(wrapper.find(Filter).props()).toEqual({
-    //     column,
-    //     onFilter,
-    //     ...filterProps
-    //   });
-    // });
+    it('should render filter correctly', () => {
+      expect(wrapper.find(Filter).length).toBe(1);
+      expect(wrapper.find(Filter).props()).toEqual({
+        column,
+        onFilter,
+        ...filterProps
+      });
+    });
   });
 
   describe('when column.filter and column.filterRenderer is defined', () => {
@@ -767,7 +773,12 @@ describe('HeaderCell', () => {
         filterRenderer
       };
       wrapper = shallow(
-        <HeaderCell column={ column } index={ index } onExternalFilter={ onExternalFilter } />);
+        <HeaderCell
+          column={ column }
+          index={ index }
+          filterPosition="inline"
+          onExternalFilter={ onExternalFilter }
+        />);
     });
 
     it('should render successfully', () => {
@@ -775,12 +786,12 @@ describe('HeaderCell', () => {
       expect(wrapper.find('th').length).toBe(1);
     });
 
-    // it('should render filter correctly', () => {
-    //   expect(wrapper.find(Filter).length).toBe(1);
-    // });
-    //
-    // it('should call filterRenderer function correctly', () => {
-    //   expect(filterRenderer).toHaveBeenCalledTimes(1);
-    // });
+    it('should render filter correctly', () => {
+      expect(wrapper.find(Filter).length).toBe(1);
+    });
+
+    it('should call filterRenderer function correctly', () => {
+      expect(filterRenderer).toHaveBeenCalledTimes(1);
+    });
   });
 });
