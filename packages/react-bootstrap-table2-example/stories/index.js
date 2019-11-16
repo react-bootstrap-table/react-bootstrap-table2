@@ -152,6 +152,8 @@ import HeaderStyleTable from 'examples/row-selection/header-style';
 import HideSelectAllTable from 'examples/row-selection/hide-select-all';
 import CustomSelectionTable from 'examples/row-selection/custom-selection';
 import NonSelectableRowsTable from 'examples/row-selection/non-selectable-rows';
+import NonSelectableRowsStyleTable from 'examples/row-selection/non-selectable-rows-style';
+import NonSelectableRowsClassTable from 'examples/row-selection/non-selectable-rows-class';
 import SelectionBgColorTable from 'examples/row-selection/selection-bgcolor';
 import SelectionHooks from 'examples/row-selection/selection-hooks';
 import HideSelectionColumnTable from 'examples/row-selection/hide-selection-column';
@@ -410,6 +412,8 @@ storiesOf('Row Selection', module)
   .add('Custom Selection', () => <CustomSelectionTable />)
   .add('Selection Background Color', () => <SelectionBgColorTable />)
   .add('Not Selectabled Rows', () => <NonSelectableRowsTable />)
+  .add('Not Selectabled Rows Style', () => <NonSelectableRowsStyleTable />)
+  .add('Not Selectabled Rows Class', () => <NonSelectableRowsClassTable />)
   .add('Selection Hooks', () => <SelectionHooks />)
   .add('Hide Selection Column', () => <HideSelectionColumnTable />)
   .add('Custom Selection Column Style', () => <SelectionColumnStyleTable />)

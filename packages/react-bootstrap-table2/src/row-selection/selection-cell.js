@@ -86,7 +86,7 @@ export default class SelectionCell extends Component {
       <BootstrapContext.Consumer>
         {
           ({ bootstrap4 }) => (
-            <td onClick={ this.handleClick } { ...attrs }>
+            <td className="selection-cell" onClick={ this.handleClick } { ...attrs }>
               {
                 selectionRenderer ? selectionRenderer({
                   mode: inputType,

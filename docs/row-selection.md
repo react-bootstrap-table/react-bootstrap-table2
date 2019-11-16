@@ -1,6 +1,6 @@
 
 # Row selection
-`react-bootstrap-table2` supports the row selection feature. By passing prop `selectRow` to enable row selection. When you enable this feature, `react-bootstrap-table2` will prepend a new selection column. 
+`react-bootstrap-table2` supports the row selection feature. By passing prop `selectRow` to enable row selection. When you enable this feature, `react-bootstrap-table2` will prepend a new selection column.
 
 ## Required
 * [mode (**required**)](#mode)
@@ -11,6 +11,8 @@
 * [classes)](#classes)
 * [bgColor](#bgColor)
 * [nonSelectable)](#nonSelectable)
+* [nonSelectableStyle](#nonSelectableStyle)
+* [nonSelectableClasses](#nonSelectableClasses)
 * [clickToSelect)](#clickToSelect)
 * [clickToExpand)](#clickToExpand)
 * [clickToEdit](#clickToEdit)
@@ -139,6 +141,54 @@ const selectRow = {
 };
 ```
 
+### <a name='nonSelectableStyle'>selectRow.nonSelectableStyle - [Object | Function]</a>
+This prop allow you to customize the non selectable rows. `selectRow.nonSelectableStyle` accepts an style object
+and a callback function for more flexible customization.
+
+### Style Object
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableStyle: { backgroundColor: 'gray' }
+};
+```
+
+### Callback Function
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableStyle: (row, rowIndex) => { return ...; }
+};
+```
+
+### <a name='nonSelectableClasses'>selectRow.nonSelectableClasses - [String | Function]</a>
+This prop allow you to set a custom class for the non selectable rows, or use a callback function for more
+flexible customization
+
+### String
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableClasses: 'my-class'
+};
+```
+
+### Callback Function
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableClasses: (row, rowIndex) => { return ...; }
+};
+```
+
 ### <a name='clickToSelect'>selectRow.clickToSelect - [Bool]</a>
 Allow user to select row by clicking on the row.
 
@@ -149,7 +199,7 @@ const selectRow = {
 };
 ```
 
-> Note: When you also enable [cellEdit](./cell-edit.md), the `selectRow.clickToSelect` will deactivate the functionality of cell editing   
+> Note: When you also enable [cellEdit](./cell-edit.md), the `selectRow.clickToSelect` will deactivate the functionality of cell editing
 > If you want to click on row to select row and edit cell simultaneously, you are suppose to enable [`selectRow.clickToEdit`](#clickToEdit)
 
 ### <a name='clickToExpand'>selectRow.clickToExpand - [Bool]</a>
@@ -307,7 +357,7 @@ const selectRow = {
   mode: 'checkbox',
   onSelectAll: (isSelect, rows, e) => {
     if (isSelect && SOME_CONDITION) {
-      return [1, 3, 4];  // finally, key 1, 3, 4 will being selected 
+      return [1, 3, 4];  // finally, key 1, 3, 4 will being selected
     }
   }
 };

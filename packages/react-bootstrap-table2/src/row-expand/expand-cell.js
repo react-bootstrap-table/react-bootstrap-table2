@@ -44,7 +44,7 @@ export default class ExpandCell extends Component {
     if (tabIndex !== -1) attrs.tabIndex = tabIndex;
 
     return (
-      <td onClick={ this.handleClick } { ...attrs }>
+      <td className="expand-cell" onClick={ this.handleClick } { ...attrs }>
         {
           expandColumnRenderer ? expandColumnRenderer({
             expandable,
