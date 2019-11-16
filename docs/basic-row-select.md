@@ -35,6 +35,11 @@ Like column, we support to custom the style, class on the selecting row easily v
 * [`selectRow.style`](./row-select-props.html#selectrowstyle-object-function)
 * [`selectRow.classes`](./row-select-props.html#selectrowclasses-string-function)
 
+If you configure some specific rows as non-selectable, you can also custom them via:
+
+* [`selectRow.nonSelectableStyle`](./row-select-props.html#selectrownonselectablestyle-object-function)
+* [`selectRow.nonSelectableClasses`](./row-select-props.html#selectrownonselectableclasses-string-function)
+
 ### Selection Column
 
 * For Custom header cell: [`selectRow.selectionRenderer`](./row-select-props.html#selectrowselectionrenderer-function)

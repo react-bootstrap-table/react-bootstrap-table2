@@ -23,6 +23,8 @@ const selectRow = {
 * [classes](#selectrowclasses-string-function)
 * [bgColor](#selectrowbgcolor-string-function)
 * [nonSelectable](#selectrownonselectable-array)
+* [nonSelectableStyle](#selectrownonselectablestyle-object-function)
+* [nonSelectableClasses](#selectrownonselectableclasses-string-function)
 * [clickToSelect](#selectrowclicktoselect-bool)
 * [clickToExpand](#selectrowclicktoexpand-bool)
 * [clickToEdit](#selectrowclicktoedit-bool)
@@ -137,6 +139,54 @@ This prop allow you to restrict some rows which can not be selected by user. `se
 const selectRow = {
   mode: 'checkbox',
   nonSelectable: [1, 3 ,5]
+};
+```
+
+## selectRow.nonSelectableStyle - [Object | Function]
+This prop allow you to customize the non selectable rows. `selectRow.nonSelectableStyle` accepts an style object
+and a callback function for more flexible customization.
+
+### Style Object
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableStyle: { backgroundColor: 'gray' }
+};
+```
+
+### Callback Function
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableStyle: (row, rowIndex) => { return ...; }
+};
+```
+
+## selectRow.nonSelectableClasses - [String | Function]
+This prop allow you to set a custom class for the non selectable rows, or use a callback function for more
+flexible customization
+
+### String
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableClasses: 'my-class'
+};
+```
+
+### Callback Function
+
+```js
+const selectRow = {
+  mode: 'checkbox',
+  nonSelectable: [1, 3 ,5],
+  nonSelectableClasses: (row, rowIndex) => { return ...; }
 };
 ```
 
