@@ -21,6 +21,7 @@ const Filters = (props) => {
   columns.forEach((column, i) => {
     filterColumns.push(<FiltersCell
       index={ i }
+      key={ column.dataField }
       column={ column }
       currFilters={ currFilters }
       onExternalFilter={ onExternalFilter }
