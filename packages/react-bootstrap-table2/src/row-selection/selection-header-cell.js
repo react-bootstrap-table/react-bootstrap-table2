@@ -112,7 +112,7 @@ export default class SelectionHeaderCell extends Component {
               );
             }
             return (
-              <th data-row-selection { ...attrs }>{ content }</th>
+              <th className="selection-cell-header" data-row-selection { ...attrs }>{ content }</th>
             );
           }
         }

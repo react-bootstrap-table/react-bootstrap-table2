@@ -2,6 +2,7 @@
 
 exports[`<SelectionCell /> render should render component correctly 1`] = `
 <td
+  className="selection-cell"
   onClick={[Function]}
 >
   <input
