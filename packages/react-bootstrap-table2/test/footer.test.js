@@ -48,7 +48,7 @@ describe('Footer', () => {
 
   describe('simplest footer', () => {
     beforeEach(() => {
-      wrapper = shallow(
+      wrapper = render(
         <Footer
           data={ data }
           columns={ columns }
@@ -61,7 +61,7 @@ describe('Footer', () => {
     it('should render successfully', () => {
       expect(wrapper.length).toBe(1);
       expect(wrapper.find('tr').length).toBe(1);
-      expect(wrapper.find(FooterCell).length).toBe(columns.length);
+      expect(wrapper.find('th').length).toBe(columns.length);
     });
   });
 
@@ -86,7 +86,7 @@ describe('Footer', () => {
     });
   });
 
-  describe('when selecrRow prop is enable', () => {
+  describe('when selectRow prop is enable', () => {
     beforeEach(() => {
       wrapper = render(
         <Footer

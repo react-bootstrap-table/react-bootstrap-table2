@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import FiltersCell from './filters-cell';
 import Const from './const';
+import RowTemplate from './row/row-template';
 
 const Filters = (props) => {
   const {
@@ -12,28 +13,33 @@ const Filters = (props) => {
     currFilters,
     filterPosition,
     onExternalFilter,
-    className
+    className,
+    selectRow,
+    expandRow
   } = props;
 
-  const filterColumns = [];
-  let showFiltersRow = false;
+  function renderContent() {
+    const filterColumns = [];
+    let showFiltersRow = false;
 
-  columns.forEach((column, i) => {
-    filterColumns.push(<FiltersCell
-      index={ i }
-      key={ column.dataField }
-      column={ column }
-      currFilters={ currFilters }
-      onExternalFilter={ onExternalFilter }
-      onFilter={ onFilter }
-    />);
+    columns.forEach((column, i) => {
+      filterColumns.push(<FiltersCell
+        index={ i }
+        key={ column.dataField }
+        column={ column }
+        currFilters={ currFilters }
+        onExternalFilter={ onExternalFilter }
+        onFilter={ onFilter }
+      />);
 
-    if (column.filterRenderer || column.filter) {
-      if (!showFiltersRow) {
-        showFiltersRow = true;
+      if (column.filterRenderer || column.filter) {
+        if (!showFiltersRow) {
+          showFiltersRow = true;
+        }
       }
-    }
-  });
+    });
+    return filterColumns;
+  }
 
   return (
     <tbody
@@ -45,7 +51,12 @@ const Filters = (props) => {
           : 'table-footer-group'
       } }
     >
-      <tr>{filterColumns}</tr>
+      <RowTemplate
+        renderContent={ renderContent }
+        selectRow={ selectRow }
+        expandRow={ expandRow }
+        cellEl="td"
+      />
     </tbody>
   );
 };
@@ -60,7 +71,9 @@ Filters.propTypes = {
   ]),
   currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  selectRow: PropTypes.object,
+  expandRow: PropTypes.object
 };
 
 Filters.defaultProps = {
