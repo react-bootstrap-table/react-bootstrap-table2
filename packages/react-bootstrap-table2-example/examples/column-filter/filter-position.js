@@ -71,6 +71,23 @@ const columns = [{
 />
 `;
 
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true
+};
+
+const expandRow = {
+  renderer: row => (
+    <div>
+      <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
+      <p>You can render anything here, also you can add additional data on every row object</p>
+      <p>expandRow.renderer callback will pass the origin row object to you</p>
+    </div>
+  ),
+  showExpandColumn: true,
+  expandColumnPosition: 'right'
+};
+
 export default () => (
   <div>
     <BootstrapTable
@@ -79,6 +96,8 @@ export default () => (
       columns={ columns }
       filter={ filterFactory() }
       filterPosition="top"
+      expandRow={ expandRow }
+      selectRow={ selectRow }
     />
     <Code>{ sourceCode1 }</Code>
     <BootstrapTable
@@ -87,6 +106,8 @@ export default () => (
       columns={ columns }
       filter={ filterFactory() }
       filterPosition="bottom"
+      expandRow={ expandRow }
+      selectRow={ selectRow }
     />
     <Code>{ sourceCode2 }</Code>
   </div>
