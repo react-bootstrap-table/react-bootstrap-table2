@@ -131,7 +131,7 @@ const columns = [{
 ## selectFilter
 **Required**:
 
-### selectFilter.options - [Object]
+### selectFilter.options - [Object | Array | Function]
 * (Required) the options for the list of drop down.
 
 **Optional**:
@@ -161,11 +161,27 @@ const columns = [{
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { selectFilter } from 'react-bootstrap-table2-filter';
 
+// options as Object
 const selectOptions = {
   0: 'good',
   1: 'Bad',
   2: 'unknown'
 };
+
+// options as Array
+const selectOptions = [
+  { value: 0, label: 'good' },
+  { value: 1, label: 'Bad' },
+  { value: 2, label: 'unknown' }
+];
+
+// options as Function
+function selectOptions = (column) => [
+  { value: 0, label: 'good' },
+  { value: 1, label: 'Bad' },
+  { value: 2, label: 'unknown' }
+];
+
 
 const columns = [
   { ... }, { ... }, {
