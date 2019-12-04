@@ -83,7 +83,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
     const hasFooter = _.filter(columns, col => _.has(col, 'footer')).length > 0;
 
-    const tableCaption = (caption && <Caption>{ caption }</Caption>);
+    const tableCaption = (
+      caption && <Caption bootstrap4={ bootstrap4 }>{ caption }</Caption>
+    );
 
     return (
       <div className={ tableWrapperClass }>
