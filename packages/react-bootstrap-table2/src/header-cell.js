@@ -22,7 +22,8 @@ class HeaderCell extends eventDelegater(React.Component) {
       onFilter,
       currFilters,
       filterPosition,
-      onExternalFilter
+      onExternalFilter,
+      globalSortCaret
     } = this.props;
 
     const {
@@ -41,6 +42,8 @@ class HeaderCell extends eventDelegater(React.Component) {
       headerSortingClasses,
       headerSortingStyle
     } = column;
+
+    const sortCaretfunc = sortCaret || globalSortCaret;
 
     const delegateEvents = this.delegate(headerEvents);
 
@@ -81,7 +84,9 @@ class HeaderCell extends eventDelegater(React.Component) {
       cellAttrs.className = cs(cellAttrs.className, 'sortable');
 
       if (sorting) {
-        sortSymbol = sortCaret ? sortCaret(sortOrder, column) : <SortCaret order={ sortOrder } />;
+        sortSymbol = sortCaretfunc ?
+          sortCaretfunc(sortOrder, column) :
+          <SortCaret order={ sortOrder } />;
 
         // append customized classes or style if table was sorting based on the current column.
         cellClasses = cs(
@@ -98,7 +103,7 @@ class HeaderCell extends eventDelegater(React.Component) {
             : headerSortingStyle
         };
       } else {
-        sortSymbol = sortCaret ? sortCaret(undefined, column) : <SortSymbol />;
+        sortSymbol = sortCaretfunc ? sortCaretfunc(undefined, column) : <SortSymbol />;
       }
     }
 

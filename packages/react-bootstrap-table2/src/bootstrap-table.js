@@ -97,6 +97,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
+            globalSortCaret={ this.props.sort && this.props.sort.sortCaret }
             onFilter={ this.props.onFilter }
             currFilters={ this.props.currFilters }
             onExternalFilter={ this.props.onExternalFilter }
@@ -234,7 +235,9 @@ BootstrapTable.propTypes = {
   })),
   sort: PropTypes.shape({
     dataField: PropTypes.string,
-    order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC])
+    order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
+    sortFunc: PropTypes.func,
+    sortCaret: PropTypes.func
   }),
   defaultSortDirection: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
   overlay: PropTypes.func,

@@ -22,7 +22,8 @@ export default (
       })),
       sort: PropTypes.shape({
         dataField: PropTypes.string,
-        order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC])
+        order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
+        sortFunc: PropTypes.func
       }),
       defaultSortDirection: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC])
     }
@@ -92,9 +93,11 @@ export default (
 
     render() {
       let { data } = this.props;
+      const { sort } = this.props;
       const { sortOrder, sortColumn } = this.state;
       if (!isRemoteSort() && sortColumn) {
-        data = dataOperator.sort(data, sortOrder, sortColumn);
+        const sortFunc = sortColumn.sortFunc ? sortColumn.sortFunc : (sort && sort.sortFunc);
+        data = dataOperator.sort(data, sortOrder, { ...sortColumn, sortFunc });
       }
 
       return (

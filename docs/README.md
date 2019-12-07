@@ -211,7 +211,15 @@ You can give `dataField` and `order` to specify the sorting state in table, For 
 ```
 
 #### One-time sorting configuration
-**TBD**
+In earily version, we only can configure [`sortCaret`](./columns.md#sortCaret) and [`sortFunc` ](./columns.md#sortFunc) per column. But they are same in most of cases.   
+So here we give you a chance to just setup these prop in one time.
+
+```js
+<BootstrapTable sort={ {
+  sortCaret: ...
+  sortFunc: ...
+} }>
+```
 
 ### <a name='defaultSorted'>defaultSorted - [Array]</a>
 `defaultSorted` accept an object array which allow you to define the default sort columns when first render.
