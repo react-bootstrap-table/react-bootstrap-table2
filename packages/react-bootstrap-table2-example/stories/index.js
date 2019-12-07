@@ -213,6 +213,7 @@ import CSVColumnType from 'examples/csv/csv-column-type';
 import CustomCSVButton from 'examples/csv/custom-csv-button';
 import ExportCustomData from 'examples/csv/export-custom-data';
 import CustomCSV from 'examples/csv/custom-csv';
+import ExportTableFooter from 'examples/csv/export-footer';
 
 // Column toggle
 import BasicColumnToggle from 'examples/column-toggle';
@@ -484,7 +485,8 @@ storiesOf('Export CSV', module)
   .add('CSV Column Type', () => <CSVColumnType />)
   .add('Custom CSV Button', () => <CustomCSVButton />)
   .add('Export Custom Data', () => <ExportCustomData />)
-  .add('Custom CSV', () => <CustomCSV />);
+  .add('Custom CSV', () => <CustomCSV />)
+  .add('Export Table Footer', () => <ExportTableFooter />);
 
 storiesOf('EmptyTableOverlay', module)
   .addDecorator(bootstrapStyle())

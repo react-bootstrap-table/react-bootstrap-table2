@@ -12,17 +12,21 @@ export const getMetaInfo = columns =>
       export: column.csvExport === false ? false : true,
       row: Number(column.row) || 0,
       rowSpan: Number(column.rowSpan) || 1,
-      colSpan: Number(column.colSpan) || 1
+      colSpan: Number(column.colSpan) || 1,
+      footer: column.footer,
+      footerFormatter: column.footerFormatter
     }))
     .filter(_ => _.export);
 
 export const transform = (
   data,
   meta,
-  getValue,
+  columns,
+  _,
   {
     separator,
-    ignoreHeader
+    ignoreHeader,
+    ignoreFooter
   }
 ) => {
   const visibleColumns = meta.filter(m => m.export);
@@ -37,7 +41,7 @@ export const transform = (
   content += data
     .map((row, rowIndex) =>
       visibleColumns.map((m) => {
-        let cellContent = getValue(row, m.field);
+        let cellContent = _.get(row, m.field);
         if (m.formatter) {
           cellContent = m.formatter(cellContent, row, rowIndex, m.formatExtraData);
         }
@@ -47,6 +51,18 @@ export const transform = (
         return cellContent;
       }).join(separator)).join('\n');
 
+  if (!ignoreFooter) {
+    content += '\n';
+    content += visibleColumns.map((m, i) => {
+      if (typeof m.footer === 'function') {
+        const columnData = _.pluck(data, columns[i].dataField);
+        return `"${m.footer(columnData, columns[i], i)}"`;
+      } else if (m.footerFormatter) {
+        return `"${m.footerFormatter(columns[i], i)}"`;
+      }
+      return `"${m.footer}"`;
+    }).join(separator);
+  }
   return content;
 };
 

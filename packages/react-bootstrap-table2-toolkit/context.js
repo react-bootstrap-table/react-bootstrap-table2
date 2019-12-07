@@ -28,6 +28,7 @@ class ToolkitProvider extends statelessDecorator(React.Component) {
         fileName: PropTypes.string,
         separator: PropTypes.string,
         ignoreHeader: PropTypes.bool,
+        ignoreFooter: PropTypes.bool,
         noAutoBOM: PropTypes.bool,
         blobType: PropTypes.string,
         exportAll: PropTypes.bool,
