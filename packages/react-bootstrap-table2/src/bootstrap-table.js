@@ -83,7 +83,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
     const hasFooter = _.filter(columns, col => _.has(col, 'footer')).length > 0;
 
-    const tableCaption = (caption && <Caption>{ caption }</Caption>);
+    const tableCaption = (
+      caption && <Caption bootstrap4={ bootstrap4 }>{ caption }</Caption>
+    );
 
     return (
       <div className={ tableWrapperClass }>
@@ -95,6 +97,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
+            globalSortCaret={ this.props.sort && this.props.sort.sortCaret }
             onFilter={ this.props.onFilter }
             currFilters={ this.props.currFilters }
             onExternalFilter={ this.props.onExternalFilter }
@@ -230,6 +233,12 @@ BootstrapTable.propTypes = {
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
   })),
+  sort: PropTypes.shape({
+    dataField: PropTypes.string,
+    order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
+    sortFunc: PropTypes.func,
+    sortCaret: PropTypes.func
+  }),
   defaultSortDirection: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
   overlay: PropTypes.func,
   onTableChange: PropTypes.func,

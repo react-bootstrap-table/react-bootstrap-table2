@@ -209,6 +209,9 @@ Custom the csv file separator.
 #### ignoreHeader - [bool]
 Default is `false`. Give true to avoid to attach the csv header.
 
+#### ignoreFooter - [bool]
+Default is `true`. Give `false` to attach the table footer if enabled.
+
 #### noAutoBOM - [bool]
 Default is `true`.
 

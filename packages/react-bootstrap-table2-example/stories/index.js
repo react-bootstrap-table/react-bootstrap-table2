@@ -18,6 +18,7 @@ import TabIndexCellTable from 'examples/basic/tabindex-column';
 
 // bootstrap 4
 import Bootstrap4DefaultSortTable from 'examples/bootstrap4/sort';
+import Bootstrap4CaptionTable from 'examples/bootstrap4/caption-table';
 import Bootstrap4RowSelectionTable from 'examples/bootstrap4/row-selection';
 import Bootstrap4PaginationTable from 'examples/bootstrap4/pagination';
 import Bootstrap4ColumnToggleTable from 'examples/bootstrap4/column-toggle';
@@ -105,6 +106,8 @@ import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
 import DefaultSortDirectionTable from 'examples/sort/default-sort-direction';
 import SortEvents from 'examples/sort/sort-events';
+import SortManagement from 'examples/sort/sort-management';
+import OneTimeSortConfiguration from 'examples/sort/one-time-sort-configuration';
 import CustomSortValue from 'examples/sort/custom-sort-value';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 import CustomSortCaretTable from 'examples/sort/custom-sort-caret';
@@ -212,6 +215,7 @@ import CSVColumnType from 'examples/csv/csv-column-type';
 import CustomCSVButton from 'examples/csv/custom-csv-button';
 import ExportCustomData from 'examples/csv/export-custom-data';
 import CustomCSV from 'examples/csv/custom-csv';
+import ExportTableFooter from 'examples/csv/export-footer';
 
 // Column toggle
 import BasicColumnToggle from 'examples/column-toggle';
@@ -268,6 +272,7 @@ storiesOf('Basic Table', module)
 storiesOf('Bootstrap 4', module)
   .addDecorator(bootstrapStyle(BOOTSTRAP_VERSION.FOUR))
   .add('Sort table with bootstrap 4', () => <Bootstrap4DefaultSortTable />)
+  .add('Table Caption bootstrap 4', () => <Bootstrap4CaptionTable />)
   .add('Row selection table with bootstrap 4', () => <Bootstrap4RowSelectionTable />)
   .add('Pagination table with bootstrap 4', () => <Bootstrap4PaginationTable />)
   .add('Column Toggle with bootstrap 4', () => <Bootstrap4ColumnToggleTable />)
@@ -362,6 +367,8 @@ storiesOf('Sort Table', module)
   .add('Default Sort Table', () => <DefaultSortTable />)
   .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
   .add('Sort Events', () => <SortEvents />)
+  .add('Sort Management', () => <SortManagement />)
+  .add('One-time Sort Configuation', () => <OneTimeSortConfiguration />)
   .add('Custom Sort Value', () => <CustomSortValue />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
   .add('Custom Sort Caret', () => <CustomSortCaretTable />)
@@ -482,7 +489,8 @@ storiesOf('Export CSV', module)
   .add('CSV Column Type', () => <CSVColumnType />)
   .add('Custom CSV Button', () => <CustomCSVButton />)
   .add('Export Custom Data', () => <ExportCustomData />)
-  .add('Custom CSV', () => <CustomCSV />);
+  .add('Custom CSV', () => <CustomCSV />)
+  .add('Export Table Footer', () => <ExportTableFooter />);
 
 storiesOf('EmptyTableOverlay', module)
   .addDecorator(bootstrapStyle())
