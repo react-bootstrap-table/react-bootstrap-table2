@@ -1,3 +1,4 @@
+/* eslint camelcase: 0 */
 /* eslint react/require-default-props: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -19,6 +20,10 @@ export default (
         dataField: PropTypes.string.isRequired,
         order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
       })),
+      sort: PropTypes.shape({
+        dataField: PropTypes.string,
+        order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC])
+      }),
       defaultSortDirection: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC])
     }
 
@@ -26,19 +31,14 @@ export default (
       super(props);
       let sortOrder;
       let sortColumn;
-      const { columns, defaultSorted, defaultSortDirection } = props;
+      const { defaultSorted, defaultSortDirection, sort } = props;
 
       if (defaultSorted && defaultSorted.length > 0) {
-        const sortField = defaultSorted[0].dataField;
         sortOrder = defaultSorted[0].order || defaultSortDirection;
-        const sortColumns = columns.filter(col => col.dataField === sortField);
-        if (sortColumns.length > 0) {
-          sortColumn = sortColumns[0];
-
-          if (sortColumn.onSort) {
-            sortColumn.onSort(sortField, sortOrder);
-          }
-        }
+        sortColumn = this.initSort(defaultSorted[0].dataField, sortOrder);
+      } else if (sort && sort.dataField && sort.order) {
+        sortOrder = sort.order;
+        sortColumn = this.initSort(sort.dataField, sortOrder);
       }
       this.state = { sortOrder, sortColumn };
     }
@@ -48,6 +48,30 @@ export default (
       if (isRemoteSort() && sortOrder && sortColumn) {
         handleSortChange(sortColumn.dataField, sortOrder);
       }
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      const { sort, columns } = nextProps;
+      if (sort && sort.dataField && sort.order) {
+        this.setState({
+          sortOrder: sort.order,
+          sortColumn: columns.find(col => col.dataField === sort.dataField)
+        });
+      }
+    }
+
+    initSort(sortField, sortOrder) {
+      let sortColumn;
+      const { columns } = this.props;
+      const sortColumns = columns.filter(col => col.dataField === sortField);
+      if (sortColumns.length > 0) {
+        sortColumn = sortColumns[0];
+
+        if (sortColumn.onSort) {
+          sortColumn.onSort(sortField, sortOrder);
+        }
+      }
+      return sortColumn;
     }
 
     handleSort = (column) => {

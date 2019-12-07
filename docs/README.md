@@ -28,6 +28,7 @@
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
 * [hiddenRows](#hiddenRows)
+* [sort](#sort)
 * [defaultSorted](#defaultSorted)
 * [defaultSortDirection](#defaultSortDirection)
 * [pagination](#pagination)
@@ -198,6 +199,19 @@ Hide rows, this props accept an array of row keys:
 const hiddenRows = [1, 4];
 <BootstrapTable data={ data } columns={ columns } hiddenRows={ hiddenRows } />
 ```
+
+### <a name='sort'>sort - [Object]</a>
+Two cases you probably need to configure `sort` prop:
+
+#### Manage sorting state
+You can give `dataField` and `order` to specify the sorting state in table, For example
+
+```js
+<BootstrapTable sort={ { dataField: 'price', order: 'asc' } }>
+```
+
+#### One-time sorting configuration
+**TBD**
 
 ### <a name='defaultSorted'>defaultSorted - [Array]</a>
 `defaultSorted` accept an object array which allow you to define the default sort columns when first render.

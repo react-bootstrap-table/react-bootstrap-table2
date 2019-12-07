@@ -106,6 +106,7 @@ import EnableSortTable from 'examples/sort/enable-sort-table';
 import DefaultSortTable from 'examples/sort/default-sort-table';
 import DefaultSortDirectionTable from 'examples/sort/default-sort-direction';
 import SortEvents from 'examples/sort/sort-events';
+import SortManagement from 'examples/sort/sort-management';
 import CustomSortValue from 'examples/sort/custom-sort-value';
 import CustomSortTable from 'examples/sort/custom-sort-table';
 import CustomSortCaretTable from 'examples/sort/custom-sort-caret';
@@ -365,6 +366,7 @@ storiesOf('Sort Table', module)
   .add('Default Sort Table', () => <DefaultSortTable />)
   .add('Default Sort Direction Table', () => <DefaultSortDirectionTable />)
   .add('Sort Events', () => <SortEvents />)
+  .add('Sort Management', () => <SortManagement />)
   .add('Custom Sort Value', () => <CustomSortValue />)
   .add('Custom Sort Fuction', () => <CustomSortTable />)
   .add('Custom Sort Caret', () => <CustomSortCaretTable />)

@@ -247,6 +247,7 @@ const withContext = Base =>
           ref={ n => this.sortContext = n }
           defaultSorted={ this.props.defaultSorted }
           defaultSortDirection={ this.props.defaultSortDirection }
+          sort={ this.props.sort }
           data={ rootProps.getData(filterProps, searchProps) }
         >
           <this.SortContext.Consumer>
