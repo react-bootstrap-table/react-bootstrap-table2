@@ -33,6 +33,7 @@
 <li><a href="#rowclasses-string-function">rowClasses</a></li>
 <li><a href="#rowevents-object">rowEvents</a></li>
 <li><a href="#hiddenrows-array">hiddenRows</a></li>
+<li><a href="#sort-object">sort</a></li>
 <li><a href="#defaultsorted-array">defaultSorted</a></li>
 <li><a href="#defaultSortDirection-string">defaultSortDirection</a></li>
 <li><a href="#pagination-object">pagination</a></li>
@@ -151,6 +152,20 @@ When <code>loading</code> is <code>true</code>, <code>react-bootstrap-table2</co
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> hiddenRows = [<span class="hljs-number">1</span>, <span class="hljs-number">4</span>];
 <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">BootstrapTable</span> <span class="hljs-attr">data</span>=<span class="hljs-string">{</span> <span class="hljs-attr">data</span> } <span class="hljs-attr">columns</span>=<span class="hljs-string">{</span> <span class="hljs-attr">columns</span> } <span class="hljs-attr">hiddenRows</span>=<span class="hljs-string">{</span> <span class="hljs-attr">hiddenRows</span> } /&gt;</span>
 </span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="sort-object"></a><a href="#sort-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>sort - [Object]</h2>
+<p>Two cases you probably need to configure <code>sort</code> prop:</p>
+<h3><a class="anchor" aria-hidden="true" name="manage-sorting-state"></a><a href="#manage-sorting-state" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Manage sorting state</h3>
+<p>You can give <code>dataField</code> and <code>order</code> to specify the sorting state in table, For example</p>
+<pre><code class="hljs css js">&lt;BootstrapTable sort={ { <span class="hljs-attr">dataField</span>: <span class="hljs-string">'price'</span>, <span class="hljs-attr">order</span>: <span class="hljs-string">'asc'</span> } }&gt;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="one-time-sorting-configuration"></a><a href="#one-time-sorting-configuration" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>One-time sorting configuration</h3>
+<p>In earily version, we only can configure <a href="./column-props.html#columnsortcaret-function"><code>sortCaret</code></a> and <a href="./column-props.html#columnsortfunc-function"><code>sortFunc</code> </a> per column. But they are same in most of cases.<br>
+So here we give you a chance to just setup these props in one time.</p>
+<pre><code class="hljs css js">&lt;BootstrapTable sort={ {
+  <span class="hljs-attr">sortCaret</span>: ...
+  sortFunc: ...
+} }&gt;
+</code></pre>
 <h2><a class="anchor" aria-hidden="true" name="defaultsorted-array"></a><a href="#defaultsorted-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>defaultSorted - [Array]</h2>
 <p><code>defaultSorted</code> accept an object array which allow you to define the default sort columns when first render.</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">const</span> defaultSorted = [{
