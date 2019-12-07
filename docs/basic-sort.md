@@ -52,8 +52,10 @@ Defined [`onSort`](./column-props.html#columnonsort-function) on target column:
 ```
 
 ### Manage Sorting Externally
+You can configure `sort` props and give `dataField` and `order` on `BootstrapTable` component to set the sorting state:
+Please refer [this](./table-props.html#sort-object) docs.
 
-**Coming Soon!**
+Usually you will need it when you want to control the sorting state externally, like clicking on a button outside the table to force to sort a specified column.
 
 ## Custom the Sorting Algorithm
 

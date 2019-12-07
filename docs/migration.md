@@ -70,8 +70,8 @@ Please see [Work with table sort](./basic-sort.html).
 - [v] Remote mode
 - [v] Custom the sorting header
 - [v] Sort event listener
-- [ ] Custom the sort caret
-- [ ] Sort management
+- [v] Custom the sort caret
+- [v] Sort management
 - [ ] Multi sort
 
 Due to no `TableHeaderColumn` so that no `dataSort` here, please add [`sort`](./column-props.html#columnsort-bool) property on column definition.
