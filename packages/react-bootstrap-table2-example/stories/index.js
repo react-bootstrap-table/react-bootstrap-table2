@@ -18,6 +18,7 @@ import TabIndexCellTable from 'examples/basic/tabindex-column';
 
 // bootstrap 4
 import Bootstrap4DefaultSortTable from 'examples/bootstrap4/sort';
+import Bootstrap4CaptionTable from 'examples/bootstrap4/caption-table';
 import Bootstrap4RowSelectionTable from 'examples/bootstrap4/row-selection';
 import Bootstrap4PaginationTable from 'examples/bootstrap4/pagination';
 import Bootstrap4ColumnToggleTable from 'examples/bootstrap4/column-toggle';
@@ -268,6 +269,7 @@ storiesOf('Basic Table', module)
 storiesOf('Bootstrap 4', module)
   .addDecorator(bootstrapStyle(BOOTSTRAP_VERSION.FOUR))
   .add('Sort table with bootstrap 4', () => <Bootstrap4DefaultSortTable />)
+  .add('Table Caption bootstrap 4', () => <Bootstrap4CaptionTable />)
   .add('Row selection table with bootstrap 4', () => <Bootstrap4RowSelectionTable />)
   .add('Pagination table with bootstrap 4', () => <Bootstrap4PaginationTable />)
   .add('Column Toggle with bootstrap 4', () => <Bootstrap4ColumnToggleTable />)
