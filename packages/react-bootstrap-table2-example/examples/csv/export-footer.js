@@ -48,11 +48,7 @@ const columns = [{
   data={ products }
   columns={ columns }
   exportCSV={ {
-    fileName: 'custom.csv',
-    separator: '|',
-    ignoreHeader: true,
-    noAutoBOM: false,
-    blobType: 'text/csv;charset=ansi'
+    ignoreFooter: false
   } }
 >
   {
