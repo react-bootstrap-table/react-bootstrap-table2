@@ -12,23 +12,21 @@ export const filterByText = _ => (
   // make sure filter value to be a string
   const filterVal = userInput.toString();
 
-  return (
-    data.filter((row) => {
-      let cell = _.get(row, dataField);
-      if (customFilterValue) {
-        cell = customFilterValue(cell, row);
-      }
-      const cellStr = _.isDefined(cell) ? cell.toString() : '';
-      if (comparator === EQ) {
-        return cellStr === filterVal;
-      }
-      if (caseSensitive) {
-        return cellStr.includes(filterVal);
-      }
+  return data.filter((row) => {
+    let cell = _.get(row, dataField);
+    if (customFilterValue) {
+      cell = customFilterValue(cell, row);
+    }
+    const cellStr = _.isDefined(cell) ? cell.toString() : '';
+    if (comparator === EQ) {
+      return cellStr === filterVal;
+    }
+    if (caseSensitive) {
+      return cellStr.includes(filterVal);
+    }
 
-      return cellStr.toLocaleUpperCase().indexOf(filterVal.toLocaleUpperCase()) !== -1;
-    })
-  );
+    return cellStr.toLocaleUpperCase().indexOf(filterVal.toLocaleUpperCase()) !== -1;
+  });
 };
 
 export const filterByNumber = _ => (
@@ -36,7 +34,7 @@ export const filterByNumber = _ => (
   dataField,
   { filterVal: { comparator, number } },
   customFilterValue
-) => (
+) =>
   data.filter((row) => {
     if (number === '' || !comparator) return true;
     let valid = true;
@@ -88,8 +86,7 @@ export const filterByNumber = _ => (
       }
     }
     return valid;
-  })
-);
+  });
 
 export const filterByDate = _ => (
   data,
@@ -110,7 +107,7 @@ export const filterByDate = _ => (
       cell = customFilterValue(cell, row);
     }
 
-    if (typeof cell !== 'object') {
+    if (typeof cell !== 'object' || cell === null) {
       cell = new Date(cell);
     }
 
@@ -118,14 +115,9 @@ export const filterByDate = _ => (
     const targetMonth = cell.getUTCMonth();
     const targetYear = cell.getUTCFullYear();
 
-
     switch (comparator) {
       case EQ: {
-        if (
-          filterDate !== targetDate ||
-          filterMonth !== targetMonth ||
-          filterYear !== targetYear
-        ) {
+        if (filterDate !== targetDate || filterMonth !== targetMonth || filterYear !== targetYear) {
           valid = false;
         }
         break;
@@ -139,12 +131,13 @@ export const filterByDate = _ => (
       case GE: {
         if (targetYear < filterYear) {
           valid = false;
-        } else if (targetYear === filterYear &&
-          targetMonth < filterMonth) {
+        } else if (targetYear === filterYear && targetMonth < filterMonth) {
           valid = false;
-        } else if (targetYear === filterYear &&
+        } else if (
+          targetYear === filterYear &&
           targetMonth === filterMonth &&
-          targetDate < filterDate) {
+          targetDate < filterDate
+        ) {
           valid = false;
         }
         break;
@@ -158,22 +151,19 @@ export const filterByDate = _ => (
       case LE: {
         if (targetYear > filterYear) {
           valid = false;
-        } else if (targetYear === filterYear &&
-          targetMonth > filterMonth) {
+        } else if (targetYear === filterYear && targetMonth > filterMonth) {
           valid = false;
-        } else if (targetYear === filterYear &&
+        } else if (
+          targetYear === filterYear &&
           targetMonth === filterMonth &&
-          targetDate > filterDate) {
+          targetDate > filterDate
+        ) {
           valid = false;
         }
         break;
       }
       case NE: {
-        if (
-          filterDate === targetDate &&
-          filterMonth === targetMonth &&
-          filterYear === targetYear
-        ) {
+        if (filterDate === targetDate && filterMonth === targetMonth && filterYear === targetYear) {
           valid = false;
         }
         break;
@@ -187,15 +177,9 @@ export const filterByDate = _ => (
   });
 };
 
-export const filterByArray = _ => (
-  data,
-  dataField,
-  { filterVal, comparator }
-) => {
+export const filterByArray = _ => (data, dataField, { filterVal, comparator }) => {
   if (filterVal.length === 0) return data;
-  const refinedFilterVal = filterVal
-    .filter(x => _.isDefined(x))
-    .map(x => x.toString());
+  const refinedFilterVal = filterVal.filter(x => _.isDefined(x)).map(x => x.toString());
   return data.filter((row) => {
     const cell = _.get(row, dataField);
     let cellStr = _.isDefined(cell) ? cell.toString() : '';
