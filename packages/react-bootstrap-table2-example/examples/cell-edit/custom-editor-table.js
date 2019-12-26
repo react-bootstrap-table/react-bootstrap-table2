@@ -18,6 +18,11 @@ class QualityRanger extends React.Component {
   static defaultProps = {
     value: 0
   }
+
+  componentDidMount() {
+    this.range.focus();
+  }
+
   getValue() {
     return parseInt(this.range.value, 10);
   }
@@ -103,7 +108,7 @@ const columns = [{
 }, {
   dataField: 'quality',
   text: 'Product Quality',
-  editorRenderer: (editorProps, value, row, rowIndex, columnIndex) => (
+  editorRenderer: (editorProps, value, row, column, rowIndex, columnIndex) => (
     <QualityRanger { ...editorProps } value={ value } />
   )
 }];

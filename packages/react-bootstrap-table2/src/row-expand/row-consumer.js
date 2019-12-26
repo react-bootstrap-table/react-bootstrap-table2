@@ -1,14 +1,28 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
+import cs from 'classnames';
 import ExpandRow from './expand-row';
+import _ from '../utils';
 import ExpansionContext from '../contexts/row-expand-context';
 
-export default (Component, visibleColumnSize) => {
+export default (Component) => {
   const renderWithExpansion = (props, expandRow) => {
+    let parentClassName = '';
+    let className = '';
     const key = props.value;
 
-    const expanded = expandRow.expanded.includes(key);
-    const expandable = !expandRow.nonExpandable || !expandRow.nonExpandable.includes(key);
+    const expanded = _.contains(expandRow.expanded, key);
+    const isClosing = _.contains(expandRow.isClosing, key);
+    const expandable = !expandRow.nonExpandable || !_.contains(expandRow.nonExpandable, key);
+    if (expanded) {
+      parentClassName = _.isFunction(expandRow.parentClassName) ?
+        expandRow.parentClassName(expanded, props.row, props.rowIndex) :
+        (expandRow.parentClassName || '');
+
+      className = _.isFunction(expandRow.className) ?
+        expandRow.className(expanded, props.row, props.rowIndex) :
+        (expandRow.className || '');
+    }
 
     return [
       <Component
@@ -17,12 +31,16 @@ export default (Component, visibleColumnSize) => {
         expanded={ expanded }
         expandable={ expandable }
         expandRow={ { ...expandRow } }
+        className={ cs(props.className, parentClassName) }
       />,
-      expanded ? <ExpandRow
+      expanded || isClosing ? <ExpandRow
         key={ `${key}-expanding` }
-        colSpan={ visibleColumnSize }
+        colSpan={ props.visibleColumnSize }
+        expanded={ expanded }
+        onClosed={ () => expandRow.onClosed(key) }
+        className={ className }
       >
-        { expandRow.renderer(props.row) }
+        { expandRow.renderer(props.row, props.rowIndex) }
       </ExpandRow> : null
     ];
   };

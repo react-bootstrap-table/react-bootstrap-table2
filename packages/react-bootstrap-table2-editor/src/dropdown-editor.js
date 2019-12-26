@@ -4,6 +4,21 @@ import cs from 'classnames';
 import PropTypes from 'prop-types';
 
 class DropDownEditor extends Component {
+  constructor(props) {
+    super(props);
+    let options = props.options;
+    if (props.getOptions) {
+      options = props.getOptions(
+        this.setOptions.bind(this),
+        {
+          row: props.row,
+          column: props.column
+        }
+      ) || [];
+    }
+    this.state = { options };
+  }
+
   componentDidMount() {
     const { defaultValue, didMount } = this.props;
     this.select.value = defaultValue;
@@ -11,12 +26,16 @@ class DropDownEditor extends Component {
     if (didMount) didMount();
   }
 
+  setOptions(options) {
+    this.setState({ options });
+  }
+
   getValue() {
     return this.select.value;
   }
 
   render() {
-    const { defaultValue, didMount, className, options, ...rest } = this.props;
+    const { defaultValue, didMount, getOptions, className, ...rest } = this.props;
     const editorClass = cs('form-control editor edit-select', className);
 
     const attr = {
@@ -31,7 +50,7 @@ class DropDownEditor extends Component {
         defaultValue={ defaultValue }
       >
         {
-          options.map(({ label, value }) => (
+          this.state.options.map(({ label, value }) => (
             <option key={ value } value={ value }>{ label }</option>
           ))
         }
@@ -41,6 +60,8 @@ class DropDownEditor extends Component {
 }
 
 DropDownEditor.propTypes = {
+  row: PropTypes.object.isRequired,
+  column: PropTypes.object.isRequired,
   defaultValue: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.number
@@ -52,13 +73,16 @@ DropDownEditor.propTypes = {
       label: PropTypes.string,
       value: PropTypes.any
     }))
-  ]).isRequired,
-  didMount: PropTypes.func
+  ]),
+  didMount: PropTypes.func,
+  getOptions: PropTypes.func
 };
 DropDownEditor.defaultProps = {
   className: '',
   defaultValue: '',
   style: {},
-  didMount: undefined
+  options: [],
+  didMount: undefined,
+  getOptions: undefined
 };
 export default DropDownEditor;

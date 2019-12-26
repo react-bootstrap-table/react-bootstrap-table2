@@ -1,7 +1,9 @@
+/* eslint camelcase: 0 */
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import Const from '../const';
+import _ from '../utils';
 
 import dataOperator from '../store/operators';
 import { getSelectionSummary } from '../store/selection';
@@ -16,50 +18,43 @@ class SelectionProvider extends React.Component {
 
   constructor(props) {
     super(props);
-    if (props.registerExposedAPI) {
-      const getSelected = () => this.getSelected();
-      props.registerExposedAPI(getSelected);
-    }
-  }
-
-  state = { selected: this.props.selectRow.selected || [] };
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectRow) {
-      this.setState(() => ({
-        selected: nextProps.selectRow.selected || this.state.selected
-      }));
-    }
+    this.selected = props.selectRow.selected || [];
   }
 
   // exposed API
   getSelected() {
-    return this.state.selected;
+    return this.selected;
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    if (nextProps.selectRow) {
+      this.selected = nextProps.selectRow.selected || this.selected;
+    }
   }
 
   handleRowSelect = (rowKey, checked, rowIndex, e) => {
     const { data, keyField, selectRow: { mode, onSelect } } = this.props;
     const { ROW_SELECT_SINGLE } = Const;
 
-    let currSelected = [...this.state.selected];
+    let currSelected = [...this.selected];
 
-    this.setState(() => {
-      let result = true;
-      if (onSelect) {
-        const row = dataOperator.getRowByRowId(data, keyField, rowKey);
-        result = onSelect(row, checked, rowIndex, e);
+    let result = true;
+    if (onSelect) {
+      const row = dataOperator.getRowByRowId(data, keyField, rowKey);
+      result = onSelect(row, checked, rowIndex, e);
+    }
+
+    if (result === true || result === undefined) {
+      if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
+        currSelected = [rowKey];
+      } else if (checked) { // when select mode is checkbox
+        currSelected.push(rowKey);
+      } else {
+        currSelected = currSelected.filter(value => value !== rowKey);
       }
-      if (result === true || result === undefined) {
-        if (mode === ROW_SELECT_SINGLE) { // when select mode is radio
-          currSelected = [rowKey];
-        } else if (checked) { // when select mode is checkbox
-          currSelected.push(rowKey);
-        } else {
-          currSelected = currSelected.filter(value => value !== rowKey);
-        }
-      }
-      return { selected: currSelected };
-    });
+    }
+    this.selected = currSelected;
+    this.forceUpdate();
   }
 
   handleAllRowsSelect = (e, isUnSelect) => {
@@ -71,34 +66,33 @@ class SelectionProvider extends React.Component {
         nonSelectable
       }
     } = this.props;
-    const { selected } = this.state;
+    const { selected } = this;
 
     let currSelected;
 
     if (!isUnSelect) {
       currSelected = selected.concat(dataOperator.selectableKeys(data, keyField, nonSelectable));
     } else {
-      currSelected = selected.filter(s => typeof data.find(d => d[keyField] === s) === 'undefined');
+      currSelected = selected.filter(s => typeof data.find(d => _.get(d, keyField) === s) === 'undefined');
     }
 
-    this.setState(() => {
-      let result;
-      if (onSelectAll) {
-        result = onSelectAll(
-          !isUnSelect,
-          dataOperator.getSelectedRows(
-            data,
-            keyField,
-            isUnSelect ? this.state.selected : currSelected
-          ),
-          e
-        );
-        if (Array.isArray(result)) {
-          currSelected = result;
-        }
+    let result;
+    if (onSelectAll) {
+      result = onSelectAll(
+        !isUnSelect,
+        dataOperator.getSelectedRows(
+          data,
+          keyField,
+          isUnSelect ? selected : currSelected
+        ),
+        e
+      );
+      if (Array.isArray(result)) {
+        currSelected = result;
       }
-      return { selected: currSelected };
-    });
+    }
+    this.selected = currSelected;
+    this.forceUpdate();
   }
 
   render() {
@@ -108,7 +102,7 @@ class SelectionProvider extends React.Component {
     } = getSelectionSummary(
       this.props.data,
       this.props.keyField,
-      this.state.selected
+      this.selected
     );
 
     let checkedStatus;
@@ -122,7 +116,7 @@ class SelectionProvider extends React.Component {
       <SelectionContext.Provider
         value={ {
           ...this.props.selectRow,
-          selected: this.state.selected,
+          selected: this.selected,
           onRowSelect: this.handleRowSelect,
           onAllRowsSelect: this.handleAllRowsSelect,
           allRowsSelected,

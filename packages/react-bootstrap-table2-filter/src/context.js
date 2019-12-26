@@ -1,5 +1,6 @@
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
+/* eslint camelcase: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -17,14 +18,18 @@ export default (
   class FilterProvider extends React.Component {
     static propTypes = {
       data: PropTypes.array.isRequired,
-      columns: PropTypes.array.isRequired
+      columns: PropTypes.array.isRequired,
+      dataChangeListener: PropTypes.object
     }
 
     constructor(props) {
       super(props);
       this.currFilters = {};
       this.onFilter = this.onFilter.bind(this);
+      this.doFilter = this.doFilter.bind(this);
       this.onExternalFilter = this.onExternalFilter.bind(this);
+      this.data = props.data;
+      this.isEmitDataChange = false;
     }
 
     componentDidMount() {
@@ -63,8 +68,7 @@ export default (
           }
           return;
         }
-
-        this.forceUpdate();
+        this.doFilter(this.props);
       };
     }
 
@@ -74,16 +78,39 @@ export default (
       };
     }
 
-    render() {
-      let { data } = this.props;
-      if (!isRemoteFiltering()) {
-        data = filters(data, this.props.columns, _)(this.currFilters);
+    getFiltered() {
+      return this.data;
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+      // let nextData = nextProps.data;
+      if (!isRemoteFiltering() && !_.isEqual(nextProps.data, this.data)) {
+        this.doFilter(nextProps, this.isEmitDataChange);
+      } else {
+        this.data = nextProps.data;
       }
+    }
+
+    doFilter(props, ignoreEmitDataChange = false) {
+      const { dataChangeListener, data, columns } = props;
+      const result = filters(data, columns, _)(this.currFilters);
+      this.data = result;
+      if (dataChangeListener && !ignoreEmitDataChange) {
+        this.isEmitDataChange = true;
+        dataChangeListener.emit('filterChanged', result.length);
+      } else {
+        this.isEmitDataChange = false;
+        this.forceUpdate();
+      }
+    }
+
+    render() {
       return (
         <FilterContext.Provider value={ {
-          data,
+          data: this.data,
           onFilter: this.onFilter,
-          onExternalFilter: this.onExternalFilter
+          onExternalFilter: this.onExternalFilter,
+          currFilters: this.currFilters
         } }
         >
           { this.props.children }

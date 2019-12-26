@@ -68,10 +68,6 @@
     text-align: center;
   }
 
-  tr.expanding-row {
-    padding: 5px;
-  }
-
   td.react-bootstrap-table-editing-cell {
     .animated {
       animation-fill-mode: both;
@@ -160,5 +156,27 @@
     .bounceOut {
       animation-name: bounceOut;
     }
+  }
+  .reset-expansion-style{
+    padding: 0;
+  }
+  .row-expansion-style{
+    padding: 8px;
+  }
+  .row-expand-slide-appear{
+    max-height: 0;
+    overflow: hidden;
+  }
+  .row-expand-slide-appear-active{
+    max-height: 1000px;
+    transition: max-height 3s linear;
+  }
+  .row-expand-slide-exit{
+    max-height: 1000px;
+  }
+  .row-expand-slide-exit-active{
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 400ms cubic-bezier(0, 0.95, 0, 0.95)
   }
 }

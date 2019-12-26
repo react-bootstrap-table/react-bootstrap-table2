@@ -8,14 +8,17 @@ const products = productsGenerator(8);
 
 const columns = [{
   dataField: 'id',
-  text: 'Product ID'
+  text: 'Product ID',
+  footer: 'hello'
 }, {
   dataField: 'name',
   text: 'Product Name',
+  footer: 'hello',
   filter: textFilter()
 }, {
   dataField: 'price',
   text: 'Product Price',
+  footer: 'hello',
   filter: textFilter()
 }];
 
@@ -39,6 +42,11 @@ const columns = [{
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 `;
 
+const selectRow = {
+  mode: 'checkbox',
+  clickToSelect: true
+};
+
 export default () => (
   <div>
     <BootstrapTable
@@ -46,6 +54,8 @@ export default () => (
       data={ products }
       columns={ columns }
       filter={ filterFactory() }
+      filterPosition="bottom"
+      selectRow={ selectRow }
     />
     <Code>{ sourceCode }</Code>
   </div>

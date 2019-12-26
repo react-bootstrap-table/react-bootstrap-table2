@@ -11,7 +11,9 @@ Available properties in a column object:
 * [hidden](#hidden)
 * [formatter](#formatter)
 * [formatExtraData](#formatExtraData)
+* [type](#type)
 * [sort](#sort)
+* [sortValue](#sortValue)
 * [sortFunc](#sortFunc)
 * [sortCaret](#sortCaret)
 * [onSort](#onSort)
@@ -30,6 +32,14 @@ Available properties in a column object:
 * [headerAttrs](#headerAttrs)
 * [headerSortingClasses](#headerSortingClasses)
 * [headerSortingStyle](#headerSortingStyle)
+* [footer](#footer)
+* [footerFormatter](#footerFormatter)
+* [footerClasses](#footerClasses)
+* [footerStyle](#footerStyle)
+* [footerTitle](#footerTitle)
+* [footerEvents](#footerEvents)
+* [footerAlign](#footerAlign)
+* [footerAttrs](#footerAttrs)
 * [editable](#editable)
 * [validator](#validator)
 * [editCellStyle](#editCellStyle)
@@ -40,6 +50,7 @@ Available properties in a column object:
 * [editorRenderer](#editorRenderer)
 * [filter](#filter)
 * [filterValue](#filterValue)
+* [searchable](#searchable)
 * [csvType](#csvType)
 * [csvFormatter](#csvFormatter)
 * [csvText](#csvText)
@@ -124,11 +135,49 @@ The third argument: `components` have following specified properties:
 ## <a name='formatExtraData'>column.formatExtraData - [Any]</a>
 It's only used for [`column.formatter`](#formatter), you can define any value for it and will be passed as fourth argument for [`column.formatter`](#formatter) callback function.
 
+## <a name='type'>column.type - [String]</a>
+Specify the data type on column. Available value so far is `string`, `number`, `bool` and `date`. Default is `string`.   
+`column.type` can be used when you enable the cell editing and want to save your cell data with correct data type.
+
 ## <a name='sort'>column.sort - [Bool]</a>
 Enable the column sort via a `true` value given.
 
+## <a name='sortValue'>column.sortValue - [Function]</a>
+`column.sortValue` only work when `column.sort` enabled. This prop allow you to replace the value when table sorting.
+
+For example, consider following data:
+
+```js
+const types = ['Cloud Service', 'Message Service', 'Add Service', 'Edit Service', 'Money'];
+const data = [{id: 1, type: 2}, {id: 2, type: 1}, {id: 3, type:0}];
+const columns = [{
+  dataField: 'id',
+  text: 'Job ID'
+}, {
+  dataField: 'type',
+  text: 'Job Type'
+  sort: true,
+  formatter: (cell, row) => types[cell]
+}]
+```
+
+In above case, when user try to sort Job Type column which will sort the original value: 0, 1, 2 but we display the type name via [`column.formatter`](#formatter), which will lead confuse because we are sorting by type value instead of type name. So `sortValue` is a way for you to decide what kind of value should be adopted when sorting on a specify column:
+
+```js
+const columns = [{
+  dataField: 'id',
+  text: 'Job ID'
+}, {
+  dataField: 'type',
+  text: 'Job Type'
+  sort: true,
+  formatter: (cell, row) => types[cell],
+  sortValue: (cell, row) => types[cell] // we use type name to sort.
+}]
+```
+
 ## <a name='sortFunc'>column.sortFunc - [Function]</a>
-`column.sortFunc` only work when `column.sort` is enable. `sortFunc` allow you to define your sorting algorithm. This callback function accept six arguments:
+`column.sortFunc` only work when `column.sort` enabled. `sortFunc` allow you to define your sorting algorithm. This callback function accept six arguments:
 
 ```js
 {
@@ -156,7 +205,7 @@ Enable the column sort via a `true` value given.
 ```
 
 ## <a name='sortCaret'>column.sortCaret - [Function]</a>
-Use`column.sortCaret` to custom the sort caret. This callback function accept two arguments: `order` and `column`
+Use`column.sortCaret` to customize the sort caret. This callback function accept two arguments: `order` and `column`
 
 ```js
 {
@@ -302,7 +351,7 @@ A new `Object` will be the result of element headerStyle.
 A new `String` will be the result of element title.
 
 ## <a name='headerTitle'>column.headerTitle - [Bool | Function]</a>
-`headerTitle` is only for the title on header column, default is disable. The usage almost same as [`column.title`](#title), 
+Configure the title on header column, default is disable. The usage almost same as [`column.title`](#title), 
 
 ```js
 {
@@ -407,7 +456,7 @@ If the events is not listed above, the callback function will only pass the `eve
 {
   // omit...
   headerEvents: {
-    onClick: e => { ... }
+    onClick: (e, column, columnIndex) => { ... }
   }
 }
 ```
@@ -517,6 +566,162 @@ const sortingHeaderStyle = {
   backgroundColor: 'red'
 };
 ```
+
+### <a name='footer'>footer - [String | Function]</a>
+Give a string to render the string value on the footer column.
+
+```js
+const columns = [{
+  dataField: 'id',
+  text: 'Product ID',
+  footerAlign: 'center',
+  footer: 'Footer 1'
+}, .....];
+```
+
+This prop also accept a function:
+
+```js
+{
+  dataField: 'price',
+  text: 'Product Price',
+  footer: column => column.reduce((acc, item) => acc + item, 0)
+}
+```
+
+## <a name='footerFormatter'>column.footerFormatter - [Function]</a>
+`footerFormatter` allow you to customize the table footer column and only accept a callback function which take two arguments and a JSX/String are expected for return.
+
+* `column`
+* `columnIndex`
+
+## <a name='footerClasses'>column.footerClasses - [String | Function]</a>
+It's similar to [`column.classes`](#classes), `footerClasses` is available to have customized class on table footer column:
+
+```js
+{
+  // omit...
+  footerClasses: 'id-custom-cell'
+}
+```
+Furthermore, it also accept a callback function which takes 2 arguments and a `String` is expect to return:
+
+```js
+{
+  footerClasses: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerStyle'>column.footerStyle - [Object | Function]</a>
+Customized the inline-style on table footer column:
+
+```js
+{
+  // omit...
+  footerStyle: { backgroundColor: 'green' }
+}
+```
+
+Moreover, it also accept a callback function which takes **2** arguments and an `Object` is expect to return:
+
+```js
+{
+  footerStyle: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerTitle'>column.footerTitle - [Bool | Function]</a>
+Configure the title on footer column, default is disable. The usage is almost same as [`column.title`](#title), 
+
+```js
+{
+  // omit...
+  footerTitle: true
+}
+```
+
+It's also available to custom via a callback function:
+```js
+{
+  footerTitle: function callback(column, colIndex) { ... }
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerEvents'>column.footerEvents - [Object]</a>
+`footerEvents` same as [`column.events`](#events) but it is for footer column:
+
+```js
+{
+  // omit...
+  footerEvents: {
+    onClick: (e, column, columnIndex) => { ... }
+  }
+}
+```
+
+## <a name='footerAlign'>column.footerAlign - [String | Function]</a>
+It's almost same as [`column.align`](#align), but it's for the [CSS text-align](https://www.w3schools.com/cssref/pr_text_text-align.asp) on footer column. 
+
+```js
+{
+  // omit...
+  footerAlign: 'center'
+}
+```
+
+Also, you can custom the align by a callback function:
+
+```js
+{
+  // omit...
+  footerAlign: (column, colIndex) => {
+    // column is an object and perform itself
+    // return custom title here
+  }
+}
+```
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
+
+## <a name='footerAttrs'>column.footerAttrs - [Object | Function]</a>
+`footerAttrs` is similar to [`column.attrs`](#attrs) but it works for footer column. 
+```js
+{
+  // omit...
+  footerAttrs: {
+    title: 'bar',
+    'data-test': 'foo'
+  }
+}
+```
+
+Additionally, customize the header attributes by a **2** arguments callback function:
+
+```js
+{
+  // omit...
+  footerAttrs: (column, colIndex) => ({
+    // return customized HTML attribute here
+  })
+}
+```
+
+**Parameters**
+* `column`: The value of current column. 
+* `colIndex`: The index of the current `column` being processed in `BootstrapTable`.
 
 ## <a name='editable'>column.editable - [Bool | Function]</a>
 `column.editable` default is true, means every column is editable if you configure [`cellEdit`](./README.md#cellEdit). But you can disable some columns editable via setting `false`.
@@ -747,6 +952,9 @@ A final `String` value you want to be filtered.
   filterValue: (cell, row) => owners[cell]
 }
 ```
+
+## <a name='searchable'>column.searchable - [Boolean]</a>
+Default the column is searchable. Give `false` to disable search functionality on specified column.
 
 ## <a name='csvType'>column.csvType - [Object]</a>
 Default is `String`. Currently, the available value is `String` and `Number`. If `Number` assigned, the cell value will not wrapped with double quote.

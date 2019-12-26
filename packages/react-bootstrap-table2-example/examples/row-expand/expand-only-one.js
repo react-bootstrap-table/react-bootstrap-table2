@@ -43,6 +43,7 @@ const columns = [{
 }];
 
 const expandRow = {
+  onlyOneExpanding: true,
   renderer: row => (
     <div>
       <p>{ \`This Expand row is belong to rowKey $\{row.id}\` }</p>

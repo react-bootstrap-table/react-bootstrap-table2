@@ -146,29 +146,6 @@ describe('Header', () => {
       });
     });
 
-    describe('when column.hidden is true', () => {
-      beforeEach(() => {
-        const newColumns = [{
-          dataField: 'id',
-          text: 'ID',
-          hidden: true
-        }, {
-          dataField: 'name',
-          text: 'Name'
-        }];
-        wrapper = shallow(
-          <Header
-            { ...mockHeaderResolvedProps }
-            columns={ newColumns }
-          />
-        );
-      });
-
-      it('should not render column with hidden value true', () => {
-        expect(wrapper.find(HeaderCell).length).toBe(1);
-      });
-    });
-
     describe('when selectRow.mode is checkbox (multiple selection)', () => {
       beforeEach(() => {
         const selectRow = { mode: 'checkbox' };
@@ -252,6 +229,34 @@ describe('Header', () => {
 
       it('should render <ExpandHeaderCell /> correctly', () => {
         expect(wrapper.find(ExpandHeaderCell).length).toBe(1);
+      });
+    });
+
+    describe('if props.expandRow.showExpandColumn is true but props.expandRow.expandColumnPosition is "right"', () => {
+      beforeEach(() => {
+        const expandRow = {
+          renderer: jest.fn(),
+          showExpandColumn: true,
+          expandColumnPosition: Const.INDICATOR_POSITION_RIGHT
+        };
+        wrapper = mount(
+          <ExpansionContext.Provider
+            data={ data }
+            keyField={ keyField }
+            expandRow={ expandRow }
+          >
+            <Header
+              { ...mockHeaderResolvedProps }
+              columns={ columns }
+              expandRow={ expandRow }
+            />
+          </ExpansionContext.Provider>
+        );
+      });
+
+      it('should render expansion column correctly', () => {
+        const header = wrapper.find(Header).children();
+        expect(header.children().children().last().find(ExpandHeaderCell)).toHaveLength(1);
       });
     });
   });

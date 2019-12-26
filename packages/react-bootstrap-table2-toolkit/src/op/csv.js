@@ -4,7 +4,9 @@ const csvDefaultOptions = {
   fileName: 'spreadsheet.csv',
   separator: ',',
   ignoreHeader: false,
+  ignoreFooter: true,
   noAutoBOM: true,
+  blobType: 'text/plain;charset=utf-8',
   exportAll: true,
   onlyExportSelection: false
 };
@@ -25,16 +27,27 @@ export default Base =>
       let data;
       if (typeof source !== 'undefined') {
         data = source;
+      } else if (options.exportAll) {
+        data = this.props.data;
+      } else if (options.onlyExportFiltered) {
+        const payload = {};
+        this.tableExposedAPIEmitter.emit('get.filtered.rows', payload);
+        data = payload.result;
       } else {
-        data = options.exportAll ? this.props.data : this.getData();
+        const payload = {};
+        this.tableExposedAPIEmitter.emit('get.table.data', payload);
+        data = payload.result;
       }
 
-      // filter data
+      // filter data by row selection
       if (options.onlyExportSelection) {
-        const selections = this.getSelected();
+        const payload = {};
+        this.tableExposedAPIEmitter.emit('get.selected.rows', payload);
+        const selections = payload.result;
         data = data.filter(row => !!selections.find(sel => row[keyField] === sel));
       }
-      const content = transform(data, meta, this._.get, options);
+
+      const content = transform(data, meta, columns, this._, options);
       save(content, options);
     }
   };

@@ -1,8 +1,12 @@
+/* eslint camelcase: 0 */
 /* eslint no-return-assign: 0 */
+/* eslint no-param-reassign: 0 */
 /* eslint class-methods-use-this: 0 */
 import React, { Component } from 'react';
+import EventEmitter from 'events';
 import _ from '../utils';
 import createDataContext from './data-context';
+import createColumnMgtContext from './column-context';
 import createSortContext from './sort-context';
 import SelectionContext from './selection-context';
 import RowExpandContext from './row-expand-context';
@@ -16,9 +20,32 @@ const withContext = Base =>
       super(props);
       this.DataContext = createDataContext();
 
+      if (props.registerExposedAPI) {
+        const exposedAPIEmitter = new EventEmitter();
+        exposedAPIEmitter.on('get.table.data', payload => payload.result = this.table.getData());
+        exposedAPIEmitter.on('get.selected.rows', payload => payload.result = this.selectionContext.getSelected());
+        exposedAPIEmitter.on('get.filtered.rows', (payload) => {
+          if (this.searchContext) {
+            payload.result = this.searchContext.getSearched();
+          } else if (this.filterContext) {
+            payload.result = this.filterContext.getFiltered();
+          } else {
+            payload.result = this.table.getData();
+          }
+        });
+        props.registerExposedAPI(exposedAPIEmitter);
+      }
+
       if (props.columns.filter(col => col.sort).length > 0) {
         this.SortContext = createSortContext(
           dataOperator, this.isRemoteSort, this.handleRemoteSortChange);
+      }
+
+      if (
+        props.columnToggle ||
+        props.columns.filter(col => col.hidden).length > 0
+      ) {
+        this.ColumnManagementContext = createColumnMgtContext();
       }
 
       if (props.selectRow) {
@@ -40,8 +67,7 @@ const withContext = Base =>
       }
 
       if (props.pagination) {
-        this.PaginationContext = props.pagination.createContext(
-          this.isRemotePagination, this.handleRemotePageChange);
+        this.PaginationContext = props.pagination.createContext();
       }
 
       if (props.search && props.search.searchContext) {
@@ -52,15 +78,26 @@ const withContext = Base =>
       if (props.setDependencyModules) {
         props.setDependencyModules(_);
       }
+
+      if (props.setPaginationRemoteEmitter) {
+        props.setPaginationRemoteEmitter(this.remoteEmitter);
+      }
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (!nextProps.pagination && this.props.pagination) {
         this.PaginationContext = null;
       }
       if (nextProps.pagination && !this.props.pagination) {
         this.PaginationContext = nextProps.pagination.createContext(
           this.isRemotePagination, this.handleRemotePageChange);
+      }
+      if (!nextProps.cellEdit && this.props.cellEdit) {
+        this.CellEditContext = null;
+      }
+      if (nextProps.cellEdit && !this.props.cellEdit) {
+        this.CellEditContext = nextProps.cellEdit.createContext(
+          _, dataOperator, this.isRemoteCellEdit, this.handleRemoteCellChange);
       }
     }
 
@@ -71,6 +108,7 @@ const withContext = Base =>
         searchProps,
         sortProps,
         paginationProps,
+        columnToggleProps
       ) => (
         <Base
           ref={ n => this.table = n }
@@ -79,8 +117,37 @@ const withContext = Base =>
           { ...filterProps }
           { ...searchProps }
           { ...paginationProps }
+          { ...columnToggleProps }
           data={ rootProps.getData(filterProps, searchProps, sortProps, paginationProps) }
         />
+      );
+    }
+
+    renderWithColumnManagementCtx(base, baseProps) {
+      return (
+        rootProps,
+        filterProps,
+        searchProps,
+        sortProps,
+        paginationProps
+      ) => (
+        <this.ColumnManagementContext.Provider
+          { ...baseProps }
+          toggles={ this.props.columnToggle ? this.props.columnToggle.toggles : null }
+        >
+          <this.ColumnManagementContext.Consumer>
+            {
+              columnToggleProps => base(
+                rootProps,
+                filterProps,
+                searchProps,
+                sortProps,
+                paginationProps,
+                columnToggleProps
+              )
+            }
+          </this.ColumnManagementContext.Consumer>
+        </this.ColumnManagementContext.Provider>
       );
     }
 
@@ -150,6 +217,9 @@ const withContext = Base =>
           pagination={ this.props.pagination }
           data={ rootProps.getData(filterProps, searchProps, sortProps) }
           bootstrap4={ this.props.bootstrap4 }
+          isRemotePagination={ this.isRemotePagination }
+          remoteEmitter={ this.remoteEmitter }
+          onDataSizeChange={ this.props.onDataSizeChange }
         >
           <this.PaginationContext.Consumer>
             {
@@ -177,6 +247,7 @@ const withContext = Base =>
           ref={ n => this.sortContext = n }
           defaultSorted={ this.props.defaultSorted }
           defaultSortDirection={ this.props.defaultSortDirection }
+          sort={ this.props.sort }
           data={ rootProps.getData(filterProps, searchProps) }
         >
           <this.SortContext.Consumer>
@@ -203,6 +274,7 @@ const withContext = Base =>
           ref={ n => this.searchContext = n }
           data={ rootProps.getData(filterProps) }
           searchText={ this.props.search.searchText }
+          dataChangeListener={ this.props.dataChangeListener }
         >
           <this.SearchContext.Consumer>
             {
@@ -223,6 +295,7 @@ const withContext = Base =>
           { ...baseProps }
           ref={ n => this.filterContext = n }
           data={ rootProps.getData() }
+          dataChangeListener={ this.props.dataChangeListener }
         >
           <this.FilterContext.Consumer>
             {
@@ -240,6 +313,7 @@ const withContext = Base =>
       return rootProps => (
         <this.CellEditContext.Provider
           { ...baseProps }
+          ref={ n => this.cellEditContext = n }
           selectRow={ this.props.selectRow }
           cellEdit={ this.props.cellEdit }
           data={ rootProps.getData() }
@@ -250,11 +324,14 @@ const withContext = Base =>
     }
 
     render() {
-      const { keyField, columns, bootstrap4, registerExposedAPI } = this.props;
+      const { keyField, columns, bootstrap4 } = this.props;
       const baseProps = { keyField, columns };
-      if (registerExposedAPI) baseProps.registerExposedAPI = registerExposedAPI;
 
       let base = this.renderBase();
+
+      if (this.ColumnManagementContext) {
+        base = this.renderWithColumnManagementCtx(base, baseProps);
+      }
 
       if (this.SelectionContext) {
         base = this.renderWithSelectionCtx(base, baseProps);

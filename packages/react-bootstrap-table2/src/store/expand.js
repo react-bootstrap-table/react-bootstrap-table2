@@ -20,7 +20,7 @@ export const expandableKeys = (data, keyField, skips = []) => {
     return data.map(row => _.get(row, keyField));
   }
   return data
-    .filter(row => !skips.includes(_.get(row, keyField)))
+    .filter(row => !_.contains(skips, _.get(row, keyField)))
     .map(row => _.get(row, keyField));
 };
 
