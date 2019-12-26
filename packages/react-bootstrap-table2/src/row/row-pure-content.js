@@ -106,7 +106,7 @@ export default class RowPureContent extends React.Component {
         /* allow to merge row or col */
         const { rowSpan, colSpan } = cellAttrs;
         if (rowSpan === 0 || colSpan === 0) {
-          return null
+          return null;
         }
 
         return (
