@@ -12,7 +12,7 @@ const columns = [{
   dataField: 'id',
   text: 'Product ID',
   headerEvents: {
-    onClick: () => alert('Click on Product ID header column')
+    onClick: (e, column, columnIndex) => alert(`Click on Product ID header column, columnIndex: ${columnIndex}`)
   }
 }, {
   dataField: 'name',
@@ -29,7 +29,7 @@ const columns = [{
   dataField: 'id',
   text: 'Product ID',
   headerEvents: {
-    onClick: () => alert('Click on Product ID header column')
+    onClick: (e, column, columnIndex) => alert('Click on Product ID header column')
   }
 }, {
   dataField: 'name',

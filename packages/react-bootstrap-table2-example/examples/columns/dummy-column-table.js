@@ -11,141 +11,13 @@ const products = [
   { id: 14, name: 'Item 14', price: 14.5, inStock: true }
 ];
 
-const columns = [
-  {
-    dataField: 'id',
-    text: 'Product ID'
-  },
-  {
-    dataField: 'name',
-    text: 'Product Name'
-  },
-  {
-    dataField: 'price',
-    text: 'Product Price'
-  },
-  {
-    dataField: 'inStock',
-    text: 'In Stock',
-    formatter: (cellContent, row) => (
-      <div className="checkbox disabled">
-        <label>
-          <input type="checkbox" checked={ row.inStock } disabled />
-        </label>
-      </div>
-    )
-  },
-  {
-    dataField: 'df1',
-    isDummyField: true,
-    text: 'Action 1',
-    formatter: (cellContent, row) => {
-      if (row.inStock) {
-        return (
-          <h5>
-            <span className="label label-success"> Available</span>
-          </h5>
-        );
-      }
-      return (
-        <h5>
-          <span className="label label-danger"> Backordered</span>
-        </h5>
-      );
-    }
-  },
-  {
-    dataField: 'df2',
-    isDummyField: true,
-    text: 'Action 2',
-    formatter: (cellContent, row) => {
-      if (row.inStock) {
-        return (
-          <h5>
-            <span className="label label-success"> Available</span>
-          </h5>
-        );
-      }
-      return (
-        <h5>
-          <span className="label label-danger"> Backordered</span>
-        </h5>
-      );
-    }
-  }
-];
-
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-
-const columns = [
-  {
-    dataField: 'id',
-    text: 'Product ID'
-  },
-  {
-    dataField: 'name',
-    text: 'Product Name'
-  },
-  {
-    dataField: 'price',
-    text: 'Product Price'
-  },
-  {
-    dataField: 'inStock',
-    text: 'In Stock',
-    formatter: (cellContent, row) => (
-      <div className="checkbox disabled">
-        <label>
-          <input type="checkbox" checked={ row.inStock } disabled />
-        </label>
-      </div>
-    )
-  },
-  {
-    dataField: 'df1',
-    isDummyField: true,
-    text: 'Action 1',
-    formatter: (cellContent, row) => {
-      if (row.inStock) {
-        return (
-          <h5>
-            <span className="label label-success"> Available</span>
-          </h5>
-        );
-      }
-      return (
-        <h5>
-          <span className="label label-danger"> Backordered</span>
-        </h5>
-      );
-    }
-  },
-  {
-    dataField: 'df2',
-    isDummyField: true,
-    text: 'Action 2',
-    formatter: (cellContent, row) => {
-      if (row.inStock) {
-        return (
-          <h5>
-            <span className="label label-success"> Available</span>
-          </h5>
-        );
-      }
-      return (
-        <h5>
-          <span className="label label-danger"> Backordered</span>
-        </h5>
-      );
-    }
-  }
-];
 
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products };
+    this.state = { products, count: 0 };
   }
 
   toggleInStock = () => {
@@ -163,17 +35,96 @@ class ProductList extends React.Component {
   };
 
   render() {
+    const columns = [
+      {
+        dataField: 'id',
+        text: 'Product ID',
+        formatter: (cell, row, rowIndex, extraData) => (
+          <div>
+            <span>ID: {row.id}</span>
+            <br />
+            <span>state: {extraData}</span>
+          </div>
+        ),
+        formatExtraData: this.state.count
+      },
+      {
+        dataField: 'name',
+        text: 'Product Name'
+      },
+      {
+        dataField: 'price',
+        text: 'Product Price'
+      },
+      {
+        dataField: 'inStock',
+        text: 'In Stock',
+        formatter: (cellContent, row) => (
+          <div className="checkbox disabled">
+            <label>
+              <input type="checkbox" checked={ row.inStock } disabled />
+            </label>
+          </div>
+        )
+      },
+      {
+        dataField: 'df1',
+        isDummyField: true,
+        text: 'Action 1',
+        formatter: (cellContent, row) => {
+          if (row.inStock) {
+            return (
+              <h5>
+                <span className="label label-success"> Available</span>
+              </h5>
+            );
+          }
+          return (
+            <h5>
+              <span className="label label-danger"> Backordered</span>
+            </h5>
+          );
+        }
+      },
+      {
+        dataField: 'df2',
+        isDummyField: true,
+        text: 'Action 2',
+        formatter: (cellContent, row) => {
+          if (row.inStock) {
+            return (
+              <h5>
+                <span className="label label-success"> Available</span>
+              </h5>
+            );
+          }
+          return (
+            <h5>
+              <span className="label label-danger"> Backordered</span>
+            </h5>
+          );
+        }
+      }
+    ];
+
     return (
       <div>
-        <h1 className="h2">Products</h1>
+        <h3>Action 1 and Action 2 are dummy column</h3>
+        <button onClick={ this.toggleInStock } className="btn btn-primary">
+          Toggle item 13 stock status
+        </button>
+        <button
+          className="btn btn-success"
+          onClick={ () => this.setState(() => ({ count: this.state.count + 1 })) }
+        >
+          Click me to Increase counter
+        </button>
         <BootstrapTable
           keyField="id"
           data={ this.state.products }
           columns={ columns }
         />
-        <button onClick={ this.toggleInStock } className="btn btn-primary">
-          Toggle item 13 stock status
-        </button>
+        <Code>{ sourceCode }</Code>
       </div>
     );
   }
@@ -183,7 +134,7 @@ class ProductList extends React.Component {
 class ProductList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { products };
+    this.state = { products, count: 0 };
   }
 
   toggleInStock = () => {
@@ -200,12 +151,94 @@ class ProductList extends React.Component {
     this.setState(curr => ({ ...curr, products: newProducts }));
   };
 
+  counter = () => {
+    this.setState(curr => ({ ...curr, count: this.state.count + 1 }));
+  }
+
   render() {
+    const columns = [
+      {
+        dataField: 'id',
+        text: 'Product ID',
+        formatter: (cell, row, rowIndex, extraData) => (
+          <div>
+            <span>ID: {row.id}</span>
+            <br />
+            <span>Counter: {extraData}</span>
+          </div>
+        ),
+        formatExtraData: this.state.count
+      },
+      {
+        dataField: 'name',
+        text: 'Product Name'
+      },
+      {
+        dataField: 'price',
+        text: 'Product Price'
+      },
+      {
+        dataField: 'inStock',
+        text: 'In Stock',
+        formatter: (cellContent, row) => (
+          <div className="checkbox disabled">
+            <label>
+              <input type="checkbox" checked={ row.inStock } disabled />
+            </label>
+          </div>
+        )
+      },
+      {
+        dataField: 'df1',
+        isDummyField: true,
+        text: 'Action 1',
+        formatter: (cellContent, row) => {
+          if (row.inStock) {
+            return (
+              <h5>
+                <span className="label label-success"> Available</span>
+              </h5>
+            );
+          }
+          return (
+            <h5>
+              <span className="label label-danger"> Backordered</span>
+            </h5>
+          );
+        }
+      },
+      {
+        dataField: 'df2',
+        isDummyField: true,
+        text: 'Action 2',
+        formatter: (cellContent, row) => {
+          if (row.inStock) {
+            return (
+              <h5>
+                <span className="label label-success"> Available</span>
+              </h5>
+            );
+          }
+          return (
+            <h5>
+              <span className="label label-danger"> Backordered</span>
+            </h5>
+          );
+        }
+      }
+    ];
+
     return (
       <div>
         <h3>Action 1 and Action 2 are dummy column</h3>
         <button onClick={ this.toggleInStock } className="btn btn-primary">
           Toggle item 13 stock status
+        </button>
+        <button
+          className="btn btn-success"
+          onClick={ this.counter }
+        >
+          Click me to Increase counter
         </button>
         <BootstrapTable
           keyField="id"

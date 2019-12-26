@@ -1,3 +1,5 @@
+import Const from './const';
+
 const getNormalizedPage = (
   page,
   pageStartIndex
@@ -18,15 +20,21 @@ const startIndex = (
 ) => end - (sizePerPage - 1);
 
 export const alignPage = (
-  data,
+  dataSize,
+  prevDataSize,
   page,
   sizePerPage,
   pageStartIndex
 ) => {
-  const dataSize = data.length;
-
-  if (page < pageStartIndex || page > (Math.floor(dataSize / sizePerPage) + pageStartIndex)) {
-    return pageStartIndex;
+  if (prevDataSize < dataSize) return page;
+  if (page < pageStartIndex) return pageStartIndex;
+  if (dataSize <= 0) return pageStartIndex;
+  if ((page >= (Math.floor(dataSize / sizePerPage) + pageStartIndex)) && pageStartIndex === 1) {
+    return Math.ceil(dataSize / sizePerPage);
+  }
+  if (page >= Math.floor(dataSize / sizePerPage) && pageStartIndex === 0) {
+    const newPage = Math.ceil(dataSize / sizePerPage);
+    return newPage - Math.abs((Const.PAGE_START_INDEX - pageStartIndex));
   }
   return page;
 };

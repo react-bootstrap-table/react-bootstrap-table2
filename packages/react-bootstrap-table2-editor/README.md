@@ -89,7 +89,10 @@ const columns = [
 In the following, we go though all the predefined editors:
 
 ### Dropdown Editor
-Dropdown editor give a select menu to choose a data from a list, the `editor.options` is required property for dropdown editor.
+Dropdown editor give a select menu to choose a data from a list. When use dropdown editor, either `editor.options` or `editor.getOptions` should be required prop.
+
+#### editor.options
+This is most simple case for assign the dropdown options data directly.   
 
 ```js
 import { Type } from 'react-bootstrap-table2-editor';
@@ -119,6 +122,46 @@ const columns = [
 }];
 ```
 
+#### editor.getOptions
+It is much flexible which accept a function and you can assign the dropdown options dynamically.
+
+There are two case for `getOptions`:
+
+* *Synchronous*: Just return the options array in `getOptions` callback function
+* *Asynchronous*: Call `setOptions` function argument when you get the options from remote. 
+
+
+```js
+// Synchronous
+
+const columns = [
+  ..., {
+  dataField: 'type',
+  text: 'Job Type',
+  editor: {
+    type: Type.SELECT,
+    getOptions: (setOptions, { row, column }) => [.....]
+  }
+}];
+
+// Asynchronous
+
+const columns = [
+  ..., {
+  dataField: 'type',
+  text: 'Job Type',
+  editor: {
+    type: Type.SELECT,
+    getOptions: (setOptions, { row, column }) => {
+      setTimeout(() => setOptions([...]), 1500);
+    }
+  }
+}];
+
+```
+
+[here](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Cell%20Editing&selectedStory=Dropdown%20Editor%20with%20Dynamic%20Options) is an online example.
+
 ### Date Editor
 Date editor is use `<input type="date">`, the configuration is very simple:
 
@@ -132,7 +175,7 @@ const columns = [
     if (typeof cell !== 'object') {
       dateObj = new Date(cell);
     }
-    return `${('0' + dateObj.getDate()).slice(-2)}/${('0' + (dateObj.getMonth() + 1)).slice(-2)}/${dateObj.getFullYear()}`;
+    return `${('0' + dateObj.getUTCDate()).slice(-2)}/${('0' + (dateObj.getUTCMonth() + 1)).slice(-2)}/${dateObj.getUTCFullYear()}`;
   },
   editor: {
     type: Type.DATE
@@ -173,16 +216,16 @@ If you feel above predefined editors are not satisfied to your requirement, you 
 
 * `editorProps`: Some useful attributes you can use on DOM editor, like class, style etc.
 * `value`: Current cell value
-* `row`: Current row data 
-* `column`: Current column definition 
-* `rowIndex`: Current row index 
+* `row`: Current row data
+* `column`: Current column definition
+* `rowIndex`: Current row index
 * `columnIndex`: Current column index
 
 > Note when implement a custom React editor component, this component should have a **getValue** function which return current value on editor
 
 > Note when you want to save value, you can call **editorProps.onUpdate** function
 
-Following is a short example: 
+Following is a short example:
 
 ```js
 class QualityRanger extends React.Component {

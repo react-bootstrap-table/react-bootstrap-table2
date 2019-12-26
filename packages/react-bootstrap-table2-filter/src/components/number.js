@@ -94,6 +94,28 @@ class NumberFilter extends Component {
     onFilter(column, FILTER_TYPE.NUMBER)({ number: value, comparator });
   }
 
+  getDefaultComparator() {
+    const { defaultValue, filterState } = this.props;
+    if (filterState && filterState.filterVal) {
+      return filterState.filterVal.comparator;
+    }
+    if (defaultValue && defaultValue.comparator) {
+      return defaultValue.comparator;
+    }
+    return '';
+  }
+
+  getDefaultValue() {
+    const { defaultValue, filterState } = this.props;
+    if (filterState && filterState.filterVal) {
+      return filterState.filterVal.number;
+    }
+    if (defaultValue && defaultValue.number) {
+      return defaultValue.number;
+    }
+    return '';
+  }
+
   getComparatorOptions() {
     const optionTags = [];
     const { withoutEmptyComparatorOption } = this.props;
@@ -148,7 +170,6 @@ class NumberFilter extends Component {
   render() {
     const { isSelected } = this.state;
     const {
-      defaultValue,
       column,
       options,
       style,
@@ -173,35 +194,53 @@ class NumberFilter extends Component {
         className={ `filter number-filter ${className}` }
         style={ style }
       >
-        <select
-          ref={ n => this.numberFilterComparator = n }
-          style={ comparatorStyle }
-          className={ `number-filter-comparator form-control ${comparatorClassName}` }
-          onChange={ this.onChangeComparator }
-          defaultValue={ defaultValue ? defaultValue.comparator : '' }
+        <label
+          className="filter-label"
+          htmlFor={ `number-filter-comparator-${column.text}` }
         >
-          { this.getComparatorOptions() }
-        </select>
+          <span className="sr-only">Filter comparator</span>
+          <select
+            ref={ n => this.numberFilterComparator = n }
+            style={ comparatorStyle }
+            id={ `number-filter-comparator-${column.text}` }
+            className={ `number-filter-comparator form-control ${comparatorClassName}` }
+            onChange={ this.onChangeComparator }
+            defaultValue={ this.getDefaultComparator() }
+          >
+            { this.getComparatorOptions() }
+          </select>
+        </label>
         {
           options ?
-            <select
-              ref={ n => this.numberFilter = n }
-              style={ numberStyle }
-              className={ selectClass }
-              onChange={ this.onChangeNumberSet }
-              defaultValue={ defaultValue ? defaultValue.number : '' }
+            <label
+              className="filter-label"
+              htmlFor={ `number-filter-column-${column.text}` }
             >
-              { this.getNumberOptions() }
-            </select> :
-            <input
-              ref={ n => this.numberFilter = n }
-              type="number"
-              style={ numberStyle }
-              className={ `number-filter-input form-control ${numberClassName}` }
-              placeholder={ placeholder || `Enter ${column.text}...` }
-              onChange={ this.onChangeNumber }
-              defaultValue={ defaultValue ? defaultValue.number : '' }
-            />
+              <span className="sr-only">{`Select ${column.text}`}</span>
+              <select
+                ref={ n => this.numberFilter = n }
+                id={ `number-filter-column-${column.text}` }
+                style={ numberStyle }
+                className={ selectClass }
+                onChange={ this.onChangeNumberSet }
+                defaultValue={ this.getDefaultValue() }
+              >
+                { this.getNumberOptions() }
+              </select>
+            </label> :
+            <label htmlFor={ `number-filter-column-${column.text}` }>
+              <span className="sr-only">{`Enter ${column.text}`}</span>
+              <input
+                ref={ n => this.numberFilter = n }
+                id={ `number-filter-column-${column.text}` }
+                type="number"
+                style={ numberStyle }
+                className={ `number-filter-input form-control ${numberClassName}` }
+                placeholder={ placeholder || `Enter ${column.text}...` }
+                onChange={ this.onChangeNumber }
+                defaultValue={ this.getDefaultValue() }
+              />
+            </label>
         }
       </div>
     );
@@ -211,6 +250,7 @@ class NumberFilter extends Component {
 NumberFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  filterState: PropTypes.object,
   options: PropTypes.arrayOf(PropTypes.number),
   defaultValue: PropTypes.shape({
     number: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -255,6 +295,7 @@ NumberFilter.defaultProps = {
     number: undefined,
     comparator: ''
   },
+  filterState: {},
   withoutEmptyComparatorOption: false,
   withoutEmptyNumberOption: false,
   comparators: legalComparators,

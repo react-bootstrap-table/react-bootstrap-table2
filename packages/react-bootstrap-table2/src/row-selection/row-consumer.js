@@ -7,8 +7,9 @@ import SelectionContext from '../contexts/selection-context';
 export default (Component) => {
   const renderWithSelection = (props, selectRow) => {
     const key = props.value;
-    const selected = selectRow.selected.includes(key);
-    const selectable = !selectRow.nonSelectable || !selectRow.nonSelectable.includes(key);
+    const selected = _.contains(selectRow.selected, key);
+    const selectable = !selectRow.nonSelectable || !_.contains(selectRow.nonSelectable, key);
+    const notSelectable = _.contains(selectRow.nonSelectable, key);
 
     let {
       style,
@@ -36,6 +37,22 @@ export default (Component) => {
           ? selectRow.bgColor(props.row, props.rowIndex)
           : selectRow.bgColor;
       }
+    }
+
+    if (notSelectable) {
+      const notSelectableStyle = _.isFunction(selectRow.nonSelectableStyle)
+        ? selectRow.nonSelectableStyle(props.row, props.rowIndex)
+        : selectRow.nonSelectableStyle;
+
+      const notSelectableClasses = _.isFunction(selectRow.nonSelectableClasses)
+        ? selectRow.nonSelectableClasses(props.row, props.rowIndex)
+        : selectRow.nonSelectableClasses;
+
+      style = {
+        ...style,
+        ...notSelectableStyle
+      };
+      className = cs(className, notSelectableClasses) || undefined;
     }
 
     return (

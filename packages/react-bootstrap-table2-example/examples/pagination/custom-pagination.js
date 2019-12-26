@@ -74,7 +74,7 @@ const options = {
   // hidePageListOnlyOnePage: true, // Hide the pagination list when only one page
   firstPageText: 'First',
   prePageText: 'Back',
-  nextPageText: 'Next',
+  nextPageText: <span>Next</span>,
   lastPageText: 'Last',
   nextPageTitle: 'First page',
   prePageTitle: 'Pre page',

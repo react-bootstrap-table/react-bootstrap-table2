@@ -1,3 +1,5 @@
+import _ from './utils';
+
 const events = [
   'onClick',
   'onDoubleClick',
@@ -15,15 +17,15 @@ export default ExtendBase =>
 
     createDefaultEventHandler(cb) {
       return (e) => {
-        const { column, columnIndex } = this.props;
-        cb(e, column, columnIndex);
+        const { column, columnIndex, index } = this.props;
+        cb(e, column, typeof columnIndex !== 'undefined' ? columnIndex : index);
       };
     }
 
     delegate(attrs = {}) {
       const newAttrs = { ...attrs };
       Object.keys(attrs).forEach((attr) => {
-        if (events.includes(attr)) {
+        if (_.contains(events, attr)) {
           newAttrs[attr] = this.createDefaultEventHandler(attrs[attr]);
         }
       });

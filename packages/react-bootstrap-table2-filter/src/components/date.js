@@ -18,7 +18,7 @@ const legalComparators = [
 ];
 
 function dateParser(d) {
-  return `${d.getFullYear()}-${('0' + (d.getMonth() + 1)).slice(-2)}-${('0' + d.getDate()).slice(-2)}`;
+  return `${d.getUTCFullYear()}-${('0' + (d.getUTCMonth() + 1)).slice(-2)}-${('0' + d.getUTCDate()).slice(-2)}`;
 }
 
 class DateFilter extends Component {
@@ -42,10 +42,11 @@ class DateFilter extends Component {
     // export onFilter function to allow users to access
     if (getFilter) {
       getFilter((filterVal) => {
-        this.dateFilterComparator.value = filterVal.comparator;
-        this.inputDate.value = dateParser(filterVal.date);
+        const nullableFilterVal = filterVal || { date: null, comparator: null };
+        this.dateFilterComparator.value = nullableFilterVal.comparator;
+        this.inputDate.value = nullableFilterVal.date ? dateParser(nullableFilterVal.date) : null;
 
-        this.applyFilter(filterVal.date, filterVal.comparator);
+        this.applyFilter(nullableFilterVal.date, nullableFilterVal.comparator);
       });
     }
   }
@@ -82,14 +83,27 @@ class DateFilter extends Component {
     return optionTags;
   }
 
-  getDefaultDate() {
-    let defaultDate = '';
-    const { defaultValue } = this.props;
-    if (defaultValue && defaultValue.date) {
-      // Set the appropriate format for the input type=date, i.e. "YYYY-MM-DD"
-      defaultDate = dateParser(new Date(defaultValue.date));
+  getDefaultComparator() {
+    const { defaultValue, filterState } = this.props;
+    if (filterState && filterState.filterVal) {
+      return filterState.filterVal.comparator;
     }
-    return defaultDate;
+    if (defaultValue && defaultValue.comparator) {
+      return defaultValue.comparator;
+    }
+    return '';
+  }
+
+  getDefaultDate() {
+    // Set the appropriate format for the input type=date, i.e. "YYYY-MM-DD"
+    const { defaultValue, filterState } = this.props;
+    if (filterState && filterState.filterVal && filterState.filterVal.date) {
+      return dateParser(filterState.filterVal.date);
+    }
+    if (defaultValue && defaultValue.date) {
+      return dateParser(new Date(defaultValue.date));
+    }
+    return '';
   }
 
   applyFilter(value, comparator, isInitial) {
@@ -121,8 +135,7 @@ class DateFilter extends Component {
       dateStyle,
       className,
       comparatorClassName,
-      dateClassName,
-      defaultValue
+      dateClassName
     } = this.props;
 
     return (
@@ -131,24 +144,35 @@ class DateFilter extends Component {
         className={ `filter date-filter ${className}` }
         style={ style }
       >
-        <select
-          ref={ n => this.dateFilterComparator = n }
-          style={ comparatorStyle }
-          className={ `date-filter-comparator form-control ${comparatorClassName}` }
-          onChange={ this.onChangeComparator }
-          defaultValue={ defaultValue ? defaultValue.comparator : '' }
+        <label
+          className="filter-label"
+          htmlFor={ `date-filter-comparator-${text}` }
         >
-          { this.getComparatorOptions() }
-        </select>
-        <input
-          ref={ n => this.inputDate = n }
-          className={ `filter date-filter-input form-control ${dateClassName}` }
-          style={ dateStyle }
-          type="date"
-          onChange={ this.onChangeDate }
-          placeholder={ placeholder || `Enter ${text}...` }
-          defaultValue={ this.getDefaultDate() }
-        />
+          <span className="sr-only">Filter comparator</span>
+          <select
+            ref={ n => this.dateFilterComparator = n }
+            id={ `date-filter-comparator-${text}` }
+            style={ comparatorStyle }
+            className={ `date-filter-comparator form-control ${comparatorClassName}` }
+            onChange={ this.onChangeComparator }
+            defaultValue={ this.getDefaultComparator() }
+          >
+            { this.getComparatorOptions() }
+          </select>
+        </label>
+        <label htmlFor={ `date-filter-column-${text}` }>
+          <span className="sr-only">Enter ${ text }</span>
+          <input
+            ref={ n => this.inputDate = n }
+            id={ `date-filter-column-${text}` }
+            className={ `filter date-filter-input form-control ${dateClassName}` }
+            style={ dateStyle }
+            type="date"
+            onChange={ this.onChangeDate }
+            placeholder={ placeholder || `Enter ${text}...` }
+            defaultValue={ this.getDefaultDate() }
+          />
+        </label>
       </div>
     );
   }
@@ -157,6 +181,7 @@ class DateFilter extends Component {
 DateFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  filterState: PropTypes.object,
   delay: PropTypes.number,
   defaultValue: PropTypes.shape({
     date: PropTypes.oneOfType([PropTypes.object]),
@@ -198,6 +223,7 @@ DateFilter.defaultProps = {
     date: undefined,
     comparator: ''
   },
+  filterState: {},
   withoutEmptyComparatorOption: false,
   comparators: legalComparators,
   placeholder: undefined,

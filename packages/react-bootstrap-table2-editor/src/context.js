@@ -1,5 +1,8 @@
+/* eslint disable-next-line: 0 */
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
+/* eslint camelcase: 0 */
+/* eslint react/no-unused-prop-types: 0 */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CLICK_TO_CELL_EDIT, DBCLICK_TO_CELL_EDIT } from './const';
@@ -43,7 +46,7 @@ export default (
       };
     }
 
-    componentWillReceiveProps(nextProps) {
+    UNSAFE_componentWillReceiveProps(nextProps) {
       if (nextProps.cellEdit && isRemoteCellEdit()) {
         if (nextProps.cellEdit.options.errorMessage) {
           this.setState(() => ({
@@ -56,12 +59,13 @@ export default (
     }
 
     handleCellUpdate(row, column, newValue) {
+      const newValueWithType = dataOperator.typeConvert(column.type, newValue);
       const { cellEdit } = this.props;
       const { beforeSaveCell } = cellEdit.options;
       const oldValue = _.get(row, column.dataField);
       const beforeSaveCellDone = (result = true) => {
         if (result) {
-          this.doUpdate(row, column, newValue);
+          this.doUpdate(row, column, newValueWithType);
         } else {
           this.escapeEditing();
         }
@@ -69,7 +73,7 @@ export default (
       if (_.isFunction(beforeSaveCell)) {
         const result = beforeSaveCell(
           oldValue,
-          newValue,
+          newValueWithType,
           row,
           column,
           beforeSaveCellDone
@@ -78,7 +82,7 @@ export default (
           return;
         }
       }
-      this.doUpdate(row, column, newValue);
+      this.doUpdate(row, column, newValueWithType);
     }
 
     doUpdate(row, column, newValue) {

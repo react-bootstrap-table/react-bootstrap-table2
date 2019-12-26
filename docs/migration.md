@@ -23,7 +23,7 @@ Currently, **I still can't implement all the mainly features in legacy `react-bo
 * [`react-bootstrap-table2-overlay`](https://www.npmjs.com/package/react-bootstrap-table2-overlay)
   * Overlay/Loading Addons
 * [`react-bootstrap-table2-toolkit`](https://www.npmjs.com/package/react-bootstrap-table2-toolkit)
-  * Table Toolkits, like search, csv etc.
+  * Table Toolkits, like search, csv, column toggle etc.
 
 This can help your application with less bundled size and also help `react-bootstrap-table2` have clean design to avoid handling to much logic in kernel module(SRP). Hence, which means you probably need to install above addons when you need specific features.
 
@@ -113,14 +113,12 @@ Please see [available pagination configurations](https://react-bootstrap-table.g
 
 Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/package/react-bootstrap-table2-paginator) firstly.   
 
-No big changes for pagination, but still can't custom the pagination list, button and sizePerPage dropdown.
-
 ## Table Search
 Ｔhe usage of search functionality is a little bit different from legacy search. The mainly different thing is developer have to render the search input field, we do believe it will be very flexible for all the developers who want to custom the search position or search field itself.
 
 - [x] Custom search component and position
 - [x] Custom search value
-- [ ] Clear search
+- [x] Clear search
 - [ ] Multiple search
 - [ ] Strict search
 

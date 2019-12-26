@@ -144,7 +144,7 @@ describe('Text Filter', () => {
         <TextFilter onFilter={ onFilter } column={ column } />
       );
       instance = wrapper.instance();
-      instance.componentWillReceiveProps(nextProps);
+      instance.UNSAFE_componentWillReceiveProps(nextProps);
     });
 
     it('should setting state correctly when props.defaultValue is changed', () => {

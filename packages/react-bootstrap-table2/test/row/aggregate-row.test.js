@@ -9,6 +9,7 @@ import bindExpansion from '../../src/row-expand/row-consumer';
 import ExpandCell from '../../src/row-expand/expand-cell';
 import SelectionCell from '../../src/row-selection/selection-cell';
 import RowAggregator from '../../src/row/aggregate-row';
+import Const from '../../src/const';
 
 describe('Row Aggregator', () => {
   let wrapper;
@@ -155,6 +156,27 @@ describe('Row Aggregator', () => {
         const expandCell = wrapper.find(ExpandCell);
         expect(expandCell).toHaveLength(1);
         expect(expandCell.props().expanded).toEqual(rowAggregator.props().expanded);
+      });
+    });
+
+    describe('if props.expandRow.showExpandColumn is true but props.expandRow.expandColumnPosition is "right"', () => {
+      beforeEach(() => {
+        const expandRow = {
+          renderer: jest.fn(),
+          showExpandColumn: true,
+          expandColumnPosition: Const.INDICATOR_POSITION_RIGHT
+        };
+        wrapper = mount(
+          <ExpansionContext.Provider data={ data } keyField={ keyField } expandRow={ expandRow }>
+            <RowAggregatorWithExpansion { ...getBaseProps() } />
+          </ExpansionContext.Provider>
+        );
+      });
+
+      it('should render expansion column correctly', () => {
+        rowAggregator = wrapper.find(RowAggregator);
+        expect(rowAggregator).toHaveLength(1);
+        expect(rowAggregator.children().children().last().type()).toEqual(ExpandCell);
       });
     });
   });

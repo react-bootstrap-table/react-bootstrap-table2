@@ -8,16 +8,10 @@ export default ExtendBase =>
       return (currPage - 1) < pageStartIndex ? pageStartIndex : currPage - 1;
     }
 
-    goToNextPage() {
-      const { currPage } = this.props;
-      const { lastPage } = this.state;
-      return (currPage + 1) > lastPage ? lastPage : currPage + 1;
-    }
-
     initialState() {
       const totalPages = this.calculateTotalPage();
       const lastPage = this.calculateLastPage(totalPages);
-      return { totalPages, lastPage, dropdownOpen: false };
+      return { totalPages, lastPage };
     }
 
     calculateTotalPage(sizePerPage = this.props.currSizePerPage, dataSize = this.props.dataSize) {
@@ -47,8 +41,9 @@ export default ExtendBase =>
     }
 
     calculatePages(
-      totalPages = this.state.totalPages,
-      lastPage = this.state.lastPage) {
+      totalPages,
+      lastPage
+    ) {
       const {
         currPage,
         paginationSize,
@@ -61,7 +56,7 @@ export default ExtendBase =>
         alwaysShowAllBtns
       } = this.props;
 
-      let pages;
+      let pages = [];
       let endPage = totalPages;
       if (endPage <= 0) return [];
 
@@ -73,28 +68,46 @@ export default ExtendBase =>
         startPage = endPage - paginationSize + 1;
       }
 
-      if (startPage !== pageStartIndex && totalPages > paginationSize && withFirstAndLast) {
+      if (alwaysShowAllBtns) {
+        if (withFirstAndLast) {
+          pages = [firstPageText, prePageText];
+        } else {
+          pages = [prePageText];
+        }
+      }
+
+      if (startPage !== pageStartIndex &&
+        totalPages > paginationSize &&
+        withFirstAndLast &&
+        pages.length === 0
+      ) {
         pages = [firstPageText, prePageText];
-      } else if (totalPages > 1 || alwaysShowAllBtns) {
+      } else if (totalPages > 1 && pages.length === 0) {
         pages = [prePageText];
-      } else {
-        pages = [];
       }
 
       for (let i = startPage; i <= endPage; i += 1) {
         if (i >= pageStartIndex) pages.push(i);
       }
 
-      if (endPage <= lastPage && pages.length > 1) {
+      if (alwaysShowAllBtns || (endPage <= lastPage && pages.length > 1)) {
         pages.push(nextPageText);
       }
-      if (endPage !== lastPage && withFirstAndLast) {
+      if ((endPage !== lastPage && withFirstAndLast) || (withFirstAndLast && alwaysShowAllBtns)) {
         pages.push(lastPageText);
       }
+
+      // if ((endPage <= lastPage && pages.length > 1) || alwaysShowAllBtns) {
+      //   pages.push(nextPageText);
+      // }
+      // if (endPage !== lastPage && withFirstAndLast) {
+      //   pages.push(lastPageText);
+      // }
+
       return pages;
     }
 
-    calculatePageStatus(pages = [], lastPage = this.state.lastPage) {
+    calculatePageStatus(pages = [], lastPage) {
       const {
         currPage,
         pageStartIndex,
@@ -140,8 +153,8 @@ export default ExtendBase =>
     calculateSizePerPageStatus() {
       const { sizePerPageList } = this.props;
       return sizePerPageList.map((_sizePerPage) => {
-        const pageText = _sizePerPage.text || _sizePerPage;
-        const pageNumber = _sizePerPage.value || _sizePerPage;
+        const pageText = typeof _sizePerPage.text !== 'undefined' ? _sizePerPage.text : _sizePerPage;
+        const pageNumber = typeof _sizePerPage.value !== 'undefined' ? _sizePerPage.value : _sizePerPage;
         return {
           text: `${pageText}`,
           page: pageNumber

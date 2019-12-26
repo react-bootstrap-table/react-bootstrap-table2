@@ -1,6 +1,7 @@
 /* eslint react/require-default-props: 0 */
 /* eslint react/prop-types: 0 */
 /* eslint no-return-assign: 0 */
+/* eslint camelcase: 0 */
 import React, { Component } from 'react';
 import { PropTypes } from 'prop-types';
 
@@ -13,8 +14,14 @@ class TextFilter extends Component {
     this.filter = this.filter.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.timeout = null;
+    function getDefaultValue() {
+      if (props.filterState && typeof props.filterState.filterVal !== 'undefined') {
+        return props.filterState.filterVal;
+      }
+      return props.defaultValue;
+    }
     this.state = {
-      value: props.defaultValue
+      value: getDefaultValue()
     };
   }
 
@@ -35,14 +42,14 @@ class TextFilter extends Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillUnmount() {
+    this.cleanTimer();
+  }
+
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.defaultValue !== this.props.defaultValue) {
       this.applyFilter(nextProps.defaultValue);
     }
-  }
-
-  componentWillUnmount() {
-    this.cleanTimer();
   }
 
   filter(e) {
@@ -89,22 +96,30 @@ class TextFilter extends Component {
       caseSensitive,
       defaultValue,
       getFilter,
+      filterState,
       ...rest
     } = this.props;
 
     // stopPropagation for onClick event is try to prevent sort was triggered.
     return (
-      <input
-        { ...rest }
-        ref={ n => this.input = n }
-        type="text"
-        className={ `filter text-filter form-control ${className}` }
-        style={ style }
-        onChange={ this.filter }
-        onClick={ this.handleClick }
-        placeholder={ placeholder || `Enter ${text}...` }
-        value={ this.state.value }
-      />
+      <label
+        className="filter-label"
+        htmlFor={ `text-filter-column-${text}` }
+      >
+        <span className="sr-only">Filter by {text}</span>
+        <input
+          { ...rest }
+          ref={ n => this.input = n }
+          type="text"
+          id={ `text-filter-column-${text}` }
+          className={ `filter text-filter form-control ${className}` }
+          style={ style }
+          onChange={ this.filter }
+          onClick={ this.handleClick }
+          placeholder={ placeholder || `Enter ${text}...` }
+          value={ this.state.value }
+        />
+      </label>
     );
   }
 }
@@ -112,6 +127,7 @@ class TextFilter extends Component {
 TextFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  filterState: PropTypes.object,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   defaultValue: PropTypes.string,
   delay: PropTypes.number,
@@ -124,6 +140,7 @@ TextFilter.propTypes = {
 
 TextFilter.defaultProps = {
   delay: FILTER_DELAY,
+  filterState: {},
   defaultValue: '',
   caseSensitive: false
 };

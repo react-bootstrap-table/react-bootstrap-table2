@@ -1,13 +1,14 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, dateFilter } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
-import { productsGenerator } from 'utils/common';
+import { stockGenerator } from 'utils/common';
 
-const products = productsGenerator(8);
+const products = stockGenerator(8);
 
 let nameFilter;
 let priceFilter;
+let stockDateFilter;
 
 const columns = [{
   dataField: 'id',
@@ -22,10 +23,19 @@ const columns = [{
   })
 }, {
   dataField: 'price',
-  text: 'Product Price',
+  text: 'Price',
   filter: textFilter({
     getFilter: (filter) => {
       priceFilter = filter;
+    }
+  })
+}, {
+  dataField: 'inStockDate',
+  text: 'InStock Date',
+  formatter: cell => cell.toString(),
+  filter: dateFilter({
+    getFilter: (filter) => {
+      stockDateFilter = filter;
     }
   })
 }];
@@ -33,14 +43,16 @@ const columns = [{
 const handleClick = () => {
   nameFilter('');
   priceFilter('');
+  stockDateFilter();
 };
 
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, dateFilter } from 'react-bootstrap-table2-filter';
 
 let nameFilter;
 let priceFilter;
+let stockDateFilter;
 
 const columns = [{
   dataField: 'id',
@@ -55,10 +67,19 @@ const columns = [{
   })
 }, {
   dataField: 'price',
-  text: 'Product Price',
+  text: 'Price',
   filter: textFilter({
     getFilter: (filter) => {
       priceFilter = filter;
+    }
+  })
+}, {
+  dataField: 'inStockDate',
+  text: 'InStock Date',
+  formatter: cell => cell.toString(),
+  filter: dateFilter({
+    getFilter: (filter) => {
+      stockDateFilter = filter;
     }
   })
 }];
@@ -66,6 +87,7 @@ const columns = [{
 const handleClick = () => {
   nameFilter('');
   priceFilter('');
+  stockDateFilter();
 };
 
 export default () => (

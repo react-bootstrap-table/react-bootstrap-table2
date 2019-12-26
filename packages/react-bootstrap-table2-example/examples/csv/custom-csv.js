@@ -40,7 +40,13 @@ const columns = [{
   keyField="id"
   data={ products }
   columns={ columns }
-  exportCSV
+  exportCSV={ {
+    fileName: 'custom.csv',
+    separator: '|',
+    ignoreHeader: true,
+    noAutoBOM: false,
+    blobType: 'text/csv;charset=ansi'
+  } }
 >
   {
     props => (
@@ -64,7 +70,8 @@ export default () => (
         fileName: 'custom.csv',
         separator: '|',
         ignoreHeader: true,
-        noAutoBOM: false
+        noAutoBOM: false,
+        blobType: 'text/csv;charset=ansi'
       } }
     >
       {

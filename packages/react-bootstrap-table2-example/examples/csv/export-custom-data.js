@@ -36,11 +36,12 @@ const columns = [{
 
 const MyExportCSV = (props) => {
   const handleClick = () => {
-    props.onExport();
+    // passing my custom data
+    props.onExport(products.filter(r => r.id > 2));
   };
   return (
     <div>
-      <button className="btn btn-success" onClick={ handleClick }>Export to CSV</button>
+      <button className="btn btn-success" onClick={ handleClick }>Only export Product ID bigger than 2</button>
     </div>
   );
 };

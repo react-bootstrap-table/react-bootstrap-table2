@@ -2,6 +2,7 @@
 /* eslint no-return-assign: 0 */
 /* eslint class-methods-use-this: 0 */
 /* eslint jsx-a11y/no-noninteractive-element-interactions: 0 */
+/* eslint camelcase: 0 */
 import React, { Component } from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
@@ -51,17 +52,17 @@ export default (_, onStartEdit) =>
       };
     }
 
-    componentWillReceiveProps({ message }) {
+    componentWillUnmount() {
+      this.clearTimer();
+    }
+
+    UNSAFE_componentWillReceiveProps({ message }) {
       if (_.isDefined(message)) {
         this.createTimer();
         this.setState(() => ({
           invalidMessage: message
         }));
       }
-    }
-
-    componentWillUnmount() {
-      this.clearTimer();
     }
 
     clearTimer() {
@@ -201,7 +202,7 @@ export default (_, onStartEdit) =>
       if (_.isFunction(column.editorRenderer)) {
         editor = column.editorRenderer(editorProps, value, row, column, rowIndex, columnIndex);
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.SELECT) {
-        editor = <DropdownEditor { ...editorProps } />;
+        editor = <DropdownEditor { ...editorProps } row={ row } column={ column } />;
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.TEXTAREA) {
         editor = <TextAreaEditor { ...editorProps } autoSelectText={ autoSelectText } />;
       } else if (isDefaultEditorDefined && column.editor.type === EDITTYPE.CHECKBOX) {

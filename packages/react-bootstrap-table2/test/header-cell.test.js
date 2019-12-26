@@ -728,7 +728,15 @@ describe('HeaderCell', () => {
           Filter
         }
       };
-      wrapper = shallow(<HeaderCell column={ column } index={ index } onFilter={ onFilter } />);
+      wrapper = shallow(
+        <HeaderCell
+          column={ column }
+          index={ index }
+          onFilter={ onFilter }
+          currFilters={ {} }
+          filterPosition="inline"
+        />
+      );
     });
 
     it('should render successfully', () => {
@@ -765,7 +773,12 @@ describe('HeaderCell', () => {
         filterRenderer
       };
       wrapper = shallow(
-        <HeaderCell column={ column } index={ index } onExternalFilter={ onExternalFilter } />);
+        <HeaderCell
+          column={ column }
+          index={ index }
+          filterPosition="inline"
+          onExternalFilter={ onExternalFilter }
+        />);
     });
 
     it('should render successfully', () => {

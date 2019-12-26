@@ -7,6 +7,7 @@ import SelectionHeaderCell from './row-selection/selection-header-cell';
 import ExpandHeaderCell from './row-expand/expand-header-cell';
 import withHeaderSelection from './row-selection/selection-header-cell-consumer';
 import withHeaderExpansion from './row-expand/expand-header-cell-consumer';
+import Const from './const';
 
 const Header = (props) => {
   const {
@@ -17,9 +18,11 @@ const Header = (props) => {
     sortField,
     sortOrder,
     selectRow,
-    onExternalFilter,
     expandRow,
-    bootstrap4
+    currFilters,
+    onExternalFilter,
+    filterPosition,
+    globalSortCaret
   } = props;
 
   let SelectionHeaderCellComp = () => null;
@@ -33,37 +36,53 @@ const Header = (props) => {
     SelectionHeaderCellComp = withHeaderSelection(SelectionHeaderCell);
   }
 
+  const isRenderFunctionColumnInLeft = (
+    position = Const.INDICATOR_POSITION_LEFT
+  ) => position === Const.INDICATOR_POSITION_LEFT;
+
+  const childrens = [
+    columns.map((column, i) => {
+      const currSort = column.dataField === sortField;
+      const isLastSorting = column.dataField === sortField;
+
+      return (
+        <HeaderCell
+          index={ i }
+          key={ column.dataField }
+          column={ column }
+          onSort={ onSort }
+          sorting={ currSort }
+          sortOrder={ sortOrder }
+          globalSortCaret={ globalSortCaret }
+          isLastSorting={ isLastSorting }
+          onFilter={ onFilter }
+          currFilters={ currFilters }
+          onExternalFilter={ onExternalFilter }
+          filterPosition={ filterPosition }
+        />);
+    })
+  ];
+
+  if (!selectRow.hideSelectColumn) {
+    if (isRenderFunctionColumnInLeft(selectRow.selectColumnPosition)) {
+      childrens.unshift(<SelectionHeaderCellComp key="selection" />);
+    } else {
+      childrens.push(<SelectionHeaderCellComp key="selection" />);
+    }
+  }
+
+  if (expandRow.showExpandColumn) {
+    if (isRenderFunctionColumnInLeft(expandRow.expandColumnPosition)) {
+      childrens.unshift(<ExpansionHeaderCellComp key="expansion" />);
+    } else {
+      childrens.push(<ExpansionHeaderCellComp key="expansion" />);
+    }
+  }
+
   return (
     <thead>
       <tr className={ className }>
-        <ExpansionHeaderCellComp />
-        {
-          !selectRow.hideSelectColumn ?
-            <SelectionHeaderCellComp /> : null
-        }
-        {
-          columns.map((column, i) => {
-            if (!column.hidden) {
-              const currSort = column.dataField === sortField;
-              const isLastSorting = column.dataField === sortField;
-
-              return (
-                <HeaderCell
-                  index={ i }
-                  bootstrap4={ bootstrap4 }
-                  key={ column.dataField }
-                  column={ column }
-                  onSort={ onSort }
-                  sorting={ currSort }
-                  onFilter={ onFilter }
-                  onExternalFilter={ onExternalFilter }
-                  sortOrder={ sortOrder }
-                  isLastSorting={ isLastSorting }
-                />);
-            }
-            return false;
-          })
-        }
+        { childrens }
       </tr>
     </thead>
   );
@@ -76,10 +95,16 @@ Header.propTypes = {
   sortField: PropTypes.string,
   sortOrder: PropTypes.string,
   selectRow: PropTypes.object,
+  currFilters: PropTypes.object,
   onExternalFilter: PropTypes.func,
+  globalSortCaret: PropTypes.func,
   className: PropTypes.string,
   expandRow: PropTypes.object,
-  bootstrap4: PropTypes.bool
+  filterPosition: PropTypes.oneOf([
+    Const.FILTERS_POSITION_TOP,
+    Const.FILTERS_POSITION_INLINE,
+    Const.FILTERS_POSITION_BOTTOM
+  ])
 };
 
 export default Header;

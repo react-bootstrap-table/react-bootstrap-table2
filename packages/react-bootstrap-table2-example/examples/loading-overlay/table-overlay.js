@@ -36,7 +36,7 @@ const RemotePagination = ({ loading, data, page, sizePerPage, onTableChange, tot
       columns={ columns }
       pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
-      overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
+      overlay={ overlayFactory({ spinner: true, styles: { overlay: (base) => ({...base, background: 'rgba(255, 0, 0, 0.5)'}) } }) }
     />
     <Code>{ sourceCode }</Code>
   </div>
@@ -101,7 +101,12 @@ const RemotePagination = ({ loading, data, page, sizePerPage, onTableChange, tot
       columns={ columns }
       pagination={ paginationFactory({ page, sizePerPage, totalSize }) }
       onTableChange={ onTableChange }
-      overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
+      overlay={
+        overlayFactory({
+          spinner: true,
+          styles: { overlay: base => ({ ...base, background: 'rgba(255, 0, 0, 0.5)' }) }
+        })
+      }
     />
     <Code>{ sourceCode }</Code>
   </div>

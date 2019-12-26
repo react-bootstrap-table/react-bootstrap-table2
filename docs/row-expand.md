@@ -2,7 +2,7 @@
 # Row expand
 `react-bootstrap-table2` supports the row expand feature. By passing prop `expandRow` to enable this functionality. 
 
-> Default is click to expand/collapse a row. In addition, we don't support any way to chagne this mechanism!
+> Default is click to expand/collapse a row. In addition, we don't support any way to change this mechanism!
 
 ## Required
 * [renderer (**required**)](#renderer)
@@ -15,8 +15,11 @@
 * [showExpandColumn](#showExpandColumn)
 * [onlyOneExpanding](#onlyOneExpanding)
 * [expandByColumnOnly](#expandByColumnOnly)
+* [expandColumnPosition](#expandColumnPosition)
 * [expandColumnRenderer](#expandColumnRenderer)
 * [expandHeaderColumnRenderer](#expandHeaderColumnRenderer)
+* [className](#className)
+* [parentClassName](#parentClassName)
 
 ### <a name="renderer">expandRow.renderer - [Function]</a>
 
@@ -24,12 +27,13 @@ Specify the content of expand row, `react-bootstrap-table2` will pass a row obje
 
 #### values
 * **row**
+* **rowIndex**
 
 #### examples
 
 ```js
 const expandRow = {
-  renderer: row => (
+  renderer: (row, rowIndex) => (
     <div>
       <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
       <p>You can render anything here, also you can add additional data on every row object</p>
@@ -92,13 +96,16 @@ const expandRow = {
 ```
 
 ### <a name='expandColumnRenderer'>expandRow.expandColumnRenderer - [Function]</a>
-Provide a callback function which allow you to custom the expand indicator. This callback only have one argument which is an object and contain one property  `expanded` which indicate if current row is expanded
+Provide a callback function which allow you to custom the expand indicator. This callback only have one argument which is an object and contain these properties:
+* `expanded`: If current row is expanded or not
+* `rowKey`: Current row key
+* `expandable`: If currnet row is expandable or not 
 
 
 ```js
 const expandRow = {
   renderer: (row) => ...
-  expandColumnRenderer: ({ expanded }) => (
+  expandColumnRenderer: ({ expanded, rowKey, expandable }) => (
     // ....
   )
 };
@@ -148,5 +155,58 @@ const expandRow = {
   renderer: (row) => ...,
   showExpandColumn: true,
   expandByColumnOnly: true
+};
+```
+
+### <a name='expandColumnPosition'>expandRow.expandColumnPosition - [String]</a>
+Default is `left`. You can give this as `right` for rendering expand column in the right side.
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  showExpandColumn: true,
+  expandColumnPosition: 'right'
+};
+```
+
+### <a name='className'>expandRow.className - [String | Function]</a>
+Apply the custom class name on the expanding row. For example: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  className: 'foo'
+};
+```
+following usage is more flexible way for customing the class name: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  className: (isExpanded, row, rowIndex) => {
+    if (rowIndex > 2) return 'foo';
+    return 'bar';
+  }
+};
+```
+
+### <a name='parentClassName'>expandRow.parentClassName - [String | Function]</a>
+Apply the custom class name on parent row of expanded row. For example: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: 'foo'
+};
+```
+Below case is more flexible way to custom the class name: 
+
+```js
+const expandRow = {
+  renderer: (row) => ...,
+  parentClassName: (isExpanded, row, rowIndex) => {
+    if (rowIndex > 2) return 'foo';
+    return 'bar';
+  }
 };
 ```

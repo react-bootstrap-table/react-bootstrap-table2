@@ -28,7 +28,7 @@ export default class ExpansionHeaderCell extends Component {
     };
 
     return (
-      <th data-row-selection { ...attrs }>
+      <th className="expand-cell-header" data-row-selection { ...attrs }>
         {
           expandHeaderColumnRenderer ?
             expandHeaderColumnRenderer({ isAnyExpands }) :

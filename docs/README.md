@@ -27,11 +27,15 @@
 * [rowStyle](#rowStyle)
 * [rowClasses](#rowClasses)
 * [rowEvents](#rowEvents)
+* [hiddenRows](#hiddenRows)
+* [sort](#sort)
 * [defaultSorted](#defaultSorted)
 * [defaultSortDirection](#defaultSortDirection)
 * [pagination](#pagination)
 * [filter](#filter)
+* [filterPosition](filterPosition)
 * [onTableChange](#onTableChange)
+* [onDataSizeChange](#onDataSizeChange)
 
 ### <a name='keyField'>keyField(**required**) - [String]</a>
 Tells `react-bootstrap-table2` which column is unique.
@@ -96,7 +100,14 @@ import overlayFactory from 'react-bootstrap-table2-overlay';
 Actually, `react-bootstrap-table-overlay` is depends on [`react-loading-overlay`](https://github.com/derrickpelletier/react-loading-overlay) and `overlayFactory` just a factory function and you can pass any props which available for `react-loading-overlay`:
 
 ```js
-overlay={ overlayFactory({ spinner: true, background: 'rgba(192,192,192,0.3)' }) }
+overlay={
+  overlayFactory({
+    spinner: true,
+    styles: {
+      overlay: (base) => ({...base, background: 'rgba(255, 0, 0, 0.5)'})
+    }
+  })
+}
 ```
 
 ### <a name='caption'>caption - [String | Node]</a>
@@ -181,6 +192,35 @@ const rowEvents = {
 <BootstrapTable data={ data } columns={ columns } rowEvents={ rowEvents } />
 ```
 
+### <a name='hiddenRows'>hiddenRows - [Array]</a>
+Hide rows, this props accept an array of row keys:
+
+```js
+const hiddenRows = [1, 4];
+<BootstrapTable data={ data } columns={ columns } hiddenRows={ hiddenRows } />
+```
+
+### <a name='sort'>sort - [Object]</a>
+Two cases you probably need to configure `sort` prop:
+
+#### Manage sorting state
+You can give `dataField` and `order` to specify the sorting state in table, For example
+
+```js
+<BootstrapTable sort={ { dataField: 'price', order: 'asc' } }>
+```
+
+#### One-time sorting configuration
+In earily version, we only can configure [`sortCaret`](./columns.md#sortCaret) and [`sortFunc` ](./columns.md#sortFunc) per column. But they are same in most of cases.   
+So here we give you a chance to just setup these prop in one time.
+
+```js
+<BootstrapTable sort={ {
+  sortCaret: ...
+  sortFunc: ...
+} }>
+```
+
 ### <a name='defaultSorted'>defaultSorted - [Array]</a>
 `defaultSorted` accept an object array which allow you to define the default sort columns when first render.
 
@@ -190,6 +230,8 @@ const defaultSorted = [{
   order: 'desc' // desc or asc
 }];
 ```
+
+**Note**: Only the first column is sorted currently, see #1083.
 
 ### <a name='defaultSortDirection'>defaultSortDirection - [String]</a>
 Default sort direction when user click on header column at first time, available value is `asc` and `desc`. Default is `desc`.
@@ -308,4 +350,23 @@ Following is a shape of `newState`
     newValue
   }
 }
+```
+
+### <a name='filterPosition'>filterPosition - [String]</a>
+Available value is `inline`, `top` and `bottom`, default is `inline`. This prop decide where `react-bootstrap-table` render column filter.
+
+### <a name='onDataSizeChange'>onDataSizeChange - [Function]</a>
+This callback function will be called only when data size change by search/filter etc. This function have one argument which is an object contains below props:
+
+* `dataSize`: The new data size
+
+```js
+handleDataChange = ({ dataSize }) => {
+  this.setState({ rowCount: dataSize });
+}
+
+<BootstrapTable
+  onDataSizeChange={ handleDataChange }
+  ....
+/>
 ```

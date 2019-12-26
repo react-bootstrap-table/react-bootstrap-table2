@@ -1,4 +1,5 @@
 /* eslint no-mixed-operators: 0 */
+/* eslint no-param-reassign: 0 */
 
 /**
  * products generator for stories
@@ -22,10 +23,21 @@ export const productsGenerator = (quantity = 5, callback) => {
   );
 };
 
-export const productsQualityGenerator = (quantity = 5) =>
+export const withOnSale = rows => rows.map((row) => {
+  if (row.id > 2) row.onSale = false;
+  else row.onSale = true;
+  return row;
+});
+
+export const withRandomPrice = rows => rows.map((row) => {
+  row.price = Math.floor((Math.random() * 10) + 2000);
+  return row;
+});
+
+export const productsQualityGenerator = (quantity = 5, factor = 0) =>
   Array.from({ length: quantity }, (value, index) => ({
-    id: index,
-    name: `Item name ${index}`,
+    id: index + factor,
+    name: `Item name ${index + factor}`,
     quality: index % 3
   }));
 
@@ -62,7 +74,9 @@ const endDate = new Date();
 export const stockGenerator = (quantity = 5) =>
   Array.from({ length: quantity }, (value, index) => ({
     id: index,
-    name: `Todo item ${index}`,
+    name: `Stock Name ${index}`,
+    price: Math.floor((Math.random() * 2) + 1),
+    visible: Math.random() > 0.5,
     inStockDate:
       new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
   }));

@@ -8,7 +8,8 @@ export default ExtendBase =>
       return (
         nextProps.editingRowIdx === nextProps.rowIndex ||
         (this.props.editingRowIdx === nextProps.rowIndex &&
-        nextProps.editingRowIdx === null)
+        nextProps.editingRowIdx === null) ||
+        this.props.editingRowIdx === nextProps.rowIndex
       );
     }
 
@@ -18,6 +19,19 @@ export default ExtendBase =>
         !_.isEqual(this.props.style, nextProps.style) ||
         !_.isEqual(this.props.attrs, nextProps.attrs)
       );
+    }
+
+    // Only use for simple-row
+    shouldUpdateByColumnsForSimpleCheck(nextProps) {
+      if (this.props.columns.length !== nextProps.columns.length) {
+        return true;
+      }
+      for (let i = 0; i < this.props.columns.length; i += 1) {
+        if (!_.isEqual(this.props.columns[i], nextProps.columns[i])) {
+          return true;
+        }
+      }
+      return false;
     }
 
     shouldUpdatedByNormalProps(nextProps) {
@@ -33,5 +47,10 @@ export default ExtendBase =>
     shouldUpdateChild(nextProps) {
       return this.shouldUpdateByCellEditing(nextProps) ||
         this.shouldUpdatedByNormalProps(nextProps);
+    }
+
+    shouldRowContentUpdate(nextProps) {
+      return this.shouldUpdateChild(nextProps) ||
+        this.shouldUpdateByColumnsForSimpleCheck(nextProps);
     }
   };
