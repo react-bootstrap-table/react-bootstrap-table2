@@ -178,6 +178,7 @@ BootstrapTable.propTypes = {
   onSort: PropTypes.func,
   onFilter: PropTypes.func,
   onExternalFilter: PropTypes.func,
+  drag: PropTypes.object,
   // Inject from toolkit
   search: PropTypes.shape({
     searchText: PropTypes.string,

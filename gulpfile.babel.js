@@ -79,6 +79,7 @@ function umd(done) {
     () => gulp.src('./webpack/next.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
     () => gulp.src('./webpack/editor.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
     () => gulp.src('./webpack/filter.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
+    () => gulp.src('./webpack/drag.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
     () => gulp.src('./webpack/overlay.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
     () => gulp.src('./webpack/paginator.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>'])),
     () => gulp.src('./webpack/toolkit.umd.babel.js').pipe(shell(['webpack --config <%= file.path %>']))

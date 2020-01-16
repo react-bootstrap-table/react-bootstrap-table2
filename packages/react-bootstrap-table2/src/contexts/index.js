@@ -39,6 +39,11 @@ const withContext = Base =>
           _, this.isRemoteFiltering, this.handleRemoteFilterChange);
       }
 
+      if (props.drag) {
+        this.DragContext = props.drag.createContext(
+          _);
+      }
+
       if (props.pagination) {
         this.PaginationContext = props.pagination.createContext(
           this.isRemotePagination, this.handleRemotePageChange);
@@ -236,6 +241,17 @@ const withContext = Base =>
       );
     }
 
+    renderWithDragCtx(base, baseProps) {
+      return rootProps => (
+        <this.DragContext.Provider
+          { ...baseProps }
+          drag={ this.props.drag }
+        >
+          { base(rootProps) }
+        </this.DragContext.Provider>
+      );
+    }
+
     renderWithCellEditCtx(base, baseProps) {
       return rootProps => (
         <this.CellEditContext.Provider
@@ -255,6 +271,10 @@ const withContext = Base =>
       if (registerExposedAPI) baseProps.registerExposedAPI = registerExposedAPI;
 
       let base = this.renderBase();
+
+      if (this.DragContext) {
+        base = this.renderWithDragCtx(base, baseProps);
+      }
 
       if (this.SelectionContext) {
         base = this.renderWithSelectionCtx(base, baseProps);
