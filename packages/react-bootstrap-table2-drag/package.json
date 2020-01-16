@@ -42,8 +42,8 @@
     }
   ],
   "dependencies": {
-    "react-dnd": "6.0.0",
-    "react-dnd-html5-backend": "6.0.0"
+    "react-dnd": "2.6.0",
+    "react-dnd-html5-backend": "2.6.0"
   },
   "peerDependencies": {
     "prop-types": "^15.0.0",
