@@ -8,7 +8,7 @@
 
 ```sh
 $ npm install react-bootstrap-table2-drag --save
-$ npm install react-dnd react-dnd-html5-backend --save
+$ npm install react-dnd@2.6.0 react-dnd-html5-backend@2.6.0 -E --save
 ```
 
 ## How
