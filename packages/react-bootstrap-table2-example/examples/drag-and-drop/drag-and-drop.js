@@ -66,11 +66,16 @@ const App = () => (
 export default DragDropContext(HTML5Backend)(App);
 `;
 
-const App = () => (
-  <div>
-    <BootstrapTable keyField="id" data={ products } columns={ columns } drag={ drag } />
-    <Code>{ sourceCode }</Code>
-  </div>
-);
+// eslint-disable-next-line react/prefer-stateless-function
+class App extends React.Component {
+  render() {
+    return (
+      <div>
+        <BootstrapTable keyField="id" data={ products } columns={ columns } drag={ drag } />
+        <Code>{ sourceCode }</Code>
+      </div>
+    );
+  }
+}
 
 export default DragDropContext(HTML5Backend)(App);
