@@ -26,7 +26,11 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 ```js
 import BootstrapTable from 'react-bootstrap-table-next';
 
-const products = [ ... ];
+// dummy data
+const products = [
+  { id: 1, name: "Item 1", price: 100 },
+  { id: 2, name: "Item 2", price: 102 }
+];
 const columns = [{
   dataField: 'id',
   text: 'Product ID'
