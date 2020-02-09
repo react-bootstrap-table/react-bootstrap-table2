@@ -21,8 +21,10 @@ title: BootstrapTable Props
 * [id](#id-string)
 * [tabIndexCell](#tabindexcell-bool)
 * [classes](#classes-string)
-* [wrapperClasses](#wrapperClasses-string)
-* [headerClasses](#headerClasses-string)
+* [bodyClasses](#bodyclasses-string)
+* [wrapperClasses](#wrapperclasses-string)
+* [headerClasses](#headerclasses-string)
+* [headerWrapperClasses](#headerwrapperclasses-string)
 * [cellEdit](#celledit-object)
 * [selectRow](#selectrow-object)
 * [rowStyle](#rowstyle-object-function)
@@ -134,6 +136,12 @@ Customize class on the outer element which wrap up the `table` element.
 
 ## headerClasses - [String]
 Customize class on the header row(`tr`).
+
+## headerWrapperClasses - [String]
+Customize class on `thead`.
+
+## bodyClasses - [String]
+Customize class on `tbody`.
 
 ## cellEdit - [Object]
 Makes table cells editable, please see [cellEdit definition](./cell-edit-props.html) for more detail.
