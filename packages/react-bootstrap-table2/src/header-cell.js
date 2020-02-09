@@ -77,6 +77,12 @@ class HeaderCell extends eventDelegater(React.Component) {
 
     if (sort) {
       const customClick = cellAttrs.onClick;
+      cellAttrs.onKeyUp = (e) => {
+        if (e.key === 'Enter') {
+          onSort(column);
+          if (_.isFunction(customClick)) customClick(e);
+        }
+      };
       cellAttrs.onClick = (e) => {
         onSort(column);
         if (_.isFunction(customClick)) customClick(e);
