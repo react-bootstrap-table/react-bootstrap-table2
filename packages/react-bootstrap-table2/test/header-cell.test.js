@@ -375,7 +375,6 @@ describe('HeaderCell', () => {
       wrapper = shallow(<HeaderCell column={ column } index={ index } />);
       expect(wrapper.find('th').prop('aria-label')).toBeUndefined();
     });
-
   });
 
   describe('when column.sort is enable', () => {
