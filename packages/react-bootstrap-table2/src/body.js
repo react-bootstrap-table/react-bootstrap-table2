@@ -60,7 +60,8 @@ class Body extends React.Component {
       rowStyle,
       rowClasses,
       rowEvents,
-      expandRow
+      expandRow,
+      className
     } = this.props;
 
     let content;
@@ -110,7 +111,7 @@ class Body extends React.Component {
     }
 
     return (
-      <tbody>{ content }</tbody>
+      <tbody className={ className }>{ content }</tbody>
     );
   }
 }

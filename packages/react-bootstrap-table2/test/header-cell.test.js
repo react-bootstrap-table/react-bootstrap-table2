@@ -394,9 +394,23 @@ describe('HeaderCell', () => {
       expect(wrapper.find('th').prop('onClick')).toBeDefined();
     });
 
+    it('should have onKeyUp event on header cell', () => {
+      expect(wrapper.find('th').prop('onKeyUp')).toBeDefined();
+    });
+
     it('should trigger onSort callback when click on header cell', () => {
       wrapper.find('th').simulate('click');
       expect(onSortCallBack.callCount).toBe(1);
+    });
+
+    it('should trigger onSort callback when keyup Enter on header cell', () => {
+      wrapper.find('th').simulate('keyup', { key: 'Enter' });
+      expect(onSortCallBack.callCount).toBe(1);
+    });
+
+    it('should not trigger onSort callback when keyup key is not Enter on header cell', () => {
+      wrapper.find('th').simulate('keyup', { key: 'test-key' });
+      expect(onSortCallBack.callCount).toBe(0);
     });
 
     describe('and sorting prop is false', () => {
