@@ -85,6 +85,12 @@ const withContext = Base =>
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
+      if (nextProps.columns.filter(col => col.sort).length > 0 && !this.SortContext) {
+        this.SortContext = createSortContext(
+          dataOperator, this.isRemoteSort, this.handleRemoteSortChange);
+      } else {
+        this.SortContext = null;
+      }
       if (!nextProps.pagination && this.props.pagination) {
         this.PaginationContext = null;
       }
