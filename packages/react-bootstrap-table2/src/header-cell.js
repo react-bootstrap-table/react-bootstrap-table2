@@ -77,6 +77,7 @@ class HeaderCell extends eventDelegater(React.Component) {
 
     if (sort) {
       const customClick = cellAttrs.onClick;
+      cellAttrs['aria-label'] = sorting ? `${text} sort ${sortOrder}` : `${text} sortable`;
       cellAttrs.onKeyUp = (e) => {
         if (e.key === 'Enter') {
           onSort(column);
