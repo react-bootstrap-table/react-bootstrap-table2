@@ -370,6 +370,11 @@ describe('HeaderCell', () => {
         });
       });
     });
+
+    it('should not have aria-label', () => {
+      wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+      expect(wrapper.find('th').prop('aria-label')).toBeUndefined();
+    });
   });
 
   describe('when column.sort is enable', () => {
@@ -413,9 +418,18 @@ describe('HeaderCell', () => {
       expect(onSortCallBack.callCount).toBe(0);
     });
 
+    it('should have aria-label', () => {
+      expect(wrapper.find('th').prop('aria-label')).toBe('ID sortable');
+    });
+
+
     describe('and sorting prop is false', () => {
       it('header should render SortSymbol as default', () => {
         expect(wrapper.find(SortSymbol).length).toBe(1);
+      });
+
+      it('should describe column header as sortable', () => {
+        expect(wrapper.find('th').prop('aria-label')).toBe('ID sortable');
       });
 
       describe('when sortCaret is defined ', () => {
@@ -443,6 +457,10 @@ describe('HeaderCell', () => {
           beforeEach(() => {
             wrapper = shallow(
               <HeaderCell column={ column } index={ index } sortOrder={ order } sorting />);
+          });
+
+          it('should describe sort order in aria-label', () => {
+            expect(wrapper.find('th').prop('aria-label')).toBe(`ID sort ${order}`);
           });
 
           it('should render SortCaret correctly', () => {
