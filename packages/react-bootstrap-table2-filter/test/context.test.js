@@ -171,6 +171,7 @@ describe('FilterContext', () => {
         filterVals.forEach((filterVal) => {
           instance.onFilter(columns[1], FILTER_TYPE.TEXT)(filterVal);
           expect(Object.keys(instance.currFilters)).toHaveLength(0);
+          expect(Object.keys(instance.clearFilters)).toHaveLength(1);
         });
       });
     });

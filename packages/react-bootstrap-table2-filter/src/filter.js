@@ -229,14 +229,13 @@ export const filterFactory = _ => (filterType) => {
   return filterFn;
 };
 
-export const filters = (data, columns, _) => (currFilters) => {
+export const filters = (data, columns, _) => (currFilters, clearFilters = {}) => {
   const factory = filterFactory(_);
+  const filterState = { ...clearFilters, ...currFilters };
   let result = data;
   let filterFn;
-  Object.keys(currFilters).forEach((dataField) => {
+  Object.keys(filterState).forEach((dataField) => {
     let currentResult;
-    const filterObj = currFilters[dataField];
-    filterFn = factory(filterObj.filterType);
     let filterValue;
     let customFilter;
     for (let i = 0; i < columns.length; i += 1) {
@@ -248,13 +247,23 @@ export const filters = (data, columns, _) => (currFilters) => {
         break;
       }
     }
-    if (customFilter) {
-      currentResult = customFilter(filterObj.filterVal, result);
-    }
-    if (typeof currentResult === 'undefined') {
-      result = filterFn(result, dataField, filterObj, filterValue);
+
+    if (clearFilters[dataField] && customFilter) {
+      currentResult = customFilter(clearFilters[dataField].filterVal, result);
+      if (typeof currentResult !== 'undefined') {
+        result = currentResult;
+      }
     } else {
-      result = currentResult;
+      const filterObj = filterState[dataField];
+      filterFn = factory(filterObj.filterType);
+      if (customFilter) {
+        currentResult = customFilter(filterObj.filterVal, result);
+      }
+      if (typeof currentResult === 'undefined') {
+        result = filterFn(result, dataField, filterObj, filterValue);
+      } else {
+        result = currentResult;
+      }
     }
   });
   return result;
