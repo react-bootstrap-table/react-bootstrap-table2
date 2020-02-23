@@ -594,6 +594,7 @@ This prop also accept a function:
 
 * `column`
 * `columnIndex`
+* `props`: It's an object and contain `text` property only.
 
 ## <a name='footerClasses'>column.footerClasses - [String | Function]</a>
 It's similar to [`column.classes`](#classes), `footerClasses` is available to have customized class on table footer column:

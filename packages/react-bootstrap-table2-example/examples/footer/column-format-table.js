@@ -7,7 +7,7 @@ import { productsGenerator } from 'utils/common';
 
 const products = productsGenerator();
 
-function priceFormatter(column, colIndex) {
+function priceFormatter(column, colIndex, { text }) {
   return (
     <h5>
       <strong>$$ {column.text} $$</strong>
@@ -37,7 +37,7 @@ const columns = [
 const sourceCode = `\
 import BootstrapTable from 'react-bootstrap-table-next';
 
-function priceFormatter(column, colIndex) {
+function priceFormatter(column, colIndex, { text }) {
   return (
     <h5><strong>$$ { column.text } $$</strong></h5>
   );
