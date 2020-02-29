@@ -64,6 +64,24 @@ class ToolkitProvider extends statelessDecorator(React.Component) {
     this.state = state;
   }
 
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    let columnToggle = this.state.columnToggle;
+    if (nextProps.columnToggle) {
+      columnToggle = nextProps.columns
+        .reduce((obj, column) => {
+          obj[column.dataField] = !column.hidden;
+          return obj;
+        }, {});
+    } else {
+      columnToggle = null;
+    }
+    this.setState({
+      ...this.state,
+      columnToggle
+    });
+  }
+
   onSearch(searchText) {
     if (searchText !== this.state.searchText) {
       this.setState({ searchText });

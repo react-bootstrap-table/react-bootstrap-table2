@@ -370,6 +370,11 @@ describe('HeaderCell', () => {
         });
       });
     });
+
+    it('should not have aria-label', () => {
+      wrapper = shallow(<HeaderCell column={ column } index={ index } />);
+      expect(wrapper.find('th').prop('aria-label')).toBeUndefined();
+    });
   });
 
   describe('when column.sort is enable', () => {
@@ -394,14 +399,37 @@ describe('HeaderCell', () => {
       expect(wrapper.find('th').prop('onClick')).toBeDefined();
     });
 
+    it('should have onKeyUp event on header cell', () => {
+      expect(wrapper.find('th').prop('onKeyUp')).toBeDefined();
+    });
+
     it('should trigger onSort callback when click on header cell', () => {
       wrapper.find('th').simulate('click');
       expect(onSortCallBack.callCount).toBe(1);
     });
 
+    it('should trigger onSort callback when keyup Enter on header cell', () => {
+      wrapper.find('th').simulate('keyup', { key: 'Enter' });
+      expect(onSortCallBack.callCount).toBe(1);
+    });
+
+    it('should not trigger onSort callback when keyup key is not Enter on header cell', () => {
+      wrapper.find('th').simulate('keyup', { key: 'test-key' });
+      expect(onSortCallBack.callCount).toBe(0);
+    });
+
+    it('should have aria-label', () => {
+      expect(wrapper.find('th').prop('aria-label')).toBe('ID sortable');
+    });
+
+
     describe('and sorting prop is false', () => {
       it('header should render SortSymbol as default', () => {
         expect(wrapper.find(SortSymbol).length).toBe(1);
+      });
+
+      it('should describe column header as sortable', () => {
+        expect(wrapper.find('th').prop('aria-label')).toBe('ID sortable');
       });
 
       describe('when sortCaret is defined ', () => {
@@ -429,6 +457,10 @@ describe('HeaderCell', () => {
           beforeEach(() => {
             wrapper = shallow(
               <HeaderCell column={ column } index={ index } sortOrder={ order } sorting />);
+          });
+
+          it('should describe sort order in aria-label', () => {
+            expect(wrapper.find('th').prop('aria-label')).toBe(`ID sort ${order}`);
           });
 
           it('should render SortCaret correctly', () => {

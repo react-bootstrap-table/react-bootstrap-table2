@@ -94,6 +94,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
+            wrapperClasses={ this.props.headerWrapperClasses }
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
@@ -119,6 +120,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             />
           )}
           <Body
+            className={ this.props.bodyClasses }
             data={ this.getData() }
             keyField={ keyField }
             tabIndexCell={ tabIndexCell }
@@ -163,7 +165,10 @@ BootstrapTable.propTypes = {
   tabIndexCell: PropTypes.bool,
   id: PropTypes.string,
   classes: PropTypes.string,
+  headerClasses: PropTypes.string,
+  bodyClasses: PropTypes.string,
   wrapperClasses: PropTypes.string,
+  headerWrapperClasses: PropTypes.string,
   condensed: PropTypes.bool,
   caption: PropTypes.oneOfType([
     PropTypes.node,
@@ -221,7 +226,6 @@ BootstrapTable.propTypes = {
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  headerClasses: PropTypes.string,
   filtersClasses: PropTypes.string,
   filterPosition: PropTypes.oneOf([
     Const.FILTERS_POSITION_TOP,

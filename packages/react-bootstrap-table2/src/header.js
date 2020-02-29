@@ -22,7 +22,8 @@ const Header = (props) => {
     currFilters,
     onExternalFilter,
     filterPosition,
-    globalSortCaret
+    globalSortCaret,
+    wrapperClasses
   } = props;
 
   let SelectionHeaderCellComp = () => null;
@@ -80,7 +81,7 @@ const Header = (props) => {
   }
 
   return (
-    <thead>
+    <thead className={ wrapperClasses }>
       <tr className={ className }>
         { childrens }
       </tr>
@@ -99,6 +100,7 @@ Header.propTypes = {
   onExternalFilter: PropTypes.func,
   globalSortCaret: PropTypes.func,
   className: PropTypes.string,
+  wrapperClasses: PropTypes.string,
   expandRow: PropTypes.object,
   filterPosition: PropTypes.oneOf([
     Const.FILTERS_POSITION_TOP,
