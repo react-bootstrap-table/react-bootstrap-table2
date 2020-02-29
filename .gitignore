@@ -1,5 +1,6 @@
 # node
 node_modules
+node_modules.nosync
 package-lock.json
 
 # testing
