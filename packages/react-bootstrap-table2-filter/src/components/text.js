@@ -88,8 +88,9 @@ class TextFilter extends Component {
 
   render() {
     const {
+      id,
       placeholder,
-      column: { text },
+      column: { dataField, text },
       style,
       className,
       onFilter,
@@ -100,18 +101,19 @@ class TextFilter extends Component {
       ...rest
     } = this.props;
 
-    // stopPropagation for onClick event is try to prevent sort was triggered.
+    const elmId = `text-filter-column-${dataField}${id ? `-${id}` : ''}`;
+
     return (
       <label
         className="filter-label"
-        htmlFor={ `text-filter-column-${text}` }
+        htmlFor={ elmId }
       >
         <span className="sr-only">Filter by {text}</span>
         <input
           { ...rest }
           ref={ n => this.input = n }
           type="text"
-          id={ `text-filter-column-${text}` }
+          id={ elmId }
           className={ `filter text-filter form-control ${className}` }
           style={ style }
           onChange={ this.filter }
@@ -127,6 +129,7 @@ class TextFilter extends Component {
 TextFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  id: PropTypes.string,
   filterState: PropTypes.object,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   defaultValue: PropTypes.string,
@@ -142,7 +145,8 @@ TextFilter.defaultProps = {
   delay: FILTER_DELAY,
   filterState: {},
   defaultValue: '',
-  caseSensitive: false
+  caseSensitive: false,
+  id: null
 };
 
 

@@ -14,7 +14,9 @@ const columns = [{
   dataField: 'name',
   text: 'Product Name',
   footer: 'hello',
-  filter: textFilter()
+  filter: textFilter({
+    id: 'identify'
+  })
 }, {
   dataField: 'price',
   text: 'Product Price',
@@ -54,7 +56,6 @@ export default () => (
       data={ products }
       columns={ columns }
       filter={ filterFactory() }
-      filterPosition="bottom"
       selectRow={ selectRow }
     />
     <Code>{ sourceCode }</Code>
