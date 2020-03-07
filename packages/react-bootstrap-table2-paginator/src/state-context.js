@@ -47,7 +47,7 @@ class StateProvider extends React.Component {
   }
 
   getPaginationProps = () => {
-    const { pagination: { options }, bootstrap4 } = this.props;
+    const { pagination: { options }, bootstrap4, tableId } = this.props;
     const { currPage, currSizePerPage, dataSize } = this;
     const withFirstAndLast = typeof options.withFirstAndLast === 'undefined' ?
       Const.With_FIRST_AND_LAST : options.withFirstAndLast;
@@ -62,6 +62,7 @@ class StateProvider extends React.Component {
     return {
       ...options,
       bootstrap4,
+      tableId,
       page: currPage,
       sizePerPage: currSizePerPage,
       pageStartIndex,

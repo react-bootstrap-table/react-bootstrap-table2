@@ -226,6 +226,7 @@ const withContext = Base =>
           isRemotePagination={ this.isRemotePagination }
           remoteEmitter={ this.remoteEmitter }
           onDataSizeChange={ this.props.onDataSizeChange }
+          tableId={ this.props.id }
         >
           <this.PaginationContext.Consumer>
             {
