@@ -54,7 +54,8 @@
   caseSensitive: <span class="hljs-literal">true</span>, <span class="hljs-comment">// default is false, and true will only work when comparator is LIKE</span>
   style: { ... }, <span class="hljs-comment">// your custom styles on input</span>
   delay: <span class="hljs-number">1000</span>, <span class="hljs-comment">// how long will trigger filtering after user typing, default is 500 ms</span>
-  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... } <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
+  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... }, <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
+  id: <span class="hljs-string">'id'</span>, <span class="hljs-comment">// assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page</span>
 });
 
 <span class="hljs-comment">// omit...</span>
@@ -95,7 +96,8 @@
   caseSensitive: <span class="hljs-literal">false</span>, <span class="hljs-comment">// default is true</span>
   style: { ... }, <span class="hljs-comment">// your custom styles on input</span>
   withoutEmptyOption: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// hide the default select option</span>
-  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... } <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
+  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... }, <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
+  id: <span class="hljs-string">'id'</span>, <span class="hljs-comment">// assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page</span>
 });
 
 <span class="hljs-comment">// omit...</span>
@@ -170,7 +172,8 @@
   defaultValue: <span class="hljs-string">'2'</span>, <span class="hljs-comment">// default filtering value</span>
   comparator: Comparator.LIKE, <span class="hljs-comment">// default is Comparator.EQ</span>
   style: { ... }, <span class="hljs-comment">// your custom styles on input</span>
-  withoutEmptyOption: <span class="hljs-literal">true</span>  <span class="hljs-comment">// hide the default select option</span>
+  withoutEmptyOption: <span class="hljs-literal">true</span>,  <span class="hljs-comment">// hide the default select option</span>
+  id: <span class="hljs-string">'id'</span>, <span class="hljs-comment">// assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page</span>
 });
 
 <span class="hljs-comment">// omit...</span>
@@ -204,7 +207,8 @@
   numberStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'cadetblue'</span>, <span class="hljs-attr">margin</span>: <span class="hljs-string">'0px'</span> },  <span class="hljs-comment">// custom the style on number input/select</span>
   numberClassName: <span class="hljs-string">'custom-number-class'</span>,  <span class="hljs-comment">// custom the class on ber input/select</span>
   defaultValue: { <span class="hljs-attr">number</span>: <span class="hljs-number">2103</span>, <span class="hljs-attr">comparator</span>: Comparator.GT },  <span class="hljs-comment">// default value</span>
-  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... } <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
+  getFilter: <span class="hljs-function">(<span class="hljs-params">f</span>) =&gt;</span> { ... }, <span class="hljs-comment">// accept callback function and you can call it for filter programmtically</span>
+  id: <span class="hljs-string">'id'</span>, <span class="hljs-comment">// assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page</span>
 })
 
 <span class="hljs-comment">// omit...</span>
@@ -238,7 +242,8 @@
   comparatorClassName: <span class="hljs-string">'custom-comparator-class'</span>,  <span class="hljs-comment">// custom the class on comparator select</span>
   dateStyle: { <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">'cadetblue'</span>, <span class="hljs-attr">margin</span>: <span class="hljs-string">'0px'</span> },  <span class="hljs-comment">// custom the style on date input</span>
   dateClassName: <span class="hljs-string">'custom-date-class'</span>,  <span class="hljs-comment">// custom the class on date input</span>
-  defaultValue: { <span class="hljs-attr">date</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2018</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), <span class="hljs-attr">comparator</span>: Comparator.GT }  <span class="hljs-comment">// default value</span>
+  defaultValue: { <span class="hljs-attr">date</span>: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(<span class="hljs-number">2018</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), <span class="hljs-attr">comparator</span>: Comparator.GT },  <span class="hljs-comment">// default value</span>
+  id: <span class="hljs-string">'id'</span>, <span class="hljs-comment">// assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page</span>
 });
 
 <span class="hljs-comment">// omit...</span>
