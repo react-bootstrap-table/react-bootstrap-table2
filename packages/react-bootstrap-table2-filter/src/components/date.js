@@ -128,8 +128,9 @@ class DateFilter extends Component {
 
   render() {
     const {
+      id,
       placeholder,
-      column: { text },
+      column: { dataField, text },
       style,
       comparatorStyle,
       dateStyle,
@@ -137,6 +138,9 @@ class DateFilter extends Component {
       comparatorClassName,
       dateClassName
     } = this.props;
+
+    const comparatorElmId = `date-filter-comparator-${dataField}${id ? `-${id}` : ''}`;
+    const inputElmId = `date-filter-column-${dataField}${id ? `-${id}` : ''}`;
 
     return (
       <div
@@ -146,12 +150,12 @@ class DateFilter extends Component {
       >
         <label
           className="filter-label"
-          htmlFor={ `date-filter-comparator-${text}` }
+          htmlFor={ comparatorElmId }
         >
           <span className="sr-only">Filter comparator</span>
           <select
             ref={ n => this.dateFilterComparator = n }
-            id={ `date-filter-comparator-${text}` }
+            id={ comparatorElmId }
             style={ comparatorStyle }
             className={ `date-filter-comparator form-control ${comparatorClassName}` }
             onChange={ this.onChangeComparator }
@@ -160,11 +164,11 @@ class DateFilter extends Component {
             { this.getComparatorOptions() }
           </select>
         </label>
-        <label htmlFor={ `date-filter-column-${text}` }>
+        <label htmlFor={ inputElmId }>
           <span className="sr-only">Enter ${ text }</span>
           <input
             ref={ n => this.inputDate = n }
-            id={ `date-filter-column-${text}` }
+            id={ inputElmId }
             className={ `filter date-filter-input form-control ${dateClassName}` }
             style={ dateStyle }
             type="date"
@@ -181,6 +185,7 @@ class DateFilter extends Component {
 DateFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  id: PropTypes.string,
   filterState: PropTypes.object,
   delay: PropTypes.number,
   defaultValue: PropTypes.shape({
@@ -232,7 +237,8 @@ DateFilter.defaultProps = {
   comparatorStyle: undefined,
   comparatorClassName: '',
   dateStyle: undefined,
-  dateClassName: ''
+  dateClassName: '',
+  id: null
 };
 
 

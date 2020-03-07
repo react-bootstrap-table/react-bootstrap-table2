@@ -25,6 +25,7 @@ export default (
     constructor(props) {
       super(props);
       this.currFilters = {};
+      this.clearFilters = {};
       this.onFilter = this.onFilter.bind(this);
       this.doFilter = this.doFilter.bind(this);
       this.onExternalFilter = this.onExternalFilter.bind(this);
@@ -42,6 +43,7 @@ export default (
       return (filterVal) => {
         // watch out here if migration to context API, #334
         const currFilters = Object.assign({}, this.currFilters);
+        this.clearFilters = {};
         const { dataField, filter } = column;
 
         const needClearFilters =
@@ -51,6 +53,7 @@ export default (
 
         if (needClearFilters) {
           delete currFilters[dataField];
+          this.clearFilters = { [dataField]: { clear: true, filterVal } };
         } else {
           // select default comparator is EQ, others are LIKE
           const {
@@ -93,7 +96,7 @@ export default (
 
     doFilter(props, ignoreEmitDataChange = false) {
       const { dataChangeListener, data, columns } = props;
-      const result = filters(data, columns, _)(this.currFilters);
+      const result = filters(data, columns, _)(this.currFilters, this.clearFilters);
       this.data = result;
       if (dataChangeListener && !ignoreEmitDataChange) {
         this.isEmitDataChange = true;

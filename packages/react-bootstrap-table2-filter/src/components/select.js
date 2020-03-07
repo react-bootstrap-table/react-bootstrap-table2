@@ -144,6 +144,7 @@ class SelectFilter extends Component {
 
   render() {
     const {
+      id,
       style,
       className,
       defaultValue,
@@ -160,17 +161,18 @@ class SelectFilter extends Component {
 
     const selectClass =
       `filter select-filter form-control ${className} ${this.state.isSelected ? '' : 'placeholder-selected'}`;
+    const elmId = `select-filter-column-${column.dataField}${id ? `-${id}` : ''}`;
 
     return (
       <label
         className="filter-label"
-        htmlFor={ `select-filter-column-${column.text}` }
+        htmlFor={ elmId }
       >
         <span className="sr-only">Filter by { column.text }</span>
         <select
           { ...rest }
           ref={ n => this.selectInput = n }
-          id={ `select-filter-column-${column.text}` }
+          id={ elmId }
           style={ style }
           className={ selectClass }
           onChange={ this.filter }
@@ -187,6 +189,7 @@ class SelectFilter extends Component {
 SelectFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
+  id: PropTypes.string,
   filterState: PropTypes.object,
   options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
   comparator: PropTypes.oneOf([LIKE, EQ]),
@@ -205,7 +208,8 @@ SelectFilter.defaultProps = {
   className: '',
   withoutEmptyOption: false,
   comparator: EQ,
-  caseSensitive: true
+  caseSensitive: true,
+  id: null
 };
 
 export default SelectFilter;

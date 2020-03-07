@@ -64,7 +64,8 @@ const priceFilter = textFilter({
   comparator: Comparator.EQ, // default is Comparator.LIKE
   caseSensitive: true, // default is false, and true will only work when comparator is LIKE
   style: { ... }, // your custom styles on input
-  delay: 1000 // how long will trigger filtering after user typing, default is 500 ms
+  delay: 1000, // how long will trigger filtering after user typing, default is 500 ms
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 });
 
 // omit...
@@ -110,6 +111,7 @@ const qualityFilter = selectFilter({
   comparator: Comparator.LIKE, // default is Comparator.EQ
   style: { ... }, // your custom styles on input
   withoutEmptyOption: true  // hide the default select option
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 });
 
 // omit...
@@ -197,6 +199,7 @@ const qualityFilter = multiSelectFilter({
   comparator: Comparator.LIKE, // default is Comparator.EQ
   style: { ... }, // your custom styles on input
   withoutEmptyOption: true  // hide the default select option
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 });
 
 // omit...
@@ -236,6 +239,7 @@ const numberFilter = numberFilter({
   numberStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on number input/select
   numberClassName: 'custom-number-class',  // custom the class on ber input/select
   defaultValue: { number: 2103, comparator: Comparator.GT }  // default value
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 })
 
 // omit...
@@ -275,6 +279,7 @@ const dateFilter = dateFilter({
   dateStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on date input
   dateClassName: 'custom-date-class',  // custom the class on date input
   defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT }  // default value
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 })
 
 // omit...

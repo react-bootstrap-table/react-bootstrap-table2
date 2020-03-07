@@ -9,6 +9,7 @@ const sizePerPageDefaultClass = 'react-bs-table-sizePerPage-dropdown';
 const SizePerPageDropDown = (props) => {
   const {
     open,
+    tableId,
     hidden,
     onClick,
     onBlur,
@@ -30,6 +31,8 @@ const SizePerPageDropDown = (props) => {
     className,
   );
 
+  const id = tableId ? `${tableId}-pageDropDown` : 'pageDropDown';
+
   return (
     <BootstrapContext.Consumer>
       {
@@ -39,7 +42,8 @@ const SizePerPageDropDown = (props) => {
             className={ dropdownClasses }
           >
             <button
-              id="pageDropDown"
+              id={ id }
+              type="button"
               className={ `btn ${btnContextual} dropdown-toggle` }
               data-toggle="dropdown"
               aria-expanded={ open }
@@ -59,7 +63,7 @@ const SizePerPageDropDown = (props) => {
             <ul
               className={ `dropdown-menu ${openClass}` }
               role="menu"
-              aria-labelledby="pageDropDown"
+              aria-labelledby={ id }
             >
               {
                 options.map((option) => {
@@ -93,6 +97,7 @@ SizePerPageDropDown.propTypes = {
   onClick: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   onSizePerPageChange: PropTypes.func.isRequired,
+  tableId: PropTypes.string,
   open: PropTypes.bool,
   hidden: PropTypes.bool,
   btnContextual: PropTypes.string,
@@ -106,7 +111,8 @@ SizePerPageDropDown.defaultProps = {
   btnContextual: 'btn-default btn-secondary',
   variation: 'dropdown',
   className: '',
-  optionRenderer: null
+  optionRenderer: null,
+  tableId: null
 };
 
 

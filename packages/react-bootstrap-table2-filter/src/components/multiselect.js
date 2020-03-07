@@ -112,6 +112,7 @@ class MultiSelectFilter extends Component {
 
   render() {
     const {
+      id,
       style,
       className,
       filterState,
@@ -128,17 +129,18 @@ class MultiSelectFilter extends Component {
 
     const selectClass =
       `filter select-filter form-control ${className} ${this.state.isSelected ? '' : 'placeholder-selected'}`;
+    const elmId = `multiselect-filter-column-${column.dataField}${id ? `-${id}` : ''}`;
 
     return (
       <label
         className="filter-label"
-        htmlFor={ `multiselect-filter-column-${column.text}` }
+        htmlFor={ elmId }
       >
         <span className="sr-only">Filter by {column.text}</span>
         <select
           { ...rest }
           ref={ n => this.selectInput = n }
-          id={ `multiselect-filter-column-${column.text}` }
+          id={ elmId }
           style={ style }
           multiple
           className={ selectClass }
@@ -157,6 +159,7 @@ MultiSelectFilter.propTypes = {
   onFilter: PropTypes.func.isRequired,
   column: PropTypes.object.isRequired,
   options: PropTypes.object.isRequired,
+  id: PropTypes.string,
   filterState: PropTypes.object,
   comparator: PropTypes.oneOf([LIKE, EQ]),
   placeholder: PropTypes.string,
@@ -174,7 +177,8 @@ MultiSelectFilter.defaultProps = {
   className: '',
   withoutEmptyOption: false,
   comparator: EQ,
-  caseSensitive: true
+  caseSensitive: true,
+  id: null
 };
 
 export default MultiSelectFilter;

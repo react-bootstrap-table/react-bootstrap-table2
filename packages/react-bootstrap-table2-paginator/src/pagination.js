@@ -13,6 +13,7 @@ import Const from './const';
 class Pagination extends pageResolver(Component) {
   render() {
     const {
+      tableId,
       currPage,
       pageStartIndex,
       showTotal,
@@ -43,6 +44,7 @@ class Pagination extends pageResolver(Component) {
       <div className="row react-bootstrap-table-pagination">
         <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
           <SizePerPageDropdownWithAdapter
+            tableId={ tableId }
             sizePerPageList={ sizePerPageList }
             currSizePerPage={ currSizePerPage }
             hideSizePerPage={ hideSizePerPage }
