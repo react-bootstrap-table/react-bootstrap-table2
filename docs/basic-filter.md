@@ -68,7 +68,8 @@ const priceFilter = textFilter({
   caseSensitive: true, // default is false, and true will only work when comparator is LIKE
   style: { ... }, // your custom styles on input
   delay: 1000, // how long will trigger filtering after user typing, default is 500 ms
-  getFilter: (f) => { ... } // accept callback function and you can call it for filter programmtically
+  getFilter: (f) => { ... }, // accept callback function and you can call it for filter programmtically
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 });
 
 // omit...
@@ -115,7 +116,8 @@ const qualityFilter = selectFilter({
   caseSensitive: false, // default is true
   style: { ... }, // your custom styles on input
   withoutEmptyOption: true,  // hide the default select option
-  getFilter: (f) => { ... } // accept callback function and you can call it for filter programmtically
+  getFilter: (f) => { ... }, // accept callback function and you can call it for filter programmtically
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 });
 
 // omit...
@@ -204,7 +206,8 @@ const qualityFilter = multiSelectFilter({
   defaultValue: '2', // default filtering value
   comparator: Comparator.LIKE, // default is Comparator.EQ
   style: { ... }, // your custom styles on input
-  withoutEmptyOption: true  // hide the default select option
+  withoutEmptyOption: true,  // hide the default select option
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 });
 
 // omit...
@@ -244,7 +247,8 @@ const numberFilter = numberFilter({
   numberStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on number input/select
   numberClassName: 'custom-number-class',  // custom the class on ber input/select
   defaultValue: { number: 2103, comparator: Comparator.GT },  // default value
-  getFilter: (f) => { ... } // accept callback function and you can call it for filter programmtically
+  getFilter: (f) => { ... }, // accept callback function and you can call it for filter programmtically
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 })
 
 // omit...
@@ -283,7 +287,8 @@ const dateFilter = dateFilter({
   comparatorClassName: 'custom-comparator-class',  // custom the class on comparator select
   dateStyle: { backgroundColor: 'cadetblue', margin: '0px' },  // custom the style on date input
   dateClassName: 'custom-date-class',  // custom the class on date input
-  defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT }  // default value
+  defaultValue: { date: new Date(2018, 0, 1), comparator: Comparator.GT },  // default value
+  id: 'id', // assign a unique value for htmlFor attribute, it's useful when you have same dataField across multiple table in one page
 });
 
 // omit...

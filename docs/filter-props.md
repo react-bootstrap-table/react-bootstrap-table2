@@ -65,6 +65,9 @@ const columns = [{
 **Required**: NONE
 
 **Optional**:
+### textFilter.id - [String]
+* custom element HTML id for filter
+
 ### textFilter.placeholder - [String]
 * custom the input placeholder
 
@@ -135,6 +138,9 @@ const columns = [{
 * (Required) the options for the list of drop down.
 
 **Optional**:
+
+### selectFilter.id - [String]
+* custom element HTML id for filter
 
 ### selectFilter.className - [String]
 * custom class name on input
@@ -215,6 +221,9 @@ const columns = [
 
 **Optional**:
 
+### multiSelectFilter.id - [String]
+* custom element HTML id for filter
+
 ### multiSelectFilter.className - [String]
 * custom class name on input
 
@@ -275,6 +284,9 @@ const columns = [
 **Required**: NONE
 
 **Optional**:
+
+### numberFilter.id - [String]
+* custom element HTML id for filter
 
 ### numberFilter.options - [Array]
 * Once the `options` has been defined, it will render number `select` drop down instead of number input field.
@@ -361,6 +373,9 @@ const columns = [{ ... }, { ... }, {
 **Required**: NONE
 
 **Optional**:
+
+### dateFilter.id - [String]
+* custom element HTML id for filter
 
 ### dateFilter.delay - [Number]
 * Debounce time, which means how long will trigger filtering after user typing. Default is 0.
