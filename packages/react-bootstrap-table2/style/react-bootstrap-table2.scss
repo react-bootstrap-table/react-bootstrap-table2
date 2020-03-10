@@ -163,11 +163,11 @@
   .row-expansion-style{
     padding: 8px;
   }
-  .row-expand-slide-appear{
+  .row-expand-slide-enter{
     max-height: 0;
     overflow: hidden;
   }
-  .row-expand-slide-appear-active{
+  .row-expand-slide-enter-active{
     max-height: 1000px;
     transition: max-height 3s linear;
   }

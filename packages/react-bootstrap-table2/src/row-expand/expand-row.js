@@ -7,7 +7,6 @@ const ExpandRow = ({ children, expanded, onClosed, className, ...rest }) => (
   <tr>
     <td className={ cs('reset-expansion-style', className) } { ...rest }>
       <CSSTransition
-        appear
         in={ expanded }
         timeout={ 400 }
         classNames="row-expand-slide"
