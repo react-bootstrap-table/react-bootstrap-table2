@@ -4,9 +4,6 @@ import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
 
 export default class ExpandRow extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   onEnter() {
     this.expandableDiv = document.getElementById(`expansion-div-${this.props.id}`);
     if (!this.elementHeight) {
