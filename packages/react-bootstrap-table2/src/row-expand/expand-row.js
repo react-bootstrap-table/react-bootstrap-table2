@@ -1,39 +1,60 @@
 import cs from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 
-const ExpandRow = ({ children, expanded, onClosed, className, ...rest }) => (
-  <tr>
-    <td className={ cs('reset-expansion-style', className) } { ...rest }>
-      <CSSTransition
-        in={ expanded }
-        timeout={ 400 }
-        classNames="row-expand-slide"
-        onExited={ onClosed }
-      >
-        <div>
-          <div className="row-expansion-style">
-            { children }
-          </div>
-        </div>
-      </CSSTransition>
-    </td>
-  </tr>
-);
+export default class ExpandRow extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.elementHeight = 0;
+  }
+  onEnter() {
+    this.expandableDiv = document.getElementById(`expansion-div-${this.props.id}`);
+    this.elementHeight = this.expandableDiv.offsetHeight;
+    this.expandableDiv.style.height = '0px';
+    const elementHeight = this.elementHeight;
+    setTimeout(() => { this.expandableDiv.style.height = `${elementHeight}px`; }, 1);
+  }
+  onExit() {
+    this.expandableDiv.style.height = '0px';
+  }
+  render() {
+    const { children, expanded, onClosed, className, id, ...rest } = this.props;
+    return (
+      <tr>
+        <td className={ cs('reset-expansion-style', className) } { ...rest }>
+          <Transition
+            in={ expanded }
+            timeout={ 460 }
+            onEnter={ () => this.onEnter() }
+            onExit={ () => this.onExit() }
+            onExited={ onClosed }
+            unmountOnExit
+          >
+            <div id={ `expansion-div-${id}` } className="row-expansion-inner">
+              <div className="row-expansion-style">
+                {children}
+              </div>
+            </div>
+          </Transition>
+        </td>
+      </tr>);
+  }
+}
 
 ExpandRow.propTypes = {
   children: PropTypes.node,
   expanded: PropTypes.bool,
   onClosed: PropTypes.func,
-  className: PropTypes.string
+  className: PropTypes.string,
+  id: PropTypes.string
 };
 
 ExpandRow.defaultProps = {
   children: null,
   expanded: false,
   onClosed: null,
-  className: ''
+  className: '',
+  id: ''
 };
-
-export default ExpandRow;
