@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import { Transition } from 'react-transition-group';
 
 export default class ExpandRow extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (!this.props.animate && !this.props.expanded && prevProps.expanded !== this.props.expanded) {
+      this.props.onClosed();
+    }
+  }
   onEnter() {
     this.expandableDiv = document.getElementById(`expansion-div-${this.props.id}`);
     if (!this.elementHeight) {
@@ -15,11 +20,6 @@ export default class ExpandRow extends React.Component {
   }
   onExit() {
     this.expandableDiv.style.height = '0px';
-  }
-  componentDidUpdate(prevProps){
-    if (!this.props.animate && !this.props.expanded && prevProps.expanded !== this.props.expanded) {
-      this.props.onClosed();
-    }
   }
   render() {
     const { children, expanded, onClosed, className, id, animate, ...rest } = this.props;
