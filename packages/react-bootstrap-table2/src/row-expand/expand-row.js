@@ -16,27 +16,44 @@ export default class ExpandRow extends React.Component {
   onExit() {
     this.expandableDiv.style.height = '0px';
   }
+  componentDidUpdate(prevProps){
+    if (!this.props.animate && !this.props.expanded && prevProps.expanded !== this.props.expanded) {
+      this.props.onClosed();
+    }
+  }
   render() {
-    const { children, expanded, onClosed, className, id, ...rest } = this.props;
+    const { children, expanded, onClosed, className, id, animate, ...rest } = this.props;
+
+    let expansionDiv = (
+      <div id={ `expansion-div-${id}` } className="row-expansion-inner">
+        <div className="row-expansion-style">
+          {children}
+        </div>
+      </div>
+    );
+
+    if (animate) {
+      expansionDiv = (
+        <Transition
+          in={ expanded }
+          timeout={ 460 }
+          onEnter={ () => this.onEnter() }
+          onExit={ () => this.onExit() }
+          onExited={ onClosed }
+          unmountOnExit
+        >
+          {expansionDiv}
+        </Transition>
+      );
+    }
+
     return (
       <tr>
         <td className={ cs('reset-expansion-style', className) } { ...rest }>
-          <Transition
-            in={ expanded }
-            timeout={ 460 }
-            onEnter={ () => this.onEnter() }
-            onExit={ () => this.onExit() }
-            onExited={ onClosed }
-            unmountOnExit
-          >
-            <div id={ `expansion-div-${id}` } className="row-expansion-inner">
-              <div className="row-expansion-style">
-                {children}
-              </div>
-            </div>
-          </Transition>
+          {expansionDiv}
         </td>
-      </tr>);
+      </tr>
+    );
   }
 }
 
@@ -45,6 +62,7 @@ ExpandRow.propTypes = {
   expanded: PropTypes.bool,
   onClosed: PropTypes.func,
   className: PropTypes.string,
+  animate: PropTypes.bool,
   id: PropTypes.number
 };
 
@@ -53,5 +71,6 @@ ExpandRow.defaultProps = {
   expanded: false,
   onClosed: null,
   className: '',
+  animate: true,
   id: null
 };
