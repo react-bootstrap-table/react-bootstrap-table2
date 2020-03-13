@@ -6,12 +6,12 @@ import { Transition } from 'react-transition-group';
 export default class ExpandRow extends React.Component {
   constructor(props) {
     super(props);
-
-    this.elementHeight = 0;
   }
   onEnter() {
     this.expandableDiv = document.getElementById(`expansion-div-${this.props.id}`);
-    this.elementHeight = this.expandableDiv.offsetHeight;
+    if (!this.elementHeight) {
+      this.elementHeight = this.expandableDiv.offsetHeight;
+    }
     this.expandableDiv.style.height = '0px';
     const elementHeight = this.elementHeight;
     setTimeout(() => { this.expandableDiv.style.height = `${elementHeight}px`; }, 1);
@@ -48,7 +48,7 @@ ExpandRow.propTypes = {
   expanded: PropTypes.bool,
   onClosed: PropTypes.func,
   className: PropTypes.string,
-  id: PropTypes.string
+  id: PropTypes.number
 };
 
 ExpandRow.defaultProps = {
@@ -56,5 +56,5 @@ ExpandRow.defaultProps = {
   expanded: false,
   onClosed: null,
   className: '',
-  id: ''
+  id: null
 };
