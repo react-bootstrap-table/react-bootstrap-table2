@@ -7,8 +7,18 @@ import PaginationList from './pagination-list';
 const paginationListAdapter = WrappedComponent =>
   class PaginationListAdapter extends pageResolver(Component) {
     render() {
-      const { lastPage, totalPages, pageButtonRenderer, onPageChange } = this.props;
-      const pages = this.calculatePageStatus(this.calculatePages(totalPages, lastPage), lastPage);
+      const {
+        lastPage,
+        totalPages,
+        pageButtonRenderer,
+        onPageChange,
+        disablePageTitle
+      } = this.props;
+      const pages = this.calculatePageStatus(
+        this.calculatePages(totalPages, lastPage),
+        lastPage,
+        disablePageTitle
+      );
       return (
         <WrappedComponent
           pageButtonRenderer={ pageButtonRenderer }

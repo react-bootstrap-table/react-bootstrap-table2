@@ -47,6 +47,7 @@ const options = {
   lastPageTitle: 'Last page',
   showTotal: true,
   paginationTotalRenderer: customTotal,
+  disablePageTitle: true,
   sizePerPageList: [{
     text: '5', value: 5
   }, {
@@ -82,6 +83,7 @@ const options = {
   lastPageTitle: 'Last page',
   showTotal: true,
   paginationTotalRenderer: customTotal,
+  disablePageTitle: true,
   sizePerPageList: [{
     text: '5', value: 5
   }, {

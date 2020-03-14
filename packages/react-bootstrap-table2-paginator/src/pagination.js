@@ -94,6 +94,7 @@ Pagination.propTypes = {
   currSizePerPage: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
   onSizePerPageChange: PropTypes.func.isRequired,
+  disablePageTitle: PropTypes.bool,
   pageStartIndex: PropTypes.number,
   paginationSize: PropTypes.number,
   showTotal: PropTypes.bool,
@@ -117,6 +118,7 @@ Pagination.propTypes = {
 };
 
 Pagination.defaultProps = {
+  disablePageTitle: false,
   pageStartIndex: Const.PAGE_START_INDEX,
   paginationSize: Const.PAGINATION_SIZE,
   withFirstAndLast: Const.With_FIRST_AND_LAST,
