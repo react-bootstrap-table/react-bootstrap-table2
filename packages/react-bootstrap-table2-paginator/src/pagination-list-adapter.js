@@ -12,13 +12,17 @@ const paginationListAdapter = WrappedComponent =>
         totalPages,
         pageButtonRenderer,
         onPageChange,
-        disablePageTitle
+        disablePageTitle,
+        hidePageListOnlyOnePage
       } = this.props;
       const pages = this.calculatePageStatus(
         this.calculatePages(totalPages, lastPage),
         lastPage,
         disablePageTitle
       );
+      if (totalPages === 1 && hidePageListOnlyOnePage) {
+        return null;
+      }
       return (
         <WrappedComponent
           pageButtonRenderer={ pageButtonRenderer }
