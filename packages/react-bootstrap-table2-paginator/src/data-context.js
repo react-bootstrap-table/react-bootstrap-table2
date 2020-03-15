@@ -5,7 +5,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Const from './const';
-import { BootstrapContext } from './bootstrap';
 import Pagination from './pagination';
 import { getByCurrPage, alignPage } from './page';
 import createBaseContext from './state-context';
@@ -57,22 +56,19 @@ class PaginationDataProvider extends Provider {
   renderDefaultPagination = () => {
     if (!this.props.pagination.options.custom) {
       const {
-        bootstrap4,
         page: currPage,
         sizePerPage: currSizePerPage,
         dataSize,
         ...rest
       } = this.getPaginationProps();
       return (
-        <BootstrapContext.Provider value={ { bootstrap4 } }>
-          <Pagination
-            { ...rest }
-            key="pagination"
-            dataSize={ dataSize || this.props.data.length }
-            currPage={ currPage }
-            currSizePerPage={ currSizePerPage }
-          />
-        </BootstrapContext.Provider>
+        <Pagination
+          { ...rest }
+          key="pagination"
+          dataSize={ dataSize || this.props.data.length }
+          currPage={ currPage }
+          currSizePerPage={ currSizePerPage }
+        />
       );
     }
     return null;

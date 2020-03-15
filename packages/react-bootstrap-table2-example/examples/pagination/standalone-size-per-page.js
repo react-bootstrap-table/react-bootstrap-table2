@@ -74,6 +74,7 @@ export default class StandaloneSizePerPage extends React.Component {
     return (
       <div>
         <PaginationProvider
+          bootstrap4
           pagination={ paginationFactory(options) }
         >
           {
@@ -84,7 +85,7 @@ export default class StandaloneSizePerPage extends React.Component {
               <div>
                 <SizePerPageDropdownStandalone
                   { ...paginationProps }
-                  btnContextual="btn btn-primary"
+                  btnContextual="btn btn-warning"
                 />
                 <BootstrapTable
                   keyField="id"

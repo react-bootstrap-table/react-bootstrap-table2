@@ -31,6 +31,7 @@ const sizePerPageDropdownAdapter = WrappedComponent =>
     render() {
       const {
         tableId,
+        bootstrap4,
         sizePerPageList,
         currSizePerPage,
         hideSizePerPage,
@@ -58,6 +59,7 @@ const sizePerPageDropdownAdapter = WrappedComponent =>
             onBlur={ this.closeDropDown }
             open={ open }
             tableId={ tableId }
+            bootstrap4={ bootstrap4 }
           />
         );
       }
