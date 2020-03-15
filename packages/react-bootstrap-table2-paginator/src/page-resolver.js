@@ -107,7 +107,7 @@ export default ExtendBase =>
       return pages;
     }
 
-    calculatePageStatus(pages = [], lastPage) {
+    calculatePageStatus(pages = [], lastPage, disablePageTitle = false) {
       const {
         currPage,
         pageStartIndex,
@@ -146,7 +146,11 @@ export default ExtendBase =>
             title = `${page}`;
           }
 
-          return { page, active, disabled, title };
+          const pageResult = { page, active, disabled };
+          if (!disablePageTitle) {
+            pageResult.title = title;
+          }
+          return pageResult;
         });
     }
 
