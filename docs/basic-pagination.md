@@ -58,6 +58,7 @@ import paginationFactory from 'react-bootstrap-table2-paginator';
 * [hideSizePerPage](./pagination-props.html#paginationhidesizeperpage-bool)
 * [hidePageListOnlyOnePage](./pagination-props.html#paginationhidepagelistonlyonepage-bool)
 * [showTotal](./pagination-props.html#paginationshowtotal-bool)
+* [disablePageTitle](./pagination-props.html#paginationdisablepagetitle-bool)
 
 You can check [this online demo](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Pagination&selectedStory=Custom%20Pagination&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel) for above props usage.
 
@@ -238,6 +239,7 @@ prePageTitle,
 nextPageTitle,
 firstPageTitle,
 lastPageTitle,
+disablePageTitle,
 onPageChange,
 onSizePerPageChange
 ```

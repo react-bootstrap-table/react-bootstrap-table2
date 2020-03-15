@@ -38,6 +38,7 @@ const pagination = paginationFactory({
 * [nextPageTitle](#paginationnextpagetitle-any)
 * [lastPageTitle](#paginationlastpagetitle-any)
 * [hideSizePerPage](#paginationhidesizeperpage-bool)
+* [disablePageTitle](#paginationdisablepagetitle-bool)
 * [hidePageListOnlyOnePage](#paginationhidepagelistonlyonepage-bool)
 * [onPageChange](#paginationonpagechange-function)
 * [onSizePerPageChange](#paginationonsizeperpagechange-function)
@@ -132,6 +133,9 @@ You can hide the pagination when there's only one page in table. Default is `fal
 
 ## pagination.showTotal - [Bool]
 Default is `false`, if enable will display a text to indicate the row range of current page.
+
+## pagination.disablePageTitle - [Bool]
+Default is `false`, if enable will remove the `title` attribute from each page button.
 
 ## pagination.pageButtonRenderer - [Function]
 Custom the page button inside the pagination list. This callback function have one argument which is an object and contain following props:
