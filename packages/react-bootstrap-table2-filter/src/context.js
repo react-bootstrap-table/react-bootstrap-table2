@@ -95,8 +95,11 @@ export default (
     }
 
     doFilter(props, ignoreEmitDataChange = false) {
-      const { dataChangeListener, data, columns } = props;
+      const { dataChangeListener, data, columns, filter } = props;
       const result = filters(data, columns, _)(this.currFilters, this.clearFilters);
+      if (filter.afterFilter) {
+        filter.afterFilter(result, this.currFilters);
+      }
       this.data = result;
       if (dataChangeListener && !ignoreEmitDataChange) {
         this.isEmitDataChange = true;
