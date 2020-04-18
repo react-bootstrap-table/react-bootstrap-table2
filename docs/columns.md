@@ -437,6 +437,7 @@ You can assign any [HTML Event](https://www.w3schools.com/tags/ref_eventattribut
 * onMouseEnter
 * onMouseLeave
 * onContextMenu
+* onAuxClick
 
 ```js
 {

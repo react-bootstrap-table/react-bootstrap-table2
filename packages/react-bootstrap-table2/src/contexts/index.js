@@ -302,6 +302,7 @@ const withContext = Base =>
           { ...baseProps }
           ref={ n => this.filterContext = n }
           data={ rootProps.getData() }
+          filter={ this.props.filter.options || {} }
           dataChangeListener={ this.props.dataChangeListener }
         >
           <this.FilterContext.Consumer>

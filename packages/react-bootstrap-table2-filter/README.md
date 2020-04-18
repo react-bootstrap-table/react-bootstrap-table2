@@ -361,3 +361,28 @@ Default filter is rendered inside the table column header, but you can choose to
   filterPosition="bottom"
 />
 ```
+
+## Configuration
+
+`filterFactory` is a factory function for initializing some internal config. Below is available options for `filterFactory`:
+
+### afterFilter
+This hook function will be called with two arguments(new filter result and filter object) when filtering completed. 
+
+```js
+function afterFilter(newResult, newFilters) {
+  console.log(newResult);
+  console.log(newFilters);
+}
+
+export default () => (
+  <div>
+    <BootstrapTable
+      keyField="id"
+      data={ products }
+      columns={ columns }
+      filter={ filterFactory({ afterFilter }) }
+    />
+  </div>
+);
+```

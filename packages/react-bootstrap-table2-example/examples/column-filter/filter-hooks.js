@@ -41,8 +41,18 @@ const columns = [{
   })
 }];
 
-<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
+function afterFilter(newResult, newFilters) {
+  console.log(newResult);
+  console.log(newFilters);
+}
+
+<BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory({ afterFilter }) } />
 `;
+
+function afterFilter(newResult, newFilters) {
+  console.log(newResult);
+  console.log(newFilters);
+}
 
 export default () => (
   <div>
@@ -50,7 +60,7 @@ export default () => (
       keyField="id"
       data={ products }
       columns={ columns }
-      filter={ filterFactory() }
+      filter={ filterFactory({ afterFilter }) }
     />
     <Code>{ sourceCode }</Code>
   </div>
