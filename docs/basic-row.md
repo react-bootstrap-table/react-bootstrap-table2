@@ -26,6 +26,7 @@ Currently, `react-bootstrap-table2` only wrapped up the following events to allo
 * `onMouseEnter`
 * `onMouseLeave`
 * `onContextMenu`
+* `onAuxClick`
 
 ```js
 const rowEvents = {
