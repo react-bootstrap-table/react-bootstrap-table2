@@ -33,6 +33,8 @@ const columns = [{
 
 <BootstrapTable id="bar" keyField='id' data={ products } columns={ columns } />
 <BootstrapTable classes="foo" keyField='id' data={ products } columns={ columns } />
+<BootstrapTable headerWrapperClasses="foo" keyField="id" data={ products } columns={ columns } />
+<BootstrapTable bodyClasses="foo" keyField="id" data={ products } columns={ columns } />
 <BootstrapTable wrapperClasses="boo" keyField="id" data={ products } columns={ columns } />
 `;
 
@@ -43,6 +45,12 @@ export default () => (
 
     <h4> Customized table className </h4>
     <BootstrapTable classes="foo" keyField="id" data={ products } columns={ columns } />
+
+    <h4> Customized thead className </h4>
+    <BootstrapTable headerWrapperClasses="foo" keyField="id" data={ products } columns={ columns } />
+
+    <h4> Customized tbody className </h4>
+    <BootstrapTable bodyClasses="foo" keyField="id" data={ products } columns={ columns } />
 
     <h4> Customized wrapper className </h4>
     <BootstrapTable wrapperClasses="boo" keyField="id" data={ products } columns={ columns } />

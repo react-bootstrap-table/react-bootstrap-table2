@@ -28,6 +28,7 @@ class ToolkitProvider extends statelessDecorator(React.Component) {
         fileName: PropTypes.string,
         separator: PropTypes.string,
         ignoreHeader: PropTypes.bool,
+        ignoreFooter: PropTypes.bool,
         noAutoBOM: PropTypes.bool,
         blobType: PropTypes.string,
         exportAll: PropTypes.bool,
@@ -61,6 +62,24 @@ class ToolkitProvider extends statelessDecorator(React.Component) {
     }
     state.searchText = typeof props.search === 'object' ? (props.search.defaultSearch || '') : '';
     this.state = state;
+  }
+
+  // eslint-disable-next-line camelcase
+  UNSAFE_componentWillReceiveProps(nextProps) {
+    let columnToggle = this.state.columnToggle;
+    if (nextProps.columnToggle) {
+      columnToggle = nextProps.columns
+        .reduce((obj, column) => {
+          obj[column.dataField] = !column.hidden;
+          return obj;
+        }, {});
+    } else {
+      columnToggle = null;
+    }
+    this.setState({
+      ...this.state,
+      columnToggle
+    });
   }
 
   onSearch(searchText) {

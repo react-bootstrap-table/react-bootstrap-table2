@@ -13,6 +13,7 @@ import Const from './const';
 class Pagination extends pageResolver(Component) {
   render() {
     const {
+      tableId,
       currPage,
       pageStartIndex,
       showTotal,
@@ -30,6 +31,7 @@ class Pagination extends pageResolver(Component) {
       sizePerPageRenderer,
       sizePerPageOptionRenderer,
       onSizePerPageChange,
+      bootstrap4,
       ...rest
     } = this.props;
 
@@ -43,6 +45,8 @@ class Pagination extends pageResolver(Component) {
       <div className="row react-bootstrap-table-pagination">
         <div className="col-md-6 col-xs-6 col-sm-6 col-lg-6">
           <SizePerPageDropdownWithAdapter
+            bootstrap4={ bootstrap4 }
+            tableId={ tableId }
             sizePerPageList={ sizePerPageList }
             currSizePerPage={ currSizePerPage }
             hideSizePerPage={ hideSizePerPage }
@@ -92,6 +96,7 @@ Pagination.propTypes = {
   currSizePerPage: PropTypes.number.isRequired,
   onPageChange: PropTypes.func.isRequired,
   onSizePerPageChange: PropTypes.func.isRequired,
+  disablePageTitle: PropTypes.bool,
   pageStartIndex: PropTypes.number,
   paginationSize: PropTypes.number,
   showTotal: PropTypes.bool,
@@ -111,10 +116,13 @@ Pagination.propTypes = {
   withFirstAndLast: PropTypes.bool,
   alwaysShowAllBtns: PropTypes.bool,
   hideSizePerPage: PropTypes.bool,
-  hidePageListOnlyOnePage: PropTypes.bool
+  hidePageListOnlyOnePage: PropTypes.bool,
+  bootstrap4: PropTypes.bool
 };
 
 Pagination.defaultProps = {
+  disablePageTitle: false,
+  bootstrap4: false,
   pageStartIndex: Const.PAGE_START_INDEX,
   paginationSize: Const.PAGINATION_SIZE,
   withFirstAndLast: Const.With_FIRST_AND_LAST,

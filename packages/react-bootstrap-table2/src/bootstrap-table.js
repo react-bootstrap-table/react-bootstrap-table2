@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import cs from 'classnames';
 
 import Header from './header';
+import Filters from './filters';
 import Caption from './caption';
 import Body from './body';
 import Footer from './footer';
@@ -65,7 +66,8 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       rowEvents,
       selectRow,
       expandRow,
-      cellEdit
+      cellEdit,
+      filterPosition
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -77,9 +79,13 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       [bootstrap4 ? 'table-sm' : 'table-condensed']: condensed
     }, classes);
 
+    const hasFilters = columns.some(col => col.filter || col.filterRenderer);
+
     const hasFooter = _.filter(columns, col => _.has(col, 'footer')).length > 0;
 
-    const tableCaption = (caption && <Caption>{ caption }</Caption>);
+    const tableCaption = (
+      caption && <Caption bootstrap4={ bootstrap4 }>{ caption }</Caption>
+    );
 
     return (
       <div className={ tableWrapperClass }>
@@ -88,16 +94,33 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
+            wrapperClasses={ this.props.headerWrapperClasses }
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
             onSort={ this.props.onSort }
+            globalSortCaret={ this.props.sort && this.props.sort.sortCaret }
             onFilter={ this.props.onFilter }
             currFilters={ this.props.currFilters }
             onExternalFilter={ this.props.onExternalFilter }
             selectRow={ selectRow }
             expandRow={ expandRow }
+            filterPosition={ filterPosition }
           />
+          {hasFilters && filterPosition !== Const.FILTERS_POSITION_INLINE && (
+            <Filters
+              columns={ columns }
+              className={ this.props.filtersClasses }
+              onSort={ this.props.onSort }
+              onFilter={ this.props.onFilter }
+              currFilters={ this.props.currFilters }
+              filterPosition={ this.props.filterPosition }
+              onExternalFilter={ this.props.onExternalFilter }
+              selectRow={ selectRow }
+              expandRow={ expandRow }
+            />
+          )}
           <Body
+            className={ this.props.bodyClasses }
             data={ this.getData() }
             keyField={ keyField }
             tabIndexCell={ tabIndexCell }
@@ -135,14 +158,17 @@ BootstrapTable.propTypes = {
   remote: PropTypes.oneOfType([PropTypes.bool, PropTypes.shape({
     pagination: PropTypes.bool
   })]),
-  noDataIndication: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+  noDataIndication: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   striped: PropTypes.bool,
   bordered: PropTypes.bool,
   hover: PropTypes.bool,
   tabIndexCell: PropTypes.bool,
   id: PropTypes.string,
   classes: PropTypes.string,
+  headerClasses: PropTypes.string,
+  bodyClasses: PropTypes.string,
   wrapperClasses: PropTypes.string,
+  headerWrapperClasses: PropTypes.string,
   condensed: PropTypes.bool,
   caption: PropTypes.oneOfType([
     PropTypes.node,
@@ -166,6 +192,8 @@ BootstrapTable.propTypes = {
     style: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     classes: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     nonSelectable: PropTypes.array,
+    nonSelectableStyle: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
+    nonSelectableClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     bgColor: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
     hideSelectColumn: PropTypes.bool,
     selectionRenderer: PropTypes.func,
@@ -198,12 +226,23 @@ BootstrapTable.propTypes = {
   rowStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   rowEvents: PropTypes.object,
   rowClasses: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
-  headerClasses: PropTypes.string,
+  filtersClasses: PropTypes.string,
+  filterPosition: PropTypes.oneOf([
+    Const.FILTERS_POSITION_TOP,
+    Const.FILTERS_POSITION_INLINE,
+    Const.FILTERS_POSITION_BOTTOM
+  ]),
   footerClasses: PropTypes.string,
   defaultSorted: PropTypes.arrayOf(PropTypes.shape({
     dataField: PropTypes.string.isRequired,
     order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]).isRequired
   })),
+  sort: PropTypes.shape({
+    dataField: PropTypes.string,
+    order: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
+    sortFunc: PropTypes.func,
+    sortCaret: PropTypes.func
+  }),
   defaultSortDirection: PropTypes.oneOf([Const.SORT_DESC, Const.SORT_ASC]),
   overlay: PropTypes.func,
   onTableChange: PropTypes.func,
@@ -240,7 +279,8 @@ BootstrapTable.defaultProps = {
   cellEdit: {
     mode: null,
     nonEditableRows: []
-  }
+  },
+  filterPosition: Const.FILTERS_POSITION_INLINE
 };
 
 export default BootstrapTable;

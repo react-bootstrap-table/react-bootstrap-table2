@@ -4,6 +4,7 @@ const csvDefaultOptions = {
   fileName: 'spreadsheet.csv',
   separator: ',',
   ignoreHeader: false,
+  ignoreFooter: true,
   noAutoBOM: true,
   blobType: 'text/plain;charset=utf-8',
   exportAll: true,
@@ -46,7 +47,7 @@ export default Base =>
         data = data.filter(row => !!selections.find(sel => row[keyField] === sel));
       }
 
-      const content = transform(data, meta, this._.get, options);
+      const content = transform(data, meta, columns, this._, options);
       save(content, options);
     }
   };

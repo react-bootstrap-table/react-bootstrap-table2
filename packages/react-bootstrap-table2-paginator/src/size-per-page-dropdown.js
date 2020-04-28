@@ -1,7 +1,6 @@
 import React from 'react';
 import cs from 'classnames';
 import PropTypes from 'prop-types';
-import { BootstrapContext } from './bootstrap';
 import SizePerPageOption from './size-per-page-option';
 
 const sizePerPageDefaultClass = 'react-bs-table-sizePerPage-dropdown';
@@ -9,12 +8,14 @@ const sizePerPageDefaultClass = 'react-bs-table-sizePerPage-dropdown';
 const SizePerPageDropDown = (props) => {
   const {
     open,
+    tableId,
     hidden,
     onClick,
     onBlur,
     options,
     className,
     variation,
+    bootstrap4,
     btnContextual,
     optionRenderer,
     currSizePerPage,
@@ -30,60 +31,57 @@ const SizePerPageDropDown = (props) => {
     className,
   );
 
+  const id = tableId ? `${tableId}-pageDropDown` : 'pageDropDown';
+
   return (
-    <BootstrapContext.Consumer>
-      {
-        ({ bootstrap4 }) => (
-          <span
-            style={ dropDownStyle }
-            className={ dropdownClasses }
-          >
-            <button
-              id="pageDropDown"
-              className={ `btn ${btnContextual} dropdown-toggle` }
-              data-toggle="dropdown"
-              aria-expanded={ open }
-              onClick={ onClick }
-              onBlur={ onBlur }
-            >
-              { currSizePerPage }
-              { ' ' }
-              {
-                bootstrap4 ? null : (
-                  <span>
-                    <span className="caret" />
-                  </span>
-                )
-              }
-            </button>
-            <ul
-              className={ `dropdown-menu ${openClass}` }
-              role="menu"
-              aria-labelledby="pageDropDown"
-            >
-              {
-                options.map((option) => {
-                  if (optionRenderer) {
-                    return optionRenderer({
-                      ...option,
-                      onSizePerPageChange
-                    });
-                  }
-                  return (
-                    <SizePerPageOption
-                      { ...option }
-                      key={ option.text }
-                      bootstrap4={ bootstrap4 }
-                      onSizePerPageChange={ onSizePerPageChange }
-                    />
-                  );
-                })
-              }
-            </ul>
-          </span>
-        )
-      }
-    </BootstrapContext.Consumer>
+    <span
+      style={ dropDownStyle }
+      className={ dropdownClasses }
+    >
+      <button
+        id={ id }
+        type="button"
+        className={ `btn ${btnContextual} dropdown-toggle` }
+        data-toggle="dropdown"
+        aria-expanded={ open }
+        onClick={ onClick }
+        onBlur={ onBlur }
+      >
+        { currSizePerPage }
+        { ' ' }
+        {
+          bootstrap4 ? null : (
+            <span>
+              <span className="caret" />
+            </span>
+          )
+        }
+      </button>
+      <ul
+        className={ `dropdown-menu ${openClass}` }
+        role="menu"
+        aria-labelledby={ id }
+      >
+        {
+          options.map((option) => {
+            if (optionRenderer) {
+              return optionRenderer({
+                ...option,
+                onSizePerPageChange
+              });
+            }
+            return (
+              <SizePerPageOption
+                { ...option }
+                key={ option.text }
+                bootstrap4={ bootstrap4 }
+                onSizePerPageChange={ onSizePerPageChange }
+              />
+            );
+          })
+        }
+      </ul>
+    </span>
   );
 };
 
@@ -93,6 +91,8 @@ SizePerPageDropDown.propTypes = {
   onClick: PropTypes.func.isRequired,
   onBlur: PropTypes.func.isRequired,
   onSizePerPageChange: PropTypes.func.isRequired,
+  bootstrap4: PropTypes.bool,
+  tableId: PropTypes.string,
   open: PropTypes.bool,
   hidden: PropTypes.bool,
   btnContextual: PropTypes.string,
@@ -106,7 +106,9 @@ SizePerPageDropDown.defaultProps = {
   btnContextual: 'btn-default btn-secondary',
   variation: 'dropdown',
   className: '',
-  optionRenderer: null
+  optionRenderer: null,
+  bootstrap4: false,
+  tableId: null
 };
 
 

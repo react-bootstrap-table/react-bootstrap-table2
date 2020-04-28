@@ -1,13 +1,20 @@
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
-import filterFactory, { textFilter, dateFilter } from 'react-bootstrap-table2-filter';
+import filterFactory, { textFilter, dateFilter, selectFilter } from 'react-bootstrap-table2-filter';
 import Code from 'components/common/code-block';
 import { stockGenerator } from 'utils/common';
 
 const products = stockGenerator(8);
 
+const selectOptions = {
+  0: 'good',
+  1: 'Bad',
+  2: 'unknown'
+};
+
 let nameFilter;
 let priceFilter;
+let qualityFilter;
 let stockDateFilter;
 
 const columns = [{
@@ -19,7 +26,19 @@ const columns = [{
   filter: textFilter({
     getFilter: (filter) => {
       nameFilter = filter;
-    }
+    },
+    onFilter: filterVal => console.log(`Filter product name ${filterVal}`)
+  })
+}, {
+  dataField: 'quality',
+  text: 'Product Quailty',
+  formatter: cell => selectOptions[cell],
+  filter: selectFilter({
+    options: selectOptions,
+    getFilter: (filter) => {
+      qualityFilter = filter;
+    },
+    onFilter: filterVal => console.log(`Filter quality ${filterVal}`)
   })
 }, {
   dataField: 'price',
@@ -27,7 +46,8 @@ const columns = [{
   filter: textFilter({
     getFilter: (filter) => {
       priceFilter = filter;
-    }
+    },
+    onFilter: filterVal => console.log(`Filter Price: ${filterVal}`)
   })
 }, {
   dataField: 'inStockDate',
@@ -36,13 +56,15 @@ const columns = [{
   filter: dateFilter({
     getFilter: (filter) => {
       stockDateFilter = filter;
-    }
+    },
+    onFilter: filterVal => console.log(`Filter date: ${filterVal}`)
   })
 }];
 
 const handleClick = () => {
   nameFilter('');
   priceFilter('');
+  qualityFilter('');
   stockDateFilter();
 };
 

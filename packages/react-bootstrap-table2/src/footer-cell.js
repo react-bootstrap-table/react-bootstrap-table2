@@ -54,7 +54,7 @@ class FooterCell extends eventDelegater(React.Component) {
     if (cellClasses) cellAttrs.className = cs(cellAttrs.className, cellClasses);
     if (!_.isEmptyObject(cellStyle)) cellAttrs.style = cellStyle;
 
-    const children = footerFormatter ? footerFormatter(column, index) : text;
+    const children = footerFormatter ? footerFormatter(column, index, { text }) : text;
 
     return React.createElement('th', cellAttrs, children);
   }

@@ -77,6 +77,7 @@ export const stockGenerator = (quantity = 5) =>
     name: `Stock Name ${index}`,
     price: Math.floor((Math.random() * 2) + 1),
     visible: Math.random() > 0.5,
+    quality: index % 3,
     inStockDate:
       new Date(startDate.getTime() + Math.random() * (endDate.getTime() - startDate.getTime()))
   }));
