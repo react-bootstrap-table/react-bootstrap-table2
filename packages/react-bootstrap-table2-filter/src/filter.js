@@ -189,25 +189,19 @@ export const filterByArray = _ => (
 };
 
 export const filterFactory = _ => (filterType) => {
-  let filterFn;
   switch (filterType) {
+    case FILTER_TYPE.MULTISELECT:
+      return filterByArray(_);
+    case FILTER_TYPE.NUMBER:
+      return filterByNumber(_);
+    case FILTER_TYPE.DATE:
+      return filterByDate(_);
     case FILTER_TYPE.TEXT:
     case FILTER_TYPE.SELECT:
-      filterFn = filterByText(_);
-      break;
-    case FILTER_TYPE.MULTISELECT:
-      filterFn = filterByArray(_);
-      break;
-    case FILTER_TYPE.NUMBER:
-      filterFn = filterByNumber(_);
-      break;
-    case FILTER_TYPE.DATE:
-      filterFn = filterByDate(_);
-      break;
     default:
-      filterFn = filterByText(_);
+      // Use `text` filter as default filter
+      return filterByText(_);
   }
-  return filterFn;
 };
 
 export const filters = (data, columns, _) => (currFilters, clearFilters = {}) => {
