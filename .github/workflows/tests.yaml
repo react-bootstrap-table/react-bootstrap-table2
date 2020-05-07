@@ -1,0 +1,28 @@
+name: Jest tests
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [6.x, 7.x]
+
+    steps:
+      # Need to install Python 2 for `node-gyp` to build `node-sass`
+      - name: Set up Python 2
+        uses: actions/setup-python@v1
+        with:
+          python-version: "2.x"
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Install dependencies
+        run: yarn install
+        env:
+          PYTHON: python2
+      - name: Run tests
+        run: yarn test
