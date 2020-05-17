@@ -4,7 +4,7 @@
         <title>react-bootstrap-table2 Blog</title>
         <link>https://react-bootstrap-table.github.io/blog</link>
         <description>The best place to stay up-to-date with the latest react-bootstrap-table2 news and events.</description>
-        <lastBuildDate>Sat, 18 Apr 2020 06:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 17 May 2020 06:00:00 GMT</lastBuildDate>
         <docs>http://blogs.law.harvard.edu/tech/rss</docs>
         <generator>Feed for Node.js</generator>
         <image>
@@ -13,6 +13,30 @@
             <link>https://react-bootstrap-table.github.io/blog</link>
         </image>
         <copyright>Copyright © 2020 react-bootstrap-table2</copyright>
+        <item>
+            <title><![CDATA[New Release (2020-05-17)]]></title>
+            <link>https://react-bootstrap-table.github.io/blog/2020/05/17/version-bump.html</link>
+            <guid>https://react-bootstrap-table.github.io/blog/2020/05/17/version-bump.html</guid>
+            <pubDate>Sun, 17 May 2020 06:00:00 GMT</pubDate>
+            <description><![CDATA[## Changed Packages
+
+We got following packages version bump in this release:
+
+* `react-bootstrap-table-next@4.0.2`
+* `react-bootstrap-table2-filter@1.3.3`
+* `react-bootstrap-table2-toolkit@2.1.3`
+
+
+## Changelog
+
+### Bug fixes
+N/A
+
+### Features
+N/A
+
+#]]></description>
+        </item>
         <item>
             <title><![CDATA[New Release (2020-04-18)]]></title>
             <link>https://react-bootstrap-table.github.io/blog/2020/04/18/version-bump.html</link>

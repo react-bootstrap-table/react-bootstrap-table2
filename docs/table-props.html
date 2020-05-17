@@ -46,9 +46,26 @@
 </ul>
 <hr>
 <h2><a class="anchor" aria-hidden="true" name="keyfield-required-string"></a><a href="#keyfield-required-string" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>keyField(<strong>required</strong>) - [String]</h2>
-<p>Tells <code>react-bootstrap-table2</code> which column is unique.</p>
+<p>Tells <code>react-bootstrap-table2</code> which column of the data is unique. This should be the name of a property that is unique for each item in your dataset</p>
 <h2><a class="anchor" aria-hidden="true" name="data-required-array"></a><a href="#data-required-array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>data(<strong>required</strong>) - [Array]</h2>
 <p>Provides data for your table. It accepts a single Array object.</p>
+<p>Each item in this array is an object that represents a row in the table. Each &quot;Row&quot; object should have a key-value pair for each column in the table, whose key matches that column's dataField value.</p>
+<p>For example, if your column definitions look like:</p>
+<pre><code class="hljs css js">columns = [
+  { <span class="hljs-attr">dataField</span>: <span class="hljs-string">'id'</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">'Id'</span> },
+  { <span class="hljs-attr">dataField</span>: <span class="hljs-string">'name'</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">'Name'</span> },
+  { <span class="hljs-attr">dataField</span>: <span class="hljs-string">'animal'</span>, <span class="hljs-attr">text</span>: <span class="hljs-string">'Animal'</span> },
+]
+</code></pre>
+<p>Then your data might look like:</p>
+<pre><code class="hljs css js">data = [
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'George'</span>, <span class="hljs-attr">animal</span>: <span class="hljs-string">'Monkey'</span> }
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Jeffrey'</span>, <span class="hljs-attr">animal</span>: <span class="hljs-string">'Giraffe'</span> }
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Alice'</span>, <span class="hljs-attr">animal</span>: <span class="hljs-string">'Giraffe'</span> }
+  { <span class="hljs-attr">id</span>: <span class="hljs-number">4</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">'Alice'</span>, <span class="hljs-attr">animal</span>: <span class="hljs-string">'Tiger'</span> }
+]
+</code></pre>
+<p>And your &quot;keyField&quot; would be <code>id</code></p>
 <h2><a class="anchor" aria-hidden="true" name="columns-required-object"></a><a href="#columns-required-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>columns(<strong>required</strong>) - [Object]</h2>
 <p>Accepts a single Array object, please see <a href="./column-props.html">columns definition</a> for more detail.</p>
 <h2><a class="anchor" aria-hidden="true" name="remote-bool-object"></a><a href="#remote-bool-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>remote - [Bool | Object]</h2>
