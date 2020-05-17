@@ -141,6 +141,22 @@ If you want to search on the formatted data, you are supposed to enable this pro
 </ToolkitProvider>
 ```
 
+#### afterSearch - [Function]
+After search done, this callback function will be called with newest result.
+
+```js
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search={ {
+    afterSearch: (newResult) => console.log(newResult)
+  } }
+>
+  // ...
+</ToolkitProvider>
+```
+
 ### Clear Search Button
 We have a built-in clear search function which allow user clear search status via clicking button:
 

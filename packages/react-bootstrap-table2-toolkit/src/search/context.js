@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 
 export default (options = {
   searchFormatted: false,
+  afterSearch: null,
   onColumnMatch: null
 }) => (
   _,
@@ -32,7 +33,7 @@ export default (options = {
         handleRemoteSearchChange(this.props.searchText);
       } else {
         initialData = this.search(props);
-        this.triggerListener(initialData);
+        this.triggerListener(initialData, true);
       }
       this.state = { data: initialData };
     }
@@ -41,7 +42,10 @@ export default (options = {
       return this.state.data;
     }
 
-    triggerListener(result) {
+    triggerListener(result, skipInit) {
+      if (options.afterSearch && !skipInit) {
+        options.afterSearch(result);
+      }
       if (this.props.dataChangeListener) {
         this.props.dataChangeListener.emit('filterChanged', result.length);
       }
