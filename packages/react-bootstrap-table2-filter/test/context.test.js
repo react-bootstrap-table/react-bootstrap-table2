@@ -55,11 +55,13 @@ describe('FilterContext', () => {
       jest.fn().mockReturnValue(enableRemote),
       handleFilterChange
     );
+    const filterOptions = {};
 
     return (
       <FilterContext.Provider
         columns={ tableColumns }
         data={ data }
+        filter={ filterOptions }
         dataChangeListener={ dataChangeListener }
       >
         <FilterContext.Consumer>

@@ -39,55 +39,36 @@ export const filterByNumber = _ => (
 ) => (
   data.filter((row) => {
     if (number === '' || !comparator) return true;
-    let valid = true;
     let cell = _.get(row, dataField);
+
     if (customFilterValue) {
       cell = customFilterValue(cell, row);
     }
 
     switch (comparator) {
       case EQ: {
-        if (cell != number) {
-          valid = false;
-        }
-        break;
+        return cell == number;
       }
       case GT: {
-        if (cell <= number) {
-          valid = false;
-        }
-        break;
+        return cell > number;
       }
       case GE: {
-        if (cell < number) {
-          valid = false;
-        }
-        break;
+        return cell >= number;
       }
       case LT: {
-        if (cell >= number) {
-          valid = false;
-        }
-        break;
+        return cell < number;
       }
       case LE: {
-        if (cell > number) {
-          valid = false;
-        }
-        break;
+        return cell <= number;
       }
       case NE: {
-        if (cell == number) {
-          valid = false;
-        }
-        break;
+        return cell != number;
       }
       default: {
         console.error('Number comparator provided is not supported');
-        break;
+        return true;
       }
     }
-    return valid;
   })
 );
 
@@ -208,25 +189,19 @@ export const filterByArray = _ => (
 };
 
 export const filterFactory = _ => (filterType) => {
-  let filterFn;
   switch (filterType) {
+    case FILTER_TYPE.MULTISELECT:
+      return filterByArray(_);
+    case FILTER_TYPE.NUMBER:
+      return filterByNumber(_);
+    case FILTER_TYPE.DATE:
+      return filterByDate(_);
     case FILTER_TYPE.TEXT:
     case FILTER_TYPE.SELECT:
-      filterFn = filterByText(_);
-      break;
-    case FILTER_TYPE.MULTISELECT:
-      filterFn = filterByArray(_);
-      break;
-    case FILTER_TYPE.NUMBER:
-      filterFn = filterByNumber(_);
-      break;
-    case FILTER_TYPE.DATE:
-      filterFn = filterByDate(_);
-      break;
     default:
-      filterFn = filterByText(_);
+      // Use `text` filter as default filter
+      return filterByText(_);
   }
-  return filterFn;
 };
 
 export const filters = (data, columns, _) => (currFilters, clearFilters = {}) => {

@@ -197,6 +197,7 @@ import CustomePaginationWithSearch from 'examples/pagination/custom-page-list-wi
 import SearchTable from 'examples/search';
 import ClearSearchButton from 'examples/search/clear-search-button';
 import DefaultSearch from 'examples/search/default-search';
+import SearchHooks from 'examples/search/search-hook';
 import DefaultCustomSearch from 'examples/search/default-custom-search';
 import FullyCustomSearch from 'examples/search/fully-custom-search';
 import SearchFormattedData from 'examples/search/search-formatted';
@@ -464,6 +465,7 @@ storiesOf('Table Search', module)
   .add('Clear Search Button', () => <ClearSearchButton />)
   .add('Default Search Table', () => <DefaultSearch />)
   .add('Default Custom Search', () => <DefaultCustomSearch />)
+  .add('Search Hooks', () => <SearchHooks />)
   .add('Searchable Column', () => <SearchableColumn />)
   .add('Fully Custom Search', () => <FullyCustomSearch />)
   .add('Search Formatted Value', () => <SearchFormattedData />)

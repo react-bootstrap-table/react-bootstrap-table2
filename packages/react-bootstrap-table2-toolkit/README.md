@@ -80,6 +80,9 @@ Custom the style on input element.
 #### delay = [number]
 milionsecond for debounce user input.
 
+#### srText = [string]
+Customize the screen reader text for the search input. (Default: "Search this table")
+
 ### Search Options
 
 #### defaultSearch - [string]
@@ -135,6 +138,22 @@ If you want to search on the formatted data, you are supposed to enable this pro
   columns={ columns }
   search={ {
     searchFormatted: true
+  } }
+>
+  // ...
+</ToolkitProvider>
+```
+
+#### afterSearch - [Function]
+After search done, this callback function will be called with newest result.
+
+```js
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search={ {
+    afterSearch: (newResult) => console.log(newResult)
   } }
 >
   // ...
