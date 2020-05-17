@@ -43,10 +43,36 @@ title: BootstrapTable Props
 -----
 
 ## keyField(**required**) - [String]
-Tells `react-bootstrap-table2` which column is unique.
+Tells `react-bootstrap-table2` which column of the data is unique. This should be the name of a property that is unique for each item in your dataset
+
 
 ## data(**required**) - [Array]
 Provides data for your table. It accepts a single Array object.
+
+Each item in this array is an object that represents a row in the table. Each "Row" object should have a key-value pair for each column in the table, whose key matches that column's dataField value.
+
+For example, if your column definitions look like:
+
+```js
+columns = [
+  { dataField: 'id', text: 'Id' },
+  { dataField: 'name', text: 'Name' },
+  { dataField: 'animal', text: 'Animal' },
+]
+```
+
+Then your data might look like:
+
+```js
+data = [
+  { id: 1, name: 'George', animal: 'Monkey' }
+  { id: 2, name: 'Jeffrey', animal: 'Giraffe' }
+  { id: 3, name: 'Alice', animal: 'Giraffe' }
+  { id: 4, name: 'Alice', animal: 'Tiger' }
+]
+```
+
+And your "keyField" would be `id`
 
 ## columns(**required**) - [Object]
 Accepts a single Array object, please see [columns definition](./column-props.html) for more detail.

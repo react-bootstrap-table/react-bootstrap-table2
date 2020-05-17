@@ -62,8 +62,11 @@ Custom the placeholder on input element.
 #### style - [object]
 Custom the style on input element.
 
-#### delay = [number]
+#### delay - [number]
 milionsecond for debounce user input.
+
+#### srText - [string]
+Customize the screen reader text for the search input. (Default: "Search this table")
 
 ## Customize Search Component
 

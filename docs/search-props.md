@@ -12,6 +12,7 @@ Table search in one of features supported by `react-bootstrap-table2-toolkit`. B
 * [searchFormatted](#searchsearchformatted-bool)
 * [defaultSearch](#searchdefaultSearch-string)
 * [onColumnMatch](#searchoncolumnmatch-function)
+* [afterSearch](#searchaftersearch-function)
 
 -----
 
@@ -74,3 +75,18 @@ function onColumnMatch({
 
 > Notes: You have to return `true` when your match logic is positive and vice versa.
 
+## search.afterSearch - [Function]
+After search done, this callback function will be called with newest result.
+
+```js
+<ToolkitProvider
+  keyField="id"
+  data={ products }
+  columns={ columns }
+  search={ {
+    afterSearch: (newResult) => console.log(newResult)
+  } }
+>
+  // ...
+</ToolkitProvider>
+```
