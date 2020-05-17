@@ -80,6 +80,9 @@ Custom the style on input element.
 #### delay = [number]
 milionsecond for debounce user input.
 
+#### srText = [string]
+Customize the screen reader text for the search input. (Default: "Search this table")
+
 ### Search Options
 
 #### defaultSearch - [string]
