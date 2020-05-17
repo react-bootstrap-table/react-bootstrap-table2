@@ -92,7 +92,8 @@ export default class SelectionCell extends Component {
                   mode: inputType,
                   checked: selected,
                   disabled,
-                  rowIndex
+                  rowIndex,
+                  rowKey
                 }) : (
                   <input
                     type={ inputType }
