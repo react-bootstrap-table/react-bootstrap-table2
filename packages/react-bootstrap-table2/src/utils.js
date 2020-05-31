@@ -11,6 +11,14 @@ function splitNested(str) {
     .split('.');
 }
 
+function contains(list, value) {
+  if (_.includes) {
+    return _.includes(list, value);
+  }
+
+  return list.indexOf(value) > -1;
+}
+
 function get(target, field) {
   const pathArray = splitNested(field);
   let result;
@@ -83,4 +91,12 @@ function debounce(func, wait, immediate) {
   };
 }
 
-export default Object.assign(_, { get, set, isDefined, isEmptyObject, sleep, debounce });
+export default Object.assign(_, {
+  get,
+  set,
+  isDefined,
+  isEmptyObject,
+  sleep,
+  debounce,
+  contains
+});
