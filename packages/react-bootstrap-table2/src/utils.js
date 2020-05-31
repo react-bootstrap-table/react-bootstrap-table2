@@ -12,6 +12,11 @@ function splitNested(str) {
 }
 
 function get(target, field) {
+  const directGet = target[field];
+  if (directGet !== undefined && directGet !== null) {
+    return directGet;
+  }
+
   const pathArray = splitNested(field);
   let result;
   try {

@@ -10,7 +10,8 @@ describe('Utils', () => {
         city: {
           name: 'B'
         }
-      }
+      },
+      'person.name': 'John Doe'
     };
 
     it('should return correct data', () => {
@@ -19,6 +20,7 @@ describe('Utils', () => {
       expect(_.get(data, 'address.city.name')).toEqual(data.address.city.name);
       expect(_.get(data, 'address.notExist')).toEqual(undefined);
       expect(_.get(data, 'address.not.exist')).toEqual(undefined);
+      expect(_.get(data, 'person.name')).toEqual(data['person.name']);
     });
   });
 
