@@ -102,6 +102,12 @@ export default class RowPureContent extends React.Component {
         cellAttrs.tabIndex = tabIndex++;
       }
 
+      /* allow to merge row or col */
+      const { rowSpan, colSpan } = cellAttrs;
+      if (rowSpan === 0 || colSpan === 0) {
+        return null;
+      }
+
       return (
         <Cell
           key={ `${content}-${index}` }
