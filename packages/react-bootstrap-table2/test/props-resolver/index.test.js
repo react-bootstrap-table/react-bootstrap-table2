@@ -95,7 +95,7 @@ describe('TableResolver', () => {
         expect(pivotColumns.some(
           column => Object.prototype.hasOwnProperty.call(column, 'reduce')
         )).toBeTruthy();
-        expect(wrapper.instance().visibleRows()).toEqual([{id: 1, name: 'AB'}]);
+        expect(wrapper.instance().visibleRows()).toEqual([{ id: 1, name: 'AB' }]);
       });
     });
 
