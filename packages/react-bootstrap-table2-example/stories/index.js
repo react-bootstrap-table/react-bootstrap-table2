@@ -224,6 +224,7 @@ import DefaultVisibility from 'examples/column-toggle/default-visibility';
 import StylingColumnToggle from 'examples/column-toggle/styling-toggle-list';
 import CustomToggleList from 'examples/column-toggle/custom-toggle-list';
 import ColumnToggleWithFilter from 'examples/column-toggle/column-toggle-with-filter';
+import ColumnToggleWithPivot from 'examples/column-toggle/column-toggle-with-pivot';
 
 // loading overlay
 import EmptyTableOverlay from 'examples/loading-overlay/empty-table-overlay';
@@ -478,7 +479,8 @@ storiesOf('Column Toggle', module)
   .add('Default Visibility', () => <DefaultVisibility />)
   .add('Styling Column Toggle', () => <StylingColumnToggle />)
   .add('Custom Column Toggle', () => <CustomToggleList />)
-  .add('Column Toggle with Filter', () => <ColumnToggleWithFilter />);
+  .add('Column Toggle with Filter', () => <ColumnToggleWithFilter />)
+  .add('Column Toggle with Pivot', () => <ColumnToggleWithPivot />);
 
 storiesOf('Export CSV', module)
   .addDecorator(bootstrapStyle())

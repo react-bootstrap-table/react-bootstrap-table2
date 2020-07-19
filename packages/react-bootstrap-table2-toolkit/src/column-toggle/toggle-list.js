@@ -12,6 +12,7 @@ const ToggleList = ({
   <div className={ `btn-group btn-group-toggle ${className}` } data-toggle="buttons">
     {
       columns
+        .filter(column => !Object.prototype.hasOwnProperty.call(column, 'reduce'))
         .map(column => ({
           ...column,
           toggle: toggles[column.dataField]

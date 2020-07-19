@@ -20,6 +20,21 @@ describe('TableResolver', () => {
     id: 2,
     name: 'B'
   }];
+  const pivotColumns = [{
+    dataField: keyField,
+    text: 'ID'
+  }, {
+    dataField: 'name',
+    text: 'Name',
+    reduce: (T, t) => T + t
+  }];
+  const pivotData = [{
+    id: 1,
+    name: 'A'
+  }, {
+    id: 1,
+    name: 'B'
+  }];
 
   const ExtendBase = baseResolver(Component);
   const BootstrapTableMock = extendTo(ExtendBase);
@@ -49,6 +64,38 @@ describe('TableResolver', () => {
 
       it('should return correct data', () => {
         expect(wrapper.instance().visibleRows()).toEqual(data);
+      });
+    });
+
+    describe('if pivot table is not collapsed', () => {
+      beforeEach(() => {
+        const mockElement = React.createElement(BootstrapTableMock, {
+          data, columns: pivotColumns, keyField
+        }, null);
+        wrapper = shallow(mockElement);
+      });
+
+      it('should return correct data', () => {
+        expect(pivotColumns.some(
+          column => Object.prototype.hasOwnProperty.call(column, 'reduce')
+        )).toBeTruthy();
+        expect(wrapper.instance().visibleRows()).toEqual(data);
+      });
+    });
+
+    describe('if pivot table is collapsed', () => {
+      beforeEach(() => {
+        const mockElement = React.createElement(BootstrapTableMock, {
+          data: pivotData, columns: pivotColumns, keyField
+        }, null);
+        wrapper = shallow(mockElement);
+      });
+
+      it('should return correct data', () => {
+        expect(pivotColumns.some(
+          column => Object.prototype.hasOwnProperty.call(column, 'reduce')
+        )).toBeTruthy();
+        expect(wrapper.instance().visibleRows()).toEqual([{ id: 1, name: 'AB' }]);
       });
     });
 
