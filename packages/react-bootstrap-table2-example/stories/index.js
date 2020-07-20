@@ -165,6 +165,7 @@ import SelectionColumnPositionTable from 'examples/row-selection/selection-colum
 
 // work on row expand
 import BasicRowExpand from 'examples/row-expand';
+import DisableExpandAnimation from 'examples/row-expand/disable-animation';
 import RowExpandManagement from 'examples/row-expand/expand-management';
 import NonExpandableRows from 'examples/row-expand/non-expandable-rows';
 import ExpandColumn from 'examples/row-expand/expand-column';
@@ -430,6 +431,7 @@ storiesOf('Row Selection', module)
 storiesOf('Row Expand', module)
   .addDecorator(bootstrapStyle())
   .add('Basic Row Expand', () => <BasicRowExpand />)
+  .add('Disable Expand Animation', () => <DisableExpandAnimation />)
   .add('Expand Management', () => <RowExpandManagement />)
   .add('Non Expandabled Rows', () => <NonExpandableRows />)
   .add('Expand Indicator', () => <ExpandColumn />)

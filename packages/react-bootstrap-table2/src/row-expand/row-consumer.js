@@ -34,7 +34,9 @@ export default (Component) => {
         className={ cs(props.className, parentClassName) }
       />,
       expanded || isClosing ? <ExpandRow
+        id={ key }
         key={ `${key}-expanding` }
+        animate={ expandRow.animate }
         colSpan={ props.visibleColumnSize }
         expanded={ expanded }
         onClosed={ () => expandRow.onClosed(key) }

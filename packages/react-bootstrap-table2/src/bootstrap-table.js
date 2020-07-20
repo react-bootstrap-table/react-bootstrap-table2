@@ -207,6 +207,7 @@ BootstrapTable.propTypes = {
   }),
   expandRow: PropTypes.shape({
     renderer: PropTypes.func,
+    animate: PropTypes.bool,
     expanded: PropTypes.array,
     onExpand: PropTypes.func,
     onExpandAll: PropTypes.func,
@@ -273,6 +274,7 @@ BootstrapTable.defaultProps = {
   },
   expandRow: {
     renderer: undefined,
+    animate: true,
     expanded: [],
     nonExpandable: []
   },
