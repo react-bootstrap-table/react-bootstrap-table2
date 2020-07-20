@@ -39,6 +39,7 @@ export default (Component) => {
         expanded={ expanded }
         onClosed={ () => expandRow.onClosed(key) }
         className={ className }
+        rowEvents={ expandRow.rowEvents }
       >
         { expandRow.renderer(props.row, props.rowIndex) }
       </ExpandRow> : null
