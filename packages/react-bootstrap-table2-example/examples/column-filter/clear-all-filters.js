@@ -31,7 +31,7 @@ const columns = [{
   })
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions,

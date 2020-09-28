@@ -87,7 +87,7 @@ const selectOptions = {
 const columns = [
   ..., {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions
@@ -130,7 +130,7 @@ const selectOptions = [
 const columns = [
   ..., {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions.find(opt => opt.value === cell).label,
   filter: selectFilter({
     options: selectOptions
@@ -148,7 +148,7 @@ const selectOptions = [
 const columns = [
   ..., {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions.find(opt => opt.value === cell).label,
   filter: selectFilter({
     options: () => selectOptions
@@ -175,7 +175,7 @@ const selectOptions = {
 const columns = [
   ..., {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: multiSelectFilter({
     options: selectOptions
