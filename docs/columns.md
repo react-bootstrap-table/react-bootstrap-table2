@@ -760,7 +760,7 @@ The return value can be a bool or an object. If your validation is pass, return 
 }
 ```
 
-If you want to perform a asycn validation, you can do it like this:
+If you want to perform a async validation, you can do it like this:
 ```js
 {
   // omit...

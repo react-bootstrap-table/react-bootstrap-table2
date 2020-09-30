@@ -127,7 +127,7 @@ Remember to install [`react-bootstrap-table2-paginator`](https://www.npmjs.com/p
 - [x] Expand Row Indicator
 - [x] Expand Row Management
 - [x] Custom Expand Row Indicators
-- [ ] Compatiable with Row Selection
+- [ ] Compatible with Row Selection
 - [ ] Expand Column position
 - [ ] Expand Column Style/Class
 
