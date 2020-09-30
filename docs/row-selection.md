@@ -253,7 +253,7 @@ const selectRow = {
 
 
 ### <a name='headerColumnStyle'>selectRow.headerColumnStyle - [Object | Function]</a>
-A way to custome the selection header cell. `headerColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
+A way to customize the selection header cell. `headerColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
 
 ### Style Object
 
@@ -277,7 +277,7 @@ const selectRow = {
 ```
 
 ### <a name='selectColumnStyle'>selectRow.selectColumnStyle - [Object | Function]</a>
-A way to custome the selection cell. `selectColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
+A way to customize the selection cell. `selectColumnStyle` not only accept a simple style object but also a callback function for more flexible customization:
 
 ### Style Object
 
@@ -291,7 +291,7 @@ const selectRow = {
 ### Callback Function
 If a callback function present, you can get below information to custom the selection cell:
 
-* `checked`: Whether current row is seleccted or not
+* `checked`: Whether current row is selected or not
 * `disabled`: Whether current row is disabled or not
 * `rowIndex`: Current row index
 * `rowKey`: Current row key

@@ -44,7 +44,7 @@ $ cd react-bootstrap-table2
 # Install all dependencies with yarn
 $ yarn install
 
-# Start the stroybook server, then go to localhost:6006
+# Start the storybook server, then go to localhost:6006
 $ yarn storybook
 
 ```

@@ -99,7 +99,7 @@ const expandRow = {
 Provide a callback function which allow you to custom the expand indicator. This callback only have one argument which is an object and contain these properties:
 * `expanded`: If current row is expanded or not
 * `rowKey`: Current row key
-* `expandable`: If currnet row is expandable or not 
+* `expandable`: If current row is expandable or not
 
 
 ```js
@@ -178,7 +178,7 @@ const expandRow = {
   className: 'foo'
 };
 ```
-following usage is more flexible way for customing the class name: 
+following usage is more flexible way for customizing the class name:
 
 ```js
 const expandRow = {
