@@ -21,7 +21,7 @@ We have [two ways](https://react-bootstrap-table.github.io/react-bootstrap-table
 * click
 * dbclick
 
-That's look into how we enable the cell edit on tabe:
+That's look into how we enable the cell edit on table:
 
 ```js
 import cellEditFactory from 'react-bootstrap-table2-editor';

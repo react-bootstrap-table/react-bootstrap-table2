@@ -102,7 +102,7 @@ Accept a string that will be used for default searching when first time table re
 ```
 
 #### onColumnMatch - [function]
-Acccpt a function which will be called when table try to match every cells when search happening. This function accept an object like below example:
+Accept a function which will be called when table try to match every cells when search happening. This function accept an object like below example:
 
 ```js
 function onColumnMatch({

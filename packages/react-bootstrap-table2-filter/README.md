@@ -156,7 +156,7 @@ const columns = [
 }];
 ```
 
-The benifit is `react-bootstrap-table2` will render the select options by the order of array.
+The benefit is `react-bootstrap-table2` will render the select options by the order of array.
 
 ## MultiSelect Filter
 
@@ -219,7 +219,7 @@ const columns = [..., {
 <BootstrapTable keyField='id' data={ products } columns={ columns } filter={ filterFactory() } />
 ```
 
-Numner filter is same as other filter, you can custom the number filter via `numberFilter` factory function:
+Number filter is same as other filter, you can custom the number filter via `numberFilter` factory function:
 
 ```js
 import filterFactory, { selectFilter, Comparator, numberFilter } from 'react-bootstrap-table2-filter';
@@ -230,7 +230,7 @@ const numberFilter = numberFilter({
   delay: 600,  // how long will trigger filtering after user typing, default is 500 ms
   placeholder: 'custom placeholder',  // placeholder for number input
   withoutEmptyComparatorOption: true,  // dont render empty option for comparator
-  withoutEmptyNumberOption: true,  // dont render empty option for numner select if it is defined
+  withoutEmptyNumberOption: true,  // dont render empty option for number select if it is defined
   comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],  // Custom the comparators
   style: { display: 'inline-grid' },  // custom the style on number filter
   className: 'custom-numberfilter-class',  // custom the class on number filter

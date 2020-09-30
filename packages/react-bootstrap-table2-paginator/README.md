@@ -112,7 +112,7 @@ const paginationOption = {
 </PaginationProvider>
 ```
 
-`PaginationProvider` actually is a wrapper for the concumser of react context, so that now you have to get the props from context provide then render to your compoennt and `BootstrapTable`:
+`PaginationProvider` actually is a wrapper for the consumer of react context, so that now you have to get the props from context provide then render to your component and `BootstrapTable`:
 
 * `paginationProps`: this include everything about pagination, you will use it when you render standalone component or your custom component.
 * `paginationTableProps`: you don't need to know about this, but you have to render this as props to `BootstrapTable`.
@@ -145,7 +145,7 @@ Now, you have to choose which solution you like: standalone or non-standalone ?
 #### 4.1 Use Standalone Component
 `react-bootstrap-table2-paginator` provider three standalone components:
 
-* Size Per Page Dropdwn Standalone
+* Size Per Page Dropdown Standalone
 * Pagination List Standalone
 * Pagination Total Standalone
 
@@ -189,7 +189,7 @@ import paginationFactory, {
 </PaginationProvider>
 ```
 
-That's it!!  The benifit for using standalone is you can much easier to render the standalone component in any posistion. In the future, we will implement more featue like applying `style`, `className` etc on standalone components.
+That's it!!  The benefit for using standalone is you can much easier to render the standalone component in any position. In the future, we will implement more features like applying `style`, `className` etc on standalone components.
 
 ##### Customizable props for `PaginationListStandalone`
 * N/A
@@ -206,7 +206,7 @@ That's it!!  The benifit for using standalone is you can much easier to render t
 
 #### 4.2 Customization Everything
 
-If you choose to custom the pagination component by yourself, the `paginationProps` will be important for you. Becasue you have to know for example how to change page or what's the current page etc. Hence, following is all the props in `paginationProps` object:
+If you choose to custom the pagination component by yourself, the `paginationProps` will be important for you. Because you have to know for example how to change page or what's the current page etc. Hence, following is all the props in `paginationProps` object:
 
 ```js
 page,
@@ -242,7 +242,7 @@ In most of case, `page`, `sizePerPage`, `onPageChange` and `onSizePerPageChange`
 
 * `page`: Current page.
 * `sizePerPage`: Current size per page.
-* `onPageChange`: Call it when you nede to change page. This function accept one number argument which indicate the new page 
-* `onSizePerPageChange`: Call it when you nede to change size per page. This function accept two number argument which indicate the new sizePerPage and new page
+* `onPageChange`: Call it when you need to change page. This function accept one number argument which indicate the new page 
+* `onSizePerPageChange`: Call it when you need to change size per page. This function accept two number argument which indicate the new sizePerPage and new page
 
 [Here](https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/index.html?selectedKind=Pagination&selectedStory=Fully%20Custom%20Pagination&full=0&addons=1&stories=1&panelRight=0&addonPanel=storybook%2Factions%2Factions-panel) is a online example.
