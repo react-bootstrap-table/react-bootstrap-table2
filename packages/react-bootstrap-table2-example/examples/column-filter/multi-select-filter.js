@@ -20,7 +20,7 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: multiSelectFilter({
     options: selectOptions
@@ -45,7 +45,7 @@ const columns = [{
   text: 'Product Name'
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: multiSelectFilter({
     options: selectOptions

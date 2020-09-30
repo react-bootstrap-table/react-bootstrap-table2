@@ -31,7 +31,7 @@ const columns1 = [{
   text: 'Product Name'
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions
@@ -46,7 +46,7 @@ const columns2 = [{
   text: 'Product Name'
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptionsArr.filter(opt => opt.value === cell)[0].label || '',
   filter: selectFilter({
     options: selectOptionsArr
@@ -61,7 +61,7 @@ const columns3 = [{
   text: 'Product Name'
 }, {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptionsArr.filter(opt => opt.value === cell)[0].label || '',
   filter: selectFilter({
     options: () => selectOptionsArr
@@ -93,7 +93,7 @@ const selectOptionsArr = [{
 
 const columns1 = [..., {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptions[cell],
   filter: selectFilter({
     options: selectOptions
@@ -103,7 +103,7 @@ const columns1 = [..., {
 
 const columns2 = [..., {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptionsArr.filter(opt => opt.value === cell)[0].label || '',
   filter: selectFilter({
     options: selectOptionsArr
@@ -113,7 +113,7 @@ const columns2 = [..., {
 
 const columns3 = [..., {
   dataField: 'quality',
-  text: 'Product Quailty',
+  text: 'Product Quality',
   formatter: cell => selectOptionsArr.filter(opt => opt.value === cell)[0].label || '',
   filter: selectFilter({
     options: () => selectOptionsArr
