@@ -37,7 +37,7 @@ Specifying the selection way for `single(radio)` or `multiple(checkbox)`. If `ra
 #### examples
 
 ```js
-const selectRow = {
+const selectRowProp = {
   mode: 'radio' // single row selection
 };
 
