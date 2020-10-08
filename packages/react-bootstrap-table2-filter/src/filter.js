@@ -171,14 +171,18 @@ export const filterByDate = _ => (
 export const filterByArray = _ => (
   data,
   dataField,
-  { filterVal, comparator }
+  { filterVal, comparator },
+  customFilterValue
 ) => {
   if (filterVal.length === 0) return data;
   const refinedFilterVal = filterVal
     .filter(x => _.isDefined(x))
     .map(x => x.toString());
   return data.filter((row) => {
-    const cell = _.get(row, dataField);
+    let cell = _.get(row, dataField);
+    if (customFilterValue) {
+      cell = customFilterValue(cell, row);
+    }
     if (Array.isArray(cell)) {
       if (comparator === EQ) {
         return refinedFilterVal.length === cell.length
