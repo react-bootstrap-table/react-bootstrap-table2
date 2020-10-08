@@ -179,6 +179,14 @@ export const filterByArray = _ => (
     .map(x => x.toString());
   return data.filter((row) => {
     const cell = _.get(row, dataField);
+    if (Array.isArray(cell)) {
+      if (comparator === EQ) {
+        return refinedFilterVal.length === cell.length
+          && refinedFilterVal.every((val, i) => val === cell[i].toString());
+      }
+      const lookup = new Set(refinedFilterVal);
+      return cell.some(val => lookup.has(val.toString()));
+    }
     let cellStr = _.isDefined(cell) ? cell.toString() : '';
     if (comparator === EQ) {
       return refinedFilterVal.indexOf(cellStr) !== -1;
