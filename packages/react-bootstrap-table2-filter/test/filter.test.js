@@ -128,31 +128,72 @@ describe('filter', () => {
     });
 
     describe('when filter value is not an empty array', () => {
-      describe(`and comparator is ${EQ}`, () => {
-        it('should return data correctly', () => {
-          currFilters.price = {
-            filterVal: [201, 203],
-            filterType: FILTER_TYPE.MULTISELECT,
-            comparator: EQ
-          };
+      describe('and the cell is a value', () => {
+        describe(`and comparator is ${EQ}`, () => {
+          it('should return data correctly', () => {
+            currFilters.price = {
+              filterVal: [201, 203],
+              filterType: FILTER_TYPE.MULTISELECT,
+              comparator: EQ
+            };
 
-          const result = filters(data, columns, _)(currFilters);
-          expect(result).toBeDefined();
-          expect(result).toHaveLength(2);
+            const result = filters(data, columns, _)(currFilters);
+            expect(result).toBeDefined();
+            expect(result).toHaveLength(2);
+          });
+        });
+
+        describe(`and comparator is ${LIKE}`, () => {
+          it('should return data correctly', () => {
+            currFilters.name = {
+              filterVal: ['name 3', '5'],
+              filterType: FILTER_TYPE.MULTISELECT,
+              comparator: LIKE
+            };
+
+            const result = filters(data, columns, _)(currFilters);
+            expect(result).toBeDefined();
+            expect(result).toHaveLength(3);
+          });
         });
       });
 
-      describe(`and comparator is ${LIKE}`, () => {
-        it('should return data correctly', () => {
-          currFilters.name = {
-            filterVal: ['name 3', '5'],
-            filterType: FILTER_TYPE.MULTISELECT,
-            comparator: LIKE
-          };
+      describe('and the cell is an array', () => {
+        const arrayData = new Array(500)
+          .fill(0)
+          .map((v, i) => ({ price: [i, i + 2] }));
 
-          const result = filters(data, columns, _)(currFilters);
-          expect(result).toBeDefined();
-          expect(result).toHaveLength(3);
+        const arrayDataColumns = [{
+          dataField: 'price',
+          text: 'Price'
+        }];
+
+        describe(`and comparator is ${EQ}`, () => {
+          it('should return data correctly', () => {
+            currFilters.price = {
+              filterVal: [201, 203],
+              filterType: FILTER_TYPE.MULTISELECT,
+              comparator: EQ
+            };
+
+            const result = filters(arrayData, arrayDataColumns, _)(currFilters);
+            expect(result).toBeDefined();
+            expect(result).toHaveLength(1);
+          });
+        });
+
+        describe(`and comparator is ${LIKE}`, () => {
+          it('should return data correctly', () => {
+            currFilters.price = {
+              filterVal: [201, 203],
+              filterType: FILTER_TYPE.MULTISELECT,
+              comparator: LIKE
+            };
+
+            const result = filters(arrayData, arrayDataColumns, _)(currFilters);
+            expect(result).toBeDefined();
+            expect(result).toHaveLength(3);
+          });
         });
       });
     });
