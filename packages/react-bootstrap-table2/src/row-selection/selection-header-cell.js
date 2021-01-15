@@ -73,23 +73,25 @@ export default class SelectionHeaderCell extends Component {
       hideSelectAll,
       headerColumnStyle
     } = this.props;
+
+    const attrs = {};
+
+    attrs.style = _.isFunction(headerColumnStyle) ?
+      headerColumnStyle(checkedStatus) :
+      headerColumnStyle;
+
     if (hideSelectAll) {
-      return <th data-row-selection />;
+      return <th data-row-selection { ...attrs } />;
     }
 
     const checked = checkedStatus === CHECKBOX_STATUS_CHECKED;
 
     const indeterminate = checkedStatus === CHECKBOX_STATUS_INDETERMINATE;
 
-    const attrs = {};
     let content;
     if (selectionHeaderRenderer || mode === ROW_SELECT_MULTIPLE) {
       attrs.onClick = this.handleCheckBoxClick;
     }
-
-    attrs.style = _.isFunction(headerColumnStyle) ?
-      headerColumnStyle(checkedStatus) :
-      headerColumnStyle;
 
     return (
       <BootstrapContext.Consumer>
