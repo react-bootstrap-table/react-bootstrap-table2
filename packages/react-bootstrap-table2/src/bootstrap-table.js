@@ -67,7 +67,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       selectRow,
       expandRow,
       cellEdit,
-      filterPosition
+      filterPosition,
+      ariaLabel,
+      ariaLabelledby
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -89,7 +91,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
 
     return (
       <div className={ tableWrapperClass }>
-        <table id={ id } className={ tableClass }>
+        <table id={ id } className={ tableClass } aria-label={ ariaLabel } aria-labelledBy={ ariaLabelledby }>
           { tableCaption }
           <Header
             columns={ columns }
@@ -255,7 +257,9 @@ BootstrapTable.propTypes = {
     searchText: PropTypes.string,
     searchContext: PropTypes.func
   }),
-  setDependencyModules: PropTypes.func
+  setDependencyModules: PropTypes.func,
+  ariaLabel: PropTypes.string,
+  ariaLabelledby: PropTypes.string
 };
 
 BootstrapTable.defaultProps = {
