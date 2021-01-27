@@ -123,7 +123,7 @@ import overlayFactory from 'react-bootstrap-table2-overlay';
 />
 ```
 
-Actually, `react-bootstrap-table-overlay` is depends on [`react-loading-overlay`](https://github.com/derrickpelletier/react-loading-overlay) and `overlayFactory` just a factory function and you can pass any props which available for `react-loading-overlay`:
+Actually, `react-bootstrap-table-overlay` depends on [`react-loading-overlay`](https://github.com/derrickpelletier/react-loading-overlay) and `overlayFactory` just a factory function and you can pass any props which available for `react-loading-overlay`:
 
 ```js
 overlay={

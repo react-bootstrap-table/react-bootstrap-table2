@@ -65,7 +65,7 @@ const { SearchBar } = Search;
 
 2. `ToolkitProvider` is a wrapper of react context, you are supposed to wrap the `BootstrapTable` and `SearchBar` as the child of `ToolkitProvider`
 
-3. You should render `SearchBar` with `searchProps` as well. The position of `SearchBar` is depends on you.
+3. You should render `SearchBar` with `searchProps` as well. The position of `SearchBar` depends on you.
 
 ### `SearchBar` Props
 #### className - [string]
@@ -192,7 +192,7 @@ const { SearchBar, ClearSearchButton } = Search;
 There are two steps to enable the export CSV functionality:
 
 1. Give `exportCSV` prop as `true` on `ToolkitProvider`.
-2. Render `ExportCSVButton` with `csvProps`. The position of `ExportCSVButton` is depends on you.
+2. Render `ExportCSVButton` with `csvProps`. The position of `ExportCSVButton` depends on you.
 
 ```js
 import ToolkitProvider, { CSVExport } from 'react-bootstrap-table2-toolkit';
