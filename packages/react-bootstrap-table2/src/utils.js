@@ -20,6 +20,10 @@ function contains(list, value) {
 }
 
 function get(target, field) {
+  if(!target){
+    return
+  }
+
   const directGet = target[field];
   if (directGet !== undefined && directGet !== null) {
     return directGet;
