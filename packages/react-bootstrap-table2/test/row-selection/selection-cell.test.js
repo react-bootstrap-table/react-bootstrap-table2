@@ -248,6 +248,25 @@ describe('<SelectionCell />', () => {
       expect(wrapper.find('input').get(0).props.checked).toBe(selected);
       expect(toJson(wrapper)).toMatchSnapshot();
     });
+    describe('when isRowHeader prop give as true', () => {
+      beforeEach(() => {
+        wrapper = shallowWithContext(
+          <SelectionCell
+            rowKey={ 1 }
+            mode={ mode }
+            rowIndex={ rowIndex }
+            selected={ selected }
+            isRowHeader
+          />,
+          { bootstrap4: false }
+        );
+      });
+
+      it('should render at a <TH>', () => {
+        expect(wrapper.first().type()).toEqual('th');
+      });
+    });
+
 
     describe('when disabled prop give as true', () => {
       beforeEach(() => {

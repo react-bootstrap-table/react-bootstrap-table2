@@ -20,6 +20,7 @@
 * [expandHeaderColumnRenderer](#expandHeaderColumnRenderer)
 * [className](#className)
 * [parentClassName](#parentClassName)
+* [isRowHeader](#isRowHeader)
 
 ### <a name="renderer">expandRow.renderer - [Function]</a>
 
@@ -210,3 +211,7 @@ const expandRow = {
   }
 };
 ```
+
+## <a name='isRowHeader'>column.isRowHeader - [Bool]</a>
+Specify if the expamsion column should be a row header. If `true`, the cells will be rendered as `<th>` tags, 
+otherwise they will be rendered as the default `<td>`.

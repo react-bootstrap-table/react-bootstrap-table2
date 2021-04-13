@@ -8,6 +8,7 @@ Available properties in a column object:
 
 #### Optional
 * [isDummyField](#isDummyField)
+* [isRowHeader](#isRowHeader)
 * [hidden](#hidden)
 * [formatter](#formatter)
 * [formatExtraData](#formatExtraData)
@@ -134,6 +135,10 @@ The third argument: `components` have following specified properties:
 
 ## <a name='formatExtraData'>column.formatExtraData - [Any]</a>
 It's only used for [`column.formatter`](#formatter), you can define any value for it and will be passed as fourth argument for [`column.formatter`](#formatter) callback function.
+
+## <a name='isRowHeader'>column.isRowHeader - [Bool]</a>
+Specify if the column should be a row header. If `true`, the cells will be rendered as `<th>` tags, 
+otherwise they will be rendered as the default `<td>`.
 
 ## <a name='type'>column.type - [String]</a>
 Specify the data type on column. Available value so far is `string`, `number`, `bool` and `date`. Default is `string`.   
