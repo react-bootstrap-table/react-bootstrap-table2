@@ -7,6 +7,7 @@ import Welcome from 'examples/welcome';
 
 // basic
 import BasicTable from 'examples/basic';
+import RowHeaderTable from 'examples/basic/is-row-header';
 import BorderlessTable from 'examples/basic/borderless-table';
 import StripHoverCondensedTable from 'examples/basic/striped-hover-condensed-table';
 import NoDataTable from 'examples/basic/no-data-table';
@@ -261,6 +262,7 @@ storiesOf('Welcome', module).add('react bootstrap table 2 ', () => <Welcome />);
 storiesOf('Basic Table', module)
   .addDecorator(bootstrapStyle())
   .add('basic table', () => <BasicTable />)
+  .add('with row header', () => <RowHeaderTable />)
   .add('striped, hover, condensed table', () => <StripHoverCondensedTable />)
   .add('borderless table', () => <BorderlessTable />)
   .add('Indication For Empty Table', () => <NoDataTable />)

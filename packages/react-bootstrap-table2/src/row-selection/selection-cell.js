@@ -12,6 +12,7 @@ export default class SelectionCell extends Component {
   static propTypes = {
     mode: PropTypes.string.isRequired,
     rowKey: PropTypes.any,
+    isRowHeader: PropTypes.bool,
     selected: PropTypes.bool,
     onRowSelect: PropTypes.func,
     disabled: PropTypes.bool,
@@ -29,6 +30,7 @@ export default class SelectionCell extends Component {
 
   shouldComponentUpdate(nextProps) {
     const shouldUpdate =
+      this.props.isRowHeader !== nextProps.isRowHeader ||
       this.props.rowIndex !== nextProps.rowIndex ||
       this.props.selected !== nextProps.selected ||
       this.props.disabled !== nextProps.disabled ||
@@ -62,6 +64,7 @@ export default class SelectionCell extends Component {
     const {
       rowKey,
       mode: inputType,
+      isRowHeader,
       selected,
       disabled,
       tabIndex,
@@ -81,31 +84,37 @@ export default class SelectionCell extends Component {
         rowKey
       }) :
       selectColumnStyle;
-
+    const cellContents = bootstrap4 => (selectionRenderer ? selectionRenderer({
+      mode: inputType,
+      checked: selected,
+      disabled,
+      rowIndex,
+      rowKey
+    }) : (
+      <input
+        type={ inputType }
+        checked={ selected }
+        disabled={ disabled }
+        className={ bootstrap4 ? 'selection-input-4' : '' }
+        onChange={ () => {} }
+      />
+    ));
     return (
       <BootstrapContext.Consumer>
         {
-          ({ bootstrap4 }) => (
+          ({ bootstrap4 }) => (isRowHeader ? (
+            <th className="selection-cell" onClick={ this.handleClick } { ...attrs }>
+              {
+                cellContents(bootstrap4)
+              }
+            </th>
+          ) : (
             <td className="selection-cell" onClick={ this.handleClick } { ...attrs }>
               {
-                selectionRenderer ? selectionRenderer({
-                  mode: inputType,
-                  checked: selected,
-                  disabled,
-                  rowIndex,
-                  rowKey
-                }) : (
-                  <input
-                    type={ inputType }
-                    checked={ selected }
-                    disabled={ disabled }
-                    className={ bootstrap4 ? 'selection-input-4' : '' }
-                    onChange={ () => {} }
-                  />
-                )
+                cellContents(bootstrap4)
               }
             </td>
-          )
+          ))
         }
       </BootstrapContext.Consumer>
     );

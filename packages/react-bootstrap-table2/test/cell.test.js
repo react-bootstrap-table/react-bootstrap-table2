@@ -45,6 +45,21 @@ describe('Cell', () => {
       expect(wrapper.text()).toEqual(aRowWithBoolValue[column.dataField].toString());
     });
   });
+  describe('when isRowHeader is true', () => {
+    const column = {
+      dataField: 'id',
+      text: 'ID',
+      isRowHeader: true
+    };
+
+    beforeEach(() => {
+      wrapper = shallow(<Cell row={ row } columnIndex={ 1 } rowIndex={ 1 } column={ column } />);
+    });
+
+    it('should render as a <TH>', () => {
+      expect(wrapper.first().type()).toEqual('th');
+    });
+  });
 
   describe('when column.formatter prop is defined', () => {
     const rowIndex = 1;

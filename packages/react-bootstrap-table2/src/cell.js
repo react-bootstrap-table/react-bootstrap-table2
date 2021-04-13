@@ -17,8 +17,8 @@ class Cell extends eventDelegater(Component) {
       shouldUpdate = !_.isEqual(this.props.row, nextProps.row);
     } else {
       shouldUpdate =
-        _.get(this.props.row, this.props.column.dataField)
-          !== _.get(nextProps.row, nextProps.column.dataField);
+        _.get(this.props.row, this.props.column.dataField) !==
+        _.get(nextProps.row, nextProps.column.dataField);
     }
 
     if (shouldUpdate) return true;
@@ -26,7 +26,10 @@ class Cell extends eventDelegater(Component) {
     // if (nextProps.formatter)
 
     shouldUpdate =
-      (nextProps.column.formatter ? !_.isEqual(this.props.row, nextProps.row) : false) ||
+      (nextProps.column.formatter
+        ? !_.isEqual(this.props.row, nextProps.row)
+        : false) ||
+      this.props.column.isRowHeader !== nextProps.column.isRowHeader ||
       this.props.column.hidden !== nextProps.column.hidden ||
       this.props.column.isDummyField !== nextProps.column.isDummyField ||
       this.props.rowIndex !== nextProps.rowIndex ||
@@ -37,7 +40,10 @@ class Cell extends eventDelegater(Component) {
       this.props.clickToEdit !== nextProps.clickToEdit ||
       this.props.dbclickToEdit !== nextProps.dbclickToEdit ||
       !_.isEqual(this.props.style, nextProps.style) ||
-      !_.isEqual(this.props.column.formatExtraData, nextProps.column.formatExtraData) ||
+      !_.isEqual(
+        this.props.column.formatExtraData,
+        nextProps.column.formatExtraData
+      ) ||
       !_.isEqual(this.props.column.events, nextProps.column.events) ||
       !_.isEqual(this.props.column.attrs, nextProps.column.attrs) ||
       this.props.tabIndex !== nextProps.tabIndex;
@@ -45,14 +51,20 @@ class Cell extends eventDelegater(Component) {
   }
 
   createHandleEditingCell = originFunc => (e) => {
-    const { onStart, rowIndex, columnIndex, clickToEdit, dbclickToEdit } = this.props;
+    const {
+      onStart,
+      rowIndex,
+      columnIndex,
+      clickToEdit,
+      dbclickToEdit
+    } = this.props;
     if ((clickToEdit || dbclickToEdit) && _.isFunction(originFunc)) {
       originFunc(e);
     }
     if (onStart) {
       onStart(rowIndex, columnIndex);
     }
-  }
+  };
 
   render() {
     const {
@@ -66,11 +78,7 @@ class Cell extends eventDelegater(Component) {
       dbclickToEdit,
       ...rest
     } = this.props;
-    const {
-      dataField,
-      formatter,
-      formatExtraData
-    } = column;
+    const { dataField, formatter, formatExtraData } = column;
     const attrs = this.delegate({ ...rest });
     let content = column.isDummyField ? null : _.get(row, dataField);
 
@@ -84,9 +92,13 @@ class Cell extends eventDelegater(Component) {
       attrs.onDoubleClick = this.createHandleEditingCell(attrs.onDoubleClick);
     }
 
-    return (
+    return column.isRowHeader ? (
+      <th { ...attrs }>
+        {typeof content === 'boolean' ? `${content}` : content}
+      </th>
+    ) : (
       <td { ...attrs }>
-        { typeof content === 'boolean' ? `${content}` : content }
+        {typeof content === 'boolean' ? `${content}` : content}
       </td>
     );
   }

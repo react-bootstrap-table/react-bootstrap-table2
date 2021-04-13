@@ -9,6 +9,7 @@
 * [selected](#selected)
 * [style](#style)
 * [classes)](#classes)
+* [isRowHeader](#isRowHeader)
 * [bgColor](#bgColor)
 * [nonSelectable)](#nonSelectable)
 * [nonSelectableStyle](#nonSelectableStyle)
@@ -109,6 +110,10 @@ const selectRow = {
   classes: (row, rowIndex) => { return ...; }
 };
 ```
+
+## <a name='isRowHeader'>column.isRowHeader - [Bool]</a>
+Specify if the selection column should be a row header. If `true`, the cells will be rendered as `<th>` tags, 
+otherwise they will be rendered as the default `<td>`.
 
 ### <a name='bgColor'>selectRow.bgColor - [String | Function]</a>
 The background color when row is selected
