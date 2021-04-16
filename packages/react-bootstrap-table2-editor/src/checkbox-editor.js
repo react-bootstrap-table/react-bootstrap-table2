@@ -31,7 +31,7 @@ class CheckBoxEditor extends Component {
 
   render() {
     const { defaultValue, didMount, className, ...rest } = this.props;
-    const editorClass = cs('editor edit-chseckbox checkbox', className);
+    const editorClass = cs('editor edit-checkbox checkbox', className);
     return (
       <input
         ref={ node => this.checkbox = node }
