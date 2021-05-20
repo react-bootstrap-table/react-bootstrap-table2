@@ -4,11 +4,9 @@
 import _ from 'underscore';
 
 function splitNested(str) {
-  return [str]
-    .join('.')
-    .replace(/\[/g, '.')
-    .replace(/\]/g, '')
-    .split('.');
+  return str
+    .replace(']', '')
+    .split(/\[\./);
 }
 
 function contains(list, value) {
