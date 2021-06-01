@@ -85,8 +85,10 @@ class HeaderCell extends eventDelegater(React.Component) {
         }
       };
       cellAttrs.onClick = (e) => {
-        onSort(column);
-        if (_.isFunction(customClick)) customClick(e);
+        if (e.target.getAttribute('class') === 'sortable') {
+          onSort(column);
+          if (_.isFunction(customClick)) customClick(e);
+        }
       };
       cellAttrs.className = cs(cellAttrs.className, 'sortable');
 
