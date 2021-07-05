@@ -23,7 +23,9 @@ const Header = (props) => {
     onExternalFilter,
     filterPosition,
     globalSortCaret,
-    wrapperClasses
+    wrapperClasses,
+    preHeaderRow,
+    postHeaderRow
   } = props;
 
   let SelectionHeaderCellComp = () => null;
@@ -82,9 +84,11 @@ const Header = (props) => {
 
   return (
     <thead className={ wrapperClasses }>
+      {preHeaderRow}
       <tr className={ className }>
         { childrens }
       </tr>
+      {postHeaderRow}
     </thead>
   );
 };
@@ -106,7 +110,14 @@ Header.propTypes = {
     Const.FILTERS_POSITION_TOP,
     Const.FILTERS_POSITION_INLINE,
     Const.FILTERS_POSITION_BOTTOM
-  ])
+  ]),
+  preHeaderRow: PropTypes.node,
+  postHeaderRow: PropTypes.node
+};
+
+Header.defaultProps = {
+  preHeaderRow: null,
+  postHeaderRow: null
 };
 
 export default Header;
