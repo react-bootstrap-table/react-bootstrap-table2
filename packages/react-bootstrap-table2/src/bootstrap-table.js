@@ -91,6 +91,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       <div className={ tableWrapperClass }>
         <table id={ id } className={ tableClass }>
           { tableCaption }
+          {this.props.preHeader}
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
@@ -105,7 +106,10 @@ class BootstrapTable extends PropsBaseResolver(Component) {
             selectRow={ selectRow }
             expandRow={ expandRow }
             filterPosition={ filterPosition }
+            preHeaderRow={ this.props.preHeaderRow }
+            postHeaderRow={ this.props.postHeaderRow }
           />
+          {this.props.postHeader}
           {hasFilters && filterPosition !== Const.FILTERS_POSITION_INLINE && (
             <Filters
               columns={ columns }
@@ -255,7 +259,9 @@ BootstrapTable.propTypes = {
     searchText: PropTypes.string,
     searchContext: PropTypes.func
   }),
-  setDependencyModules: PropTypes.func
+  setDependencyModules: PropTypes.func,
+  preHeaderRow: PropTypes.node,
+  postHeaderRow: PropTypes.node
 };
 
 BootstrapTable.defaultProps = {
