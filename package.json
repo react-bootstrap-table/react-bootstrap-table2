@@ -84,7 +84,7 @@
     "prop-types": "15.5.10",
     "react": "16.4.0",
     "react-dom": "16.4.0",
-    "underscore": "1.9.1"
+    "underscore": "1.13.1"
   },
   "jest": {
     "collectCoverageFrom": [
