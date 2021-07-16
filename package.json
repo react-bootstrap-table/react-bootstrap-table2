@@ -1,11 +1,10 @@
 {
-  "name": "react-bootstrap-table2",
+  "name": "react-bootstrap-table-next",
   "version": "0.0.1",
   "private": true,
   "description": "Rebuilt for react-bootstrap-table",
   "main": "index.js",
   "scripts": {
-    "postinstall": "lerna bootstrap",
     "build": "./node_modules/.bin/gulp prod",
     "lint": "eslint ./packages --ext .js --ext .jsx --ignore-path .gitignore",
     "pretest": "yarn lint --cache",
@@ -15,7 +14,7 @@
     "storybook": "cd ./packages/react-bootstrap-table2-example && yarn storybook",
     "gh-pages:clean": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:clean",
     "gh-pages:build": "cd ./packages/react-bootstrap-table2-example && yarn gh-pages:build",
-    "release": "yarn install && yarn build && lerna publish"
+    "release": "yarn install && yarn build"
   },
   "repository": {
     "type": "git",
@@ -59,11 +58,11 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.2.1",
-    "gulp": "4.0.0",
-    "gulp-babel": "7.0.0",
+    "gulp": "4.0.2",
+    "gulp-babel": "7.0.1",
     "gulp-clean": "0.4.0",
     "gulp-clean-css": "3.9.2",
-    "gulp-rename": "^1.2.2",
+    "gulp-rename": "^1.4.0",
     "gulp-sass": "3.1.0",
     "gulp-shell": "0.6.5",
     "html-webpack-plugin": "2.30.1",
@@ -71,7 +70,7 @@
     "jsdom": "11.2.0",
     "jsdom-global": "3.0.2",
     "lerna": "2.8.0",
-    "node-sass": "4.5.3",
+    "node-sass": "4.12",
     "react-test-renderer": "16.0.0",
     "sass-loader": "6.0.6",
     "sinon": "3.2.1",
@@ -84,7 +83,7 @@
     "prop-types": "15.5.10",
     "react": "16.4.0",
     "react-dom": "16.4.0",
-    "underscore": "1.9.1"
+    "underscore": "1.13.1"
   },
   "jest": {
     "collectCoverageFrom": [
