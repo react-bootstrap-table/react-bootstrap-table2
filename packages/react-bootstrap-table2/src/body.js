@@ -88,25 +88,28 @@ class Body extends React.Component {
       }
 
       content = data.map((row, index) => {
-        const key = _.get(row, keyField);
-        const baseRowProps = {
-          key,
-          row,
-          tabIndexCell,
-          columns,
-          keyField,
-          cellEdit,
-          value: key,
-          rowIndex: index,
-          visibleColumnSize,
-          attrs: rowEvents || {},
-          ...additionalRowProps
-        };
+        try {
+          const key = _.get(row, keyField);
+          const baseRowProps = {
+            key,
+            row,
+            tabIndexCell,
+            columns,
+            keyField,
+            cellEdit,
+            value: key,
+            rowIndex: index,
+            visibleColumnSize,
+            attrs: rowEvents || {},
+            ...additionalRowProps
+          };
 
-        baseRowProps.style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
-        baseRowProps.className = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
+          baseRowProps.style = _.isFunction(rowStyle) ? rowStyle(row, index) : rowStyle;
+          baseRowProps.className = (_.isFunction(rowClasses) ? rowClasses(row, index) : rowClasses);
 
-        return <this.RowComponent { ...baseRowProps } />;
+          return <this.RowComponent { ...baseRowProps } />;
+        } catch (error) {}
+        
       });
     }
 
