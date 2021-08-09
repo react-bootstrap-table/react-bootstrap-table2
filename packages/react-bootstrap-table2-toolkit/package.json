@@ -45,6 +45,7 @@
     "react-dom": "^16.3.0"
   },
   "dependencies": {
-    "file-saver": "2.0.2"
+    "file-saver": "2.0.2",
+    "xlsx": "0.17.0"
   }
 }
