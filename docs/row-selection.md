@@ -229,7 +229,7 @@ Provide a callback function which allow you to custom the checkbox/radio box. Th
 ```js
 const selectRow = {
   mode: 'checkbox',
-  selectionRenderer: ({ mode, checked, disabled, rowIndex }) => (
+  selectionRenderer: ({ mode, checked, disabled, rowIndex, rowKey }) => (
     // ....
   )
 };
