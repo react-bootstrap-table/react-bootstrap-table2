@@ -4,11 +4,7 @@
 import _ from 'underscore';
 
 function splitNested(str) {
-  return [str]
-    .join('.')
-    .replace(/\[/g, '.')
-    .replace(/\]/g, '')
-    .split('.');
+  return [str].join('.').replace(/\[/g, '.').replace(/\]/g, '').split('.');
 }
 
 function contains(list, value) {
@@ -20,14 +16,15 @@ function contains(list, value) {
 }
 
 function get(target, field) {
-  const directGet = target[field];
-  if (directGet !== undefined && directGet !== null) {
-    return directGet;
-  }
-
-  const pathArray = splitNested(field);
   let result;
   try {
+    const directGet = target[field];
+    if (directGet !== undefined && directGet !== null) {
+      return directGet;
+    }
+
+    const pathArray = splitNested(field);
+
     result = pathArray.reduce((curr, path) => curr[path], target);
   } catch (e) {}
   return result;
