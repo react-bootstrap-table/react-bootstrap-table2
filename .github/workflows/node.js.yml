@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [6.x, 8.x]
+        node-version: [8.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:

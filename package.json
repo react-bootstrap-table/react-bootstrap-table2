@@ -80,11 +80,11 @@
     "webpack-dev-server": "2.7.1"
   },
   "dependencies": {
-    "classnames": "^2.2.5",
-    "prop-types": "15.5.10",
+    "classnames": "^2.3.1",
+    "prop-types": "^15.8.1",
     "react": "16.4.0",
     "react-dom": "16.4.0",
-    "underscore": "1.9.1"
+    "underscore": "^1.13.1"
   },
   "jest": {
     "collectCoverageFrom": [
