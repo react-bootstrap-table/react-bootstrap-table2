@@ -1,6 +1,17 @@
+## BN fork
+
+[![Build Status]](https://github.com/BonnierNews/react-bootstrap-table2/actions/workflows/node.js.yml/badge.svg)  
+
+This is a fork of Allen Fangs [react-bootstrap-table2](https://github.com/react-bootstrap-table/react-bootstrap-table2) repo, which is the repo for [react-bootstrap-table-next](https://www.npmjs.com/package/react-bootstrap-table-next) on npm.
+
+That repo seems to have been abandoned, so this fork was created simply to keep packages up to date with security fixes.
+
+Specific packages from this repo can be used via [gitpkg.now.sh](https://gitpkg.now.sh/):
+
+`yarn add https://gitpkg.now.sh/<user>/<repo>/<subdir>[?<branch>]`
+
 # react-bootstrap-table2
 
-[![Build Status](https://travis-ci.org/react-bootstrap-table/react-bootstrap-table2.svg?branch=master)](https://travis-ci.org/react-bootstrap-table/react-bootstrap-table2)  
 Rebuild of [react-bootstrap-table](https://github.com/AllenFang/react-bootstrap-table)
 
 > Note that `react-bootstrap-table2`'s npm module name is [**`react-bootstrap-table-next`**](https://www.npmjs.com/package/react-bootstrap-table-next) due to the name being already taken.
