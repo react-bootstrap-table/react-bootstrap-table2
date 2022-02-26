@@ -45,7 +45,7 @@ describe('Sort Function', () => {
       const sortFunc = sinon.stub().returns(1);
       sortOrder = Const.SORT_DESC;
       sort(data, sortOrder, { ...sortColumn, sortFunc });
-      expect(sortFunc.callCount).toBe(6);
+      expect(sortFunc.callCount).toBe(3);
     });
   });
 
