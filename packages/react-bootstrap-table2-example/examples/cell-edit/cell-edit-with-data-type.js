@@ -99,10 +99,10 @@ function afterSaveCell(oldValue, newValue) {
 `;
 
 function afterSaveCell(oldValue, newValue) {
-  console.log('--after save cell--');
-  console.log('New Value was apply as');
-  console.log(newValue);
-  console.log(`and the type is ${typeof newValue}`);
+  console.log('--after save cell--'); // eslint-disable-line no-console
+  console.log('New Value was apply as'); // eslint-disable-line no-console
+  console.log(newValue); // eslint-disable-line no-console
+  console.log(`and the type is ${typeof newValue}`); // eslint-disable-line no-console
 }
 
 export default () => (

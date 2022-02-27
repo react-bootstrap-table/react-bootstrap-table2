@@ -62,7 +62,7 @@ const afterSearch = (newResult) => {
 `;
 
 const afterSearch = (newResult) => {
-  console.log(newResult);
+  console.log(newResult); // eslint-disable-line no-console
 };
 
 export default () => (

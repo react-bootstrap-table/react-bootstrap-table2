@@ -27,7 +27,7 @@ const columns = [{
     getFilter: (filter) => {
       nameFilter = filter;
     },
-    onFilter: filterVal => console.log(`Filter product name ${filterVal}`)
+    onFilter: filterVal => console.log(`Filter product name ${filterVal}`) // eslint-disable-line no-console
   })
 }, {
   dataField: 'quality',
@@ -38,7 +38,7 @@ const columns = [{
     getFilter: (filter) => {
       qualityFilter = filter;
     },
-    onFilter: filterVal => console.log(`Filter quality ${filterVal}`)
+    onFilter: filterVal => console.log(`Filter quality ${filterVal}`) // eslint-disable-line no-console
   })
 }, {
   dataField: 'price',
@@ -47,7 +47,7 @@ const columns = [{
     getFilter: (filter) => {
       priceFilter = filter;
     },
-    onFilter: filterVal => console.log(`Filter Price: ${filterVal}`)
+    onFilter: filterVal => console.log(`Filter Price: ${filterVal}`) // eslint-disable-line no-console
   })
 }, {
   dataField: 'inStockDate',
@@ -57,7 +57,7 @@ const columns = [{
     getFilter: (filter) => {
       stockDateFilter = filter;
     },
-    onFilter: filterVal => console.log(`Filter date: ${filterVal}`)
+    onFilter: filterVal => console.log(`Filter date: ${filterVal}`) // eslint-disable-line no-console
   })
 }];
 
