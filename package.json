@@ -55,7 +55,7 @@
     "babel-register": "^6.24.1",
     "css-loader": "^6.6.0",
     "enzyme": "^3.4.0",
-    "enzyme-adapter-react-16.3": "^1.0.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.3.4",
     "eslint": "4.5.0",
     "eslint-config-airbnb": "15.1.0",
@@ -75,7 +75,7 @@
     "jsdom": "^11.2.0",
     "jsdom-global": "^3.0.2",
     "lerna": "^2.8.0",
-    "react-test-renderer": "^16",
+    "react-test-renderer": "^16.4.0",
     "sass-loader": "^12.6.0",
     "sinon": "^3.2.1",
     "style-loader": "^0.17.0",
@@ -85,8 +85,8 @@
   "dependencies": {
     "classnames": "^2.3.1",
     "prop-types": "^15.8.1",
-    "react": "16.4.0",
-    "react-dom": "16.4.0",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
     "sass": "^1.49.9",
     "underscore": "^1.13.1"
   },
