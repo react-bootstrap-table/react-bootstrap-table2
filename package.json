@@ -74,7 +74,7 @@
     "jest": "^20.0.4",
     "jsdom": "^11.2.0",
     "jsdom-global": "^3.0.2",
-    "lerna": "^2.8.0",
+    "lerna": "^3.21.1",
     "react-test-renderer": "^16.4.0",
     "sass-loader": "^12.6.0",
     "sinon": "^13.0.1",
