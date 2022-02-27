@@ -131,7 +131,7 @@ describe('<SelectionCell />', () => {
       });
 
       afterEach(() => {
-        spy.reset();
+        spy.resetHistory();
         mockOnRowSelect.reset();
       });
 

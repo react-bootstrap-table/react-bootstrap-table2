@@ -57,7 +57,7 @@ describe('<SelectionHeaderCell />', () => {
       const mockOnAllRowsSelect = sinon.stub();
 
       beforeEach(() => {
-        spy.reset();
+        spy.resetHistory();
         mockOnAllRowsSelect.reset();
       });
 

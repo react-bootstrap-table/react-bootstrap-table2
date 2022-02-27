@@ -77,7 +77,7 @@
     "lerna": "^2.8.0",
     "react-test-renderer": "^16.4.0",
     "sass-loader": "^12.6.0",
-    "sinon": "^3.2.1",
+    "sinon": "^13.0.1",
     "style-loader": "^0.17.0",
     "webpack": "^5.69.1",
     "webpack-dev-server": "^4.7.4"
