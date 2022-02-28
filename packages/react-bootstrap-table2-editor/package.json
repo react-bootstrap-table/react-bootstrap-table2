@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-table2-editor",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "it's the editor addon for react-bootstrap-table2",
   "main": "./lib/index.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+    "url": "git+https://github.com/BonnierNews/react-bootstrap-table2.git"
   },
   "keywords": [
     "react",
@@ -40,8 +40,8 @@
     }
   ],
   "peerDependencies": {
-    "prop-types": "^15.0.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "prop-types": "^15.8.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   }
 }

@@ -19,7 +19,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+    "url": "git+https://github.com/BonnierNews/react-bootstrap-table2.git"
   },
   "author": "AllenFang",
   "contributors": [
@@ -36,12 +36,12 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/react-bootstrap-table/react-bootstrap-table2/issues"
+    "url": "https://github.com/BonnierNews/react-bootstrap-table2/issues"
   },
   "engines": {
     "node": ">=12"
   },
-  "homepage": "https://github.com/react-bootstrap-table/react-bootstrap-table2#readme",
+  "homepage": "https://github.com/BonnierNews/react-bootstrap-table2#readme",
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "babel-cli": "^6.26.0",

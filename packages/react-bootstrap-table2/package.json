@@ -1,11 +1,11 @@
 {
   "name": "react-bootstrap-table-next",
-  "version": "4.0.3",
+  "version": "4.1.0",
   "description": "Next generation of react-bootstrap-table",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+    "url": "git+https://github.com/BonnierNews/react-bootstrap-table2.git"
   },
   "license": "MIT",
   "keywords": [
@@ -36,14 +36,14 @@
     }
   ],
   "dependencies": {
-    "classnames": "^2.2.5",
+    "classnames": "^2.3.1",
     "react-transition-group": "^4.2.0",
-    "underscore": "^1.9.1"
+    "underscore": "^1.13.1"
   },
   "peerDependencies": {
-    "classnames": "^2.2.5",
-    "prop-types": "^15.0.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "classnames": "^2.3.1",
+    "prop-types": "^15.8.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   }
 }

@@ -1,11 +1,11 @@
 {
   "name": "react-bootstrap-table2-toolkit",
-  "version": "2.1.3",
+  "version": "2.2.0",
   "description": "The toolkit for react-bootstrap-table2",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+    "url": "git+https://github.com/BonnierNews/react-bootstrap-table2.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -40,9 +40,9 @@
     }
   ],
   "peerDependencies": {
-    "prop-types": "^15.0.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "prop-types": "^15.8.1",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0"
   },
   "dependencies": {
     "file-saver": "2.0.2"
