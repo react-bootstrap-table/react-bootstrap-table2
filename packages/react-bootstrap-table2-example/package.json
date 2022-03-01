@@ -18,13 +18,13 @@
     "react-dom": "^16.4.0"
   },
   "devDependencies": {
-    "@storybook/addon-console": "^1.0.0",
-    "@storybook/react": "^3.2.8",
-    "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-preset-env": "^1.6.1",
-    "react-redux": "^5.0.6",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0",
-    "typed.js": "^2.0.5"
+    "@storybook/addon-console": "^1.2.3",
+    "@storybook/react": "^6.4.19",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "react-redux": "^7.2.6",
+    "redux": "^4.1.2",
+    "redux-thunk": "^2.4.1",
+    "typed.js": "^2.0.12"
   }
 }
