@@ -46,7 +46,7 @@ describe('FilterContext', () => {
   function shallowContext(
     enableRemote = false,
     tableColumns = columns,
-    dataChangeListener,
+    dataChangeListener
   ) {
     mockBase.mockReset();
     handleFilterChange.mockReset();

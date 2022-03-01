@@ -28,7 +28,7 @@ const SizePerPageDropDown = (props) => {
     openClass,
     sizePerPageDefaultClass,
     variation,
-    className,
+    className
   );
 
   const id = tableId ? `${tableId}-pageDropDown` : 'pageDropDown';

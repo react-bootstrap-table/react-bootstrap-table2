@@ -18,7 +18,3 @@ yarn-error.log*
 
 # gh-pages
 storybook-static
-
-# build
-lib
-dist

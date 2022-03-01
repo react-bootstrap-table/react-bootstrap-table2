@@ -211,10 +211,11 @@ describe('Text Filter', () => {
       );
       instance = wrapper.instance();
       instance.filter(event);
+      jest.spyOn(globalThis, 'setTimeout');
     });
 
     afterEach(() => {
-      setTimeout.mockClear();
+      jest.clearAllTimers();
     });
 
     it('should calling e.stopPropagation', () => {
@@ -226,9 +227,8 @@ describe('Text Filter', () => {
     });
 
     it('should calling setTimeout correctly', () => {
-      expect(setTimeout.mock.calls).toHaveLength(1);
-      expect(setTimeout.mock.calls[0]).toHaveLength(2);
-      expect(setTimeout.mock.calls[0][1]).toEqual(instance.props.delay);
+      expect(setTimeout).toBeCalledTimes(2);
+      expect(setTimeout).toBeCalledWith(expect.any(Function), instance.props.delay);
     });
   });
 });

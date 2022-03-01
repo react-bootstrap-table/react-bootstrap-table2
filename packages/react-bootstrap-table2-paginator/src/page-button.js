@@ -1,5 +1,4 @@
 /* eslint react/require-default-props: 0 */
-/* eslint jsx-a11y/href-no-hash: 0 */
 import cs from 'classnames';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';

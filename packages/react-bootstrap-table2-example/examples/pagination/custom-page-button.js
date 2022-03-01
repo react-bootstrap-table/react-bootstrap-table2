@@ -1,6 +1,5 @@
 /* eslint react/prefer-stateless-function: 0 */
 /* eslint react/prop-types: 0 */
-/* eslint jsx-a11y/href-no-hash: 0 */
 /* eslint no-unused-vars: 0 */
 import React from 'react';
 

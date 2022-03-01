@@ -16,7 +16,7 @@ const endIndex = (
 
 const startIndex = (
   end,
-  sizePerPage,
+  sizePerPage
 ) => end - (sizePerPage - 1);
 
 export const alignPage = (

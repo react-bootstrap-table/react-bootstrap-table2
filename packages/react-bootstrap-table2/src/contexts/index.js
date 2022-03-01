@@ -263,7 +263,7 @@ const withContext = Base =>
                 rootProps,
                 filterProps,
                 searchProps,
-                sortProps,
+                sortProps
               )
             }
           </this.SortContext.Consumer>

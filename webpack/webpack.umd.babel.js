@@ -1,9 +1,12 @@
-import webpack from 'webpack';
+const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
+  mode: 'production',
   devtool: 'source-map',
   externals: [{
-    'react': {
+    react: {
       root: 'React',
       commonjs2: 'react',
       commonjs: 'react',
@@ -19,27 +22,25 @@ module.exports = {
   }],
   module: {
     rules: [{
-      enforce: 'pre',
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      loader: 'eslint-loader'
-    }, {
       test: /\.js?$/,
       use: ['babel-loader'],
       exclude: /node_modules/
     }]
   },
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin()]
+  },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
     new webpack.SourceMapDevToolPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-      include: /\.min\.js$/,
-      compress: { warnings: false }
+    new ESLintPlugin({
+      // Plugin options
+      extensions: ['js', 'jsx'],
+      eslintPath: require.resolve('eslint'),
+      exclude: ['/node_modules/'],
+      // ESLint class options
+      resolvePluginsRelativeTo: __dirname
     })
   ]
 };

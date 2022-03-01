@@ -1,4 +1,3 @@
-/* eslint disable-next-line: 0 */
 /* eslint react/prop-types: 0 */
 /* eslint react/require-default-props: 0 */
 /* eslint camelcase: 0 */

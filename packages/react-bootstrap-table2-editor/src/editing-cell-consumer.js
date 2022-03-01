@@ -22,8 +22,7 @@ export default (_, onStartEdit) => {
         content,
         props.row,
         props.rowIndex,
-        props.columnIndex)
-      ;
+        props.columnIndex);
     }
 
     return (

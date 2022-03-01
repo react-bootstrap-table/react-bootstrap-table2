@@ -15,12 +15,12 @@ export default class RowAggregator extends shouldUpdater(eventDelegater(React.Co
   static propTypes = {
     attrs: PropTypes.object,
     style: PropTypes.object
-  }
+  };
 
   static defaultProps = {
     attrs: {},
     style: {}
-  }
+  };
 
   constructor(props) {
     super(props);

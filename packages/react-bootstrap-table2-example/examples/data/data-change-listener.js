@@ -1,4 +1,5 @@
 /* eslint react/no-multi-comp: 0 */
+/* eslint max-classes-per-file: "off" */
 import React from 'react';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';

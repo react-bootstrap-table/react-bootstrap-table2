@@ -31,7 +31,7 @@ export default class SelectionHeaderCell extends Component {
     hideSelectAll: PropTypes.bool,
     selectionHeaderRenderer: PropTypes.func,
     headerColumnStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func])
-  }
+  };
 
   constructor() {
     super();

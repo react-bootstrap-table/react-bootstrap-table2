@@ -1,5 +1,6 @@
 /* eslint no-mixed-operators: 0 */
 /* eslint no-param-reassign: 0 */
+/* eslint no-promise-executor-return: 0 */
 
 /**
  * products generator for stories
