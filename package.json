@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-table2",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "private": true,
   "description": "Rebuilt for react-bootstrap-table",
   "main": "index.js",
@@ -79,7 +79,7 @@
     "eslint-plugin-react": "^7.29.2",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-webpack-plugin": "^3.1.1",
-    "gulp": "^4.0.2",
+    "gulp": "BonnierNews/gulp#semver:^4.1.2",
     "gulp-babel": "^8.0.0",
     "gulp-clean": "^0.4.0",
     "gulp-clean-css": "^4.3.0",
