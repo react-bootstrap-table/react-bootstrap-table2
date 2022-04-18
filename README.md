@@ -7,10 +7,14 @@ This is a fork of Allen Fangs [react-bootstrap-table2](https://github.com/react-
 That repo seems to have been abandoned, so this fork was created simply to keep packages up to date with security fixes.
 
 Specific packages from this repo can be used via [gitpkg.now.sh](https://gitpkg.now.sh/):
-e.g (packages from tag v1.0.0 in this repo)
+e.g (packages from tag v1.0.0 in this repo):
+
 `yarn add https://gitpkg.now.sh/BonnierNews/react-bootstrap-table2/packages/react-bootstrap-table2?v1.0.0`
+
 `yarn add https://gitpkg.now.sh/BonnierNews/react-bootstrap-table2/packages/react-bootstrap-table2-editor?v1.0.0`
+
 `yarn add https://gitpkg.now.sh/BonnierNews/react-bootstrap-table2/packages/react-bootstrap-table2-filter?v1.0.0`
+
 
 Or by adding directly to package.json. 
 e.g (packages from tag v1.0.0 in this repo)
