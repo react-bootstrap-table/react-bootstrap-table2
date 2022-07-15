@@ -45,7 +45,7 @@ describe('Sort Function', () => {
       const sortFunc = sinon.stub().returns(1);
       sortOrder = Const.SORT_DESC;
       sort(data, sortOrder, { ...sortColumn, sortFunc });
-      expect(sortFunc.callCount).toBe(6);
+      expect(sortFunc.callCount).toBe(3);
     });
   });
 
@@ -77,7 +77,9 @@ describe('Sort Function', () => {
         },
         sortOrder: Const.SORT_DESC
       };
-      expect(nextOrder(currentSortColumn, nextSort, Const.SORT_ASC)).toBe(Const.SORT_ASC);
+      expect(nextOrder(currentSortColumn, nextSort, Const.SORT_ASC)).toBe(
+        Const.SORT_ASC
+      );
     });
 
     it('should return correcly order when current sortField is eq next sort field', () => {

@@ -9,7 +9,7 @@ function comparator(a, b) {
   if (typeof b === 'string') {
     result = b.localeCompare(a);
   } else {
-    result = a > b ? -1 : ((a < b) ? 1 : 0);
+    result = a > b ? -1 : a < b ? 1 : 0;
   }
   return result;
 }
@@ -47,6 +47,8 @@ export const nextOrder = (
   { sortOrder, sortColumn },
   defaultOrder = Const.SORT_DESC
 ) => {
-  if (!sortColumn || currentSortColumn.dataField !== sortColumn.dataField) return defaultOrder;
+  if (!sortColumn || currentSortColumn.dataField !== sortColumn.dataField) {
+    return defaultOrder;
+  }
   return sortOrder === Const.SORT_DESC ? Const.SORT_ASC : Const.SORT_DESC;
 };

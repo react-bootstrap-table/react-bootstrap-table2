@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-table-next",
-  "version": "4.0.3",
+  "version": "4.1.0",
   "description": "Next generation of react-bootstrap-table",
   "main": "./lib/index.js",
   "repository": {
@@ -43,7 +43,7 @@
   "peerDependencies": {
     "classnames": "^2.2.5",
     "prop-types": "^15.0.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
