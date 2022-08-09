@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-table2",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "private": true,
   "description": "Rebuilt for react-bootstrap-table",
   "main": "index.js",
@@ -88,7 +88,7 @@
     "gulp-shell": "^0.8.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^28.1.1",
-    "jsdom": "^19.0.0",
+    "jsdom": "^20.0.0",
     "jsdom-global": "^3.0.2",
     "lerna": "^5.1.1",
     "react-test-renderer": "^16.4.0",
