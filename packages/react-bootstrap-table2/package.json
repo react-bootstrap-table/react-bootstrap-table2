@@ -5,7 +5,7 @@
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+    "url": "git+https://github.com/dalmau/react-bootstrap-table2.git"
   },
   "license": "MIT",
   "keywords": [
