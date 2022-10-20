@@ -1,6 +1,6 @@
 {
   "name": "react-bootstrap-table-next",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "description": "Next generation of react-bootstrap-table",
   "main": "./lib/index.js",
   "repository": {
@@ -24,6 +24,11 @@
   ],
   "author": "AllenFang",
   "contributors": [
+    {
+      "name": "Vicente Ferrer Dalmau",
+      "email": "",
+      "url": "https://github.com/dalmau"
+    },
     {
       "name": "Allen Fang",
       "email": "ayu780129@hotmail.com",
