@@ -67,7 +67,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       selectRow,
       expandRow,
       cellEdit,
-      filterPosition
+      filterPosition,
+      /* VFD */
+      wrapperStyle = {}
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -88,7 +90,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     );
 
     return (
-      <div className={ tableWrapperClass }>
+      <div className={ tableWrapperClass } style={ { ...wrapperStyle } } >
         <table id={ id } className={ tableClass }>
           { tableCaption }
           <Header
