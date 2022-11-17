@@ -4,11 +4,8 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.typeConvert = void 0;
-
 var _const = _interopRequireDefault(require("../const"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 var typeConvert = function typeConvert(type, value) {
   if (type === _const["default"].TYPE_STRING) {
     return String(value);
@@ -18,13 +15,10 @@ var typeConvert = function typeConvert(type, value) {
     if (typeof value === 'boolean') {
       return value;
     }
-
     return value === 'true';
   } else if (type === _const["default"].TYPE_DATE) {
     return new Date(value);
   }
-
   return value;
 };
-
 exports.typeConvert = typeConvert;

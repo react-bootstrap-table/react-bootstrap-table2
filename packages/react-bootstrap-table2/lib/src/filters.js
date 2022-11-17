@@ -4,30 +4,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _filtersCell = _interopRequireDefault(require("./filters-cell"));
-
 var _const = _interopRequireDefault(require("./const"));
-
 var _rowTemplate = _interopRequireDefault(require("./row/row-template"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 /* eslint react/require-default-props: 0 */
+
 var Filters = function Filters(props) {
   var columns = props.columns,
-      onFilter = props.onFilter,
-      currFilters = props.currFilters,
-      filterPosition = props.filterPosition,
-      onExternalFilter = props.onExternalFilter,
-      className = props.className,
-      selectRow = props.selectRow,
-      expandRow = props.expandRow;
-
+    onFilter = props.onFilter,
+    currFilters = props.currFilters,
+    filterPosition = props.filterPosition,
+    onExternalFilter = props.onExternalFilter,
+    className = props.className,
+    selectRow = props.selectRow,
+    expandRow = props.expandRow;
   function renderContent() {
     var filterColumns = [];
     var showFiltersRow = false;
@@ -40,7 +33,6 @@ var Filters = function Filters(props) {
         onExternalFilter: onExternalFilter,
         onFilter: onFilter
       }));
-
       if (column.filterRenderer || column.filter) {
         if (!showFiltersRow) {
           showFiltersRow = true;
@@ -49,7 +41,6 @@ var Filters = function Filters(props) {
     });
     return filterColumns;
   }
-
   return /*#__PURE__*/_react["default"].createElement("tbody", {
     className: className,
     style: {
@@ -62,7 +53,6 @@ var Filters = function Filters(props) {
     cellEl: "td"
   }));
 };
-
 Filters.propTypes = {
   columns: _propTypes["default"].array.isRequired,
   onFilter: _propTypes["default"].func,

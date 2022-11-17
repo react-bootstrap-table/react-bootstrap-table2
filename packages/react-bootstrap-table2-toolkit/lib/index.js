@@ -22,19 +22,12 @@ Object.defineProperty(exports, "Search", {
   }
 });
 exports["default"] = exports.ToolkitContext = void 0;
-
 var _context = _interopRequireDefault(require("./context"));
-
 var _provider = _interopRequireDefault(require("./provider"));
-
 var _search = _interopRequireDefault(require("./src/search"));
-
 var _csv = _interopRequireDefault(require("./src/csv"));
-
 var _columnToggle = _interopRequireDefault(require("./src/column-toggle"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 var _default = _provider["default"];
 exports["default"] = _default;
 var ToolkitContext = _context["default"];

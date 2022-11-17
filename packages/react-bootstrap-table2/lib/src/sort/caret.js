@@ -4,19 +4,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports["default"] = void 0;
-
 var _react = _interopRequireDefault(require("react"));
-
 var _classnames = _interopRequireDefault(require("classnames"));
-
 var _propTypes = _interopRequireDefault(require("prop-types"));
-
 var _const = _interopRequireDefault(require("../const"));
-
 var _bootstrap = require("../contexts/bootstrap");
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 var SortCaret = function SortCaret(_ref) {
   var order = _ref.order;
   var orderClass = (0, _classnames["default"])('react-bootstrap-table-sort-order', {
@@ -33,7 +26,6 @@ var SortCaret = function SortCaret(_ref) {
     }));
   });
 };
-
 SortCaret.propTypes = {
   order: _propTypes["default"].oneOf([_const["default"].SORT_ASC, _const["default"].SORT_DESC]).isRequired
 };
