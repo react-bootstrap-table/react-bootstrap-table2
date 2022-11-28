@@ -96,6 +96,7 @@ class BootstrapTable extends PropsBaseResolver(Component) {
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
+            style={ this.props.headerStyle }
             wrapperClasses={ this.props.headerWrapperClasses }
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
@@ -168,6 +169,7 @@ BootstrapTable.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.string,
   headerClasses: PropTypes.string,
+  headerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]), /* VFD */
   bodyClasses: PropTypes.string,
   wrapperClasses: PropTypes.string,
   headerWrapperClasses: PropTypes.string,
