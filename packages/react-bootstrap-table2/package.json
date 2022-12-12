@@ -1,11 +1,11 @@
 {
   "name": "react-bootstrap-table-next",
-  "version": "4.0.3",
+  "version": "4.0.7",
   "description": "Next generation of react-bootstrap-table",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/react-bootstrap-table/react-bootstrap-table2.git"
+    "url": "git+https://github.com/dalmau/react-bootstrap-table2.git"
   },
   "license": "MIT",
   "keywords": [
@@ -24,6 +24,11 @@
   ],
   "author": "AllenFang",
   "contributors": [
+    {
+      "name": "Vicente Ferrer Dalmau",
+      "email": "",
+      "url": "https://github.com/dalmau"
+    },
     {
       "name": "Allen Fang",
       "email": "ayu780129@hotmail.com",

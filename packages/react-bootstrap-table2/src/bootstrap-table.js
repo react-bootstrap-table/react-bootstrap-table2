@@ -67,7 +67,9 @@ class BootstrapTable extends PropsBaseResolver(Component) {
       selectRow,
       expandRow,
       cellEdit,
-      filterPosition
+      filterPosition,
+      /* VFD */
+      wrapperStyle = {}
     } = this.props;
 
     const tableWrapperClass = cs('react-bootstrap-table', wrapperClasses);
@@ -88,12 +90,13 @@ class BootstrapTable extends PropsBaseResolver(Component) {
     );
 
     return (
-      <div className={ tableWrapperClass }>
+      <div className={ tableWrapperClass } style={ { ...wrapperStyle } } >
         <table id={ id } className={ tableClass }>
           { tableCaption }
           <Header
             columns={ columns }
             className={ this.props.headerClasses }
+            style={ this.props.headerStyle }
             wrapperClasses={ this.props.headerWrapperClasses }
             sortField={ this.props.sortField }
             sortOrder={ this.props.sortOrder }
@@ -166,6 +169,7 @@ BootstrapTable.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.string,
   headerClasses: PropTypes.string,
+  headerStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.func]), /* VFD */
   bodyClasses: PropTypes.string,
   wrapperClasses: PropTypes.string,
   headerWrapperClasses: PropTypes.string,
