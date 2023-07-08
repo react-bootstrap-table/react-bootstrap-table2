@@ -4,14 +4,13 @@
 import _ from '../utils';
 import Const from '../const';
 
+const collator = new Intl.Collator();
 function comparator(a, b) {
-  let result;
   if (typeof b === 'string') {
-    result = b.localeCompare(a);
+    return collator.compare(a, b);
   } else {
-    result = a > b ? -1 : ((a < b) ? 1 : 0);
+    return a > b ? -1 : ((a < b) ? 1 : 0);
   }
-  return result;
 }
 
 export const sort = (data, sortOrder, { dataField, sortFunc, sortValue }) => {
