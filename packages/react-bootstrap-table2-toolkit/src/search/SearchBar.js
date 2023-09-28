@@ -11,7 +11,7 @@ const handleDebounce = (func, wait, immediate) => {
       timeout = null;
 
       if (!immediate) {
-        func.apply(this, arguments);
+        func.apply(this);
       }
     };
 
@@ -22,7 +22,7 @@ const handleDebounce = (func, wait, immediate) => {
     timeout = setTimeout(later, wait || 0);
 
     if (callNow) {
-      func.appy(this, arguments);
+      func.appy(this);
     }
   };
 };
