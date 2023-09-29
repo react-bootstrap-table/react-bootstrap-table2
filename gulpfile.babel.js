@@ -1,10 +1,14 @@
 import gulp from 'gulp';
 import babel from 'gulp-babel';
-import sass from 'gulp-sass';
+// import sass from 'gulp-sass';
 import cleanCSS from 'gulp-clean-css';
 import cleanDir from 'gulp-clean';
 import rename from 'gulp-rename';
 import shell from 'gulp-shell';
+import dartSass from 'sass';
+import gulpSass from 'gulp-sass';
+
+const sass = gulpSass(dartSass);
 
 const LIB = 'lib';
 const DIST = 'dist';
